@@ -2,6 +2,6 @@
   "parent": "immersivegeology:block/base/ore_block",
   "textures": {
     "base": "minecraft:block/granite",
-    "ore": "immersivegeology:palette/block/ore_bearing/layered/normal_2_pristine_anthracite"
+    "ore": "immersivegeology:block/colored/anthracite/ore/normal_2"
   }
 }

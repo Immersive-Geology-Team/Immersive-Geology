@@ -10,11 +10,13 @@ package com.igteam.immersivegeology.core.material;
 
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler.IMultiblock;
 import com.google.common.collect.Sets;
+import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.configuration.ConfigurationHelper;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.*;
@@ -28,6 +30,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -223,7 +226,10 @@ public abstract class GeologyMaterial implements MaterialHelper {
     }
     static Random rand = new Random(0);
     public int getPaletteVariation(ItemCategoryFlags flag){
-        if(flag.equals(ItemCategoryFlags.INGOT)) return Math.min(6,1+(rand.nextInt(flag.getVariations()))%flag.getVariations());
+        if(flag.equals(ItemCategoryFlags.INGOT))
+        {
+            return Math.min(6,1+(rand.nextInt(flag.getVariations()))%flag.getVariations());
+        }
         return 1+(rand.nextInt(flag.getVariations()))%flag.getVariations();
     }
 
@@ -522,5 +528,13 @@ public abstract class GeologyMaterial implements MaterialHelper {
     public TagKey<Block> getBlockMaterialTag()
     {
         return IGTags.BLOCK_MATERIAL_HOLDER.get(this);
+    }
+
+    public ItemStack getOreIcon()
+    {
+        if(acceptableStoneType(StoneEnum.MCStone)) return new ItemStack(getOreBlock(StoneEnum.MCStone, OreRichness.NORMAL).asIGItem());
+        if(acceptableStoneType(StoneEnum.MCNetherrack)) return new ItemStack(getOreBlock(StoneEnum.MCNetherrack, OreRichness.NORMAL).asIGItem());
+        if(acceptableStoneType(StoneEnum.MCEndStone)) return new ItemStack(getOreBlock(StoneEnum.MCEndStone, OreRichness.NORMAL).asIGItem());
+        return ItemStack.EMPTY;
     }
 }

@@ -2,6 +2,6 @@
   "parent": "immersivegeology:block/base/ore_block",
   "textures": {
     "base": "minecraft:block/stone",
-    "ore": "immersivegeology:palette/block/ore_bearing/metallic/rich_1_pristine_gold"
+    "ore": "immersivegeology:block/colored/gold/ore/rich_1"
   }
 }

@@ -30,10 +30,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogi
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.*;
 import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
-import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
-import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
-import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.data.enums.*;
 import com.igteam.immersivegeology.core.material.data.metal.MaterialAluminum;
 import com.igteam.immersivegeology.core.material.data.mineral.MaterialAnthracite;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetalAlloy;
@@ -49,7 +46,6 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import com.igteam.immersivegeology.core.registration.IGRecipeSerializers;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import com.mojang.datafixers.util.Pair;
-import net.dries007.tfc.util.Metal;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.PackOutput;
@@ -117,6 +113,11 @@ public class IGRecipes extends RecipeProvider
 
 		SpecialRecipeBuilder.special(IGRecipeSerializers.IG_REPAIR_SERIALIZER.get())
 				.save(consumer, IGLib.MODID+"ig_item_repair");
+
+
+		Item binding_agent_flask = ChemicalEnum.BindingAgent.getFluid(BlockCategoryFlags.FLUID).getBucket();
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, binding_agent_flask).requires(Items.WATER_BUCKET)
+				.requires(Items.CLAY_BALL).requires(Items.CLAY_BALL).requires(Items.CLAY_BALL).unlockedBy("has_clay", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CLAY_BALL)).save(consumer, ig("craft_blinding_fluid"));
 
 		Item bronze_ingot = MetalEnum.Bronze.getItem(ItemCategoryFlags.INGOT);
 
@@ -415,10 +416,14 @@ public class IGRecipes extends RecipeProvider
 		GeothermalConversionRecipeBuilder.builder(Blocks.LAVA, 1100, null, Pair.of(Blocks.MAGMA_BLOCK, 900)).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/lava"));
 		GeothermalConversionRecipeBuilder.builder(Blocks.MAGMA_BLOCK, 900, Pair.of(Blocks.LAVA, 1173), Pair.of(Blocks.OBSIDIAN, 300)).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/magma"));
 		GeothermalConversionRecipeBuilder.builder(Blocks.OBSIDIAN, 300, Pair.of(Blocks.MAGMA_BLOCK, 920), null).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/obsidian"));
-		TurbineFuelBuilder.builder(MiscEnum.Steam.getFluidTag(BlockCategoryFlags.FLUID), 0.5f, 21).build(consumer, new ResourceLocation(IGLib.MODID, "turbine_fuel/steam"));
+		TurbineFuelBuilder.builder(MiscEnum.Steam.getFluidTag(BlockCategoryFlags.FLUID), 0.25f, 21).build(consumer, new ResourceLocation(IGLib.MODID, "turbine_fuel/steam"));
 
 		for(MaterialInterface<?> material : IGLib.getGeologyMaterials())
 		{
+			if(material.hasFlag(BlockCategoryFlags.ORE_BLOCK))
+			{
+				IGGeoHintBuilder.builder(material.instance()).build(consumer, new ResourceLocation(IGLib.MODID, "geohint/" + material.getName().toLowerCase()));
+			}
 			if(material.hasFlag(ItemCategoryFlags.CRUSHED_ORE) && material.hasFlag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)) {
 				for(ItemCategoryFlags ore : List.of(ItemCategoryFlags.POOR_ORE, ItemCategoryFlags.NORMAL_ORE, ItemCategoryFlags.RICH_ORE))
 				{
@@ -437,7 +442,7 @@ public class IGRecipes extends RecipeProvider
 					builder.addInput(material.getItemTag(ore)).setTime(time).setEnergy(energy).build(consumer, new ResourceLocation(IGLib.MODID, "crusher/" + material.getName().toLowerCase() + "_" + ore.getName().toLowerCase() + "_to_dirty_crushed"));
 				}
 				ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, material.getItem(ItemCategoryFlags.CRUSHED_ORE)).requires(material.getItem(ItemCategoryFlags.DIRTY_CRUSHED_ORE)).requires(material.getItem(ItemCategoryFlags.DIRTY_CRUSHED_ORE)).unlockedBy("has_stone_work_hammer", InventoryChangeTrigger.TriggerInstance.hasItems(stone_work_hammer)).save(consumer, ig("wash_dirty_crushed_" + material.getName().toLowerCase()));
-				if(!material.hasFlag(ItemCategoryFlags.PELLET)) GravitySeparatorRecipeBuilder.builder(material.getItemTag(ItemCategoryFlags.CRUSHED_ORE)).setChance(0.5f).setByproduct(Items.GRAVEL).setTime(100).setWater(100).addInput(material.getItemTag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)).build(consumer, new ResourceLocation(IGLib.MODID, "gravityseparator/dirty_crushed_"+ material.getName() + "_to_crushed"));
+				//GravitySeparatorRecipeBuilder.builder(material.getItemTag(ItemCategoryFlags.CRUSHED_ORE)).setChance(0.5f).setByproduct(Items.GRAVEL).setTime(100).setWater(100).addInput(material.getItemTag(ItemCategoryFlags.DIRTY_CRUSHED_ORE)).build(consumer, new ResourceLocation(IGLib.MODID, "gravityseparator/dirty_crushed_"+ material.getName() + "_to_crushed"));
 			}
 
 			if(material instanceof MetalEnum)

@@ -13,7 +13,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
-import net.dries007.tfc.util.ToolTier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -204,5 +203,10 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     default Tier getToolTier()
     {
         return instance().getToolTier();
+    };
+
+	default boolean hasCustomTexture(BlockCategoryFlags blockCategoryFlags)
+    {
+        return instance().hasCustomTexture(blockCategoryFlags);
     };
 }

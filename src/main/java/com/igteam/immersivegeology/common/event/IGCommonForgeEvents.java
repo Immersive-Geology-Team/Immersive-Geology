@@ -12,20 +12,30 @@ import com.igteam.immersivegeology.common.commands.IGFindMineralVeinCommand;
 import com.igteam.immersivegeology.common.loot.IGLootModifier;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
+import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.datafixers.util.Pair;
+import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.MapItem;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
@@ -39,8 +49,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistries.Keys;
 import net.minecraftforge.registries.RegisterEvent;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class IGCommonForgeEvents
@@ -70,20 +79,61 @@ public class IGCommonForgeEvents
 		IGFindMineralVeinCommand.register(dispatcher);
 	}
 
+
+	public static final List<VeinScanTask> activeVeinScans  = Collections.synchronizedList(new ArrayList<>());
+
 	@SubscribeEvent
 	public void updateMapData(TickEvent.LevelTickEvent event)
 	{
-//		if(event.side.isClient()) return;
-//		Level level = event.level;
-//		List<? extends Player> players = event.level.players();
-//		for(Player player : players)
-//		{
-//			if(player!=null)
-//			{
-//				ItemStack mainHand = player.getMainHandItem();
-//				ItemStack offHand = player.getOffhandItem();
-//			}
-//		}
+		if (event.side.isClient()) return;
+
+		List<VeinScanTask> toRemove = new ArrayList<>();
+
+		for (VeinScanTask task : activeVeinScans) {
+			if (task.isComplete()) {
+				task.source.sendFailure(Component.literal("No " + task.type.getTranslationName() + " ore vein found within " + task.radius + " chunk radius."));
+				toRemove.add(task);
+				continue;
+			}
+
+			ChunkPos currentChunkPos = task.nextChunk();
+			LevelChunk chunk = task.level.getChunk(currentChunkPos.x, currentChunkPos.z);
+
+			int sectionMin = task.level.getSectionIndex(task.level.getMinBuildHeight());
+			int sectionMax = task.level.getSectionIndex(task.level.getMaxBuildHeight());
+			TagKey<Block> materialTag = task.type.getBlockMaterialTag();
+			Component progressMessage = Component.literal("Scanning chunk: [" + currentChunkPos.x + ", " + currentChunkPos.z + "]")
+					.withStyle(ChatFormatting.YELLOW);
+
+			task.source.getPlayer().displayClientMessage(
+					progressMessage,
+					true
+			);
+
+			for (int sectionIndex = sectionMin; sectionIndex < sectionMax; sectionIndex++) {
+				LevelChunkSection section = chunk.getSection(sectionIndex);
+				if (section.hasOnlyAir()) continue;
+				if (!section.maybeHas(b -> b.is(materialTag))) continue;
+
+				BlockPos orePosition = chunk.getPos().getWorldPosition();
+				int distance = Mth.floor(Mth.sqrt((float) task.source.getPosition().distanceToSqr(orePosition.getX(), orePosition.getY(), orePosition.getZ())));
+
+				Component coordinates = ComponentUtils.wrapInSquareBrackets(
+						Component.translatable("chat.coordinates", orePosition.getX(), orePosition.getY(), orePosition.getZ())
+				).withStyle(style -> style.withColor(ChatFormatting.GREEN)
+						.withClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tp @s " + orePosition.getX() + " ~ " + orePosition.getZ()))
+						.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.translatable("chat.coordinates.tooltip")))
+				);
+
+				task.source.sendSuccess(() -> Component.translatable("command.immersivegeology.veinlocate", task.type.getTranslationName(), coordinates, distance), false);
+
+				toRemove.add(task);
+				break;
+			}
+		}
+
+		// Remove after iteration
+		activeVeinScans.removeAll(toRemove);
 	}
 
 	private static void checkAndRenderMap(ItemStack stack, Level level, Player player)

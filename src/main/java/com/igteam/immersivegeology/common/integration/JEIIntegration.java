@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.common.integration;
 
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.*;
+import com.igteam.immersivegeology.common.recipe.IGGeoRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import mezz.jei.api.IModPlugin;
@@ -43,6 +44,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipeCategories(new IGSeparatorCategory(guiHelper));
 		registration.addRecipeCategories(new IGCrystallizerCategory(guiHelper));
 		registration.addRecipeCategories(new IGGeothermalExchangerCategory(guiHelper));
+		registration.addRecipeCategories(new IGGeologyCategory(guiHelper));
 		registration.addRecipeCategories(new IGReverberationCategory(guiHelper));
 		registration.addRecipeCategories(new IGRotaryKilnCategory(guiHelper));
 		registration.addRecipeCategories(new IGChemicalCategory(guiHelper));
@@ -62,6 +64,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipes(JEIRecipeTypes.CHEMICAL, getRecipes(ChemicalRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.SLUICE, getRecipes(IndustrialSluiceRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.BLOOMERY, getRecipes(BloomeryRecipe.RECIPES));
+		registration.addRecipes(JEIRecipeTypes.GEOHINT, getRecipes(IGGeoRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.BALLMILL, getRecipes(BallmillRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.PELLETIZER, getRecipes(PelletizerRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.CENTRIFUGE, getRecipes(CentrifugeRecipe.RECIPES));

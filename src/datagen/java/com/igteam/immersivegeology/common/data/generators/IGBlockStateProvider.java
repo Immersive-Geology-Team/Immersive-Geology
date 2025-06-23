@@ -580,12 +580,13 @@ public class IGBlockStateProvider extends BlockStateProvider {
         }
     }
 
-
-    private void implementUnsafeOreTexture(BlockModelBuilder baseModel, IGOreBlock block, StoneFormation formation, int variant)
+    private void implementOrePaletteTexture(BlockModelBuilder baseModel, IGOreBlock block, StoneFormation formation, int variant)
     {
         MineralWeathering weathering = MineralWeathering.PRISTINE;
         ResourceLocation default_richness_ore;
-        default_richness_ore = new ResourceLocation(IGLib.MODID, "palette/block/ore_bearing/" + (formation.equals(StoneFormation.SEDIMENTARY) ? IGVeinTextureType.LAYERED.getSanitizedName() : block.getMaterial(MaterialTexture.overlay).getVeinTextureType().getSanitizedName()) +"/" + block.getOreRichness().name().toLowerCase() + "_" + variant + "_" + weathering.name().toLowerCase() + "_"+ block.getMaterial(MaterialTexture.overlay).getName().toLowerCase());
+        MaterialInterface<?> oreMaterial = block.getMaterial(MaterialTexture.overlay);
+        default_richness_ore = new ResourceLocation(IGLib.MODID, "palette/block/ore_bearing/" + (formation.equals(StoneFormation.SEDIMENTARY) ? IGVeinTextureType.LAYERED.getSanitizedName() : oreMaterial.getVeinTextureType().getSanitizedName()) +"/" + block.getOreRichness().name().toLowerCase() + "_" + variant + "_" + weathering.name().toLowerCase() + "_"+ oreMaterial.getName().toLowerCase());
+
         try {
             if(formation.equals(StoneFormation.SEDIMENTARY) || block.getMaterial(MaterialTexture.base).useSedimentaryTextures())
             {
@@ -616,6 +617,56 @@ public class IGBlockStateProvider extends BlockStateProvider {
             }
         }
         baseModel.textures.put("ore", default_richness_ore.toString());
+    }
+
+    private void implementOreCustomTexture(BlockModelBuilder baseModel, IGOreBlock block, StoneFormation formation, int variant)
+    {
+        ResourceLocation default_richness_ore;
+        MaterialInterface<?> oreMaterial = block.getMaterial(MaterialTexture.overlay);
+        default_richness_ore = new ResourceLocation(IGLib.MODID, "block/colored/" + oreMaterial.getName().toLowerCase() +"/ore/" + block.getOreRichness().name().toLowerCase() + "_" + variant);
+        try {
+            if(formation.equals(StoneFormation.SEDIMENTARY) || block.getMaterial(MaterialTexture.base).useSedimentaryTextures())
+            {
+                baseModel.texture("side", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()) + (block.getMaterial(MaterialTexture.base).useSedimentaryTextures() ? "_side" : ""));
+                baseModel.texture("top", new ResourceLocation(block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getNamespace(),block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase() + "_top"));
+            }
+            else
+            {
+                baseModel.texture("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()));
+            }
+        } catch(Exception error) {
+            if(formation.equals(StoneFormation.SEDIMENTARY) || block.getMaterial(MaterialTexture.base).useSedimentaryTextures())
+            {
+                baseModel.textures.put("side", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).toString() + (block.getMaterial(MaterialTexture.base).useSedimentaryTextures() ? "_side" : ""));
+
+                // As TFC only has two sedimentary rocks that have a 'top and side' texture, as we can't use the EXISTING_HELPER, we manually check the stone type for now.
+                boolean manual_test = block.getMaterial(MaterialTexture.base).equals(StoneEnum.Claystone) || block.getMaterial(MaterialTexture.base).equals(StoneEnum.Shale);
+                if(manual_test)
+                {
+                    baseModel.textures.put("top", new ResourceLocation(block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getNamespace(), block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase()+"_top").toString());
+                }
+                else
+                {
+                    baseModel.textures.put("top", new ResourceLocation(block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getNamespace(), block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase())+ (block.getMaterial(MaterialTexture.base).useSedimentaryTextures() ? "_top" : ""));
+                }
+            } else {
+                baseModel.textures.put("base", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).toString());
+            }
+        }
+        baseModel.textures.put("ore", default_richness_ore.toString());
+    }
+
+    private void implementUnsafeOreTexture(BlockModelBuilder baseModel, IGOreBlock block, StoneFormation formation, int variant)
+    {
+
+        MaterialInterface<?> oreMaterial = block.getMaterial(MaterialTexture.overlay);
+        boolean usePalette = !oreMaterial.hasCustomTexture(BlockCategoryFlags.ORE_BLOCK);
+        if(usePalette)
+        {
+            implementOrePaletteTexture(baseModel, block, formation, variant);
+            return;
+        }
+        implementOreCustomTexture(baseModel, block, formation, variant);
     }
 
     public static void implementUnsafeOreTexture(ModelBuilder<?> baseModel, IOreBlock block, StoneFormation formation, int variant)
