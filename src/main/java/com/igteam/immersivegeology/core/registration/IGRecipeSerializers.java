@@ -13,6 +13,8 @@ import blusunrize.immersiveengineering.common.crafting.serializers.SimpleRecipeS
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.*;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.TurbineFuelBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.serializer.*;
+import com.igteam.immersivegeology.common.recipe.IGGeoRecipe;
+import com.igteam.immersivegeology.common.recipe.IGGeoSerializer;
 import com.igteam.immersivegeology.common.recipe.IGRepairItemRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.helper.EmptyRecipe;
@@ -52,6 +54,7 @@ public class IGRecipeSerializers
 		FoundryRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("foundry", FoundryRecipeSerializer::new);
 		GeothermalExchangerRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("geothermal_exchanger", GeothermalExchangerRecipeSerializer::new);
 		GeothermalConversionRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("geothermal_conversion", GeothermalConversionRecipeSerializer::new);
+		IGGeoRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("geo_hint", IGGeoSerializer::new);
 
 		IG_REPAIR_SERIALIZER = RECIPE_SERIALIZERS.register("ig_item_repair", special(IGRepairItemRecipe::new));
 

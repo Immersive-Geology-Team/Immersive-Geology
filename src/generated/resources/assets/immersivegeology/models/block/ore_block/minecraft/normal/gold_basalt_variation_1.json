@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/ore_block_sedimentary",
   "textures": {
-    "ore": "immersivegeology:palette/block/ore_bearing/metallic/normal_1_pristine_gold",
+    "ore": "immersivegeology:block/colored/gold/ore/normal_1",
     "side": "minecraft:block/basalt_side",
     "top": "minecraft:block/basalt_top"
   }

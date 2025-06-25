@@ -28,7 +28,7 @@ public class MaterialIron extends MaterialNativeMetal {
     public MaterialIron() {
         super();
         addFlags(MaterialFlags.EXISTING_IMPLEMENTATION, ItemCategoryFlags.OXIDE_PELLET);
-        removeMaterialFlags(ItemCategoryFlags.COMPOUND_DUST);
+        removeMaterialFlags(ItemCategoryFlags.COMPOUND_DUST, BlockCategoryFlags.ORE_BLOCK, ItemCategoryFlags.NORMAL_ORE, ItemCategoryFlags.POOR_ORE, ItemCategoryFlags.RICH_ORE);
         addExistingFlag(ModFlags.IMMERSIVEENGINEERING, ItemCategoryFlags.ROD, ItemCategoryFlags.PLATE, ItemCategoryFlags.POWDER);
         addExistingFlag(ModFlags.IMMERSIVEENGINEERING, BlockCategoryFlags.SHEETMETAL_BLOCK, BlockCategoryFlags.SHEETMETAL_SLAB);
         addExistingFlag(ModFlags.AD_ASTRA, ItemCategoryFlags.ROD, ItemCategoryFlags.PLATE);

@@ -55,6 +55,10 @@ public class MaterialMillerite extends MaterialSulphideMineral
     {
         super.setupRecipeStages();
 
+        IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("slag_"+getName()+"_to_nuggets",
+                getItemTag(ItemCategoryFlags.SLAG),
+                getPrimaryProduct().getStack(ItemCategoryFlags.NUGGET, 8)).addToTree(directBlasting);
+
         IGMethodBuilder.roast(this, IGStageDesignation.PREPARATION).create(
                 "crushed_ore_"+getName() + "_to_oxide",
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE), 1,

@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.core.registration;
 import blusunrize.immersiveengineering.api.crafting.IERecipeTypes.TypeWithClass;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BloomeryFuel;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.*;
+import com.igteam.immersivegeology.common.recipe.IGGeoRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.helper.EmptyRecipe;
 import net.minecraft.core.registries.Registries;
@@ -29,6 +30,7 @@ public class IGRecipeTypes
 	public static final TypeWithClass<CentrifugeRecipe> CENTRIFUGE = register("centrifuge", CentrifugeRecipe.class);
 	public static final TypeWithClass<GravitySeparatorRecipe> GRAVITYSEPARATOR = register("gravity_separator", GravitySeparatorRecipe.class);
 	public static final TypeWithClass<IndustrialSluiceRecipe> SLUICE = register("industrial_sluice", IndustrialSluiceRecipe.class);
+	public static final TypeWithClass<IGGeoRecipe> GEOHINT = register("geo_hint", IGGeoRecipe.class);
 	public static final TypeWithClass<RevFurnaceRecipe> REVFURNACE = register("reverberation_furnace", RevFurnaceRecipe.class);
 	public static final TypeWithClass<RotaryKilnRecipe> ROTARYKILN = register("rotary_kiln", RotaryKilnRecipe.class);
 	public static final TypeWithClass<ChemicalRecipe> CHEMICAL_REACTOR = register("chemical_reactor", ChemicalRecipe.class);

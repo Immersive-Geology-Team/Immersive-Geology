@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.common.integration;
 import blusunrize.immersiveengineering.api.crafting.IERecipeTypes;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.*;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.IndustrialSluiceRecipeBuilder;
+import com.igteam.immersivegeology.common.recipe.IGGeoRecipe;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import mezz.jei.api.recipe.RecipeType;
 import net.minecraft.world.item.crafting.Recipe;
@@ -28,6 +29,7 @@ public class JEIRecipeTypes
 	public static final RecipeType<BallmillRecipe> BALLMILL = create(IGRecipeTypes.BALLMILL);
 	public static final RecipeType<PelletizerRecipe> PELLETIZER = create(IGRecipeTypes.PELLETIZER);
 	public static final RecipeType<CentrifugeRecipe> CENTRIFUGE = create(IGRecipeTypes.CENTRIFUGE);
+	public static final RecipeType<IGGeoRecipe> GEOHINT = create(IGRecipeTypes.GEOHINT);
 
 	private static <T extends Recipe<?>>
 	RecipeType<T> create(IERecipeTypes.TypeWithClass<T> type)

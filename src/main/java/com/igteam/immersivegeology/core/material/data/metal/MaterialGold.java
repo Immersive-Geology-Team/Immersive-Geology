@@ -85,6 +85,12 @@ public class MaterialGold extends MaterialNativeMetal {
     }
 
     @Override
+    public boolean hasCustomTexture(BlockCategoryFlags blockCategoryFlags)
+    {
+        return blockCategoryFlags.equals(BlockCategoryFlags.ORE_BLOCK);
+    }
+
+    @Override
     public float getNoiseProbability()
     {
         return 0.1942749f;

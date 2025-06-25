@@ -8,28 +8,34 @@
 
 package com.igteam.immersivegeology.common.commands;
 
+import com.igteam.immersivegeology.common.event.IGCommonForgeEvents;
+import com.igteam.immersivegeology.common.event.VeinScanTask;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.ClickEvent;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.ComponentUtils;
-import net.minecraft.network.chat.HoverEvent;
+import net.minecraft.network.chat.*;
 import net.minecraft.server.level.*;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
+import net.minecraft.util.TaskChainer.DelayedTask;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraftforge.server.command.EnumArgument;
 import org.slf4j.Logger;
+
+import java.util.Arrays;
 
 public class IGFindMineralVeinCommand
 {
@@ -41,35 +47,63 @@ public class IGFindMineralVeinCommand
 				Commands.literal("locate")
 						.requires(source -> source.hasPermission(2))
 						.then(Commands.literal("mineral")
-						.then(Commands.argument("type", EnumArgument.enumArgument(MineralEnum.class))
-								.then(Commands.argument("radius", IntegerArgumentType.integer(0, 32))
-										.executes(context -> {
-											MineralEnum mineral = context.getArgument("type", MineralEnum.class);
-											int radius = IntegerArgumentType.getInteger(context, "radius");
-											findMineralVienAsync(context.getSource(), mineral, radius);
-											return 1;
-										}))))
+								.then(Commands.argument("type", EnumArgument.enumArgument(MineralEnum.class))
+										.then(Commands.argument("radius", IntegerArgumentType.integer(0, 32))
+												.executes(context -> {
+													MineralEnum mineral = context.getArgument("type", MineralEnum.class);
+													int radius = IntegerArgumentType.getInteger(context, "radius");
+													findMineralVienAsync(context.getSource(), mineral, radius);
+													return 1;
+												}))))
+		);
+
+		dispatcher.register(
+				Commands.literal("locate")
+						.requires(source -> source.hasPermission(2))
+						.then(Commands.literal("metal")
+								.then(Commands.argument("type", StringArgumentType.word())
+										.suggests((ctx, builder) -> {
+											for (MetalEnum metal : MetalEnum.values()) {
+												if (metal.hasFlag(BlockCategoryFlags.ORE_BLOCK)) {
+													builder.suggest(metal.name().toLowerCase());
+												}
+											}
+											return builder.buildFuture();
+										})
+										.then(Commands.argument("radius", IntegerArgumentType.integer(0, 32))
+												.executes(context -> {
+													String typeName = StringArgumentType.getString(context, "type");
+													MetalEnum metal = Arrays.stream(MetalEnum.values())
+															.filter(m -> m.name().equalsIgnoreCase(typeName) && m.hasFlag(BlockCategoryFlags.ORE_BLOCK))
+															.findFirst()
+															.orElseThrow(() -> new IllegalArgumentException("Invalid native metal: " + typeName));
+													int radius = IntegerArgumentType.getInteger(context, "radius");
+													findMetalVienAsync(context.getSource(), metal, radius);
+													return 1;
+												}))))
 		);
 	}
 
 	public static void findMineralVienAsync(CommandSourceStack source, MineralEnum type, int radius) {
 		source.sendSuccess(() -> Component.literal("Locating Mineral Vein..."), false);
 		source.getServer().submit(() -> {
-			try {
-				findMineralVien(source, type, radius);
-			} catch (CommandSyntaxException e) {
-				source.sendFailure(Component.literal("An error occurred while searching for the mineral veins."));
-			}
+			if(source.getPlayer() == null) source.sendFailure(Component.literal("Command must be run by a player"));
+			IGCommonForgeEvents.activeVeinScans.add(new VeinScanTask(source, source.getLevel(), type, radius));
 		});
 	}
 
-	public static void findMineralVien(CommandSourceStack source, MineralEnum type, int radius) throws CommandSyntaxException {
+	public static void findMetalVienAsync(CommandSourceStack source, MetalEnum type, int radius) {
+		source.sendSuccess(() -> Component.literal("Locating Native Metal Vein..."), false);
+		source.getServer().submit(() -> {
+			if(source.getPlayer() == null) source.sendFailure(Component.literal("Command must be run by a player"));
+			IGCommonForgeEvents.activeVeinScans.add(new VeinScanTask(source, source.getLevel(), type, radius));
+		});
+	}
+
+	public static boolean findMineralVien(CommandSourceStack source, ServerLevel level, MineralEnum type, int radius) throws CommandSyntaxException {
 		// Get player position
 		ServerPlayer player = source.getPlayerOrException();
 		ChunkPos playerPos = player.chunkPosition();
-
-		// Get the current level (world)
-		ServerLevel level = player.serverLevel();
 
 		int minBuildHeight = level.getMinBuildHeight();
 		int maxBuildHeight = level.getMaxBuildHeight();
@@ -106,11 +140,12 @@ public class IGFindMineralVeinCommand
 
 					source.sendSuccess(() -> Component.translatable("command.immersivegeology.veinlocate",
 							type.name(), coordinates, distance), false);
-					return;
+					return true;
 				}
 			}
 		}
 		// If no matching feature is found, send a message to the player
 		source.sendFailure(Component.literal("No " + type.name() + " ore vein found within " + radius + " chunk radius."));
+		return false;
 	}
 }

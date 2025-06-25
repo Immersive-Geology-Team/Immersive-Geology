@@ -1,0 +1,15 @@
+{
+  "type": "immersivegeology:gravity_separator",
+  "byproduct": {
+    "item": "minecraft:gravel"
+  },
+  "byproduct_chance": 0.33,
+  "input": {
+    "tag": "forge:dirty_crushed_ore/apatite"
+  },
+  "result": {
+    "item": "immersivegeology:crushed_ore_apatite"
+  },
+  "time": 100,
+  "water": 100
+}

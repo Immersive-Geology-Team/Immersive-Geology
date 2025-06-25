@@ -41,6 +41,12 @@ public class MaterialAnthracite extends MaterialMineral
 	}
 
 	@Override
+	public boolean hasCustomTexture(BlockCategoryFlags blockCategoryFlags)
+	{
+		return blockCategoryFlags.equals(BlockCategoryFlags.ORE_BLOCK);
+	}
+
+	@Override
 	public IGVeinTextureType getVeinTextureType()
 	{
 		return IGVeinTextureType.LAYERED;

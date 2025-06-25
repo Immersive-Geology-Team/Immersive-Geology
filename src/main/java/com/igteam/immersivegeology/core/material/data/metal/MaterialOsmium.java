@@ -33,7 +33,7 @@ public class MaterialOsmium extends MaterialNativeMetal
     public MaterialOsmium() {
         super();
         this.CONFIG = new MaterialMineral.MineralConfig(0,0,0,0,0,0,0, false, Optional.empty(), IGGenerationType.DEFAULT);
-        removeMaterialFlags(ItemCategoryFlags.CRYSTAL, ItemCategoryFlags.CRYSTAL, ItemCategoryFlags.METAL_OXIDE);
+        removeMaterialFlags(BlockCategoryFlags.ORE_BLOCK, ItemCategoryFlags.CRYSTAL, ItemCategoryFlags.CRYSTAL, ItemCategoryFlags.METAL_OXIDE, ItemCategoryFlags.NORMAL_ORE, ItemCategoryFlags.POOR_ORE, ItemCategoryFlags.RICH_ORE);
     }
 
     @Override

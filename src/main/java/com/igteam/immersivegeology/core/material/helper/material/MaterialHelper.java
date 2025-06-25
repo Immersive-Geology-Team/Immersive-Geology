@@ -328,4 +328,9 @@ public interface MaterialHelper {
     default int getToolSpeed()  {return 3;};
 
     default Tier getToolTier() {return Tiers.IRON;};
+
+	default boolean hasCustomTexture(BlockCategoryFlags blockCategoryFlags)
+    {
+        return false;
+    };
 }

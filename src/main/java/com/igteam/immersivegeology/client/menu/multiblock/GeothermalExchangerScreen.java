@@ -208,7 +208,7 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 			);
 
 			pose.pushPose();
-			pose.translate(-1f,4,0);
+			pose.translate(0,4,0);
 			BakedModel itemModel = itemRender.getModel(multiblockRenderIcon, level, null, 0);
 			pose.translate(1.5, 0.5, 1.5);
 			itemRender.renderModelLists(itemModel, multiblockRenderIcon,

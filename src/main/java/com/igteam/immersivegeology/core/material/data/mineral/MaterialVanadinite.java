@@ -18,6 +18,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags.Biomes;
 import net.minecraftforge.fluids.FluidStack;
@@ -54,24 +55,20 @@ public class MaterialVanadinite extends MaterialSulphideMineral
     @Override
     public void setupRecipeStages()
     {
+        logged_recipes.add(getName());
+
+        IGMethodBuilder.separating(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.DIRTY_CRUSHED_ORE, ItemCategoryFlags.CRUSHED_ORE, new ItemStack(Blocks.GRAVEL), 0.33f, 100, 100);
+        IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.GRIT, 6000, 100);
+
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("pellet_"+getName()+"_to_ingot",
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE),
                 getSecondaryProduct().getStack(ItemCategoryFlags.INGOT),
                 getStack(ItemCategoryFlags.SLAG, 1), 1800);
 
-
-        IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION)
-                .create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.GRIT, 6000, 100);
-        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION)
-                .create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.POWDER);
-        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION)
-                .create(ItemCategoryFlags.GRIT, ItemCategoryFlags.POWDER, 200, 16000);
-
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("pellet_"+getName()+"_to_ingot",
                 getItemTag(ItemCategoryFlags.PELLET),
                 getSecondaryProduct().getStack(ItemCategoryFlags.INGOT),
                 getStack(ItemCategoryFlags.SLAG, 1), 200);
-
 
         IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(
                 ItemCategoryFlags.SLAG,
