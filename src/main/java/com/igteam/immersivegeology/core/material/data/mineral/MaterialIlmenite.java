@@ -29,7 +29,8 @@ public class MaterialIlmenite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_EXTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
-
+        removeMaterialFlags(ItemCategoryFlags.GRIT);
+        removeMaterialFlags(ItemCategoryFlags.POWDER);
         addFlags(ItemCategoryFlags.SLAG);
         addFlags(ItemCategoryFlags.POWDERED_SLAG);
 

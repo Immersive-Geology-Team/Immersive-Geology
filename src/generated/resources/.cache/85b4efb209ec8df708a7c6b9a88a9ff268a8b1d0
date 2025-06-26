@@ -1,4 +1,4 @@
-// 1.20.1	2025-06-24T01:05:23.041458714	Item models
+// 1.20.1	2025-06-26T15:06:57.849726028	Item models
 d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/bloomery_multiblock_skin_default.json
 d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/bloomery_multiblock_skin_legacy.json
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_aluminum_fluid.json
@@ -311,10 +311,8 @@ d540cc242d0c3649e3d18b584a5c2d1c40b3fec1 assets/immersivegeology/models/item/gri
 3db71ad171f96815e90f59b9e0c509d1d44ebc40 assets/immersivegeology/models/item/grit_fluorite.json
 03b9566e9ad0c2b7b5cb3e5926e83825b8295d7a assets/immersivegeology/models/item/grit_galena.json
 43358be677282d6a390e69f97d3ea19dba5eb255 assets/immersivegeology/models/item/grit_gold.json
-bae76f6b59c2c45ef2299779a45d98967729b65b assets/immersivegeology/models/item/grit_gypsum.json
 01f84725f6b6f51028de14115ca15e4de2ea358a assets/immersivegeology/models/item/grit_hastelloy.json
 96698d59a2982069521f1fa9e929fd45f25f5077 assets/immersivegeology/models/item/grit_hematite.json
-45332ee1815e302209fe3f07d6a160d79d1dcec8 assets/immersivegeology/models/item/grit_ilmenite.json
 f3101e5fe09a9155f943f33e211bfdc6baf0d9ef assets/immersivegeology/models/item/grit_iron.json
 9bcce1720d84a6e1856912538bd0f0752b8a123e assets/immersivegeology/models/item/grit_lead.json
 06afe7f2c851bd8d1ffad89d6e3a5ce3ce89da2d assets/immersivegeology/models/item/grit_lignite.json
@@ -1130,9 +1128,7 @@ eed339fad1a7d6535ba805118652d8e96e72742d assets/immersivegeology/models/item/pow
 fa36e7b4ef7fff50dff3071c6ea0daf51e7c7588 assets/immersivegeology/models/item/powder_cuprite.json
 db2494c13a04eee5a756e631beb3c65cf74c5be8 assets/immersivegeology/models/item/powder_fluorite.json
 f38dab317a89f7c010439a721867389a7ea9f50c assets/immersivegeology/models/item/powder_galena.json
-d48f44b10814aacbb7f050d92a8b91e6b8834a38 assets/immersivegeology/models/item/powder_gypsum.json
 83cdfb1fa0d7406875b0e3a466e00f82156d4a7d assets/immersivegeology/models/item/powder_hematite.json
-5e4d33b6faf766f9da40b296771bd1dbab844bc5 assets/immersivegeology/models/item/powder_ilmenite.json
 40fc9d86b39d5e1208cce9ba002f951fbf282f75 assets/immersivegeology/models/item/powder_magnetite.json
 d067b0f72f56ce7a521c694b23ab0f2fa8b7213f assets/immersivegeology/models/item/powder_millerite.json
 58e803943f1af441b23023886e19712805cf3ce5 assets/immersivegeology/models/item/powder_monazite.json

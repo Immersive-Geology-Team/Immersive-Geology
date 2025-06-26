@@ -16,6 +16,8 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 import net.minecraft.tags.BiomeTags;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -50,7 +52,8 @@ public class MaterialCryolite extends MaterialMineral {
     @Override
     public void setupRecipeStages()
     {
-
+        logged_recipes.add(getName());
+        IGMethodBuilder.separating(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.DIRTY_CRUSHED_ORE, ItemCategoryFlags.CRUSHED_ORE, new ItemStack(Blocks.GRAVEL), 0.33f, 100, 100);
         IGRecipeNode crushing =  IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(
                 ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.GRIT, 6000, 100).addToTree(basic_preparation);
         IGRecipeNode powder_a = IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE,
