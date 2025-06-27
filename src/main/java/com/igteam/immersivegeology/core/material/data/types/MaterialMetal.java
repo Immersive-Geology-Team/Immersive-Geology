@@ -19,7 +19,9 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.Optional;
 
@@ -38,6 +40,12 @@ public class MaterialMetal extends GeologyMaterial {
     @Override
     public void setupRecipeStages()
     {
+        if(hasFlag(ItemCategoryFlags.DIRTY_CRUSHED_ORE) && hasFlag(ItemCategoryFlags.CRUSHED_ORE))
+        {
+            IGMethodBuilder.separating(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.DIRTY_CRUSHED_ORE, ItemCategoryFlags.CRUSHED_ORE, new ItemStack(Blocks.GRAVEL), 0.33f, 100, 100);
+            if(hasFlag(ItemCategoryFlags.GRIT)) IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.GRIT, 6000, 100);
+        }
+
         if (hasFlag(ItemCategoryFlags.OXIDE_PELLET))
         {
             IGMethodBuilder.pelletize(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.METAL_OXIDE, ItemCategoryFlags.OXIDE_PELLET);

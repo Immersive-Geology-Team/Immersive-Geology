@@ -1,4 +1,4 @@
-// 1.20.1	2025-06-24T01:05:23.041132004	Tags for minecraft:block mod id immersivegeology
+// 1.20.1	2025-06-26T14:51:00.462141456	Tags for minecraft:block mod id immersivegeology
 3c47486e8a899e1788bceacca8b9aab9d31e85f3 data/forge/tags/blocks/engineering_block.json
 a3cf156f511e6cd5e4e48c785c1a701475a96170 data/forge/tags/blocks/evaporate.json
 4d078a81179ed345dbdb4f453620dfc7abb8f640 data/forge/tags/blocks/evaporate_crystal.json
@@ -52,3 +52,8 @@ c0d3ecb7b09c943902f2f261a1d810e889a4a37b data/forge/tags/blocks/storage_block.js
 a3cf156f511e6cd5e4e48c785c1a701475a96170 data/minecraft/tags/blocks/mineable/shovel.json
 6b9a565ee84aa1bef0633bae458a08701f45dab7 data/minecraft/tags/blocks/needs_stone_tool.json
 5d58b0e5b50615fc17c2be8abb25afef6fb817b7 data/minecraft/tags/blocks/replaceable.json
+6b9a565ee84aa1bef0633bae458a08701f45dab7 data/tfc/tags/blocks/can_collapse.json
+6b9a565ee84aa1bef0633bae458a08701f45dab7 data/tfc/tags/blocks/can_start_collapse.json
+6b9a565ee84aa1bef0633bae458a08701f45dab7 data/tfc/tags/blocks/can_trigger_collapse.json
+6b9a565ee84aa1bef0633bae458a08701f45dab7 data/tfc/tags/blocks/powderkeg_breaking_blocks.json
+6b9a565ee84aa1bef0633bae458a08701f45dab7 data/tfc/tags/blocks/prospectable.json

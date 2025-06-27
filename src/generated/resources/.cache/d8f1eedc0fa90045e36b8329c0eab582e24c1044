@@ -1,4 +1,4 @@
-// 1.20.1	2025-06-24T01:05:23.037432663	Tags for minecraft:item mod id immersivegeology
+// 1.20.1	2025-06-26T15:06:57.859130327	Tags for minecraft:item mod id immersivegeology
 e56adb03218e45c59aec8be5897a83ad852a915b data/forge/tags/items/compound_dust.json
 a474cefed341534d35ef94390868bfb60032bd4b data/forge/tags/items/compound_dust/aluminum.json
 24a62424adfc489796a9bf426edff2967ee92da8 data/forge/tags/items/compound_dust/calcium.json
@@ -156,7 +156,7 @@ c31629bdf3eb2038cfc710e97767361335ab0b79 data/forge/tags/items/gears/tungstencar
 4f7dd2252f359fcbd70c32310dce6c8c4ea9b552 data/forge/tags/items/gears/vanadium.json
 3eea4b24182abf62cdb69c10dda451acfe74acde data/forge/tags/items/gears/zinc.json
 2b4ec062f71f42ef1122266c999e262581c65b28 data/forge/tags/items/gears/zirconium.json
-716416ad1dd62d6213576c640fba625dd6b37e69 data/forge/tags/items/grits.json
+89500e791f789362d3f6c66cd80438d8f47881a0 data/forge/tags/items/grits.json
 b1770e20fb2a9e6df936a0bc16ecdfe7fb6d8d12 data/forge/tags/items/grits/acanthite.json
 c10364b99f67530b5986f63073d7ed7940f8e222 data/forge/tags/items/grits/alumina.json
 08194ba58462cc4f4ce1a1a73cb80b97f285a007 data/forge/tags/items/grits/aluminum.json
@@ -176,10 +176,8 @@ aef7afd6eb72c2ce7f7f92fcc2392ba6f2310847 data/forge/tags/items/grits/cryolite.js
 d6a2564ba0d97daee824ca08eaa085b904b6f112 data/forge/tags/items/grits/fluorite.json
 5d7da5c52c694e0aec9185639489670a281eb8b3 data/forge/tags/items/grits/galena.json
 0862748a0f5a9caf11be82426b7cecf6edb813bc data/forge/tags/items/grits/gold.json
-8454a81334358e9517f9dcc168b15d50ff039d42 data/forge/tags/items/grits/gypsum.json
 cc095af0714071088eb38c68354e7afbbe56b196 data/forge/tags/items/grits/hastelloy.json
 711be394a3ea61a813d6e6a78c34f47da3628c07 data/forge/tags/items/grits/hematite.json
-0cbc3b3ea6b9b569f738ea5789e5586343416a55 data/forge/tags/items/grits/ilmenite.json
 f00165b9a71c1120500cb3c08f179ded89c80355 data/forge/tags/items/grits/iron.json
 3a7e6b7cb733537679056e34833a5b3a3554bcf2 data/forge/tags/items/grits/lead.json
 81f54b044fded104a97e583719a8bb5dce7cff2a data/forge/tags/items/grits/lignite.json
@@ -272,11 +270,11 @@ ccf34816bce87661c03e5303ca6f389a951077d6 data/forge/tags/items/material/chromium
 6bc1bb65cc138936f8b46d766004ea60ae747559 data/forge/tags/items/material/fluorite.json
 8e74decd76078bd56375febf0f1b362155df4662 data/forge/tags/items/material/galena.json
 f15124ea62066cdd71d49a59c3de90afdde172d7 data/forge/tags/items/material/gold.json
-f613e702d81468cb88ca6e0ba3dbdd8d98f79128 data/forge/tags/items/material/gypsum.json
+d1828829ecfa34756531473babec1134052e020b data/forge/tags/items/material/gypsum.json
 bada35dadf3f8022364cc1de8f8a6b5ce0c8a43f data/forge/tags/items/material/hastelloy.json
 18c5b75b1f8cf5f36a531a73f8c68d8ce600913e data/forge/tags/items/material/hematite.json
 32089e29fa6c446472caa2619c32aef98f9d4347 data/forge/tags/items/material/highspeedsteel.json
-74e5eb0f54ad39fdc510df2a297372a7fcbcbdf9 data/forge/tags/items/material/ilmenite.json
+c7664a7e60d0a38c05fda4a2525aef31ed9f9faa data/forge/tags/items/material/ilmenite.json
 d54e27ca9d406b5633196f84890f0502679738b5 data/forge/tags/items/material/iron.json
 0da5c4bb4779ef63e81545b2b1b5c400c7215ae1 data/forge/tags/items/material/lead.json
 ec3ad4f6151599b87fc066865ecd7091586bce2d data/forge/tags/items/material/lignite.json
@@ -515,7 +513,7 @@ f461dd9e74cfb903e4176f769ee6161588b17560 data/forge/tags/items/powdered_slag/ilm
 b976dacc3a206e218bd75c373a000d98fb5078c9 data/forge/tags/items/powdered_slag/smithsonite.json
 c9fc5fc34fd86658faca7528de3e3066b23735e3 data/forge/tags/items/powdered_slag/sphalerite.json
 bb67bbade4d7bf87ba93fd03a3fe0b434b963f5d data/forge/tags/items/powdered_slag/vanadinite.json
-ced610d176dbbc8aa5676b98aa350cd016166a57 data/forge/tags/items/powders.json
+e8a627cb3cc633eaa6fc6388203ce37e9661403d data/forge/tags/items/powders.json
 6baba74f408008a032c95e17fcd9723199a9f602 data/forge/tags/items/powders/acanthite.json
 57b5bbc88bbf9d33f21a5e9c2eb6ba78eb2b89be data/forge/tags/items/powders/alumina.json
 41162608401c369bea357b20372ee1bb5b138f86 data/forge/tags/items/powders/anatase.json
@@ -529,9 +527,7 @@ b7b63b805a9bba6fb03845e008dbf4185af00c4d data/forge/tags/items/powders/cryolite.
 e4a502fc66c462991c9b4ebc68c92bc7ad6fb24d data/forge/tags/items/powders/cuprite.json
 a9ee82763de7a6780c0a1b884d64b1ae24ddeeeb data/forge/tags/items/powders/fluorite.json
 4fe1a3a27c0ee2e4b18def5a17a16fe0777d04f4 data/forge/tags/items/powders/galena.json
-0c19b27505ccf6d73b96a31b4932a6b64c4c9c6f data/forge/tags/items/powders/gypsum.json
 9f4b11842c21d3679de30a151752b96701511abc data/forge/tags/items/powders/hematite.json
-3958a4ea5a5cc97deb116c7c4a437206cba2e959 data/forge/tags/items/powders/ilmenite.json
 a2f750af51b36f78395bec143373de29d7aabf05 data/forge/tags/items/powders/magnetite.json
 0af0da4cfc90a3e66c590c15087f0479b28ad576 data/forge/tags/items/powders/millerite.json
 105f8b0b3a902216f89b603f5df0aaae0f729ce5 data/forge/tags/items/powders/monazite.json
@@ -651,3 +647,4 @@ de4e36a2b59605f65c14af501ad5c29cee8ab8ae data/forge/tags/items/wires/unobtanium.
 a8aeb8ea26795f7f0b5c300c657dbca091598d52 data/forge/tags/items/wires/zinc.json
 fdbfccc9746e4044bde943f8591e5f5cd1e34e7c data/forge/tags/items/wires/zirconium.json
 49a95b3b60f2752133d30a54def88a26cc7cbfe0 data/immersiveengineering/tags/items/toolbox/tools.json
+af1bd1d9d40cc4c2dcff7a1e45f320f44fa5cd16 data/tfc/tags/items/pileable_ingots.json
