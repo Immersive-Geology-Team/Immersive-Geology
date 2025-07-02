@@ -25,7 +25,7 @@ public class MaterialLead extends MaterialNativeMetal
 {
     public MaterialLead() {
         super();
-        addFlags(MaterialFlags.EXISTING_IMPLEMENTATION);
+        addFlags(MaterialFlags.EXISTING_IMPLEMENTATION, ItemCategoryFlags.OXIDE_PELLET);
 
         removeMaterialFlags(ItemCategoryFlags.COMPOUND_DUST);
         addExistingFlag(ModFlags.IMMERSIVEENGINEERING, ItemCategoryFlags.INGOT, ItemCategoryFlags.PLATE, ItemCategoryFlags.ROD, ItemCategoryFlags.WIRE, ItemCategoryFlags.NUGGET, ItemCategoryFlags.POWDER);

@@ -1,4 +1,4 @@
-// 1.20.1	2025-06-26T15:06:57.849726028	Item models
+// 1.20.1	2025-07-02T18:04:24.503529437	Item models
 d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/bloomery_multiblock_skin_default.json
 d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/bloomery_multiblock_skin_legacy.json
 9da5dd7ef0b6dda3ca5847aa2f0ef23eb838b8cb assets/immersivegeology/models/item/bucket_aluminum_fluid.json
@@ -1025,6 +1025,7 @@ cc1ce7b5dd97d2dcf64c1d758a70fc7d9263d22e assets/immersivegeology/models/item/nug
 605df53a18c8f0ae0343eb481cad04b79d9f0be7 assets/immersivegeology/models/item/oxide_pellet_cobalt.json
 605df53a18c8f0ae0343eb481cad04b79d9f0be7 assets/immersivegeology/models/item/oxide_pellet_copper.json
 605df53a18c8f0ae0343eb481cad04b79d9f0be7 assets/immersivegeology/models/item/oxide_pellet_iron.json
+605df53a18c8f0ae0343eb481cad04b79d9f0be7 assets/immersivegeology/models/item/oxide_pellet_lead.json
 605df53a18c8f0ae0343eb481cad04b79d9f0be7 assets/immersivegeology/models/item/oxide_pellet_manganese.json
 605df53a18c8f0ae0343eb481cad04b79d9f0be7 assets/immersivegeology/models/item/oxide_pellet_molybdenum.json
 605df53a18c8f0ae0343eb481cad04b79d9f0be7 assets/immersivegeology/models/item/oxide_pellet_nickel.json
