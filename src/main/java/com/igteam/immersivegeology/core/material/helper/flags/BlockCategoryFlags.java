@@ -27,6 +27,7 @@ public enum BlockCategoryFlags implements IFlagType<BlockCategoryFlags> {
     EVAPORATE(0),
     EVAPORATE_CRYSTAL(0),
     ENGINEERING_BLOCK(4),
+    ADVANCED_ENGINEERING_BLOCK(4),
     CRATE(4),
     MISC(4);
 

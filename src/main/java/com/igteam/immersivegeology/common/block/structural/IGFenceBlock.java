@@ -29,7 +29,7 @@ public class IGFenceBlock extends FenceBlock implements IGBlockType
 	protected final BlockCategoryFlags category;
 
 	public IGFenceBlock(BlockCategoryFlags flag, MaterialInterface<?> material) {
-		this(flag, material, material.instance().getProperties());
+		this(flag, material, material.instance().getProperties(flag));
 	}
 
 	public IGFenceBlock(BlockCategoryFlags flag, MaterialInterface<?> material, Properties props) {

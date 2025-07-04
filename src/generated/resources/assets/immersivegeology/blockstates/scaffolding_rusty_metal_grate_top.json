@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "waterlogged=false": {
+      "model": "immersivegeology:block/scaffolding/rusty_metal_scaffolding_grate_top"
+    },
+    "waterlogged=true": {
+      "model": "immersivegeology:block/scaffolding/rusty_metal_scaffolding_grate_top"
+    }
+  }
+}

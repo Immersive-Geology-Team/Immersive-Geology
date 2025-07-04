@@ -8,13 +8,14 @@
 
 package com.igteam.immersivegeology.core.lib;
 
-import blusunrize.immersiveengineering.ImmersiveEngineering;
-import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.core.material.data.enums.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
-import org.apache.logging.log4j.LogManager;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.MapColor;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 
@@ -59,6 +60,32 @@ public class IGLib {
     {
         return new PrefixedLogger(LogUtils.getLogger(), "[IG] ");
     }
+    public static final BlockBehaviour.Properties STONE_DECO_PROPS = BlockBehaviour.Properties.of()
+            .mapColor(MapColor.STONE)
+            .instrument(NoteBlockInstrument.BASEDRUM)
+            .sound(SoundType.STONE)
+            .requiresCorrectToolForDrops()
+            .strength(2, 10);
+
+    public static final BlockBehaviour.Properties DEFAULT_METAL_PROPERTIES = BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
+            .sound(SoundType.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(3, 15);
+
+    public static final BlockBehaviour.Properties SHEETMETAL_PROPERTIES = BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
+            .sound(SoundType.METAL)
+            .strength(2, 2);
+
+    public static final BlockBehaviour.Properties METAL_PROPERTIES_NO_OVERLAY = BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
+            .sound(SoundType.METAL)
+            .strength(3, 15)
+            .requiresCorrectToolForDrops()
+            .isViewBlocking((state, blockReader, pos) -> false);
+
+    public static final BlockBehaviour.Properties METAL_PROPERTIES_NO_OCCLUSION = METAL_PROPERTIES_NO_OVERLAY.noOcclusion().forceSolidOn();
 
     public static LinkedList<MaterialInterface<?>> getGeologyMaterials(){
         LinkedList<MaterialInterface<?>> list = new LinkedList<>();

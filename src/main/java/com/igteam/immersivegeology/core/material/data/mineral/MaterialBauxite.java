@@ -59,8 +59,7 @@ public class MaterialBauxite extends MaterialMineral {
     @Override
     public void setupRecipeStages()
     {
-        super.setupRecipeStages();
-
+        logged_recipes.add(getName());
         IGRecipeNode crushing =  IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(
                 ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.GRIT, 6000, 100).addToTree(bayer_process);
         IGRecipeNode powder_a = IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE,

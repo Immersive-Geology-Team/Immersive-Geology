@@ -30,7 +30,7 @@ public class MaterialTitaniumConcrete extends MaterialMisc
 		removeMaterialFlags(MaterialFlags.IS_ORE_BEARING);
 	}
 
-	public BlockBehaviour.Properties getProperties()
+	public BlockBehaviour.Properties getProperties(IFlagType<?> flag)
 	{
 		return Properties.of().sound(SoundType.POLISHED_DEEPSLATE).instrument(NoteBlockInstrument.COW_BELL).strength(30, 1200);
 	}

@@ -28,7 +28,7 @@ public class MaterialSteelConcrete extends MaterialMisc
 		removeMaterialFlags(MaterialFlags.IS_ORE_BEARING);
 	}
 
-	public Properties getProperties()
+	public Properties getProperties(IFlagType<?> flag)
 	{
 		return Properties.of().sound(SoundType.GILDED_BLACKSTONE).instrument(NoteBlockInstrument.COW_BELL).strength(20, 600);
 	}

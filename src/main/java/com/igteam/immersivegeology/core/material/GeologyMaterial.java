@@ -36,8 +36,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
@@ -86,7 +88,20 @@ public abstract class GeologyMaterial implements MaterialHelper {
         initializeFlags();
     }
 
-    public BlockBehaviour.Properties getProperties(){return BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK);};
+    public BlockBehaviour.Properties getProperties(IFlagType<?> flag)
+    {
+        if(flag instanceof BlockCategoryFlags blockCategoryFlags)
+        {
+            return switch(blockCategoryFlags)
+            {
+                case SHEETMETAL_BLOCK, SHEETMETAL_SLAB, SHEETMETAL_STAIRS -> IGLib.SHEETMETAL_PROPERTIES;
+                case STORAGE_BLOCK, ENGINEERING_BLOCK, ADVANCED_ENGINEERING_BLOCK -> IGLib.DEFAULT_METAL_PROPERTIES;
+                case SCAFFOLDING -> IGLib.METAL_PROPERTIES_NO_OCCLUSION;
+                default -> BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK);
+            };
+        }
+        return BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK);
+    }
 
     public Set<IGRecipeChain> getRecipeChains()
     {
@@ -173,7 +188,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
                     String ore_overlay = getCrystalFamily()!=null?getCrystalFamily().getName(): "vanilla_normal";
                     yield new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/vanilla/"+ore_overlay);
                 }
-                case STORAGE_BLOCK, STAIRS, SLAB, ENGINEERING_BLOCK, FENCE ->
+                case STORAGE_BLOCK, STAIRS, SLAB, ENGINEERING_BLOCK, ADVANCED_ENGINEERING_BLOCK, FENCE ->
                         new ResourceLocation(IGLib.MODID, "block/greyscale/metal/storage");
                 case EVAPORATE -> new ResourceLocation(IGLib.MODID, "block/greyscale/evaporate/type_1");
                 case SHEETMETAL_SLAB, SHEETMETAL_STAIRS, SHEETMETAL_BLOCK ->

@@ -102,6 +102,9 @@ public class IGGenericBlockItem extends BlockItem implements IGFlagItem {
             case ENGINEERING_BLOCK -> {
                 materialList.add(Component.translatable("material.immersivegeology.engineering." + materialMap.get(MaterialTexture.base).getName()).getString());
             }
+            case ADVANCED_ENGINEERING_BLOCK -> {
+                materialList.add(Component.translatable("material.immersivegeology.adv_engineering." + materialMap.get(MaterialTexture.base).getName()).getString());
+            }
             default ->
             {
                 for(MaterialTexture t : MaterialTexture.values()){
