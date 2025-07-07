@@ -8,13 +8,19 @@
 
 package com.igteam.immersivegeology.core.material.data.misc;
 
+import blusunrize.immersiveengineering.api.EnumMetals;
+import blusunrize.immersiveengineering.common.register.IEItems;
+import blusunrize.immersiveengineering.common.register.IEItems.Metals;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMisc;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -32,6 +38,19 @@ public class MaterialRuined extends MaterialMisc
 				BlockCategoryFlags.ADVANCED_ENGINEERING_BLOCK, BlockCategoryFlags.MISC, BlockCategoryFlags.CRATE);
 
 		removeMaterialFlags(MaterialFlags.IS_ORE_BEARING);
+	}
+
+	@Override
+	public void setupRecipeStages()
+	{
+		super.setupRecipeStages();
+
+		IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION)
+				.create("crude_steel_extraction", this.getItemTag(ItemCategoryFlags.PLATE), new ItemStack(Metals.NUGGETS.get(EnumMetals.STEEL), 2));
+
+		IGMethodBuilder.arcSmelting(this, IGStageDesignation.EXTRACTION)
+				.create("steel_extraction", this.getItemTag(ItemCategoryFlags.PLATE), 1, new ItemStack(Metals.NUGGETS.get(EnumMetals.STEEL), 4), ItemStack.EMPTY)
+				.setTimeAndEnergy(100, 51200);
 	}
 
 	@Override

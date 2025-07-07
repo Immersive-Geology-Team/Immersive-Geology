@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "input": {
+    "tag": "forge:plates/rusty_metal"
+  },
+  "result": {
+    "count": 2,
+    "item": "immersiveengineering:nugget_steel"
+  },
+  "slag": {
+    "item": "immersiveengineering:slag"
+  },
+  "time": 200
+}

@@ -1,6 +1,6 @@
 {
   "type": "immersivegeology:ruined_mining_outpost",
-  "biomes": "#minecraft:is_overworld",
+  "biomes": "#forge:is_plains",
   "step": "surface_structures",
   "spawn_overrides": {},
   "terrain_adaptation": "beard_thin",
