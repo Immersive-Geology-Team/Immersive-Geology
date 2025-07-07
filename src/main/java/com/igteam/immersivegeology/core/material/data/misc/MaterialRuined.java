@@ -28,8 +28,8 @@ public class MaterialRuined extends MaterialMisc
 		this.name = "rusty_metal";
 		addFlags(BlockCategoryFlags.STORAGE_BLOCK, BlockCategoryFlags.MISC, BlockCategoryFlags.SLAB, BlockCategoryFlags.STAIRS,
 				BlockCategoryFlags.SHEETMETAL_BLOCK, BlockCategoryFlags.SHEETMETAL_SLAB, BlockCategoryFlags.SHEETMETAL_STAIRS);
-		addFlags(BlockCategoryFlags.SCAFFOLDING, ItemCategoryFlags.PLATE, BlockCategoryFlags.ENGINEERING_BLOCK,
-				BlockCategoryFlags.ADVANCED_ENGINEERING_BLOCK, BlockCategoryFlags.MISC);
+		addFlags(BlockCategoryFlags.SCAFFOLDING, ItemCategoryFlags.PLATE, BlockCategoryFlags.ENGINEERING_BLOCK, BlockCategoryFlags.FENCE,
+				BlockCategoryFlags.ADVANCED_ENGINEERING_BLOCK, BlockCategoryFlags.MISC, BlockCategoryFlags.CRATE);
 
 		removeMaterialFlags(MaterialFlags.IS_ORE_BEARING);
 	}
@@ -45,6 +45,7 @@ public class MaterialRuined extends MaterialMisc
 				case ENGINEERING_BLOCK -> new ResourceLocation(IGLib.MODID, "block/colored/rusty_metal/light");
 				case ADVANCED_ENGINEERING_BLOCK -> new ResourceLocation(IGLib.MODID, "block/colored/rusty_metal/heavy");
 				case MISC -> new ResourceLocation(IGLib.MODID, "block/colored/rusty_metal/deco");
+				case CRATE -> new ResourceLocation(IGLib.MODID, "block/colored/rusty_metal/crate");
 				case SCAFFOLDING -> new ResourceLocation(IGLib.MODID, "block/colored/rusty_metal/scaffolding/scaffolding");
 				case SHEETMETAL_BLOCK, SHEETMETAL_SLAB, SHEETMETAL_STAIRS -> new ResourceLocation(IGLib.MODID, "block/colored/rusty_metal/sheetmetal");
 				default -> super.getTextureLocation(flag);
@@ -60,5 +61,11 @@ public class MaterialRuined extends MaterialMisc
 			};
 		}
 		return new ResourceLocation(IGLib.MODID, "block/colored/rusty_metal/deco");
+	}
+
+	@Override
+	public Properties getProperties(IFlagType<?> flag)
+	{
+		return super.getProperties(flag).sound(SoundType.COPPER);
 	}
 }

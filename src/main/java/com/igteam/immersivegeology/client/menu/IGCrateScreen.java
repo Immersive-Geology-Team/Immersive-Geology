@@ -15,17 +15,23 @@ import blusunrize.immersiveengineering.common.network.MessageContainerUpdate;
 import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.common.menu.IGCrateMenu;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
+import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraftforge.network.PacketDistributor;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class IGCrateScreen<C extends IGCrateMenu> extends IEContainerScreen<C>
@@ -58,9 +64,8 @@ public class IGCrateScreen<C extends IGCrateMenu> extends IEContainerScreen<C>
 			{
 				String contentString = title.getContents().toString();
 				String formatString = contentString.substring(contentString.lastIndexOf("args=[")+6, contentString.lastIndexOf("]}"));
-				String sanitized = formatString.replace(" ", "");
-				MetalEnum material = MetalEnum.valueOf(sanitized);
-				return new ResourceLocation(IGLib.MODID, "textures/gui/block/crate_"+material.getName()+".png");
+				String sanitized = formatString.replace(" ", "").toLowerCase();
+				return new ResourceLocation(IGLib.MODID, "textures/gui/block/crate_"+sanitized+".png");
 			}catch(Exception ignored)
 			{
 				return new ResourceLocation(IGLib.MODID, "textures/gui/block/crate.png");

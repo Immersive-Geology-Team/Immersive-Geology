@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-04T15:39:48.352470768	Item models
+// 1.20.1	2025-07-07T18:07:35.260325501	Item models
 7d48f2b4469e5dd5953f6f9507355e31dcf47225 assets/immersivegeology/models/item/advanced_engineering_block_rusty_metal.json
 d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/bloomery_multiblock_skin_default.json
 d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/bloomery_multiblock_skin_legacy.json
@@ -134,6 +134,7 @@ e55fa9bcd26bd14b45f0913d49dedde429614395 assets/immersivegeology/models/item/com
 4bde1e3b621594d3e84afa62083adfaaaf3fed9c assets/immersivegeology/models/item/compound_dust_vanadium.json
 66184556ff04768521841950ccda2763e1c77de8 assets/immersivegeology/models/item/compound_dust_zinc.json
 9ad7a5ef40501fd1ef1d71a5dd3a902ed39542e0 assets/immersivegeology/models/item/compound_dust_zirconium.json
+22fa523d7bef0989545b081228c779ca0b596e5f assets/immersivegeology/models/item/crate_rusty_metal.json
 95111a0b5913371a1abd480f1eaa2c7be9d7ac94 assets/immersivegeology/models/item/crate_stainlesssteel.json
 b437529e62aac1c2ea96ff393be4c06544ce58db assets/immersivegeology/models/item/crate_steel.json
 6503209823c2bd051ffb95895f64a9298f834808 assets/immersivegeology/models/item/crushed_ore_acanthite.json
@@ -257,6 +258,7 @@ a7f07048cda509524ea086e33c1423b4bba01915 assets/immersivegeology/models/item/eva
 64fd02c100c9c4e6a5cd1991490021ad05e9e53c assets/immersivegeology/models/item/evaporate_saltpeter.json
 fc3f204777a8f7034463f20a5ca76af8c0447bd5 assets/immersivegeology/models/item/fence_bronze.json
 77a19e60ff6b741624119ed9f0df4c3f6f74a1a8 assets/immersivegeology/models/item/fence_hastelloy.json
+9a47ce493b3bc68e331ecb89bf7127f3be56890b assets/immersivegeology/models/item/fence_rusty_metal.json
 ba6657ad7e5411c67462ad43b5f4cec2eec4ae63 assets/immersivegeology/models/item/fence_stainlesssteel.json
 01ca1e5d5117fb6b7c161d6bd3470a8347d2bead assets/immersivegeology/models/item/fence_titanium.json
 3da7df86b4b1cb6f4316327aa182365a686b1d61 assets/immersivegeology/models/item/fence_tungsten.json

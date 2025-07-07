@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "immersivegeology:ruined_mining_outpost",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 80,
+    "separation": 20,
+    "salt": 123456789
+  }
+}
