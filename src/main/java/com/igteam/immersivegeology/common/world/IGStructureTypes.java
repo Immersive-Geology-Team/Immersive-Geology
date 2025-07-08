@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.common.world;
 
+import com.igteam.immersivegeology.common.world.structure.RuinedFactory;
 import com.igteam.immersivegeology.common.world.structure.RuinedMiningOutpost;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.registries.Registries;
@@ -21,6 +22,7 @@ public class IGStructureTypes
 	public static final DeferredRegister<StructureType<?>> STRUCTURE_TYPES = DeferredRegister.create(Registries.STRUCTURE_TYPE, IGLib.MODID);
 
 	public static final RegistryObject<StructureType<RuinedMiningOutpost>> RUINED_MINING_OUTPOST = STRUCTURE_TYPES.register("ruined_mining_outpost", () -> () -> RuinedMiningOutpost.CODEC);
+	public static final RegistryObject<StructureType<RuinedFactory>> RUINED_FACTORY = STRUCTURE_TYPES.register("ruined_factory", () -> () -> RuinedFactory.CODEC);
 
 	public static void initialize(IEventBus bus)
 	{

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "immersivegeology:block/default_block/default_block_rusty_metal"
+    }
+  }
+}

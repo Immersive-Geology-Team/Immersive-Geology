@@ -261,6 +261,7 @@
   "block.immersivegeology.industrialsluice": "Industrial Sluice",
   "block.immersivegeology.geothermal_exchanger": "Geothermal Exchanger",
   "block.immersivegeology.storage_block": "%s Block",
+  "block.immersivegeology.default_block": "%s Panel Block",
   "block.immersivegeology.scaffolding": "%s Scaffolding",
   "block.immersivegeology.rock": "%s Stone",
   "block.immersivegeology.stone": "%s",

@@ -21,6 +21,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -32,10 +33,10 @@ public class MaterialRuined extends MaterialMisc
 	{
 		super();
 		this.name = "rusty_metal";
-		addFlags(BlockCategoryFlags.STORAGE_BLOCK, BlockCategoryFlags.MISC, BlockCategoryFlags.SLAB, BlockCategoryFlags.STAIRS,
+		addFlags(BlockCategoryFlags.STORAGE_BLOCK, BlockCategoryFlags.DEFAULT_BLOCK, BlockCategoryFlags.SLAB, BlockCategoryFlags.STAIRS,
 				BlockCategoryFlags.SHEETMETAL_BLOCK, BlockCategoryFlags.SHEETMETAL_SLAB, BlockCategoryFlags.SHEETMETAL_STAIRS);
 		addFlags(BlockCategoryFlags.SCAFFOLDING, ItemCategoryFlags.PLATE, BlockCategoryFlags.ENGINEERING_BLOCK, BlockCategoryFlags.FENCE,
-				BlockCategoryFlags.ADVANCED_ENGINEERING_BLOCK, BlockCategoryFlags.MISC, BlockCategoryFlags.CRATE);
+				BlockCategoryFlags.ADVANCED_ENGINEERING_BLOCK, BlockCategoryFlags.CRATE);
 
 		removeMaterialFlags(MaterialFlags.IS_ORE_BEARING);
 	}
@@ -51,6 +52,14 @@ public class MaterialRuined extends MaterialMisc
 		IGMethodBuilder.arcSmelting(this, IGStageDesignation.EXTRACTION)
 				.create("steel_extraction", this.getItemTag(ItemCategoryFlags.PLATE), 1, new ItemStack(Metals.NUGGETS.get(EnumMetals.STEEL), 4), ItemStack.EMPTY)
 				.setTimeAndEnergy(100, 51200);
+
+		IGMethodBuilder.arcSmelting(this, IGStageDesignation.EXTRACTION)
+				.create("steel_extraction", this.getBlock(BlockCategoryFlags.ENGINEERING_BLOCK).asItem(), 1, new ItemStack(Metals.PLATES.get(EnumMetals.IRON), 2), new ItemStack(Metals.INGOTS.get(EnumMetals.COPPER)))
+				.setTimeAndEnergy(100, 51200);
+
+		IGMethodBuilder.arcSmelting(this, IGStageDesignation.EXTRACTION)
+				.create("steel_extraction", this.getBlock(BlockCategoryFlags.ADVANCED_ENGINEERING_BLOCK).asItem(), 1, new ItemStack(Metals.PLATES.get(EnumMetals.STEEL), 2), new ItemStack(Metals.INGOTS.get(EnumMetals.ELECTRUM)))
+				.setTimeAndEnergy(100, 51200);
 	}
 
 	@Override
@@ -63,7 +72,7 @@ public class MaterialRuined extends MaterialMisc
 				case STORAGE_BLOCK, SLAB, STAIRS -> new ResourceLocation(IGLib.MODID, "block/colored/rusty_metal/block");
 				case ENGINEERING_BLOCK -> new ResourceLocation(IGLib.MODID, "block/colored/rusty_metal/light");
 				case ADVANCED_ENGINEERING_BLOCK -> new ResourceLocation(IGLib.MODID, "block/colored/rusty_metal/heavy");
-				case MISC -> new ResourceLocation(IGLib.MODID, "block/colored/rusty_metal/deco");
+				case DEFAULT_BLOCK -> new ResourceLocation(IGLib.MODID, "block/colored/rusty_metal/deco");
 				case CRATE -> new ResourceLocation(IGLib.MODID, "block/colored/rusty_metal/crate");
 				case SCAFFOLDING -> new ResourceLocation(IGLib.MODID, "block/colored/rusty_metal/scaffolding/scaffolding");
 				case SHEETMETAL_BLOCK, SHEETMETAL_SLAB, SHEETMETAL_STAIRS -> new ResourceLocation(IGLib.MODID, "block/colored/rusty_metal/sheetmetal");

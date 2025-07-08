@@ -32,6 +32,8 @@
     "immersivegeology:storage_block_reinforced_refractory_brick",
     "immersivegeology:storage_block_trconcrete",
     "immersivegeology:storage_block_srconcrete",
+    "immersivegeology:storage_block_ruined_concrete",
+    "immersivegeology:storage_block_reinforced_ruined_concrete",
     "immersivegeology:storage_block_rusty_metal"
   ]
 }
