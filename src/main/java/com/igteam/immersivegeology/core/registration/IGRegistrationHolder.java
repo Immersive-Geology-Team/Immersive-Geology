@@ -272,7 +272,7 @@ public class IGRegistrationHolder {
                 boolean hasExistingImplementation = material.instance().checkExistingImplementation(flags) &! DatagenModLoader.isRunningDataGen();
                 if(flags instanceof BlockCategoryFlags blockCategory) {
                     switch (blockCategory) {
-                        case DEFAULT_BLOCK, STORAGE_BLOCK, SHEETMETAL_BLOCK, DUST_BLOCK, GEODE_BLOCK, ENGINEERING_BLOCK -> {
+                        case DEFAULT_BLOCK, STORAGE_BLOCK, SHEETMETAL_BLOCK, DUST_BLOCK, GEODE_BLOCK, ENGINEERING_BLOCK, ADVANCED_ENGINEERING_BLOCK -> {
                             if(hasExistingImplementation) continue;
                             String registryKey = blockCategory.getRegistryKey(material);
                             Supplier<Block> blockProvider = () -> new IGGenericBlock(blockCategory, material);

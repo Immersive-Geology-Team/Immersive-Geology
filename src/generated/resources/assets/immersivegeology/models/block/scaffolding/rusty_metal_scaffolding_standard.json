@@ -1,0 +1,8 @@
+{
+  "parent": "immersivegeology:block/base/scaffolding/scaffolding_standard",
+  "textures": {
+    "bottom": "immersivegeology:block/colored/rusty_metal/scaffolding/scaffolding",
+    "side": "immersivegeology:block/colored/rusty_metal/scaffolding/scaffolding",
+    "top": "immersivegeology:block/colored/rusty_metal/scaffolding/scaffolding_standard"
+  }
+}

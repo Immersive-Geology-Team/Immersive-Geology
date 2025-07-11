@@ -32,7 +32,7 @@ public class IGGenericBlock extends Block implements IGBlockType {
     protected final BlockCategoryFlags category;
 
     public IGGenericBlock(BlockCategoryFlags flag, MaterialInterface<?> material) {
-        this(flag, material, material.instance().getProperties().mapColor(MapColor.COLOR_GRAY));
+        this(flag, material, material.instance().getProperties(flag).mapColor(MapColor.COLOR_GRAY));
     }
 
     public IGGenericBlock(BlockCategoryFlags flag, MaterialInterface<?> material, Properties props) {
@@ -54,8 +54,14 @@ public class IGGenericBlock extends Block implements IGBlockType {
         // By default, we don't need any additional information; the secondaryColors are used for mineral oxidation
         // or other state based color changes
         if(materialMap == null || materialMap.isEmpty()) return 0xffffffff;
-        if(index > materialMap.size()) return materialMap.get(MaterialTexture.values()[0]).getColor(category, 0);
-        return materialMap.get(MaterialTexture.values()[index > 0 ? 1 : 0]).getColor(category, 0);
+        MaterialTexture texture = MaterialTexture.base;
+        if(MaterialTexture.values()[index > 0 ? 1 : 0] != null)
+        {
+            texture = MaterialTexture.values()[index > 0 ? 1 : 0];
+        }
+        if(index > materialMap.size()) return materialMap.get(texture).getColor(category, 0);
+        if(materialMap.get(texture) != null) return materialMap.get(texture).getColor(category, 0);
+        return 0xffffffff;
     }
 
     public @NotNull Collection<MaterialInterface<?>> getMaterials() {

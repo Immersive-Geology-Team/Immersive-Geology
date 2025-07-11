@@ -15,6 +15,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class MaterialRefractoryBlock extends MaterialMisc
 {
@@ -25,6 +26,12 @@ public class MaterialRefractoryBlock extends MaterialMisc
 		addFlags(BlockCategoryFlags.STORAGE_BLOCK, BlockCategoryFlags.SLAB, BlockCategoryFlags.STAIRS);
 		removeMaterialFlags(MaterialFlags.IS_ORE_BEARING);
 		this.colorFunction = (f,i) -> 0xffffffff;
+	}
+
+	@Override
+	public Properties getProperties(IFlagType<?> flag)
+	{
+		return IGLib.STONE_DECO_PROPS;
 	}
 
 	@Override

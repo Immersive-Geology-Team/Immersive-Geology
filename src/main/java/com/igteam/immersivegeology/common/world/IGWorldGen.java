@@ -59,6 +59,8 @@ public class IGWorldGen
 		HEIGHT_REGISTER.register(bus);
 		IGLib.IG_LOGGER.info("- Biome Modifiers");
 		BIOME_MODIFIER_SERIALIZERS.register(bus);
+		IGLib.IG_LOGGER.info("- Structure Registration");
+		IGStructureTypes.initialize(bus);
 		IGLib.IG_LOGGER.info("Finished");
 	}
 

@@ -19,11 +19,15 @@ import com.igteam.immersivegeology.common.block.ore.IGCrystalBlock;
 import com.igteam.immersivegeology.common.block.ore.IGEvaporateMineralBlock;
 import com.igteam.immersivegeology.common.block.structural.IGSlabBlock;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.advancements.critereon.EnchantmentPredicate;
+import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.advancements.critereon.MinMaxBounds.Ints;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -31,6 +35,7 @@ import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
@@ -39,12 +44,14 @@ import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootPool.Builder;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.*;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.*;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.*;
@@ -115,28 +122,52 @@ public class IGBlockLootProvider implements LootTableSubProvider
 		this.registerMultiblock(IGMultiblockProvider.CENTRIFUGE);
 	}
 
+	EnchantmentPredicate HAS_SILK = new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1));
+
 	private void registerCrates()
 	{
 		for(RegistryObject<Block> block : IGRegistrationHolder.getBlockRegister().getEntries())
 		{
-			if(block.get() instanceof IGCrateEntityType)
+			if(block.get() instanceof IGCrateEntityType type)
 			{
-				this.register(block, tileDrop());
+				if(type.getMaterial(MaterialTexture.base).equals(MiscEnum.RustyMetal))
+				{
+					LootTable.Builder loot = LootTable.lootTable()
+							.withPool(
+									dropInv().when(InvertedLootItemCondition.invert(MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(HAS_SILK)))))
+							.withPool(
+									singleItemRandomAmount(MiscEnum.RustyMetal.getItem(ItemCategoryFlags.PLATE), 1,8)
+											.when(InvertedLootItemCondition.invert(MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(HAS_SILK)))))
+							.withPool(tileDrop().when(MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(HAS_SILK))));
+
+					this.register(block, loot);
+				}
+				else
+				{
+					this.register(block, tileDrop());
+				}
 			}
 		}
 	}
 
 	private void registerSlabs() {
-		Iterator<RegistryObject<Block>> iterator = IGRegistrationHolder.getBlockRegister().getEntries().iterator();
-
-		while(iterator.hasNext())
+		for(RegistryObject<Block> block : IGRegistrationHolder.getBlockRegister().getEntries())
 		{
-			RegistryObject<Block> block = iterator.next();
 			if(block.get() instanceof IGSlabBlock slab)
 			{
-				if(slab.getMaterial(MaterialTexture.base).instance().checkExistingImplementation(slab.getFlag())) continue;
+				if(slab.getMaterial(MaterialTexture.base).instance().checkExistingImplementation(slab.getFlag()))
+					continue;
 				LootItemConditionalFunction.Builder<?> doubleSlabFunction = SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)).when(this.propertyIs(block, SlabBlock.TYPE, SlabType.DOUBLE));
-				LootTable.Builder lootBuilder = LootTable.lootTable().withPool(this.singleItem(slab).apply(doubleSlabFunction));
+				LootTable.Builder lootBuilder;
+				if(slab.getMaterial(MaterialTexture.base).equals(MiscEnum.RustyMetal))
+				{
+					lootBuilder = LootTable.lootTable().withPool(this.singleItemRandomAmount(MiscEnum.RustyMetal.getItem(ItemCategoryFlags.PLATE), 1, 2).apply(doubleSlabFunction));
+				}
+				else
+				{
+					lootBuilder = LootTable.lootTable().withPool(this.singleItem(slab).apply(doubleSlabFunction));
+				}
+
 				this.register(block, lootBuilder);
 			}
 		}
@@ -221,6 +252,13 @@ public class IGBlockLootProvider implements LootTableSubProvider
 
 	private LootPool.Builder singleItem(ItemLike in) {
 		return this.createPoolBuilder().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(in));
+	}
+
+	private LootPool.Builder singleItemRandomAmount(ItemLike in, int min, int max) {
+		return this.createPoolBuilder()
+				.setRolls(ConstantValue.exactly(1.0F))
+				.add(LootItem.lootTableItem(in)
+						.apply(SetItemCountFunction.setCount(UniformGenerator.between(min, max))));
 	}
 
 	private LootPool.Builder createPoolBuilder() {

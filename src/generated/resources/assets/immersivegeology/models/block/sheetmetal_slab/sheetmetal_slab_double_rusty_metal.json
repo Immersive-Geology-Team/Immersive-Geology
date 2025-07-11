@@ -1,0 +1,9 @@
+{
+  "parent": "immersivegeology:block/base/slab/slab_double",
+  "textures": {
+    "all": "immersivegeology:block/colored/rusty_metal/sheetmetal",
+    "cover": "immersivegeology:block/colored/rusty_metal/sheetmetal",
+    "particle": "immersivegeology:block/colored/rusty_metal/sheetmetal",
+    "side": "immersivegeology:block/colored/rusty_metal/sheetmetal"
+  }
+}

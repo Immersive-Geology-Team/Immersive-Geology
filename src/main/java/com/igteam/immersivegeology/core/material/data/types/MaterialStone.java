@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.core.material.data.types;
 
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -9,6 +10,8 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.sun.jna.platform.win32.WinDef.HINSTANCE;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration.TargetBlockState;
 
 import java.util.List;
@@ -40,7 +43,11 @@ public class MaterialStone extends GeologyMaterial {
     public void setupRecipeStages()
     {
 
+    }
 
+    public BlockBehaviour.Properties getProperties(IFlagType<?> flag)
+    {
+        return IGLib.STONE_DECO_PROPS;
     }
 
     public List<TargetBlockState> getTargets(MineralEnum mineral)

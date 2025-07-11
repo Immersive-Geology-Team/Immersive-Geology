@@ -27,6 +27,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -49,6 +50,18 @@ public class IEArcSmeltingMethod extends IGRecipeMethod
 
 	public IEArcSmeltingMethod create(String method_name, TagKey<Item> input, int inputAmount, ItemStack output, ItemStack iSlag, IngredientWithSize... additives){
 		this.input = new IngredientWithSize(input, inputAmount);
+		this.output = output;
+		this.slag = iSlag;
+		this.additives = asList(additives);
+		this.method_name = method_name;
+		return this;
+	}
+
+
+
+	public IEArcSmeltingMethod create(String method_name, Item input, int inputAmount, ItemStack output, ItemStack iSlag, IngredientWithSize... additives)
+	{
+		this.input = new IngredientWithSize(Ingredient.of(input), inputAmount);
 		this.output = output;
 		this.slag = iSlag;
 		this.additives = asList(additives);

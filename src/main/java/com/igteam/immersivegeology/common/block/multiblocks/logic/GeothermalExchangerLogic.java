@@ -70,10 +70,11 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
     public static final int TANK_VOLUME = FluidType.BUCKET_VOLUME;
 
     private static final int GUI_SYNC_INTERVAL = 20;
-    private static final int THERMAL_TRANSFER_INTERVAL = 2400;
+    private static final int THERMAL_TRANSFER_INTERVAL = 3800;
     private static final int GRID_WIDTH = 5;
     private static final int GRID_DEPTH = 3;
     private static final float HEAT_LERP_FACTOR = 0.1f;
+
     @Override
     public void tickClient(IMultiblockContext<State> context) {
 

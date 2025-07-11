@@ -1,0 +1,48 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "immersivegeology:plate_rusty_metal"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "conditions": [
+            {
+              "block": "immersivegeology:sheetmetal_slab_rusty_metal",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "type": "double"
+              }
+            }
+          ],
+          "count": 2.0,
+          "function": "minecraft:set_count"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "immersivegeology:blocks/sheetmetal_slab_rusty_metal"
+}

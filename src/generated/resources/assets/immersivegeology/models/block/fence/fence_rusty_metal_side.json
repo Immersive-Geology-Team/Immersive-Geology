@@ -1,0 +1,6 @@
+{
+  "parent": "immersivegeology:block/base/fence_side",
+  "textures": {
+    "texture": "immersivegeology:block/colored/rusty_metal/block"
+  }
+}

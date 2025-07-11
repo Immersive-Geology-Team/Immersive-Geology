@@ -18,9 +18,12 @@ public enum MiscEnum implements MaterialInterface<MaterialMisc> {
     ReinforcedRefractory(new MaterialReinforcedRefractoryBlock()),
     TitaniumConcrete(new MaterialTitaniumConcrete()),
     ReinforceConcrete(new MaterialSteelConcrete()),
+    RuinedReinforceConcrete(new MaterialSteelConcreteRuined()),
+    RuinedTitaniumConcrete(new MaterialTitaniumConcreteRuined()),
     Cable(new MaterialHighVoltageCable()),
     EHVInsulation(new MaterialEHVInsulation()),
     Steam(new MaterialSteam()),
+    RustyMetal(new MaterialRuined()),
     HighPressureSteam(new MaterialHighPressureSteam());
 
     private final MaterialMisc material;

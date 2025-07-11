@@ -28,7 +28,7 @@ public class MaterialHighVoltageCable extends MaterialMisc
 		removeMaterialFlags(MaterialFlags.IS_ORE_BEARING);
 	}
 
-	public Properties getProperties()
+	public Properties getProperties(IFlagType<?> flag)
 	{
 		return Properties.of().sound(SoundType.BAMBOO_WOOD).instrument(NoteBlockInstrument.BASEDRUM).strength(10, 20);
 	}
