@@ -334,6 +334,8 @@
   "material.immersivegeology.rusty_metal": "Ruined",
   "material.immersivegeology.engineering.rusty_metal": "Ruined Light",
   "material.immersivegeology.adv_engineering.rusty_metal": "Ruined Heavy",
+  "material.immersivegeology.ruined_concrete": "Forgotten Steel Reinforced Concrete",
+  "material.immersivegeology.reinforced_ruined_concrete": "Forgotten Titanium Reinforced Concrete",
   "material.immersivegeology.millerite": "Millerite",
   "material.immersivegeology.hydrogensulfide": "Hydrogen Sulfide",
   "material.immersivegeology.vanilla": "Stone",

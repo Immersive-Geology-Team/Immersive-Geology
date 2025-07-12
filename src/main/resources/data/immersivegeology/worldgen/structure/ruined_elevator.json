@@ -7,6 +7,6 @@
   "start_pool": "immersivegeology:ruined_elevator/start_pool",
   "size": 1,
   "y_min": -60,
-  "y_max": 62,
+  "y_max": 35,
   "max_distance_from_center": 80
 }

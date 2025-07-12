@@ -12,8 +12,6 @@ import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.common.blocks.IEBaseBlockEntity;
 import blusunrize.immersiveengineering.common.blocks.ticking.IEClientTickableBE;
 import blusunrize.immersiveengineering.common.blocks.ticking.IEServerTickableBE;
-import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
-import blusunrize.immersiveengineering.common.util.ResettableCapability;
 import blusunrize.immersiveengineering.common.util.Utils;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
@@ -25,7 +23,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -70,7 +67,7 @@ public class IGHydroVentEntity extends IEBaseBlockEntity implements ICapabilityP
 			return IGRegistrationHolder.getTE.apply(registryKey);
 		}
 
-		// Fallback to Steel if block is not of the expected type
+		// Fallback to Sulfur Dioxde if block is not of the expected type
 		String fallbackKey = BlockCategoryFlags.HYDROVENT.getRegistryKey(ChemicalEnum.SulfurDioxde);
 		return IGRegistrationHolder.getTE.apply(fallbackKey);
 	}
@@ -96,7 +93,7 @@ public class IGHydroVentEntity extends IEBaseBlockEntity implements ICapabilityP
 	@Override
 	public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> capability, @Nullable Direction facing)
 	{
-		return capability == ForgeCapabilities.FLUID_HANDLER ? this.holder.cast() : super.getCapability(capability, facing);
+		return capability == ForgeCapabilities.FLUID_HANDLER  && (facing == null || facing.equals(Direction.UP)) ? this.holder.cast() : super.getCapability(capability, facing);
 	}
 
 	int tick_count = 0;
