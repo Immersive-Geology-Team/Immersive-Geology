@@ -1,0 +1,12 @@
+{
+  "type": "immersivegeology:so2_vent",
+  "biomes": "#minecraft:is_ocean",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none",
+  "start_pool": "immersivegeology:so2_vent/start_pool",
+  "size": 3,
+  "y_min": -60,
+  "y_max": 62,
+  "max_distance_from_center": 16
+}

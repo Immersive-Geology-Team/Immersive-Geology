@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-04T15:30:26.284292237	Tags for minecraft:item mod id immersivegeology
+// 1.20.1	2025-07-12T03:06:12.163864059	Tags for minecraft:item mod id immersivegeology
 e56adb03218e45c59aec8be5897a83ad852a915b data/forge/tags/items/compound_dust.json
 a474cefed341534d35ef94390868bfb60032bd4b data/forge/tags/items/compound_dust/aluminum.json
 24a62424adfc489796a9bf426edff2967ee92da8 data/forge/tags/items/compound_dust/calcium.json
@@ -19,7 +19,7 @@ dd2646df8b3391bab25afdb8426114ed4448740d data/forge/tags/items/compound_dust/tho
 0ddecf2944e81dbc53604126fb885cb6c7e4b1e0 data/forge/tags/items/compound_dust/vanadium.json
 55305176d5b298d5b30689efcb83ed8828602bad data/forge/tags/items/compound_dust/zinc.json
 4edc35eaf3c938918c48075ed04024e8a3c20ed7 data/forge/tags/items/compound_dust/zirconium.json
-ed00234d05f62480a44fff740880cd904b3a4d66 data/forge/tags/items/crushed_ore.json
+6baa769dace090db9a17918b6114eef5c4951571 data/forge/tags/items/crushed_ore.json
 d3a41c90350ec668b6a5be41ad220e9467e5f627 data/forge/tags/items/crushed_ore/acanthite.json
 f30776f816b47279440ed51c20c4ed1d146e9788 data/forge/tags/items/crushed_ore/alumina.json
 ab9efb762a1d4249d92c9761bad261921330c2fe data/forge/tags/items/crushed_ore/anatase.json
@@ -45,7 +45,6 @@ ed98eba5ffb80926e37563669ea8d64ab2df0d65 data/forge/tags/items/crushed_ore/lead.
 4391f3d09dc93905f779d7d261c752543bc62f42 data/forge/tags/items/crushed_ore/millerite.json
 2ef118f71f1747190c24b993d02a34f61ed16a70 data/forge/tags/items/crushed_ore/molybdenite.json
 3b1dee7e8ff40494a135cc0f967cf691ecc46272 data/forge/tags/items/crushed_ore/monazite.json
-17d10af70e28a54898159f785e81d716565db62d data/forge/tags/items/crushed_ore/osmium.json
 9750c8dfe25c92a921d9c2e516e6e74a16b60b33 data/forge/tags/items/crushed_ore/platinum.json
 ff9fb0d199112b36556ff977997a42e3bf3359d2 data/forge/tags/items/crushed_ore/pyrite.json
 b1efcea7ec40a1d9492587105f97953f5dbce30d data/forge/tags/items/crushed_ore/pyrolusite.json
@@ -83,7 +82,7 @@ ca4d310668c41168106ac40b3806e313939caff5 data/forge/tags/items/crystal/nickel.js
 45b3beff8e6b0ee86d710f0f9d588e27c19a8a5d data/forge/tags/items/crystal/vanadium.json
 723752dde53df9e7b33d75e9023ca1cb12717f83 data/forge/tags/items/crystal/zinc.json
 4a0fff14fabaa5dfa3bf03287568b10a92fc51d6 data/forge/tags/items/crystal/zirconium.json
-e9d37333039e19d57facc7a89025ea91eef19b1d data/forge/tags/items/dirty_crushed_ore.json
+5098d97684761be488b5caa4ce69b87d1fc1af78 data/forge/tags/items/dirty_crushed_ore.json
 fa88eb75c08e0708c9240c6f2d1ac63c1ada0e01 data/forge/tags/items/dirty_crushed_ore/acanthite.json
 99d2150957a1afd0a3e0c47bb4f5ef263b5d5248 data/forge/tags/items/dirty_crushed_ore/alumina.json
 52b1a4723f36200088be9b355a7917646fad1e89 data/forge/tags/items/dirty_crushed_ore/anatase.json
@@ -109,7 +108,6 @@ fddb87555a0f5db7ca6827a45ea8ab184cb12930 data/forge/tags/items/dirty_crushed_ore
 46a828bb19ef96cb604f758ac6bbac7f862d7c26 data/forge/tags/items/dirty_crushed_ore/millerite.json
 2ac0c67dbc9cda434eaa889e0d34beae31168353 data/forge/tags/items/dirty_crushed_ore/molybdenite.json
 d67a3baf00e5eb729a7e1e0a9a0f161de7566dda data/forge/tags/items/dirty_crushed_ore/monazite.json
-a23666327a7ec713f9033c3938268c4e9ed846c8 data/forge/tags/items/dirty_crushed_ore/osmium.json
 dbc7f83cbfdbc33d58aa82f4dfef4438f34eda48 data/forge/tags/items/dirty_crushed_ore/platinum.json
 fd02dd5879c3c35579d597b8cdfd30234118faf9 data/forge/tags/items/dirty_crushed_ore/pyrite.json
 a869aef2df2c184f788bf317d952c54dff63856c data/forge/tags/items/dirty_crushed_ore/pyrolusite.json
@@ -288,7 +286,7 @@ f9af6b2d3c240bafacd1f70857a3f5a3804a3b36 data/forge/tags/items/material/magnesiu
 6b9ad3264083fab213323f8adc061ae372e3532c data/forge/tags/items/material/monazite.json
 20b56fe5b1626791d83d96d0cbd5599e32cd6cf4 data/forge/tags/items/material/neodymium.json
 bef7a85c253136489c333597761f92b8ab50cacd data/forge/tags/items/material/nickel.json
-1abdbcb392635195dbd7888196c40425a8203219 data/forge/tags/items/material/osmium.json
+2c52f7ad8d5919199471443ac09cd152b2d6516b data/forge/tags/items/material/osmium.json
 89977674f4a14af0e2a951f42a8c09014aa0205d data/forge/tags/items/material/platinum.json
 8da9f1b7245d76d118a10119c0c7ab156fbab44a data/forge/tags/items/material/pyrite.json
 409335aeb6fd3e7c7bc6c66cf9d714249e393bbf data/forge/tags/items/material/pyrolusite.json

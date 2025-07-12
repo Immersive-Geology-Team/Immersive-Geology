@@ -19,12 +19,14 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -37,8 +39,8 @@ public class IECrushingMethod extends IGRecipeMethod
 	}
 
 	private ItemStack output;
-	private IngredientWithSize input, secondary;
-	private float chance = 0;
+	private IngredientWithSize input;
+	private List<Pair<IngredientWithSize, Float>> secondaries = new ArrayList<>();
 	private int energy, time;
 	private String name;
 
@@ -105,14 +107,19 @@ public class IECrushingMethod extends IGRecipeMethod
 		return this;
 	}
 
+	public IECrushingMethod addSecondary(ItemStack secondary, float chance)
+	{
+		secondaries.add(Pair.of(IngredientWithSize.of(secondary), chance));
+		return this;
+	}
+
 	public IECrushingMethod create(String method_name, IngredientWithSize input, ItemStack output, IngredientWithSize secondary, int energy, int time, float chance){
 		this.input = input;
 		this.output = output;
 		this.name = method_name;
 		this.energy = energy;
 		this.time = time;
-		this.secondary = secondary;
-		this.chance = chance;
+		secondaries.add(Pair.of(secondary, chance));
 		return this;
 	}
 
@@ -122,8 +129,7 @@ public class IECrushingMethod extends IGRecipeMethod
 		this.name = method_name;
 		this.energy = energy;
 		this.time = time;
-		this.secondary = IngredientWithSize.of(secondary);
-		this.chance = chance;
+		secondaries.add(Pair.of(IngredientWithSize.of(secondary), chance));
 		return this;
 	}
 
@@ -157,10 +163,17 @@ public class IECrushingMethod extends IGRecipeMethod
 	{
 		renderItemStack(graphics, input.getRandomizedExampleStack(0), x + 25, y + 11, mx, my);
 		renderItemStack(graphics, output, x + 59, y + 2, mx,my);
-		if(secondary != null && !secondary.hasNoMatchingItems())
+		int i = 0;
+		for(Pair<IngredientWithSize, Float> secondaryPair : secondaries)
 		{
-			renderItemStack(graphics, secondary.getRandomizedExampleStack(0), x + 59, y + 20, mx,my);
-			ManualUtils.drawSplitString(graphics, screen.getManual().fontRenderer(), List.of(String.format("%.1f", (chance * 100)) + "%"), x+79, y+24, 0xff777777);
+			IngredientWithSize secondary = secondaryPair.getFirst();
+			float chance = secondaryPair.getSecond();
+			if(secondary != null && !secondary.hasNoMatchingItems())
+			{
+				renderItemStack(graphics, secondary.getRandomizedExampleStack(0), x + 59 + (18 * i), y + 20, mx,my);
+				ManualUtils.drawSplitString(graphics, screen.getManual().fontRenderer(), List.of(String.format("%.1f", (chance * 100)) + "%"), x+79, y+24, 0xff777777);
+				i++;
+			}
 		}
 	}
 
@@ -181,7 +194,12 @@ public class IECrushingMethod extends IGRecipeMethod
 		try
 		{
 			CrusherRecipeBuilder builder = CrusherRecipeBuilder.builder(output).addInput(input).setTime(time).setEnergy(energy);
-			if(chance > 0) builder.addSecondary(secondary, chance);
+			for(Pair<IngredientWithSize, Float> additionalIngredients : secondaries)
+			{
+				IngredientWithSize secondary = additionalIngredients.getFirst();
+				float chance = additionalIngredients.getSecond();
+				if(chance > 0) builder.addSecondary(secondary, chance);
+			}
 			builder.build(consumer, getLocation());
 			return true;
 		}catch(Exception e)

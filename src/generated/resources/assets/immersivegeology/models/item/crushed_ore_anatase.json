@@ -1,6 +1,6 @@
 {
   "parent": "immersivegeology:item/base/ig_base_item",
   "textures": {
-    "layer0": "immersivegeology:item/greyscale/rock/crushed_ore"
+    "layer0": "immersivegeology:palette/item/crushed_ore/type_4_pristine_anatase"
   }
 }

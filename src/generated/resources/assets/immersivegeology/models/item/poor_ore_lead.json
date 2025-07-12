@@ -1,6 +1,6 @@
 {
   "parent": "immersivegeology:item/base/ig_base_item",
   "textures": {
-    "layer0": "immersivegeology:item/greyscale/raw_ore/poor"
+    "layer0": "immersivegeology:palette/item/poor_ore/type_2_pristine_lead"
   }
 }

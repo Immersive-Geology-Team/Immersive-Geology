@@ -26,7 +26,7 @@ public class MaterialCarnallite extends MaterialEvaporateMineral
     public MaterialCarnallite() {
         super();
 
-        CONFIG = new MineralConfig(12,45,1,24,128,1350,0.5,false,Optional.of(Biomes.IS_SANDY), IGGenerationType.EVAPORATE);
+        CONFIG = new MineralConfig(12,45,1,24,128,5,0.5,false,Optional.of(Biomes.IS_SANDY), IGGenerationType.EVAPORATE);
     }
 
     @Override

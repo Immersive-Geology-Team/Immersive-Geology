@@ -18,6 +18,7 @@ import com.igteam.immersivegeology.core.material.configuration.ConfigurationHelp
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
+import com.igteam.immersivegeology.core.material.helper.HazardTypes;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.*;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
@@ -86,6 +87,11 @@ public abstract class GeologyMaterial implements MaterialHelper {
         this.colorFunction = materialColorFunction();
         initializeColorTint((p, integer) -> true); //default will be overridden later on in ClientProxy
         initializeFlags();
+    }
+
+    public Set<HazardTypes> getHazards()
+    {
+        return Set.of();
     }
 
     public BlockBehaviour.Properties getProperties(IFlagType<?> flag)
@@ -203,13 +209,18 @@ public abstract class GeologyMaterial implements MaterialHelper {
         {
             switch(i)
             {
-                case DIRTY_CRUSHED_ORE, CLAY, POWDERED_SLAG, CRUSHED_ORE ->
+                case DIRTY_CRUSHED_ORE, CLAY, POWDERED_SLAG ->
                 {
                     return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/"+i.getName());
                 }
-                case GEAR, INGOT, NUGGET, PLATE, SLAG, GRIT, POWDER, COMPOUND_DUST, TOOL_HOE ->
+                case GEAR, INGOT, NUGGET, PLATE, SLAG, COMPOUND_DUST, TOOL_HOE, CRUSHED_ORE ->
                 {
                     return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_pristine_"+getName().toLowerCase());
+                }
+                case POOR_ORE, NORMAL_ORE, RICH_ORE, GRIT, POWDER ->
+                {
+                    String weathering = canTarnish() ? "corroded" : "pristine";
+                    return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_"+weathering+"_"+getName().toLowerCase());
                 }
                 case METAL_OXIDE ->
                 {
@@ -227,10 +238,10 @@ public abstract class GeologyMaterial implements MaterialHelper {
                 {
                     return new ResourceLocation(IGLib.MODID, "item/greyscale/crystal/"+getCrystalFamily().getName());
                 }
-                case POOR_ORE, NORMAL_ORE, RICH_ORE ->
-                {
-                    return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/"+i.getName()+"_"+getCrystalFamily().getName());
-                }
+//                case POOR_ORE, NORMAL_ORE, RICH_ORE ->
+//                {
+//                    return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/"+i.getName()+"_"+getCrystalFamily().getName());
+//                }
                 default ->
                 {
                     return new ResourceLocation(IGLib.MODID, "item/greyscale/"+i.getName());

@@ -1,6 +1,6 @@
 {
   "parent": "immersivegeology:item/base/ig_base_item",
   "textures": {
-    "layer0": "immersivegeology:item/greyscale/raw_ore/normal"
+    "layer0": "immersivegeology:palette/item/normal_ore/type_3_pristine_scheelite"
   }
 }

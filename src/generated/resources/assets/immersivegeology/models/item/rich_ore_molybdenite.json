@@ -1,6 +1,6 @@
 {
   "parent": "immersivegeology:item/base/ig_base_item",
   "textures": {
-    "layer0": "immersivegeology:item/greyscale/raw_ore/rich"
+    "layer0": "immersivegeology:palette/item/rich_ore/type_1_pristine_molybdenite"
   }
 }

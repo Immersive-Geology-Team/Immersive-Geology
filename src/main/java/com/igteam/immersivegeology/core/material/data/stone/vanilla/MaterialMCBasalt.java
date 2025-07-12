@@ -6,6 +6,9 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 import java.util.function.BiFunction;
 
@@ -27,5 +30,11 @@ public class MaterialMCBasalt extends MaterialStone {
     public boolean useSedimentaryTextures()
     {
         return true;
+    }
+
+    @Override
+    public Properties getProperties(IFlagType<?> flag)
+    {
+        return BlockBehaviour.Properties.copy(Blocks.BASALT);
     }
 }

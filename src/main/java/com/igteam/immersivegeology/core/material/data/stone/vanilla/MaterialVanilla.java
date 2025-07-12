@@ -12,11 +12,14 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration.TargetBlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
-import net.minecraftforge.common.Tags.Blocks;
+import net.minecraftforge.common.Tags;
 
 import java.util.List;
 import java.util.function.BiFunction;
@@ -45,12 +48,18 @@ public class MaterialVanilla extends MaterialStone {
         BlockState poor = mineral.getOreBlock(this, OreRichness.POOR).getIGDefaultBlockState();
         BlockState normal = mineral.getOreBlock(this, OreRichness.NORMAL).getIGDefaultBlockState();
         BlockState rich = mineral.getOreBlock(this, OreRichness.RICH).getIGDefaultBlockState();
-        return List.of(OreConfiguration.target(new TagMatchTest(Blocks.STONE), normal));
+        return List.of(OreConfiguration.target(new TagMatchTest(Tags.Blocks.STONE), normal));
     }
 
     @Override
     public boolean canFormMB(IMultiblock multiblock)
     {
         return super.canFormMB(multiblock);
+    }
+
+    @Override
+    public Properties getProperties(IFlagType<?> flag)
+    {
+        return BlockBehaviour.Properties.copy(Blocks.STONE);
     }
 }

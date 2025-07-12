@@ -19,6 +19,7 @@ public enum BlockCategoryFlags implements IFlagType<BlockCategoryFlags> {
     SHEETMETAL_STAIRS(4),
     FENCE(4),
     ENERGY_PIPE(4),
+    HYDROVENT(0),
     STAIRS(4),
     FLUID(3),
     SLURRY(3),

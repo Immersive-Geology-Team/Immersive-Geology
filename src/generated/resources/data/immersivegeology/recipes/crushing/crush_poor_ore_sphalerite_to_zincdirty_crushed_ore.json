@@ -2,7 +2,7 @@
   "type": "immersiveengineering:crusher",
   "energy": 6000,
   "input": {
-    "tag": "forge:normal_ore/sphalerite"
+    "item": "immersivegeology:poor_ore_sphalerite"
   },
   "result": {
     "item": "immersivegeology:dirty_crushed_ore_sphalerite"
@@ -15,9 +15,9 @@
       }
     },
     {
-      "chance": 0.165,
+      "chance": 0.5,
       "output": {
-        "item": "immersivegeology:dirty_crushed_ore_sphalerite"
+        "item": "immersiveengineering:dust_sulfur"
       }
     }
   ],

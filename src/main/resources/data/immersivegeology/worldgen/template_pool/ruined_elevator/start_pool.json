@@ -1,0 +1,15 @@
+{
+  "name": "immersivegeology:ruined_elevator/start_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "immersivegeology:ruins/ruined_elevator",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      }
+    }
+  ]
+}

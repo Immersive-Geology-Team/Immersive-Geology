@@ -167,30 +167,28 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
         }
     }
 
-    private void generateGenericOreItem(IGFlagItem item)
+    private void generateGenericOreItem(IGGenericOreItem item)
     {
         String itemLocation = new ResourceLocation(IGLib.MODID, "item/" + item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base))).getPath();
+        ResourceLocation coloredTexture = new ResourceLocation(IGLib.MODID, "item/colored/raw_ore/" + item.getMaterial(MaterialTexture.base).getName().toLowerCase() + "/" + item.getOreRichness().getSanitizedName());
+        boolean color_exists = EXISTING_HELPER.exists(new ResourceLocation(IGLib.MODID, "textures/" + coloredTexture.getPath() + ".png"), CLIENT_RESOURCES);
+        ResourceLocation useTextureBase = color_exists ? coloredTexture : item.getMaterial(MaterialTexture.base).getTextureLocation(item.getFlag());
 
         try {
             ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");
-            TRSRModelBuilder builder = withExistingParent(itemLocation, parentLocation);
-            setItemTexture(builder, (IGGenericOreItem) item);
-        } catch (Exception ex) {
-            logger.error("Attempted to generate a texture for the ore item type '{}' with material '{}'", item.getFlag().getName(), item.getMaterial(MaterialTexture.base).getName());
-            logger.error(ex.getMessage());
-        }
-    }
+            withExistingParent(itemLocation, parentLocation).texture("layer0", useTextureBase);
 
-    private void setItemTexture(ModelBuilder<?> model, IGGenericOreItem item)
-    {
-        ResourceLocation coloredTexture = new ResourceLocation(IGLib.MODID, "item/colored/raw_ore/" + item.getMaterial(MaterialTexture.base).getName().toLowerCase() + "/" + item.getOreRichness().getSanitizedName());
-        //IGLib.IG_LOGGER.info("Testing: {}", coloredTexture);
-        if(EXISTING_HELPER.exists(new ResourceLocation(IGLib.MODID, "textures/" + coloredTexture.getPath() + ".png"), CLIENT_RESOURCES))
-        {
-            model.texture("layer0", coloredTexture);
-            return;
+            if(item.getMaterial(MaterialTexture.overlay) != null) {
+                getBuilder(itemLocation).texture("layer1", item.getMaterial(MaterialTexture.overlay).getTextureLocation(item.getFlag()));
+            }
+        } catch (Exception ex) {
+            ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");
+            withExistingParent(itemLocation, parentLocation).textures.put("layer0", useTextureBase.toString());
+
+            if(item.getMaterial(MaterialTexture.overlay) != null) {
+                getBuilder(itemLocation).textures.put("layer1", item.getMaterial(MaterialTexture.overlay).getTextureLocation(item.getFlag()).toString());
+            }
         }
-        model.texture("layer0", new ResourceLocation(IGLib.MODID, "item/greyscale/raw_ore/" + item.getOreRichness().getSanitizedName()));
     }
 
     private void generateGenericBucketItem(IGFlagItem item){

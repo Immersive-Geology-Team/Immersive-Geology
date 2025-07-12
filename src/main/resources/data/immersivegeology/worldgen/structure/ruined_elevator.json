@@ -1,0 +1,12 @@
+{
+  "type": "immersivegeology:ruined_elevator",
+  "biomes": "#minecraft:is_overworld",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none",
+  "start_pool": "immersivegeology:ruined_elevator/start_pool",
+  "size": 1,
+  "y_min": -60,
+  "y_max": 62,
+  "max_distance_from_center": 80
+}

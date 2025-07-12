@@ -32,7 +32,7 @@ public class IGGenericBlock extends Block implements IGBlockType {
     protected final BlockCategoryFlags category;
 
     public IGGenericBlock(BlockCategoryFlags flag, MaterialInterface<?> material) {
-        this(flag, material, material.instance().getProperties(flag).mapColor(MapColor.COLOR_GRAY));
+        this(flag, material, material.instance().getProperties(flag));
     }
 
     public IGGenericBlock(BlockCategoryFlags flag, MaterialInterface<?> material, Properties props) {

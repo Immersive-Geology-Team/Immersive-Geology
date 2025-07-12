@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.core.material.data.chemical;
 import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.common.register.IEItems;
 import blusunrize.immersiveengineering.common.register.IEItems.Metals;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
@@ -20,6 +21,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.material.Fluid;
 
@@ -32,8 +34,8 @@ public class MaterialSulfurDioxide extends MaterialChemical
 	public MaterialSulfurDioxide()
 	{
 		super();
-		removeMaterialFlags(BlockCategoryFlags.SLURRY, MaterialFlags.IS_CHEMICAL);
-		addFlags(MaterialFlags.IS_GAS);
+		removeMaterialFlags(BlockCategoryFlags.SLURRY, BlockCategoryFlags.CLOUDY_SLURRY, MaterialFlags.IS_CHEMICAL);
+		addFlags(MaterialFlags.IS_GAS, BlockCategoryFlags.HYDROVENT);
 	}
 
 	@Override
@@ -51,6 +53,13 @@ public class MaterialSulfurDioxide extends MaterialChemical
 						FluidTags.WATER, 2, getFluidTag(), 25,
 						MetalEnum.Vanadium.getItem(ItemCategoryFlags.PLATE),
 						ChemicalEnum.SulfuricAcid.getFluidStack(8));
+	}
+
+	@Override
+	public ResourceLocation getTextureLocation(IFlagType<?> flag)
+	{
+		if(flag.equals(BlockCategoryFlags.HYDROVENT)) return new ResourceLocation(IGLib.MODID, "block/greyscale/stone/cobble");
+		return super.getTextureLocation(flag);
 	}
 
 	@Override

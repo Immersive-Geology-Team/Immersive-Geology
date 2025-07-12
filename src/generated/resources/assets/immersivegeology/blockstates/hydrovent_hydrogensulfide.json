@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "waterlogged=false": {
+      "model": "immersivegeology:block/hydrovent/hydrovent_hydrogensulfide"
+    },
+    "waterlogged=true": {
+      "model": "immersivegeology:block/hydrovent/hydrovent_hydrogensulfide"
+    }
+  }
+}

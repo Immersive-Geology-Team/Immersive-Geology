@@ -1,6 +1,6 @@
 {
   "parent": "immersivegeology:item/base/ig_base_item",
   "textures": {
-    "layer0": "immersivegeology:palette/item/nugget/type_1_pristine_iron"
+    "layer0": "immersivegeology:palette/item/nugget/type_3_pristine_iron"
   }
 }

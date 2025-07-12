@@ -1,4 +1,4 @@
-// 1.20.1	2025-06-26T14:51:00.468652105	Tags for minecraft:fluid mod id immersivegeology
+// 1.20.1	2025-07-12T07:48:01.28968709	Tags for minecraft:fluid mod id immersivegeology
 4489299af4aa9d876479701264f77a7df0fd7a2c data/forge/tags/fluids/aluminum.json
 92df19d1a8d4bbdbefbbd7d7c5b485d13590db4e data/forge/tags/fluids/ammoniasolution.json
 18a807d36f4fe096644a2f8df077ff04b35dfeeb data/forge/tags/fluids/aquaregia.json
@@ -73,12 +73,13 @@ c984845f9a2dcd75e35a6841b985a0817b9adccf data/forge/tags/fluids/cloudy_sulfurica
 9b890b1cf9b57ef75925b66da11dfd261bfec236 data/forge/tags/fluids/cobalt.json
 6f3c533d3ba62e460e57dfb429071cd7708f5c31 data/forge/tags/fluids/copper.json
 f722e2053471a9da834d9050c7a5fad6a58c64c8 data/forge/tags/fluids/ehv_insulation.json
-327b40754d876232b8f1071d89ad8b8d496730fb data/forge/tags/fluids/gaseous.json
+e895dd8202cd47894e5ebdce3cdb41c9c9675ef5 data/forge/tags/fluids/gaseous.json
 a5c565a4b8b2994ee464351bc9777a3854b03ff5 data/forge/tags/fluids/gold.json
 7ce2dd3d4af36d65170633b7cdbecd06e383c83f data/forge/tags/fluids/hastelloy.json
 773c3b14c0019334e569efaba912381964b24fd1 data/forge/tags/fluids/highpressuresteam.json
 d35867617a3b2e10548a8c856397b20392dc81e8 data/forge/tags/fluids/hydrochloricacid.json
 eae26ffd0a714af07180ad3fb7c3b0786d258ce6 data/forge/tags/fluids/hydrofluoricacid.json
+6acd71b69dbc0d2b85b10d0fc3775fba4faf8c43 data/forge/tags/fluids/hydrogensulfide.json
 56c3fba5f3db76951ee4183fdc39b35b36fe49a9 data/forge/tags/fluids/iron.json
 c66b82f24bbfa085f69edb0fc8784a0f43f4102b data/forge/tags/fluids/lead.json
 bb26c723f26a4ed59e6023bf8788b21c271646ad data/forge/tags/fluids/magnesium.json

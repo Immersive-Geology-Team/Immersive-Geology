@@ -93,7 +93,7 @@ public class ImmersiveGeology {
         IGLib.IG_LOGGER.info("- Client Render Handler Registration");
         IGClientRenderHandler.register();
         IGClientRenderHandler.init(event);
-
+        
         IGLib.IG_LOGGER.info("- Color Tint Registration");
         supplyMaterialTint();
 
@@ -114,7 +114,7 @@ public class ImmersiveGeology {
                 ItemStack formation = ig.getFormationItem();
                 InterModComms.sendTo("engineered_schematics", "formation_item", () -> Pair.of(id, formation));
             }
-        }
+        } 
     }
 
     private void supplyMaterialTint()

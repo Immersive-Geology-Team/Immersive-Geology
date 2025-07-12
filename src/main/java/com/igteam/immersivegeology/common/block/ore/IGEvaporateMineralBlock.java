@@ -46,11 +46,6 @@ public class IGEvaporateMineralBlock extends IGGenericBlock
 		return PushReaction.DESTROY;
 	}
 
-	public static boolean canGrowIn(BlockState state)
-	{
-		return true;
-	}
-
 	@Override
 	public boolean isRandomlyTicking(BlockState pState)
 	{
@@ -77,25 +72,25 @@ public class IGEvaporateMineralBlock extends IGGenericBlock
 	@Override
 	public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random)
 	{
-		if(random.nextInt(5)==0)
-		{
-			Direction direction = Direction.UP;
-			BlockPos blockPos = pos.offset(direction.getNormal());
-			BlockState blockState = world.getBlockState(blockPos);
-			IGCrystalBlock nextBlock = null;
-
-			if(canGrowIn(blockState) && blockState.isAir())
-			{
-				nextBlock = clusters.get();
-			}
-
-			if(nextBlock!=null)
-			{
-				BlockState toSet = nextBlock.defaultBlockState();
-
-				world.setBlockAndUpdate(blockPos, toSet);
-			}
-		}
+//		if(random.nextInt(5)==0)
+//		{
+//			Direction direction = Direction.UP;
+//			BlockPos blockPos = pos.offset(direction.getNormal());
+//			BlockState blockState = world.getBlockState(blockPos);
+//			IGCrystalBlock nextBlock = null;
+//
+//			if(canGrowIn(blockState) && blockState.isAir())
+//			{
+//				nextBlock = clusters.get();
+//			}
+//
+//			if(nextBlock!=null)
+//			{
+//				BlockState toSet = nextBlock.defaultBlockState();
+//
+//				world.setBlockAndUpdate(blockPos, toSet);
+//			}
+//		}
 	}
 
 	public ItemStack getItemDrop()

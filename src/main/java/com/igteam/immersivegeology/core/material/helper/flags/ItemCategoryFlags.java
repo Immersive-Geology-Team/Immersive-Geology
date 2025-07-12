@@ -75,6 +75,8 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
 		{
 			case INGOT -> 7;
 			case GEAR, NUGGET -> 6;
+            case CRUSHED_ORE -> 4;
+            case RICH_ORE, NORMAL_ORE, POOR_ORE -> 3;
             case PLATE -> 2;
 			default -> 1;
 		};
@@ -84,7 +86,8 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
     {
         return switch(this)
         {
-            case INGOT, GEAR, NUGGET, PLATE, SLAG, GRIT, POWDER, METAL_OXIDE, COMPOUND_DUST, DRILL_HEAD, TOOL_HOE -> true;
+            case INGOT, GEAR, CRUSHED_ORE, POOR_ORE, NORMAL_ORE, RICH_ORE, NUGGET,
+                 PLATE, SLAG, GRIT, POWDER, METAL_OXIDE, COMPOUND_DUST, DRILL_HEAD, TOOL_HOE -> true;
             default -> false;
         };
     }

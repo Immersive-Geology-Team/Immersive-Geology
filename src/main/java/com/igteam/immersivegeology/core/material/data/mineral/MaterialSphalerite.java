@@ -1,5 +1,8 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
+import blusunrize.immersiveengineering.common.register.IEItems;
+import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -7,9 +10,17 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialSulphideMine
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.methods.IECrushingMethod;
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -47,6 +58,18 @@ public class MaterialSphalerite extends MaterialSulphideMineral
     public void setupRecipeStages()
     {
         super.setupRecipeStages();
+
+        float chance = 0.33f;
+        int time = 100;
+        int energy = 6000;
+        for(ItemCategoryFlags ore : List.of(ItemCategoryFlags.POOR_ORE, ItemCategoryFlags.NORMAL_ORE, ItemCategoryFlags.RICH_ORE))
+        {
+            IECrushingMethod method = IGMethodBuilder.crushing(this, IGStageDesignation.EXTRACTION).create(ore, ItemCategoryFlags.DIRTY_CRUSHED_ORE, energy, time);
+            method.addSecondary(getStack(ItemCategoryFlags.DIRTY_CRUSHED_ORE, 1), chance);
+            method.addSecondary(new ItemStack(Ingredients.DUST_SULFUR), 0.5f);
+            if(ore.equals(ItemCategoryFlags.NORMAL_ORE) || ore.equals(ItemCategoryFlags.RICH_ORE)) method.addSecondary(getStack(ItemCategoryFlags.DIRTY_CRUSHED_ORE, 1), chance / 2);
+            if(ore.equals(ItemCategoryFlags.RICH_ORE)) method.addSecondary(getStack(ItemCategoryFlags.DIRTY_CRUSHED_ORE, 1), chance / 2);
+        }
 
         IGMethodBuilder.bloomery(this, IGStageDesignation.REFINEMENT).create(ItemCategoryFlags.CRUSHED_ORE,
                 2, ItemCategoryFlags.INGOT, 1, 400);
