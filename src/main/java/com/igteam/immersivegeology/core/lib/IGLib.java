@@ -117,7 +117,15 @@ public class IGLib {
         return rl("textures/gui/" + name + ".png");
     }
 
-    public static class PrefixedLogger implements Logger {
+    public static int fastHash(String s) {
+        int hash = 0;
+        for (int i = 0; i < s.length(); i++) {
+            hash = (hash << 5) - hash + s.charAt(i); // hash * 31 + char
+        }
+        return hash;
+    }
+
+	public static class PrefixedLogger implements Logger {
         private final Logger delegate;
         private final String prefix;
 

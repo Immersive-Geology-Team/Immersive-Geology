@@ -15,6 +15,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import com.mojang.datafixers.util.Pair;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class MaterialSulphideMineral extends MaterialMineral
@@ -31,5 +32,10 @@ public class MaterialSulphideMineral extends MaterialMineral
 	{
 		if(hasFlag(ItemCategoryFlags.PELLET) &! this.directBlasting.getRootNodes().isEmpty()) return Set.of(this.directBlasting);
 		return Set.of();
+	}
+
+	public List<String> getAcceptableDimensions()
+	{
+		return List.of("minecraft:the_nether");
 	}
 }

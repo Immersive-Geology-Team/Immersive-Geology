@@ -94,4 +94,10 @@ public class MaterialVanadinite extends MaterialSulphideMineral
     {
         return 0.019104004f;
     }
+
+    @Override
+    public List<String> getAcceptableDimensions()
+    {
+        return List.of("minecraft:overworld", "minecraft:the_nether");
+    }
 }

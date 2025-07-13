@@ -94,4 +94,10 @@ public class MaterialSphalerite extends MaterialSulphideMineral
     {
         return 0.203125f;
     }
+
+    @Override
+    public List<String> getAcceptableDimensions()
+    {
+        return List.of("minecraft:overworld", "minecraft:the_nether");
+    }
 }

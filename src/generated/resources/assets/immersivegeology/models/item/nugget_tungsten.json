@@ -1,6 +1,6 @@
 {
   "parent": "immersivegeology:item/base/ig_base_item",
   "textures": {
-    "layer0": "immersivegeology:palette/item/nugget/type_5_pristine_tungsten"
+    "layer0": "immersivegeology:palette/item/nugget/type_6_pristine_tungsten"
   }
 }

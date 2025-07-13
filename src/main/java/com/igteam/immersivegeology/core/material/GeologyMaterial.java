@@ -209,7 +209,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
         {
             switch(i)
             {
-                case DIRTY_CRUSHED_ORE, CLAY, POWDERED_SLAG ->
+                case CLAY, POWDERED_SLAG ->
                 {
                     return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/"+i.getName());
                 }
@@ -217,7 +217,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
                 {
                     return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_pristine_"+getName().toLowerCase());
                 }
-                case POOR_ORE, NORMAL_ORE, RICH_ORE, GRIT, POWDER ->
+                case POOR_ORE, NORMAL_ORE, RICH_ORE, GRIT, POWDER, DIRTY_CRUSHED_ORE ->
                 {
                     String weathering = canTarnish() ? "corroded" : "pristine";
                     return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_"+weathering+"_"+getName().toLowerCase());
@@ -252,6 +252,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
     }
     static Random rand = new Random(0);
     public int getPaletteVariation(ItemCategoryFlags flag){
+        rand.setSeed(IGLib.fastHash(name));
         if(flag.equals(ItemCategoryFlags.INGOT))
         {
             return Math.min(6,1+(rand.nextInt(flag.getVariations()))%flag.getVariations());
@@ -562,5 +563,10 @@ public abstract class GeologyMaterial implements MaterialHelper {
         if(acceptableStoneType(StoneEnum.MCNetherrack)) return new ItemStack(getOreBlock(StoneEnum.MCNetherrack, OreRichness.NORMAL).asIGItem());
         if(acceptableStoneType(StoneEnum.MCEndStone)) return new ItemStack(getOreBlock(StoneEnum.MCEndStone, OreRichness.NORMAL).asIGItem());
         return ItemStack.EMPTY;
+    }
+
+    public List<String> getAcceptableDimensions()
+    {
+        return List.of("minecraft:overworld");
     }
 }

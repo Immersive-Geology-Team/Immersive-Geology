@@ -110,4 +110,11 @@ public class MaterialAlumina extends MaterialMineral {
     {
         return 0.8157959f;
     }
+
+
+    @Override
+    public List<String> getAcceptableDimensions()
+    {
+        return List.of("minecraft:the_end");
+    }
 }

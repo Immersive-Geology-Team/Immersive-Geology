@@ -54,7 +54,7 @@ public class IGGeothermalExchangerMultiblock extends IGTemplateMultiblock {
 
     @Override
     public void initializeClient(Consumer<ClientMultiblocks.MultiblockManualData> consumer) {
-        consumer.accept(new IGClientMultiblockProperties(this, 1.5, 4, 1.5));
+        consumer.accept(new IGClientMultiblockProperties(this, 2.5, 4, 1.5));
     }
 
     @Override

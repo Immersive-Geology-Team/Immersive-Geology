@@ -1,6 +1,6 @@
 {
   "parent": "immersivegeology:item/base/ig_base_item",
   "textures": {
-    "layer0": "immersivegeology:palette/item/rich_ore/type_3_corroded_pyrite"
+    "layer0": "immersivegeology:palette/item/rich_ore/type_6_corroded_pyrite"
   }
 }

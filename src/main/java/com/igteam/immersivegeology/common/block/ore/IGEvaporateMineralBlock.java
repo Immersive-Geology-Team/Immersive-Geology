@@ -68,29 +68,34 @@ public class IGEvaporateMineralBlock extends IGGenericBlock
 			}
 		}
 	}
-
+	int tick = 0;
 	@Override
 	public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random)
 	{
-//		if(random.nextInt(5)==0)
-//		{
-//			Direction direction = Direction.UP;
-//			BlockPos blockPos = pos.offset(direction.getNormal());
-//			BlockState blockState = world.getBlockState(blockPos);
-//			IGCrystalBlock nextBlock = null;
-//
-//			if(canGrowIn(blockState) && blockState.isAir())
-//			{
-//				nextBlock = clusters.get();
-//			}
-//
-//			if(nextBlock!=null)
-//			{
-//				BlockState toSet = nextBlock.defaultBlockState();
-//
-//				world.setBlockAndUpdate(blockPos, toSet);
-//			}
-//		}
+		tick++;
+		if(tick % 10 == 0)
+		{
+			tick = 0;
+			if(random.nextBoolean())
+			{
+				Direction direction = Direction.UP;
+				BlockPos blockPos = pos.offset(direction.getNormal());
+				BlockState blockState = world.getBlockState(blockPos);
+				IGCrystalBlock nextBlock = null;
+
+				if(blockState.isAir())
+				{
+					nextBlock = clusters.get();
+				}
+
+				if(nextBlock!=null)
+				{
+					BlockState toSet = nextBlock.defaultBlockState();
+
+					world.setBlockAndUpdate(blockPos, toSet);
+				}
+			}
+		}
 	}
 
 	public ItemStack getItemDrop()

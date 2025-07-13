@@ -33,6 +33,9 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.ForgeHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -51,7 +54,7 @@ public class IGCrystalBlock extends IGGenericBlock implements IGBlockType
 
 	public IGCrystalBlock(BlockCategoryFlags flag, MaterialInterface<?> material)
 	{
-		super(flag, material, Properties.of().randomTicks().sound(SoundType.AMETHYST_CLUSTER).noCollission().strength(1.5f, 1.0f));
+		super(flag, material, Properties.of().randomTicks().sound(SoundType.AMETHYST_CLUSTER).noCollission().strength(1.5f, 1.0f).dynamicShape());
 		this.registerDefaultState(this.defaultBlockState().setValue(AGE, 0));
 		this.materialMap.put(MaterialTexture.base, material);
 		this.category = flag;
@@ -70,6 +73,17 @@ public class IGCrystalBlock extends IGGenericBlock implements IGBlockType
 	public @Nullable PushReaction getPistonPushReaction(BlockState state)
 	{
 		return PushReaction.DESTROY;
+	}
+
+	VoxelShape AGE_0 = Shapes.box(0.1875,0,0.1875,0.8125,0.3125,0.8125);
+	VoxelShape AGE_1 = Shapes.box(0.1875,0,0.1875,0.8125,0.375,0.8125);
+	VoxelShape AGE_2 = Shapes.box(0.125,0,0.125,0.875,0.625,0.875);
+
+	@Override
+	public VoxelShape getShape(BlockState state, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext)
+	{
+		int age = state.getValue(AGE);
+		return age == 0 ? AGE_0 : age == 1 ? AGE_1 : AGE_2;
 	}
 
 	@Override

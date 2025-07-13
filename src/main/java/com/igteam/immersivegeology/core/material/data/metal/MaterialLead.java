@@ -33,7 +33,7 @@ public class MaterialLead extends MaterialNativeMetal
 
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        this.CONFIG = new MaterialMineral.MineralConfig(12,99,1,0,50,5,0.5, true, Optional.of(Biomes.IS_WET), IGGenerationType.DEFAULT);
+        this.CONFIG = new MaterialMineral.MineralConfig(12,99,1,0,50,300,0.5, true, Optional.of(Biomes.IS_WET), IGGenerationType.DEFAULT);
     }
 
     @Override

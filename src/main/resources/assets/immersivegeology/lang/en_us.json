@@ -575,6 +575,7 @@
   "block.immersivegeology.srconcrete": "Steel Reinforced Concrete",
   "block.immersivegeology.energy_pipe": "Extra High Voltage Ground Cable",
   "block.immersivegeology.trconcrete": "Titanium Reinforced Concrete",
+  "block.immersivegeology.evaporate_crystal": "%s Evaporate Crystal Block",
 
   "item.immersivegeology.raw_fire_clay": "Fire Clay Ball",
   "item.immersivegeology.refractory_brick": "Refractory Brick",

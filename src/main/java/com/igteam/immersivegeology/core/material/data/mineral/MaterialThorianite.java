@@ -40,4 +40,10 @@ public class MaterialThorianite extends MaterialMineral {
     {
         return 0.16003418f;
     }
+
+    @Override
+    public List<String> getAcceptableDimensions()
+    {
+        return List.of("minecraft:the_end");
+    }
 }
