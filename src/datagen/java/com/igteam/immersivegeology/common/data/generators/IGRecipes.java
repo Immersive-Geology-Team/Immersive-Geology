@@ -506,11 +506,9 @@ public class IGRecipes extends RecipeProvider
 
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MetalEnum.Tungsten.getBlock(BlockCategoryFlags.ENGINEERING_BLOCK), 4)
 				.unlockedBy("has_tungsten_component", InventoryChangeTrigger.TriggerInstance.hasItems(MetalEnum.Tungsten.getItem(ItemCategoryFlags.MECHANICAL_COMPONENT)))
-				.define('s', MetalEnum.Tungsten.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK).asItem()).define('c', MetalEnum.Tungsten.getItem(ItemCategoryFlags.MECHANICAL_COMPONENT)).define('o', Metals.INGOTS.get(EnumMetals.STEEL).asItem())
+				.define('s', MetalEnum.Tungsten.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK).asItem()).define('c', MetalEnum.Tungsten.getItem(ItemCategoryFlags.MECHANICAL_COMPONENT)).define('o', Items.DIAMOND)
 				.pattern("scs").pattern("coc").pattern("scs").save(consumer, ig("craft_thermal_engineering_block"));
 
-
-		// Register bloomery fuels
 		BloomeryFuelBuilder.builder(Items.CHARCOAL).setTime(BASE_CHARCOAL_TIME).build(consumer, IGLib.rl("bloomery/bloomery_fuel_charcoal"));
 		BloomeryFuelBuilder.builder(Ingredients.COAL_COKE).setTime(BASE_COAL_COKE_TIME).build(consumer, IGLib.rl("bloomery/bloomery_fuel_coke"));
 		BloomeryFuelBuilder.builder(Items.COAL).setTime(BASE_COAL_TIME).build(consumer, IGLib.rl("bloomery/bloomery_fuel_coal"));

@@ -38,7 +38,10 @@ public class IGGeothermalExchangerMultiblock extends IGTemplateMultiblock {
     public static final IGGeothermalExchangerMultiblock INSTANCE = new IGGeothermalExchangerMultiblock();
 
     public IGGeothermalExchangerMultiblock() {
-        super(new ResourceLocation(IGLib.MODID, "multiblocks/geothermal_exchanger"), new BlockPos(2,4,1), new BlockPos(2,5,1), new BlockPos(5,6, 3), IGMultiblockProvider.GEOTHERMAL_EXCHANGER);
+        super(new ResourceLocation(IGLib.MODID, "multiblocks/geothermal_exchanger"),
+                new BlockPos(2,4,1),
+                new BlockPos(2,4,3),
+                new BlockPos(3, 7, 4), IGMultiblockProvider.GEOTHERMAL_EXCHANGER);
     }
 
     @Override

@@ -137,6 +137,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         generateMultiskinMultiblock(IGMultiblockProvider.PELLETIZER.block().get(), "pelletizer", false, false, true, true);
         generateMultiskinMultiblock(IGMultiblockProvider.GEOTHERMAL_EXCHANGER.block().get(), "geothermal_exchanger", false, false, true, true);
         generateMultiskinMultiblock(IGMultiblockProvider.STEAM_TURBINE.block().get(), "steam_turbine", false, false, true, true);
+        generateMultiskinMultiblock(IGMultiblockProvider.SMALL_CHEMICAL_REACTOR.block().get(), "small_chemical_reactor", false, false, true, true);
 
         genericmultiblock("foundry");
         genericmultiblockMirror("coredrill");

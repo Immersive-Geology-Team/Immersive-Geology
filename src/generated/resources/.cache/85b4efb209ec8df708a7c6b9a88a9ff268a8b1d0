@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-13T23:02:32.905765053	Item models
+// 1.20.1	2025-07-15T22:21:48.798845887	Item models
 7d48f2b4469e5dd5953f6f9507355e31dcf47225 assets/immersivegeology/models/item/advanced_engineering_block_rusty_metal.json
 d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/bloomery_multiblock_skin_default.json
 d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/bloomery_multiblock_skin_legacy.json
@@ -1402,6 +1402,8 @@ c81ef0276ba81f5b8920af0f0a430fb5e4eda08b assets/immersivegeology/models/item/sla
 630410a06f2ea708c65d72c62a930d8a018bb78b assets/immersivegeology/models/item/slag_smithsonite.json
 710c9ad6428c22b90c5712dde1ed966e8d086623 assets/immersivegeology/models/item/slag_sphalerite.json
 cc0a4dcfc7581acb12fda0408c0c1fa7c851b66f assets/immersivegeology/models/item/slag_vanadinite.json
+d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/small_chemical_reactor_multiblock_skin_default.json
+d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/small_chemical_reactor_multiblock_skin_steampunk.json
 0ad5081f86d919147577f69e30887ec8771d6296 assets/immersivegeology/models/item/stairs_aluminum.json
 d2e319b2e67d2388e6f145252e8a6868f99f4dad assets/immersivegeology/models/item/stairs_bronze.json
 ec8c7c8ce8bc792d4bcba305090475fe7b0c5053 assets/immersivegeology/models/item/stairs_calcium.json

@@ -15,11 +15,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrommelShape extends GenericShape {
+public class SmallChemicalReactorShape extends GenericShape {
 
-    public static final TrommelShape GETTER = new TrommelShape();
+    public static final SmallChemicalReactorShape GETTER = new SmallChemicalReactorShape();
 
-    private TrommelShape(){};
+    private SmallChemicalReactorShape(){};
 
     @NotNull
     @Override

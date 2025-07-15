@@ -17,14 +17,14 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockCon
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.ShapeType;
-import com.igteam.immersivegeology.common.block.multiblocks.shapes.TrommelShape;
+import com.igteam.immersivegeology.common.block.multiblocks.shapes.SmallChemicalReactorShape;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.function.Function;
 
-public class TrommelLogic implements IMultiblockLogic<TrommelLogic.State>, IServerTickableComponent<TrommelLogic.State>, IClientTickableComponent<TrommelLogic.State> {
+public class SmallChemicalReactorLogic implements IMultiblockLogic<SmallChemicalReactorLogic.State>, IServerTickableComponent<SmallChemicalReactorLogic.State>, IClientTickableComponent<SmallChemicalReactorLogic.State> {
     public static final BlockPos REDSTONE_IN = new BlockPos(6,1,0);
     public static final int ENERGY_CAPACITY = 24000;
 
@@ -40,12 +40,12 @@ public class TrommelLogic implements IMultiblockLogic<TrommelLogic.State>, IServ
 
     @Override
     public State createInitialState(IInitialMultiblockContext<State> capability) {
-        return new TrommelLogic.State(capability);
+        return new SmallChemicalReactorLogic.State(capability);
     }
 
     @Override
     public Function<BlockPos, VoxelShape> shapeGetter(ShapeType shapeType) {
-        return TrommelShape.GETTER;
+        return SmallChemicalReactorShape.GETTER;
     }
 
     public static class State implements IMultiblockState {
