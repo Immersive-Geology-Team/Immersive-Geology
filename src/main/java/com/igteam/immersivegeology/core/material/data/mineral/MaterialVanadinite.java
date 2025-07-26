@@ -39,7 +39,7 @@ public class MaterialVanadinite extends MaterialSulphideMineral
         addFlags(ItemCategoryFlags.PELLET);
         addFlags(ItemCategoryFlags.POWDERED_SLAG);
 
-        CONFIG = new MineralConfig(12,70,1,-32,140,350, 0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
+        CONFIG = new MineralConfig(12,70,1,-32,140,700, 0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
     }
 
     @Override

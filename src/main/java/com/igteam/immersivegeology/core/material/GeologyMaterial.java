@@ -451,7 +451,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
     {
         LinkedHashSet<MaterialInterface<?>> set =  getDerivedMaterials();
         if(set.isEmpty()) {
-            IGLib.IG_LOGGER.error("Called a Primary Use (product) Source Material with no Entry [{}]", getName());
+            IGLib.IG_LOGGER.warn("Called a Primary Use (product) Source Material with no Entry [{}]", getName());
             return MetalEnum.Unobtanium;
         }
 

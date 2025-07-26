@@ -124,7 +124,7 @@ tasks.withType(Jar).configureEach {
 // ----------------------------------------------------------------------------
 
 minecraft {
-    mappings channel: 'parchment', version: "${version_parchment}-${version_minecraft}"
+    mappings channel: 'parchment', version: "1.19.3-2023.06.25-1.20.1"
     accessTransformers {
         file 'src/main/resources/META-INF/accesstransformer.cfg'
     }

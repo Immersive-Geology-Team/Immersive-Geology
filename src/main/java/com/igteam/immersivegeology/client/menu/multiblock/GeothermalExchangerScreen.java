@@ -210,7 +210,7 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 			pose.pushPose();
 			pose.translate(0,4,0);
 			BakedModel itemModel = itemRender.getModel(multiblockRenderIcon, level, null, 0);
-			pose.translate(1.5, 0.5, 1.5);
+			pose.translate(1.5, -0.5, 1.5);
 			itemRender.renderModelLists(itemModel, multiblockRenderIcon,
 					0xffffffff, OverlayTexture.NO_OVERLAY, pose,
 					bufferSource.getBuffer(IERenderTypes.TRANSLUCENT_FULLBRIGHT));
@@ -228,7 +228,7 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 						int overlay = OverlayTexture.NO_OVERLAY;
 						if (state.isAir())
 						{
-							if(blockIndex > 65) continue;
+							if(blockIndex > 53) continue;
 							int heatState = unpackHeatStateAtIndex(blockIndex);
 							Block heatBlock = GeothermalConversionRecipe.getBlockFromIndex(level, heatState);
 

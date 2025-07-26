@@ -64,9 +64,9 @@ import java.util.function.Supplier;
 public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExchangerLogic.State>, IServerTickableComponent<GeothermalExchangerLogic.State>, IClientTickableComponent<GeothermalExchangerLogic.State> {
     public static final BlockPos REDSTONE_IN = new BlockPos(2,5,1);
     public static final int ENERGY_CAPACITY = 16000;
-    private static final CapabilityPosition FLUID_INPUT_CAP = new CapabilityPosition(3,4,1, RelativeBlockFace.UP);
-    private static final CapabilityPosition FLUID_OUTPUT_CAP = new CapabilityPosition(1,4,1, RelativeBlockFace.UP);
-    private static final CapabilityPosition ENERGY_INPUT = new CapabilityPosition(3,5,0, RelativeBlockFace.UP);
+    private static final CapabilityPosition FLUID_INPUT_CAP = new CapabilityPosition(2,3,2, RelativeBlockFace.BACK);
+    private static final CapabilityPosition FLUID_OUTPUT_CAP = new CapabilityPosition(2,3, 0, RelativeBlockFace.FRONT);
+    private static final CapabilityPosition ENERGY_INPUT = new CapabilityPosition(1,4,2, RelativeBlockFace.UP);
     public static final int TANK_VOLUME = FluidType.BUCKET_VOLUME;
 
     private static final int GUI_SYNC_INTERVAL = 20;
@@ -405,7 +405,7 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
                     1, 0, 1, context.getMarkDirtyRunnable(), GeothermalExchangerRecipe.RECIPES::getById
             );
 			assert FLUID_OUTPUT_CAP.side()!=null;
-			this.fluidOutput = context.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(FLUID_OUTPUT_CAP.side().getOpposite(), FLUID_OUTPUT_CAP.posInMultiblock().above()));
+			this.fluidOutput = context.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(FLUID_OUTPUT_CAP.side().getOpposite(), FLUID_OUTPUT_CAP.posInMultiblock().north()));
             this.dummy = new InMachineProcessor<>(1, 0, 1, context.getMarkDirtyRunnable(), GeothermalExchangerRecipe.RECIPES::getById);
         }
 
