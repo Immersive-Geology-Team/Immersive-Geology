@@ -3,11 +3,11 @@
   "energy": 38400,
   "fluidResult": {
     "amount": 120,
-    "fluid": "immersivegeology:fluid_nitricacid"
+    "fluid": "immersivegeology:fluid_nitric_acid"
   },
   "input": {
     "amount": 144,
-    "tag": "forge:clean_nitricacid_cobalt"
+    "tag": "forge:clean_nitric_acid_cobalt"
   },
   "result": {
     "item": "immersivegeology:crystal_cobalt"

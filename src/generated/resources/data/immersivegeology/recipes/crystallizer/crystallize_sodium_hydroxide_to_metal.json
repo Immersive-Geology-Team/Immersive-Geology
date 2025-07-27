@@ -7,7 +7,7 @@
   },
   "input": {
     "amount": 144,
-    "tag": "forge:sodiumhydroxide"
+    "tag": "forge:sodium_hydroxide"
   },
   "result": {
     "item": "immersivegeology:crystal_sodium"

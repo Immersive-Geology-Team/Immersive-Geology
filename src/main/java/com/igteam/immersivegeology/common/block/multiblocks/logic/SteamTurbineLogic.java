@@ -25,7 +25,8 @@ import blusunrize.immersiveengineering.common.util.CachedRecipe;
 import blusunrize.immersiveengineering.common.util.EnergyHelper;
 import blusunrize.immersiveengineering.common.util.Utils;
 import com.google.common.collect.ImmutableList;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.CrystallizerLogic.State;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.SteamTurbineLogic.State;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.ISkinnableMultiblockLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.TurbineFuel;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.SteamTurbineShape;
 import net.minecraft.ChatFormatting;
@@ -56,7 +57,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class SteamTurbineLogic implements IMultiblockLogic<SteamTurbineLogic.State>, MBOverlayText<SteamTurbineLogic.State>, IServerTickableComponent<SteamTurbineLogic.State>, IClientTickableComponent<SteamTurbineLogic.State> {
+public class SteamTurbineLogic implements ISkinnableMultiblockLogic<State>, MBOverlayText<SteamTurbineLogic.State>, IServerTickableComponent<SteamTurbineLogic.State>, IClientTickableComponent<SteamTurbineLogic.State> {
     public static final BlockPos REDSTONE_IN = new BlockPos(0,1,5);
     private static final List<BlockPos> ENERGY_OUTPUTS = IntStream.range(2, 5).mapToObj((i) -> {
         return new BlockPos(13, 3, i);

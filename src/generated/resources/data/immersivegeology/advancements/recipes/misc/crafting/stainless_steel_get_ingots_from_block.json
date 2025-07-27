@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "immersivegeology:crafting/stainless_steel_get_ingots_from_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "stainless_steelhas_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:storage_block_stainless_steel"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "stainless_steelhas_ingot",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "immersivegeology:crafting/stainless_steel_get_ingots_from_block"
+    ]
+  },
+  "sends_telemetry_event": false
+}

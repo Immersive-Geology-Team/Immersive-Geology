@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "immersivegeology:storage_block_high_speed_steel"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "immersivegeology:ingot_high_speed_steel"
+  }
+}

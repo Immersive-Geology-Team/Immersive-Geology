@@ -1,6 +1,6 @@
 {
   "parent": "immersivegeology:item/base/ig_base_item",
   "textures": {
-    "layer0": "immersivegeology:palette/item/dirty_crushed_ore/type_2_pristine_platinum"
+    "layer0": "immersivegeology:item/colored/platinum/dirty_crushed_ore"
   }
 }

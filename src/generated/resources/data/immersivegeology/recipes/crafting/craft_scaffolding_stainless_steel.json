@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "i": {
+      "item": "immersivegeology:ingot_stainless_steel"
+    },
+    "r": {
+      "item": "immersivegeology:rod_stainless_steel"
+    }
+  },
+  "pattern": [
+    "iii",
+    " r ",
+    "r r"
+  ],
+  "result": {
+    "item": "immersivegeology:scaffolding_stainless_steel_standard"
+  },
+  "show_notification": true
+}

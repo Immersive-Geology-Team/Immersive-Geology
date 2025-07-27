@@ -11,7 +11,7 @@
     "immersivegeology:rod_osmium",
     "immersivegeology:rod_platinum",
     "immersivegeology:rod_hastelloy",
-    "immersivegeology:rod_stainlesssteel",
+    "immersivegeology:rod_stainless_steel",
     "immersivegeology:rod_thorium",
     "immersivegeology:rod_tin",
     "immersivegeology:rod_titanium",
@@ -20,6 +20,6 @@
     "immersivegeology:rod_vanadium",
     "immersivegeology:rod_zinc",
     "immersivegeology:rod_zirconium",
-    "immersivegeology:rod_tungstencarbide"
+    "immersivegeology:rod_tungsten_carbide"
   ]
 }

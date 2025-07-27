@@ -3,11 +3,11 @@
   "energy": 38400,
   "fluidResult": {
     "amount": 120,
-    "fluid": "immersivegeology:fluid_sulfuricacid"
+    "fluid": "immersivegeology:fluid_sulfuric_acid"
   },
   "input": {
     "amount": 144,
-    "tag": "forge:clean_sulfuricacid_iron"
+    "tag": "forge:clean_sulfuric_acid_iron"
   },
   "result": {
     "item": "immersivegeology:crystal_iron"

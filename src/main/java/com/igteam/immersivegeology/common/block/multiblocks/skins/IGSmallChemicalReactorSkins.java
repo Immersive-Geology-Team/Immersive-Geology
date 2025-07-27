@@ -57,7 +57,7 @@ public enum IGSmallChemicalReactorSkins implements StringRepresentable, IIGMulti
 	@Override
 	public String multiblockName()
 	{
-		return "steam_turbine";
+		return "small_chemical_reactor";
 	}
 
 	@Override

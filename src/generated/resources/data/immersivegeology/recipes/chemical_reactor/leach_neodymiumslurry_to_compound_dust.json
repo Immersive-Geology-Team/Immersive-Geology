@@ -3,15 +3,15 @@
   "energy": 51200,
   "fluidInputA": {
     "amount": 750,
-    "tag": "forge:ammoniasolution"
+    "tag": "forge:ammonia_solution"
   },
   "fluidInputB": {
     "amount": 648,
-    "tag": "forge:clean_sulfuricacid_neodymium"
+    "tag": "forge:clean_sulfuric_acid_neodymium"
   },
   "fluidResult": {
     "amount": 648,
-    "fluid": "immersivegeology:fluid_chemicalwaste"
+    "fluid": "immersivegeology:fluid_chemical_waste"
   },
   "itemInput": {
     "base_ingredient": [],

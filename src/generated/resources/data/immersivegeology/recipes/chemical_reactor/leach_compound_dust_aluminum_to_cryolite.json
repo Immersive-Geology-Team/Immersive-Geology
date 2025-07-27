@@ -3,7 +3,7 @@
   "energy": 51200,
   "fluidInputA": {
     "amount": 125,
-    "tag": "forge:hydrofluoricacid"
+    "tag": "forge:hydrofluoric_acid"
   },
   "fluidResult": {
     "amount": 0,

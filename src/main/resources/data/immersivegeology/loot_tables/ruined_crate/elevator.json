@@ -174,7 +174,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "immersivegeology:drill_head_tungstencarbide",
+          "name": "immersivegeology:drill_head_tungsten_carbide",
           "functions": [ { "function": "minecraft:set_count", "count": 1 } ],
           "conditions": [ { "condition": "minecraft:random_chance", "chance": 0.05 } ]
         },

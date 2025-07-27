@@ -3,11 +3,11 @@
   "energy": 51200,
   "fluidInputA": {
     "amount": 250,
-    "tag": "forge:hydrochloricacid"
+    "tag": "forge:hydrochloric_acid"
   },
   "fluidResult": {
     "amount": 216,
-    "fluid": "immersivegeology:slurry_hydrochloricacid_tungsten"
+    "fluid": "immersivegeology:slurry_hydrochloric_acid_tungsten"
   },
   "itemInput": {
     "item": "immersivegeology:powder_scheelite"

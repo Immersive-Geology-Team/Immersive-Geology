@@ -3,11 +3,11 @@
   "energy": 51200,
   "fluidInputA": {
     "amount": 750,
-    "tag": "forge:hydrofluoricacid"
+    "tag": "forge:hydrofluoric_acid"
   },
   "fluidResult": {
     "amount": 648,
-    "fluid": "immersivegeology:slurry_hydrofluoricacid_thorium"
+    "fluid": "immersivegeology:slurry_hydrofluoric_acid_thorium"
   },
   "itemInput": {
     "item": "immersivegeology:metal_oxide_thorium"

@@ -1,6 +1,6 @@
 {
   "parent": "immersivegeology:item/base/ig_base_item",
   "textures": {
-    "layer0": "immersivegeology:palette/item/dirty_crushed_ore/type_1_corroded_chalcocite"
+    "layer0": "immersivegeology:item/colored/chalcocite/dirty_crushed_ore"
   }
 }

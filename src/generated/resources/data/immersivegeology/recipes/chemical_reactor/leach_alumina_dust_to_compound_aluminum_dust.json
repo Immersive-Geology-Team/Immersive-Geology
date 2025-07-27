@@ -3,7 +3,7 @@
   "energy": 51200,
   "fluidInputA": {
     "amount": 125,
-    "tag": "forge:sodiumhydroxide"
+    "tag": "forge:sodium_hydroxide"
   },
   "fluidResult": {
     "amount": 0,

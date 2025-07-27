@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "p": {
+      "item": "immersivegeology:plate_stainless_steel"
+    }
+  },
+  "pattern": [
+    "ppp",
+    "p p",
+    "ppp"
+  ],
+  "result": {
+    "item": "immersivegeology:crate_stainless_steel"
+  },
+  "show_notification": true
+}

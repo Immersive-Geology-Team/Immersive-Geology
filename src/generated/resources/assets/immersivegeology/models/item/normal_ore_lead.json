@@ -1,6 +1,6 @@
 {
   "parent": "immersivegeology:item/base/ig_base_item",
   "textures": {
-    "layer0": "immersivegeology:palette/item/normal_ore/type_6_pristine_lead"
+    "layer0": "immersivegeology:item/colored/raw_ore/lead/normal"
   }
 }

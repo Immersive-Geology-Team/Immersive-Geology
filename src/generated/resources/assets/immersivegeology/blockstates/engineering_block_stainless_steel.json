@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "immersivegeology:block/engineering_block/engineering_block_stainless_steel"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "immersiveengineering:metal_press",
+  "energy": 2400,
+  "input": {
+    "tag": "forge:ingots/tungsten_carbide"
+  },
+  "mold": "immersiveengineering:mold_plate",
+  "result": {
+    "tag": "forge:plates/tungsten_carbide"
+  }
+}

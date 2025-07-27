@@ -1,6 +1,6 @@
 {
   "parent": "immersivegeology:item/base/ig_base_item",
   "textures": {
-    "layer0": "immersivegeology:palette/item/plate/type_1_pristine_silver"
+    "layer0": "immersivegeology:item/colored/silver/plate"
   }
 }

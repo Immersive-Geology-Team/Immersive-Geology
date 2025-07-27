@@ -3,11 +3,11 @@
   "energy": 51200,
   "fluidInputA": {
     "amount": 750,
-    "tag": "forge:hydrochloricacid"
+    "tag": "forge:hydrochloric_acid"
   },
   "fluidResult": {
     "amount": 216,
-    "fluid": "immersivegeology:slurry_hydrochloricacid_titanium"
+    "fluid": "immersivegeology:slurry_hydrochloric_acid_titanium"
   },
   "itemInput": {
     "item": "immersivegeology:powder_anatase"

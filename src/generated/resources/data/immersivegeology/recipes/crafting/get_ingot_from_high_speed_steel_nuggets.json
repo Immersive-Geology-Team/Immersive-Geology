@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "n": {
+      "item": "immersivegeology:nugget_high_speed_steel"
+    }
+  },
+  "pattern": [
+    "nnn",
+    "nnn",
+    "nnn"
+  ],
+  "result": {
+    "item": "immersivegeology:ingot_high_speed_steel"
+  },
+  "show_notification": true
+}

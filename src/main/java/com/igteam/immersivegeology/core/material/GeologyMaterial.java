@@ -78,9 +78,9 @@ public abstract class GeologyMaterial implements MaterialHelper {
 
     public GeologyMaterial() {
         // As long as the class itself is named appropriately we do not need to specify a name in the class.
-        String className = this.getClass().getName().toLowerCase();
+        String className = this.getClass().getName();
         String classNameNormal = this.getClass().getName();
-        this.name = className.substring(className.lastIndexOf(".") + 1).replace("material", "");
+        this.name = className.substring(className.lastIndexOf(".") + 1).replace("Material", "").replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase();
         this.unserialized_name =  classNameNormal.substring(classNameNormal.lastIndexOf(".") + 1).replace("Material", "");
 
         this.generation_group.add(Pair.of((i) -> this, 100));
@@ -149,7 +149,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
 
     @Override
     public String getName() {
-        return name.toLowerCase();
+        return name;
     }
 
     public int getColor(IFlagType<?> p, Integer secondaryColors) {

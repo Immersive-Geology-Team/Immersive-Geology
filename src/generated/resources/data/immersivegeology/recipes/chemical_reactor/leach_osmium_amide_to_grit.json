@@ -3,19 +3,19 @@
   "energy": 51200,
   "fluidInputA": {
     "amount": 216,
-    "tag": "forge:clean_ammoniasolution_osmium"
+    "tag": "forge:clean_ammonia_solution_osmium"
   },
   "fluidInputB": {
     "amount": 125,
-    "tag": "forge:hydrochloricacid"
+    "tag": "forge:hydrochloric_acid"
   },
   "fluidInputC": {
     "amount": 125,
-    "tag": "forge:nitricacid"
+    "tag": "forge:nitric_acid"
   },
   "fluidResult": {
     "amount": 216,
-    "fluid": "immersivegeology:fluid_chemicalwaste"
+    "fluid": "immersivegeology:fluid_chemical_waste"
   },
   "itemInput": {
     "base_ingredient": [],

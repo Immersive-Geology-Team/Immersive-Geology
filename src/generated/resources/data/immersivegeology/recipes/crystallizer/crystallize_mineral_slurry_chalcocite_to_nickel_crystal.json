@@ -3,11 +3,11 @@
   "energy": 38400,
   "fluidResult": {
     "amount": 120,
-    "fluid": "immersivegeology:slurry_hydrochloricacid_nickel"
+    "fluid": "immersivegeology:slurry_hydrochloric_acid_nickel"
   },
   "input": {
     "amount": 144,
-    "tag": "forge:clean_hydrochloricacid_chalcocite"
+    "tag": "forge:clean_hydrochloric_acid_chalcocite"
   },
   "result": {
     "item": "immersivegeology:crystal_copper"

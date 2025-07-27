@@ -10,8 +10,8 @@
     "immersivegeology:nugget_osmium",
     "immersivegeology:nugget_platinum",
     "immersivegeology:nugget_hastelloy",
-    "immersivegeology:nugget_highspeedsteel",
-    "immersivegeology:nugget_stainlesssteel",
+    "immersivegeology:nugget_high_speed_steel",
+    "immersivegeology:nugget_stainless_steel",
     "immersivegeology:nugget_sodium",
     "immersivegeology:nugget_thorium",
     "immersivegeology:nugget_tin",
@@ -21,6 +21,6 @@
     "immersivegeology:nugget_vanadium",
     "immersivegeology:nugget_zinc",
     "immersivegeology:nugget_zirconium",
-    "immersivegeology:nugget_tungstencarbide"
+    "immersivegeology:nugget_tungsten_carbide"
   ]
 }

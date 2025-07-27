@@ -2,7 +2,7 @@
   "type": "immersivegeology:coredrill",
   "fluidResult": {
     "amount": 1,
-    "fluid": "immersivegeology:fluid_moltenmantle"
+    "fluid": "immersivegeology:fluid_molten_mantle"
   },
   "input": {
     "amount": 1,

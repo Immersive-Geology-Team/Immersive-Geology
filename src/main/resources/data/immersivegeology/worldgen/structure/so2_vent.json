@@ -7,6 +7,6 @@
   "start_pool": "immersivegeology:so2_vent/start_pool",
   "size": 3,
   "y_min": -60,
-  "y_max": 62,
+  "y_max": 50,
   "max_distance_from_center": 16
 }

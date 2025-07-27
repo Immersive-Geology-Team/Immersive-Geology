@@ -3,11 +3,11 @@
   "energy": 51200,
   "fluidInputA": {
     "amount": 125,
-    "tag": "forge:hydrochloricacid"
+    "tag": "forge:hydrochloric_acid"
   },
   "fluidResult": {
     "amount": 125,
-    "fluid": "immersivegeology:slurry_hydrochloricacid_magnesium"
+    "fluid": "immersivegeology:slurry_hydrochloric_acid_magnesium"
   },
   "itemInput": {
     "item": "immersivegeology:metal_oxide_magnesium"

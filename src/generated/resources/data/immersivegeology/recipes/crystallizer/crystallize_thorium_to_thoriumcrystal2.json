@@ -3,11 +3,11 @@
   "energy": 38400,
   "fluidResult": {
     "amount": 120,
-    "fluid": "immersivegeology:fluid_nitricacid"
+    "fluid": "immersivegeology:fluid_nitric_acid"
   },
   "input": {
     "amount": 144,
-    "tag": "forge:clean_nitricacid_thorium"
+    "tag": "forge:clean_nitric_acid_thorium"
   },
   "result": {
     "item": "immersivegeology:crystal_thorium"

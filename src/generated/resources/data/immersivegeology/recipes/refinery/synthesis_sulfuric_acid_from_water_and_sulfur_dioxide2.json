@@ -10,11 +10,11 @@
   },
   "input1": {
     "amount": 25,
-    "tag": "forge:sulfurdioxide"
+    "tag": "forge:sulfur_dioxide"
   },
   "result": {
     "amount": 8,
-    "fluid": "immersivegeology:fluid_sulfuricacid"
+    "fluid": "immersivegeology:fluid_sulfuric_acid"
   },
   "time": 1
 }

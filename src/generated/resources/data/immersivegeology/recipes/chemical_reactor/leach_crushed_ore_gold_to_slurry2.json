@@ -3,11 +3,11 @@
   "energy": 51200,
   "fluidInputA": {
     "amount": 500,
-    "tag": "forge:aquaregia"
+    "tag": "forge:aqua_regia"
   },
   "fluidResult": {
     "amount": 432,
-    "fluid": "immersivegeology:slurry_aquaregia_gold"
+    "fluid": "immersivegeology:slurry_aqua_regia_gold"
   },
   "itemInput": {
     "item": "immersivegeology:crushed_ore_gold"

@@ -17,6 +17,8 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockCon
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.ShapeType;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.SmallChemicalReactorLogic.State;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.ISkinnableMultiblockLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.SmallChemicalReactorShape;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -24,7 +26,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.function.Function;
 
-public class SmallChemicalReactorLogic implements IMultiblockLogic<SmallChemicalReactorLogic.State>, IServerTickableComponent<SmallChemicalReactorLogic.State>, IClientTickableComponent<SmallChemicalReactorLogic.State> {
+public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<State>, IServerTickableComponent<SmallChemicalReactorLogic.State>, IClientTickableComponent<SmallChemicalReactorLogic.State> {
     public static final BlockPos REDSTONE_IN = new BlockPos(6,1,0);
     public static final int ENERGY_CAPACITY = 24000;
 

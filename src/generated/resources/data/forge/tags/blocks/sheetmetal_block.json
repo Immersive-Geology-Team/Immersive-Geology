@@ -12,8 +12,8 @@
     "immersivegeology:sheetmetal_block_osmium",
     "immersivegeology:sheetmetal_block_platinum",
     "immersivegeology:sheetmetal_block_hastelloy",
-    "immersivegeology:sheetmetal_block_highspeedsteel",
-    "immersivegeology:sheetmetal_block_stainlesssteel",
+    "immersivegeology:sheetmetal_block_high_speed_steel",
+    "immersivegeology:sheetmetal_block_stainless_steel",
     "immersivegeology:sheetmetal_block_thorium",
     "immersivegeology:sheetmetal_block_tin",
     "immersivegeology:sheetmetal_block_titanium",
@@ -22,8 +22,8 @@
     "immersivegeology:sheetmetal_block_vanadium",
     "immersivegeology:sheetmetal_block_zinc",
     "immersivegeology:sheetmetal_block_zirconium",
-    "immersivegeology:sheetmetal_block_tungstencarbide",
-    "immersivegeology:sheetmetal_block_moltenmantle",
+    "immersivegeology:sheetmetal_block_tungsten_carbide",
+    "immersivegeology:sheetmetal_block_molten_mantle",
     "immersivegeology:sheetmetal_block_rusty_metal"
   ]
 }

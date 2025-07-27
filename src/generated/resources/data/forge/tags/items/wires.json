@@ -8,7 +8,7 @@
     "immersivegeology:wire_osmium",
     "immersivegeology:wire_platinum",
     "immersivegeology:wire_hastelloy",
-    "immersivegeology:wire_stainlesssteel",
+    "immersivegeology:wire_stainless_steel",
     "immersivegeology:wire_tin",
     "immersivegeology:wire_titanium",
     "immersivegeology:wire_tungsten",
@@ -16,6 +16,6 @@
     "immersivegeology:wire_vanadium",
     "immersivegeology:wire_zinc",
     "immersivegeology:wire_zirconium",
-    "immersivegeology:wire_tungstencarbide"
+    "immersivegeology:wire_tungsten_carbide"
   ]
 }

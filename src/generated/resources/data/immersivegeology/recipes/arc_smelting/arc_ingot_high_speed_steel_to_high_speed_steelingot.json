@@ -1,0 +1,35 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [
+    {
+      "item": "immersivegeology:ingot_tungsten"
+    },
+    {
+      "item": "immersivegeology:ingot_vanadium"
+    },
+    {
+      "item": "immersivegeology:ingot_molybdenum"
+    },
+    {
+      "item": "immersivegeology:ingot_manganese"
+    }
+  ],
+  "energy": 204800,
+  "input": {
+    "base_ingredient": {
+      "tag": "forge:ingots/steel"
+    },
+    "count": 12
+  },
+  "results": [
+    {
+      "count": 16,
+      "item": "immersivegeology:ingot_high_speed_steel"
+    }
+  ],
+  "slag": {
+    "count": 2,
+    "item": "immersiveengineering:slag"
+  },
+  "time": 400
+}
