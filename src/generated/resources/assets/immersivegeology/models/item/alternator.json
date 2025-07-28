@@ -70,8 +70,8 @@
         0.16
       ],
       "translation": [
-        -1,
-        0,
+        -2,
+        1,
         0
       ]
     },
@@ -124,8 +124,8 @@
   },
   "flip_v": true,
   "loader": "forge:obj",
-  "model": "immersivegeology:models/block/multiblock/obj/small_chemical_reactor/small_chemical_reactor.obj",
+  "model": "immersivegeology:models/block/multiblock/obj/alternator/alternator_item.obj",
   "textures": {
-    "small_chemical_reactor": "immersivegeology:block/multiblock/small_chemical_reactor/default"
+    "alternator": "immersivegeology:block/multiblock/alternator/default"
   }
 }

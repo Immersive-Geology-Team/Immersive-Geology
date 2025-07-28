@@ -71,7 +71,9 @@ public class SteamTurbineLogic implements ISkinnableMultiblockLogic<State>, MBOv
 
     @Override
     public void tickClient(IMultiblockContext<State> context) {
-
+        SteamTurbineLogic.State state = context.getState();
+        state.rotation += 1f;
+        state.rotation = state.rotation % 360;
     }
 
     @Override
@@ -183,6 +185,7 @@ public class SteamTurbineLogic implements ISkinnableMultiblockLogic<State>, MBOv
         public final FluidTank water_tank = new FluidTank(WATER_CAPACITY);
         private boolean active = false;
         private int consumeTick = 0;
+        private float rotation = 0;
         private final BiFunction<Level, Fluid, TurbineFuel> recipeGetter = CachedRecipe.cached(TurbineFuel::getRecipeFor);
         private final List<CapabilityReference<IEnergyStorage>> energyOutputs;
         private final StoredCapability<IFluidHandler> steamFluidCap;
@@ -218,6 +221,7 @@ public class SteamTurbineLogic implements ISkinnableMultiblockLogic<State>, MBOv
             this.water_tank.readFromNBT(nbt.getCompound("water_tank"));
             this.active = nbt.getBoolean("active");
             this.consumeTick = nbt.getInt("consumeTick");
+            this.rotation = nbt.getFloat("rotation");
         }
 
         @Override
@@ -226,6 +230,7 @@ public class SteamTurbineLogic implements ISkinnableMultiblockLogic<State>, MBOv
             nbt.put("water_tank", this.water_tank.writeToNBT(new CompoundTag()));
             nbt.putBoolean("active", this.active);
             nbt.putInt("consumeTick", this.consumeTick);
+            nbt.putFloat("rotation", this.rotation);
         }
 
         public void writeSyncNBT(CompoundTag nbt) {
@@ -237,6 +242,11 @@ public class SteamTurbineLogic implements ISkinnableMultiblockLogic<State>, MBOv
             readSaveNBT(nbt);
             this.active = nbt.getBoolean("active");
         }
-    }
+
+		public float getRotation()
+		{
+            return this.rotation;
+		}
+	}
 
 }

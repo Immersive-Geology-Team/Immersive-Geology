@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.logic.helper;
 
+import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistrationBuilder;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.ComparatorManager;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IMultiblockComponent;
@@ -23,12 +24,24 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMenuTypes.MultiblockContainer;
 import net.minecraft.core.BlockPos;
 
+import java.util.ArrayList;
+
+import static com.igteam.immersivegeology.core.registration.IGMultiblockProvider.ALL_IG_MULTIBLOCKS;
+
 public class IGMultiblockBuilder<S extends IMultiblockState>
 		extends MultiblockRegistrationBuilder<S, IGMultiblockBuilder<S>>
 {
 	public IGMultiblockBuilder(IMultiblockLogic<S> logic, String name)
 	{
 		super(logic, IGLib.rl(name));
+	}
+
+	@Override
+	public MultiblockRegistration<S> build()
+	{
+		MultiblockRegistration<S> b = super.build();
+		ALL_IG_MULTIBLOCKS.add(b);
+		return b;
 	}
 
 	public IGMultiblockBuilder<S> gui(MultiblockContainer<S, ?> menu)

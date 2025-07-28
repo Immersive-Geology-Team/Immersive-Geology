@@ -38,6 +38,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 import static com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat.getTFCBlockTag;
+import static com.igteam.immersivegeology.core.registration.IGMultiblockProvider.ALL_IG_MULTIBLOCKS;
 
 public class IGBlockTags extends BlockTagsProvider
 {
@@ -204,29 +205,10 @@ public class IGBlockTags extends BlockTagsProvider
 		}
 
 		IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> tag = this.tag(BlockTags.MINEABLE_WITH_PICKAXE);
-		this.registerMineable(tag, IGMultiblockProvider.BALLMILL,
-				IGMultiblockProvider.BLOOMERY,
-				IGMultiblockProvider.CENTRIFUGE,
-				IGMultiblockProvider.COREDRILL,
-				IGMultiblockProvider.CRYSTALLIZER,
-				IGMultiblockProvider.CHEMICAL_REACTOR,
-				IGMultiblockProvider.GRAVITY_SEPARATOR,
-				IGMultiblockProvider.PELLETIZER,
-				IGMultiblockProvider.GEOTHERMAL_EXCHANGER,
-				IGMultiblockProvider.FOUNDRY,
-				IGMultiblockProvider.REVERBERATION_FURNACE,
-				IGMultiblockProvider.ROTARYKILN);
+		for(MultiblockRegistration<?> multi : ALL_IG_MULTIBLOCKS) tag.add(multi.block().get());
+
 
 		IGLib.IG_LOGGER.info("Finished Registration of Immersive Geology Block Tags");
 	}
 
-	private void registerMineable(IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> tag, MultiblockRegistration<?>... entries) {
-		MultiblockRegistration[] var3 = entries;
-		int var4 = entries.length;
-
-		for(int var5 = 0; var5 < var4; ++var5) {
-			MultiblockRegistration<?> entry = var3[var5];
-			tag.add((Block)entry.block().get());
-		}
-	}
 }

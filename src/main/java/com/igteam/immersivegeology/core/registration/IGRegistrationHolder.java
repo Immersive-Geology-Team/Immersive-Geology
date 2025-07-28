@@ -52,7 +52,6 @@ import com.igteam.immersivegeology.core.lib.ResourceUtils;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
-import com.igteam.immersivegeology.core.material.helper.ToolTierHelper;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -66,7 +65,6 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -496,7 +494,8 @@ public class IGRegistrationHolder {
         registerMB("geothermal_exchanger", IGGeothermalExchangerMultiblock.INSTANCE, IGMultiblockProvider.GEOTHERMAL_EXCHANGER, IGGeothermalSkins.class);
         registerMB("pelletizer", IGPelletizerMultiblock.INSTANCE, IGMultiblockProvider.PELLETIZER, IGPelletizerSkins.class);
         registerMB("steam_turbine", IGSteamTurbineMultiblock.INSTANCE, IGMultiblockProvider.STEAM_TURBINE, IGSteamTurbineSkins.class);
-        registerMB("small_chemical_reactor", IGSmallChemicalReactor.INSTANCE, IGMultiblockProvider.SMALL_CHEMICAL_REACTOR, IGSmallChemicalReactorSkins.class);
+        registerMB("small_chemical_reactor", IGSmallChemicalReactorMultiblock.INSTANCE, IGMultiblockProvider.SMALL_CHEMICAL_REACTOR, IGSmallChemicalReactorSkins.class);
+        registerMB("alternator", IGAlternatorMultiblock.INSTANCE, IGMultiblockProvider.ALTERNATOR, IGAlternatorSkins.class);
 
         registerMB("coredrill", IGCoreDrillMultiblock.INSTANCE, IGMultiblockProvider.COREDRILL);
         registerMB("centrifuge", IGCentrifugeMultiblock.INSTANCE, IGMultiblockProvider.CENTRIFUGE);

@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks;
 
-import blusunrize.immersiveengineering.api.multiblocks.ClientMultiblocks;
 import blusunrize.immersiveengineering.api.multiblocks.ClientMultiblocks.MultiblockManualData;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
@@ -17,15 +16,15 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.function.Consumer;
 
-public class IGSmallChemicalReactor extends IGTemplateMultiblock
+public class IGAlternatorMultiblock extends IGTemplateMultiblock
 {
-	public static final IGSmallChemicalReactor INSTANCE = new IGSmallChemicalReactor();
+	public static final IGAlternatorMultiblock INSTANCE = new IGAlternatorMultiblock();
 
-	public IGSmallChemicalReactor() {
-		super(new ResourceLocation(IGLib.MODID, "multiblocks/small_chemical_reactor"),
-				new BlockPos(1,0,1),
-				new BlockPos(0,1,2),
-				new BlockPos(4, 6, 3), IGMultiblockProvider.SMALL_CHEMICAL_REACTOR);
+	public IGAlternatorMultiblock() {
+		super(new ResourceLocation(IGLib.MODID, "multiblocks/alternator"),
+				new BlockPos(3,2,3),
+				new BlockPos(3,4,4),
+				new BlockPos(7, 7, 5), IGMultiblockProvider.ALTERNATOR);
 	}
 
 	@Override
@@ -47,6 +46,6 @@ public class IGSmallChemicalReactor extends IGTemplateMultiblock
 	@Override
 	public String getName()
 	{
-		return "Small Chemical Reactor";
+		return "Alternator";
 	}
 }

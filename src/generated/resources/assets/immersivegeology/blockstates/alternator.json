@@ -1,0 +1,80 @@
+{
+  "variants": {
+    "alternator=default,facing=east,mirrored=false": {
+      "model": "immersivegeology:block/alternator_default_split",
+      "uvlock": true,
+      "y": 90
+    },
+    "alternator=default,facing=east,mirrored=true": {
+      "model": "immersivegeology:block/alternator_default_mirrored_split",
+      "uvlock": true,
+      "y": 90
+    },
+    "alternator=default,facing=north,mirrored=false": {
+      "model": "immersivegeology:block/alternator_default_split",
+      "uvlock": true
+    },
+    "alternator=default,facing=north,mirrored=true": {
+      "model": "immersivegeology:block/alternator_default_mirrored_split",
+      "uvlock": true
+    },
+    "alternator=default,facing=south,mirrored=false": {
+      "model": "immersivegeology:block/alternator_default_split",
+      "uvlock": true,
+      "y": 180
+    },
+    "alternator=default,facing=south,mirrored=true": {
+      "model": "immersivegeology:block/alternator_default_mirrored_split",
+      "uvlock": true,
+      "y": 180
+    },
+    "alternator=default,facing=west,mirrored=false": {
+      "model": "immersivegeology:block/alternator_default_split",
+      "uvlock": true,
+      "y": 270
+    },
+    "alternator=default,facing=west,mirrored=true": {
+      "model": "immersivegeology:block/alternator_default_mirrored_split",
+      "uvlock": true,
+      "y": 270
+    },
+    "alternator=hazard,facing=east,mirrored=false": {
+      "model": "immersivegeology:block/alternator_hazard_split",
+      "uvlock": true,
+      "y": 90
+    },
+    "alternator=hazard,facing=east,mirrored=true": {
+      "model": "immersivegeology:block/alternator_hazard_mirrored_split",
+      "uvlock": true,
+      "y": 90
+    },
+    "alternator=hazard,facing=north,mirrored=false": {
+      "model": "immersivegeology:block/alternator_hazard_split",
+      "uvlock": true
+    },
+    "alternator=hazard,facing=north,mirrored=true": {
+      "model": "immersivegeology:block/alternator_hazard_mirrored_split",
+      "uvlock": true
+    },
+    "alternator=hazard,facing=south,mirrored=false": {
+      "model": "immersivegeology:block/alternator_hazard_split",
+      "uvlock": true,
+      "y": 180
+    },
+    "alternator=hazard,facing=south,mirrored=true": {
+      "model": "immersivegeology:block/alternator_hazard_mirrored_split",
+      "uvlock": true,
+      "y": 180
+    },
+    "alternator=hazard,facing=west,mirrored=false": {
+      "model": "immersivegeology:block/alternator_hazard_split",
+      "uvlock": true,
+      "y": 270
+    },
+    "alternator=hazard,facing=west,mirrored=true": {
+      "model": "immersivegeology:block/alternator_hazard_mirrored_split",
+      "uvlock": true,
+      "y": 270
+    }
+  }
+}

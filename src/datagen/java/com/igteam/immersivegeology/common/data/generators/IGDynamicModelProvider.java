@@ -90,6 +90,19 @@ public class IGDynamicModelProvider extends ModelProvider<SimpleModelBuilder>
 				.flipV(true)
 				.end();
 
+
+		getBuilder(SteamTurbineRenderer.ROTOR_NAME)
+				.customLoader(ObjModelBuilder::begin)
+				.modelLocation(rl("models/block/multiblock/obj/steam_turbine/steam_turbine_rotor.obj"))
+				.flipV(true)
+				.end();
+
+		getBuilder(AlternatorRenderer.WHEEL_NAME)
+				.customLoader(ObjModelBuilder::begin)
+				.modelLocation(rl("models/block/multiblock/obj/alternator/alternator_wheel.obj"))
+				.flipV(true)
+				.end();
+
 		for(Entry<Block, ModelFile> multiblock : multiblocks.unsplitModels.entrySet())
 			withExistingParent(BuiltInRegistries.BLOCK.getKey(multiblock.getKey()).getPath(), multiblock.getValue().getLocation());
 
