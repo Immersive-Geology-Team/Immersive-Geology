@@ -3,11 +3,11 @@
   "energy": 38400,
   "fluidResult": {
     "amount": 120,
-    "fluid": "immersivegeology:fluid_hydrochloricacid"
+    "fluid": "immersivegeology:fluid_hydrochloric_acid"
   },
   "input": {
     "amount": 144,
-    "tag": "forge:clean_hydrochloricacid_lead"
+    "tag": "forge:clean_hydrochloric_acid_lead"
   },
   "result": {
     "item": "immersivegeology:crystal_lead"

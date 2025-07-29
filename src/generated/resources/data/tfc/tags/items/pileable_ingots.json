@@ -10,17 +10,17 @@
     "immersivegeology:ingot_osmium",
     "immersivegeology:ingot_platinum",
     "immersivegeology:ingot_hastelloy",
-    "immersivegeology:ingot_highspeedsteel",
-    "immersivegeology:ingot_stainlesssteel",
+    "immersivegeology:ingot_high_speed_steel",
+    "immersivegeology:ingot_stainless_steel",
     "immersivegeology:ingot_thorium",
     "immersivegeology:ingot_titanium",
     "immersivegeology:ingot_tungsten",
     "immersivegeology:ingot_unobtanium",
-    "immersivegeology:ingot_refineduranium",
+    "immersivegeology:ingot_refined_uranium",
     "immersivegeology:ingot_vanadium",
     "immersivegeology:ingot_zinc",
     "immersivegeology:ingot_zirconium",
-    "immersivegeology:ingot_tungstencarbide",
+    "immersivegeology:ingot_tungsten_carbide",
     "immersivegeology:ingot_lignite"
   ]
 }

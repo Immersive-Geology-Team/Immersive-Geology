@@ -3,19 +3,19 @@
   "energy": 51200,
   "fluidInputA": {
     "amount": 144,
-    "tag": "forge:hydrochloricacid"
+    "tag": "forge:hydrochloric_acid"
   },
   "fluidInputB": {
     "amount": 144,
-    "tag": "forge:cloudy_chemicalwaste_bauxite"
+    "tag": "forge:cloudy_chemical_waste_bauxite"
   },
   "fluidInputC": {
     "amount": 144,
-    "tag": "forge:sulfuricacid"
+    "tag": "forge:sulfuric_acid"
   },
   "fluidResult": {
     "amount": 250,
-    "fluid": "immersivegeology:fluid_chemicalwaste"
+    "fluid": "immersivegeology:fluid_chemical_waste"
   },
   "itemInput": {
     "tag": "forge:compound_dust/calcium"

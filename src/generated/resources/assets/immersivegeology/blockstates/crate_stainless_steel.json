@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "immersivegeology:block/crate/crate_stainless_steel"
+    }
+  }
+}

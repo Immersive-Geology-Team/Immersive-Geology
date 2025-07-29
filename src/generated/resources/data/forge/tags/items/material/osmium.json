@@ -7,8 +7,6 @@
     "immersivegeology:grit_osmium",
     "immersivegeology:plate_osmium",
     "immersivegeology:nugget_osmium",
-    "immersivegeology:compound_dust_osmium",
-    "immersivegeology:crushed_ore_osmium",
-    "immersivegeology:dirty_crushed_ore_osmium"
+    "immersivegeology:compound_dust_osmium"
   ]
 }

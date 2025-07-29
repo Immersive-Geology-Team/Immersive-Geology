@@ -7,7 +7,7 @@
   },
   "fluidResult": {
     "amount": 60,
-    "fluid": "immersivegeology:fluid_ammoniasolution"
+    "fluid": "immersivegeology:fluid_ammonia_solution"
   },
   "itemInput": {
     "base_ingredient": {

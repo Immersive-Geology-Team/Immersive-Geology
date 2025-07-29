@@ -3,11 +3,11 @@
   "energy": 51200,
   "fluidInputA": {
     "amount": 750,
-    "tag": "forge:ammoniasolution"
+    "tag": "forge:ammonia_solution"
   },
   "fluidResult": {
     "amount": 648,
-    "fluid": "immersivegeology:cloudy_slurry_ammoniasolution_molybdenite"
+    "fluid": "immersivegeology:cloudy_slurry_ammonia_solution_molybdenite"
   },
   "itemInput": {
     "item": "immersivegeology:powdered_slag_molybdenite"

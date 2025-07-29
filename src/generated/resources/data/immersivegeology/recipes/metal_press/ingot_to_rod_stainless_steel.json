@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:metal_press",
+  "energy": 2400,
+  "input": {
+    "tag": "forge:ingots/stainless_steel"
+  },
+  "mold": "immersiveengineering:mold_rod",
+  "result": {
+    "base_ingredient": {
+      "tag": "forge:rods/stainless_steel"
+    },
+    "count": 2
+  }
+}

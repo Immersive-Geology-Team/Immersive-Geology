@@ -7,6 +7,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import net.minecraft.tags.BiomeTags;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -20,7 +21,7 @@ public class MaterialZircon extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         // TODO Remove fully probably
-        CONFIG = new MineralConfig(0,0,0,0,0,0, 0.5,true,Optional.empty(), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(30, 50, 1, -64, 200, 1000, 0.7,false, Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.DEFAULT);
     }
 
     @Override
@@ -37,5 +38,11 @@ public class MaterialZircon extends MaterialMineral {
     public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
     {
         return new LinkedHashSet<>(List.of(MetalEnum.Zirconium));
+    }
+
+    @Override
+    public float getNoiseProbability()
+    {
+        return 0.19122314f;
     }
 }

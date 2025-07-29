@@ -13,7 +13,7 @@
     "immersivegeology:fluid_platinum",
     "immersivegeology:fluid_hastelloy",
     "immersivegeology:fluid_steel",
-    "immersivegeology:fluid_stainlesssteel",
+    "immersivegeology:fluid_stainless_steel",
     "immersivegeology:fluid_sodium",
     "immersivegeology:fluid_thorium",
     "immersivegeology:fluid_titanium",
@@ -23,7 +23,7 @@
     "immersivegeology:fluid_vanadium",
     "immersivegeology:fluid_zinc",
     "immersivegeology:fluid_zirconium",
-    "immersivegeology:fluid_tungstencarbide",
-    "immersivegeology:fluid_moltenmantle"
+    "immersivegeology:fluid_tungsten_carbide",
+    "immersivegeology:fluid_molten_mantle"
   ]
 }

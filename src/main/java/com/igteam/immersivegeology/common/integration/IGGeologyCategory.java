@@ -39,17 +39,17 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.text.DecimalFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class IGGeologyCategory extends IGRecipeCategory<IGGeoRecipe>
 {
 	public IGGeologyCategory(IGuiHelper helper)
 	{
 		super(helper, JEIRecipeTypes.GEOHINT, "block.immersivegeology.geohint");
-		ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/temp_sluice_jei.png");
-		IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 128, 128).setTextureSize(128,128).build();
+		ResourceLocation background = new ResourceLocation("minecraft", "textures/gui/light_dirt_background.png");
+		IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 180, 192).setTextureSize(16,16).build();
 		setBackground(back);
 		setIcon(new ItemStack(MineralEnum.Unobtania.getOreBlock(StoneEnum.MCStone, OreRichness.NORMAL).asIGItem()));
 	}
@@ -76,59 +76,141 @@ public class IGGeologyCategory extends IGRecipeCategory<IGGeoRecipe>
 			}
 		}
 
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 16, 18)
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 4, 18)
 				.addItemStacks(triggerInputs)
 				.setBackground(JEIHelper.slotDrawable, -1,-1);
 	}
 
+	int tick = 0;
 
 	@Override
-	public void draw(IGGeoRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY)
-	{
+	public void draw(IGGeoRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
 		super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
-		String t = recipe.material.getName();
-		t = t.substring(0,1).toUpperCase() + t.substring(1);
-		guiGraphics.drawString(Minecraft.getInstance().font, t, 4,4,0xffffffff);
+		tick++;
 		GeologyMaterial material = recipe.material;
-		int type = material instanceof MaterialMineral? 0 : 1;
-		MaterialInterface<?> materialInterface = type == 1 ? MetalEnum.valueOf(t) : MineralEnum.valueOf(t);
+		String materialName = formatMaterialName(material.getName());
+		OreConfig config = getOreConfig(material, materialName);
 
-		OreConfig config = IGServerConfig.ORES.ores.get(materialInterface.getConfig());
-		int i = 0;
-		guiGraphics.drawString(Minecraft.getInstance().font, "Found in:", 4, 48, 0xffffffff);
-		i++;
+		drawMaterialName(guiGraphics, materialName);
+		drawOreInformation(guiGraphics, config, material);
+		drawFoundInLocations(guiGraphics, config, material);
+		drawManualReference(guiGraphics);
+	}
 
-		if(material.acceptableStoneType(StoneEnum.MCStone))
-		{
-			guiGraphics.drawString(Minecraft.getInstance().font, "Overworld", 4, 48+(i*12), 0xffffffff);
-			i++;
+	private String formatMaterialName(String name) {
+		return name.substring(0, 1).toUpperCase() + name.substring(1);
+	}
+
+	private OreConfig getOreConfig(GeologyMaterial material, String materialName) {
+		boolean isMineral = material instanceof MaterialMineral;
+		MaterialInterface<?> materialInterface = isMineral
+				? MineralEnum.valueOf(materialName)
+				: MetalEnum.valueOf(materialName);
+
+		return IGServerConfig.ORES.ores.get(materialInterface.getConfig());
+	}
+
+	private void drawMaterialName(GuiGraphics guiGraphics, String materialName) {
+		guiGraphics.drawString(Minecraft.getInstance().font, materialName, 4, 4, 0xffffffff);
+	}
+
+	private void drawOreInformation(GuiGraphics guiGraphics, OreConfig config, GeologyMaterial material) {
+		final int INFO_X = 4;
+		final int INFO_Y_BASE = 60;
+		final int LINE_HEIGHT = 12;
+		final int TEXT_COLOR = 0xffffffff;
+
+		var font = Minecraft.getInstance().font;
+		int currentY = INFO_Y_BASE;
+
+		double noise_probability = material.getNoiseProbability();
+		double chunk_probability = (double) config.generationChance.get()/2_000_000;
+		double finalProb = noise_probability*chunk_probability;
+		DecimalFormat format = new DecimalFormat("0.####");
+
+		String[] infoLines = {
+				"Enabled: " + config.canSpawn.get(),
+				"Y Range: " + config.minY.get() + " ~ " + config.maxY.get(),
+				"Temp Range: " + config.min_temp.get() + " ~ " + config.max_temp.get(),
+				"Downfall Range: " + config.min_downfall.get() + " ~ " + config.max_downfall.get(),
+				"Chunk Spawn probability: " + format.format(finalProb * 100) + "%"
+		};
+
+		for (String line : infoLines) {
+			currentY += LINE_HEIGHT;
+			guiGraphics.drawString(font, line, INFO_X, currentY, TEXT_COLOR);
+		}
+	}
+
+	private void drawFoundInLocations(GuiGraphics guiGraphics, OreConfig config, GeologyMaterial material) {
+		final int LOCATION_X = 4;
+		final int LOCATION_Y_BASE = 48;
+		final int LINE_HEIGHT = 12;
+		final int TEXT_COLOR = 0xffffffff;
+
+		var font = Minecraft.getInstance().font;
+
+		guiGraphics.drawString(font, "Found in:", LOCATION_X, LOCATION_Y_BASE, TEXT_COLOR);
+
+		// Collect available dimensions
+		String[] availableDimensions = getAvailableDimensions(config, material);
+
+		// Only show a dimension if there are any available
+		if (availableDimensions.length > 0) {
+			int dimensionIndex = (tick / 60) % availableDimensions.length; // Change every second (20 ticks)
+			if(dimensionIndex == 0 && tick > 256) tick = 0;
+			int yPos = LOCATION_Y_BASE + LINE_HEIGHT;
+			guiGraphics.drawString(font, availableDimensions[dimensionIndex], LOCATION_X, yPos, TEXT_COLOR);
+		}
+	}
+
+	private final Map<String, String> dimensionNameCache = new HashMap<>();
+
+	private String[] getAvailableDimensions(OreConfig config, GeologyMaterial material) {
+		List<String> dimensions = new ArrayList<>();
+		List<? extends String> dimension_id = config.dimension_whitelist.get();
+
+		for (String id : dimension_id) {
+			dimensions.add(formatDimensionID(id));
 		}
 
-		if(material.acceptableStoneType(StoneEnum.MCNetherrack))
-		{
-			guiGraphics.drawString(Minecraft.getInstance().font, "Nether", 4, 48+(i*12), 0xffffffff);
-			i++;
-		}
+		return dimensions.toArray(new String[0]);
+	}
 
-		if(material.acceptableStoneType(StoneEnum.MCEndStone))
-		{
-			guiGraphics.drawString(Minecraft.getInstance().font, "The End", 4, 48+(i*12), 0xffffffff);
-			i++;
-		}
+	private String formatDimensionID(String dimensionId) {
+		// Check cache first
+		return dimensionNameCache.computeIfAbsent(dimensionId, this::computeDimensionName);
+	}
+
+	private String computeDimensionName(String dimensionId) {
+		String name = dimensionId.contains(":") ? dimensionId.substring(dimensionId.indexOf(":") + 1) : dimensionId;
+		return Arrays.stream(name.split("_"))
+				.map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
+				.collect(Collectors.joining(" "));
+	}
+
+	private void drawManualReference(GuiGraphics guiGraphics) {
+		final float SCALE = 0.75f;
+		final int TEXT_COLOR = 0xffffffff;
+
+		var font = Minecraft.getInstance().font;
 
 		guiGraphics.pose().pushPose();
-		guiGraphics.pose().translate(4,52+(i*12),0);
+		guiGraphics.pose().translate(32, 18, 0);
 
-			guiGraphics.pose().pushPose();
-				guiGraphics.pose().scale(0.75f,0.75f,0.75f);
-				guiGraphics.drawString(font, Component.literal("See more in the Geology"), 0, 0, 0xffffffff);
-			guiGraphics.pose().popPose();
+		// First line
+		guiGraphics.pose().pushPose();
+		guiGraphics.pose().scale(SCALE, SCALE, SCALE);
+		guiGraphics.drawString(font, Component.literal("See more in the Geology"), 0, 0, TEXT_COLOR);
+		guiGraphics.pose().popPose();
 
-			guiGraphics.pose().translate(0,8,0);
-			guiGraphics.pose().pushPose();
-				guiGraphics.pose().scale(0.75f,0.75f,0.75f);
-				guiGraphics.drawString(font, Component.literal("Section of the IE Manual"), 0, 0, 0xffffffff);
-			guiGraphics.pose().popPose();
+		// Second line
+		guiGraphics.pose().translate(0, 8, 0);
+		guiGraphics.pose().pushPose();
+		guiGraphics.pose().scale(SCALE, SCALE, SCALE);
+		guiGraphics.drawString(font, Component.literal("Section of the IE Manual"), 0, 0, TEXT_COLOR);
+		guiGraphics.pose().popPose();
+
 		guiGraphics.pose().popPose();
 	}
 }

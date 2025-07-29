@@ -103,4 +103,10 @@ public class MaterialGalena extends MaterialSulphideMineral
     {
         return 0.49456787f;
     }
+
+    @Override
+    public List<String> getAcceptableDimensions()
+    {
+        return List.of("minecraft:overworld", "minecraft:the_nether");
+    }
 }

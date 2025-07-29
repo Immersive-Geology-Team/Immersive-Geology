@@ -7,11 +7,11 @@
   },
   "fluidInputB": {
     "amount": 125,
-    "tag": "forge:sulfuricacid"
+    "tag": "forge:sulfuric_acid"
   },
   "fluidResult": {
     "amount": 125,
-    "fluid": "immersivegeology:fluid_nitricacid"
+    "fluid": "immersivegeology:fluid_nitric_acid"
   },
   "itemInput": {
     "base_ingredient": [],

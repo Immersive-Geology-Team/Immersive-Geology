@@ -1,0 +1,80 @@
+{
+  "variants": {
+    "facing=east,mirrored=false,small_chemical_reactor=default": {
+      "model": "immersivegeology:block/small_chemical_reactor_default_split",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=east,mirrored=false,small_chemical_reactor=steampunk": {
+      "model": "immersivegeology:block/small_chemical_reactor_steampunk_split",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=east,mirrored=true,small_chemical_reactor=default": {
+      "model": "immersivegeology:block/small_chemical_reactor_default_mirrored_split",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=east,mirrored=true,small_chemical_reactor=steampunk": {
+      "model": "immersivegeology:block/small_chemical_reactor_steampunk_mirrored_split",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=north,mirrored=false,small_chemical_reactor=default": {
+      "model": "immersivegeology:block/small_chemical_reactor_default_split",
+      "uvlock": true
+    },
+    "facing=north,mirrored=false,small_chemical_reactor=steampunk": {
+      "model": "immersivegeology:block/small_chemical_reactor_steampunk_split",
+      "uvlock": true
+    },
+    "facing=north,mirrored=true,small_chemical_reactor=default": {
+      "model": "immersivegeology:block/small_chemical_reactor_default_mirrored_split",
+      "uvlock": true
+    },
+    "facing=north,mirrored=true,small_chemical_reactor=steampunk": {
+      "model": "immersivegeology:block/small_chemical_reactor_steampunk_mirrored_split",
+      "uvlock": true
+    },
+    "facing=south,mirrored=false,small_chemical_reactor=default": {
+      "model": "immersivegeology:block/small_chemical_reactor_default_split",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=south,mirrored=false,small_chemical_reactor=steampunk": {
+      "model": "immersivegeology:block/small_chemical_reactor_steampunk_split",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=south,mirrored=true,small_chemical_reactor=default": {
+      "model": "immersivegeology:block/small_chemical_reactor_default_mirrored_split",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=south,mirrored=true,small_chemical_reactor=steampunk": {
+      "model": "immersivegeology:block/small_chemical_reactor_steampunk_mirrored_split",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west,mirrored=false,small_chemical_reactor=default": {
+      "model": "immersivegeology:block/small_chemical_reactor_default_split",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=west,mirrored=false,small_chemical_reactor=steampunk": {
+      "model": "immersivegeology:block/small_chemical_reactor_steampunk_split",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=west,mirrored=true,small_chemical_reactor=default": {
+      "model": "immersivegeology:block/small_chemical_reactor_default_mirrored_split",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=west,mirrored=true,small_chemical_reactor=steampunk": {
+      "model": "immersivegeology:block/small_chemical_reactor_steampunk_mirrored_split",
+      "uvlock": true,
+      "y": 270
+    }
+  }
+}

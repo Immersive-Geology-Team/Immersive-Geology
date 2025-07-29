@@ -32,7 +32,7 @@ public class MaterialEvaporateMineral extends MaterialMineral
 		int minSea = 62;
 		int maxSea = 72;
 
-		CONFIG = new MineralConfig(8,50,1, minSea, maxSea,50, 0.5,true, Optional.of(Biomes.IS_SANDY), IGGenerationType.EVAPORATE);
+		CONFIG = new MineralConfig(8,50,1, minSea, maxSea,5, 0.5,true, Optional.of(Biomes.IS_SANDY), IGGenerationType.EVAPORATE);
 	}
 
 	@Override
@@ -50,8 +50,5 @@ public class MaterialEvaporateMineral extends MaterialMineral
 			ChemicalEnum.Brine.getCloudySlurryTagWith(this), 1000,  this,Items.SAND, 1,
 				ChemicalEnum.Brine.getSlurryWith(this), 976,
 				null, 0, 1200, 614400);
-
-
-
 	}
 }

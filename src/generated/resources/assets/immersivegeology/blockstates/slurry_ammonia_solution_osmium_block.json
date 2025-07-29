@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "immersivegeology:block/fluid/slurry_ammonia_solution_osmium"
+    }
+  }
+}

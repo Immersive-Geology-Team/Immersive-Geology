@@ -4,6 +4,7 @@ import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerati
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 
+import java.util.List;
 import java.util.Optional;
 
 public class MaterialNativeMetal extends MaterialMetal {
@@ -14,5 +15,11 @@ public class MaterialNativeMetal extends MaterialMetal {
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_EXTRUSIVE);
         this.CONFIG = new MaterialMineral.MineralConfig(8,50,1,-48,112,10,0.5, false, Optional.empty(), IGGenerationType.DEFAULT);
+    }
+
+    @Override
+    public List<String> getAcceptableDimensions()
+    {
+        return List.of("minecraft:overworld");
     }
 }

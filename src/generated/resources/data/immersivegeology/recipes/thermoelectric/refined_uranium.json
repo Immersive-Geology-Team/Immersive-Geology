@@ -1,0 +1,5 @@
+{
+  "type": "immersiveengineering:thermoelectric_source",
+  "singleBlock": "immersivegeology:storage_block_refined_uranium",
+  "tempKelvin": 2500
+}

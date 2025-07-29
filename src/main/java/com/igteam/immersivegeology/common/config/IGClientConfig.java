@@ -26,6 +26,8 @@ public class IGClientConfig
 	public final static BooleanValue doSpecialRenderPelletizer;
 	public final static BooleanValue doSpecialRenderChemicalReactor;
 	public final static BooleanValue doSpecialRenderRotaryKiln;
+	public final static BooleanValue doSpecialRenderSteamTurbine;
+	public final static BooleanValue doSpecialRenderAlternator;
 	public final static BooleanValue doSpecialRenderCentrifuge;
 	public final static BooleanValue doSpecialRenderBallmill;
 
@@ -47,6 +49,14 @@ public class IGClientConfig
 		doSpecialRenderPelletizer = builder
 				.comment("This controls if the animations and special client rendering applies to the Pelletizer")
 				.define("pelletizer_renderer", true);
+
+		doSpecialRenderSteamTurbine = builder
+				.comment("This controls if the animations and special client rendering applies to the Steam Turbine")
+				.define("steam_turbine_renderer", true);
+
+		doSpecialRenderAlternator = builder
+				.comment("This controls if the animations and special client rendering applies to the Alternator")
+				.define("alternator_renderer", true);
 
 		doSpecialRenderChemicalReactor = builder
 				.comment("This controls if the animations and special client rendering applies to the Chemical Reactor")

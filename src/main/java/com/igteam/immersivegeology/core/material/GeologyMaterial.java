@@ -18,6 +18,7 @@ import com.igteam.immersivegeology.core.material.configuration.ConfigurationHelp
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
+import com.igteam.immersivegeology.core.material.helper.HazardTypes;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.*;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
@@ -77,15 +78,20 @@ public abstract class GeologyMaterial implements MaterialHelper {
 
     public GeologyMaterial() {
         // As long as the class itself is named appropriately we do not need to specify a name in the class.
-        String className = this.getClass().getName().toLowerCase();
+        String className = this.getClass().getName();
         String classNameNormal = this.getClass().getName();
-        this.name = className.substring(className.lastIndexOf(".") + 1).replace("material", "");
+        this.name = className.substring(className.lastIndexOf(".") + 1).replace("Material", "").replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase();
         this.unserialized_name =  classNameNormal.substring(classNameNormal.lastIndexOf(".") + 1).replace("Material", "");
 
         this.generation_group.add(Pair.of((i) -> this, 100));
         this.colorFunction = materialColorFunction();
         initializeColorTint((p, integer) -> true); //default will be overridden later on in ClientProxy
         initializeFlags();
+    }
+
+    public Set<HazardTypes> getHazards()
+    {
+        return Set.of();
     }
 
     public BlockBehaviour.Properties getProperties(IFlagType<?> flag)
@@ -143,7 +149,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
 
     @Override
     public String getName() {
-        return name.toLowerCase();
+        return name;
     }
 
     public int getColor(IFlagType<?> p, Integer secondaryColors) {
@@ -203,13 +209,18 @@ public abstract class GeologyMaterial implements MaterialHelper {
         {
             switch(i)
             {
-                case DIRTY_CRUSHED_ORE, CLAY, POWDERED_SLAG, CRUSHED_ORE ->
+                case CLAY, POWDERED_SLAG ->
                 {
                     return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/"+i.getName());
                 }
-                case GEAR, INGOT, NUGGET, PLATE, SLAG, GRIT, POWDER, COMPOUND_DUST, TOOL_HOE ->
+                case GEAR, INGOT, NUGGET, PLATE, SLAG, COMPOUND_DUST, TOOL_HOE, CRUSHED_ORE ->
                 {
                     return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_pristine_"+getName().toLowerCase());
+                }
+                case POOR_ORE, NORMAL_ORE, RICH_ORE, GRIT, POWDER, DIRTY_CRUSHED_ORE ->
+                {
+                    String weathering = canTarnish() ? "corroded" : "pristine";
+                    return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_"+weathering+"_"+getName().toLowerCase());
                 }
                 case METAL_OXIDE ->
                 {
@@ -227,10 +238,10 @@ public abstract class GeologyMaterial implements MaterialHelper {
                 {
                     return new ResourceLocation(IGLib.MODID, "item/greyscale/crystal/"+getCrystalFamily().getName());
                 }
-                case POOR_ORE, NORMAL_ORE, RICH_ORE ->
-                {
-                    return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/"+i.getName()+"_"+getCrystalFamily().getName());
-                }
+//                case POOR_ORE, NORMAL_ORE, RICH_ORE ->
+//                {
+//                    return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/"+i.getName()+"_"+getCrystalFamily().getName());
+//                }
                 default ->
                 {
                     return new ResourceLocation(IGLib.MODID, "item/greyscale/"+i.getName());
@@ -241,6 +252,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
     }
     static Random rand = new Random(0);
     public int getPaletteVariation(ItemCategoryFlags flag){
+        rand.setSeed(IGLib.fastHash(name));
         if(flag.equals(ItemCategoryFlags.INGOT))
         {
             return Math.min(6,1+(rand.nextInt(flag.getVariations()))%flag.getVariations());
@@ -439,7 +451,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
     {
         LinkedHashSet<MaterialInterface<?>> set =  getDerivedMaterials();
         if(set.isEmpty()) {
-            IGLib.IG_LOGGER.error("Called a Primary Use (product) Source Material with no Entry [{}]", getName());
+            IGLib.IG_LOGGER.warn("Called a Primary Use (product) Source Material with no Entry [{}]", getName());
             return MetalEnum.Unobtanium;
         }
 
@@ -551,5 +563,10 @@ public abstract class GeologyMaterial implements MaterialHelper {
         if(acceptableStoneType(StoneEnum.MCNetherrack)) return new ItemStack(getOreBlock(StoneEnum.MCNetherrack, OreRichness.NORMAL).asIGItem());
         if(acceptableStoneType(StoneEnum.MCEndStone)) return new ItemStack(getOreBlock(StoneEnum.MCEndStone, OreRichness.NORMAL).asIGItem());
         return ItemStack.EMPTY;
+    }
+
+    public List<String> getAcceptableDimensions()
+    {
+        return List.of("minecraft:overworld");
     }
 }

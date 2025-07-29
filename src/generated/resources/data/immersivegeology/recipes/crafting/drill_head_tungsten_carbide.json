@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "immersivegeology:storage_block_tungsten_carbide"
+    },
+    "I": {
+      "item": "immersivegeology:ingot_tungsten_carbide"
+    }
+  },
+  "pattern": [
+    "  I",
+    "II ",
+    "BI "
+  ],
+  "result": {
+    "item": "immersivegeology:drill_head_tungsten_carbide"
+  },
+  "show_notification": true
+}

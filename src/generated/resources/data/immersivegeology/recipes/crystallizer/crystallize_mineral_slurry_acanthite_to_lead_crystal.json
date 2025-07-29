@@ -3,11 +3,11 @@
   "energy": 38400,
   "fluidResult": {
     "amount": 240,
-    "fluid": "immersivegeology:slurry_hydrochloricacid_silver"
+    "fluid": "immersivegeology:slurry_hydrochloric_acid_silver"
   },
   "input": {
     "amount": 288,
-    "tag": "forge:clean_hydrochloricacid_acanthite"
+    "tag": "forge:clean_hydrochloric_acid_acanthite"
   },
   "result": {
     "item": "immersivegeology:crystal_lead"

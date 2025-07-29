@@ -49,4 +49,10 @@ public class MaterialThorite extends MaterialMineral {
     {
         return 0.2475586f;
     }
+
+    @Override
+    public List<String> getAcceptableDimensions()
+    {
+        return List.of("minecraft:the_end");
+    }
 }

@@ -13,7 +13,6 @@ import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
-import com.igteam.immersivegeology.core.material.data.chemical.MaterialNitricAcid;
 import com.igteam.immersivegeology.core.material.data.chemical.mantle.MaterialMoltenMantle;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.data.metal.*;
@@ -28,7 +27,6 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.*;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConfig
 {

@@ -5,6 +5,16 @@
       "uvlock": true,
       "y": 90
     },
+    "facing=east,mirrored=false,steam_turbine=green": {
+      "model": "immersivegeology:block/steam_turbine_green_split",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=east,mirrored=false,steam_turbine=industrial": {
+      "model": "immersivegeology:block/steam_turbine_industrial_split",
+      "uvlock": true,
+      "y": 90
+    },
     "facing=east,mirrored=false,steam_turbine=steampunk": {
       "model": "immersivegeology:block/steam_turbine_steampunk_split",
       "uvlock": true,
@@ -12,6 +22,16 @@
     },
     "facing=east,mirrored=true,steam_turbine=default": {
       "model": "immersivegeology:block/steam_turbine_default_mirrored_split",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=east,mirrored=true,steam_turbine=green": {
+      "model": "immersivegeology:block/steam_turbine_green_mirrored_split",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=east,mirrored=true,steam_turbine=industrial": {
+      "model": "immersivegeology:block/steam_turbine_industrial_mirrored_split",
       "uvlock": true,
       "y": 90
     },
@@ -24,6 +44,14 @@
       "model": "immersivegeology:block/steam_turbine_default_split",
       "uvlock": true
     },
+    "facing=north,mirrored=false,steam_turbine=green": {
+      "model": "immersivegeology:block/steam_turbine_green_split",
+      "uvlock": true
+    },
+    "facing=north,mirrored=false,steam_turbine=industrial": {
+      "model": "immersivegeology:block/steam_turbine_industrial_split",
+      "uvlock": true
+    },
     "facing=north,mirrored=false,steam_turbine=steampunk": {
       "model": "immersivegeology:block/steam_turbine_steampunk_split",
       "uvlock": true
@@ -32,12 +60,30 @@
       "model": "immersivegeology:block/steam_turbine_default_mirrored_split",
       "uvlock": true
     },
+    "facing=north,mirrored=true,steam_turbine=green": {
+      "model": "immersivegeology:block/steam_turbine_green_mirrored_split",
+      "uvlock": true
+    },
+    "facing=north,mirrored=true,steam_turbine=industrial": {
+      "model": "immersivegeology:block/steam_turbine_industrial_mirrored_split",
+      "uvlock": true
+    },
     "facing=north,mirrored=true,steam_turbine=steampunk": {
       "model": "immersivegeology:block/steam_turbine_steampunk_mirrored_split",
       "uvlock": true
     },
     "facing=south,mirrored=false,steam_turbine=default": {
       "model": "immersivegeology:block/steam_turbine_default_split",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=south,mirrored=false,steam_turbine=green": {
+      "model": "immersivegeology:block/steam_turbine_green_split",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=south,mirrored=false,steam_turbine=industrial": {
+      "model": "immersivegeology:block/steam_turbine_industrial_split",
       "uvlock": true,
       "y": 180
     },
@@ -51,6 +97,16 @@
       "uvlock": true,
       "y": 180
     },
+    "facing=south,mirrored=true,steam_turbine=green": {
+      "model": "immersivegeology:block/steam_turbine_green_mirrored_split",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=south,mirrored=true,steam_turbine=industrial": {
+      "model": "immersivegeology:block/steam_turbine_industrial_mirrored_split",
+      "uvlock": true,
+      "y": 180
+    },
     "facing=south,mirrored=true,steam_turbine=steampunk": {
       "model": "immersivegeology:block/steam_turbine_steampunk_mirrored_split",
       "uvlock": true,
@@ -61,6 +117,16 @@
       "uvlock": true,
       "y": 270
     },
+    "facing=west,mirrored=false,steam_turbine=green": {
+      "model": "immersivegeology:block/steam_turbine_green_split",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=west,mirrored=false,steam_turbine=industrial": {
+      "model": "immersivegeology:block/steam_turbine_industrial_split",
+      "uvlock": true,
+      "y": 270
+    },
     "facing=west,mirrored=false,steam_turbine=steampunk": {
       "model": "immersivegeology:block/steam_turbine_steampunk_split",
       "uvlock": true,
@@ -68,6 +134,16 @@
     },
     "facing=west,mirrored=true,steam_turbine=default": {
       "model": "immersivegeology:block/steam_turbine_default_mirrored_split",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=west,mirrored=true,steam_turbine=green": {
+      "model": "immersivegeology:block/steam_turbine_green_mirrored_split",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=west,mirrored=true,steam_turbine=industrial": {
+      "model": "immersivegeology:block/steam_turbine_industrial_mirrored_split",
       "uvlock": true,
       "y": 270
     },

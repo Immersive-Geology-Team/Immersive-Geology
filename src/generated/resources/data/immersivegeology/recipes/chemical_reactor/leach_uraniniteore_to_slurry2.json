@@ -3,19 +3,19 @@
   "energy": 51200,
   "fluidInputA": {
     "amount": 216,
-    "tag": "forge:cloudy_phosphoricacid_uraninite"
+    "tag": "forge:cloudy_phosphoric_acid_uraninite"
   },
   "fluidInputB": {
     "amount": 250,
-    "tag": "forge:ammoniasolution"
+    "tag": "forge:ammonia_solution"
   },
   "fluidInputC": {
     "amount": 250,
-    "tag": "forge:nitricacid"
+    "tag": "forge:nitric_acid"
   },
   "fluidResult": {
     "amount": 648,
-    "fluid": "immersivegeology:cloudy_slurry_nitricacid_uraninite"
+    "fluid": "immersivegeology:cloudy_slurry_nitric_acid_uraninite"
   },
   "itemInput": {
     "base_ingredient": [],

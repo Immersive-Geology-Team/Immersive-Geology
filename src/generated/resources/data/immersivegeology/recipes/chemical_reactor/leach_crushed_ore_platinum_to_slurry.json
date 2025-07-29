@@ -3,15 +3,15 @@
   "energy": 51200,
   "fluidInputA": {
     "amount": 250,
-    "tag": "forge:hydrochloricacid"
+    "tag": "forge:hydrochloric_acid"
   },
   "fluidInputB": {
     "amount": 250,
-    "tag": "forge:nitricacid"
+    "tag": "forge:nitric_acid"
   },
   "fluidResult": {
     "amount": 432,
-    "fluid": "immersivegeology:slurry_aquaregia_platinum"
+    "fluid": "immersivegeology:slurry_aqua_regia_platinum"
   },
   "itemInput": {
     "item": "immersivegeology:crushed_ore_platinum"

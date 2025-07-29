@@ -8,6 +8,8 @@
 
 package com.igteam.immersivegeology.common.world;
 
+import com.igteam.immersivegeology.common.world.structure.HydroVent;
+import com.igteam.immersivegeology.common.world.structure.RuinedElevator;
 import com.igteam.immersivegeology.common.world.structure.RuinedFactory;
 import com.igteam.immersivegeology.common.world.structure.RuinedMiningOutpost;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -23,6 +25,8 @@ public class IGStructureTypes
 
 	public static final RegistryObject<StructureType<RuinedMiningOutpost>> RUINED_MINING_OUTPOST = STRUCTURE_TYPES.register("ruined_mining_outpost", () -> () -> RuinedMiningOutpost.CODEC);
 	public static final RegistryObject<StructureType<RuinedFactory>> RUINED_FACTORY = STRUCTURE_TYPES.register("ruined_factory", () -> () -> RuinedFactory.CODEC);
+	public static final RegistryObject<StructureType<RuinedElevator>> RUINED_ELEVATOR = STRUCTURE_TYPES.register("ruined_elevator", () -> () -> RuinedElevator.CODEC);
+	public static final RegistryObject<StructureType<HydroVent>> SO2_VENT_TYPE = STRUCTURE_TYPES.register("so2_vent", () -> () -> HydroVent.CODEC);
 
 	public static void initialize(IEventBus bus)
 	{

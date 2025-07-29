@@ -3,7 +3,7 @@
   "energy": 51200,
   "fluidInputA": {
     "amount": 250,
-    "tag": "forge:sulfuricacid"
+    "tag": "forge:sulfuric_acid"
   },
   "fluidInputB": {
     "amount": 250,
@@ -11,7 +11,7 @@
   },
   "fluidResult": {
     "amount": 216,
-    "fluid": "immersivegeology:slurry_sulfuricacid_chromium"
+    "fluid": "immersivegeology:slurry_sulfuric_acid_chromium"
   },
   "itemInput": {
     "item": "immersivegeology:compound_dust_chromium"

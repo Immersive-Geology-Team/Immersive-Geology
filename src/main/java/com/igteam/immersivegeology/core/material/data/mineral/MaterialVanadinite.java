@@ -39,7 +39,7 @@ public class MaterialVanadinite extends MaterialSulphideMineral
         addFlags(ItemCategoryFlags.PELLET);
         addFlags(ItemCategoryFlags.POWDERED_SLAG);
 
-        CONFIG = new MineralConfig(12,70,1,-32,140,350, 0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
+        CONFIG = new MineralConfig(12,70,1,-32,140,700, 0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
     }
 
     @Override
@@ -93,5 +93,11 @@ public class MaterialVanadinite extends MaterialSulphideMineral
     public float getNoiseProbability()
     {
         return 0.019104004f;
+    }
+
+    @Override
+    public List<String> getAcceptableDimensions()
+    {
+        return List.of("minecraft:overworld", "minecraft:the_nether");
     }
 }

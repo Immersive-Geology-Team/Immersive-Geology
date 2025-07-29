@@ -1,0 +1,7 @@
+{
+  "parent": "immersivegeology:block/base/block",
+  "textures": {
+    "all": "immersivegeology:block/colored/stainless_steel/engineering_block",
+    "particle": "immersivegeology:block/colored/stainless_steel/engineering_block"
+  }
+}

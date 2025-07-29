@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "immersivegeology:scaffolding_stainless_steel_wooden_top"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:scaffolding_stainless_steel_standard"
+  }
+}

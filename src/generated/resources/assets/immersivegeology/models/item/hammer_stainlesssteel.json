@@ -1,6 +1,0 @@
-{
-  "parent": "immersivegeology:item/base/ig_tool_item",
-  "textures": {
-    "layer0": "immersivegeology:item/colored/stainlesssteel/hammer"
-  }
-}

@@ -3,11 +3,11 @@
   "energy": 38400,
   "fluidResult": {
     "amount": 120,
-    "fluid": "immersivegeology:fluid_hydrofluoricacid"
+    "fluid": "immersivegeology:fluid_hydrofluoric_acid"
   },
   "input": {
     "amount": 144,
-    "tag": "forge:clean_hydrofluoricacid_neodymium"
+    "tag": "forge:clean_hydrofluoric_acid_neodymium"
   },
   "result": {
     "item": "immersivegeology:crystal_neodymium"

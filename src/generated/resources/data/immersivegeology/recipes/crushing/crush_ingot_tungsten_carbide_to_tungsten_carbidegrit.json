@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "item": "immersivegeology:ingot_tungsten_carbide"
+  },
+  "result": {
+    "item": "immersivegeology:grit_tungsten_carbide"
+  },
+  "secondaries": [],
+  "time": 200
+}

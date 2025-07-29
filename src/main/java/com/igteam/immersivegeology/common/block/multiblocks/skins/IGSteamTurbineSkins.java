@@ -17,8 +17,10 @@ import java.util.Locale;
 
 public enum IGSteamTurbineSkins implements StringRepresentable, IIGMultiSkinHelper
 {
-	DEFAULT("default", ChatFormatting.GOLD, SkinCreditType.ARTIST, "unschtalch"),
-	STEAMPUNK("steampunk", ChatFormatting.DARK_RED, SkinCreditType.DEVELOPER, "muddykat");
+	DEFAULT("default", ChatFormatting.GOLD, SkinCreditType.PETER, "peter"),
+	INDUSTRIAL("industrial", ChatFormatting.GRAY, SkinCreditType.PETER, "peter"),
+	STEAMPUNK("steampunk", ChatFormatting.DARK_RED, SkinCreditType.CREATOR, "wanderingbeekeeper"),
+	GREEN("green", ChatFormatting.DARK_GREEN, SkinCreditType.PETER, "peter");
 
 	private final String skin;
 	private final SkinCreditType type;

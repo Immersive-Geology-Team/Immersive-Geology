@@ -66,6 +66,8 @@ public class ClientModBusEventHandlers {
 		BallmillRenderer.AXLE = new IGDynamicModel(BallmillRenderer.AXLE_NAME);
 		PelletizerRenderer.DISH = new IGDynamicModel(PelletizerRenderer.DISH_NAME);
 		RotaryKilnRenderer.TUBE = new IGDynamicModel(RotaryKilnRenderer.TUBE_NAME);
+		SteamTurbineRenderer.ROTOR = new IGDynamicModel(SteamTurbineRenderer.ROTOR_NAME);
+		AlternatorRenderer.WHEEL = new IGDynamicModel(AlternatorRenderer.WHEEL_NAME);
 		CentrifugeRenderer.DRUM = new IGDynamicModel(CentrifugeRenderer.DRUM_NAME);
 	}
 
@@ -90,6 +92,8 @@ public class ClientModBusEventHandlers {
 		registerBERenderNoContext(event, IGMultiblockProvider.GRAVITY_SEPARATOR.masterBE(), SeparatorRenderer::new);
 		registerBERenderNoContext(event, IGMultiblockProvider.CHEMICAL_REACTOR.masterBE(), ChemicalReactorRenderer::new);
 		registerBERenderNoContext(event, IGMultiblockProvider.CENTRIFUGE.masterBE(), CentrifugeRenderer::new);
+		registerBERenderNoContext(event, IGMultiblockProvider.STEAM_TURBINE.masterBE(), SteamTurbineRenderer::new);
+		registerBERenderNoContext(event, IGMultiblockProvider.ALTERNATOR.masterBE(), AlternatorRenderer::new);
 	}
 
 	private static <T extends BlockEntity>

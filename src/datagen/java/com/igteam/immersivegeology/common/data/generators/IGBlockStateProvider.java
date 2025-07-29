@@ -111,6 +111,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
                     case SCAFFOLDING -> registerScaffolding(igBlock);
                     case FENCE -> registerFenceBlock(igBlock);
                     case ENERGY_PIPE -> registerCable(block);
+                    case HYDROVENT -> registerVentBlock(igBlock, flag);
                     case DEFAULT_BLOCK, GEODE_BLOCK, DUST_BLOCK, SHEETMETAL_BLOCK, STORAGE_BLOCK, EVAPORATE, ENGINEERING_BLOCK, ADVANCED_ENGINEERING_BLOCK, CRATE -> registerGenericBlock(igBlock, flag);
                     case EVAPORATE_CRYSTAL -> registerEvaporateCrystal(igBlock, flag);
                     case ORE_BLOCK -> registerOre(igBlock);
@@ -136,6 +137,8 @@ public class IGBlockStateProvider extends BlockStateProvider {
         generateMultiskinMultiblock(IGMultiblockProvider.PELLETIZER.block().get(), "pelletizer", false, false, true, true);
         generateMultiskinMultiblock(IGMultiblockProvider.GEOTHERMAL_EXCHANGER.block().get(), "geothermal_exchanger", false, false, true, true);
         generateMultiskinMultiblock(IGMultiblockProvider.STEAM_TURBINE.block().get(), "steam_turbine", false, false, true, true);
+        generateMultiskinMultiblock(IGMultiblockProvider.SMALL_CHEMICAL_REACTOR.block().get(), "small_chemical_reactor", false, false, true, true);
+        generateMultiskinMultiblock(IGMultiblockProvider.ALTERNATOR.block().get(), "alternator", false, false, true, true);
 
         genericmultiblock("foundry");
         genericmultiblockMirror("coredrill");
@@ -437,14 +440,18 @@ public class IGBlockStateProvider extends BlockStateProvider {
     }
 
     private void registerGenericBlock(IGBlockType block, IFlagType<?> pattern){
-        //IGGenericBlock block = (IGGenericBlock) type;
-        //logger.info("Attempting Check for Texture Location: " + "["+ pattern.getName() + " | " + type.getMaterial(MaterialTexture.base).getName() + "] " + block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).getPath().toLowerCase());
         getVariantBuilder((Block)block).forAllStates(state -> ConfiguredModel.builder().modelFile(models().withExistingParent(
                                 new ResourceLocation(IGLib.MODID, "block/" + pattern.toString().toLowerCase() + "/" + pattern.getRegistryKey(block.getMaterial(MaterialTexture.base))).getPath(),
                                 new ResourceLocation(IGLib.MODID, "block/base/block"))
                         .texture("all", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()))
                         .texture("particle", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag())))
                 .build());
+    }
+
+    private void registerVentBlock(IGBlockType block, IFlagType<?> pattern){
+        getVariantBuilder((Block)block).forAllStates(state -> ConfiguredModel.builder().modelFile(models().withExistingParent(
+                                new ResourceLocation(IGLib.MODID, "block/" + pattern.toString().toLowerCase() + "/" + pattern.getRegistryKey(block.getMaterial(MaterialTexture.base))).getPath(),
+                                new ResourceLocation(IGLib.MODID, "block/static_block/hydrothermal_vent"))).build());
     }
 
     private void registerEvaporateCrystal(IGBlockType type, IFlagType<?> pattern){
@@ -476,7 +483,6 @@ public class IGBlockStateProvider extends BlockStateProvider {
             new ResourceLocation(IGLib.MODID, "block/base/"+parent_name+ (isSedimentary ? "_sedimentary" : "") + "/" +parent_name + "_" + direction));
         return model;
     }
-
 
     private void registerOre(IGBlockType type)
     {

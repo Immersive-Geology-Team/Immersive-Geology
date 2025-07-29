@@ -110,6 +110,7 @@ public class IGDefaultPlacement extends PlacementFilter
 		{
 			return true;
 		}
+
 		Holder<Biome> biome = level.getBiome(worldPos);
 		boolean isOverworld = biome.containsTag(BiomeTags.IS_OVERWORLD);
 		boolean isEnd = biome.containsTag(BiomeTags.IS_END);

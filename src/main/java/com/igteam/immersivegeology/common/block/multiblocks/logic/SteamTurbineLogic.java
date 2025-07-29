@@ -25,7 +25,8 @@ import blusunrize.immersiveengineering.common.util.CachedRecipe;
 import blusunrize.immersiveengineering.common.util.EnergyHelper;
 import blusunrize.immersiveengineering.common.util.Utils;
 import com.google.common.collect.ImmutableList;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.CrystallizerLogic.State;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.SteamTurbineLogic.State;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.ISkinnableMultiblockLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.TurbineFuel;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.SteamTurbineShape;
 import net.minecraft.ChatFormatting;
@@ -56,7 +57,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class SteamTurbineLogic implements IMultiblockLogic<SteamTurbineLogic.State>, MBOverlayText<SteamTurbineLogic.State>, IServerTickableComponent<SteamTurbineLogic.State>, IClientTickableComponent<SteamTurbineLogic.State> {
+public class SteamTurbineLogic implements ISkinnableMultiblockLogic<State>, MBOverlayText<SteamTurbineLogic.State>, IServerTickableComponent<SteamTurbineLogic.State>, IClientTickableComponent<SteamTurbineLogic.State> {
     public static final BlockPos REDSTONE_IN = new BlockPos(0,1,5);
     private static final List<BlockPos> ENERGY_OUTPUTS = IntStream.range(2, 5).mapToObj((i) -> {
         return new BlockPos(13, 3, i);
@@ -70,7 +71,9 @@ public class SteamTurbineLogic implements IMultiblockLogic<SteamTurbineLogic.Sta
 
     @Override
     public void tickClient(IMultiblockContext<State> context) {
-
+        SteamTurbineLogic.State state = context.getState();
+        state.rotation += 1f;
+        state.rotation = state.rotation % 360;
     }
 
     @Override
@@ -182,6 +185,7 @@ public class SteamTurbineLogic implements IMultiblockLogic<SteamTurbineLogic.Sta
         public final FluidTank water_tank = new FluidTank(WATER_CAPACITY);
         private boolean active = false;
         private int consumeTick = 0;
+        private float rotation = 0;
         private final BiFunction<Level, Fluid, TurbineFuel> recipeGetter = CachedRecipe.cached(TurbineFuel::getRecipeFor);
         private final List<CapabilityReference<IEnergyStorage>> energyOutputs;
         private final StoredCapability<IFluidHandler> steamFluidCap;
@@ -217,6 +221,7 @@ public class SteamTurbineLogic implements IMultiblockLogic<SteamTurbineLogic.Sta
             this.water_tank.readFromNBT(nbt.getCompound("water_tank"));
             this.active = nbt.getBoolean("active");
             this.consumeTick = nbt.getInt("consumeTick");
+            this.rotation = nbt.getFloat("rotation");
         }
 
         @Override
@@ -225,6 +230,7 @@ public class SteamTurbineLogic implements IMultiblockLogic<SteamTurbineLogic.Sta
             nbt.put("water_tank", this.water_tank.writeToNBT(new CompoundTag()));
             nbt.putBoolean("active", this.active);
             nbt.putInt("consumeTick", this.consumeTick);
+            nbt.putFloat("rotation", this.rotation);
         }
 
         public void writeSyncNBT(CompoundTag nbt) {
@@ -236,6 +242,11 @@ public class SteamTurbineLogic implements IMultiblockLogic<SteamTurbineLogic.Sta
             readSaveNBT(nbt);
             this.active = nbt.getBoolean("active");
         }
-    }
+
+		public float getRotation()
+		{
+            return this.rotation;
+		}
+	}
 
 }

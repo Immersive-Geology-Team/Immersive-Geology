@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 204800,
+  "input": {
+    "tag": "forge:grits/stainless_steel"
+  },
+  "results": [
+    {
+      "item": "immersivegeology:ingot_stainless_steel"
+    }
+  ],
+  "time": 400
+}

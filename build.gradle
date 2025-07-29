@@ -124,7 +124,7 @@ tasks.withType(Jar).configureEach {
 // ----------------------------------------------------------------------------
 
 minecraft {
-    mappings channel: 'parchment', version: "${version_parchment}-${version_minecraft}"
+    mappings channel: 'parchment', version: "1.19.3-2023.06.25-1.20.1"
     accessTransformers {
         file 'src/main/resources/META-INF/accesstransformer.cfg'
     }
@@ -204,7 +204,7 @@ dependencies {
     implementation       fg.deobf("curse.maven:patchouli-306770:6164575")
     implementation       fg.deobf("curse.maven:engineered-schematics-1207780:6293337")
 
-    implementation fg.deobf("curse.maven:chisels-bits-231095:5203366")
+    //implementation fg.deobf("curse.maven:chisels-bits-231095:5203366")
 
     implementation fg.deobf("curse.maven:observable-509575:5643037")
     implementation fg.deobf("curse.maven:architectury-api-419699:5137938")

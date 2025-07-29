@@ -3,15 +3,15 @@
   "energy": 51200,
   "fluidInputA": {
     "amount": 144,
-    "tag": "forge:clean_hydrochloricacid_tungsten"
+    "tag": "forge:clean_hydrochloric_acid_tungsten"
   },
   "fluidInputB": {
     "amount": 144,
-    "tag": "forge:ammoniasolution"
+    "tag": "forge:ammonia_solution"
   },
   "fluidResult": {
     "amount": 120,
-    "fluid": "immersivegeology:fluid_chemicalwaste"
+    "fluid": "immersivegeology:fluid_chemical_waste"
   },
   "itemInput": {
     "base_ingredient": [],

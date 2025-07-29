@@ -15,10 +15,10 @@
     "immersivegeology:gear_osmium",
     "immersivegeology:gear_platinum",
     "immersivegeology:gear_hastelloy",
-    "immersivegeology:gear_highspeedsteel",
+    "immersivegeology:gear_high_speed_steel",
     "immersivegeology:gear_silver",
     "immersivegeology:gear_steel",
-    "immersivegeology:gear_stainlesssteel",
+    "immersivegeology:gear_stainless_steel",
     "immersivegeology:gear_tin",
     "immersivegeology:gear_titanium",
     "immersivegeology:gear_tungsten",
@@ -26,6 +26,6 @@
     "immersivegeology:gear_vanadium",
     "immersivegeology:gear_zinc",
     "immersivegeology:gear_zirconium",
-    "immersivegeology:gear_tungstencarbide"
+    "immersivegeology:gear_tungsten_carbide"
   ]
 }

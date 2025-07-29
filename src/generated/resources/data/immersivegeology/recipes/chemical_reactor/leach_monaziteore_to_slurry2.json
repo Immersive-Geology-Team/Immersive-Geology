@@ -3,11 +3,11 @@
   "energy": 51200,
   "fluidInputA": {
     "amount": 250,
-    "tag": "forge:sodiumhydroxide"
+    "tag": "forge:sodium_hydroxide"
   },
   "fluidResult": {
     "amount": 216,
-    "fluid": "immersivegeology:slurry_chemicalwaste_monazite"
+    "fluid": "immersivegeology:slurry_chemical_waste_monazite"
   },
   "itemInput": {
     "item": "immersivegeology:sediment_monazite"

@@ -21,6 +21,7 @@ public enum ChemicalEnum implements MaterialInterface<MaterialChemical>
 {
     SulfuricAcid(new MaterialSulfuricAcid()),
     SulfurDioxde(new MaterialSulfurDioxide()),
+    HydrogenSulfide(new MaterialHydrogenSulfide()),
     Brine(new MaterialBrine()),
     BindingAgent(new MaterialBindingAgent()),
     HydrochloricAcid(new MaterialHydrochloricAcid()),
@@ -31,6 +32,7 @@ public enum ChemicalEnum implements MaterialInterface<MaterialChemical>
     Ammonia(new MaterialAmmoniaSolution()),
     ChemicalWaste(new MaterialChemicalWaste()),
     PhosphoricAcid(new MaterialPhosphoricAcid());
+
     private final MaterialChemical material;
     ChemicalEnum(MaterialChemical m){
         this.material = m;

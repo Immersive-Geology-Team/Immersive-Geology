@@ -1,9 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/slab/slab",
-  "textures": {
-    "all": "immersivegeology:block/colored/stainlesssteel/storage_block",
-    "cover": "immersivegeology:block/colored/stainlesssteel/storage_block",
-    "particle": "immersivegeology:block/colored/stainlesssteel/storage_block",
-    "side": "immersivegeology:block/colored/stainlesssteel/storage_block"
-  }
-}

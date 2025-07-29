@@ -3,11 +3,11 @@
   "energy": 38400,
   "fluidResult": {
     "amount": 120,
-    "fluid": "immersivegeology:fluid_aquaregia"
+    "fluid": "immersivegeology:fluid_aqua_regia"
   },
   "input": {
     "amount": 144,
-    "tag": "forge:clean_aquaregia_gold"
+    "tag": "forge:clean_aqua_regia_gold"
   },
   "result": {
     "item": "immersivegeology:crystal_gold"

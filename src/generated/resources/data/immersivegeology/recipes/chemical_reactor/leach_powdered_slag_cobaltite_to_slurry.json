@@ -3,11 +3,11 @@
   "energy": 51200,
   "fluidInputA": {
     "amount": 750,
-    "tag": "forge:nitricacid"
+    "tag": "forge:nitric_acid"
   },
   "fluidResult": {
     "amount": 648,
-    "fluid": "immersivegeology:slurry_nitricacid_cobalt"
+    "fluid": "immersivegeology:slurry_nitric_acid_cobalt"
   },
   "itemInput": {
     "base_ingredient": {

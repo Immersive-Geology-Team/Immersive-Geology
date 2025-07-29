@@ -97,4 +97,10 @@ public class MaterialAnatase extends MaterialMineral {
     {
         return 0.07171631f;
     }
+
+    @Override
+    public List<String> getAcceptableDimensions()
+    {
+        return List.of("minecraft:the_end");
+    }
 }

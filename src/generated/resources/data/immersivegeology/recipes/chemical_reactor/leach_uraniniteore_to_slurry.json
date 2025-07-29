@@ -3,11 +3,11 @@
   "energy": 51200,
   "fluidInputA": {
     "amount": 250,
-    "tag": "forge:phosphoricacid"
+    "tag": "forge:phosphoric_acid"
   },
   "fluidInputB": {
     "amount": 250,
-    "tag": "forge:sodiumhydroxide"
+    "tag": "forge:sodium_hydroxide"
   },
   "fluidInputC": {
     "amount": 250,
@@ -15,7 +15,7 @@
   },
   "fluidResult": {
     "amount": 648,
-    "fluid": "immersivegeology:cloudy_slurry_phosphoricacid_uraninite"
+    "fluid": "immersivegeology:cloudy_slurry_phosphoric_acid_uraninite"
   },
   "itemInput": {
     "item": "immersivegeology:powder_uraninite"

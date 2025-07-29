@@ -1,11 +1,3 @@
-/*
- * Muddykat
- * Copyright (c) 2025
- *
- * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
- * Details can be found in the license file in the root folder of this project
- */
-
 package com.igteam.immersivegeology.common.block.entity.cable;
 
 
@@ -70,7 +62,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 
 @EventBusSubscriber(
-		modid = "immersiveengineering",
+		modid = "immersivegeology",
 		bus = Bus.FORGE
 )
 public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe, IEBlockInterfaces.IColouredBE, IEBlockInterfaces.IPlayerInteraction, IEBlockInterfaces.IHammerInteraction, IEBlockInterfaces.IPlacementInteraction, IEBlockInterfaces.ISelectionBounds, IEBlockInterfaces.ICollisionBounds, IEBlockInterfaces.IAdditionalDrops {
@@ -218,7 +210,6 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 					this.level.updateNeighborsAt(this.worldPosition, this.getBlockState().getBlock());
 					this.markContainingBlockForUpdate((BlockState)null);
 				}
-
 			});
 		}
 
@@ -229,7 +220,6 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 		if (this.level != null && !this.level.isClientSide) {
 			indirectConnections.clearDimension(this.level);
 		}
-
 	}
 
 	public void onChunkUnloaded() {
@@ -358,7 +348,6 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 				indirectConnections.clearDimension(world);
 			}
 		}
-
 	}
 
 	public boolean updateConnectionByte(Direction dir) {
@@ -790,7 +779,7 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 		private int getTransferableAmount(BlockEntity target) {
 			Block block = target.getBlockState().getBlock();
 			if(block instanceof IGEnergyPipe cable) return pipe.getTransferableAmount(cable);
-			return 4096;
+			return 32768;
 		}
 
 		@Override

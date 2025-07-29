@@ -25,6 +25,8 @@ import com.igteam.immersivegeology.common.block.entity.cable.IGEnergyPipe;
 import com.igteam.immersivegeology.common.block.entity.cable.IGEnergyPipeEntity;
 import com.igteam.immersivegeology.common.block.entity.crate.IGCrateEntity;
 import com.igteam.immersivegeology.common.block.entity.crate.IGCrateEntityType;
+import com.igteam.immersivegeology.common.block.entity.vent.IGHydroVent;
+import com.igteam.immersivegeology.common.block.entity.vent.IGHydroVentEntity;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.block.multiblocks.*;
@@ -48,12 +50,8 @@ import com.igteam.immersivegeology.common.particle.IGParticles;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.lib.ResourceUtils;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
-import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
-import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
-import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
-import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.data.enums.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
-import com.igteam.immersivegeology.core.material.helper.ToolTierHelper;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -67,7 +65,6 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -251,6 +248,7 @@ public class IGRegistrationHolder {
     }
 
     public static RegistryObject<BlockEntityType<IGEnergyPipeEntity>> ENERGY_PIPE;
+    public static RegistryObject<BlockEntityType<IGHydroVentEntity>> IG_HYDROVENT;
     public static void initialize()
     {
 
@@ -297,6 +295,18 @@ public class IGRegistrationHolder {
                         {
                             String registryKey = blockCategory.getRegistryKey(material);
                             registerBlock(registryKey, () -> new IGEnergyPipe(blockCategory, material));
+                            registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));
+                        }
+                        case HYDROVENT ->
+                        {
+                            String registryKey = blockCategory.getRegistryKey(material);
+                            RegistryObject<BlockEntityType<IGHydroVentEntity>> TYPE = TE_REGISTER.register(material.getName() + "_vent_entity_type", makeType(IGHydroVentEntity::new, ()-> getBlock.apply(registryKey)));
+
+                            @SuppressWarnings("unchecked")
+                            RegistryObject<BlockEntityType<?>> typeCast = (RegistryObject<BlockEntityType<?>>)(Object) TYPE;
+                            TE_REGISTRY_MAP.put(registryKey, typeCast);
+
+                            registerBlock(registryKey, () -> new IGHydroVent(blockCategory, material, TYPE));
                             registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));
                         }
                         case CRATE ->
@@ -464,6 +474,7 @@ public class IGRegistrationHolder {
         }
 
         ENERGY_PIPE = TE_REGISTER.register("energy_pipe_type", makeType(IGEnergyPipeEntity::new, () -> MiscEnum.Cable.getBlock(BlockCategoryFlags.ENERGY_PIPE)));
+
         IGLib.IG_LOGGER.info("Finished");
     }
 
@@ -483,6 +494,8 @@ public class IGRegistrationHolder {
         registerMB("geothermal_exchanger", IGGeothermalExchangerMultiblock.INSTANCE, IGMultiblockProvider.GEOTHERMAL_EXCHANGER, IGGeothermalSkins.class);
         registerMB("pelletizer", IGPelletizerMultiblock.INSTANCE, IGMultiblockProvider.PELLETIZER, IGPelletizerSkins.class);
         registerMB("steam_turbine", IGSteamTurbineMultiblock.INSTANCE, IGMultiblockProvider.STEAM_TURBINE, IGSteamTurbineSkins.class);
+        registerMB("small_chemical_reactor", IGSmallChemicalReactorMultiblock.INSTANCE, IGMultiblockProvider.SMALL_CHEMICAL_REACTOR, IGSmallChemicalReactorSkins.class);
+        registerMB("alternator", IGAlternatorMultiblock.INSTANCE, IGMultiblockProvider.ALTERNATOR, IGAlternatorSkins.class);
 
         registerMB("coredrill", IGCoreDrillMultiblock.INSTANCE, IGMultiblockProvider.COREDRILL);
         registerMB("centrifuge", IGCentrifugeMultiblock.INSTANCE, IGMultiblockProvider.CENTRIFUGE);
@@ -617,6 +630,7 @@ public class IGRegistrationHolder {
         MaterialHelper.logRecipeStages();
         IGLib.IG_LOGGER.info("- Complete");
     }
+
     public static RegistryObject<Codec<? extends IGlobalLootModifier>> IG_LOOT_MODIFICATION;
 
     public static void initializeLootModifications()

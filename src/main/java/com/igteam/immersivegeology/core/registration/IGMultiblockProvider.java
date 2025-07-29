@@ -14,9 +14,13 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 
+import java.util.ArrayList;
 import java.util.function.BiFunction;
 
 public class IGMultiblockProvider {
+
+    public static final ArrayList<MultiblockRegistration<?>> ALL_IG_MULTIBLOCKS = new ArrayList<>();
+
     public static final MultiblockRegistration<CrystallizerLogic.State> CRYSTALLIZER = metal_skinnable(new CrystallizerLogic(), "crystallizer", false, CrystallizerPart::new)
             .structure(() -> IGRegistrationHolder.getMBTemplate.apply("crystallizer"))
             .gui(IGMenuTypes.CRYSTALLIZER)
@@ -43,11 +47,6 @@ public class IGMultiblockProvider {
             .structure(() -> IGRegistrationHolder.getMBTemplate.apply("reverberation_furnace"))
             .gui(IGMenuTypes.REVERBERATION_FURNACE)
             .build();
-
-//    public static final MultiblockRegistration<TrommelLogic.State> TROMMEL = IGRegistrationHolder.registerMetalMultiblock("trommel", new TrommelLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("trommel"),
-//            builder -> {
-//                builder.redstone(state -> state.rsState, TrommelLogic.REDSTONE_IN);
-//            });
 
     public static final MultiblockRegistration<BloomeryLogic.State> BLOOMERY = stone_skinnable(new BloomeryLogic(), "bloomery", false, BloomeryPart::new)
                     .structure(() -> IGRegistrationHolder.getMBTemplate.apply("bloomery"))
@@ -89,6 +88,18 @@ public class IGMultiblockProvider {
             .redstone(state -> state.rsState, GeothermalExchangerLogic.REDSTONE_IN)
             .gui(IGMenuTypes.GEOTHERMAL_EXCHANGER)
             .build();
+
+    public static final MultiblockRegistration<SmallChemicalReactorLogic.State> SMALL_CHEMICAL_REACTOR = metal_skinnable(new SmallChemicalReactorLogic(), "small_chemical_reactor", false, SmallChemicalReactorPart::new)
+            .structure(() -> IGRegistrationHolder.getMBTemplate.apply("small_chemical_reactor"))
+            .redstone(state -> state.rsState, GeothermalExchangerLogic.REDSTONE_IN)
+            .build();
+
+
+    public static final MultiblockRegistration<AlternatorLogic.State> ALTERNATOR = metal_skinnable(new AlternatorLogic(), "alternator", false, AlternatorPart::new)
+            .structure(() -> IGRegistrationHolder.getMBTemplate.apply("alternator"))
+            .redstone(state -> state.rsState, GeothermalExchangerLogic.REDSTONE_IN)
+            .build();
+
 
     private static <S extends IMultiblockState, B extends SkinableMultiblockPart<S, ?>>
     IGMultiblockBuilder<S> metal_skinnable(

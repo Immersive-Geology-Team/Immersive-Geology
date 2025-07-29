@@ -3,11 +3,11 @@
   "energy": 51200,
   "fluidInputA": {
     "amount": 250,
-    "tag": "forge:sulfuricacid"
+    "tag": "forge:sulfuric_acid"
   },
   "fluidResult": {
     "amount": 216,
-    "fluid": "immersivegeology:slurry_sulfuricacid_zinc"
+    "fluid": "immersivegeology:slurry_sulfuric_acid_zinc"
   },
   "itemInput": {
     "item": "immersivegeology:metal_oxide_zinc"

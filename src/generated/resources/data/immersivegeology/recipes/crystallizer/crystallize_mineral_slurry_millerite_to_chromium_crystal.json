@@ -3,11 +3,11 @@
   "energy": 38400,
   "fluidResult": {
     "amount": 240,
-    "fluid": "immersivegeology:slurry_sulfuricacid_nickel"
+    "fluid": "immersivegeology:slurry_sulfuric_acid_nickel"
   },
   "input": {
     "amount": 288,
-    "tag": "forge:clean_sulfuricacid_millerite"
+    "tag": "forge:clean_sulfuric_acid_millerite"
   },
   "result": {
     "item": "immersivegeology:crystal_chromium"

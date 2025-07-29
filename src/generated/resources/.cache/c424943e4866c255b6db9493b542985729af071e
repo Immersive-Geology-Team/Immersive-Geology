@@ -1,4 +1,5 @@
-// 1.20.1	2025-06-06T20:09:24.487943589	IG Dynamic models
+// 1.20.1	2025-07-28T21:24:33.934356563	IG Dynamic models
+313c07ea1ea72fc83a227edd6e17344a927b07c5 assets/immersivegeology/models/dynamic/alternator_wheel.json
 47bdfc69f2983ef70bca2dfa0f11781c0b2c9a06 assets/immersivegeology/models/dynamic/axle.json
 8fa5155cc25317f02acd5fed1cd2da747935398f assets/immersivegeology/models/dynamic/ballmill.json
 421b27153a544a5f9e4cd37834566304b5af5837 assets/immersivegeology/models/dynamic/centrifuge.json
@@ -12,3 +13,4 @@ bfdc36a74b3786940e9fc101ffa9361ea79c3fc7 assets/immersivegeology/models/dynamic/
 23351d26ca266d6bdd494fad50e4b6240fbde7f2 assets/immersivegeology/models/dynamic/foundry.json
 85c0f4926120509467bc6291871bb462e5a3b759 assets/immersivegeology/models/dynamic/pelletizer_dish.json
 9fa108a93d9c36fe5fa7461369e7bf6be4b6a2e3 assets/immersivegeology/models/dynamic/rotarykiln_tube.json
+600c12f6ceb4eb84e7cab7528ec0438c320410d6 assets/immersivegeology/models/dynamic/steam_turbine_rotor.json

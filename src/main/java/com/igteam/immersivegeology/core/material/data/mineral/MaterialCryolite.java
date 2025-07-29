@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -84,5 +85,11 @@ public class MaterialCryolite extends MaterialMineral {
     public float getNoiseProbability()
     {
         return 0.22589111f;
+    }
+
+
+    public List<String> getAcceptableDimensions()
+    {
+        return List.of("minecraft:the_end");
     }
 }
