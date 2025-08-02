@@ -65,14 +65,14 @@ public class SteamTurbineLogic implements ISkinnableMultiblockLogic<State>, MBOv
 
     public static final int STEAM_CAPACITY = 500;
     public static final int WATER_CAPACITY = 250;
-    private static final CapabilityPosition FLUID_INPUT_A;
-    private static final CapabilityPosition FLUID_INPUT_B;
-    private static final CapabilityPosition FLUID_OUTPUT;
+    private static final CapabilityPosition FLUID_INPUT;
+    private static final CapabilityPosition FLUID_OUTPUT_A;
+    private static final CapabilityPosition FLUID_OUTPUT_B;
 
     @Override
     public void tickClient(IMultiblockContext<State> context) {
         SteamTurbineLogic.State state = context.getState();
-        state.rotation += 1f;
+        state.rotation += 8f;
         state.rotation = state.rotation % 360;
     }
 
@@ -160,10 +160,10 @@ public class SteamTurbineLogic implements ISkinnableMultiblockLogic<State>, MBOv
     @Override
     public <T> LazyOptional<T> getCapability(IMultiblockContext<State> ctx, CapabilityPosition position, Capability<T> cap)
     {
-        if (cap != ForgeCapabilities.FLUID_HANDLER || !FLUID_INPUT_A.equalsOrNullFace(position) && !FLUID_INPUT_B.equalsOrNullFace(position) && !FLUID_OUTPUT.equalsOrNullFace(position)) {
+        if (cap != ForgeCapabilities.FLUID_HANDLER || !FLUID_INPUT.equalsOrNullFace(position) && !FLUID_OUTPUT_A.equalsOrNullFace(position) && !FLUID_OUTPUT_B.equalsOrNullFace(position)) {
             return cap != ForgeCapabilities.ENERGY || position.side() != null && (position.side() != RelativeBlockFace.UP || !ENERGY_OUTPUTS.contains(position.posInMultiblock())) ? LazyOptional.empty() : ((SteamTurbineLogic.State)ctx.getState()).energyView.cast(ctx);
         } else {
-            if(position.equals(FLUID_OUTPUT)) return ((State)ctx.getState()).waterFluidCap.cast(ctx);
+            if(position.equals(FLUID_OUTPUT_A) || position.equals(FLUID_OUTPUT_B)) return ((State)ctx.getState()).waterFluidCap.cast(ctx);
             return ((SteamTurbineLogic.State)ctx.getState()).steamFluidCap.cast(ctx);
         }
     }
@@ -174,9 +174,9 @@ public class SteamTurbineLogic implements ISkinnableMultiblockLogic<State>, MBOv
     }
 
     static {
-        FLUID_INPUT_A = new CapabilityPosition(0, 3, 2, RelativeBlockFace.RIGHT);
-        FLUID_INPUT_B = new CapabilityPosition(0, 3, 4, RelativeBlockFace.RIGHT);
-        FLUID_OUTPUT = new CapabilityPosition(11, 7, 3, RelativeBlockFace.LEFT);
+        FLUID_INPUT = new CapabilityPosition(1, 1, 11, RelativeBlockFace.BACK);
+        FLUID_OUTPUT_A = new CapabilityPosition(2, 0, 3, RelativeBlockFace.LEFT);
+        FLUID_OUTPUT_B = new CapabilityPosition(0, 0, 3, RelativeBlockFace.RIGHT);
     }
 
     public static class State implements IMultiblockState {
@@ -212,7 +212,7 @@ public class SteamTurbineLogic implements ISkinnableMultiblockLogic<State>, MBOv
             this.energyOutputs = outputs.build();
             this.energyView = new StoredCapability<>(NullEnergyStorage.INSTANCE);
 
-            this.fluidOutput = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(FLUID_OUTPUT.side().getOpposite(), FLUID_OUTPUT.posInMultiblock().east()));
+			this.fluidOutput = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(FLUID_OUTPUT_A.side().getOpposite(), FLUID_OUTPUT_A.posInMultiblock().south()));
         }
 
         @Override

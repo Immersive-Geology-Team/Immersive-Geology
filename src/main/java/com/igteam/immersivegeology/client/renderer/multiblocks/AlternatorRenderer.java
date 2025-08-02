@@ -77,7 +77,7 @@ public class AlternatorRenderer extends IGBlockEntityRenderer<MultiblockBlockEnt
         poseStack.pushPose();
         {
             poseStack.translate(.5f,1.5f,0);
-            poseStack.pushPose();a
+            poseStack.pushPose();
             {
                 poseStack.mulPose(new Quaternionf().rotateAxis((rot + pPartialTick)*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
                 renderDynamicModel(WHEEL, poseStack, buffer, Direction.NORTH, level, pos, pPackedLight, pPackedOverlay, skin);

@@ -31,7 +31,7 @@ public class AlternatorLogic implements ISkinnableMultiblockLogic<AlternatorLogi
     @Override
     public void tickClient(IMultiblockContext<State> context) {
         State state = context.getState();
-        state.rotation += 1f;
+        state.rotation += 8f;
         state.rotation = state.rotation % 360;
     }
 
