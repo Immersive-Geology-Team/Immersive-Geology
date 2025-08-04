@@ -66,6 +66,7 @@ public class SteamTurbineRenderer extends IGBlockEntityRenderer<MultiblockBlockE
         final SteamTurbineLogic.State state = context.getState();
         final IGSteamTurbineSkins skin = tile.getBlockState().getValue(SteamTurbinePart.STEAM_TURBINE);
         float rot = state.getRotation();
+
         BlockPos pos = tile.getBlockPos();
         Level level = tile.getLevel();
         Direction dir = orientation.front();

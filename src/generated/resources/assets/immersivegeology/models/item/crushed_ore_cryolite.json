@@ -1,6 +1,6 @@
 {
   "parent": "immersivegeology:item/base/ig_base_item",
   "textures": {
-    "layer0": "immersivegeology:palette/item/crushed_ore/type_2_pristine_cryolite"
+    "layer0": "immersivegeology:item/colored/cryolite/crushed_ore"
   }
 }
