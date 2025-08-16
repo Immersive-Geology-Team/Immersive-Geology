@@ -15,7 +15,7 @@ import net.minecraft.util.StringRepresentable;
 
 import java.util.Locale;
 
-public enum IGRevFurnaceSkins implements StringRepresentable, IIGMultiSkinHelper
+public enum IGRevFurnaceSkins implements IIGMultiSkinHelper
 {
 	DEFAULT("default", ChatFormatting.GOLD, SkinCreditType.ARTIST, "steelblue8"),
 	LEGACY("legacy", ChatFormatting.UNDERLINE, SkinCreditType.FOUNDER, "crimsontwilight");
@@ -64,5 +64,11 @@ public enum IGRevFurnaceSkins implements StringRepresentable, IIGMultiSkinHelper
 	public boolean alternativeModel()
 	{
 		return false;
+	}
+
+	@Override
+	public Enum<?> instance()
+	{
+		return this;
 	}
 }

@@ -8,6 +8,12 @@
 
 package com.igteam.immersivegeology.client;
 
+import blusunrize.immersiveengineering.api.ApiUtils;
+import blusunrize.immersiveengineering.client.utils.RenderUtils;
+import com.igteam.immersivegeology.client.models.IGDynamicModel;
+import com.igteam.immersivegeology.common.block.multiblocks.IGAlternatorMultiblock;
+import com.igteam.immersivegeology.common.block.multiblocks.part.AlternatorPart;
+import com.igteam.immersivegeology.common.block.multiblocks.skins.IGAlternatorSkins;
 import com.igteam.immersivegeology.common.fluid.IGFluidBlock;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
@@ -15,25 +21,33 @@ import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Supplier;
 
 public class IGClientRenderHandler implements ItemColor, BlockColor {
@@ -135,6 +149,8 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
         resolveRenderTypes();
         mapping.put(block, skeleton);
     }
+
+
 
     @OnlyIn(Dist.CLIENT)
     private static void resolveRenderTypes() {

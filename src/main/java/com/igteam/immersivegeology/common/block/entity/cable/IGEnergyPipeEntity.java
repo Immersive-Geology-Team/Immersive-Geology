@@ -2,6 +2,10 @@ package com.igteam.immersivegeology.common.block.entity.cable;
 
 
 import blusunrize.immersiveengineering.api.IETags;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockBEHelperDummy;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockBE;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityDummy;
 import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.api.utils.DirectionUtils;
 import blusunrize.immersiveengineering.api.utils.SafeChunkUtils;
@@ -17,6 +21,7 @@ import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.WorldMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import it.unimi.dsi.fastutil.HashCommon;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
@@ -92,16 +97,13 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 		this.cover = Blocks.AIR;
 		this.connections = 0;
 		this.color = null;
-		this.sidedHandlers = new EnumMap(Direction.class);
+		this.sidedHandlers = new EnumMap<>(Direction.class);
 		this.neighbors = CapabilityReference.forAllNeighbors(this, ForgeCapabilities.ENERGY);
-		var3 = DirectionUtils.VALUES;
-		var4 = var3.length;
 
 		for(var5 = 0; var5 < var4; ++var5) {
 			f = var3[var5];
 			this.sidedHandlers.put(f, this.registerCapability(new PipeEnergyHandler(this, f)));
 		}
-
 	}
 
 	@Override
@@ -174,6 +176,12 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 										// Check if the adjacent tile has energy capability
 										LazyOptional<IEnergyStorage> handlerOptional = adjacentTile.getCapability(
 												ForgeCapabilities.ENERGY, fd.getOpposite());
+
+										if(adjacentTile instanceof MultiblockBlockEntityDummy<?> dummy)
+										{
+											IMultiblockBEHelperDummy<?> helper = dummy.getHelper();
+											handlerOptional = dummy.getCapability(ForgeCapabilities.ENERGY);
+										}
 
 										handlerOptional.ifPresent(handler -> {
 											// Add to energy handlers list
@@ -705,7 +713,7 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 			}
 
 			Set<DirectionalEnergyOutput> outputList = IGEnergyPipeEntity.getConnectedEnergyHandlers(this.pipe.getBlockPos(), this.pipe.level);
-			if (outputList.size() < 1) {
+			if (outputList.isEmpty()) {
 				return 0;
 			}
 
@@ -736,10 +744,6 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 						sum += accepted;
 					}
 				}
-			}
-
-			if (sum <= 0) {
-				return 0;
 			}
 
 			// Second pass: Actually transfer the energy
@@ -796,7 +800,7 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 			// Remove the block we're extracting to from potential sources
 			outputList.removeIf(output -> sourcePos.equals(output.containingTile().getBlockPos()));
 
-			if (outputList.size() < 1) {
+			if (outputList.isEmpty()) {
 				return 0;
 			}
 
@@ -821,7 +825,6 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 
 		@Override
 		public int getEnergyStored() {
-			// Energy pipes don't store energy, they only transfer it
 			return 0;
 		}
 

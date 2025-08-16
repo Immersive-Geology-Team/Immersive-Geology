@@ -15,7 +15,7 @@ import net.minecraft.util.StringRepresentable;
 
 import java.util.Locale;
 
-public enum IGCrystallizerSkins implements StringRepresentable, IIGMultiSkinHelper
+public enum IGCrystallizerSkins implements IIGMultiSkinHelper
 {
 	DEFAULT("default", ChatFormatting.GOLD, SkinCreditType.DEVELOPER, "muddykat", false),
 	RUSTED("rusted", ChatFormatting.YELLOW, SkinCreditType.DEVELOPER, "muddykat", false);
@@ -66,5 +66,11 @@ public enum IGCrystallizerSkins implements StringRepresentable, IIGMultiSkinHelp
 	public boolean alternativeModel()
 	{
 		return altModel;
+	}
+
+	@Override
+	public Enum<?> instance()
+	{
+		return this;
 	}
 }

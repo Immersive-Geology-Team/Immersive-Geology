@@ -15,7 +15,7 @@ import net.minecraft.util.StringRepresentable;
 
 import java.util.Locale;
 
-public enum IGGeothermalSkins implements StringRepresentable, IIGMultiSkinHelper
+public enum IGGeothermalSkins implements IIGMultiSkinHelper
 {
 	DEFAULT("default", ChatFormatting.GOLD, SkinCreditType.DEVELOPER, "unschtalch"),
 	STEAMPUNK("steampunk", ChatFormatting.RED, SkinCreditType.CREATOR, "wanderingbeekeeper");
@@ -64,5 +64,12 @@ public enum IGGeothermalSkins implements StringRepresentable, IIGMultiSkinHelper
 	public boolean alternativeModel()
 	{
 		return false;
+	}
+
+
+	@Override
+	public Enum<?> instance()
+	{
+		return this;
 	}
 }

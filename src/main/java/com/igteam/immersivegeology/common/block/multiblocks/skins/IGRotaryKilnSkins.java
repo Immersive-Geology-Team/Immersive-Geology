@@ -15,7 +15,7 @@ import net.minecraft.util.StringRepresentable;
 
 import java.util.Locale;
 
-public enum IGRotaryKilnSkins implements StringRepresentable, IIGMultiSkinHelper
+public enum IGRotaryKilnSkins implements IIGMultiSkinHelper
 {
 	DEFAULT("default", ChatFormatting.GOLD, SkinCreditType.PETER, "peter"),
 	LEGACY("legacy", ChatFormatting.UNDERLINE, SkinCreditType.DEVELOPER, "muddykat");
@@ -64,5 +64,11 @@ public enum IGRotaryKilnSkins implements StringRepresentable, IIGMultiSkinHelper
 	public boolean alternativeModel()
 	{
 		return false;
+	}
+
+	@Override
+	public Enum<?> instance()
+	{
+		return this;
 	}
 }
