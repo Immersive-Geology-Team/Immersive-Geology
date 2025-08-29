@@ -56,6 +56,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class GravitySeparatorLogic implements ISkinnableMultiblockLogic<GravitySeparatorLogic.State>, IServerTickableComponent<GravitySeparatorLogic.State>, MBOverlayText<GravitySeparatorLogic.State>, IClientTickableComponent<GravitySeparatorLogic.State> {
     public static final BlockPos REDSTONE_IN = new BlockPos(1, 1, 1);
@@ -116,25 +117,51 @@ public class GravitySeparatorLogic implements ISkinnableMultiblockLogic<GravityS
     @Override
     public void onEntityCollision(IMultiblockContext<State> ctx, BlockPos posInMultiblock, Entity collided)
     {
-        if(collided.level().isClientSide)
-            return;
+        if(collided.level().isClientSide) return;
         final State state = ctx.getState();
         final IMultiblockLevel level = ctx.getLevel();
         final AABB internalBB = new AABB(-2, 3, -2, 5, 6, 5);
         final AABB separatorInternal = level.toAbsolute(internalBB);
         if(collided instanceof ItemEntity itemEntity)
         {
+            if(state.insert_cooldown > 0)
+            {
+                ctx.markDirtyAndSync();
+                state.insert_cooldown--;
+                return;
+            }
+            state.insert_cooldown = 1;
+            ctx.markDirtyAndSync();
             ItemStack stack = itemEntity.getItem();
             if(stack.isEmpty())
                 return;
             stack = stack.copy();
-            if(insertItemToProcess(stack, false, state, level.getRawLevel()))
-                ctx.markDirtyAndSync();
-            if(stack.getCount() <= 0)
-                itemEntity.discard();
-            else
-                itemEntity.setItem(stack);
+            if(insertItemToProcess(stack, true, state, level.getRawLevel()))
+            {
+                if(insertItemToProcess(stack, false, state, level.getRawLevel()))
+                {
+                    if(stack.getCount() <= 0)
+                        itemEntity.discard();
+                    else
+                        itemEntity.setItem(stack);
+                }
+            }
         }
+    }
+
+    private static boolean insertItemToProcess(ItemStack stack, boolean simulate, State state, Level rawLevel)
+    {
+        if(state.separatorProcessesQueue.size() >= MAX_PROCESSES) return false;
+        SeparatorProcess p;
+        GravitySeparatorRecipe recipe = GravitySeparatorRecipe.findRecipe(rawLevel, stack);
+        if(recipe == null) return false;
+        if(!simulate)
+        {
+            p = new SeparatorProcess(ItemHandlerHelper.copyStackWithSize(stack, 1));
+            state.separatorProcessesQueue.add(p);
+            stack.shrink(1);
+        }
+        return true;
     }
 
     @Override
@@ -165,44 +192,27 @@ public class GravitySeparatorLogic implements ISkinnableMultiblockLogic<GravityS
         return LazyOptional.empty();
     }
 
-    private static boolean isInInput(BlockPos posInMultiblock, boolean allowMiddleLayer)
-    {
-        return true;
-    }
-
-    private static boolean insertItemToProcess(ItemStack stack, boolean simulate, State state, Level rawLevel)
-    {
-        if(state.separatorProcessesQueue.size() >= MAX_PROCESSES) return false;
-        SeparatorProcess p;
-        GravitySeparatorRecipe recipe = GravitySeparatorRecipe.findRecipe(rawLevel, stack);
-        if(recipe == null) return false;
-        if(!simulate)
-        {
-            p = new SeparatorProcess(ItemHandlerHelper.copyStackWithSize(stack, 1));
-            state.separatorProcessesQueue.add(p);
-            stack.shrink(1);
-        }
-        return true;
-    }
-
     @Nullable
     @Override
     public List<Component> getOverlayText(State state, Player player, boolean b)
     {
-        if(state == null) return List.of();
-        if(!state.separatorProcessesQueue.isEmpty() && state.tank.getFluidAmount() < 20)
-        {
-            return List.of(Component.translatable("immersivegeology.machine.low_water").withStyle(ChatFormatting.RED));
-        }
-        if(Utils.isFluidRelatedItemStack(player.getItemInHand(InteractionHand.MAIN_HAND)))
-            return List.of(TextUtils.formatFluidStack(state.tank.getFluid()));
-        return List.of();
+        if(state == null || player.level() == null || state.separatorProcessesQueue.isEmpty()) return List.of();
+        if(!state.separatorProcessesQueue.isEmpty()) return List.of(Component.literal(String.valueOf(state.separatorProcessesQueue.size())));
+        return List.of(Component.literal(state.separatorProcessesQueue.stream().map(p -> new String(p.getInput().toString() + ": " + p.isProcessFinished() + "|" + p.getRelativeProcessStep(player.level()))).collect(Collectors.toSet()).toString()));
+//        if(!state.separatorProcessesQueue.isEmpty() && state.tank.getFluidAmount() < 20)
+//        {
+//            return List.of(Component.translatable("immersivegeology.machine.low_water").withStyle(ChatFormatting.RED));
+//        }
+//        if(Utils.isFluidRelatedItemStack(player.getItemInHand(InteractionHand.MAIN_HAND)))
+//            return List.of(TextUtils.formatFluidStack(state.tank.getFluid()));
+//        return List.of();
     }
 
     public static class State implements IMultiblockState
     {
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.disabledByDefault();
         public final ArrayList<SeparatorProcess> separatorProcessesQueue = new ArrayList<>();
+        private int insert_cooldown = 10;
         private final StoredCapability<IItemHandler> insertionHandler;
         private final DroppingMultiblockOutput output;
         private final DroppingMultiblockOutput secondary;
@@ -244,28 +254,30 @@ public class GravitySeparatorLogic implements ISkinnableMultiblockLogic<GravityS
 
         @Override
         public void writeSaveNBT(CompoundTag nbt){
-            writeCommonNBT(nbt);
-            nbt.put("tank", this.tank.writeToNBT(new CompoundTag()));
+            writeSyncNBT(nbt);
         }
 
         @Override
         public void readSaveNBT(CompoundTag nbt){
-            readCommonNBT(nbt);
-            tank.readFromNBT(nbt.getCompound("tank"));
+            readSyncNBT(nbt);
         }
 
         @Override
         public void writeSyncNBT(CompoundTag nbt)
         {
+            writeCommonNBT(nbt);
+            nbt.put("tank", this.tank.writeToNBT(new CompoundTag()));
             nbt.putBoolean("renderActive", renderAsActive);
-            writeSaveNBT(nbt);
+            nbt.putInt("insert_cooldown", insert_cooldown);
         }
 
         @Override
         public void readSyncNBT(CompoundTag nbt)
         {
+            readCommonNBT(nbt);
+            tank.readFromNBT(nbt.getCompound("tank"));
             renderAsActive = nbt.getBoolean("renderActive");
-            readSaveNBT(nbt);
+            insert_cooldown = nbt.getInt("insert_cooldown");
         }
 
         private void writeCommonNBT(CompoundTag nbt)

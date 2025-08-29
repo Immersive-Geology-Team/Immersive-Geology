@@ -256,7 +256,8 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
         if (lowerTransition == null) {
             return false;
         }
-
+        // Add recipe for biome to hold a 'heat' value, check if a biome we're in has said recipe, if so get the biome heat, then that is the MINIMUM heat for block transitions.
+        // Speed of transition is also stored here, so we can have this be faster or slower in different biomes.
         final BlockPos absolutePos = multiblockLevel.toAbsolute(localPos).below();
         rawLevel.setBlock(absolutePos, lowerTransition.defaultBlockState(), 3);
         return true;

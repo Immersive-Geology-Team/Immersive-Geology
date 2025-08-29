@@ -78,7 +78,8 @@ public class SteamTurbineLogic implements ISkinnableMultiblockLogic<State>, MBOv
     }
 
     @Override
-    public void tickServer(IMultiblockContext<State> context) {
+    public void tickServer(IMultiblockContext<State> context)
+    {
         SteamTurbineLogic.State state = (SteamTurbineLogic.State)context.getState();
         boolean active = state.active;
         state.rotation_speed = Mth.lerp(0.01f, state.rotation_speed, state.target_rotation);
@@ -88,43 +89,61 @@ public class SteamTurbineLogic implements ISkinnableMultiblockLogic<State>, MBOv
             if(tank_amount!=state.steam_tank.getFluidAmount()) context.requestMasterBESync();
         }
         if (state.rsState.isEnabled(context) && !state.steam_tank.getFluid().isEmpty() && state.water_tank.getSpace() > 0) {
-            TurbineFuel recipe = (TurbineFuel)state.recipeGetter.apply(context.getLevel().getRawLevel(), state.steam_tank.getFluid().getFluid());
+            TurbineFuel recipe = (TurbineFuel) state.recipeGetter.apply(context.getLevel().getRawLevel(), state.steam_tank.getFluid().getFluid());
+
             if (recipe != null) {
-                int fluidConsumed = recipe.getBurnTime();
+                int fluidConsumed = recipe.getConsumed();
+                int burnTime = recipe.getBurnTime();
                 float outputRatio = recipe.getOutputRatio();
-                if (state.steam_tank.getFluidAmount() >= fluidConsumed) {
-                    if (!active) {
+
+                if (state.consumeTick <= 0) {
+                    // Only try to consume fluid if we're "ready" for a new burn cycle
+                    if (state.steam_tank.getFluidAmount() >= fluidConsumed) {
+                        // Consume steam and start new burn cycle
+                        state.steam_tank.drain(fluidConsumed, FluidAction.EXECUTE);
+                        state.consumeTick = burnTime;
+
+                        int waterOutput = (int) (fluidConsumed * outputRatio);
+                        state.water_tank.fill(new FluidStack(Fluids.WATER, waterOutput), FluidAction.EXECUTE);
+
                         active = true;
+                    } else {
+                        // Not enough steam to start a new cycle
+                        active = false;
                     }
-
-                    state.steam_tank.drain(fluidConsumed, FluidAction.EXECUTE);
-
-                    int waterOutput = Math.round(fluidConsumed * outputRatio);
-                    state.water_tank.fill(new FluidStack(Fluids.WATER,waterOutput), FluidAction.EXECUTE);
-                } else if (active) {
-                    state.steam_tank.drain(state.steam_tank.getFluidAmount(), FluidAction.EXECUTE);
-                    active = false;
+                } else {
+                    // Still in a burn cycle — produce water but don't consume more steam
+                    state.consumeTick--;
+                    active = true;
                 }
-                int steam_amount = state.steam_tank.getFluidAmount();
-                if(fluidConsumed > steam_amount) state.steam_tank.drain(steam_amount, FluidAction.EXECUTE);
+            } else {
+                active = false;
             }
+
             state.target_rotation = active ? 36f : 0f;
-        } else if (active) {
-            active = false;
-            state.target_rotation = 0f;
+        } else {
+            // Not enabled or can't operate
+            if (active) {
+                active = false;
+                state.target_rotation = 0f;
+            }
         }
 
-        if (active != state.active) {
+        if(active!=state.active)
+        {
             state.active = active;
         }
 
-        if(state.water_tank.getFluid().getAmount() > 0)
+        if(state.water_tank.getFluid().getAmount() > 0 && context.getLevel().getRawLevel().getGameTime() % 2 == 0)
         {
-            for(CapabilityReference<IFluidHandler> output : state.fluidOutputs)
-            {
-                drainOutputTank(state, context, output);
-                context.requestMasterBESync();
-            }
+            int amount = state.water_tank.getFluid().getAmount();
+            int half = amount / 2;
+
+            int outputLeftAmount = (amount == 1) ? 1 : (amount % 2 == 0 ? half : half - 1);
+            int outputRightAmount = (amount == 1) ? 1 : half;
+
+            drainOutputTank(state, outputLeftAmount, state.fluidOutputs.get(0));
+            drainOutputTank(state, outputRightAmount, state.fluidOutputs.get(1));
         }
 
         if(state.target_rotation == 0 && state.rotation_speed < 0.5f) state.rotation_speed = Math.round(state.rotation);
@@ -141,10 +160,9 @@ public class SteamTurbineLogic implements ISkinnableMultiblockLogic<State>, MBOv
         context.requestMasterBESync();
     }
 
-    private void drainOutputTank(SteamTurbineLogic.State state, IMultiblockContext<SteamTurbineLogic.State> context, CapabilityReference<IFluidHandler> output_reference)
+    private void drainOutputTank(SteamTurbineLogic.State state, int amount, CapabilityReference<IFluidHandler> output_reference)
     {
-        int outSize = Math.min(FluidType.BUCKET_VOLUME, state.water_tank.getFluidAmount());
-        FluidStack out = Utils.copyFluidStackWithAmount(state.water_tank.getFluid(), outSize, false);
+		FluidStack out = Utils.copyFluidStackWithAmount(state.water_tank.getFluid(), amount, false);
         IFluidHandler output = output_reference.getNullable();
 
         if(output==null)

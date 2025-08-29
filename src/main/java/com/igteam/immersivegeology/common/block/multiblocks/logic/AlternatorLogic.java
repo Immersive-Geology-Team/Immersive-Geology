@@ -25,6 +25,7 @@ import blusunrize.immersiveengineering.common.util.EnergyHelper;
 import com.google.common.collect.ImmutableList;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.ISkinnableMultiblockLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.AlternatorShape;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
@@ -67,7 +68,8 @@ public class AlternatorLogic implements ISkinnableMultiblockLogic<AlternatorLogi
     public void tickServer(IMultiblockContext<State> ctx) {
         State state = ctx.getState();
         state.rotation_speed = Mth.lerp(0.1f, state.rotation_speed, state.target_rotation);
-        boolean generating_energy = provideFlux(state);
+        if(state.rotation_speed < 0.05f) state.rotation_speed = Math.round(state.rotation_speed);
+        if(state.rotation_speed > 0) provideFlux(state);
         if(state.target_rotation > 0)
         {
             state.target_rotation = Mth.lerp(0.05f, state.target_rotation, 0);
@@ -81,34 +83,7 @@ public class AlternatorLogic implements ISkinnableMultiblockLogic<AlternatorLogi
         }
         ctx.markDirtyAndSync();
     }
-    /*
-			IMultiblockLevel mbLevel = ctx.getLevel();
-			Level level = mbLevel.getRawLevel();
-			BlockPos steam_engine_check = mbLevel.toAbsolute(new BlockPos(3, 3, 4)).south();
-			BlockState engine_state = level.getBlockState(steam_engine_check);
-			if(engine_state.getBlock() instanceof SteamTurbinePart)
-			{
-				BlockEntity entity = level.getBlockEntity(steam_engine_check);
-				if(entity instanceof IMultiblockBE<?> mbe)
-				{
-					BlockPos posInMB = mbe.getHelper().getPositionInMB();
-					BlockPos masterPos = mbe.getHelper().getMultiblock().masterPosInMB();
-					BlockPos masterAbsPos = entity.getBlockPos().subtract(posInMB).offset(masterPos.getX(), masterPos.getY(), masterPos.getZ());
-					BlockEntity masterBE = level.getBlockEntity(masterAbsPos);
-					if(masterBE instanceof IMultiblockBE<?> master)
-					{
-						IMultiblockState turbine = master.getHelper().getState();
-						if(turbine instanceof SteamTurbineLogic.State turbine_state)
-						{
-							state.target_rotation = turbine_state.getRotationSpeed();
-						}
-					}
-				}
-			} else
-			{
-				state.target_rotation = 0f;
-			}
-	*/
+
     public boolean provideFlux(AlternatorLogic.State state)
     {
         List<IEnergyStorage> presentOutputs = state.energyOutputs.stream().map(CapabilityReference::getNullable).filter(Objects::nonNull).collect(Collectors.toList());
@@ -137,7 +112,12 @@ public class AlternatorLogic implements ISkinnableMultiblockLogic<AlternatorLogi
     public <T> LazyOptional<T> getCapability(IMultiblockContext<State> ctx, CapabilityPosition position, Capability<T> cap)
     {
         if (cap != ForgeCapabilities.FLUID_HANDLER && cap != IRotationAcceptor.CAPABILITY) {
-            return cap != ForgeCapabilities.ENERGY || position.side() != null && (position.side() != RelativeBlockFace.UP || !ENERGY_OUTPUTS.contains(position.posInMultiblock())) ? LazyOptional.empty() : ((AlternatorLogic.State)ctx.getState()).energyView.cast(ctx);
+            if(cap != ForgeCapabilities.ENERGY) return LazyOptional.empty();
+            if(position.side()!=null && (position.side()!=RelativeBlockFace.RIGHT || !ENERGY_OUTPUTS.contains(position.posInMultiblock())))
+            {
+                return LazyOptional.empty();
+            }
+            return ctx.getState().energyView.cast(ctx);
         }
         if(cap == IRotationAcceptor.CAPABILITY)
         {
@@ -207,7 +187,7 @@ public class AlternatorLogic implements ISkinnableMultiblockLogic<AlternatorLogi
             request_sync = nbt.getBoolean("request_sync");
         }
 
-        public float getRender_rotation()
+        public float getRenderRotation()
         {
             return render_rotation;
         }

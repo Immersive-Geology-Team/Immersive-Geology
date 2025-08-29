@@ -48,7 +48,7 @@ public class AlternatorRenderer extends IGBlockEntityRenderer<MultiblockBlockEnt
         final MultiblockOrientation orientation = context.getLevel().getOrientation();
         final AlternatorLogic.State state = context.getState();
         final IGAlternatorSkins skin = tile.getBlockState().getValue(AlternatorPart.ALTERNATOR);
-        float rot = state.getRender_rotation();
+        float rot = state.getRenderRotation();
         BlockPos pos = tile.getBlockPos();
         Level level = tile.getLevel();
         Direction dir = orientation.front();

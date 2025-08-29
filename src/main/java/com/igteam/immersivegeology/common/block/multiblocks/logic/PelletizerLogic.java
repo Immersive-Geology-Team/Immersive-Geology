@@ -233,9 +233,9 @@ public class PelletizerLogic implements ISkinnableMultiblockLogic<State>, IServe
                 return state.fInputCap.cast(ctx);
             }
         }
-        if (cap == ForgeCapabilities.ITEM_HANDLER) {
-            return state.insertionHandler.cast(ctx);
-        }
+//        if (cap == ForgeCapabilities.ITEM_HANDLER) {
+//            return state.insertionHandler.cast(ctx);
+//        }
         return LazyOptional.empty();
     }
 
