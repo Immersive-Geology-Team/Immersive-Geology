@@ -19,6 +19,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockL
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
 import blusunrize.immersiveengineering.api.utils.CapabilityReference;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.blockimpl.MultiblockLevel;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcess;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessInMachine;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor;
@@ -29,6 +30,7 @@ import blusunrize.immersiveengineering.common.util.CachedRecipe;
 import blusunrize.immersiveengineering.common.util.Utils;
 import com.igteam.immersivegeology.common.block.multiblocks.IGGeothermalExchangerMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.GeothermalHeatHelper;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.LazyList;
 import com.igteam.immersivegeology.common.block.multiblocks.part.GeothermalPart;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.*;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.GeothermalExchangerShape;
@@ -37,12 +39,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
@@ -60,6 +64,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExchangerLogic.State>, IServerTickableComponent<GeothermalExchangerLogic.State>, IClientTickableComponent<GeothermalExchangerLogic.State> {
     public static final BlockPos REDSTONE_IN = new BlockPos(2,5,1);
@@ -109,6 +114,8 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
 
         updateActiveState(state, context, size, multiblockLevel);
 
+        List<TagKey<Biome>> biomes = state.biome_cache.get(multiblockLevel.getAbsoluteOrigin());
+        biomes.forEach(b -> IGLib.IG_LOGGER.info(b.toString()));
         if (state.isActive) {
             processActiveState(state, context, multiblockLevel, rawLevel);
         }
@@ -381,6 +388,8 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
         private final CapabilityReference<IFluidHandler> fluidOutput;
         private final StoredCapability<IEnergyStorage> energyCap;
         private final Supplier<GeothermalExchangerRecipe> cachedRecipe;
+        private final LazyList<BlockPos, TagKey<Biome>> biome_cache;
+
 
         private final MultiblockProcessor.InMachineProcessor<GeothermalExchangerRecipe> dummy;
         private final GeothermalHeatHelper heatHelper;
@@ -400,6 +409,9 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
             this.fOutputCap = new StoredCapability<>(new ArrayFluidHandler(output_tank, true, false, changedAndSync));
 
             Supplier<Level> getLevel = context.levelSupplier();
+
+            biome_cache = new LazyList<>((b) -> getLevel.get().getBiome(b).getTagKeys().toList());
+
             heatHelper = new GeothermalHeatHelper(getLevel);
             this.cachedRecipe = CachedRecipe.cached(GeothermalExchangerRecipe::findRecipe, getLevel, this.water_tank::getFluid);
             this.processor = new MultiblockProcessor<>(
