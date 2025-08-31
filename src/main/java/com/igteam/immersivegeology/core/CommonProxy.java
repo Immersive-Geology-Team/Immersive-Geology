@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.core;
 
 import com.igteam.immersivegeology.common.block.entity.cable.IGIMCHandler;
+import com.igteam.immersivegeology.common.fluid.IGFluid;
 import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.common.world.IGWorldGen;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -18,7 +19,10 @@ import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 public class CommonProxy
 {
@@ -34,6 +38,17 @@ public class CommonProxy
 		IGContent.initializeIETweaks();
 		IGIMCHandler.init();
 		IGIMCHandler.handleIMCMessages(InterModComms.getMessages(IGLib.MODID));
+	}
+
+	public void registerFluidBehaviour(FMLCommonSetupEvent event)
+	{
+		event.enqueueWork(() -> {
+			for(Fluid value : IGRegistrationHolder.supplyDeferredFluids().get())
+			{
+				IGFluid fluid = (IGFluid)value;
+				DispenserBlock.registerBehavior(fluid.getBucket(), IGFluid.BUCKET_DISPENSE_BEHAVIOR);
+			}
+		});
 	}
 
 	public void reinitializeGUI(){}

@@ -22,6 +22,7 @@ import blusunrize.immersiveengineering.common.register.IEItems.Metals;
 import blusunrize.immersiveengineering.common.register.IEItems.Molds;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.GeothermalBiomeRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.*;
 import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -40,6 +41,7 @@ import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
@@ -48,6 +50,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
@@ -411,6 +415,9 @@ public class IGRecipes extends RecipeProvider
 		GeothermalConversionRecipeBuilder.builder(Blocks.LAVA, 1100, null, Pair.of(Blocks.MAGMA_BLOCK, 900)).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/lava"));
 		GeothermalConversionRecipeBuilder.builder(Blocks.MAGMA_BLOCK, 900, Pair.of(Blocks.LAVA, 1173), Pair.of(Blocks.BASALT, 300)).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/magma"));
 		GeothermalConversionRecipeBuilder.builder(Blocks.BASALT, 300, Pair.of(Blocks.MAGMA_BLOCK, 920), null).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/basalt"));
+		GeothermalBiomeRecipeBuilder.fromTags(900, 4000, BiomeTags.IS_NETHER).build(consumer, new ResourceLocation(IGLib.MODID, "geobiome/is_nether"));
+		GeothermalBiomeRecipeBuilder.fromTags(100, 2000, Tags.Biomes.IS_COLD_OVERWORLD).build(consumer, new ResourceLocation(IGLib.MODID, "geobiome/is_cold"));
+
 		TurbineFuelBuilder.builder(MiscEnum.Steam.getFluidTag(BlockCategoryFlags.FLUID), 0.25f, 8, 25).build(consumer, new ResourceLocation(IGLib.MODID, "turbine_fuel/steam"));
 		TurbineFuelBuilder.builder(MiscEnum.HighPressureSteam.getFluidTag(BlockCategoryFlags.FLUID), 0.5f, 16, 25).build(consumer, new ResourceLocation(IGLib.MODID, "turbine_fuel/hpsteam"));
 

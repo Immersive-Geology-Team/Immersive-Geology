@@ -1,4 +1,4 @@
-// 1.20.1	2025-08-29T19:48:10.910125384	Recipes
+// 1.20.1	2025-08-31T17:06:02.549400682	Recipes
 5a4b25aa15a30261c92770f0fa073905a4c40ae5 data/immersivegeology/advancements/recipes/building_blocks/crafting/block_to_slab_srconcrete.json
 f65a7adae9d73884f297c5ee3a35ce426134b508 data/immersivegeology/advancements/recipes/building_blocks/crafting/block_to_slab_trconcrete.json
 c3ec2e6cdaa828d8509f10a136f34099ebba7e3c data/immersivegeology/advancements/recipes/building_blocks/crafting/block_to_stair_srconcrete.json
@@ -2541,6 +2541,8 @@ b0520b3d6b89120c184b9a9ae293edcfde6109a7 data/immersivegeology/recipes/crystalli
 c2eaa74edebd3174c136f54cf2da2d2fbe03c63e data/immersivegeology/recipes/crystallizer/crystallize_thorium_to_thoriumcrystal2.json
 28221bb51854942e24b09929da3a1115db39a299 data/immersivegeology/recipes/crystallizer/crystallize_zinc_to_zinccrystal.json
 0c896b986b394e027ea1a0bd3f5ebe74ae4e33fb data/immersivegeology/recipes/electronics/ehv_cable.json
+6725f19478a92d8d438eae66b3b50189ee437cf0 data/immersivegeology/recipes/geobiome/is_cold.json
+166642198e703bc7b7fdec4ba8c39690e10422e9 data/immersivegeology/recipes/geobiome/is_nether.json
 a08724751ee010b912ee4204de9ecb5c5f239c6e data/immersivegeology/recipes/geoconvert/basalt.json
 347b6458e688b1845ff33e1105d6ee4769e6f86c data/immersivegeology/recipes/geoconvert/lava.json
 2e7750d9e01d7f096cae379441ee116996870628 data/immersivegeology/recipes/geoconvert/magma.json

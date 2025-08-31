@@ -133,7 +133,6 @@ public class GeothermalHeatHelper
 	public byte getFastPseudoRandomCell(int layer, long seed) {
 		if (layer < 0 || layer >= 5) return 0;
 
-		// Simple hash-based coordinate generation
 		long hash = seed * 31 + layer;
 		int x = (int)((hash >>> 16) % 3);
 		int y = (int)((hash >>> 8) % 5);

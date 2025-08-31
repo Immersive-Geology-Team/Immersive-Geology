@@ -1,0 +1,8 @@
+{
+  "type": "immersivegeology:geothermal_biome",
+  "biome_tags": [
+    "forge:is_cold/overworld"
+  ],
+  "max_heat": 2000,
+  "min_heat": 100
+}
