@@ -43,8 +43,8 @@ public class IGRecipeTypes
 	public static final TypeWithClass<FoundryRecipe> FOUNDRY = register("foundry",FoundryRecipe.class);
 	public static final TypeWithClass<EmptyRecipe> EMPTY = register("empty", EmptyRecipe.class);
 
-	public static final TypeWithClass<? extends Recipe<?>> BLOOMERY_FUEL = register("bloomery_fuel", BloomeryFuel.class);
-	public static final TypeWithClass<? extends Recipe<?>> TURBINE_FUEL = register("turbine_fuel", TurbineFuel.class);
+	public static final TypeWithClass<BloomeryFuel> BLOOMERY_FUEL = register("bloomery_fuel", BloomeryFuel.class);
+	public static final TypeWithClass<TurbineFuel> TURBINE_FUEL = register("turbine_fuel", TurbineFuel.class);
 
 	private static <T extends Recipe<?>>
 	TypeWithClass<T> register(String name, Class<T> type)

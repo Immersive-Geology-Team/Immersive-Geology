@@ -104,9 +104,9 @@ public class GeothermalExchangerMenu extends IEContainerMenu
 		ownSlotCount = 0;
 		for(int i = 0; i < 3; i++)
 			for(int j = 0; j < 9; j++)
-				addSlot(new Slot(inventoryPlayer, j+i*9+9, 36+j*18, 103+i*18));
+				addSlot(new Slot(inventoryPlayer, j+i*9+9, 37+j*18, 104+i*18));
 		for(int i = 0; i < 9; i++)
-			addSlot(new Slot(inventoryPlayer, i, 36+i*18, 161));
+			addSlot(new Slot(inventoryPlayer, i, 37+i*18, 162));
 
 		this.addGenericData(GenericContainerData.energy(energy_storage));
 		this.addGenericData(new GenericContainerData<>(GenericDataSerializers.FLOAT, heat));

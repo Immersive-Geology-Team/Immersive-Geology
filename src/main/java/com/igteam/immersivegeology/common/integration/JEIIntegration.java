@@ -45,6 +45,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipeCategories(new IGCrystallizerCategory(guiHelper));
 		registration.addRecipeCategories(new IGGeothermalExchangerCategory(guiHelper));
 		registration.addRecipeCategories(new IGGeologyCategory(guiHelper));
+		registration.addRecipeCategories(new IGTurbineFuelCategory(guiHelper));
 		registration.addRecipeCategories(new IGReverberationCategory(guiHelper));
 		registration.addRecipeCategories(new IGRotaryKilnCategory(guiHelper));
 		registration.addRecipeCategories(new IGChemicalCategory(guiHelper));
@@ -65,6 +66,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipes(JEIRecipeTypes.SLUICE, getRecipes(IndustrialSluiceRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.BLOOMERY, getRecipes(BloomeryRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.GEOHINT, getRecipes(IGGeoRecipe.RECIPES));
+		registration.addRecipes(JEIRecipeTypes.TURBINE_FUEL, getRecipes(TurbineFuel.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.BALLMILL, getRecipes(BallmillRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.PELLETIZER, getRecipes(PelletizerRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.CENTRIFUGE, getRecipes(CentrifugeRecipe.RECIPES));
@@ -79,7 +81,6 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipeCatalyst(IGMultiblockProvider.REVERBERATION_FURNACE.iconStack(), JEIRecipeTypes.REVERBERATION);
 		registration.addRecipeCatalyst(IGMultiblockProvider.ROTARYKILN.iconStack(), JEIRecipeTypes.ROTARYKILN);
 		registration.addRecipeCatalyst(IGMultiblockProvider.CHEMICAL_REACTOR.iconStack(), JEIRecipeTypes.CHEMICAL);
-		//registration.addRecipeCatalyst(IGMultiblockProvider.TROMMEL.iconStack(), JEIRecipeTypes.SLUICE);
 		registration.addRecipeCatalyst(IGMultiblockProvider.BLOOMERY.iconStack(), JEIRecipeTypes.BLOOMERY);
 		registration.addRecipeCatalyst(IGMultiblockProvider.BALLMILL.iconStack(), JEIRecipeTypes.BALLMILL);
 		registration.addRecipeCatalyst(IGMultiblockProvider.PELLETIZER.iconStack(), JEIRecipeTypes.PELLETIZER);
