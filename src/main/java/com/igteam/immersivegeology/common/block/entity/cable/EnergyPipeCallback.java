@@ -60,12 +60,10 @@ public class EnergyPipeCallback implements BlockCallback<EnergyPipeCallback.Key>
 		if (!(blockEntity instanceof IGEnergyPipeEntity pipeBE)) {
 			return this.getDefaultKey();
 		} else {
-			EnumMap connections = new EnumMap(Direction.class);
+			EnumMap<Direction, ConnectionStyle> connections = new EnumMap<>(Direction.class);
 			Direction[] var7 = DirectionUtils.VALUES;
-			int var8 = var7.length;
-
-			for(int var9 = 0; var9 < var8; ++var9) {
-				Direction face = var7[var9];
+			for(Direction face : var7)
+			{
 				connections.put(face, pipeBE.getConnectionStyle(face));
 			}
 

@@ -21,6 +21,8 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
@@ -72,7 +74,18 @@ public class GeothermalConversionRecipe extends IESerializableRecipe implements 
 	{
 		for(GeothermalConversionRecipe recipe : RECIPES.getRecipes(level))
 			if(recipe.transitionBlock.get().equals(block))
+			{
+				FluidState fluidState = block.defaultBlockState().getFluidState();
+				if(!fluidState.isEmpty())
+				{
+					if(fluidState.isSource())
+					{
+						return recipe;
+					}
+					return null;
+				}
 				return recipe;
+			}
 		return null;
 	}
 

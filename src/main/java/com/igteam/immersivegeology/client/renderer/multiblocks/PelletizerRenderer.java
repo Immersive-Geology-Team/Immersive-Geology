@@ -16,6 +16,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.util.MultiblockOri
 import blusunrize.immersiveengineering.client.utils.RenderUtils;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcess;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext.ProcessContextInWorld;
+import com.igteam.immersivegeology.client.helper.LinkedMultiSkin;
 import com.igteam.immersivegeology.client.models.IGDynamicModel;
 import com.igteam.immersivegeology.client.renderer.IGBlockEntityRenderer;
 import com.igteam.immersivegeology.common.block.multiblocks.IGPelletizerMultiblock;
@@ -50,6 +51,7 @@ import org.joml.Vector3f;
 
 import java.util.*;
 
+@LinkedMultiSkin(multiblock = IGPelletizerMultiblock.class)
 public class PelletizerRenderer extends IGBlockEntityRenderer<MultiblockBlockEntityMaster<PelletizerLogic.State>>
 {
     public static final String DISH_NAME = "pelletizer_dish";
@@ -170,67 +172,4 @@ public class PelletizerRenderer extends IGBlockEntityRenderer<MultiblockBlockEnt
             poseStack.popPose();
         poseStack.popPose();
     }
-
-    public void renderDynamicModel(IGDynamicModel model, PoseStack matrix, MultiBufferSource buffer, Direction facing, Level level, BlockPos pos, int light, int overlay, IGPelletizerSkins skin)
-    {
-        matrix.pushPose();
-
-        final String skinKey = skin.getSerializedName();
-
-        List<BakedQuad> outQuads = quadCache.computeIfAbsent(skinKey, key -> {
-            BlockRenderDispatcher brd = Minecraft.getInstance().getBlockRenderer();
-            BlockState state = IGPelletizerMultiblock.INSTANCE.getBlock().defaultBlockState().setValue(PelletizerPart.PELLETIZER, skin);
-
-            BakedModel baseModel = brd.getBlockModel(state);
-            baseModel.getQuads(null, null, ApiUtils.RANDOM_SOURCE, ModelData.EMPTY, RenderType.cutout());
-            TextureAtlasSprite newSprite = baseModel.getParticleIcon(ModelData.EMPTY);
-
-            List<BakedQuad> baseQuads = model.get().getQuads(null, null, ApiUtils.RANDOM_SOURCE, ModelData.EMPTY, null);
-
-            List<BakedQuad> remapped = new ArrayList<>(baseQuads.size());
-            for (BakedQuad q : baseQuads) {
-                TextureAtlasSprite oldSprite = q.getSprite();
-                remapped.add(remapQuad(q, oldSprite, newSprite));
-            }
-            return remapped;
-        });
-
-        rotateForFacing(matrix, facing);
-        RenderUtils.renderModelTESRFancy(outQuads, buffer.getBuffer(RenderType.cutout()), matrix, level, pos, false, 0xffffff, light);
-        matrix.popPose();
-    }
-
-    private static BakedQuad remapQuad(BakedQuad quad, TextureAtlasSprite oldSprite, TextureAtlasSprite newSprite) {
-        int[] vertices = Arrays.copyOf(quad.getVertices(), quad.getVertices().length);
-
-        float oldU0 = oldSprite.getU0(), oldU1 = oldSprite.getU1();
-        float oldV0 = oldSprite.getV0(), oldV1 = oldSprite.getV1();
-
-        float newU0 = newSprite.getU0(), newU1 = newSprite.getU1();
-        float newV0 = newSprite.getV0(), newV1 = newSprite.getV1();
-
-        for (int i = 0; i < vertices.length; i += 8) {
-            float u = Float.intBitsToFloat(vertices[i + 4]);
-            float v = Float.intBitsToFloat(vertices[i + 5]);
-
-            float normU = (u - oldU0) / (oldU1 - oldU0);
-            float normV = (v - oldV0) / (oldV1 - oldV0);
-
-            float mappedU = newU0 + normU * (newU1 - newU0);
-            float mappedV = newV0 + normV * (newV1 - newV0);
-
-            vertices[i + 4] = Float.floatToRawIntBits(mappedU);
-            vertices[i + 5] = Float.floatToRawIntBits(mappedV);
-        }
-
-        return new BakedQuad(
-                vertices,
-                quad.getTintIndex(),
-                quad.getDirection(),
-                newSprite,
-                quad.isShade(),
-                quad.hasAmbientOcclusion()
-        );
-    }
-
 }

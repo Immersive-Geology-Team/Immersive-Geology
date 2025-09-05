@@ -1,0 +1,7 @@
+{
+  "type": "immersivegeology:tubrine_fuel",
+  "burnTime": 16,
+  "consume_amount": 25,
+  "fluidTag": "forge:high_pressure_steam",
+  "outputRatio": 0.5
+}

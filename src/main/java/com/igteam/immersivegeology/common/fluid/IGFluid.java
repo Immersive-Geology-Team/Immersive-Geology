@@ -29,7 +29,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ScreenEffectRenderer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
+import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -40,10 +43,15 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -51,6 +59,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
@@ -72,6 +81,22 @@ public abstract class IGFluid extends FlowingFluid implements IGBlockType
 	protected final ItemCategoryFlags bucket_type;
 	protected final Supplier<FluidType> type;
 	private FluidType cached;
+	public static final DispenseItemBehavior BUCKET_DISPENSE_BEHAVIOR = new DefaultDispenseItemBehavior() {
+		private final DefaultDispenseItemBehavior defaultBehavior = new DefaultDispenseItemBehavior();
+
+		public ItemStack execute(BlockSource source, ItemStack stack) {
+			BucketItem bucketitem = (BucketItem)stack.getItem();
+			BlockPos blockpos = source.getPos().relative((Direction)source.getBlockState().getValue(DispenserBlock.FACING));
+			Level world = source.getLevel();
+			if (bucketitem.emptyContents((Player)null, world, blockpos, (BlockHitResult)null)) {
+				bucketitem.checkExtraContent((Player)null, world, stack, blockpos);
+				return new ItemStack(Items.BUCKET);
+			} else {
+				return this.defaultBehavior.dispense(source, stack);
+			}
+		}
+	};
+
 	public IGFluid(BlockCategoryFlags flag, ItemCategoryFlags bucket_type, MaterialInterface<?> material, MaterialInterface<?> overlay)
 	{
 		this.materialMap.put(MaterialTexture.base, material);

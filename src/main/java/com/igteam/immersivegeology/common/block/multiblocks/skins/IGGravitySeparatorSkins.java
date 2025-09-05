@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
 
-public enum IGGravitySeparatorSkins implements StringRepresentable, IIGMultiSkinHelper
+public enum IGGravitySeparatorSkins implements IIGMultiSkinHelper
 {
 	DEFAULT("default", ChatFormatting.GOLD, SkinCreditType.DEVELOPER, "muddykat"),
 	LEGACY("legacy", ChatFormatting.UNDERLINE, SkinCreditType.DEVELOPER,"muddykat"),
@@ -75,5 +75,11 @@ public enum IGGravitySeparatorSkins implements StringRepresentable, IIGMultiSkin
 	public Item getItem()
 	{
 		return IGRegistrationHolder.getItem.apply(multiblockName() + "_multiblock_skin_" + getSerializedName());
+	}
+
+	@Override
+	public Enum<?> instance()
+	{
+		return this;
 	}
 }

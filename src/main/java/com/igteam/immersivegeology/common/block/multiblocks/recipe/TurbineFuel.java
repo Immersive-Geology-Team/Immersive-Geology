@@ -37,19 +37,22 @@ public class TurbineFuel extends IESerializableRecipe
 	public static final CachedRecipeList<TurbineFuel> RECIPES;
 	private final FastEither<TagKey<Fluid>, List<Fluid>> fluids;
 	private final int burnTime;
+	private final int consume_amount;
 	private final float outputRatio;
 
-	public TurbineFuel(ResourceLocation id, TagKey<Fluid> fluids, float outputRatio, int burnTime) {
+	public TurbineFuel(ResourceLocation id, TagKey<Fluid> fluids, float outputRatio, int consume_amount, int burnTime) {
 		super(LAZY_EMPTY, IGRecipeTypes.TURBINE_FUEL, id);
 		this.fluids = FastEither.left(fluids);
 		this.burnTime = burnTime;
 		this.outputRatio = outputRatio;
+		this.consume_amount = consume_amount;
 	}
 
-	public TurbineFuel(ResourceLocation id, List<Fluid> fluids, float outputRatio, int burnTime) {
+	public TurbineFuel(ResourceLocation id, List<Fluid> fluids, float outputRatio, int consume_amount, int burnTime) {
 		super(LAZY_EMPTY, IGRecipeTypes.TURBINE_FUEL, id);
 		this.fluids = FastEither.right(fluids);
 		this.burnTime = burnTime;
+		this.consume_amount = consume_amount;
 		this.outputRatio = outputRatio;
 	}
 
@@ -61,6 +64,11 @@ public class TurbineFuel extends IESerializableRecipe
 
 	public int getBurnTime() {
 		return this.burnTime;
+	}
+
+	public int getConsumed()
+	{
+		return consume_amount;
 	}
 
 	public float getOutputRatio()

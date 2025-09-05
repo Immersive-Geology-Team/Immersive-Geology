@@ -47,6 +47,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.AirBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -219,7 +220,6 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 			IGShaders.setGeothermalRenderData(0.8f);
 			int blockIndex = 0;
 			TransformingVertexBuilder translucentFullbright = new TransformingVertexBuilder(bufferSource, IGRenderTypes.GEOTHERMAL_DISPLAY);
-
 			for(int h = -1; h < structureHeight; ++h) {
 				for(int l = 0; l < structureLength; ++l) {
 					for(int w = 0; w < structureWidth; ++w) {
@@ -231,29 +231,30 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 							if(blockIndex > 53) continue;
 							int heatState = unpackHeatStateAtIndex(blockIndex);
 							Block heatBlock = GeothermalConversionRecipe.getBlockFromIndex(level, heatState);
-
 							pose.pushPose();
 							pose.translate((float)l, (float)h, (float)w);
 							ModelData modelData = ModelData.EMPTY;
 							BlockState extraState = heatBlock.defaultBlockState();
 							BakedModel model = blockRender.getBlockModel(extraState);
 							modelData = model.getModelData(this.structureWorld, pos, extraState, modelData);
-							if(heatBlock.defaultBlockState().getFluidState().is(Fluids.EMPTY))
+							pose.pushPose();
 							{
-								pose.pushPose();
-								pose.translate(-0.5,0.5,0.5);
-								blockRender.getModelRenderer().tesselateBlock(this.structureWorld, model, extraState, pos, pose, translucentFullbright, false, this.structureWorld.random, state.getSeed(pos), overlay, modelData, (RenderType)null);
-								pose.popPose();
-							}
-							if(!heatBlock.defaultBlockState().getFluidState().is(Fluids.EMPTY) && heatBlock.defaultBlockState().getFluidState().isSource())
-							{
-								pose.pushPose();
-								Fluid fluid = heatBlock.defaultBlockState().getFluidState().getType();
-								IClientFluidTypeExtensions fluidAttributes = IClientFluidTypeExtensions.of(fluid);
-								TextureAtlasSprite flowing = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluidAttributes.getFlowingTexture());
-								TextureAtlasSprite still = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluidAttributes.getStillTexture());
-								pose.translate(-0.5,0.5,0.5);
-								IGFluidRenderHelper.renderCuboid(pose, translucentFullbright, fluidCube, still, flowing, new Vector3f(0,0,0), new Vector3f(1,1,1), 0xffffffff, 0xffffffff);
+								pose.translate(-0.5, 0.5, 0.5);
+								{
+									if(extraState.getFluidState().is(Fluids.EMPTY))
+									{
+										blockRender.getModelRenderer().tesselateBlock(this.structureWorld, model, extraState, pos, pose, translucentFullbright, false, this.structureWorld.random, state.getSeed(pos), overlay, modelData, (RenderType)null);
+									}
+
+									if(!extraState.getFluidState().is(Fluids.EMPTY))
+									{
+										Fluid fluid = heatBlock.defaultBlockState().getFluidState().getType();
+										IClientFluidTypeExtensions fluidAttributes = IClientFluidTypeExtensions.of(fluid);
+										TextureAtlasSprite flowing = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluidAttributes.getFlowingTexture());
+										TextureAtlasSprite still = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluidAttributes.getStillTexture());
+										IGFluidRenderHelper.renderCuboid(pose, translucentFullbright, fluidCube, still, flowing, new Vector3f(0, 0, 0), new Vector3f(1, 1, 1), 0xffffffff, 0xffffffff);
+									}
+								}
 								pose.popPose();
 							}
 							pose.popPose();

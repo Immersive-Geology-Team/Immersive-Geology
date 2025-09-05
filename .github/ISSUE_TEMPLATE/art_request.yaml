@@ -1,0 +1,116 @@
+name: Pixel Art Task / Request / Style Guide Contribution
+description: Template for managing pixel art tasks, style guide proposals, asset tracking, and team collaboration.
+labels: ["pixel-art", "style-guide", "asset-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This template is intended for use by the Immersive Geology art team.
+
+        Use it to:
+        - Propose or contribute to the style guide
+        - Submit missing or requested assets
+        - Suggest revisions to existing assets
+        - Discuss visual consistency (themes, palettes, techniques)
+        - Organize and prioritize pixel art-related work
+
+        Before submitting, check open issues to avoid duplication.
+
+  - type: dropdown
+    attributes:
+      label: Type of Entry
+      description: What kind of task or contribution is this?
+      options:
+        - New Asset Request
+        - Missing Asset Report
+        - Style Guide Proposal
+        - Existing Asset Review / Feedback
+        - Palette / Theme Discussion
+        - General Art Task
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Asset or Topic Name
+      description: A clear and specific name for the asset, proposal, or topic being addressed.
+      placeholder: "e.g., 'X Multiblock GUI', 'Reworking Ore Variant Palette', 'Missing Rusted Rotary Kiln Multiblock Texture'"
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
+      label: Asset Type
+      description: Select the relevant asset category.
+      options:
+        - Texture: Item
+        - Texture: Block
+        - Texture: Model (e.g. Multiblocks)
+        - Texture: Armor
+        - Texture: GUI
+        - 3D Model: Multiblock
+        - 3D Model: Special Block
+        - 3D Model: Special Item
+        - Other / Multi-type
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Description or Proposal
+      description: |
+        Describe the asset or concept in detail. For asset requests, include expected use and visual requirements.
+        For style guide contributions, describe the theory or guideline you're proposing and its intended impact.
+      placeholder: |
+        This task involves creating GUI backgrounds for the different multiblock variations.
+        Should visually differentiate between multiblock skins while maintaining a consistent design language.
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
+      label: Priority Level
+      description: How important is this task to current development or release goals?
+      options:
+        - Critical (blocks active development or upcoming release)
+        - High (needed to align visuals or support planned features)
+        - Medium (helps improve consistency or polish)
+        - Low (non-blocking, long-term or backlog)
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Style / Theme Guidelines
+      description: |
+        Reference any existing style guide principles, palettes, or theming considerations relevant to this task.
+        If proposing new visual direction, describe how it integrates with the rest of the IG aesthetic.
+      placeholder: |
+        Uses the "Industrial" theme established in base IG GUI assets.
+        Should adopt same corner trims and metallic color palette as the Rotary Kiln GUI.
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: References or Attachments
+      description: |
+        Optional: Provide visual references, mockups, or links to related assets.
+        Attach concept sketches or screenshots if applicable.
+      placeholder: |
+        - Existing GUI example: [link]
+        - Screenshot of current multiblock asset
+        - Color palette comparison
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: Notes or Questions for the Art Team
+      description: |
+        Include discussion points, open questions, or requests for input from other artists or developers.
+      placeholder: |
+        - Should this use the same layout rules as the Chemical Reactor GUI?
+        - How does this texture fit with the darker stone variants?
+    validations:
+      required: false

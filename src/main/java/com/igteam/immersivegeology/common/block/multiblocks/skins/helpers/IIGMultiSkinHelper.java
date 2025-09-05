@@ -10,12 +10,13 @@ package com.igteam.immersivegeology.common.block.multiblocks.skins.helpers;
 
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.ChatFormatting;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 
 import java.util.Locale;
 
-public interface IIGMultiSkinHelper
+public interface IIGMultiSkinHelper extends StringRepresentable
 {
 	String getSkin();
 	String getCredit();
@@ -33,4 +34,6 @@ public interface IIGMultiSkinHelper
 	}
 
 	default Rarity getRarity() {return Rarity.UNCOMMON;};
+
+	Enum<?> instance();
 }

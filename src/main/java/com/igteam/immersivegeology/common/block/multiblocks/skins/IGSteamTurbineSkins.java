@@ -15,7 +15,7 @@ import net.minecraft.util.StringRepresentable;
 
 import java.util.Locale;
 
-public enum IGSteamTurbineSkins implements StringRepresentable, IIGMultiSkinHelper
+public enum IGSteamTurbineSkins implements IIGMultiSkinHelper
 {
 	DEFAULT("default", ChatFormatting.GOLD, SkinCreditType.PETER, "peter"),
 	INDUSTRIAL("industrial", ChatFormatting.GRAY, SkinCreditType.PETER, "peter"),
@@ -66,5 +66,11 @@ public enum IGSteamTurbineSkins implements StringRepresentable, IIGMultiSkinHelp
 	public boolean alternativeModel()
 	{
 		return false;
+	}
+
+	@Override
+	public Enum<?> instance()
+	{
+		return this;
 	}
 }

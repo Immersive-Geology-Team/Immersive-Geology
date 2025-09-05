@@ -201,6 +201,8 @@ public class ImmersiveGeology {
         IGRegistrationHolder.buildMaterialRecipes();
         IGLib.IG_LOGGER.info("- Event Handler Registration");
         MinecraftForge.EVENT_BUS.register(new IGCommonForgeEvents());
+
+        proxy.registerFluidBehaviour(event);
     }
 
 }

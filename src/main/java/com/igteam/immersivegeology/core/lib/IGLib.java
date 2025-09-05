@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraftforge.energy.IEnergyStorage;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 
@@ -125,6 +126,13 @@ public class IGLib {
         return hash;
     }
 
+    public static int pushEnergy(IEnergyStorage provider, IEnergyStorage receiver, int maxAmount) {
+        int energySim = provider.extractEnergy(maxAmount, true);
+        int receivedSim = receiver.receiveEnergy(energySim, true);
+        int energy = provider.extractEnergy(receivedSim, false);
+        receiver.receiveEnergy(energy, false);
+        return energy;
+    }
 	public static class PrefixedLogger implements Logger {
         private final Logger delegate;
         private final String prefix;

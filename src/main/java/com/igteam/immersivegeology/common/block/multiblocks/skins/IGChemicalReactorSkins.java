@@ -19,7 +19,7 @@ import net.minecraft.world.level.ItemLike;
 
 import java.util.Locale;
 
-public enum IGChemicalReactorSkins implements StringRepresentable, IIGMultiSkinHelper
+public enum IGChemicalReactorSkins implements IIGMultiSkinHelper
 {
 	DEFAULT("default", ChatFormatting.GOLD, SkinCreditType.PETER, "peter"),
 	LEGACY("legacy", ChatFormatting.UNDERLINE, SkinCreditType.DEVELOPER, "muddykat"),
@@ -80,5 +80,11 @@ public enum IGChemicalReactorSkins implements StringRepresentable, IIGMultiSkinH
 	public boolean alternativeModel()
 	{
 		return false;
+	}
+
+	@Override
+	public Enum<?> instance()
+	{
+		return this;
 	}
 }

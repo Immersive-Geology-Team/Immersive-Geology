@@ -42,9 +42,10 @@ public class TurbineFuelSerializer extends IERecipeSerializer<TurbineFuel>
 	{
 		ResourceLocation tagName = new ResourceLocation(json.get(FLUID_TAG_KEY).getAsString());
 		TagKey<Fluid> tag = TagKey.create(Registries.FLUID, tagName);
-		int amount = json.get(BURN_TIME_KEY).getAsInt();
+		int amount = json.get(CONSUME_AMOUNT_KEY).getAsInt();
+		int burn_time = json.get(BURN_TIME_KEY).getAsInt();
 		float outputRatio = json.get(OUTPUT_RATIO).getAsFloat();
-		return new TurbineFuel(recipeId, tag, outputRatio, amount);
+		return new TurbineFuel(recipeId, tag, outputRatio, amount, burn_time);
 	}
 
 	@Nullable
@@ -52,9 +53,10 @@ public class TurbineFuelSerializer extends IERecipeSerializer<TurbineFuel>
 	public TurbineFuel fromNetwork(@Nonnull ResourceLocation recipeId, @Nonnull FriendlyByteBuf buffer)
 	{
 		List<Fluid> fluids = PacketUtils.readList(buffer, buf -> buf.readRegistryIdUnsafe(ForgeRegistries.FLUIDS));
+		int consume_amount = buffer.readInt();
 		int burnTime = buffer.readInt();
 		float outputRatio = buffer.readFloat();
-		return new TurbineFuel(recipeId, fluids, outputRatio, burnTime);
+		return new TurbineFuel(recipeId, fluids, outputRatio,consume_amount, burnTime);
 	}
 
 	@Override
@@ -63,6 +65,7 @@ public class TurbineFuelSerializer extends IERecipeSerializer<TurbineFuel>
 		PacketUtils.writeList(
 				buffer, recipe.getFluids(), (f, buf) -> buf.writeRegistryIdUnsafe(ForgeRegistries.FLUIDS, f)
 		);
+		buffer.writeInt(recipe.getConsumed());
 		buffer.writeInt(recipe.getBurnTime());
 		buffer.writeFloat(recipe.getOutputRatio());
 	}

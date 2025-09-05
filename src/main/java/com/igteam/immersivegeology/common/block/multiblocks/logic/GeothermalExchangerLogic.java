@@ -29,6 +29,7 @@ import blusunrize.immersiveengineering.common.util.CachedRecipe;
 import blusunrize.immersiveengineering.common.util.Utils;
 import com.igteam.immersivegeology.common.block.multiblocks.IGGeothermalExchangerMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.GeothermalHeatHelper;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.LazyGetter;
 import com.igteam.immersivegeology.common.block.multiblocks.part.GeothermalPart;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.*;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.GeothermalExchangerShape;
@@ -37,14 +38,18 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.Capability;
@@ -113,6 +118,18 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
             processActiveState(state, context, multiblockLevel, rawLevel);
         }
 
+        List<TagKey<Biome>> biome_keys = state.biome_cache.get(multiblockLevel.getAbsoluteOrigin());
+
+        for(TagKey<Biome> biome_key : biome_keys)
+        {
+            GeothermalBiomeRecipe recipe = GeothermalBiomeRecipe.findRecipe(rawLevel, biome_key);
+            if(recipe != null)
+            {
+                state.minimum_temperature = recipe.getMinHeat();
+                state.maximum_temperature = recipe.getMaxHeat();
+            }
+        }
+
         state.ticks++;
         if(state.ticks % GUI_SYNC_INTERVAL == 0)
         {
@@ -174,12 +191,12 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
                 GeothermalConversionRecipe recipe = state.heatHelper.findCellWithHeat(exchangerRecipe.isCooling(), outputTemp);
                 if(recipe!=null)
                 {
-                    state.heat = recipe.blockHeat;
+                    state.heat = Math.max(state.minimum_temperature, Math.min(recipe.blockHeat, state.maximum_temperature));
                 }
                 else
                 {
                     int inputFluidTemp = exchangerRecipe.fluidIn.getRandomizedExampleStack(0).getFluid().getFluidType().getTemperature();
-                    state.heat = (int)Mth.lerp(HEAT_LERP_FACTOR, state.heat, inputFluidTemp);
+                    state.heat = (int)Mth.lerp(HEAT_LERP_FACTOR, state.heat, Math.max(state.minimum_temperature, Math.min(inputFluidTemp, state.maximum_temperature)));
                 }
 
                 if (shouldProcessConversion(state, multiblockLevel)) {
@@ -187,7 +204,7 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
                 }
             }
         } else {
-            state.heat = (int)Mth.lerp(HEAT_LERP_FACTOR, state.heat, 300);
+            state.heat = (int)Mth.lerp(HEAT_LERP_FACTOR, state.heat, state.minimum_temperature);
         }
     }
 
@@ -256,7 +273,8 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
         if (lowerTransition == null) {
             return false;
         }
-
+        // Add recipe for biome to hold a 'heat' value, check if a biome we're in has said recipe, if so get the biome heat, then that is the MINIMUM heat for block transitions.
+        // Speed of transition is also stored here, so we can have this be faster or slower in different biomes.
         final BlockPos absolutePos = multiblockLevel.toAbsolute(localPos).below();
         rawLevel.setBlock(absolutePos, lowerTransition.defaultBlockState(), 3);
         return true;
@@ -308,14 +326,18 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
                 {
                     cursor.set(l, h, w);
                     BlockState relativeState = multiblockLevel.getBlockState(cursor);
-                    if(index < 66 && !(relativeState.getBlock() instanceof GeothermalPart))
+                    FluidState fluidState = relativeState.getFluidState();
+                    Block block = relativeState.getBlock();
+                    boolean isFluid = !fluidState.isEmpty();
+                    boolean isSource = isFluid && fluidState.isSource();
+
+                    if (index < 66 && !(block instanceof GeothermalPart))
                     {
-                        Block block = relativeState.getBlock();
                         blockSet.add(block);
 
                         GeothermalConversionRecipe recipe = GeothermalConversionRecipe.findRecipe(rawLevel, block);
                         int heatBlockIndex = -1;
-                        if(recipe != null)
+                        if(recipe != null && (isSource || !isFluid))
                         {
                             List<GeothermalConversionRecipe> recipeList = GeothermalConversionRecipe.RECIPES.getRecipes(rawLevel).stream().toList();
                             heatBlockIndex = recipeList.indexOf(recipe);
@@ -380,6 +402,11 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
         private final CapabilityReference<IFluidHandler> fluidOutput;
         private final StoredCapability<IEnergyStorage> energyCap;
         private final Supplier<GeothermalExchangerRecipe> cachedRecipe;
+        private final LazyGetter<BlockPos, List<TagKey<Biome>>> biome_cache;
+
+
+        private int minimum_temperature;
+        private int maximum_temperature;
 
         private final MultiblockProcessor.InMachineProcessor<GeothermalExchangerRecipe> dummy;
         private final GeothermalHeatHelper heatHelper;
@@ -390,6 +417,8 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
             this.display_heat = 0;
             this.heat = 300;
             this.cooling_rate = 0;
+            this.minimum_temperature = 1;
+            this.maximum_temperature = 3200;
             Runnable changedAndSync = () -> {
                 context.getSyncRunnable().run();
                 context.getMarkDirtyRunnable().run();
@@ -399,11 +428,15 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
             this.fOutputCap = new StoredCapability<>(new ArrayFluidHandler(output_tank, true, false, changedAndSync));
 
             Supplier<Level> getLevel = context.levelSupplier();
+
+            biome_cache = new LazyGetter<>((b) -> getLevel.get().getBiome(b).getTagKeys().toList());
+
             heatHelper = new GeothermalHeatHelper(getLevel);
             this.cachedRecipe = CachedRecipe.cached(GeothermalExchangerRecipe::findRecipe, getLevel, this.water_tank::getFluid);
             this.processor = new MultiblockProcessor<>(
                     1, 0, 1, context.getMarkDirtyRunnable(), GeothermalExchangerRecipe.RECIPES::getById
             );
+
 			assert FLUID_OUTPUT_CAP.side()!=null;
 			this.fluidOutput = context.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(FLUID_OUTPUT_CAP.side().getOpposite(), FLUID_OUTPUT_CAP.posInMultiblock().north()));
             this.dummy = new InMachineProcessor<>(1, 0, 1, context.getMarkDirtyRunnable(), GeothermalExchangerRecipe.RECIPES::getById);
@@ -432,6 +465,8 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
             heating_states = nbt.getByteArray("heating_states");
             currentY = nbt.getInt("current_y");
             ticks = nbt.getInt("internal_ticks");
+            minimum_temperature = nbt.getInt("min_heat");
+            maximum_temperature = nbt.getInt("max_heat");
         }
 
         @Override
@@ -441,6 +476,8 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
             nbt.putByteArray("heating_states", heating_states);
             nbt.putInt("current_y", currentY);
             nbt.putInt("internal_ticks", ticks);
+            nbt.putInt("min_heat", minimum_temperature);
+            nbt.putInt("max_heat", maximum_temperature);
         }
 
         @Override

@@ -15,7 +15,7 @@ import net.minecraft.util.StringRepresentable;
 
 import java.util.Locale;
 
-public enum IGSmallChemicalReactorSkins implements StringRepresentable, IIGMultiSkinHelper
+public enum IGSmallChemicalReactorSkins implements IIGMultiSkinHelper
 {
 	DEFAULT("default", ChatFormatting.GOLD, SkinCreditType.PETER, "peter"),
 	STEAMPUNK("steampunk", ChatFormatting.DARK_RED, SkinCreditType.CREATOR, "wanderingbeekeeper");
@@ -64,5 +64,11 @@ public enum IGSmallChemicalReactorSkins implements StringRepresentable, IIGMulti
 	public boolean alternativeModel()
 	{
 		return false;
+	}
+
+	@Override
+	public Enum<?> instance()
+	{
+		return this;
 	}
 }

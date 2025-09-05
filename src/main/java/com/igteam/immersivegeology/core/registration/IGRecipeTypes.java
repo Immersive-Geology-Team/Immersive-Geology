@@ -36,14 +36,15 @@ public class IGRecipeTypes
 	public static final TypeWithClass<ChemicalRecipe> CHEMICAL_REACTOR = register("chemical_reactor", ChemicalRecipe.class);
 	public static final TypeWithClass<GeothermalExchangerRecipe> GEOTHERMAL_EXCHANGER = register("geothermal_exchanger", GeothermalExchangerRecipe.class);
 	public static final TypeWithClass<GeothermalConversionRecipe> GEOTHERMAL_EXCHANGER_CONVERTION = register("geothermal_convertion", GeothermalConversionRecipe.class);
+	public static final TypeWithClass<GeothermalBiomeRecipe> GEOTHERMAL_EXCHANGER_BIOME = register("geothermal_biome", GeothermalBiomeRecipe.class);
 	public static final TypeWithClass<BloomeryRecipe> BLOOMERY = register("bloomery", BloomeryRecipe.class);
 	public static final TypeWithClass<BallmillRecipe> BALLMILL = register("ballmill", BallmillRecipe.class);
 	public static final TypeWithClass<PelletizerRecipe> PELLETIZER = register("pelletizer",PelletizerRecipe.class);
 	public static final TypeWithClass<FoundryRecipe> FOUNDRY = register("foundry",FoundryRecipe.class);
 	public static final TypeWithClass<EmptyRecipe> EMPTY = register("empty", EmptyRecipe.class);
 
-	public static final TypeWithClass<? extends Recipe<?>> BLOOMERY_FUEL = register("bloomery_fuel", BloomeryFuel.class);
-	public static final TypeWithClass<? extends Recipe<?>> TURBINE_FUEL = register("turbine_fuel", TurbineFuel.class);
+	public static final TypeWithClass<BloomeryFuel> BLOOMERY_FUEL = register("bloomery_fuel", BloomeryFuel.class);
+	public static final TypeWithClass<TurbineFuel> TURBINE_FUEL = register("turbine_fuel", TurbineFuel.class);
 
 	private static <T extends Recipe<?>>
 	TypeWithClass<T> register(String name, Class<T> type)

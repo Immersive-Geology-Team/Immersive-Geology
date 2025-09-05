@@ -20,13 +20,18 @@ import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.DispensibleContainerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -35,13 +40,14 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Supplier;
 
-public class IGGenericBucketItem extends BucketItem implements IGFlagItem {
+public class IGGenericBucketItem extends BucketItem implements IGFlagItem, DispensibleContainerItem
+{
     private final Map<MaterialTexture, MaterialInterface<?>> materialMap = new HashMap<>();
     private final BlockCategoryFlags fluid_category;
     private final ItemCategoryFlags bucket_type;
@@ -51,6 +57,7 @@ public class IGGenericBucketItem extends BucketItem implements IGFlagItem {
         this.materialMap.put(MaterialTexture.base, material);
         this.fluid_category = flag;
         this.bucket_type = bucket_type;
+
     }
 
     public IGGenericBucketItem(Supplier<? extends Fluid> fluid, BlockCategoryFlags flag, ItemCategoryFlags bucket_type, MaterialInterface<?> material, MaterialInterface<?> extra) {
@@ -154,6 +161,12 @@ public class IGGenericBucketItem extends BucketItem implements IGFlagItem {
     public IFlagType<?> getBucketType()
     {
         return bucket_type;
+    }
+
+    @Override
+    public boolean emptyContents(@Nullable Player p_150716_, Level p_150717_, BlockPos p_150718_, @Nullable BlockHitResult p_150719_, @Nullable ItemStack container)
+    {
+        return super.emptyContents(p_150716_, p_150717_, p_150718_, p_150719_, container);
     }
 
     private static class FluidHandler implements IFluidHandlerItem, ICapabilityProvider

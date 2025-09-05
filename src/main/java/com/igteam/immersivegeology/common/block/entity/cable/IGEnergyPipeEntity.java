@@ -2,6 +2,14 @@ package com.igteam.immersivegeology.common.block.entity.cable;
 
 
 import blusunrize.immersiveengineering.api.IETags;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockBEHelper;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockBEHelperDummy;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockBE;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityDummy;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.util.CapabilityPosition;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.util.RelativeBlockFace;
 import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.api.utils.DirectionUtils;
 import blusunrize.immersiveengineering.api.utils.SafeChunkUtils;
@@ -17,12 +25,16 @@ import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.WorldMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
+import com.igteam.immersivegeology.common.block.helper.IGUndefinedEnergyInterface;
+import com.igteam.immersivegeology.common.block.helper.MultiblockCapabilityReference;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import it.unimi.dsi.fastutil.HashCommon;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Direction.Axis;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -75,7 +87,7 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 	@Nullable
 	private DyeColor color;
 	private final Map<Direction, ResettableCapability<IEnergyStorage>> sidedHandlers;
-	private final Map<Direction, CapabilityReference<IEnergyStorage>> neighbors;
+	private final Map<Direction, MultiblockCapabilityReference<IEnergyStorage>> neighbors;
 	private static final CachedVoxelShapes<IGEnergyPipeEntity.BoundingBoxKey> SHAPES = new CachedVoxelShapes<>(IGEnergyPipeEntity::getBoxes);
 
 	public IGEnergyPipeEntity(BlockPos pos, BlockState state) {
@@ -92,16 +104,13 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 		this.cover = Blocks.AIR;
 		this.connections = 0;
 		this.color = null;
-		this.sidedHandlers = new EnumMap(Direction.class);
-		this.neighbors = CapabilityReference.forAllNeighbors(this, ForgeCapabilities.ENERGY);
-		var3 = DirectionUtils.VALUES;
-		var4 = var3.length;
+		this.sidedHandlers = new EnumMap<>(Direction.class);
+		this.neighbors = MultiblockCapabilityReference.forAllNeighbors(this, ForgeCapabilities.ENERGY);
 
 		for(var5 = 0; var5 < var4; ++var5) {
 			f = var3[var5];
 			this.sidedHandlers.put(f, this.registerCapability(new PipeEnergyHandler(this, f)));
 		}
-
 	}
 
 	@Override
@@ -159,7 +168,6 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 					BlockEntity pipeTile = Utils.getExistingTileEntity(world, next);
 					if (!closedList.contains(next) && pipeTile instanceof IGEnergyPipeEntity) {
 						closedList.add(next);
-
 						// Check all six directions
 						for (Direction fd : DirectionUtils.VALUES) {
 							if (((IGEnergyPipeEntity)pipeTile).hasOutputConnection(fd)) {
@@ -357,10 +365,22 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 			int mask = 1 << i;
 			this.connections = (byte)(this.connections & ~mask);
 			if (this.sideConfig.getBoolean(dir)) {
-				IEnergyStorage handler = (IEnergyStorage)((CapabilityReference)this.neighbors.get(dir)).getNullable();
-				if (handler != null && handler.getEnergyStored() >= 0) {
+				MultiblockCapabilityReference<IEnergyStorage> neighbor = this.neighbors.get(dir);
+				IEnergyStorage handler = neighbor.getNullable();
+				if (handler != null &&  (handler.getEnergyStored() >= 0  || !(handler instanceof IGUndefinedEnergyInterface))) {
 					this.connections = (byte)(this.connections | mask);
 				}
+//				BlockEntity be = this.level.getBlockEntity(this.getBlockPos().relative(dir));
+//				if(be instanceof IMultiblockBE<?> mbe) {
+//					IMultiblockBEHelper<?> helper = mbe.getHelper();
+//					IMultiblockContext<?> context = helper.getContext();
+//					if(context == null) return oldConn != this.connections;
+//					CapabilityPosition capPos = new CapabilityPosition(helper.getPositionInMB().relative(dir.getOpposite()), RelativeBlockFace.from(context.getLevel().getOrientation(),dir.getAxis().equals(Axis.Y) ? dir.getOpposite() : dir));
+//					if(helper.getMultiblock().logic().getCapability((IMultiblockContext)context, capPos, ForgeCapabilities.ENERGY).isPresent())
+//					{
+//						this.connections = (byte)(this.connections | mask);
+//					}
+//				}
 			}
 
 			return oldConn != this.connections;
@@ -378,14 +398,27 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 		for(int var5 = 0; var5 < var4; ++var5) {
 			Direction dir = var3[var5];
 			if ((availableConnections & mask) == 0) {
-				if (this.level.getBlockEntity(this.getBlockPos().relative(dir)) instanceof IGEnergyPipeEntity) {
+				BlockEntity be = this.level.getBlockEntity(this.getBlockPos().relative(dir));
+				if (be instanceof IGEnergyPipeEntity) {
 					availableConnections = (byte)(availableConnections | mask);
 				} else {
-					IEnergyStorage handler = (IEnergyStorage)((CapabilityReference)this.neighbors.get(dir)).getNullable();
+					IEnergyStorage handler = this.neighbors.get(dir).getNullable();
 					if (handler != null && handler.getEnergyStored() > 0) {
 						availableConnections = (byte)(availableConnections | mask);
+						continue;
 					}
+//					if(be instanceof IMultiblockBE<?> mbe) {
+//						IMultiblockBEHelper<?> helper = mbe.getHelper();
+//						IMultiblockContext<?> context = helper.getContext();
+//						if(context == null) continue;
+//						CapabilityPosition capPos = new CapabilityPosition(helper.getPositionInMB().relative(dir.getOpposite()), RelativeBlockFace.from(context.getLevel().getOrientation(),dir.getAxis().equals(Axis.Y) ? dir.getOpposite() : dir));
+//						if(helper.getMultiblock().logic().getCapability((IMultiblockContext)context, capPos, ForgeCapabilities.ENERGY).isPresent())
+//						{
+//							availableConnections = (byte)(availableConnections | mask);
+//						}
+//					}
 				}
+
 			}
 
 			mask <<= 1;
@@ -398,9 +431,9 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 		if ((this.connections & 1 << connection.get3DDataValue()) == 0) {
 			return IGEnergyPipeEntity.ConnectionStyle.NO_CONNECTION;
 		} else if (this.connections != 3 && this.connections != 12 && this.connections != 48) {
-			IEnergyStorage handler = (IEnergyStorage)((CapabilityReference)this.neighbors.get(connection)).getNullable();
+			IEnergyStorage handler = this.neighbors.get(connection).getNullable();
 			BlockEntity con = Utils.getExistingTileEntity(this.level, this.getBlockPos().relative(connection));
-			if(handler!=null&&handler.getEnergyStored() >= 0 &! (con instanceof IGEnergyPipeEntity))
+			if(handler!=null&& (handler.getEnergyStored() >= 0) &! (con instanceof IGEnergyPipeEntity))
 			{
 				return ConnectionStyle.PLUGGED;
 			}
@@ -415,8 +448,8 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 				}
 			} else
 			{
-				IEnergyStorage handler = (IEnergyStorage)((CapabilityReference)this.neighbors.get(connection)).getNullable();
-				if(handler!=null&&handler.getEnergyStored() >= 0)
+				IEnergyStorage handler = this.neighbors.get(connection).getNullable();
+				if(handler!=null&& (handler.getEnergyStored() >= 0  || !(handler instanceof IGUndefinedEnergyInterface)))
 				{
 					return ConnectionStyle.PLUGGED;
 				}
@@ -663,7 +696,6 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 					}
 				}
 			}
-
 		}
 	}
 
@@ -705,7 +737,7 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 			}
 
 			Set<DirectionalEnergyOutput> outputList = IGEnergyPipeEntity.getConnectedEnergyHandlers(this.pipe.getBlockPos(), this.pipe.level);
-			if (outputList.size() < 1) {
+			if (outputList.isEmpty()) {
 				return 0;
 			}
 
@@ -736,10 +768,6 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 						sum += accepted;
 					}
 				}
-			}
-
-			if (sum <= 0) {
-				return 0;
 			}
 
 			// Second pass: Actually transfer the energy
@@ -796,7 +824,7 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 			// Remove the block we're extracting to from potential sources
 			outputList.removeIf(output -> sourcePos.equals(output.containingTile().getBlockPos()));
 
-			if (outputList.size() < 1) {
+			if (outputList.isEmpty()) {
 				return 0;
 			}
 
@@ -821,7 +849,6 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 
 		@Override
 		public int getEnergyStored() {
-			// Energy pipes don't store energy, they only transfer it
 			return 0;
 		}
 

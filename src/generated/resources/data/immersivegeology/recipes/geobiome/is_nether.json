@@ -1,0 +1,8 @@
+{
+  "type": "immersivegeology:geothermal_biome",
+  "biome_tags": [
+    "minecraft:is_nether"
+  ],
+  "max_heat": 4000,
+  "min_heat": 900
+}

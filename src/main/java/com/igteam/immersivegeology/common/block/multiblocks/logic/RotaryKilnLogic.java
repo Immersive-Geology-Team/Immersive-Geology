@@ -46,6 +46,7 @@ import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.OptionalInt;
@@ -168,7 +169,23 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
 
         if(avgInput > 0)
         {
-            int recipeHeatTarget = convertAvePowerToHeat(avgInput);
+
+			int recipeHeatTarget = convertAvePowerToHeat(avgInput);
+            List<MultiblockProcess<RotaryKilnRecipe, ProcessContextInMachine<RotaryKilnRecipe>>> queue = state.getProcessorQueue();
+            if(queue != null && !queue.isEmpty())
+            {
+                List<RotaryKilnRecipe> recipes = queue.stream().map(p -> p.getRecipe(level)).toList();
+                int recipeHeat = 0;
+                for(RotaryKilnRecipe r : recipes)
+                {
+                    if(r == null) continue;
+                    int h = r.getHeatRequired();
+                    if(recipeHeat < h) recipeHeat = h;
+                }
+
+                if(recipeHeatTarget < recipeHeat) recipeHeatTarget = recipeHeat;
+            }
+
             if(recipeHeatTarget!=target_heat) state.targetHeat = recipeHeatTarget;
             if(currentHeat < recipeHeatTarget) return RotaryKilnHeatState.HEATING_UP;
             if(currentHeat > (recipeHeatTarget+7)) return RotaryKilnHeatState.COOLING_DOWN;
@@ -315,7 +332,7 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
             this.outputHandler = new StoredCapability<>(new WrappingItemHandler(
                     inventory, false, true, new IntRange(8,14)
             ));
-            this.itemInputCap = new StoredCapability<>(this.inventory);
+            this.itemInputCap = new StoredCapability<>(new WrappingItemHandler(inventory, true, false, new IntRange(0,1)));
         }
 
         @Override

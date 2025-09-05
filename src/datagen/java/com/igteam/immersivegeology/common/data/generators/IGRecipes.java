@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.common.data.generators;
 
 import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.IETags;
+import blusunrize.immersiveengineering.api.crafting.BlueprintCraftingRecipe;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.builders.*;
@@ -21,6 +22,7 @@ import blusunrize.immersiveengineering.common.register.IEItems.Metals;
 import blusunrize.immersiveengineering.common.register.IEItems.Molds;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.GeothermalBiomeRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.*;
 import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -39,6 +41,7 @@ import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
@@ -47,6 +50,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
@@ -101,9 +106,8 @@ public class IGRecipes extends RecipeProvider
 		SpecialRecipeBuilder.special(IGRecipeSerializers.IG_REPAIR_SERIALIZER.get())
 				.save(consumer, IGLib.MODID+"ig_item_repair");
 
-
 		Item binding_agent_flask = ChemicalEnum.BindingAgent.getFluid(BlockCategoryFlags.FLUID).getBucket();
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, binding_agent_flask).requires(Items.WATER_BUCKET)
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, binding_agent_flask).requires(Items.WATER_BUCKET).requires(Items.BUCKET)
 				.requires(Items.CLAY_BALL).requires(Items.CLAY_BALL).requires(Items.CLAY_BALL).unlockedBy("has_clay", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CLAY_BALL)).save(consumer, ig("craft_blinding_fluid"));
 
 		Item bronze_ingot = MetalEnum.Bronze.getItem(ItemCategoryFlags.INGOT);
@@ -197,7 +201,7 @@ public class IGRecipes extends RecipeProvider
 				.build(consumer, new ResourceLocation("calcination/synthesis_tungstencarbide"));
 
 		Item ehv_cable = MiscEnum.Cable.getBlock(BlockCategoryFlags.ENERGY_PIPE).asItem();
-		ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, ehv_cable)
+		ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, ehv_cable, 2)
 				.pattern("RAR")
 				.pattern("ACA")
 				.pattern("RAR")
@@ -209,6 +213,12 @@ public class IGRecipes extends RecipeProvider
 
 		BottlingMachineRecipeBuilder.builder(MiscEnum.EHVInsulation.getItem(ItemCategoryFlags.PLATE))
 				.addResult(Molds.MOLD_PLATE).addInput(new ItemLike[]{Molds.MOLD_PLATE}).addFluidTag(MiscEnum.EHVInsulation.getFluidTag(), 250).build(consumer, new ResourceLocation(IGLib.MODID, "bottling/duroplast_plate"));
+
+		BlueprintCraftingRecipeBuilder ehv_blueprint = BlueprintCraftingRecipeBuilder.builder("electronics", new ItemStack(ehv_cable,4));
+		ehv_blueprint.addMultiInput(IngredientWithSize.of(new ItemStack(IEBlocks.Metals.STORAGE.get(EnumMetals.ELECTRUM))));
+		ehv_blueprint.addMultiInput(IngredientWithSize.of(MiscEnum.EHVInsulation.getStack(ItemCategoryFlags.PLATE, 4)));
+		ehv_blueprint.addMultiInput(IngredientWithSize.of(MetalEnum.TungstenCarbide.getStack(ItemCategoryFlags.WIRE, 4)));
+		ehv_blueprint.build(consumer, new ResourceLocation(IGLib.MODID, "electronics/ehv_cable"));
 
 		// Bronze Plate
 		Item bronze_plate = MetalEnum.Bronze.getItem(ItemCategoryFlags.PLATE);
@@ -403,9 +413,13 @@ public class IGRecipes extends RecipeProvider
 		Item stainless_work_hammer = MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.HAMMER);
 
 		GeothermalConversionRecipeBuilder.builder(Blocks.LAVA, 1100, null, Pair.of(Blocks.MAGMA_BLOCK, 900)).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/lava"));
-		GeothermalConversionRecipeBuilder.builder(Blocks.MAGMA_BLOCK, 900, Pair.of(Blocks.LAVA, 1173), Pair.of(Blocks.OBSIDIAN, 300)).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/magma"));
-		GeothermalConversionRecipeBuilder.builder(Blocks.OBSIDIAN, 300, Pair.of(Blocks.MAGMA_BLOCK, 920), null).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/obsidian"));
-		TurbineFuelBuilder.builder(MiscEnum.Steam.getFluidTag(BlockCategoryFlags.FLUID), 0.25f, 21).build(consumer, new ResourceLocation(IGLib.MODID, "turbine_fuel/steam"));
+		GeothermalConversionRecipeBuilder.builder(Blocks.MAGMA_BLOCK, 900, Pair.of(Blocks.LAVA, 1173), Pair.of(Blocks.BASALT, 300)).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/magma"));
+		GeothermalConversionRecipeBuilder.builder(Blocks.BASALT, 300, Pair.of(Blocks.MAGMA_BLOCK, 920), null).build(consumer, new ResourceLocation(IGLib.MODID, "geoconvert/basalt"));
+		GeothermalBiomeRecipeBuilder.fromTags(900, 4000, BiomeTags.IS_NETHER).build(consumer, new ResourceLocation(IGLib.MODID, "geobiome/is_nether"));
+		GeothermalBiomeRecipeBuilder.fromTags(100, 2000, Tags.Biomes.IS_COLD_OVERWORLD).build(consumer, new ResourceLocation(IGLib.MODID, "geobiome/is_cold"));
+
+		TurbineFuelBuilder.builder(MiscEnum.Steam.getFluidTag(BlockCategoryFlags.FLUID), 0.25f, 4, 25).build(consumer, new ResourceLocation(IGLib.MODID, "turbine_fuel/steam"));
+		TurbineFuelBuilder.builder(MiscEnum.HighPressureSteam.getFluidTag(BlockCategoryFlags.FLUID), 0.5f, 16, 25).build(consumer, new ResourceLocation(IGLib.MODID, "turbine_fuel/hpsteam"));
 
 		for(MaterialInterface<?> material : IGLib.getGeologyMaterials())
 		{

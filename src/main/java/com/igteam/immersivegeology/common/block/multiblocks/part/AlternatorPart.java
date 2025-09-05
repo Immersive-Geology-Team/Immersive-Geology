@@ -18,8 +18,7 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 
 public class AlternatorPart extends SkinableMultiblockPart<AlternatorLogic.State, IGAlternatorSkins>
 {
-	public static final EnumProperty<IGAlternatorSkins> ALTERNATOR =
-			EnumProperty.create("alternator", IGAlternatorSkins.class);
+	public static final EnumProperty<IGAlternatorSkins> ALTERNATOR = EnumProperty.create("alternator", IGAlternatorSkins.class);
 
 	public AlternatorPart(Properties props, MultiblockRegistration<AlternatorLogic.State> reg)
 	{
