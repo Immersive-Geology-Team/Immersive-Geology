@@ -1,4 +1,4 @@
-// 1.20.1	2025-08-31T17:06:02.549400682	Recipes
+// 1.20.1	2025-09-13T17:02:43.036844832	Recipes
 5a4b25aa15a30261c92770f0fa073905a4c40ae5 data/immersivegeology/advancements/recipes/building_blocks/crafting/block_to_slab_srconcrete.json
 f65a7adae9d73884f297c5ee3a35ce426134b508 data/immersivegeology/advancements/recipes/building_blocks/crafting/block_to_slab_trconcrete.json
 c3ec2e6cdaa828d8509f10a136f34099ebba7e3c data/immersivegeology/advancements/recipes/building_blocks/crafting/block_to_stair_srconcrete.json
@@ -2671,7 +2671,7 @@ aa5e985b380f12970163e13153b3c310e5cd116d data/immersivegeology/recipes/roasting/
 1297bd68c8aa9ee2db7b04d7d53dec4930df2f2f data/immersivegeology/recipes/thermoelectric/thorium.json
 fff5018d16ad6c74288e0e2e2ee4aed922a826d6 data/immersivegeology/recipes/thermoelectric/uranium.json
 f05f8f8aa4e37f27c5c9c3420ee647c668d373f1 data/immersivegeology/recipes/turbine_fuel/hpsteam.json
-972e040fb98c1210f669239465f9d149f1f8c754 data/immersivegeology/recipes/turbine_fuel/steam.json
+10b6f9ecea86191f3b24d82f18bfa87128feb5dd data/immersivegeology/recipes/turbine_fuel/steam.json
 c3fdcdb7b077e882ef9b072a2deeecdad166ee51 data/immersivegeology/recipes/wash/wash_acanthite.json
 5becf60a93792a617bf679951c48259ee66cd9bf data/immersivegeology/recipes/wash/wash_cassiterite.json
 70dd8e80fd50663b795aaa918a62d7a9f73ff6c4 data/immersivegeology/recipes/wash/wash_chalcocite.json

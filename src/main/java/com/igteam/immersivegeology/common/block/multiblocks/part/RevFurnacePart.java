@@ -26,6 +26,12 @@ public class RevFurnacePart extends SkinableMultiblockPart<RevFurnaceLogic.State
 	public RevFurnacePart(Properties props, MultiblockRegistration<RevFurnaceLogic.State> reg)
 	{
 		super(props, reg, REVERBERATION_FURNACE, IGRevFurnaceSkins.class, "block/multiblock/reverberation_furnace/");
+		this.registerDefaultState(
+				this.defaultBlockState()
+						.setValue(IEProperties.MIRRORED, false)
+						.setValue(REVERBERATION_FURNACE, IGRevFurnaceSkins.DEFAULT)
+						.setValue(IEProperties.ACTIVE, false)
+		);
 	}
 	
 	@Override

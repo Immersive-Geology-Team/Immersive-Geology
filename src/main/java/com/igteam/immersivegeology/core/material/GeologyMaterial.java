@@ -209,7 +209,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
         {
             switch(i)
             {
-                case CLAY, POWDERED_SLAG ->
+                case CLAY ->
                 {
                     return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/"+i.getName());
                 }
@@ -217,7 +217,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
                 {
                     return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_pristine_"+getName().toLowerCase());
                 }
-                case POOR_ORE, NORMAL_ORE, RICH_ORE, GRIT, POWDER, DIRTY_CRUSHED_ORE ->
+                case POOR_ORE, NORMAL_ORE, RICH_ORE, GRIT, POWDER, POWDERED_SLAG, DIRTY_CRUSHED_ORE ->
                 {
                     String weathering = canTarnish() ? "corroded" : "pristine";
                     return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_"+weathering+"_"+getName().toLowerCase());

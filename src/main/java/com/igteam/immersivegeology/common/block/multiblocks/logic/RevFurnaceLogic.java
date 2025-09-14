@@ -44,8 +44,10 @@ import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFu
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFurnaceHandler.IRevFurnaceEnvironment;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFurnaceHandler.RevInputSlot;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFurnaceHandler.RevOutputSlot;
+import com.igteam.immersivegeology.common.block.multiblocks.part.RevFurnacePart;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RevFurnaceRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.RevFurnaceShape;
+import com.igteam.immersivegeology.common.block.multiblocks.skins.IGRevFurnaceSkins;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -69,6 +71,8 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.Capability;
@@ -85,6 +89,7 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -120,9 +125,12 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
 
         final boolean anyActive = state.active_left || state.active_right;
         final boolean wasActive = level.getBlockState(IGReverberationFurnaceMultiblock.INSTANCE.getMasterFromOriginOffset()).getValue(IEProperties.ACTIVE);
+
         if(anyActive != wasActive)
         {
+            IGRevFurnaceSkins current_skin = level.getBlockState(IGReverberationFurnaceMultiblock.INSTANCE.getMasterFromOriginOffset()).getValue(RevFurnacePart.REVERBERATION_FURNACE);
             NonMirrorableWithActiveBlock.setActive(level, IGReverberationFurnaceMultiblock.INSTANCE, anyActive);
+            RevFurnacePart.setSkin(level, IGReverberationFurnaceMultiblock.INSTANCE, current_skin);
         }
         // Not the most optimal way to solve this issue.
         // But a sync request should be alright for this purpose for now.
