@@ -303,7 +303,7 @@ public interface MaterialHelper {
     MaterialInterface<?> getSecondaryProduct();
     MaterialInterface<?> getTraceProduct(int index);
 
-    default boolean useSedimentaryTextures() { return false;};
+    default boolean useColumnBlockStyle(IFlagType<?> flag) { return false;};
 
     default ScaffoldingHelper getScaffoldingBlock() {
         return new ScaffoldingHelper(this);

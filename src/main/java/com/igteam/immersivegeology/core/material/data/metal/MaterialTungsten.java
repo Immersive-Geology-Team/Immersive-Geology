@@ -39,6 +39,12 @@ public class MaterialTungsten extends MaterialMetal {
     }
 
     @Override
+    public boolean useColumnBlockStyle(IFlagType<?> flag)
+    {
+        return flag.equals(BlockCategoryFlags.STORAGE_BLOCK);
+    }
+
+    @Override
     public void setupRecipeStages()
     {
         IGMethodBuilder.crushing(this, IGStageDesignation.REFINEMENT).create(ItemCategoryFlags.INGOT, ItemCategoryFlags.GRIT, 6000, 100);
@@ -49,6 +55,7 @@ public class MaterialTungsten extends MaterialMetal {
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("pellet_"+getName()+"_to_ingot",
                 getItemTag(ItemCategoryFlags.OXIDE_PELLET),
                 getPrimaryProduct().getStack(ItemCategoryFlags.INGOT), 1800);
+
         //Direct Leaching in HCL
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(getName()+"slurry_to_compound_dust",
                 getStack(ItemCategoryFlags.COMPOUND_DUST, IGLib.COMPOUND_FROM_ACID_AMOUNT),
@@ -57,7 +64,6 @@ public class MaterialTungsten extends MaterialMetal {
                 new FluidTagInput(ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Tungsten), IGLib.SLURRY_TO_CRYSTAL_MB),
                 new FluidTagInput(ChemicalEnum.Ammonia.getFluidTag(BlockCategoryFlags.FLUID), IGLib.SLURRY_TO_CRYSTAL_MB),
                 null,200, 51200);
-
 
         // Ammonium paratungstate decomposes at ~600°C to yield WO₃ see https://en.wikipedia.org/wiki/Ammonium_paratungstate
         IGMethodBuilder.decompose(this, IGStageDesignation.EXTRACTION).create(

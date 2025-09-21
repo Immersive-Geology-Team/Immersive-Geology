@@ -70,7 +70,7 @@ public class IGLib {
 
     public static final BlockBehaviour.Properties DEFAULT_METAL_PROPERTIES = BlockBehaviour.Properties.of()
             .mapColor(MapColor.METAL)
-            .sound(SoundType.METAL)
+            .sound(SoundType.COPPER)
             .requiresCorrectToolForDrops()
             .strength(3, 15);
 
