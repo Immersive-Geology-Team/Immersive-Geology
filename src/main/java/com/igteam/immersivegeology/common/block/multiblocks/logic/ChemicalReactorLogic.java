@@ -100,8 +100,8 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 	private static final BlockPos ITEM_INPUT;
 
 	private static final Set<BlockPos> TANK_LEFT_POSITIONS;
-	private static final Set<BlockPos> TANK_BACK_POSITIONS;
 	private static final Set<BlockPos> TANK_RIGHT_POSITIONS;
+	private static final Set<BlockPos> TANK_BACK_POSITIONS;
 	private static final Set<BlockPos> TANK_FRONT_POSITIONS;
 	private static final Set<BlockPos> REACTOR_CHAMBER_POSITIONS;
 	public static final int ENERGY_CAPACITY = 64000;
@@ -119,8 +119,8 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 				new CapabilityPosition(3, 0, 0, RelativeBlockFace.FRONT));
 		FLUID_INPUTS = FLUID_INPUT_CAPS.stream().map(CapabilityPosition::posInMultiblock).collect(Collectors.toSet());
 		TANK_LEFT_POSITIONS = generateBlockPositions(new BlockPos(0,1,3), new BlockPos(1,3,4));
-		TANK_BACK_POSITIONS = generateBlockPositions(new BlockPos(4,1,0), new BlockPos(5,3,1));
 		TANK_RIGHT_POSITIONS = generateBlockPositions(new BlockPos(7,1,4), new BlockPos(8,3,5));
+		TANK_BACK_POSITIONS = generateBlockPositions(new BlockPos(4,1,0), new BlockPos(5,3,1));
 		TANK_FRONT_POSITIONS = generateBlockPositions(new BlockPos(3,1,7), new BlockPos(4,3,8));
 		REACTOR_CHAMBER_POSITIONS = generateBlockPositions(new BlockPos(3,1,3), new BlockPos(5,4,5));
 	}

@@ -107,7 +107,6 @@ public class BasicChemicalRecipe extends MultiblockRecipe
 
 	public static BasicChemicalRecipe findRecipe(Level level, FluidStack inputA, FluidStack inputB, ItemStack itemInput)
 	{
-		// TODO: Ensure this is tested a LOT.
 		List<FluidStack> tankedFluids = List.of(inputA, inputB);
 		BasicChemicalRecipe bestMatch = null;
 		for(BasicChemicalRecipe recipe : RECIPES.getRecipes(level))

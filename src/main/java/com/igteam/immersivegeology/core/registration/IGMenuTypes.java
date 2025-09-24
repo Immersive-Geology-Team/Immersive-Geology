@@ -41,6 +41,7 @@ public class IGMenuTypes
 	public static final MultiblockContainer<RevFurnaceLogic.State, ReverberationFurnaceMenu> REVERBERATION_FURNACE = registerMultiblock(IGLib.GUIID_RevFurnace, ReverberationFurnaceMenu::makeServer, ReverberationFurnaceMenu::makeClient);
 	public static final MultiblockContainer<CrystallizerLogic.State, CrystallizerMenu> CRYSTALLIZER = registerMultiblock(IGLib.GUIID_Crystallizer, CrystallizerMenu::makeServer, CrystallizerMenu::makeClient);
 	public static final MultiblockContainer<ChemicalReactorLogic.State, ChemicalReactorMenu> CHEMICAL_REACTOR = registerMultiblock(IGLib.GUIID_ChemicalReactor, ChemicalReactorMenu::makeServer, ChemicalReactorMenu::makeClient);
+	public static final MultiblockContainer<SmallChemicalReactorLogic.State, SmallChemicalReactorMenu> SMALL_CHEMICAL_REACTOR = registerMultiblock(IGLib.GUIID_SmallChemicalReactor, SmallChemicalReactorMenu::makeServer, SmallChemicalReactorMenu::makeClient);
 	public static final MultiblockContainer<RotaryKilnLogic.State, RotaryKilnMenu> ROTARY_KILN = registerMultiblock(IGLib.GUIID_RotaryKiln, RotaryKilnMenu::makeServer, RotaryKilnMenu::makeClient);
 	public static final MultiblockContainer<GeothermalExchangerLogic.State, GeothermalExchangerMenu> GEOTHERMAL_EXCHANGER = registerMultiblock(IGLib.GUIID_GeothermalExchanger, GeothermalExchangerMenu::makeServer, GeothermalExchangerMenu::makeClient);
 

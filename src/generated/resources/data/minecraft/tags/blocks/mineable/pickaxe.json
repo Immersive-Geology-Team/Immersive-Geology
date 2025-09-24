@@ -1692,6 +1692,7 @@
     "immersivegeology:evaporate_carnallite",
     "immersivegeology:evaporate_crystal_carnallite",
     "immersivegeology:evaporate_crystal_carnallite",
+    "immersivegeology:storage_block_carnallite",
     {
       "id": "immersivegeology:tfc_poor_ore_block_chalcocite_andesite",
       "required": false
@@ -3868,6 +3869,7 @@
     "immersivegeology:evaporate_saltpeter",
     "immersivegeology:evaporate_crystal_saltpeter",
     "immersivegeology:evaporate_crystal_saltpeter",
+    "immersivegeology:storage_block_saltpeter",
     {
       "id": "immersivegeology:tfc_poor_ore_block_scheelite_diorite",
       "required": false
@@ -4279,6 +4281,7 @@
     "immersivegeology:evaporate_rocksalt",
     "immersivegeology:evaporate_crystal_rocksalt",
     "immersivegeology:evaporate_crystal_rocksalt",
+    "immersivegeology:storage_block_rocksalt",
     {
       "id": "immersivegeology:tfc_poor_ore_block_thorianite_diorite",
       "required": false

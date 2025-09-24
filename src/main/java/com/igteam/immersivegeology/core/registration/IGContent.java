@@ -126,6 +126,7 @@ public class IGContent {
         MenuScreens.register(IGMenuTypes.GEOTHERMAL_EXCHANGER.getType(), GeothermalExchangerScreen::new);
         MenuScreens.register(IGMenuTypes.CRYSTALLIZER.getType(), CrystallizerScreen::new);
         MenuScreens.register(IGMenuTypes.CHEMICAL_REACTOR.getType(), ChemicalReactorScreen::new);
+        MenuScreens.register(IGMenuTypes.SMALL_CHEMICAL_REACTOR.getType(), SmallChemicalReactorScreen::new);
         MenuScreens.register(IGMenuTypes.ROTARY_KILN.getType(), RotaryKilnScreen::new);
         MenuScreens.register(IGMenuTypes.CRATE.get(), IGCrateScreen.StandardIGCrate::new);
     }

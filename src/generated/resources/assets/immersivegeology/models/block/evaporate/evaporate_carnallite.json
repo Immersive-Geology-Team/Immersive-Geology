@@ -1,7 +1,7 @@
 {
   "parent": "immersivegeology:block/base/block",
   "textures": {
-    "all": "immersivegeology:block/greyscale/evaporate/type_1",
-    "particle": "immersivegeology:block/greyscale/evaporate/type_1"
+    "all": "immersivegeology:block/colored/carnallite/sediment",
+    "particle": "immersivegeology:block/colored/carnallite/sediment"
   }
 }

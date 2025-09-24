@@ -45,6 +45,7 @@ public class IGRecipeTypes
 	public static final TypeWithClass<EmptyRecipe> EMPTY = register("empty", EmptyRecipe.class);
 
 	public static final TypeWithClass<BloomeryFuel> BLOOMERY_FUEL = register("bloomery_fuel", BloomeryFuel.class);
+	public static final TypeWithClass<ChemicalRepairRecipe> CHEMICAL_REPAIR_RECIPE = register("chemical_repair", ChemicalRepairRecipe.class);
 	public static final TypeWithClass<TurbineFuel> TURBINE_FUEL = register("turbine_fuel", TurbineFuel.class);
 
 	private static <T extends Recipe<?>>
