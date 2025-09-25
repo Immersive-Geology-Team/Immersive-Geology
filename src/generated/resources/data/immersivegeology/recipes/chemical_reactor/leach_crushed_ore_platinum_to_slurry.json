@@ -16,7 +16,7 @@
   "itemInput": {
     "item": "immersivegeology:crushed_ore_platinum"
   },
-  "itemResult": {
+  "result": {
     "item": "immersivegeology:compound_dust_osmium"
   },
   "time": 200

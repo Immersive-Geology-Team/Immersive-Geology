@@ -14,63 +14,52 @@ import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.google.gson.JsonObject;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.BasicChemicalRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRecipe;
-import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
-import net.minecraft.data.PackOutput;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.crafting.conditions.ICondition.IContext;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
 
-import javax.print.attribute.SetOfIntegerSyntax;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
-public class ChemicalRecipeSerializer extends IERecipeSerializer<ChemicalRecipe>
+public class BasicChemicalRecipeSerializer extends IERecipeSerializer<BasicChemicalRecipe>
 {
 	@Override
 	public ItemStack getIcon()
 	{
-		return IGMultiblockProvider.CHEMICAL_REACTOR.iconStack();
+		return IGMultiblockProvider.SMALL_CHEMICAL_REACTOR.iconStack();
 	}
 
 	@Override
-	public ChemicalRecipe readFromJson(ResourceLocation resourceLocation, JsonObject json, IContext iContext)
+	public BasicChemicalRecipe readFromJson(ResourceLocation resourceLocation, JsonObject json, IContext iContext)
 	{
-		Lazy<ItemStack> output = readOutput(json.get("result"));
+		Lazy<ItemStack> output = readOutput(GsonHelper.getAsJsonObject(json, "result"));
+
 		FluidStack fluidOut = ApiUtils.jsonDeserializeFluidStack(GsonHelper.getAsJsonObject(json, "fluidResult"));
-		IngredientWithSize itemInput = IngredientWithSize.deserialize(json.get("itemInput"));
+		IngredientWithSize itemInput =IngredientWithSize.deserialize(json.get("itemInput"));
 		Set<FluidTagInput> fluidSet = new HashSet<>();
 
-		if(GsonHelper.isValidNode(json, "fluidInputA"))
-			fluidSet.add(FluidTagInput.deserialize(GsonHelper.getAsJsonObject(json, "fluidInputA")));
-		if(GsonHelper.isValidNode(json, "fluidInputB"))
-			fluidSet.add(FluidTagInput.deserialize(GsonHelper.getAsJsonObject(json, "fluidInputB")));
-		if(GsonHelper.isValidNode(json, "fluidInputC"))
-			fluidSet.add(FluidTagInput.deserialize(GsonHelper.getAsJsonObject(json, "fluidInputC")));
+		if(GsonHelper.isValidNode(json, "fluidInputA")) fluidSet.add(FluidTagInput.deserialize(GsonHelper.getAsJsonObject(json, "fluidInputA")));
+		if(GsonHelper.isValidNode(json, "fluidInputB")) fluidSet.add(FluidTagInput.deserialize(GsonHelper.getAsJsonObject(json, "fluidInputB")));
 
 		int energy = GsonHelper.getAsInt(json, "energy");
 		int time = GsonHelper.getAsInt(json, "time");
+		int damage_per_second = GsonHelper.getAsInt(json, "damage_per_second");
 
-		ItemStack outputStack = ItemStack.EMPTY;
-		try
-		{
-			outputStack = output.get();
-		} catch(RuntimeException ignore) {}
-
-		return new ChemicalRecipe(resourceLocation, itemInput, fluidSet, outputStack, fluidOut, energy, time);
+		return new BasicChemicalRecipe(resourceLocation, itemInput, fluidSet, output.get(), fluidOut, damage_per_second, energy, time);
 	}
 
 	@Override
-	public @Nullable ChemicalRecipe fromNetwork(ResourceLocation resourceLocation, FriendlyByteBuf buffer)
+	public @Nullable BasicChemicalRecipe fromNetwork(ResourceLocation resourceLocation, FriendlyByteBuf buffer)
 	{
+		
 		ItemStack output = buffer.readItem();
 		FluidStack fluidOut = FluidStack.readFromPacket(buffer);
 		IngredientWithSize itemInput = IngredientWithSize.read(buffer);
@@ -83,11 +72,12 @@ public class ChemicalRecipeSerializer extends IERecipeSerializer<ChemicalRecipe>
 
 		int energy = buffer.readInt();
 		int time = buffer.readInt();
-		return new ChemicalRecipe(resourceLocation, itemInput, fluidSet, output, fluidOut, energy, time);
+		int damage_per_second = buffer.readInt();
+		return new BasicChemicalRecipe(resourceLocation, itemInput, fluidSet, output, fluidOut, damage_per_second, energy, time);
 	}
 
 	@Override
-	public void toNetwork(FriendlyByteBuf buffer, ChemicalRecipe recipe)
+	public void toNetwork(FriendlyByteBuf buffer, BasicChemicalRecipe recipe)
 	{
 		
 		buffer.writeItemStack(recipe.itemOutput, false);
@@ -98,5 +88,7 @@ public class ChemicalRecipeSerializer extends IERecipeSerializer<ChemicalRecipe>
 		buffer.writeInt(recipe.getTotalProcessEnergy());
 		int time = recipe.getTotalProcessTime();
 		buffer.writeInt(time);
+		int damage_per_second = recipe.getDamagePerTick();
+		buffer.writeInt(damage_per_second);
 	}
 }

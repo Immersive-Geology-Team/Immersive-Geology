@@ -38,8 +38,9 @@ public class BasicChemicalRecipe extends MultiblockRecipe
 	public final IngredientWithSize itemInput;
 	Lazy<Integer> totalProcessEnergy;
 	Lazy<Integer> totalProcessTime;
+	Lazy<Integer> damage_per_second;
 
-	public <T extends Recipe<?>> BasicChemicalRecipe(ResourceLocation id, IngredientWithSize inputItem, Set<FluidTagInput> fluidInputSet, ItemStack itemOutput, FluidStack fluidOutput, int energy, int time)
+	public <T extends Recipe<?>> BasicChemicalRecipe(ResourceLocation id, IngredientWithSize inputItem, Set<FluidTagInput> fluidInputSet, ItemStack itemOutput, FluidStack fluidOutput, int damage_per_second, int energy, int time)
 	{
 		super(LAZY_EMPTY, IGRecipeTypes.BASIC_CHEMICAL_REACTOR, id);
 		this.itemOutput = itemOutput;
@@ -48,6 +49,7 @@ public class BasicChemicalRecipe extends MultiblockRecipe
 		this.itemInput = inputItem;
 		totalProcessEnergy = Lazy.of(() -> energy);
 		totalProcessTime = Lazy.of(() -> time);
+		this.damage_per_second = Lazy.of(() -> damage_per_second);
 		this.outputList = Lazy.of(() -> NonNullList.of(this.itemOutput));
 		this.fluidOutputList = List.of(fluidOutput);
 		this.fluidInputList = fluidIn.stream().toList();
@@ -127,6 +129,11 @@ public class BasicChemicalRecipe extends MultiblockRecipe
 		}
 
 		return bestMatch;
+	}
+
+	public int getDamagePerTick()
+	{
+		return damage_per_second.get();
 	}
 
 	@Override

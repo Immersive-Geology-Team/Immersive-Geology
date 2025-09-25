@@ -12,7 +12,7 @@
   "itemInput": {
     "item": "immersivegeology:powdered_slag_molybdenite"
   },
-  "itemResult": {
+  "result": {
     "item": "immersivegeology:compound_dust_osmium"
   },
   "time": 200

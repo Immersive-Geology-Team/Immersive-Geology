@@ -12,7 +12,7 @@
   "itemInput": {
     "tag": "forge:compound_dust/aluminum"
   },
-  "itemResult": {
+  "result": {
     "item": "immersivegeology:powder_cryolite"
   },
   "time": 200

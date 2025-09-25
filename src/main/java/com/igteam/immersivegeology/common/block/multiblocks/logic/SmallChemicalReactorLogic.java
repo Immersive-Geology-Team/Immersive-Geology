@@ -159,7 +159,6 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
 
 
         public State(IInitialMultiblockContext<State> ctx){
-
             final Supplier<@Nullable Level> getLevel = ctx.levelSupplier();
             final Runnable markDirty = ctx.getMarkDirtyRunnable();
 

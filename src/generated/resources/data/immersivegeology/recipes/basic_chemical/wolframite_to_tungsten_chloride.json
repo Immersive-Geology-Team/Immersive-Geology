@@ -1,19 +1,20 @@
 {
-  "type": "immersivegeology:chemical_reactor",
-  "energy": 51200,
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 1,
+  "energy": 6400,
   "fluidInputA": {
     "amount": 500,
     "tag": "forge:hydrochloric_acid"
   },
   "fluidResult": {
-    "amount": 432,
+    "amount": 500,
     "fluid": "immersivegeology:slurry_hydrochloric_acid_tungsten"
   },
   "itemInput": {
     "item": "immersivegeology:powder_wolframite"
   },
-  "result": {
-    "item": "immersivegeology:compound_dust_manganese"
+  "itemResult": {
+    "item": "immersivegeology:compound_dust_magnesium"
   },
-  "time": 200
+  "time": 100
 }

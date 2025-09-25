@@ -20,7 +20,7 @@
   "itemInput": {
     "tag": "forge:compound_dust/calcium"
   },
-  "itemResult": {
+  "result": {
     "item": "immersivegeology:metal_oxide_iron"
   },
   "time": 200

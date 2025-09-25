@@ -21,7 +21,7 @@
     "base_ingredient": [],
     "count": 0
   },
-  "itemResult": {
+  "result": {
     "item": "immersivegeology:grit_osmium"
   },
   "time": 200

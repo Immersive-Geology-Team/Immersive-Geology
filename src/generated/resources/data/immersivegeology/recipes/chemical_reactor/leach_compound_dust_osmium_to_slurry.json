@@ -12,7 +12,7 @@
   "itemInput": {
     "item": "immersivegeology:compound_dust_osmium"
   },
-  "itemResult": {
+  "result": {
     "item": "immersivegeology:compound_dust_platinum"
   },
   "time": 200
