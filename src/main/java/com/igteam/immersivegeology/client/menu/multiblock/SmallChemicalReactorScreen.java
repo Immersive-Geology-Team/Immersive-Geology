@@ -16,12 +16,16 @@ import com.google.common.collect.ImmutableList;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.ChemicalReactorMenu;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.SmallChemicalReactorMenu;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -33,8 +37,8 @@ public class SmallChemicalReactorScreen extends IEContainerScreen<SmallChemicalR
 	public SmallChemicalReactorScreen(SmallChemicalReactorMenu inventorySlotsIn, Inventory inv, Component title)
 	{
 		super(inventorySlotsIn, inv, title, TEXTURE);
-		this.imageHeight = 208;
-		this.imageWidth = 179;
+		this.imageHeight = 204;
+		this.imageWidth = 218;
 	}
 
 	@Override
@@ -42,12 +46,30 @@ public class SmallChemicalReactorScreen extends IEContainerScreen<SmallChemicalR
 	{
 		super.init();
 		this.inventoryLabelY = this.imageHeight - 93;
-		this.inventoryLabelX = 10;
+		this.inventoryLabelX = 49;
 	}
 
 	@Override
 	protected void drawBackgroundTexture(GuiGraphics graphics)
 	{
+		PoseStack pose = graphics.pose();
+		graphics.blit(TEXTURE, leftPos+5, topPos+67, 225, 0, 31, 62);
+
+		pose.pushPose();
+		{
+			pose.translate(leftPos+39, topPos+99, 0);
+			pose.mulPose(new Quaternionf().rotateAxis(250*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
+			pose.pushPose();
+			{
+				pose.translate(0, 3, 0);
+				pose.mulPose(new Quaternionf().rotateAxis(-(getMenu().damage.get())*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
+				pose.translate(0, -3, 0);
+				graphics.blit(TEXTURE, 0, 0, 224, 64, 32, 7);
+			}
+			pose.popPose();
+		}
+		pose.popPose();
+
 		graphics.blit(TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight);
 	}
 
@@ -55,7 +77,7 @@ public class SmallChemicalReactorScreen extends IEContainerScreen<SmallChemicalR
 	protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY)
 	{
 		super.renderLabels(graphics, mouseX, mouseY);
-		graphics.drawString(this.font, Component.literal("Working"), 69, 98, -557004, true);
+		graphics.drawString(this.font, Component.literal("Working"), 108, 94, -557004, true);
 	}
 
 	@Override
@@ -76,9 +98,9 @@ public class SmallChemicalReactorScreen extends IEContainerScreen<SmallChemicalR
 	protected List<InfoArea> makeInfoAreas()
 	{
 		return ImmutableList.of(
-				new FluidInfoArea(this.menu.tanks.rightInput(), new Rect2i(this.leftPos + 158, this.topPos + 33, 6, 14), 0, 0, 0, 0, TEXTURE),
-				new FluidInfoArea(this.menu.tanks.leftInput(), new Rect2i(this.leftPos + 158, this.topPos + 50, 6, 15), 0, 0, 0, 0, TEXTURE),
-				new FluidInfoArea(this.menu.tanks.output(), new Rect2i(this.leftPos + 158, this.topPos + 81, 6, 11), 0, 0, 0, 0, TEXTURE),
-				new EnergyInfoArea(this.leftPos + 136,this.topPos + 45, this.menu.energy));
+				new FluidInfoArea(this.menu.tanks.rightInput(), new Rect2i(this.leftPos + 196, this.topPos + 28, 6, 14), 0, 0, 0, 0, TEXTURE),
+				new FluidInfoArea(this.menu.tanks.leftInput(), new Rect2i(this.leftPos + 196, this.topPos + 45, 6, 15), 0, 0, 0, 0, TEXTURE),
+				new FluidInfoArea(this.menu.tanks.output(), new Rect2i(this.leftPos + 196, this.topPos + 76, 6, 11), 0, 0, 0, 0, TEXTURE),
+				new EnergyInfoArea(this.leftPos + 174,this.topPos + 40, this.menu.energy));
 	}
 }

@@ -13,7 +13,7 @@
   "itemInput": {
     "item": "immersivegeology:powder_wolframite"
   },
-  "itemResult": {
+  "result": {
     "item": "immersivegeology:compound_dust_magnesium"
   },
   "time": 100

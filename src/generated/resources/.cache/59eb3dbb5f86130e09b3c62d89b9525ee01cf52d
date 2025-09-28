@@ -1,4 +1,4 @@
-// 1.20.1	2025-09-22T18:28:48.761449775	Loot Tables
+// 1.20.1	2025-09-28T13:40:06.074639757	Loot Tables
 c3ba476a910748a3d60d066f18bc407bd29bb957 data/immersivegeology/loot_tables/blocks/advanced_engineering_block_rusty_metal.json
 5669eb705e091e12e49ef2aa7f900b9f9d5ceddd data/immersivegeology/loot_tables/blocks/ballmill.json
 25558435e3d54e546141db6300fa8732ebc582e1 data/immersivegeology/loot_tables/blocks/bloomery.json
@@ -619,7 +619,6 @@ cc67fca26a4e572cbad05e40faf3d2649a8e8a9f data/immersivegeology/loot_tables/block
 d8f05e1722b13e58c8073d712f5708b128a2788e data/immersivegeology/loot_tables/blocks/sheetmetal_slab_rusty_metal.json
 f82b4437db8b5cd9f937a5fabf7a49c006d8f641 data/immersivegeology/loot_tables/blocks/sheetmetal_slab_silver.json
 9c35030c29aff704a1a2be8f0713881bab6b22a9 data/immersivegeology/loot_tables/blocks/sheetmetal_slab_stainless_steel.json
-09f8f4455f87f7e30f26396cef8b2c92b5eb8cc1 data/immersivegeology/loot_tables/blocks/sheetmetal_slab_steel.json
 5e7f0e8ceceb413e37d2529e2f2b0560bd9451ca data/immersivegeology/loot_tables/blocks/sheetmetal_slab_thorium.json
 b1aab81e0efb3919bb50525a5731bcc1362f1e31 data/immersivegeology/loot_tables/blocks/sheetmetal_slab_tin.json
 beb55c2a87143132d4fe2ca5ae9656a5fccb52e6 data/immersivegeology/loot_tables/blocks/sheetmetal_slab_titanium.json

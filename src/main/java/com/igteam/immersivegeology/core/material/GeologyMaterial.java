@@ -252,11 +252,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
     }
     static Random rand = new Random(0);
     public int getPaletteVariation(ItemCategoryFlags flag){
-        rand.setSeed(IGLib.fastHash(name));
-        if(flag.equals(ItemCategoryFlags.INGOT))
-        {
-            return Math.min(6,1+(rand.nextInt(flag.getVariations()))%flag.getVariations());
-        }
+        rand.setSeed(IGLib.fastHash(getName()));
         return 1+(rand.nextInt(flag.getVariations()))%flag.getVariations();
     }
 

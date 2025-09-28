@@ -73,7 +73,7 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
 	{
 		return switch(this)
 		{
-			case INGOT -> 7;
+			case INGOT -> 13;
 			case GEAR, NUGGET, RICH_ORE, NORMAL_ORE, POOR_ORE -> 6;
             case CRUSHED_ORE -> 5;
 			case PLATE, DIRTY_CRUSHED_ORE -> 2;

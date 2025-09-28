@@ -79,7 +79,6 @@ public class BasicChemicalRecipeSerializer extends IERecipeSerializer<BasicChemi
 	@Override
 	public void toNetwork(FriendlyByteBuf buffer, BasicChemicalRecipe recipe)
 	{
-		
 		buffer.writeItemStack(recipe.itemOutput, false);
 		recipe.fluidOutput.writeToPacket(buffer);
 		recipe.itemInput.write(buffer);
