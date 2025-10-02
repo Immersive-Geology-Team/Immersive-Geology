@@ -16,6 +16,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.component.Redstone
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockBE;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
 import blusunrize.immersiveengineering.api.utils.CapabilityReference;
@@ -35,15 +36,26 @@ import com.igteam.immersivegeology.common.block.multiblocks.logic.ChemicalReacto
 import com.igteam.immersivegeology.common.block.multiblocks.logic.SmallChemicalReactorLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.BasicChemicalProcessor;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.ISkinnableMultiblockLogic;
+import com.igteam.immersivegeology.common.block.multiblocks.part.SmallChemicalReactorPart;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BasicChemicalRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRepairRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.SmallChemicalReactorShape;
+import com.igteam.immersivegeology.common.network.IGPacketHandler;
+import com.igteam.immersivegeology.common.network.msg.MessageSCRFail;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -105,6 +117,11 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
         if(isEnabled) insertRecipeToProcess(state, ctx);
 
         state.processor.tickServer(state, ctx.getLevel(), state.rsState.isEnabled(ctx));
+
+        if(state.damage >= 10)
+        {
+            IGPacketHandler.sendToServer(new MessageSCRFail(new BlockPos(0,1,1)));
+        }
 
         if(state.tanks.output.getFluid().getAmount() > 0)
         {
