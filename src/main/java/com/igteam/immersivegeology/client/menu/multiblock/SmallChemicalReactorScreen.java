@@ -62,7 +62,8 @@ public class SmallChemicalReactorScreen extends IEContainerScreen<SmallChemicalR
 			pose.pushPose();
 			{
 				pose.translate(0, 3, 0);
-				pose.mulPose(new Quaternionf().rotateAxis(-(getMenu().damage.get())*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
+				int damage = Math.round((getMenu().damage.get() / 100f) * 140);
+				pose.mulPose(new Quaternionf().rotateAxis(-(damage)*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
 				pose.translate(0, -3, 0);
 				graphics.blit(TEXTURE, 0, 0, 224, 64, 32, 7);
 			}

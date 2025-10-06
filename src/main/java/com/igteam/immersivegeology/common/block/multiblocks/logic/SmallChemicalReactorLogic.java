@@ -113,14 +113,16 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
     @Override
     public void tickServer(IMultiblockContext<State> ctx) {
         SmallChemicalReactorLogic.State state = ctx.getState();
+        boolean isMirrored = ctx.getLevel().getOrientation().mirrored();
         boolean isEnabled = state.rsState.isEnabled(ctx);
         if(isEnabled) insertRecipeToProcess(state, ctx);
 
         state.processor.tickServer(state, ctx.getLevel(), state.rsState.isEnabled(ctx));
 
-        if(state.damage >= 10)
+        if(state.damage >= 100)
         {
-            IGPacketHandler.sendToServer(new MessageSCRFail(new BlockPos(0,1,1)));
+            BlockPos realPos = ctx.getLevel().toAbsolute(new BlockPos(isMirrored ? 2 : 1,1,0));
+            IGPacketHandler.sendToServer(new MessageSCRFail(realPos));
         }
 
         if(state.tanks.output.getFluid().getAmount() > 0)
