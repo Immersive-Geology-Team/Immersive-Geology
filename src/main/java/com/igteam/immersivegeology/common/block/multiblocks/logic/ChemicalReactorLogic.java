@@ -44,6 +44,7 @@ import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler
 import com.igteam.immersivegeology.common.block.multiblocks.IGChemicalReactorMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.IGGravitySeparatorMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.ChemicalReactorLogic.State;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGPositionalOverlayText;
 import com.igteam.immersivegeology.common.block.multiblocks.part.SkinableMultiblockPart;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BloomeryFuel;
@@ -78,6 +79,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
@@ -335,7 +337,7 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 		return positions;
 	}
 
-	public static class State implements IMultiblockState, ProcessContext.ProcessContextInMachine<ChemicalRecipe>
+	public static class State implements IGMultiblockState, ProcessContext.ProcessContextInMachine<ChemicalRecipe>
 	{
 		public final AveragingEnergyStorage energy = new AveragingEnergyStorage(ENERGY_CAPACITY);
 		public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
@@ -483,6 +485,18 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 		public @Nullable ChemicalRecipe getRecipeForInputs(Level level)
 		{
 			return ChemicalRecipe.findRecipe(level, tanks.leftInput.getFluid(), tanks.backInput.getFluid(), tanks.rightInput.getFluid(), inventory.getStackInSlot(0));
+		}
+
+		@Override
+		public void invalidate(@NotNull IMultiblockContext<?> context)
+		{
+			this.inputCapRight.get(context).invalidate();
+			this.inputCapLeft.get(context).invalidate();
+			this.inputCapBack.get(context).invalidate();
+			this.outputCap.get(context).invalidate();
+			this.outputHandler.get(context).invalidate();
+			this.itemInputCap.get(context).invalidate();
+			this.energyCap.get(context).invalidate();
 		}
 	}
 

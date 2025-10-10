@@ -28,6 +28,7 @@ import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler.IOConstraint;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.PelletizerLogic.State;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.ISkinnableMultiblockLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.PelletizerRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
@@ -60,6 +61,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
@@ -255,7 +257,7 @@ public class PelletizerLogic implements ISkinnableMultiblockLogic<State>, IServe
         return null;
     }
 
-    public static class State implements IMultiblockState, ProcessContextInWorld<PelletizerRecipe>
+    public static class State implements IGMultiblockState, ProcessContextInWorld<PelletizerRecipe>
     {
         public final AveragingEnergyStorage energy = new AveragingEnergyStorage(ENERGY_CAPACITY);
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
@@ -352,6 +354,14 @@ public class PelletizerLogic implements ISkinnableMultiblockLogic<State>, IServe
 
         public List<MultiblockProcess<PelletizerRecipe, ProcessContextInWorld<PelletizerRecipe>>> getProcessQueue() {
             return this.processor.getQueue();
+        }
+
+        @Override
+        public void invalidate(@NotNull IMultiblockContext<?> ctx)
+        {
+            this.energyCap.get(ctx).invalidate();
+            this.fInputCap.get(ctx).invalidate();
+            this.insertionHandler.get(ctx).invalidate();
         }
     }
 

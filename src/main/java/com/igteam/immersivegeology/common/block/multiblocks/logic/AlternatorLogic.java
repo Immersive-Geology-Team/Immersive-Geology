@@ -23,6 +23,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.util.StoredCapabil
 import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.common.util.EnergyHelper;
 import com.google.common.collect.ImmutableList;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.ISkinnableMultiblockLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.AlternatorShape;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -34,6 +35,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Objects;
@@ -129,7 +131,8 @@ public class AlternatorLogic implements ISkinnableMultiblockLogic<AlternatorLogi
         return LazyOptional.empty();
     }
 
-    public static class State implements IMultiblockState {
+    public static class State implements IGMultiblockState
+    {
         private final StoredCapability<IEnergyStorage> energyView;
         private final StoredCapability<IRotationAcceptor> rotationCap;
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
@@ -149,6 +152,13 @@ public class AlternatorLogic implements ISkinnableMultiblockLogic<AlternatorLogi
             this.energyOutputs = outputs.build();
             this.rotationCap = new StoredCapability<>(new RotationAcceptor());
             this.energyView = new StoredCapability<>(NullEnergyStorage.INSTANCE);
+        }
+
+        @Override
+        public void invalidate(@NotNull IMultiblockContext<?> context)
+        {
+            this.energyView.get(context).invalidate();
+            this.rotationCap.get(context).invalidate();
         }
 
         private class RotationAcceptor implements IRotationAcceptor

@@ -27,6 +27,7 @@ import blusunrize.immersiveengineering.common.util.EnergyHelper;
 import blusunrize.immersiveengineering.common.util.Utils;
 import com.google.common.collect.ImmutableList;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.SteamTurbineLogic.State;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.ISkinnableMultiblockLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.TurbineFuel;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.SteamTurbineShape;
@@ -50,6 +51,7 @@ import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -214,7 +216,8 @@ public class SteamTurbineLogic implements ISkinnableMultiblockLogic<State>, MBOv
         ROTATION_OUTPUT = new CapabilityPosition(1, 1, 0, RelativeBlockFace.BACK);
     }
 
-    public static class State implements IMultiblockState {
+    public static class State implements IGMultiblockState
+    {
         private final CapabilityReference<IRotationAcceptor> outputCap;
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
         public final FluidTank steam_tank = new FluidTank(STEAM_CAPACITY);
@@ -294,6 +297,13 @@ public class SteamTurbineLogic implements ISkinnableMultiblockLogic<State>, MBOv
         public float getRotationSpeed()
         {
             return this.rotation_speed;
+        }
+
+        @Override
+        public void invalidate(@NotNull IMultiblockContext<?> ctx)
+        {
+            this.waterFluidCap.get(ctx).invalidate();
+            this.steamFluidCap.get(ctx).invalidate();
         }
     }
 

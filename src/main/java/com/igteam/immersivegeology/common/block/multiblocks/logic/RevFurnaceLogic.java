@@ -40,6 +40,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurna
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.IFurnaceEnvironment;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.InputSlot;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.OutputSlot;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFurnaceHandler;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFurnaceHandler.IRevFurnaceEnvironment;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFurnaceHandler.RevInputSlot;
@@ -87,6 +88,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemHandlerHelper;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
@@ -275,7 +277,7 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
         );
     }
 
-    public static class State implements IMultiblockState, IGRevFurnaceHandler.IRevFurnaceEnvironment<RevFurnaceRecipe>
+    public static class State implements IGMultiblockState, IGRevFurnaceHandler.IRevFurnaceEnvironment<RevFurnaceRecipe>
     {
         private final SlotwiseItemHandler inventory;
         final IGRevFurnaceHandler<RevFurnaceRecipe> furnace;
@@ -489,5 +491,15 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
 		{
             return this.tank;
 		}
-	}
+
+        @Override
+        public void invalidate(@NotNull IMultiblockContext<?> ctx)
+        {
+            this.outputHandlerRight.get(ctx).invalidate();
+            this.outputHandlerLeft.get(ctx).invalidate();
+            this.fluidCap.get(ctx).invalidate();
+            this.invCapLeft.get(ctx).invalidate();
+            this.invCapRight.get(ctx).invalidate();
+        }
+    }
 }

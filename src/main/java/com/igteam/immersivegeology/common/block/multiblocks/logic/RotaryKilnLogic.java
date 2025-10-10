@@ -26,6 +26,7 @@ import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler.IntRange;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic.State;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.ISkinnableMultiblockLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.RotaryKilnHeatState;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
@@ -44,6 +45,7 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
@@ -275,7 +277,7 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
         return RotaryKilnShape.GETTER;
     }
 
-    public static class State implements IMultiblockState, ProcessContextInMachine<RotaryKilnRecipe>
+    public static class State implements IGMultiblockState, ProcessContextInMachine<RotaryKilnRecipe>
     {
         public final AveragingEnergyStorage total_energy = new AveragingEnergyStorage(ENERGY_CAPACITY * 7);
         public final AveragingEnergyStorage energy_lv = new AveragingEnergyStorage(ENERGY_CAPACITY);
@@ -496,6 +498,14 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
         public void setHeat(float v)
         {
             this.heatLevel = v;
+        }
+
+        @Override
+        public void invalidate(@NotNull IMultiblockContext<?> ctx)
+        {
+            this.energyCap.get(ctx).invalidate();
+            this.outputHandler.get(ctx).invalidate();
+            this.itemInputCap.get(ctx).invalidate();
         }
     }
 }

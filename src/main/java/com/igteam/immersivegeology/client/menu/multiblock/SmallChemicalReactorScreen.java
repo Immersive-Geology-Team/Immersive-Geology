@@ -78,7 +78,15 @@ public class SmallChemicalReactorScreen extends IEContainerScreen<SmallChemicalR
 	protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY)
 	{
 		super.renderLabels(graphics, mouseX, mouseY);
-		graphics.drawString(this.font, Component.literal("Working"), 108, 94, -557004, true);
+		String status = "immersivegeology.gui.basic_chemical_reactor.nominal_status";
+		float damage = getMenu().damage.get();
+		if(damage > 25) status = "immersivegeology.gui.basic_chemical_reactor.worn_status";
+		if(damage > 50) status = "immersivegeology.gui.basic_chemical_reactor.damaged_status";
+		if(damage > 99) status = "immersivegeology.gui.basic_chemical_reactor.failed_status";
+
+		if(getMenu().tanks.output().getSpace() == 0) status = "immersivegeology.gui.basic_chemical_reactor.output_blocked";
+
+		graphics.drawString(this.font, Component.translatable(status), 108, 94, -557004, true);
 	}
 
 	@Override

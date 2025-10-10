@@ -31,6 +31,7 @@ import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler.IntRange;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.CrystallizerLogic.State;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.CrystallizerRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.CrystallizerShape;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -55,6 +56,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -185,7 +187,7 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
         return null;
     }
 
-    public static class State implements IMultiblockState, ProcessContextInMachine<CrystallizerRecipe>
+    public static class State implements IGMultiblockState, ProcessContextInMachine<CrystallizerRecipe>
     {
         public final AveragingEnergyStorage energy = new AveragingEnergyStorage(ENERGY_CAPACITY);
         private final MultiblockProcessor<CrystallizerRecipe, ProcessContextInMachine<CrystallizerRecipe>> processor;
@@ -253,6 +255,12 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
         public void readSyncNBT(CompoundTag nbt)
         {
             readSaveNBT(nbt);
+        }
+
+        public void invalidate(@NotNull IMultiblockContext<?> ctx)
+        {
+            this.fOutputCap.get(ctx).invalidate();
+            this.fInputCap.get(ctx).invalidate();
         }
 
         @Override

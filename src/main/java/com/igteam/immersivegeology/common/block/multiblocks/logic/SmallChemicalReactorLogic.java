@@ -35,6 +35,7 @@ import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler
 import com.igteam.immersivegeology.common.block.multiblocks.logic.ChemicalReactorLogic.ChemicalReactorTanks;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.SmallChemicalReactorLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.BasicChemicalProcessor;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.ISkinnableMultiblockLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.part.SmallChemicalReactorPart;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BasicChemicalRecipe;
@@ -68,6 +69,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -115,20 +117,18 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
         SmallChemicalReactorLogic.State state = ctx.getState();
         boolean isMirrored = ctx.getLevel().getOrientation().mirrored();
         boolean isEnabled = state.rsState.isEnabled(ctx);
-        if(isEnabled) insertRecipeToProcess(state, ctx);
-
-        state.processor.tickServer(state, ctx.getLevel(), state.rsState.isEnabled(ctx));
-
-        if(state.damage >= 100)
-        {
-            BlockPos realPos = ctx.getLevel().toAbsolute(new BlockPos(isMirrored ? 2 : 1,1,0));
-            IGPacketHandler.sendToServer(new MessageSCRFail(realPos));
-        }
+        if(state.damage > 99) return;
 
         if(state.tanks.output.getFluid().getAmount() > 0)
         {
             drainOutputTank(state, ctx, state.fluidOutput);
         }
+
+        if(state.tanks.output.getSpace() == 0) return;
+
+        if(isEnabled) insertRecipeToProcess(state, ctx);
+        state.processor.tickServer(state, ctx.getLevel(), state.rsState.isEnabled(ctx));
+
 
         if(!state.rsState.isEnabled(ctx))
         {
@@ -281,9 +281,10 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
         return SmallChemicalReactorShape.GETTER;
     }
 
-    public static class State implements IMultiblockState, ProcessContext.ProcessContextInMachine<BasicChemicalRecipe> {
+    public static class State implements IGMultiblockState, ProcessContext.ProcessContextInMachine<BasicChemicalRecipe> {
         public final AveragingEnergyStorage energy = new AveragingEnergyStorage(ENERGY_CAPACITY);
         public float damage;
+        private boolean isInvalidated = false;
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
 
         public final SlotwiseItemHandler inventory;
@@ -291,11 +292,11 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
         private final StoredCapability<IFluidHandler> inputCapBack;
         private final StoredCapability<IFluidHandler> inputCapFront;
         private final StoredCapability<IItemHandler> itemInputCap;
-        private final CapabilityReference<IItemHandler> input_output;
         private final StoredCapability<IItemHandler> outputHandler;
-        private final CapabilityReference<IFluidHandler> fluidOutput;
         private final StoredCapability<IFluidHandler> outputCap;
         private final StoredCapability<IEnergyStorage> energyCap;
+        private final CapabilityReference<IItemHandler> input_output;
+        private final CapabilityReference<IFluidHandler> fluidOutput;
 
         private final BasicChemicalProcessor processor;
         private final MultiblockProcessor.InMachineProcessor<BasicChemicalRecipe> dummy;
@@ -345,6 +346,8 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
             this.tanks.readNBT(nbt.getCompound("tanks"));
             this.inventory.deserializeNBT(nbt.getCompound("inventory"));
             this.processor.fromNBT(nbt.get("processor"), MultiblockProcessInMachine::new);
+            this.damage = nbt.getFloat("damage");
+            this.isInvalidated = nbt.getBoolean("invalid");
         }
 
         @Override
@@ -353,6 +356,8 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
             nbt.put("tanks", this.tanks.toNBT());
             nbt.put("processor", this.processor.toNBT());
             nbt.put("inventory", this.inventory.serializeNBT());
+            nbt.putFloat("damage", this.damage);
+            nbt.putBoolean("invalid", this.isInvalidated);
         }
 
         public void clearProcessor()
@@ -397,7 +402,32 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
 		{
             return () -> this.damage;
 		}
-	}
+
+        @Override
+        public void invalidate(@NotNull IMultiblockContext<?> ctx)
+        {
+            if(!isInvalidated)
+            {
+                if(ctx.getState() instanceof State state)
+                {
+                    boolean isMirrored = ctx.getLevel().getOrientation().mirrored();
+                    if(state.damage > 1)
+                    {
+                        BlockPos realPos = ctx.getLevel().toAbsolute(new BlockPos(isMirrored?2: 1, 1, 0));
+                        IGPacketHandler.sendToServer(new MessageSCRFail(realPos, damage));
+                    }
+                }
+                isInvalidated = true;
+            }
+
+            this.energyCap.get(ctx).invalidate();
+            this.inputCapBack.get(ctx).invalidate();
+            this.inputCapFront.get(ctx).invalidate();
+            this.outputHandler.get(ctx).invalidate();
+            this.itemInputCap.get(ctx).invalidate();
+            this.outputCap.get(ctx).invalidate();
+        }
+    }
 
     public record SmallChemicalReactorTanks(FluidTank leftInput, FluidTank rightInput, FluidTank output)
     {

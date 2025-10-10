@@ -196,6 +196,13 @@
   "manual.immersivegeology.cryolite": "Cryolite",
   "manual.immersivegeology.unobtania": "Unobtania",
 
+
+  "immersivegeology.gui.basic_chemical_reactor.nominal_status": "Nominal",
+  "immersivegeology.gui.basic_chemical_reactor.worn_status": "Worn",
+  "immersivegeology.gui.basic_chemical_reactor.damaged_status": "Damaged",
+  "immersivegeology.gui.basic_chemical_reactor.failed_status": "Failed",
+  "immersivegeology.gui.basic_chemical_reactor.output_blocked": "Output Blocked",
+
   "immersivegeology.gui.schematic_table.button_0": "Previous Schematic",
   "immersivegeology.gui.schematic_table.button_1": "Next Schematic",
   "immersivegeology.gui.schematic_table.mirror": "Mirrored",

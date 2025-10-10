@@ -23,6 +23,7 @@ import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
 import blusunrize.immersiveengineering.common.util.DroppingMultiblockOutput;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.InsertOnlyInventory;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.ISkinnableMultiblockLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.SeparatorProcess;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GravitySeparatorRecipe;
@@ -49,6 +50,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -196,19 +198,17 @@ public class GravitySeparatorLogic implements ISkinnableMultiblockLogic<GravityS
     @Override
     public List<Component> getOverlayText(State state, Player player, boolean b)
     {
-        if(state == null || player.level() == null || state.separatorProcessesQueue.isEmpty()) return List.of();
-        if(!state.separatorProcessesQueue.isEmpty()) return List.of(Component.literal(String.valueOf(state.separatorProcessesQueue.size())));
-        return List.of(Component.literal(state.separatorProcessesQueue.stream().map(p -> new String(p.getInput().toString() + ": " + p.isProcessFinished() + "|" + p.getRelativeProcessStep(player.level()))).collect(Collectors.toSet()).toString()));
-//        if(!state.separatorProcessesQueue.isEmpty() && state.tank.getFluidAmount() < 20)
-//        {
-//            return List.of(Component.translatable("immersivegeology.machine.low_water").withStyle(ChatFormatting.RED));
-//        }
-//        if(Utils.isFluidRelatedItemStack(player.getItemInHand(InteractionHand.MAIN_HAND)))
-//            return List.of(TextUtils.formatFluidStack(state.tank.getFluid()));
-//        return List.of();
+        if(state == null) return List.of();
+        if(!state.separatorProcessesQueue.isEmpty() && state.tank.getFluidAmount() < 20)
+        {
+            return List.of(Component.translatable("immersivegeology.machine.low_water").withStyle(ChatFormatting.RED));
+        }
+        if(Utils.isFluidRelatedItemStack(player.getItemInHand(InteractionHand.MAIN_HAND)))
+            return List.of(TextUtils.formatFluidStack(state.tank.getFluid()));
+        return List.of();
     }
 
-    public static class State implements IMultiblockState
+    public static class State implements IGMultiblockState
     {
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.disabledByDefault();
         public final ArrayList<SeparatorProcess> separatorProcessesQueue = new ArrayList<>();
@@ -294,6 +294,13 @@ public class GravitySeparatorLogic implements ISkinnableMultiblockLogic<GravityS
             separatorProcessesQueue.clear();
             for(int i = 0; i < processes.size(); ++i)
                 separatorProcessesQueue.add(SeparatorProcess.readFromNBT(processes.getCompound(i)));
+        }
+
+        @Override
+        public void invalidate(@NotNull IMultiblockContext<?> ctx)
+        {
+            this.fInputCap.get(ctx).invalidate();
+            this.insertionHandler.get(ctx).invalidate();
         }
     }
 }

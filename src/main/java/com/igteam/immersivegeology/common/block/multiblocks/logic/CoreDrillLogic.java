@@ -31,6 +31,7 @@ import blusunrize.immersiveengineering.common.register.IEFluids;
 import blusunrize.immersiveengineering.common.register.IEParticles;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.MultiFluidTank;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.CoreDrillRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.CoreDrillShape;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -55,6 +56,7 @@ import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.stringtemplate.v4.ST;
 
@@ -373,7 +375,7 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
         return null;
     }
 
-    public static class State implements IMultiblockState, ProcessContextInWorld<CoreDrillRecipe> {
+    public static class State implements IGMultiblockState, ProcessContextInWorld<CoreDrillRecipe> {
         public final AveragingEnergyStorage energy = new AveragingEnergyStorage(ENERGY_CAPACITY);
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
         public final FluidTank acid_tank = new FluidTank(TANK_VOLUME);
@@ -509,6 +511,14 @@ public class CoreDrillLogic implements IMultiblockLogic<CoreDrillLogic.State>, I
         public boolean getDrillDirection()
         {
             return drill_direction;
+        }
+
+        @Override
+        public void invalidate(@NotNull IMultiblockContext<?> context)
+        {
+            this.energyCap.get(context).invalidate();
+            this.fOutputCap.get(context).invalidate();
+            this.fInputCap.get(context).invalidate();
         }
     }
 
