@@ -62,10 +62,10 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.State>, IServerTickableComponent<CrystallizerLogic.State>, MBOverlayText<State> {
-    public static final BlockPos REDSTONE_IN = new BlockPos(2, 1, 1);
+    public static final BlockPos REDSTONE_IN = new BlockPos(0, 0, 1);
 
     public static final int ENERGY_CAPACITY = 48000;
-    private static final CapabilityPosition ENERGY_INPUT = new CapabilityPosition(1,2,1, RelativeBlockFace.UP);
+    private static final CapabilityPosition ENERGY_INPUT = new CapabilityPosition(2,0,1, RelativeBlockFace.LEFT);
 
     private static final CapabilityPosition FLUID_INPUT_CAP = new CapabilityPosition(1,1,2, RelativeBlockFace.BACK);
     private static final CapabilityPosition FLUID_OUTPUT_CAP = new CapabilityPosition(1,0,1, RelativeBlockFace.DOWN);

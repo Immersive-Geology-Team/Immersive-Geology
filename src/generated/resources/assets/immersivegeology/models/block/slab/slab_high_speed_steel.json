@@ -1,9 +1,9 @@
 {
   "parent": "immersivegeology:block/base/slab/slab",
   "textures": {
-    "all": "immersivegeology:block/greyscale/metal/storage",
-    "cover": "immersivegeology:block/greyscale/metal/storage",
-    "particle": "immersivegeology:block/greyscale/metal/storage",
-    "side": "immersivegeology:block/greyscale/metal/storage"
+    "all": "immersivegeology:palette/block/storage_block/type_1_pristine_high_speed_steel",
+    "cover": "immersivegeology:palette/block/storage_block/type_1_pristine_high_speed_steel",
+    "particle": "immersivegeology:palette/block/storage_block/type_1_pristine_high_speed_steel",
+    "side": "immersivegeology:palette/block/storage_block/type_1_pristine_high_speed_steel"
   }
 }

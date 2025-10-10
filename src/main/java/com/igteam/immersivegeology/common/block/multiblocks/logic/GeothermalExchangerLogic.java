@@ -62,6 +62,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 
+import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -564,6 +565,12 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
         public float getDisplayHeat()
         {
             return this.display_heat;
+        }
+
+        public void invalidate(@Nonnull IMultiblockContext<State> ctx)
+        {
+            fInputCap.get(ctx).invalidate();
+            fOutputCap.get(ctx).invalidate();
         }
     }
 }

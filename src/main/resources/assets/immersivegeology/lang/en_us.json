@@ -55,6 +55,8 @@
   "skin.immersivegeology.gravity_separator.green": "Eco Friendly",
   "skin.immersivegeology.gravity_separator.steampunk": "Steam Punk",
 
+  "skin.immersivegeology.small_chemical_reactor.steampunk": "Steam Punk",
+
   "skin.immersivegeology.chemical_reactor.default": "Old Faithful",
   "skin.immersivegeology.chemical_reactor.legacy": "Legacy",
   "skin.immersivegeology.chemical_reactor.hazard": "Hazard",
@@ -68,7 +70,6 @@
 
   "skin.immersivegeology.bloomery.default": "Old Faithful",
   "skin.immersivegeology.bloomery.legacy": "Legacy",
-
 
   "skin.immersivegeology.reverberation_furnace.default": "Old Faithful",
   "skin.immersivegeology.reverberation_furnace.legacy": "Legacy",

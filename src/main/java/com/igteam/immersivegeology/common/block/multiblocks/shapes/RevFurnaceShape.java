@@ -251,11 +251,11 @@ public class RevFurnaceShape extends GenericShape {
         {
             if(bX==3)
             {
-                main.add(new AABB(0.5, 0.0, 0.0, 1.0, 1.0, 1.0));
+                main.add(new AABB(0.5, 0.0, -0.5, 1.0, 1.0, 1.5));
             }
             else if(bX==5)
             {
-                main.add(new AABB(0.0, 0.0, 0.0, 0.5, 1.0, 1.0));
+                main.add(new AABB(0.0, 0.0, -0.5, 0.5, 1.0, 1.5));
             }
             else if(bX==4)
             {

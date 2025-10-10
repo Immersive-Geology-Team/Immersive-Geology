@@ -6,6 +6,11 @@
       "source": "item"
     },
     {
+      "type": "directory",
+      "prefix": "block/",
+      "source": "block"
+    },
+    {
       "type": "paletted_permutations",
       "palette_key": "immersivegeology:palette/palette_key",
       "permutations": {
@@ -315,6 +320,7 @@
         "immersivegeology:palette/item/drill_head/drill",
         "immersivegeology:palette/item/drill_head/drill_head",
         "immersivegeology:palette/item/tool_hoe/type_1",
+        "immersivegeology:palette/block/storage_block/type_1",
         "immersivegeology:block/greyscale/scaffolding/scaffolding",
         "immersivegeology:block/greyscale/scaffolding/scaffolding_top_grate_top",
         "immersivegeology:block/greyscale/scaffolding/scaffolding_top_wooden_top"

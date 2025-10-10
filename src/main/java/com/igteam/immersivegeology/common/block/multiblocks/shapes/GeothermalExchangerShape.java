@@ -63,6 +63,13 @@ public class GeothermalExchangerShape extends GenericShape {
             return main;
         }
 
+        if(bX == 3 && bY == 6 && bZ == 2)
+        {
+            main.add(pipeHorizontalLR.move(0,0.125f,0));
+            main.add(new AABB(9/16f,6/16f,0,17/16f,14/16f,12/16f));
+            return main;
+        }
+
         // Top pipe bend and horizontal extension
         if(bY==6&&(bZ==2||bZ==0)&&bX==2)
         {

@@ -280,23 +280,46 @@ public class IGBlockStateProvider extends BlockStateProvider {
         ResourceLocation rTextureLocBase = slabBlock.getMaterial(MaterialTexture.base).getTextureLocation(parentFlag);
         ResourceLocation rTextureLocSide = slabBlock.getMaterial(MaterialTexture.base).getTextureLocation(parentFlag);
 
-        baseModel.texture("particle", rTextureLocBase);
-        topModel.texture("particle", rTextureLocBase);
-        doubleModel.texture("particle", rTextureLocBase);
+        try
+        {
+            baseModel.texture("particle", rTextureLocBase);
+            topModel.texture("particle", rTextureLocBase);
+            doubleModel.texture("particle", rTextureLocBase);
 
-        doubleModel.texture("all", rTextureLocBase);
-        topModel.texture("all", rTextureLocBase);
-        baseModel.texture("all", rTextureLocBase);
+            doubleModel.texture("all", rTextureLocBase);
+            topModel.texture("all", rTextureLocBase);
+            baseModel.texture("all", rTextureLocBase);
 
 
-        doubleModel.texture("side", rTextureLocSide);
-        doubleModel.texture("cover", rTextureLocBase);
+            doubleModel.texture("side", rTextureLocSide);
+            doubleModel.texture("cover", rTextureLocBase);
 
-        topModel.texture("side", rTextureLocSide);
-        topModel.texture("cover", rTextureLocBase);
+            topModel.texture("side", rTextureLocSide);
+            topModel.texture("cover", rTextureLocBase);
 
-        baseModel.texture("side", rTextureLocSide);
-        baseModel.texture("cover", rTextureLocBase);
+            baseModel.texture("side", rTextureLocSide);
+            baseModel.texture("cover", rTextureLocBase);
+        }
+        catch(Exception e)
+        {
+            baseModel.textures.put("particle", rTextureLocBase.toString());
+            topModel.textures.put("particle", rTextureLocBase.toString());
+            doubleModel.textures.put("particle", rTextureLocBase.toString());
+
+            doubleModel.textures.put("all", rTextureLocBase.toString());
+            topModel.textures.put("all", rTextureLocBase.toString());
+            baseModel.textures.put("all", rTextureLocBase.toString());
+
+
+            doubleModel.textures.put("side", rTextureLocSide.toString());
+            doubleModel.textures.put("cover", rTextureLocBase.toString());
+
+            topModel.textures.put("side", rTextureLocSide.toString());
+            topModel.textures.put("cover", rTextureLocBase.toString());
+
+            baseModel.textures.put("side", rTextureLocSide.toString());
+            baseModel.textures.put("cover", rTextureLocBase.toString());
+        }
 
         builder.forAllStates(blockState ->
                 blockState.getValue(SlabBlock.TYPE) == SlabType.BOTTOM ?
@@ -445,13 +468,21 @@ public class IGBlockStateProvider extends BlockStateProvider {
             registerGenericBlockColumn(block, pattern);
             return;
         }
+        BlockModelBuilder builder = models().withExistingParent(
+                new ResourceLocation(IGLib.MODID, "block/" + pattern.toString().toLowerCase() + "/" + pattern.getRegistryKey(block.getMaterial(MaterialTexture.base))).getPath(),
+                new ResourceLocation(IGLib.MODID, "block/base/block"));
 
-        getVariantBuilder((Block)block).forAllStates(state -> ConfiguredModel.builder().modelFile(models().withExistingParent(
-                                new ResourceLocation(IGLib.MODID, "block/" + pattern.toString().toLowerCase() + "/" + pattern.getRegistryKey(block.getMaterial(MaterialTexture.base))).getPath(),
-                                new ResourceLocation(IGLib.MODID, "block/base/block"))
-                        .texture("all", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()))
-                        .texture("particle", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag())))
-                .build());
+        try
+        {
+            builder.texture("all", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()))
+                    .texture("particle", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()));
+        } catch(Exception ignored)
+        {
+            builder.textures.put("all", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).toString());
+            builder.textures.put("particle", block.getMaterial(MaterialTexture.base).getTextureLocation(block.getFlag()).toString());
+        }
+
+        getVariantBuilder((Block)block).forAllStates(state -> ConfiguredModel.builder().modelFile(builder).build());
     }
 
     private void registerGenericBlockColumn(IGBlockType block, IFlagType<?> pattern){
@@ -801,9 +832,17 @@ public class IGBlockStateProvider extends BlockStateProvider {
         // A system overhaul would be needed to allow for a 'Primary or Parent' Flag type, with some SubTypes, such as the Storage and Sheetmetal Variations
         IFlagType<?> parentFlag = stairsBlock.getFlag().equals(BlockCategoryFlags.STAIRS) ? BlockCategoryFlags.STORAGE_BLOCK : BlockCategoryFlags.SHEETMETAL_BLOCK;
 
-        baseModel.texture("all", stairsBlock.getMaterial(MaterialTexture.base).getTextureLocation(parentFlag));
-        innerModel.texture("all", stairsBlock.getMaterial(MaterialTexture.base).getTextureLocation(parentFlag));
-        outerModel.texture("all", stairsBlock.getMaterial(MaterialTexture.base).getTextureLocation(parentFlag));
+        try
+        {
+            baseModel.texture("all", stairsBlock.getMaterial(MaterialTexture.base).getTextureLocation(parentFlag));
+            innerModel.texture("all", stairsBlock.getMaterial(MaterialTexture.base).getTextureLocation(parentFlag));
+            outerModel.texture("all", stairsBlock.getMaterial(MaterialTexture.base).getTextureLocation(parentFlag));
+        } catch(Exception e)
+        {
+            baseModel.textures.put("all", stairsBlock.getMaterial(MaterialTexture.base).getTextureLocation(parentFlag).toString());
+            innerModel.textures.put("all", stairsBlock.getMaterial(MaterialTexture.base).getTextureLocation(parentFlag).toString());
+            outerModel.textures.put("all", stairsBlock.getMaterial(MaterialTexture.base).getTextureLocation(parentFlag).toString());
+        }
 
         builder.forAllStates(blockState ->
                 blockState.getValue(stairsBlock.SHAPE) == StairsShape.INNER_LEFT ?

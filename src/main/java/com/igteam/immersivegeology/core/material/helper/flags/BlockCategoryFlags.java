@@ -61,6 +61,24 @@ public enum BlockCategoryFlags implements IFlagType<BlockCategoryFlags> {
         return IFlagType.super.getRenderType();
     }
 
+    public int getVariations()
+    {
+        return switch(this)
+        {
+            case STORAGE_BLOCK -> 1;
+            default -> 1;
+        };
+    }
+
+    public boolean hasPalette()
+    {
+        return switch(this)
+        {
+            case STORAGE_BLOCK -> true;
+            default -> false;
+        };
+    }
+
     public TagKey<Block> getCategoryTag()
     {
         return IGTags.BLOCK_CATEGORY_FLAGS.get(this);

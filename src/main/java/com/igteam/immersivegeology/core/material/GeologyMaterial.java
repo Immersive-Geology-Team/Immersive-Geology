@@ -189,12 +189,13 @@ public abstract class GeologyMaterial implements MaterialHelper {
         {
             return switch(b)
             {
+                case STORAGE_BLOCK -> new ResourceLocation(IGLib.MODID, "palette/block/"+b.getName()+"/type_"+getPaletteVariation(b)+"_pristine_"+getName().toLowerCase());
                 case ORE_BLOCK ->
                 {
                     String ore_overlay = getCrystalFamily()!=null?getCrystalFamily().getName(): "vanilla_normal";
                     yield new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/vanilla/"+ore_overlay);
                 }
-                case STORAGE_BLOCK, STAIRS, SLAB, ENGINEERING_BLOCK, ADVANCED_ENGINEERING_BLOCK, FENCE ->
+                case STAIRS, SLAB, ENGINEERING_BLOCK, ADVANCED_ENGINEERING_BLOCK, FENCE ->
                         new ResourceLocation(IGLib.MODID, "block/greyscale/metal/storage");
                 case EVAPORATE -> new ResourceLocation(IGLib.MODID, "block/greyscale/evaporate/type_1");
                 case SHEETMETAL_SLAB, SHEETMETAL_STAIRS, SHEETMETAL_BLOCK ->
@@ -252,6 +253,10 @@ public abstract class GeologyMaterial implements MaterialHelper {
     }
     static Random rand = new Random(0);
     public int getPaletteVariation(ItemCategoryFlags flag){
+        rand.setSeed(IGLib.fastHash(getName()));
+        return 1+(rand.nextInt(flag.getVariations()))%flag.getVariations();
+    }
+    public int getPaletteVariation(BlockCategoryFlags flag){
         rand.setSeed(IGLib.fastHash(getName()));
         return 1+(rand.nextInt(flag.getVariations()))%flag.getVariations();
     }
