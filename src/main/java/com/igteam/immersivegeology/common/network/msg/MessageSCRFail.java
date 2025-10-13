@@ -47,7 +47,6 @@ public class MessageSCRFail implements IMessage
 		this.damage = damage;
 	}
 
-
 	public MessageSCRFail(FriendlyByteBuf buf)
 	{
 		this.pos = new BlockPos(buf.readInt(), buf.readInt(), buf.readInt());

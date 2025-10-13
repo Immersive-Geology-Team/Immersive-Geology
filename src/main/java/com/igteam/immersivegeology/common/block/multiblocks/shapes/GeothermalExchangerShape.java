@@ -70,6 +70,14 @@ public class GeothermalExchangerShape extends GenericShape {
             return main;
         }
 
+        if(bX == 3 && bY == 6 && bZ == 1)
+        {
+            main.add(pipeVerticalBend.move(0.3125f,0,-0.5));
+            main.add(new AABB(9/16f,6/16f,0,17/16f,14/16f,16/16f));
+            main.add(pipeConnectionBottom.move(0.3125f,0,-0.5));
+            return main;
+        }
+
         // Top pipe bend and horizontal extension
         if(bY==6&&(bZ==2||bZ==0)&&bX==2)
         {
