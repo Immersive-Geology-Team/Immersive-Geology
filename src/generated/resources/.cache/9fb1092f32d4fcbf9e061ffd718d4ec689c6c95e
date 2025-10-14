@@ -1,4 +1,4 @@
-// 1.20.1	2025-10-10T19:24:28.119877298	Recipes
+// 1.20.1	2025-10-14T21:25:51.831861728	Recipes
 5a4b25aa15a30261c92770f0fa073905a4c40ae5 data/immersivegeology/advancements/recipes/building_blocks/crafting/block_to_slab_srconcrete.json
 f65a7adae9d73884f297c5ee3a35ce426134b508 data/immersivegeology/advancements/recipes/building_blocks/crafting/block_to_slab_trconcrete.json
 c3ec2e6cdaa828d8509f10a136f34099ebba7e3c data/immersivegeology/advancements/recipes/building_blocks/crafting/block_to_stair_srconcrete.json
@@ -2696,6 +2696,7 @@ c77380b8940ef57b992e2780ef25a675f9fc3883 data/immersivegeology/recipes/roasting/
 42d1d557e93a5599d3280ae3f746846ed7b535c0 data/immersivegeology/recipes/roasting/roast_crushed_ore_pyrite_to_oxide.json
 6dad6b8932382fe11c8ca29465d48a0efe21d0a2 data/immersivegeology/recipes/roasting/roast_crushed_ore_sphalerite_to_slag.json
 aa5e985b380f12970163e13153b3c310e5cd116d data/immersivegeology/recipes/roasting/roast_roast_copper_sulfide_to_oxide.json
+96080e45a1862e875d238db05605575886c92e79 data/immersivegeology/recipes/stainless_steel_plate.json
 4bcbfdc8e7fda4067a982ad56175d707e9788900 data/immersivegeology/recipes/thermoelectric/refined_uranium.json
 1297bd68c8aa9ee2db7b04d7d53dec4930df2f2f data/immersivegeology/recipes/thermoelectric/thorium.json
 fff5018d16ad6c74288e0e2e2ee4aed922a826d6 data/immersivegeology/recipes/thermoelectric/uranium.json

@@ -115,6 +115,7 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
     @Override
     public void tickServer(IMultiblockContext<State> ctx) {
         SmallChemicalReactorLogic.State state = ctx.getState();
+        Level rawLevel = ctx.getLevel().getRawLevel();
         boolean isMirrored = ctx.getLevel().getOrientation().mirrored();
         boolean isEnabled = state.rsState.isEnabled(ctx);
         if(state.damage > 99) return;
@@ -129,6 +130,23 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
         if(isEnabled) insertRecipeToProcess(state, ctx);
         state.processor.tickServer(state, ctx.getLevel(), state.rsState.isEnabled(ctx));
 
+        ItemStack repairStack = state.inventory.getStackInSlot(2);
+        if(!repairStack.isEmpty())
+        {
+            boolean validRepair = ChemicalRepairRecipe.isValidRepairItem(rawLevel, repairStack);
+            if(validRepair)
+            {
+                int repairAmount = ChemicalRepairRecipe.getRepairAmount(rawLevel, repairStack);
+                if(state.damage >= repairAmount)
+                {
+                    repairStack.shrink(1);
+                    if(repairStack.getCount() == 0) repairStack = ItemStack.EMPTY;
+                    state.inventory.setStackInSlot(2, repairStack);
+                    state.damage -= repairAmount;
+                    ctx.requestMasterBESync();
+                }
+            }
+        }
 
         if(!state.rsState.isEnabled(ctx))
         {
@@ -147,15 +165,16 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
                 {
                     Utils.insertStackIntoInventory(state.input_output, itemStack.copyWithCount(1), false);
                     itemStack.shrink(1);
+
+                    ctx.requestMasterBESync();
                 }
             }
             if(state.processor.getQueueSize() > 0)
             {
                 state.clearProcessor();
+                ctx.requestMasterBESync();
             }
         }
-
-        ctx.requestMasterBESync();
     }
 
     private static void insertRecipeToProcess(State state, IMultiblockContext<SmallChemicalReactorLogic.State>  ctx)
@@ -208,6 +227,7 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
             if(state.processor.getQueueSize() > 0)
             {
                 state.clearProcessor();
+                ctx.requestMasterBESync();
             }
         }
     }
@@ -311,7 +331,7 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
             this.inventory = new SlotwiseItemHandler(List.of(
                     new IOConstraint(true, i -> BasicChemicalRecipe.acceptableCatalyst(getLevel.get(), i)),
                     IOConstraint.OUTPUT,
-                    new IOConstraint(false, i -> ChemicalRepairRecipe.isValidRepairItem(getLevel.get(), i))
+                    new IOConstraint(true, i -> ChemicalRepairRecipe.isValidRepairItem(getLevel.get(), i))
             ), ctx.getMarkDirtyRunnable());
             this.input_output = ctx.getCapabilityAt(ForgeCapabilities.ITEM_HANDLER, ITEM_INPUT_OUTPUT);
 

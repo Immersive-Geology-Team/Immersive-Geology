@@ -103,6 +103,8 @@ public class IGRecipes extends RecipeProvider
 
 		CoreDrillRecipeBuilder.builder(MetalEnum.MoltenMantle.getFluid(BlockCategoryFlags.FLUID)).addInput(new FluidTagInput(FluidTags.WATER, 1)).build(consumer, new ResourceLocation(IGLib.MODID, "basic_coredrill"));
 
+		ChemicalRepairBuilder.builder(MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.PLATE)).setTime(10).build(consumer, new ResourceLocation(IGLib.MODID, "stainless_steel_plate"));
+
 		SpecialRecipeBuilder.special(IGRecipeSerializers.IG_REPAIR_SERIALIZER.get()).save(consumer, IGLib.MODID+":ig_item_repair");
 
 		Item binding_agent_flask = ChemicalEnum.BindingAgent.getFluid(BlockCategoryFlags.FLUID).getBucket();
