@@ -422,16 +422,6 @@ public class IGRecipes extends RecipeProvider
 		TurbineFuelBuilder.builder(MiscEnum.Steam.getFluidTag(BlockCategoryFlags.FLUID), 0.25f, 4, 25).build(consumer, new ResourceLocation(IGLib.MODID, "turbine_fuel/steam"));
 		TurbineFuelBuilder.builder(MiscEnum.HighPressureSteam.getFluidTag(BlockCategoryFlags.FLUID), 0.5f, 16, 25).build(consumer, new ResourceLocation(IGLib.MODID, "turbine_fuel/hpsteam"));
 
-		BasicChemicalRecipeBuilder.builder(MetalEnum.Magnesium.getStack(ItemCategoryFlags.COMPOUND_DUST),
-				ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Tungsten, 500),
-				IngredientWithSize.of(MineralEnum.Wolframite.getStack(ItemCategoryFlags.POWDER)),
-				new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), 500),
-				null,
-				1)
-				.setEnergy(6400)
-				.setTime(100)
-				.build(consumer, new ResourceLocation(IGLib.MODID, "basic_chemical/wolframite_to_tungsten_chloride"));
-
 		for(MaterialInterface<?> material : IGLib.getGeologyMaterials())
 		{
 			if(material.hasFlag(BlockCategoryFlags.ORE_BLOCK))

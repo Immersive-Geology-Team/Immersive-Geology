@@ -1,0 +1,21 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 0,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 250,
+    "tag": "forge:sulfuric_acid"
+  },
+  "fluidResult": {
+    "amount": 216,
+    "fluid": "immersivegeology:slurry_sulfuric_acid_zinc"
+  },
+  "itemInput": {
+    "item": "immersivegeology:metal_oxide_zinc"
+  },
+  "result": {
+    "base_ingredient": [],
+    "count": 0
+  },
+  "time": 200
+}

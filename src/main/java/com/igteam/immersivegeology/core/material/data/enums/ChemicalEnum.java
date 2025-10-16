@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.core.material.data.enums;
 
+import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import com.igteam.immersivegeology.core.material.data.chemical.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -16,6 +17,9 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+
+import java.util.HashSet;
+import java.util.List;
 
 public enum ChemicalEnum implements MaterialInterface<MaterialChemical>
 {
@@ -37,6 +41,33 @@ public enum ChemicalEnum implements MaterialInterface<MaterialChemical>
     ChemicalEnum(MaterialChemical m){
         this.material = m;
     }
+
+    public static int getChemicalDamage(FluidTagInput fluidTagInput)
+    {
+        FluidTagInput base = new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(), fluidTagInput.getAmount());
+
+        boolean isBase = base.serialize().toString().equals(fluidTagInput.serialize().toString());
+        if(isBase) return 1;
+//
+//        boolean isSlurry = ChemicalEnum.HydrochloricAcid.getAllSlurries().stream().anyMatch(slurry -> fluidTagInput.testIgnoringAmount(new FluidStack(slurry, fluidTagInput.getAmount())));
+//        if(isSlurry) return 1;
+//
+//        isSlurry = ChemicalEnum.HydrochloricAcid.getAllCloudySlurries().stream().anyMatch(slurry -> fluidTagInput.testIgnoringAmount(new FluidStack(slurry, fluidTagInput.getAmount())));
+//        if(isSlurry) return 1;
+
+        return 0;
+    }
+
+    private List<Fluid> getAllCloudySlurries()
+    {
+        return instance().getValidSlurryMaterials().stream().map(m -> instance().getFluid(BlockCategoryFlags.CLOUDY_SLURRY, m)).toList();
+    }
+
+    private List<Fluid> getAllSlurries()
+    {
+        return instance().getValidSlurryMaterials().stream().map(m -> instance().getFluid(BlockCategoryFlags.SLURRY, m)).toList();
+    }
+
     @Override
     public MaterialChemical instance() {
         return material;

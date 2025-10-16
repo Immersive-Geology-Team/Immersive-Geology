@@ -41,6 +41,14 @@ public class BasicChemicalRecipeSerializer extends IERecipeSerializer<BasicChemi
 	public BasicChemicalRecipe readFromJson(ResourceLocation resourceLocation, JsonObject json, IContext iContext)
 	{
 		Lazy<ItemStack> output = readOutput(GsonHelper.getAsJsonObject(json, "result"));
+		ItemStack itemOut;
+		try
+		{
+			itemOut = output.get();
+		}  catch(Exception e)
+		{
+			itemOut = ItemStack.EMPTY;
+		}
 
 		FluidStack fluidOut = ApiUtils.jsonDeserializeFluidStack(GsonHelper.getAsJsonObject(json, "fluidResult"));
 		IngredientWithSize itemInput =IngredientWithSize.deserialize(json.get("itemInput"));
@@ -53,7 +61,7 @@ public class BasicChemicalRecipeSerializer extends IERecipeSerializer<BasicChemi
 		int time = GsonHelper.getAsInt(json, "time");
 		int damage_per_second = GsonHelper.getAsInt(json, "damage_per_second");
 
-		return new BasicChemicalRecipe(resourceLocation, itemInput, fluidSet, output.get(), fluidOut, damage_per_second, energy, time);
+		return new BasicChemicalRecipe(resourceLocation, itemInput, fluidSet, itemOut, fluidOut, damage_per_second, energy, time);
 	}
 
 	@Override

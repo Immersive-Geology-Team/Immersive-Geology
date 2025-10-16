@@ -1,20 +1,21 @@
 {
   "type": "immersivegeology:small_chemical_reactor",
   "damage_per_second": 1,
-  "energy": 6400,
+  "energy": 25600,
   "fluidInputA": {
-    "amount": 500,
+    "amount": 250,
     "tag": "forge:hydrochloric_acid"
   },
   "fluidResult": {
-    "amount": 500,
+    "amount": 216,
     "fluid": "immersivegeology:slurry_hydrochloric_acid_tungsten"
   },
   "itemInput": {
-    "item": "immersivegeology:powder_wolframite"
+    "item": "immersivegeology:powder_scheelite"
   },
   "result": {
-    "item": "immersivegeology:compound_dust_magnesium"
+    "base_ingredient": [],
+    "count": 0
   },
-  "time": 100
+  "time": 200
 }

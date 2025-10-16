@@ -53,6 +53,29 @@ public class BasicChemicalRecipeBuilder extends IEFinishedRecipe<BasicChemicalRe
 		return builder;
 	}
 
+	public static BasicChemicalRecipeBuilder builder(IngredientWithSize result, FluidStack fluidStack, IngredientWithSize itemInput, FluidTagInput fluidInputA, FluidTagInput fluidInputB, int damage_per_second)
+	{
+		BasicChemicalRecipeBuilder builder = new BasicChemicalRecipeBuilder().addFluid("fluidResult", fluidStack).addFluid("fluidResult", fluidStack)
+				.addIngredient("itemInput",itemInput);
+
+		builder.addResult(result);
+
+		if(fluidInputA != null)
+		{
+			builder.addFluidTag("fluidInputA", fluidInputA);
+		}
+		if(fluidInputB != null)
+		{
+			builder.addFluidTag("fluidInputB", fluidInputB);
+		}
+
+		builder.addWriter((jsonObject) -> {
+			jsonObject.addProperty("damage_per_second", damage_per_second);
+		});
+
+		return builder;
+	}
+
 	public static BasicChemicalRecipeBuilder builder(ItemStack result, FluidStack fluidStack, IngredientWithSize itemInput, FluidTagInput fluidInputA, FluidTagInput fluidInputB)
 	{
 		BasicChemicalRecipeBuilder builder = new BasicChemicalRecipeBuilder().addFluid("fluidResult", fluidStack).addFluid("fluidResult", fluidStack)

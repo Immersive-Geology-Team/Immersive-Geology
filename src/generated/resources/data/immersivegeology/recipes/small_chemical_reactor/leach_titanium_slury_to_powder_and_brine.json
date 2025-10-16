@@ -1,0 +1,27 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 0,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 216,
+    "tag": "forge:clean_hydrochloric_acid_titanium"
+  },
+  "fluidInputB": {
+    "amount": 216,
+    "tag": "minecraft:water"
+  },
+  "fluidResult": {
+    "amount": 360,
+    "fluid": "immersivegeology:slurry_brine_rocksalt"
+  },
+  "itemInput": {
+    "base_ingredient": {
+      "item": "immersivegeology:grit_sodium"
+    },
+    "count": 4
+  },
+  "result": {
+    "item": "immersivegeology:grit_titanium"
+  },
+  "time": 200
+}

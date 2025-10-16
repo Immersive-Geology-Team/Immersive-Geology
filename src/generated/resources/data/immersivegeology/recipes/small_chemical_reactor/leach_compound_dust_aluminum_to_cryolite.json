@@ -1,0 +1,20 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 0,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 125,
+    "tag": "forge:hydrofluoric_acid"
+  },
+  "fluidResult": {
+    "amount": 0,
+    "fluid": "minecraft:empty"
+  },
+  "itemInput": {
+    "tag": "forge:compound_dust/aluminum"
+  },
+  "result": {
+    "item": "immersivegeology:powder_cryolite"
+  },
+  "time": 200
+}

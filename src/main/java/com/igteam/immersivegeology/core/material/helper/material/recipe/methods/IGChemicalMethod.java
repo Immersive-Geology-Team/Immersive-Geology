@@ -11,9 +11,15 @@ package com.igteam.immersivegeology.core.material.helper.material.recipe.methods
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.lib.manual.gui.ManualScreen;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.BasicChemicalRecipeBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.ChemicalRecipeBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
@@ -26,6 +32,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class IGChemicalMethod extends IGRecipeMethod
@@ -130,6 +138,35 @@ public class IGChemicalMethod extends IGRecipeMethod
 			builder.setEnergy(energy);
 			builder.setTime(time);
 			builder.build(consumer, getLocation());
+
+			int nullCount = 0;
+			if (fluidInA == null) nullCount++;
+			if (fluidInB == null) nullCount++;
+			if (fluidInC == null) nullCount++;
+
+			// If at least one fluid is null
+			if (nullCount >= 1)
+			{
+				List<FluidTagInput> tempFluids = new ArrayList<>(2);
+
+				if(fluidInA!=null) tempFluids.add(fluidInA);
+				if(fluidInB!=null) tempFluids.add(fluidInB);
+				if(fluidInC!=null) tempFluids.add(fluidInC);
+
+				int damage = ChemicalEnum.getChemicalDamage(tempFluids.get(0)) + ((nullCount == 1) ? ChemicalEnum.getChemicalDamage(tempFluids.get(0)) : 0);
+
+
+				BasicChemicalRecipeBuilder.builder(itemOutput,
+								fluidOutput,
+								itemIn,
+								tempFluids.get(0),
+								nullCount == 2 ? null : tempFluids.get(1),
+								damage)
+						.setEnergy(energy / 2)
+						.setTime(time)
+						.build(consumer, toRL("small_chemical_reactor/leach_" + getName()));
+			}
+
 			return true;
 		}
 		catch(Exception e)

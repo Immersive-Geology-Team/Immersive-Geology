@@ -1,0 +1,20 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 0,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 750,
+    "tag": "forge:ammonia_solution"
+  },
+  "fluidResult": {
+    "amount": 648,
+    "fluid": "immersivegeology:cloudy_slurry_ammonia_solution_molybdenite"
+  },
+  "itemInput": {
+    "item": "immersivegeology:powdered_slag_molybdenite"
+  },
+  "result": {
+    "item": "immersivegeology:compound_dust_osmium"
+  },
+  "time": 200
+}
