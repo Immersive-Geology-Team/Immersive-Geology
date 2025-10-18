@@ -54,6 +54,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipeCategories(new IGBallmillCategory(guiHelper));
 		registration.addRecipeCategories(new IGPelletizerCategory(guiHelper));
 		registration.addRecipeCategories(new IGCentrifugeCategory(guiHelper));
+		registration.addRecipeCategories(new IGBasicChemicalCategory(guiHelper));
 	}
 
 	@Override
@@ -63,6 +64,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipes(JEIRecipeTypes.REVERBERATION, getRecipes(RevFurnaceRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.ROTARYKILN, getRecipes(RotaryKilnRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.CHEMICAL, getRecipes(ChemicalRecipe.RECIPES));
+		registration.addRecipes(JEIRecipeTypes.BASIC_CHEMICAL, getRecipes(BasicChemicalRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.SLUICE, getRecipes(IndustrialSluiceRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.BLOOMERY, getRecipes(BloomeryRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.GEOHINT, getRecipes(IGGeoRecipe.RECIPES));
@@ -81,6 +83,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipeCatalyst(IGMultiblockProvider.REVERBERATION_FURNACE.iconStack(), JEIRecipeTypes.REVERBERATION);
 		registration.addRecipeCatalyst(IGMultiblockProvider.ROTARYKILN.iconStack(), JEIRecipeTypes.ROTARYKILN);
 		registration.addRecipeCatalyst(IGMultiblockProvider.CHEMICAL_REACTOR.iconStack(), JEIRecipeTypes.CHEMICAL);
+		registration.addRecipeCatalyst(IGMultiblockProvider.SMALL_CHEMICAL_REACTOR.iconStack(), JEIRecipeTypes.BASIC_CHEMICAL);
 		registration.addRecipeCatalyst(IGMultiblockProvider.BLOOMERY.iconStack(), JEIRecipeTypes.BLOOMERY);
 		registration.addRecipeCatalyst(IGMultiblockProvider.BALLMILL.iconStack(), JEIRecipeTypes.BALLMILL);
 		registration.addRecipeCatalyst(IGMultiblockProvider.PELLETIZER.iconStack(), JEIRecipeTypes.PELLETIZER);

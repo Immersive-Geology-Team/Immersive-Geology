@@ -2157,5 +2157,8 @@
   "block.immersivegeology.tfc_poor_ore_block_pyrite_claystone.prospected": "Pyrite",
   "block.immersivegeology.ad_astra_poor_ore_block_vanadinite_venus_stone.prospected": "Vanadinite",
   "block.immersivegeology.tfc_poor_ore_block_fluorite_granite.prospected": "Fluorite",
-  "block.immersivegeology.rich_ore_block_hubnerite_granite.prospected": "Hubnerite"
+  "block.immersivegeology.rich_ore_block_hubnerite_granite.prospected": "Hubnerite",
+  "immersivegeology.steam_turbine.jei_fuel_time": "Fuel Time",
+  "block.immersivegeology.basic_chemical_reactor": "Basic Chemical Reactor",
+  "immersivegeology.alternator.rpm": "RPM:"
 }

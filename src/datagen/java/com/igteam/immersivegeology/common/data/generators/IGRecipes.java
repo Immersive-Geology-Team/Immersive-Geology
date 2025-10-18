@@ -419,8 +419,8 @@ public class IGRecipes extends RecipeProvider
 		GeothermalBiomeRecipeBuilder.fromTags(900, 4000, BiomeTags.IS_NETHER).build(consumer, new ResourceLocation(IGLib.MODID, "geobiome/is_nether"));
 		GeothermalBiomeRecipeBuilder.fromTags(100, 2000, Tags.Biomes.IS_COLD_OVERWORLD).build(consumer, new ResourceLocation(IGLib.MODID, "geobiome/is_cold"));
 
-		TurbineFuelBuilder.builder(MiscEnum.Steam.getFluidTag(BlockCategoryFlags.FLUID), 0.25f, 4, 25).build(consumer, new ResourceLocation(IGLib.MODID, "turbine_fuel/steam"));
-		TurbineFuelBuilder.builder(MiscEnum.HighPressureSteam.getFluidTag(BlockCategoryFlags.FLUID), 0.5f, 16, 25).build(consumer, new ResourceLocation(IGLib.MODID, "turbine_fuel/hpsteam"));
+		TurbineFuelBuilder.builder(MiscEnum.Steam.getFluidTag(BlockCategoryFlags.FLUID), 0.25f, 2, 33).build(consumer, new ResourceLocation(IGLib.MODID, "turbine_fuel/steam"));
+		TurbineFuelBuilder.builder(MiscEnum.HighPressureSteam.getFluidTag(BlockCategoryFlags.FLUID), 0.5f, 8, 25).build(consumer, new ResourceLocation(IGLib.MODID, "turbine_fuel/hpsteam"));
 
 		for(MaterialInterface<?> material : IGLib.getGeologyMaterials())
 		{

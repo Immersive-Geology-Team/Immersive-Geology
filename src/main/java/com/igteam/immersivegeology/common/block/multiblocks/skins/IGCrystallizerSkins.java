@@ -18,7 +18,9 @@ import java.util.Locale;
 public enum IGCrystallizerSkins implements IIGMultiSkinHelper
 {
 	DEFAULT("default", ChatFormatting.GOLD, SkinCreditType.DEVELOPER, "muddykat", false),
-	RUSTED("rusted", ChatFormatting.YELLOW, SkinCreditType.DEVELOPER, "muddykat", false);
+	RUSTED("rusted", ChatFormatting.YELLOW, SkinCreditType.DEVELOPER, "muddykat", false),
+	HIVE("hive", ChatFormatting.GOLD, SkinCreditType.ARTIST, "yeshwamp", false),
+	PUMPKIN("pumpkin", ChatFormatting.GOLD, SkinCreditType.ARTIST, "bilebirda", false);
 
 	private final String skin;
 	private final SkinCreditType type;

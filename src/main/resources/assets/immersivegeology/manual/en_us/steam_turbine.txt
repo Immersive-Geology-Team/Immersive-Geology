@@ -2,8 +2,7 @@ Steam Turbine
 Spin me around
 <&multiblock>The Steam Turbine is a §lhigh-output power generator§r designed to convert §lpressurized steam§r into energy.
 
-Capable of generating up to §l12288 FE/t§r—three times more than a Diesel Generator.
-
+When paired with an <link;immersivegeology:alternator;Alternator> is able to provide enough §lRotation Energy§r to generate over §l12288 FE/t§r, more than three times than a Diesel Generator.
 
 §lOperation§r
 - The turbine runs exclusively on §lSteam§r as its fuel source.

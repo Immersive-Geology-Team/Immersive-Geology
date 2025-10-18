@@ -1,18 +1,14 @@
 {
   "type": "immersiveengineering:arc_furnace",
   "additives": [],
-  "energy": 51200,
+  "energy": 25600,
   "input": {
-    "item": "immersivegeology:engineering_block_rusty_metal"
+    "item": "immersivegeology:scaffolding_rusty_metal_standard"
   },
   "results": [
     {
-      "count": 2,
       "item": "immersiveengineering:plate_iron"
     }
   ],
-  "slag": {
-    "item": "minecraft:copper_ingot"
-  },
   "time": 100
 }

@@ -39,8 +39,8 @@ public class AlternatorRenderer extends IGBlockEntityRenderer<MultiblockBlockEnt
     @Override
     public void render(MultiblockBlockEntityMaster<AlternatorLogic.State> tile, float pPartialTick, PoseStack poseStack, @NotNull MultiBufferSource buffer, int pPackedLight, int pPackedOverlay)
     {
-        boolean doRendering = IGClientConfig.doSpecialRenderAlternator.get();
-        if(!doRendering) return;
+        if (!IGClientConfig.doSpecialRenderAlternator.get())
+            return;
 
         IMultiblockBEHelperMaster<AlternatorLogic.State> helper = tile.getHelper();
         IMultiblockContext<AlternatorLogic.State> context = helper.getContext();
@@ -48,26 +48,33 @@ public class AlternatorRenderer extends IGBlockEntityRenderer<MultiblockBlockEnt
         final MultiblockOrientation orientation = context.getLevel().getOrientation();
         final AlternatorLogic.State state = context.getState();
         final IGAlternatorSkins skin = tile.getBlockState().getValue(AlternatorPart.ALTERNATOR);
-        float rot = state.getRenderRotation();
-        BlockPos pos = tile.getBlockPos();
-        Level level = tile.getLevel();
-        Direction dir = orientation.front();
-        boolean isMirror = orientation.mirrored();
-        if(state.target_rotation == 0) pPartialTick = 0;
+        final Level level = tile.getLevel();
+        final BlockPos pos = tile.getBlockPos();
+        final Direction dir = orientation.front();
+
+        // Interpolated rotation (normalized 0.0 to 1.0)
+        float normalizedRot = state.render_rotation + (state.rotation_speed * pPartialTick);
+        normalizedRot %= 1.0f;
+
+        // Convert to radians
+        float wheelRotation = Mth.TWO_PI * normalizedRot;
+
         poseStack.pushPose();
-        poseStack.scale(0.975f,0.975f,0.975f);
+        poseStack.scale(0.975f, 0.975f, 0.975f);
         rotateForFacing(poseStack, dir);
+
         poseStack.pushPose();
         {
-            poseStack.translate(.5f,1.5f,0);
+            poseStack.translate(0.5f, 1.5f, 0f);
             poseStack.pushPose();
             {
-                poseStack.mulPose(new Quaternionf().rotateAxis((rot + pPartialTick)*Mth.DEG_TO_RAD, new Vector3f(0, 0, 1)));
+                // Apply smooth Z rotation
+                poseStack.mulPose(new Quaternionf().rotateZ(wheelRotation));
                 renderDynamicModel(WHEEL, poseStack, buffer, Direction.NORTH, level, pos, pPackedLight, pPackedOverlay, skin);
-                poseStack.popPose();
             }
             poseStack.popPose();
         }
+        poseStack.popPose();
         poseStack.popPose();
     }
 

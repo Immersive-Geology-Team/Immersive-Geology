@@ -1,0 +1,15 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 25600,
+  "input": {
+    "item": "immersivegeology:storage_block_rusty_metal"
+  },
+  "results": [
+    {
+      "count": 4,
+      "item": "immersiveengineering:ingot_steel"
+    }
+  ],
+  "time": 100
+}

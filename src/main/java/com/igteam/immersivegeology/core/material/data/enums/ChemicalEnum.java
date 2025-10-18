@@ -45,16 +45,11 @@ public enum ChemicalEnum implements MaterialInterface<MaterialChemical>
     public static int getChemicalDamage(FluidTagInput fluidTagInput)
     {
         FluidTagInput base = new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(), fluidTagInput.getAmount());
-
+        // I'm only fine with this code as it's run once on my end and isn't really used on the end users.
+        // Leaving this open for expanding incase I'd like to have different levels of acid damage.
+        // Checking Fluid Tags is really annoying in Data Generation, so we have to do this work around.
         boolean isBase = base.serialize().toString().equals(fluidTagInput.serialize().toString());
         if(isBase) return 1;
-//
-//        boolean isSlurry = ChemicalEnum.HydrochloricAcid.getAllSlurries().stream().anyMatch(slurry -> fluidTagInput.testIgnoringAmount(new FluidStack(slurry, fluidTagInput.getAmount())));
-//        if(isSlurry) return 1;
-//
-//        isSlurry = ChemicalEnum.HydrochloricAcid.getAllCloudySlurries().stream().anyMatch(slurry -> fluidTagInput.testIgnoringAmount(new FluidStack(slurry, fluidTagInput.getAmount())));
-//        if(isSlurry) return 1;
-
         return 0;
     }
 

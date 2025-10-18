@@ -1,0 +1,15 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 25600,
+  "input": {
+    "item": "immersivegeology:sheetmetal_stairs_rusty_metal"
+  },
+  "results": [
+    {
+      "count": 4,
+      "item": "immersiveengineering:nugget_steel"
+    }
+  ],
+  "time": 100
+}

@@ -1,18 +1,15 @@
 {
   "type": "immersiveengineering:arc_furnace",
   "additives": [],
-  "energy": 51200,
+  "energy": 25600,
   "input": {
-    "item": "immersivegeology:advanced_engineering_block_rusty_metal"
+    "item": "immersivegeology:default_block_rusty_metal"
   },
   "results": [
     {
-      "count": 2,
+      "count": 4,
       "item": "immersiveengineering:plate_steel"
     }
   ],
-  "slag": {
-    "item": "immersiveengineering:ingot_electrum"
-  },
   "time": 100
 }

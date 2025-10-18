@@ -1,4 +1,4 @@
-// 1.20.1	2025-09-28T13:40:06.066251025	Item models
+// 1.20.1	2025-10-18T22:12:33.443606159	Item models
 7d48f2b4469e5dd5953f6f9507355e31dcf47225 assets/immersivegeology/models/item/advanced_engineering_block_rusty_metal.json
 d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/alternator_multiblock_skin_default.json
 d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/alternator_multiblock_skin_hazard.json
@@ -202,6 +202,8 @@ f992ebebf0d170d029c60dc331c83b88a86d0ebe assets/immersivegeology/models/item/cry
 eabeb621d29b5ffea74eed9e2f4dceb24ed2753b assets/immersivegeology/models/item/crystal_zinc.json
 eabeb621d29b5ffea74eed9e2f4dceb24ed2753b assets/immersivegeology/models/item/crystal_zirconium.json
 d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/crystallizer_multiblock_skin_default.json
+d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/crystallizer_multiblock_skin_hive.json
+d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/crystallizer_multiblock_skin_pumpkin.json
 d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/crystallizer_multiblock_skin_rusted.json
 0a27437f619e5a21c4a7e3a723e3dc79d9b0cb39 assets/immersivegeology/models/item/default_block_rusty_metal.json
 a952c2882a709d4aee7c3dea55bed0eb08223253 assets/immersivegeology/models/item/dirty_crushed_ore_acanthite.json

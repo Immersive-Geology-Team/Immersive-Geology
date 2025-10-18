@@ -71,6 +71,7 @@ public class SteamTurbineLogic implements ISkinnableMultiblockLogic<State>, MBOv
     private static final CapabilityPosition FLUID_OUTPUT_B;
     private static final CapabilityPosition ROTATION_OUTPUT;
 
+    private static final float DEG_PER_FULL_ROTATION = 360f;
 
     @Override
     public void tickClient(IMultiblockContext<State> context) {
@@ -122,7 +123,7 @@ public class SteamTurbineLogic implements ISkinnableMultiblockLogic<State>, MBOv
                 active = false;
             }
 
-            state.target_rotation = active ? 36f : 0f;
+            state.target_rotation = active ? 64f : 0f;
         } else {
             // Not enabled or can't operate
             if (active) {
@@ -155,7 +156,8 @@ public class SteamTurbineLogic implements ISkinnableMultiblockLogic<State>, MBOv
             IRotationAcceptor alternator = (IRotationAcceptor)state.outputCap.getNullable();
             if(alternator != null)
             {
-                alternator.inputRotation(state.rotation_speed);
+                float rotationPerTick = state.rotation_speed / 360f;
+                alternator.inputRotation(rotationPerTick);
             }
         }
 

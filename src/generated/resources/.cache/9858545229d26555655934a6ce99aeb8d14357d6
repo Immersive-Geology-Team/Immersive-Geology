@@ -1,4 +1,4 @@
-// 1.20.1	2025-08-29T16:06:28.725451561	IGComplexItemModelProvider
+// 1.20.1	2025-10-19T01:46:52.797047786	IGComplexItemModelProvider
 29883d0fb4e6ee57fe79176c2840545d289fe142 assets/immersivegeology/models/item/alternator.json
 6d820c2770f6dbd3dde161966bed0487bfa02519 assets/immersivegeology/models/item/ballmill.json
 85c417183be92be6ed895c3d58b63c65c5fd3ba4 assets/immersivegeology/models/item/bloomery.json
@@ -11,5 +11,5 @@ f1a4dc9f1d06173c5f429e089525e081cb17a1f2 assets/immersivegeology/models/item/gra
 e1364b4ca02a4ff60b1f93f60d7c587ce5f38fa0 assets/immersivegeology/models/item/pelletizer.json
 03c5a52696f7d1f6c478b6dda64370068076bc39 assets/immersivegeology/models/item/reverberation_furnace.json
 5ef9b9b47706bc12fdfd800b635fce055fbe137e assets/immersivegeology/models/item/rotary_kiln.json
-38a19dc7e69e430913ec4325469d21c700a00d8d assets/immersivegeology/models/item/small_chemical_reactor.json
+378c5892927185f21117893bd7fecd0185e04d79 assets/immersivegeology/models/item/small_chemical_reactor.json
 1785c8c4277626f30a3ccb22c73ee90651e412aa assets/immersivegeology/models/item/steam_turbine.json

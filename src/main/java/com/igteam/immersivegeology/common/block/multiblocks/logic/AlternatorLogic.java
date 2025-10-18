@@ -21,6 +21,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.util.RelativeBlock
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.ShapeType;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.StoredCapability;
 import blusunrize.immersiveengineering.api.utils.CapabilityReference;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.interfaces.MBOverlayText;
 import blusunrize.immersiveengineering.common.util.EnergyHelper;
 import com.google.common.collect.ImmutableList;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
@@ -29,13 +30,16 @@ import com.igteam.immersivegeology.common.block.multiblocks.shapes.AlternatorSha
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Objects;
@@ -43,7 +47,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AlternatorLogic implements ISkinnableMultiblockLogic<AlternatorLogic.State>, IServerTickableComponent<AlternatorLogic.State>, IClientTickableComponent<AlternatorLogic.State> {
+public class AlternatorLogic implements ISkinnableMultiblockLogic<AlternatorLogic.State>, MBOverlayText<AlternatorLogic.State>, IServerTickableComponent<AlternatorLogic.State>, IClientTickableComponent<AlternatorLogic.State> {
     public static final BlockPos REDSTONE_IN = new BlockPos(6,1,0);
     private static final List<BlockPos> ENERGY_OUTPUTS = IntStream.range(2, 5).mapToObj((i) -> {
         return new BlockPos(5, i, 0);
@@ -51,14 +55,16 @@ public class AlternatorLogic implements ISkinnableMultiblockLogic<AlternatorLogi
 
     public static final BlockPos ROTATION_IN = new BlockPos(3, 3, 4);
 
-    private static final int MAX_ENERGY_OUTPUT = 24576;
-    private static final float MAX_TURBINE_SPEED = 36f;
+    private static final int MAX_ENERGY_OUTPUT = 32768;
+    private static final float MAX_TURBINE_SPEED = 0.21f; //20% turn per tick, or 4 turns a second.
 
     @Override
     public void tickClient(IMultiblockContext<State> ctx) {
         State state = ctx.getState();
         state.render_rotation += state.rotation_speed;
-        state.render_rotation %= 360;
+        state.render_rotation %= 1.0f;
+        if(state.render_rotation < 0) state.render_rotation += 1.0f;
+
         if(state.request_sync)
         {
             state.request_sync = false;
@@ -70,12 +76,12 @@ public class AlternatorLogic implements ISkinnableMultiblockLogic<AlternatorLogi
     public void tickServer(IMultiblockContext<State> ctx) {
         State state = ctx.getState();
         state.rotation_speed = Mth.lerp(0.1f, state.rotation_speed, state.target_rotation);
-        if(state.rotation_speed < 0.05f) state.rotation_speed = Math.round(state.rotation_speed);
+        //if(state.rotation_speed < 0.0005f) state.rotation_speed = Math.round(state.rotation_speed);
         if(state.rotation_speed > 0) provideFlux(state);
         if(state.target_rotation > 0)
         {
-            state.target_rotation = Mth.lerp(0.05f, state.target_rotation, 0);
-            if(state.target_rotation < 0.1f) state.target_rotation = 0;
+            state.target_rotation = Mth.lerp(0.005f, state.target_rotation, 0);
+            if(state.target_rotation < 0.001f) state.target_rotation = 0;
         }
 
         if(state.request_sync)
@@ -91,7 +97,7 @@ public class AlternatorLogic implements ISkinnableMultiblockLogic<AlternatorLogi
         List<IEnergyStorage> presentOutputs = state.energyOutputs.stream().map(CapabilityReference::getNullable).filter(Objects::nonNull).collect(Collectors.toList());
         if(!presentOutputs.isEmpty())
         {
-            int output = Math.round(MAX_ENERGY_OUTPUT*(state.rotation_speed/MAX_TURBINE_SPEED));
+            int output = Math.round(MAX_ENERGY_OUTPUT*(state.rotation_speed/(MAX_TURBINE_SPEED - 0.05f)));
             if(EnergyHelper.distributeFlux(presentOutputs, output, true) < output)
             {
                 return EnergyHelper.distributeFlux(presentOutputs, output, false) < output;
@@ -131,6 +137,15 @@ public class AlternatorLogic implements ISkinnableMultiblockLogic<AlternatorLogi
         return LazyOptional.empty();
     }
 
+    @Nullable
+    @Override
+    public List<Component> getOverlayText(State state, Player player, boolean b)
+    {
+        if(state == null) return List.of();
+        int rpm = Math.round(state.rotation_speed * 1200.0f);
+        return List.of(Component.translatable("immersivegeology.alternator.rpm").append(String.valueOf(rpm)));
+    }
+
     public static class State implements IGMultiblockState
     {
         private final StoredCapability<IEnergyStorage> energyView;
@@ -164,8 +179,22 @@ public class AlternatorLogic implements ISkinnableMultiblockLogic<AlternatorLogi
         private class RotationAcceptor implements IRotationAcceptor
         {
             private RotationAcceptor() {}
-            public void inputRotation(double rotation) {
-                setTargetRotation(Math.min(rotation, MAX_TURBINE_SPEED));
+            @Override
+            public void inputRotation(double inputValue) {
+                double normalizedRPT = convertToRPT(inputValue);
+                setTargetRotation(Math.min(normalizedRPT, MAX_TURBINE_SPEED));
+            }
+
+            private double convertToRPT(double raw) {
+                if (raw >= 9) {
+                    // Windmill: rotation * 800
+                    return raw / 0.75 / 2880;
+                } else if (raw >= 2) {
+                    // Watermill: power * 0.75 rough estimate (power max ~1.5 - 2.0)
+                    return  raw / 1600; // from watermill logic: 1/1440 * power
+                }
+                // Fallback: assume it's already close to RPT (from other sources)
+                return raw;
             }
         }
 

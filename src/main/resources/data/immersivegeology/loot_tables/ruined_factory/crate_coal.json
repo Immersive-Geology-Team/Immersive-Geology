@@ -1,0 +1,106 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "group",
+              "children": [
+                {
+                  "type": "item",
+                  "name": "immersivegeology:normal_ore_bituminous",
+                  "functions": [
+                    {
+                      "function": "minecraft:set_count",
+                      "count": { "min": 84, "max": 256 }
+                    }
+                  ]
+                },
+                {
+                  "type": "item",
+                  "name": "immersivegeology:normal_ore_lignite",
+                  "functions": [
+                    {
+                      "function": "minecraft:set_count",
+                      "count": { "min": 8, "max": 32 }
+                    }
+                  ]
+                },
+                {
+                  "type": "item",
+                  "name": "immersivegeology:normal_ore_anthracite",
+                  "functions": [
+                    {
+                      "function": "minecraft:set_count",
+                      "count": { "min": 8, "max": 32 }
+                    }
+                  ]
+                }
+              ],
+              "conditions": [
+                { "condition": "minecraft:random_chance", "chance": 0.3333 }
+              ]
+            },
+            {
+              "type": "group",
+              "children": [
+                {
+                  "type": "item",
+                  "name": "immersivegeology:normal_ore_lignite",
+                  "functions": [
+                    {
+                      "function": "minecraft:set_count",
+                      "count": { "min": 84, "max": 256 }
+                    }
+                  ]
+                },
+                {
+                  "type": "item",
+                  "name": "immersivegeology:normal_ore_bituminous",
+                  "functions": [
+                    {
+                      "function": "minecraft:set_count",
+                      "count": { "min": 16, "max": 84 }
+                    }
+                  ]
+                }
+              ],
+              "conditions": [
+                { "condition": "minecraft:random_chance", "chance": 0.5 }
+              ]
+            },
+            {
+              "type": "group",
+              "children": [
+                {
+                  "type": "item",
+                  "name": "immersivegeology:normal_ore_anthracite",
+                  "functions": [
+                    {
+                      "function": "minecraft:set_count",
+                      "count": { "min": 84, "max": 256 }
+                    }
+                  ]
+                },
+                {
+                  "type": "item",
+                  "name": "immersivegeology:normal_ore_bituminous",
+                  "functions": [
+                    {
+                      "function": "minecraft:set_count",
+                      "count": { "min": 16, "max": 84 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
