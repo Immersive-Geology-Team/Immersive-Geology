@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.core.material.data.types;
 
+import com.igteam.immersivegeology.common.world.IGWorldGen;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
@@ -36,7 +37,7 @@ public class MaterialEvaporateMineral extends MaterialMineral
 		int minSea = 62;
 		int maxSea = 72;
 
-		CONFIG = new MineralConfig(8,50,1, minSea, maxSea,5, 0.5,true, Optional.of(Biomes.IS_SANDY), IGGenerationType.EVAPORATE);
+		CONFIG = new MineralConfig(8,50,1, minSea, maxSea,5, 0.5,true, Optional.of(IGWorldGen.SALT_FLATS_BIOMES), IGGenerationType.EVAPORATE);
 	}
 
 	@Override

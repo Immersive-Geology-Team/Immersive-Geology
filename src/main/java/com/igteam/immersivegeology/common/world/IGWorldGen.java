@@ -16,11 +16,23 @@ import com.igteam.immersivegeology.common.world.placements.IGPlaceholderFeature;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.mojang.serialization.Codec;
+import dev.architectury.registry.registries.RegistrySupplier;
+import net.minecraft.core.Registry;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.biome.*;
+import net.minecraft.world.level.biome.MobSpawnSettings.SpawnerData;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProviderType;
-import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
+import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -41,6 +53,11 @@ public class IGWorldGen
 	public static RegistryObject<PlacementModifierType<IGSparsePlacement>> IG_SPARSE_PLACEMENT;
 	public static RegistryObject<PlacementModifierType<IGDefaultPlacement>> IG_DEFAULT_PLACEMENT;
 	public static final RegistryObject<Feature<BlockStateConfiguration>> EVAPORITE_FEATURE;
+
+	public static final TagKey<Biome> SALT_FLATS_BIOMES = TagKey.create(
+			Registries.BIOME,
+			new ResourceLocation(IGLib.MODID, "salt_flats")
+	);
 
 	public static final DeferredRegister<Codec<? extends BiomeModifier>> BIOME_MODIFIER_SERIALIZERS;
 	public static final RegistryObject<Codec<IGOreRemovalModifier>> ORE_MODIFIER_CODEC;
@@ -78,12 +95,12 @@ public class IGWorldGen
 
 		BIOME_MODIFIER_SERIALIZERS = DeferredRegister.create(ForgeRegistries.Keys.BIOME_MODIFIER_SERIALIZERS, IGLib.MODID);
 
-		ORE_MODIFIER_CODEC = BIOME_MODIFIER_SERIALIZERS.register("ore_removal", () ->Codec.unit(IGOreRemovalModifier::new));
+		ORE_MODIFIER_CODEC = BIOME_MODIFIER_SERIALIZERS.register("ore_removal", () -> Codec.unit(IGOreRemovalModifier::new));
 
 
 		PLACEMENT_REGISTER = DeferredRegister.create(Registries.PLACEMENT_MODIFIER_TYPE, IGLib.MODID);
 
-		EVAPORITE_FEATURE = FEATURE_REGISTER.register("evaporate", () -> new IGEvaporateFeature(BlockStateConfiguration.CODEC));
+		EVAPORITE_FEATURE = FEATURE_REGISTER.register("evaporate_pool", () -> new IGEvaporateFeature(BlockStateConfiguration.CODEC));
 
 		IG_COUNT_PLACEMENT = PLACEMENT_REGISTER.register("ig_count", () -> {
 			return () -> {

@@ -1,5 +1,5 @@
 {
-  "type": "immersivegeology:evaporate",
+  "type": "immersivegeology:evaporate_pool",
   "config": {
     "state": {
       "Name": "immersivegeology:evaporate_rocksalt"
