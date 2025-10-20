@@ -37,7 +37,7 @@ public class MaterialEvaporateMineral extends MaterialMineral
 		int minSea = 62;
 		int maxSea = 72;
 
-		CONFIG = new MineralConfig(8,50,1, minSea, maxSea,5, 0.5,true, Optional.of(IGWorldGen.SALT_FLATS_BIOMES), IGGenerationType.EVAPORATE);
+		CONFIG = new MineralConfig(8,50,1, minSea, maxSea,5, 0.5,true, Optional.of(Biomes.IS_DESERT), IGGenerationType.EVAPORATE);
 	}
 
 	@Override
