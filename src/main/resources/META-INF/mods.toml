@@ -40,7 +40,7 @@ side="BOTH"
 modId="immersiveengineering"
 mandatory=true
 versionRange="[${version_ie},]"
-ordering="NONE"
+ordering="AFTER"
 side="BOTH"
 
 [[dependencies.immersivegeology]]

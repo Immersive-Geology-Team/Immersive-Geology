@@ -1,0 +1,73 @@
+{
+  "type": "immersiveengineering:mineral_mix",
+  "dimensions": [
+    "minecraft:the_nether"
+  ],
+  "fail_chance": 0.25,
+  "ores": [
+    {
+      "chance": 0.25,
+      "output": {
+        "tag": "forge:normal_ore/molybdenite"
+      }
+    },
+    {
+      "chance": 0.25,
+      "output": {
+        "tag": "forge:normal_ore/vanadinite"
+      }
+    },
+    {
+      "chance": 0.15,
+      "output": {
+        "tag": "forge:normal_ore/zircon"
+      }
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "tag": "forge:poor_ore/molybdenite"
+      }
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "tag": "forge:rich_ore/zircon"
+      }
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "tag": "forge:rich_ore/vanadinite"
+      }
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "tag": "forge:rich_ore/molybdenite"
+      }
+    }
+  ],
+  "sample_background": "minecraft:basalt",
+  "spoils": [
+    {
+      "chance": 0.5,
+      "output": {
+        "item": "minecraft:netherrack"
+      }
+    },
+    {
+      "chance": 0.3,
+      "output": {
+        "item": "minecraft:basalt"
+      }
+    },
+    {
+      "chance": 0.2,
+      "output": {
+        "item": "minecraft:gravel"
+      }
+    }
+  ],
+  "weight": 8
+}

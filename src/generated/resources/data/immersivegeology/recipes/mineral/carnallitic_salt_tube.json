@@ -1,0 +1,61 @@
+{
+  "type": "immersiveengineering:mineral_mix",
+  "dimensions": [
+    "minecraft:the_nether"
+  ],
+  "fail_chance": 0.15,
+  "ores": [
+    {
+      "chance": 0.45,
+      "output": {
+        "tag": "forge:sediment/carnallite"
+      }
+    },
+    {
+      "chance": 0.35,
+      "output": {
+        "tag": "forge:sediment/rocksalt"
+      }
+    },
+    {
+      "chance": 0.1,
+      "output": {
+        "tag": "forge:normal_ore/fluorite"
+      }
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "tag": "forge:crystal/carnallite"
+      }
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "tag": "forge:crystal/rocksalt"
+      }
+    }
+  ],
+  "sample_background": "minecraft:soul_sand",
+  "spoils": [
+    {
+      "chance": 0.5,
+      "output": {
+        "item": "minecraft:netherrack"
+      }
+    },
+    {
+      "chance": 0.3,
+      "output": {
+        "item": "minecraft:basalt"
+      }
+    },
+    {
+      "chance": 0.2,
+      "output": {
+        "item": "minecraft:gravel"
+      }
+    }
+  ],
+  "weight": 12
+}

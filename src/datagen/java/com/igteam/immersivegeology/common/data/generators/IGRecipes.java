@@ -40,10 +40,12 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -54,14 +56,20 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
+import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
+
+import static blusunrize.immersiveengineering.api.utils.TagUtils.createItemWrapper;
+import static blusunrize.immersiveengineering.data.Recipes.getTagCondition;
 
 public class IGRecipes extends RecipeProvider
 {
@@ -79,6 +87,7 @@ public class IGRecipes extends RecipeProvider
 		manualRecipes(consumer);
 		IGRegistrationHolder.buildMaterialRecipes();
 		methodRecipes(consumer);
+		igMineralMixes(consumer);
 		IGLib.IG_LOGGER.info("Finished Registration of Immersive Geology Recipes");
 	}
 
@@ -100,6 +109,7 @@ public class IGRecipes extends RecipeProvider
 	private void manualRecipes(Consumer<FinishedRecipe> consumer)
 	{
 		IGLib.IG_LOGGER.info("- Basic Recipe Registration");
+
 
 		CoreDrillRecipeBuilder.builder(MetalEnum.MoltenMantle.getFluid(BlockCategoryFlags.FLUID)).addInput(new FluidTagInput(FluidTags.WATER, 1)).build(consumer, new ResourceLocation(IGLib.MODID, "basic_coredrill"));
 
@@ -378,6 +388,100 @@ public class IGRecipes extends RecipeProvider
 		}
 
 		GeothermalExchangerRecipeBuilder.builder(new FluidStack(MiscEnum.Steam.getFluid(BlockCategoryFlags.FLUID), 50)).addInput(FluidTags.WATER, 25).setTime(20).setEnergy(2560).build(consumer, IGLib.rl("geothermal/water_to_steam"));
+	}
+
+	private void igMineralMixes(Consumer<FinishedRecipe> consumer)
+	{
+		ResourceKey<DimensionType> overworld = BuiltinDimensionTypes.OVERWORLD;
+		ResourceKey<DimensionType> nether = BuiltinDimensionTypes.NETHER;
+
+		TagKey<Item> sulfur = IETags.sulfurDust;
+		MineralMixBuilder.builder(overworld).addOverworldSpoils()
+				.addOre(MineralEnum.Chromite.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.5f)
+				.addOre(MineralEnum.Magnetite.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.35f)
+				.addOre(MineralEnum.Vanadinite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.1f)
+				.addOre(MineralEnum.Magnetite.getItemTag(ItemCategoryFlags.RICH_ORE), 0.05f)
+				.setWeight(15).setFailchance(0.1f)
+				.build(consumer, new ResourceLocation(IGLib.MODID, "mineral/chromite_magnetite_mix"));
+
+		MineralMixBuilder.builder(nether).addNetherSpoils()
+				.addOre(Items.MAGMA_BLOCK, 0.5f)
+				.addOre(Items.SMOOTH_BASALT, 0.3f)
+				.addOre(MineralEnum.Ilmenite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.1f)
+				.addOre(MineralEnum.Ilmenite.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.2f)
+				.addOre(MineralEnum.Ilmenite.getItemTag(ItemCategoryFlags.RICH_ORE), 0.05f)
+				.setWeight(15).setFailchance(0.05f)
+				.setBackground(ForgeRegistries.BLOCKS.getKey(Blocks.NETHERRACK))
+				.build(consumer, new ResourceLocation(IGLib.MODID, "mineral/volcanic_tube"));
+
+		MineralMixBuilder.builder(nether).addNetherSpoils()
+				.addOre(MineralEnum.Millerite.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.4f)  // NiS
+				.addOre(MineralEnum.Chalcocite.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.3f) // Cu₂S
+				.addOre(MineralEnum.Cobaltite.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.2f)  // CoAsS
+				.addOre(sulfur, 0.2f)
+				.setWeight(20).setFailchance(0.15f)
+				.setBackground(ForgeRegistries.BLOCKS.getKey(Blocks.NETHERRACK))
+				.build(consumer, new ResourceLocation(IGLib.MODID, "mineral/magmatic_sulfide_complex"));
+
+		MineralMixBuilder.builder(nether).addNetherSpoils()
+				.addOre(MineralEnum.Magnetite.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.35f)
+				.addOre(MineralEnum.Ilmenite.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.25f)
+				.addOre(MineralEnum.Chromite.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.2f)
+				.addOre(MineralEnum.Magnetite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.05f)
+				.addOre(MineralEnum.Vanadinite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.05f)
+				.setWeight(15).setFailchance(0.1f)
+				.setBackground(ForgeRegistries.BLOCKS.getKey(Blocks.BLACKSTONE))
+				.build(consumer, new ResourceLocation(IGLib.MODID, "mineral/titaniferous_magnetite_layer"));
+
+		MineralMixBuilder.builder(nether).addNetherSpoils()
+				.addOre(sulfur, 0.55f)
+				.addOre(MineralEnum.Gypsum.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.25f)
+				.addOre(MineralEnum.Pyrite.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.15f)
+				.addOre(MineralEnum.Pyrite.getItemTag(ItemCategoryFlags.RICH_ORE), 0.05f)
+				.addOre(MineralEnum.Gypsum.getItemTag(ItemCategoryFlags.POOR_ORE), 0.05f)
+				.setWeight(25).setFailchance(0.2f)
+				.setBackground(ForgeRegistries.BLOCKS.getKey(Blocks.MAGMA_BLOCK))
+				.build(consumer, new ResourceLocation(IGLib.MODID, "mineral/fumarolic_sulfur_deposit"));
+
+		MineralMixBuilder.builder(nether).addNetherSpoils()
+				.addOre(MineralEnum.Molybdenite.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.25f)
+				.addOre(MineralEnum.Vanadinite.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.25f)
+				.addOre(MineralEnum.Zircon.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.15f)
+				.addOre(MineralEnum.Molybdenite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.05f)
+				.addOre(MineralEnum.Zircon.getItemTag(ItemCategoryFlags.RICH_ORE), 0.05f)
+				.setWeight(8).setFailchance(0.25f)
+				.setBackground(ForgeRegistries.BLOCKS.getKey(Blocks.BASALT))
+				.build(consumer, new ResourceLocation(IGLib.MODID, "mineral/basaltic_pegmatite"));
+
+		MineralMixBuilder.builder(nether).addNetherSpoils()
+				.addOre(MineralEnum.Carnallite.getItemTag(ItemCategoryFlags.SEDIMENT), 0.45f)
+				.addOre(MineralEnum.Rocksalt.getItemTag(ItemCategoryFlags.SEDIMENT), 0.35f)
+				.addOre(MineralEnum.Fluorite.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.1f)
+				.addOre(MineralEnum.Carnallite.getItemTag(ItemCategoryFlags.CRYSTAL), 0.05f)
+				.addOre(MineralEnum.Rocksalt.getItemTag(ItemCategoryFlags.CRYSTAL), 0.05f)
+				.setWeight(12).setFailchance(0.15f)
+				.setBackground(ForgeRegistries.BLOCKS.getKey(Blocks.SOUL_SAND))
+				.build(consumer, new ResourceLocation(IGLib.MODID, "mineral/carnallitic_salt_tube"));
+
+		MineralMixBuilder.builder(nether).addNetherSpoils()
+				.addOre(MineralEnum.Uraninite.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.35f)
+				.addOre(MineralEnum.Thorianite.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.25f)
+				.addOre(MineralEnum.Zircon.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.15f)
+				.addOre(MineralEnum.Uraninite.getItemTag(ItemCategoryFlags.RICH_ORE), 0.05f)
+				.setWeight(5).setFailchance(0.35f)
+				.setBackground(ForgeRegistries.BLOCKS.getKey(Blocks.ANCIENT_DEBRIS))
+				.build(consumer, new ResourceLocation(IGLib.MODID, "mineral/nether_uraninite_seam"));
+
+		MineralMixBuilder.builder(nether).addNetherSpoils()
+				.addOre(Items.OBSIDIAN, 0.45f)
+				.addOre(MineralEnum.Ilmenite.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.25f)
+				.addOre(MineralEnum.Vanadinite.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.15f)
+				.addOre(MineralEnum.Ilmenite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.05f)
+				.addOre(MineralEnum.Vanadinite.getItemTag(ItemCategoryFlags.RICH_ORE), 0.05f)
+				.addOre(MineralEnum.Ilmenite.getItemTag(ItemCategoryFlags.RICH_ORE), 0.05f)
+				.setWeight(10).setFailchance(0.1f)
+				.setBackground(ForgeRegistries.BLOCKS.getKey(Blocks.OBSIDIAN))
+				.build(consumer, new ResourceLocation(IGLib.MODID, "mineral/obsidian_contact_zone"));
 	}
 
 	private static final List<MetalEnum> plates_and_rods_to_register = List.of(

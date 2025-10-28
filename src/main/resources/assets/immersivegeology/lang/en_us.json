@@ -30,6 +30,16 @@
   "manual.immersivegeology.hunter_process.subtext": "Hunter Process",
   "manual.immersivegeology.becher_process.subtext": "Becher Process",
 
+  "desc.immersiveengineering.info.mineral.chromite_magnetite_mix": "Chromite Magnetite Mix",
+  "desc.immersiveengineering.info.mineral.carnallitic_salt_tube": "Carnallitic Salt Tube",
+  "desc.immersiveengineering.info.mineral.basaltic_pegmatite": "Basaltic Pegmatite",
+  "desc.immersiveengineering.info.mineral.fumarolic_sulfur_deposit": "Fumarolic Sulfur Deposit",
+  "desc.immersiveengineering.info.mineral.magmatic_sulfide_complex": "Magmatic Sulfide Complex",
+  "desc.immersiveengineering.info.mineral.nether_uraninite_seam": "Uraninite Seam",
+  "desc.immersiveengineering.info.mineral.obsidian_contact_zone": "Obsidan Contact Zone",
+  "desc.immersiveengineering.info.mineral.titaniferous_magnetite_layer": "Titaniferous Magnetite Layer",
+  "desc.immersiveengineering.info.mineral.volcanic_tube": "Volcanic Tube",
+
   "manual.immersivegeology.bug_bounty_contributors": "Bug Bounty Contributors",
   "manual.immersivegeology.ig_processing_chains": "Processing Chains",
   "manual.immersivegeology.ig_metal_chains": "Metals",
@@ -47,6 +57,8 @@
   "skin.immersivegeology.crimsontwilight": "Crimson Twilight's",
   "skin.immersivegeology.wanderingbeekeeper": "WanderingBeekeeper's",
   "skin.immersivegeology.unschtalch": "UnSchtalch's",
+  "skin.immersivegeology.yeshwamp": "Yeshwamp's",
+  "skin.immersivegeology.bilebirda": "Bilebirda's",
   "skin.immersivegeology.the_northern_harpy": "The Northern Harpy's",
 
   "skin.immersivegeology.gravity_separator.default": "Old Faithful",
@@ -76,7 +88,8 @@
 
   "skin.immersivegeology.crystallizer.default": "Old Faithful",
   "skin.immersivegeology.crystallizer.rusted": "Rusted",
-
+  "skin.immersivegeology.crystallizer.hive": "Hive",
+  "skin.immersivegeology.crystallizer.pumpkin": "Pumpkin",
 
   "skin.immersivegeology.geothermal_exchanger.default": "Old Faithful",
   "skin.immersivegeology.geothermal_exchanger.steampunk": "Steam Punk",

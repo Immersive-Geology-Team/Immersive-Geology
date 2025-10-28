@@ -54,9 +54,10 @@ public class AlternatorLogic implements ISkinnableMultiblockLogic<AlternatorLogi
     }).toList();
 
     public static final BlockPos ROTATION_IN = new BlockPos(3, 3, 4);
+    public static final BlockPos FORMATION_LOC = new BlockPos(3, 4, 4);
 
     private static final int MAX_ENERGY_OUTPUT = 32768;
-    private static final float MAX_TURBINE_SPEED = 0.21f; //20% turn per tick, or 4 turns a second.
+    private static final float MAX_TURBINE_SPEED = 0.21f; //21% turn per tick, or ~4 turns a second.
 
     @Override
     public void tickClient(IMultiblockContext<State> ctx) {

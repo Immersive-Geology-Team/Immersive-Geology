@@ -1,0 +1,49 @@
+{
+  "type": "immersiveengineering:mineral_mix",
+  "dimensions": [
+    "minecraft:overworld"
+  ],
+  "fail_chance": 0.35,
+  "ores": [
+    {
+      "chance": 0.05,
+      "output": {
+        "tag": "forge:normal_ore/platinum"
+      }
+    },
+    {
+      "chance": 0.075,
+      "output": {
+        "tag": "forge:poor_ore/platinum"
+      }
+    },
+    {
+      "chance": 0.25,
+      "output": {
+        "tag": "forge:nuggets/nickel"
+      }
+    }
+  ],
+  "sample_background": "minecraft:stone",
+  "spoils": [
+    {
+      "chance": 0.2,
+      "output": {
+        "item": "minecraft:gravel"
+      }
+    },
+    {
+      "chance": 0.5,
+      "output": {
+        "item": "minecraft:cobblestone"
+      }
+    },
+    {
+      "chance": 0.3,
+      "output": {
+        "item": "minecraft:cobbled_deepslate"
+      }
+    }
+  ],
+  "weight": 5
+}

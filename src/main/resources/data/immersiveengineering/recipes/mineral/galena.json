@@ -1,0 +1,72 @@
+{
+  "type": "immersiveengineering:mineral_mix",
+  "dimensions": [
+    "minecraft:overworld"
+  ],
+  "fail_chance": 0.05,
+  "ores": [
+    {
+      "chance": 0.35,
+      "output": {
+        "tag": "forge:normal_ore/galena"
+      }
+    },
+    {
+      "chance": 0.3,
+      "output": {
+        "tag": "forge:normal_ore/sphalerite"
+      }
+    },
+    {
+      "chance": 0.1,
+      "output": {
+        "tag": "forge:poor_ore/lead"
+      }
+    },
+    {
+      "chance": 0.1,
+      "output": {
+        "tag": "forge:poor_ore/millerite"
+      }
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "tag": "forge:rich_ore/silver"
+      }
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "tag": "forge:rich_ore/sphalerite"
+      }
+    },
+    {
+      "chance": 0.2,
+      "output": {
+        "tag": "forge:dusts/sulfur"
+      }
+    }
+  ],
+  "spoils": [
+    {
+      "chance": 0.2,
+      "output": {
+        "item": "minecraft:gravel"
+      }
+    },
+    {
+      "chance": 0.5,
+      "output": {
+        "item": "minecraft:cobblestone"
+      }
+    },
+    {
+      "chance": 0.3,
+      "output": {
+        "item": "minecraft:cobbled_deepslate"
+      }
+    }
+  ],
+  "weight": 15
+}
