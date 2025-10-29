@@ -45,6 +45,7 @@
       }
     }
   ],
+  "sample_background": "minecraft:coal_block",
   "spoils": [
     {
       "chance": 0.2,

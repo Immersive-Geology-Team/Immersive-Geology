@@ -14,11 +14,17 @@
     {
       "chance": 0.25,
       "output": {
-        "tag": "forge:normal_ore/gypsum"
+        "tag": "forge:poor_ore/gypsum"
       }
     },
     {
       "chance": 0.15,
+      "output": {
+        "tag": "forge:poor_ore/pyrite"
+      }
+    },
+    {
+      "chance": 0.05,
       "output": {
         "tag": "forge:normal_ore/pyrite"
       }
@@ -26,13 +32,7 @@
     {
       "chance": 0.05,
       "output": {
-        "tag": "forge:rich_ore/pyrite"
-      }
-    },
-    {
-      "chance": 0.05,
-      "output": {
-        "tag": "forge:poor_ore/gypsum"
+        "tag": "forge:normal_ore/gypsum"
       }
     }
   ],

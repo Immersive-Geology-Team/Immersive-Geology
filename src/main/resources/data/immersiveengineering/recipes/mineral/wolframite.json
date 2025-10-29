@@ -6,33 +6,33 @@
   "fail_chance": 0.05,
   "ores": [
     {
-      "chance": 0.45,
-      "output": {
-        "tag": "forge:normal_ore/cassiterite"
-      }
-    },
-    {
-      "chance": 0.35,
-      "output": {
-        "tag": "forge:normal_ore/wolframite"
-      }
-    },
-    {
-      "chance": 0.1,
-      "output": {
-        "tag": "forge:normal_ore/magnetite"
-      }
-    },
-    {
-      "chance": 0.05,
+      "chance": 0.15,
       "output": {
         "tag": "forge:poor_ore/cassiterite"
       }
     },
     {
+      "chance": 0.55,
+      "output": {
+        "tag": "forge:poor_ore/wolframite"
+      }
+    },
+    {
+      "chance": 0.1,
+      "output": {
+        "tag": "forge:poor_ore/magnetite"
+      }
+    },
+    {
       "chance": 0.05,
       "output": {
-        "tag": "forge:rich_ore/wolframite"
+        "tag": "forge:normal_ore/cassiterite"
+      }
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "tag": "forge:normal_ore/wolframite"
       }
     }
   ],

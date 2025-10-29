@@ -8,25 +8,25 @@
     {
       "chance": 0.35,
       "output": {
-        "tag": "forge:normal_ore/magnetite"
+        "tag": "forge:poor_ore/magnetite"
       }
     },
     {
       "chance": 0.25,
       "output": {
-        "tag": "forge:normal_ore/ilmenite"
+        "tag": "forge:poor_ore/ilmenite"
       }
     },
     {
       "chance": 0.2,
       "output": {
-        "tag": "forge:normal_ore/chromite"
+        "tag": "forge:poor_ore/chromite"
       }
     },
     {
       "chance": 0.05,
       "output": {
-        "tag": "forge:poor_ore/magnetite"
+        "tag": "forge:normal_ore/magnetite"
       }
     },
     {

@@ -8,40 +8,41 @@
     {
       "chance": 0.35,
       "output": {
-        "tag": "forge:normal_ore/chalcocite"
+        "tag": "forge:poor_ore/chalcocite"
       }
     },
     {
       "chance": 0.3,
       "output": {
-        "tag": "forge:normal_ore/copper"
+        "tag": "forge:poor_ore/copper"
       }
     },
     {
       "chance": 0.15,
       "output": {
-        "tag": "forge:rich_ore/gold"
+        "tag": "forge:normal_ore/gold"
       }
     },
     {
       "chance": 0.1,
       "output": {
-        "tag": "forge:normal_ore/pyrite"
+        "tag": "forge:poor_ore/pyrite"
       }
     },
     {
       "chance": 0.05,
       "output": {
-        "tag": "forge:poor_ore/copper"
+        "tag": "forge:normal_ore/copper"
       }
     },
     {
       "chance": 0.05,
       "output": {
-        "tag": "forge:poor_ore/gold"
+        "tag": "forge:normal_ore/gold"
       }
     }
   ],
+  "sample_background": "minecraft:stone",
   "spoils": [
     {
       "chance": 0.2,

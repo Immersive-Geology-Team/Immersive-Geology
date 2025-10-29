@@ -8,13 +8,13 @@
     {
       "chance": 0.5,
       "output": {
-        "tag": "forge:normal_ore/chromite"
+        "tag": "forge:poor_ore/chromite"
       }
     },
     {
       "chance": 0.35,
       "output": {
-        "tag": "forge:normal_ore/magnetite"
+        "tag": "forge:poor_ore/magnetite"
       }
     },
     {
@@ -26,10 +26,11 @@
     {
       "chance": 0.05,
       "output": {
-        "tag": "forge:rich_ore/magnetite"
+        "tag": "forge:normal_ore/magnetite"
       }
     }
   ],
+  "sample_background": "minecraft:deepslate",
   "spoils": [
     {
       "chance": 0.2,

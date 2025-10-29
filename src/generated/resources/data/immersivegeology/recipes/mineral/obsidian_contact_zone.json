@@ -14,31 +14,19 @@
     {
       "chance": 0.25,
       "output": {
-        "tag": "forge:normal_ore/ilmenite"
+        "tag": "forge:poor_ore/ilmenite"
       }
     },
     {
       "chance": 0.15,
       "output": {
-        "tag": "forge:normal_ore/vanadinite"
+        "tag": "forge:poor_ore/vanadinite"
       }
     },
     {
       "chance": 0.05,
       "output": {
-        "tag": "forge:poor_ore/ilmenite"
-      }
-    },
-    {
-      "chance": 0.05,
-      "output": {
-        "tag": "forge:rich_ore/vanadinite"
-      }
-    },
-    {
-      "chance": 0.05,
-      "output": {
-        "tag": "forge:rich_ore/ilmenite"
+        "tag": "forge:normal_ore/ilmenite"
       }
     }
   ],

@@ -1,7 +1,7 @@
 {
   "type": "immersiveengineering:mineral_mix",
   "dimensions": [
-    "minecraft:the_nether"
+    "minecraft:overworld"
   ],
   "fail_chance": 0.15,
   "ores": [
@@ -20,7 +20,7 @@
     {
       "chance": 0.1,
       "output": {
-        "tag": "forge:normal_ore/fluorite"
+        "tag": "forge:poor_ore/fluorite"
       }
     },
     {
@@ -36,24 +36,24 @@
       }
     }
   ],
-  "sample_background": "minecraft:soul_sand",
+  "sample_background": "minecraft:sand",
   "spoils": [
     {
-      "chance": 0.5,
+      "chance": 0.6,
       "output": {
-        "item": "minecraft:netherrack"
+        "item": "minecraft:sandstone"
       }
     },
     {
       "chance": 0.3,
       "output": {
-        "item": "minecraft:basalt"
+        "item": "minecraft:gravel"
       }
     },
     {
-      "chance": 0.2,
+      "chance": 0.1,
       "output": {
-        "item": "minecraft:gravel"
+        "item": "minecraft:sand"
       }
     }
   ],

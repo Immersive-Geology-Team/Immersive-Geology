@@ -8,19 +8,19 @@
     {
       "chance": 0.45,
       "output": {
-        "tag": "forge:normal_ore/chalcopyrite"
+        "tag": "forge:poor_ore/chalcopyrite"
       }
     },
     {
       "chance": 0.25,
       "output": {
-        "tag": "forge:normal_ore/pyrite"
+        "tag": "forge:poor_ore/pyrite"
       }
     },
     {
       "chance": 0.2,
       "output": {
-        "tag": "forge:normal_ore/copper"
+        "tag": "forge:poor_ore/copper"
       }
     },
     {
@@ -32,7 +32,7 @@
     {
       "chance": 0.05,
       "output": {
-        "tag": "forge:poor_ore/chalcopyrite"
+        "tag": "forge:normal_ore/chalcopyrite"
       }
     },
     {

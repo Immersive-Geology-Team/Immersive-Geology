@@ -8,13 +8,13 @@
     {
       "chance": 0.35,
       "output": {
-        "tag": "forge:normal_ore/galena"
+        "tag": "forge:poor_ore/galena"
       }
     },
     {
-      "chance": 0.3,
+      "chance": 0.15,
       "output": {
-        "tag": "forge:normal_ore/sphalerite"
+        "tag": "forge:poor_ore/sphalerite"
       }
     },
     {
@@ -26,19 +26,19 @@
     {
       "chance": 0.1,
       "output": {
-        "tag": "forge:poor_ore/millerite"
+        "tag": "forge:poor_ore/smithsonite"
       }
     },
     {
       "chance": 0.05,
       "output": {
-        "tag": "forge:rich_ore/silver"
+        "tag": "forge:normal_ore/silver"
       }
     },
     {
       "chance": 0.05,
       "output": {
-        "tag": "forge:rich_ore/sphalerite"
+        "tag": "forge:normal_ore/sphalerite"
       }
     },
     {

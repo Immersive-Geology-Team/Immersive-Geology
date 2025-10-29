@@ -6,12 +6,6 @@
   "fail_chance": 0.15,
   "ores": [
     {
-      "chance": 0.4,
-      "output": {
-        "tag": "forge:normal_ore/millerite"
-      }
-    },
-    {
       "chance": 0.3,
       "output": {
         "tag": "forge:poor_ore/gold"
