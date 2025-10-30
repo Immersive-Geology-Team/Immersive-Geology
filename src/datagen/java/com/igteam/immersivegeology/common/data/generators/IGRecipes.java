@@ -17,6 +17,7 @@ import blusunrize.immersiveengineering.api.crafting.builders.*;
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import blusunrize.immersiveengineering.common.register.IEBlocks.MetalDecoration;
 import blusunrize.immersiveengineering.common.register.IEFluids;
+import blusunrize.immersiveengineering.common.register.IEItems;
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import blusunrize.immersiveengineering.common.register.IEItems.Metals;
 import blusunrize.immersiveengineering.common.register.IEItems.Molds;
@@ -471,6 +472,46 @@ public class IGRecipes extends RecipeProvider
 				.setWeight(10).setFailchance(0.1f)
 				.setBackground(ForgeRegistries.BLOCKS.getKey(Blocks.OBSIDIAN))
 				.build(consumer, new ResourceLocation(IGLib.MODID, "mineral/obsidian_contact_zone"));
+
+		MineralMixBuilder.builder(overworld).addOverworldSpoils()
+				.addOre(MineralEnum.Gypsum.getItemTag(ItemCategoryFlags.POOR_ORE), 0.35f)
+				.addOre(MineralEnum.Cuprite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.25f)
+				.addOre(Blocks.CALCITE, 0.20f)
+				.setWeight(12).setFailchance(0.15f)
+				.setBackground(ForgeRegistries.BLOCKS.getKey(Blocks.CALCITE))
+				.build(consumer, new ResourceLocation(IGLib.MODID, "mineral/carbonate_cave_deposit"));
+
+		MineralMixBuilder.builder(overworld).addOverworldSpoils()
+				.addOre(MineralEnum.Lignite.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.35f)
+				.addOre(MineralEnum.Bituminous.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.15f)
+				.addOre(MineralEnum.Pyrite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.05f)
+				.setWeight(12).setFailchance(0.25f)
+				.setBackground(ForgeRegistries.BLOCKS.getKey(Blocks.COBBLESTONE))
+				.build(consumer, new ResourceLocation(IGLib.MODID, "mineral/coal_seam"));
+
+		MineralMixBuilder.builder(overworld).addSeabedSpoils()
+				.addOre(MineralEnum.Uraninite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.15f)
+				.addOre(Blocks.QUARTZ_BLOCK, 0.05f)
+				.setWeight(12).setFailchance(0.25f)
+				.setBackground(ForgeRegistries.BLOCKS.getKey(Blocks.SANDSTONE))
+				.build(consumer, new ResourceLocation(IGLib.MODID, "mineral/sandstone_deposit"));
+
+		MineralMixBuilder.builder(overworld).addOverworldSpoils()
+				.addOre(MineralEnum.Cobaltite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.15f)
+				.addOre(MineralEnum.Bauxite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.05f)
+				.setWeight(12).setFailchance(0.25f)
+				.setBackground(ForgeRegistries.BLOCKS.getKey(Blocks.STONE))
+				.build(consumer, new ResourceLocation(IGLib.MODID, "mineral/contact_metamorphic_deposit"));
+
+		MineralMixBuilder.builder(nether).addNetherSpoils()
+				.addOre(MineralEnum.Pyrolusite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.25f)
+				.addOre(MineralEnum.Chalcopyrite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.15f)
+				.addOre(MineralEnum.Wolframite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.05f)
+				.addOre(MineralEnum.Molybdenite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.05f)
+				.addOre(Metals.NUGGETS.get(EnumMetals.ELECTRUM), 0.015f)
+				.setWeight(12).setFailchance(0.25f)
+				.setBackground(ForgeRegistries.BLOCKS.getKey(Blocks.BASALT))
+				.build(consumer, new ResourceLocation(IGLib.MODID, "mineral/skarn_deposit"));
 	}
 
 	private static final List<MetalEnum> plates_and_rods_to_register = List.of(

@@ -3,42 +3,18 @@
   "dimensions": [
     "minecraft:overworld"
   ],
-  "fail_chance": 0.1,
+  "fail_chance": 0.25,
   "ores": [
-    {
-      "chance": 0.35,
-      "output": {
-        "tag": "forge:poor_ore/chalcocite"
-      }
-    },
-    {
-      "chance": 0.3,
-      "output": {
-        "tag": "forge:poor_ore/copper"
-      }
-    },
     {
       "chance": 0.15,
       "output": {
-        "tag": "forge:poor_ore/gold"
-      }
-    },
-    {
-      "chance": 0.1,
-      "output": {
-        "tag": "forge:poor_ore/pyrite"
+        "tag": "forge:poor_ore/cobaltite"
       }
     },
     {
       "chance": 0.05,
       "output": {
-        "tag": "forge:normal_ore/copper"
-      }
-    },
-    {
-      "chance": 0.05,
-      "output": {
-        "tag": "forge:normal_ore/gold"
+        "tag": "forge:poor_ore/bauxite"
       }
     }
   ],
@@ -63,5 +39,5 @@
       }
     }
   ],
-  "weight": 30
+  "weight": 12
 }

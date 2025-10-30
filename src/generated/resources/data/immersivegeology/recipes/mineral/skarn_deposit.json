@@ -8,37 +8,31 @@
     {
       "chance": 0.25,
       "output": {
-        "tag": "forge:poor_ore/molybdenite"
-      }
-    },
-    {
-      "chance": 0.25,
-      "output": {
-        "tag": "forge:poor_ore/vanadinite"
+        "tag": "forge:poor_ore/pyrolusite"
       }
     },
     {
       "chance": 0.15,
       "output": {
-        "tag": "forge:poor_ore/zircon"
+        "tag": "forge:poor_ore/chalcopyrite"
       }
     },
     {
       "chance": 0.05,
       "output": {
-        "tag": "forge:normal_ore/molybdenite"
+        "tag": "forge:poor_ore/wolframite"
       }
     },
     {
       "chance": 0.05,
       "output": {
-        "tag": "forge:normal_ore/zircon"
+        "tag": "forge:poor_ore/molybdenite"
       }
     },
     {
-      "chance": 0.05,
+      "chance": 0.015,
       "output": {
-        "tag": "forge:normal_ore/vanadinite"
+        "item": "immersiveengineering:nugget_electrum"
       }
     }
   ],
@@ -63,5 +57,5 @@
       }
     }
   ],
-  "weight": 8
+  "weight": 12
 }

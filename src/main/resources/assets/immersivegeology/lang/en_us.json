@@ -40,6 +40,12 @@
   "desc.immersiveengineering.info.mineral.titaniferous_magnetite_layer": "Titaniferous Magnetite Layer",
   "desc.immersiveengineering.info.mineral.volcanic_tube": "Volcanic Tube",
 
+  "desc.immersiveengineering.info.mineral.skarn_deposit": "Skarn Deposit",
+  "desc.immersiveengineering.info.mineral.contact_metamorphic_deposit": "Contact Metamorphic Deposit",
+  "desc.immersiveengineering.info.mineral.sandstone_deposit": "Sandstone Deposit",
+  "desc.immersiveengineering.info.mineral.coal_seam": "Coal Seam",
+  "desc.immersiveengineering.info.mineral.carbonate_cave_deposit": "Carbonate Cave Deposit",
+
   "manual.immersivegeology.bug_bounty_contributors": "Bug Bounty Contributors",
   "manual.immersivegeology.ig_processing_chains": "Processing Chains",
   "manual.immersivegeology.ig_metal_chains": "Metals",
@@ -286,6 +292,7 @@
   "item.immersivegeology.oxide_pellet": "%s Oxide Pellet",
 
   "block.immersivegeology.industrialsluice": "Industrial Sluice",
+  "block.immersivegeology.turbine_fuel": "Steam Turbine Fuel",
   "block.immersivegeology.geothermal_exchanger": "Geothermal Exchanger",
   "block.immersivegeology.storage_block": "%s Block",
   "block.immersivegeology.default_block": "%s Panel Block",

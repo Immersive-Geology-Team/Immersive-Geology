@@ -1,7 +1,7 @@
 Basic Chemical Reactor
 Chemical X not included.
 <&multiblock>The Basic Chemical Reactor allows the combination of up to two fluids and one item.
-Do not ingest the output. Do not inhale the input. If pressure exceeds 10 bars, run.
+Do not ingest the output. Do not inhale the input. If pressure exceeds 10 bars, run. (Joke)
 
 It can be formed with the §lStainless Steel Work Hammer§r
 

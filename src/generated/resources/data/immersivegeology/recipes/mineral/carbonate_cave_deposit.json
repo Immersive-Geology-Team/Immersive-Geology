@@ -3,46 +3,28 @@
   "dimensions": [
     "minecraft:overworld"
   ],
-  "fail_chance": 0.1,
+  "fail_chance": 0.15,
   "ores": [
     {
       "chance": 0.35,
       "output": {
-        "tag": "forge:poor_ore/chalcocite"
+        "tag": "forge:poor_ore/gypsum"
       }
     },
     {
-      "chance": 0.3,
+      "chance": 0.25,
       "output": {
-        "tag": "forge:poor_ore/copper"
+        "tag": "forge:poor_ore/cuprite"
       }
     },
     {
-      "chance": 0.15,
+      "chance": 0.2,
       "output": {
-        "tag": "forge:poor_ore/gold"
-      }
-    },
-    {
-      "chance": 0.1,
-      "output": {
-        "tag": "forge:poor_ore/pyrite"
-      }
-    },
-    {
-      "chance": 0.05,
-      "output": {
-        "tag": "forge:normal_ore/copper"
-      }
-    },
-    {
-      "chance": 0.05,
-      "output": {
-        "tag": "forge:normal_ore/gold"
+        "item": "minecraft:calcite"
       }
     }
   ],
-  "sample_background": "minecraft:stone",
+  "sample_background": "minecraft:calcite",
   "spoils": [
     {
       "chance": 0.2,
@@ -63,5 +45,5 @@
       }
     }
   ],
-  "weight": 30
+  "weight": 12
 }
