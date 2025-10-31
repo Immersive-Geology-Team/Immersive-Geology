@@ -122,6 +122,7 @@ public class IGRecipes extends RecipeProvider
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, binding_agent_flask).requires(Items.WATER_BUCKET).requires(Items.BUCKET)
 				.requires(Items.CLAY_BALL).requires(Items.CLAY_BALL).requires(Items.CLAY_BALL).unlockedBy("has_clay", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CLAY_BALL)).save(consumer, ig("craft_blinding_fluid"));
 
+		MixerRecipeBuilder.builder(ChemicalEnum.BindingAgent.getFluid(BlockCategoryFlags.FLUID), 500).addFluidTag(FluidTags.WATER, 500).addInput(IETags.clay).addInput(Items.CHARCOAL).setEnergy(3200).build(consumer, igRL("mixer/binding_agent"));
 		Item bronze_ingot = MetalEnum.Bronze.getItem(ItemCategoryFlags.INGOT);
 
 		// Bronze Hammer
@@ -735,6 +736,11 @@ public class IGRecipes extends RecipeProvider
 	}
 
 	private ResourceLocation ig(String crafting)
+	{
+		return new ResourceLocation(IGLib.MODID, "crafting/" + crafting);
+	}
+
+	private ResourceLocation igRL(String crafting)
 	{
 		return new ResourceLocation(IGLib.MODID, "crafting/" + crafting);
 	}
