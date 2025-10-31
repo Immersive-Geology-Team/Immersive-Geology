@@ -111,7 +111,6 @@ public class IGRecipes extends RecipeProvider
 	{
 		IGLib.IG_LOGGER.info("- Basic Recipe Registration");
 
-
 		CoreDrillRecipeBuilder.builder(MetalEnum.MoltenMantle.getFluid(BlockCategoryFlags.FLUID)).addInput(new FluidTagInput(FluidTags.WATER, 1)).build(consumer, new ResourceLocation(IGLib.MODID, "basic_coredrill"));
 
 		ChemicalRepairBuilder.builder(MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.PLATE)).setTime(10).build(consumer, new ResourceLocation(IGLib.MODID, "stainless_steel_plate"));

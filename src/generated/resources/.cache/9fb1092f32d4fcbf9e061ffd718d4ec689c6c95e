@@ -1,4 +1,4 @@
-// 1.20.1	2025-10-30T19:25:08.005451478	Recipes
+// 1.20.1	2025-10-31T20:48:13.400276483	Recipes
 5a4b25aa15a30261c92770f0fa073905a4c40ae5 data/immersivegeology/advancements/recipes/building_blocks/crafting/block_to_slab_srconcrete.json
 f65a7adae9d73884f297c5ee3a35ce426134b508 data/immersivegeology/advancements/recipes/building_blocks/crafting/block_to_slab_trconcrete.json
 c3ec2e6cdaa828d8509f10a136f34099ebba7e3c data/immersivegeology/advancements/recipes/building_blocks/crafting/block_to_stair_srconcrete.json
@@ -2182,6 +2182,7 @@ fc3e505b415b5770f34c731e84e5ff861ef65e5b data/immersivegeology/recipes/crafting/
 76c63493b0d32aeb0b995e93a07f3f06b9bee7dd data/immersivegeology/recipes/crafting/lignite_from_storage_block.json
 0ce25acd2ab6f782455d7f615607802b4cdd53fe data/immersivegeology/recipes/crafting/magnesium_get_ingots_from_block.json
 a8ed459e686bf23d416e87bbf882c2c3eaeeefbe data/immersivegeology/recipes/crafting/manganese_get_ingots_from_block.json
+ca08802c9766447cc74e511795d05726af38911c data/immersivegeology/recipes/crafting/mixer/binding_agent.json
 184aab87e1aac51300e3be0c45d9f5d0400f588c data/immersivegeology/recipes/crafting/molybdenum_get_ingots_from_block.json
 d6a4a7011d64591b43531c01cda86aa9253d669b data/immersivegeology/recipes/crafting/neodymium_get_ingots_from_block.json
 4afe198892f452d0601c434b96e8e09c8f683a55 data/immersivegeology/recipes/crafting/osmium_get_ingots_from_block.json

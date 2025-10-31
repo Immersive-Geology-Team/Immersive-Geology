@@ -1,0 +1,20 @@
+{
+  "type": "immersiveengineering:mixer",
+  "energy": 3200,
+  "fluid": {
+    "amount": 500,
+    "tag": "minecraft:water"
+  },
+  "inputs": [
+    {
+      "tag": "forge:clay"
+    },
+    {
+      "item": "minecraft:charcoal"
+    }
+  ],
+  "result": {
+    "amount": 500,
+    "fluid": "immersivegeology:fluid_binding_agent"
+  }
+}

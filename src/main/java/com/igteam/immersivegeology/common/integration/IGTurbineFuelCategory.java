@@ -45,7 +45,7 @@ public class IGTurbineFuelCategory extends IGRecipeCategory<TurbineFuel>
 	public void draw(TurbineFuel recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
 		super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
 
-		guiGraphics.drawString(font, Component.translatable("immersivegeology.steam_turbine.jei_fuel_time").append(Component.literal(String.valueOf(recipe.getBurnTime()))), 10,10, 0xffffff);
+		guiGraphics.drawString(font, Component.translatable("immersivegeology.steam_turbine.jei_fuel_time").append(Component.literal(" " + recipe.getBurnTime() + " smiticks")), 10,10, 0xffffff);
 
 	}
 }
