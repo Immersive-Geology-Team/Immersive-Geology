@@ -30,7 +30,7 @@
   "manual.immersivegeology.hunter_process.subtext": "Процесс Хантера",
   "manual.immersivegeology.becher_process.subtext": "Процесс Бехера",
 
-  "desc.immersiveengineering.info.mineral.chromite_magnetite_mix": "Хромит-магнититовая смесь",
+  "desc.immersiveengineering.info.mineral.chromite_magnetite_mix": "Хромит-магнетитовая смесь",
   "desc.immersiveengineering.info.mineral.carnallitic_salt_tube": "Карналитовые соляные трубки",
   "desc.immersiveengineering.info.mineral.basaltic_pegmatite": "Базальтовый пегматит",
   "desc.immersiveengineering.info.mineral.fumarolic_sulfur_deposit": "Серные Фумаролы",
@@ -213,11 +213,11 @@
   "manual.immersivegeology.unobtania": "Недобудий",
 
   
-  "immersivegeology.gui.basic_chemical_reactor.nominal_status": "Nominal",
-  "immersivegeology.gui.basic_chemical_reactor.worn_status": "Worn",
-  "immersivegeology.gui.basic_chemical_reactor.damaged_status": "Damaged",
-  "immersivegeology.gui.basic_chemical_reactor.failed_status": "Failed",
-  "immersivegeology.gui.basic_chemical_reactor.output_blocked": "Output Blocked",
+  "immersivegeology.gui.basic_chemical_reactor.nominal_status": "Цэл",
+  "immersivegeology.gui.basic_chemical_reactor.worn_status": "Изношен",
+  "immersivegeology.gui.basic_chemical_reactor.damaged_status": "Поврежден",
+  "immersivegeology.gui.basic_chemical_reactor.failed_status": "Сломан",
+  "immersivegeology.gui.basic_chemical_reactor.output_blocked": "Выход заблокирован",
 
   "immersivegeology.gui.schematic_table.button_0": "Предыдущая схема",
   "immersivegeology.gui.schematic_table.button_1": "Следующая схема",
