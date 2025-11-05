@@ -1,4 +1,4 @@
-// 1.20.1	2025-10-20T20:40:57.06954126	Item models
+// 1.20.1	2025-11-03T19:59:09.264504339	Item models
 7d48f2b4469e5dd5953f6f9507355e31dcf47225 assets/immersivegeology/models/item/advanced_engineering_block_rusty_metal.json
 d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/alternator_multiblock_skin_default.json
 d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/alternator_multiblock_skin_hazard.json
@@ -357,7 +357,6 @@ adc61a875bfe6205a1804137c62867a811c0d8c8 assets/immersivegeology/models/item/gri
 b79d34ad9c001f2ca16feb4c2a0d140889e865ed assets/immersivegeology/models/item/grit_unobtanium.json
 59afa3c09001a3c6789c76acf0438ef45f63cb96 assets/immersivegeology/models/item/grit_uraninite.json
 acb11623685e41aeede80b3c1083b77eb209b441 assets/immersivegeology/models/item/grit_uranium.json
-3f84a0b2aa6c1c1496c142b6950a96fa3b010cd5 assets/immersivegeology/models/item/grit_vanadinite.json
 8ee6c371cea73cc9429329f39c4dc13352b055ba assets/immersivegeology/models/item/grit_vanadium.json
 61b8c87a4313ac94509f7e65653221d254103fac assets/immersivegeology/models/item/grit_wolframite.json
 eb5a53723939a078f6bb0bf672eee3232c989812 assets/immersivegeology/models/item/grit_zinc.json
@@ -1157,7 +1156,6 @@ a8747ee18d1cb606888106b0a61cd4c7eb289b52 assets/immersivegeology/models/item/pow
 2d4ede63d41bbe6c1f0fb842573696c563d3a260 assets/immersivegeology/models/item/powder_tungsten_carbide.json
 ed37bc9143145c19c18180cdc8d5899355bbc078 assets/immersivegeology/models/item/powder_unobtania.json
 1eeca4137c3b5f15c17295dee277d30e9a57e312 assets/immersivegeology/models/item/powder_uraninite.json
-306e9dfa3546bec8f34cd1c15c782b02c814841a assets/immersivegeology/models/item/powder_vanadinite.json
 5292709b738b56a38ddc6056606f1ad13db5ad5e assets/immersivegeology/models/item/powder_wolframite.json
 af8ca960071c4a05c9a6fefd80f8988f149e1688 assets/immersivegeology/models/item/powder_zircon.json
 14cecde966271e1b6b6771d498cf8f5f31c9218f assets/immersivegeology/models/item/powdered_slag_acanthite.json
