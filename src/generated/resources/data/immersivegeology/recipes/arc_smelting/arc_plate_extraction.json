@@ -1,0 +1,15 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 25600,
+  "input": {
+    "tag": "forge:plates/rusty_metal"
+  },
+  "results": [
+    {
+      "count": 4,
+      "item": "immersiveengineering:nugget_steel"
+    }
+  ],
+  "time": 100
+}

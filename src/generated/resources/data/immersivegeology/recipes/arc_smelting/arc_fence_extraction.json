@@ -1,0 +1,18 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 25600,
+  "input": {
+    "item": "immersivegeology:fence_rusty_metal"
+  },
+  "results": [
+    {
+      "count": 2,
+      "item": "immersiveengineering:stick_steel"
+    }
+  ],
+  "slag": {
+    "item": "immersiveengineering:ingot_steel"
+  },
+  "time": 100
+}

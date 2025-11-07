@@ -1,0 +1,20 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 0,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 250,
+    "tag": "forge:ammonia_solution"
+  },
+  "fluidResult": {
+    "amount": 216,
+    "fluid": "immersivegeology:slurry_ammonia_solution_osmium"
+  },
+  "itemInput": {
+    "item": "immersivegeology:compound_dust_osmium"
+  },
+  "result": {
+    "item": "immersivegeology:compound_dust_platinum"
+  },
+  "time": 200
+}

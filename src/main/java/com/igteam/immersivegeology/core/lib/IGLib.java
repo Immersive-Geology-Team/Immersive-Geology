@@ -51,6 +51,7 @@ public class IGLib {
     public static final String GUIID_RevFurnace= "reverberation_furnace";
     public static final String GUIID_Crystallizer= "crystallizer";
     public static final String GUIID_ChemicalReactor= "chemical_reactor";
+    public static final String GUIID_SmallChemicalReactor= "small_chemical_reactor";
     public static final String GUIID_RotaryKiln= "rotary_kiln";
     public static final String GUIID_GeothermalExchanger= "geothermal_exchanger";
     public static final String GUIID_Crate = "crate_menu";
@@ -68,9 +69,16 @@ public class IGLib {
             .requiresCorrectToolForDrops()
             .strength(2, 10);
 
+    public static final BlockBehaviour.Properties CRYSTAL_DECO_PROPS = BlockBehaviour.Properties.of()
+            .mapColor(MapColor.COLOR_YELLOW)
+            .instrument(NoteBlockInstrument.PLING)
+            .sound(SoundType.AMETHYST)
+            .requiresCorrectToolForDrops()
+            .strength(2, 5);
+
     public static final BlockBehaviour.Properties DEFAULT_METAL_PROPERTIES = BlockBehaviour.Properties.of()
             .mapColor(MapColor.METAL)
-            .sound(SoundType.METAL)
+            .sound(SoundType.COPPER)
             .requiresCorrectToolForDrops()
             .strength(3, 15);
 

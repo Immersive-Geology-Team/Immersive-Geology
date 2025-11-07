@@ -44,31 +44,33 @@ public class ChemicalRecipeSerializer extends IERecipeSerializer<ChemicalRecipe>
 	@Override
 	public ChemicalRecipe readFromJson(ResourceLocation resourceLocation, JsonObject json, IContext iContext)
 	{
-		IngredientWithSize outgredient = IngredientWithSize.deserialize(json.get("itemResult"));
-		ItemStack output = ItemStack.EMPTY;
-		if(!outgredient.hasNoMatchingItems())
-		{
-			output = IEApi.getPreferredStackbyMod(outgredient.getMatchingStacks());
-		}
-
+		Lazy<ItemStack> output = readOutput(json.get("result"));
 		FluidStack fluidOut = ApiUtils.jsonDeserializeFluidStack(GsonHelper.getAsJsonObject(json, "fluidResult"));
-		IngredientWithSize itemInput =IngredientWithSize.deserialize(json.get("itemInput"));
+		IngredientWithSize itemInput = IngredientWithSize.deserialize(json.get("itemInput"));
 		Set<FluidTagInput> fluidSet = new HashSet<>();
 
-		if(GsonHelper.isValidNode(json, "fluidInputA")) fluidSet.add(FluidTagInput.deserialize(GsonHelper.getAsJsonObject(json, "fluidInputA")));
-		if(GsonHelper.isValidNode(json, "fluidInputB")) fluidSet.add(FluidTagInput.deserialize(GsonHelper.getAsJsonObject(json, "fluidInputB")));
-		if(GsonHelper.isValidNode(json, "fluidInputC")) fluidSet.add(FluidTagInput.deserialize(GsonHelper.getAsJsonObject(json, "fluidInputC")));
+		if(GsonHelper.isValidNode(json, "fluidInputA"))
+			fluidSet.add(FluidTagInput.deserialize(GsonHelper.getAsJsonObject(json, "fluidInputA")));
+		if(GsonHelper.isValidNode(json, "fluidInputB"))
+			fluidSet.add(FluidTagInput.deserialize(GsonHelper.getAsJsonObject(json, "fluidInputB")));
+		if(GsonHelper.isValidNode(json, "fluidInputC"))
+			fluidSet.add(FluidTagInput.deserialize(GsonHelper.getAsJsonObject(json, "fluidInputC")));
 
 		int energy = GsonHelper.getAsInt(json, "energy");
 		int time = GsonHelper.getAsInt(json, "time");
 
-		return new ChemicalRecipe(resourceLocation, itemInput, fluidSet, output, fluidOut, energy, time);
+		ItemStack outputStack = ItemStack.EMPTY;
+		try
+		{
+			outputStack = output.get();
+		} catch(RuntimeException ignore) {}
+
+		return new ChemicalRecipe(resourceLocation, itemInput, fluidSet, outputStack, fluidOut, energy, time);
 	}
 
 	@Override
 	public @Nullable ChemicalRecipe fromNetwork(ResourceLocation resourceLocation, FriendlyByteBuf buffer)
 	{
-		
 		ItemStack output = buffer.readItem();
 		FluidStack fluidOut = FluidStack.readFromPacket(buffer);
 		IngredientWithSize itemInput = IngredientWithSize.read(buffer);

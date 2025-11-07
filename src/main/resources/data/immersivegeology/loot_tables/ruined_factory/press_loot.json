@@ -1,0 +1,125 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "immersiveengineering:wire_copper",
+          "functions": [
+            { "function": "minecraft:set_count", "count": { "min": 32, "max": 128 } }
+          ],
+          "conditions": [
+            { "condition": "minecraft:random_chance", "chance": 0.85 }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "immersiveengineering:wire_electrum",
+          "functions": [
+            { "function": "minecraft:set_count", "count": { "min": 24, "max": 108 } }
+          ],
+          "conditions": [
+            { "condition": "minecraft:random_chance", "chance": 0.75 }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "immersiveengineering:stick_steel",
+          "functions": [
+            { "function": "minecraft:set_count", "count": { "min": 12, "max": 48 } }
+          ],
+          "conditions": [
+            { "condition": "minecraft:random_chance", "chance": 0.65 }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "immersivegeology:plate_bronze",
+          "functions": [
+            { "function": "minecraft:set_count", "count": { "min": 8, "max": 64 } }
+          ],
+          "conditions": [
+            { "condition": "minecraft:random_chance", "chance": 0.6 }
+          ]
+        },
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "item",
+              "name": "immersivegeology:plate_rusty_metal",
+              "functions": [
+                { "function": "minecraft:set_count", "count": { "min": 8, "max": 128 } }
+              ],
+              "conditions": [
+                { "condition": "minecraft:random_chance", "chance": 0.5 }
+              ]
+            },
+            {
+              "type": "item",
+              "name": "immersiveengineering:plate_iron",
+              "functions": [
+                { "function": "minecraft:set_count", "count": { "min": 8, "max": 128 } }
+              ],
+              "conditions": [
+                { "condition": "minecraft:random_chance", "chance": 0.6 }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "item",
+              "name": "immersiveengineering:plate_steel",
+              "functions": [
+                { "function": "minecraft:set_count", "count": { "min": 8, "max": 32 } }
+              ],
+              "conditions": [
+                { "condition": "minecraft:random_chance", "chance": 0.5 }
+              ]
+            },
+            {
+              "type": "item",
+              "name": "immersivegeology:plate_stainless_steel",
+              "functions": [
+                { "function": "minecraft:set_count", "count": { "min": 8, "max": 32 } }
+              ],
+              "conditions": [
+                { "condition": "minecraft:random_chance", "chance": 0.5 }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "item",
+              "name": "immersivegeology:gear_steel",
+              "functions": [
+                { "function": "minecraft:set_count", "count": { "min": 4, "max": 12 } }
+              ],
+              "conditions": [
+                { "condition": "minecraft:random_chance", "chance": 0.5 }
+              ]
+            },
+            {
+              "type": "item",
+              "name": "immersivegeology:gear_stainless_steel",
+              "functions": [
+                { "function": "minecraft:set_count", "count": { "min": 4, "max": 12 } }
+              ],
+              "conditions": [
+                { "condition": "minecraft:random_chance", "chance": 0.5 }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

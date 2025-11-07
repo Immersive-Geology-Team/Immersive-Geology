@@ -10,10 +10,16 @@ package com.igteam.immersivegeology.common.block.multiblocks.part;
 
 import blusunrize.immersiveengineering.api.IEProperties;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockBEHelper;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockBE;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockPartBlock;
 import com.igteam.immersivegeology.common.block.multiblocks.IGTemplateMultiblock;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.CrystallizerLogic;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.CrystallizerLogic.State;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.skins.helpers.IIGMultiSkinHelper;
 import com.igteam.immersivegeology.common.block.multiblocks.skins.helpers.IMultiSkinBlock;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
@@ -30,6 +36,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property.Value;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
@@ -61,6 +68,21 @@ public abstract class SkinableMultiblockPart<S extends IMultiblockState, T exten
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		super.createBlockStateDefinition(builder);
 		builder.add(IEProperties.MIRRORED);
+	}
+
+	@Override
+	public void onRemove(BlockState state, @NotNull Level level, @NotNull BlockPos pos, BlockState newState, boolean isMoving)
+	{
+		if(level.getBlockEntity(pos) instanceof IMultiblockBE<?> be)
+		{
+			IMultiblockBEHelper<?> helper = be.getHelper();
+			IMultiblockState mbState = helper.getState();
+			if(mbState instanceof IGMultiblockState igState && helper.getContext() != null)
+			{
+				igState.invalidate(helper.getContext());
+			}
+		}
+		super.onRemove(state, level, pos, newState, isMoving);
 	}
 
 	@Override

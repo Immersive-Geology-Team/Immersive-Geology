@@ -31,6 +31,7 @@ import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler.IntRange;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.CrystallizerLogic.State;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.CrystallizerRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.CrystallizerShape;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -55,6 +56,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -62,10 +64,10 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.State>, IServerTickableComponent<CrystallizerLogic.State>, MBOverlayText<State> {
-    public static final BlockPos REDSTONE_IN = new BlockPos(2, 1, 1);
+    public static final BlockPos REDSTONE_IN = new BlockPos(0, 0, 1);
 
     public static final int ENERGY_CAPACITY = 48000;
-    private static final CapabilityPosition ENERGY_INPUT = new CapabilityPosition(1,2,1, RelativeBlockFace.UP);
+    private static final CapabilityPosition ENERGY_INPUT = new CapabilityPosition(2,0,1, RelativeBlockFace.LEFT);
 
     private static final CapabilityPosition FLUID_INPUT_CAP = new CapabilityPosition(1,1,2, RelativeBlockFace.BACK);
     private static final CapabilityPosition FLUID_OUTPUT_CAP = new CapabilityPosition(1,0,1, RelativeBlockFace.DOWN);
@@ -185,7 +187,7 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
         return null;
     }
 
-    public static class State implements IMultiblockState, ProcessContextInMachine<CrystallizerRecipe>
+    public static class State implements IGMultiblockState, ProcessContextInMachine<CrystallizerRecipe>
     {
         public final AveragingEnergyStorage energy = new AveragingEnergyStorage(ENERGY_CAPACITY);
         private final MultiblockProcessor<CrystallizerRecipe, ProcessContextInMachine<CrystallizerRecipe>> processor;
@@ -253,6 +255,12 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
         public void readSyncNBT(CompoundTag nbt)
         {
             readSaveNBT(nbt);
+        }
+
+        public void invalidate(@NotNull IMultiblockContext<?> ctx)
+        {
+            this.fOutputCap.get(ctx).invalidate();
+            this.fInputCap.get(ctx).invalidate();
         }
 
         @Override

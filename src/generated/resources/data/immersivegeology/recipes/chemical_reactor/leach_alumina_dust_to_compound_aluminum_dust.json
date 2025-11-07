@@ -12,7 +12,7 @@
   "itemInput": {
     "tag": "forge:powders/alumina"
   },
-  "itemResult": {
+  "result": {
     "item": "immersivegeology:compound_dust_aluminum"
   },
   "time": 200

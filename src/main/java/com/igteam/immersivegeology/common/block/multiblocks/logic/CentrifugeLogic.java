@@ -35,6 +35,7 @@ import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler.IntRange;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.CentrifugeLogic.State;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.CentrifugeRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.CentrifugeShape;
@@ -60,6 +61,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -217,7 +219,7 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
         if(state.shouldRenderActive()) state.rotation = (float)((rot-3.5)%360);
     }
 
-    public static class State implements IMultiblockState, ProcessContextInMachine<CentrifugeRecipe>
+    public static class State implements IGMultiblockState, ProcessContextInMachine<CentrifugeRecipe>
     {
         public final AveragingEnergyStorage energy = new AveragingEnergyStorage(ENERGY_CAPACITY);
         private final MultiblockProcessor<CentrifugeRecipe, ProcessContextInMachine<CentrifugeRecipe>> processor;
@@ -356,6 +358,17 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
         public boolean shouldRenderActive()
         {
             return isActive;
+        }
+
+        @Override
+        public void invalidate(@NotNull IMultiblockContext<?> context)
+        {
+            this.fPrimaryOutput.get(context).invalidate();
+            this.fSecondaryOutput.get(context).invalidate();
+            this.itemOutputCap.get(context).invalidate();
+            this.fInputCap.get(context).invalidate();
+            this.energyCap.get(context).invalidate();
+            this.itemOutputCap.get(context).invalidate();
         }
     }
 

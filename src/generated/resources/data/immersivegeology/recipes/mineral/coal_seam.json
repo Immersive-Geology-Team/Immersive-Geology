@@ -1,0 +1,49 @@
+{
+  "type": "immersiveengineering:mineral_mix",
+  "dimensions": [
+    "minecraft:overworld"
+  ],
+  "fail_chance": 0.25,
+  "ores": [
+    {
+      "chance": 0.35,
+      "output": {
+        "tag": "forge:normal_ore/lignite"
+      }
+    },
+    {
+      "chance": 0.15,
+      "output": {
+        "tag": "forge:normal_ore/bituminous"
+      }
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "tag": "forge:poor_ore/pyrite"
+      }
+    }
+  ],
+  "sample_background": "minecraft:cobblestone",
+  "spoils": [
+    {
+      "chance": 0.2,
+      "output": {
+        "item": "minecraft:gravel"
+      }
+    },
+    {
+      "chance": 0.5,
+      "output": {
+        "item": "minecraft:cobblestone"
+      }
+    },
+    {
+      "chance": 0.3,
+      "output": {
+        "item": "minecraft:cobbled_deepslate"
+      }
+    }
+  ],
+  "weight": 12
+}

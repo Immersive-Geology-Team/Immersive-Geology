@@ -29,6 +29,7 @@ import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.InsertOnlyInventory;
 import com.igteam.immersivegeology.common.block.multiblocks.IGBallmillMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.BloomeryLogic.State;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BallmillRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.PelletizerRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
@@ -48,6 +49,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
@@ -123,7 +125,7 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
         return BallmillShape.GETTER;
     }
 
-    public static class State implements IMultiblockState, ProcessContextInWorld<BallmillRecipe>
+    public static class State implements IGMultiblockState, ProcessContextInWorld<BallmillRecipe>
     {
         public final AveragingEnergyStorage energy = new AveragingEnergyStorage(ENERGY_CAPACITY);
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
@@ -217,6 +219,13 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
         public float getRotation()
         {
             return rotation;
+        }
+
+        @Override
+        public void invalidate(@NotNull IMultiblockContext<?> context)
+        {
+            this.energyCap.get(context).invalidate();
+            this.insertionHandler.get(context).invalidate();
         }
     }
 

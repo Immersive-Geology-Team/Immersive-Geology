@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology;
 
+import blusunrize.immersiveengineering.api.excavator.MineralMix;
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import com.igteam.immersivegeology.client.IGClientRenderHandler;
 import com.igteam.immersivegeology.client.IGOverlayHandler;
@@ -28,6 +29,7 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.repository.BuiltInPackSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;

@@ -1,0 +1,7 @@
+{
+  "type": "immersivegeology:chemical_repair",
+  "input": {
+    "item": "immersivegeology:plate_stainless_steel"
+  },
+  "time": 10
+}

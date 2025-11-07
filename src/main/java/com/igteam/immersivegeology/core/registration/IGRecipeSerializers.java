@@ -44,10 +44,12 @@ public class IGRecipeSerializers
 		RevFurnaceRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("reverberation_furnace", RevFurnaceRecipeSerializer::new);
 		RotaryKilnRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("rotary_kiln", RotaryKilnRecipeSerializer::new);
 		ChemicalRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("chemical_reactor", ChemicalRecipeSerializer::new);
+		BasicChemicalRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("small_chemical_reactor", BasicChemicalRecipeSerializer::new);
 		CentrifugeRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("centrifuge", CentrifugeRecipeSerializer::new);
 		IndustrialSluiceRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("industrial_sluice", IndustrialSluiceRecipeSerializer::new);
 		BloomeryRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("bloomery", BloomeryRecipeSerializer::new);
 		BloomeryFuel.SERIALIZER = RECIPE_SERIALIZERS.register("bloomery_fuel", BloomeryFuelSerializer::new);
+		ChemicalRepairRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("chemical_repair", ChemicalRepairSerializer::new);
 		TurbineFuel.SERIALIZER = RECIPE_SERIALIZERS.register("tubrine_fuel", TurbineFuelSerializer::new);
 		BallmillRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("ballmill", BallmillRecipeSerializer::new);
 		PelletizerRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("pelletizer", PelletizerRecipeSerializer::new);

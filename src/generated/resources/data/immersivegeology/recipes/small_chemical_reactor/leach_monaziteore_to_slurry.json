@@ -1,0 +1,24 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 0,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 750,
+    "tag": "forge:sulfuric_acid"
+  },
+  "fluidResult": {
+    "amount": 648,
+    "fluid": "immersivegeology:slurry_sulfuric_acid_neodymium"
+  },
+  "itemInput": {
+    "base_ingredient": {
+      "item": "immersivegeology:powder_monazite"
+    },
+    "count": 3
+  },
+  "result": {
+    "count": 3,
+    "item": "immersivegeology:sediment_monazite"
+  },
+  "time": 200
+}

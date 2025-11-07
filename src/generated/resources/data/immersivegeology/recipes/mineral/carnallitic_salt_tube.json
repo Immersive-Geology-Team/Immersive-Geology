@@ -1,0 +1,61 @@
+{
+  "type": "immersiveengineering:mineral_mix",
+  "dimensions": [
+    "minecraft:overworld"
+  ],
+  "fail_chance": 0.15,
+  "ores": [
+    {
+      "chance": 0.45,
+      "output": {
+        "tag": "forge:sediment/carnallite"
+      }
+    },
+    {
+      "chance": 0.35,
+      "output": {
+        "tag": "forge:sediment/rocksalt"
+      }
+    },
+    {
+      "chance": 0.1,
+      "output": {
+        "tag": "forge:poor_ore/fluorite"
+      }
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "tag": "forge:crystal/carnallite"
+      }
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "tag": "forge:crystal/rocksalt"
+      }
+    }
+  ],
+  "sample_background": "minecraft:sand",
+  "spoils": [
+    {
+      "chance": 0.6,
+      "output": {
+        "item": "minecraft:sandstone"
+      }
+    },
+    {
+      "chance": 0.3,
+      "output": {
+        "item": "minecraft:gravel"
+      }
+    },
+    {
+      "chance": 0.1,
+      "output": {
+        "item": "minecraft:sand"
+      }
+    }
+  ],
+  "weight": 12
+}

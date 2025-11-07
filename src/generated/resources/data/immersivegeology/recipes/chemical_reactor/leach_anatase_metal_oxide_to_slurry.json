@@ -12,6 +12,9 @@
   "itemInput": {
     "item": "immersivegeology:powder_anatase"
   },
-  "itemResult": [],
+  "result": {
+    "base_ingredient": [],
+    "count": 0
+  },
   "time": 200
 }

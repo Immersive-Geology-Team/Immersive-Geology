@@ -1,0 +1,12 @@
+{
+  "type": "immersivegeology:rotary_kiln",
+  "heat": 75,
+  "input": {
+    "item": "minecraft:calcite"
+  },
+  "result": {
+    "count": 4,
+    "item": "immersivegeology:metal_oxide_calcium"
+  },
+  "time": 300
+}

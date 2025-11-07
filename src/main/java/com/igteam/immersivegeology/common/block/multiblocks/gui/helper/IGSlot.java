@@ -11,9 +11,7 @@ package com.igteam.immersivegeology.common.block.multiblocks.gui.helper;
 import blusunrize.immersiveengineering.api.crafting.BlastFurnaceFuel;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.arcfurnace.ArcFurnaceProcess;
 import blusunrize.immersiveengineering.common.gui.ArcFurnaceMenu;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.BloomeryFuel;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRecipe;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.*;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.process.RotaryKilnProcess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -23,6 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class IGSlot extends Slot
 {
@@ -89,6 +88,34 @@ public abstract class IGSlot extends Slot
 
 		public boolean mayPlace(ItemStack itemStack) {
 			return ChemicalRecipe.acceptableCatalyst(this.level, itemStack);
+		}
+	}
+
+	public static class ChemicalRepairSlot extends SlotItemHandler
+	{
+		private final Level level;
+
+		public ChemicalRepairSlot(IItemHandler inv, int id, int x, int y, Level level) {
+			super(inv, id, x, y);
+			this.level = level;
+		}
+
+		public boolean mayPlace(ItemStack itemStack) {
+			return ChemicalRepairRecipe.isValidRepairItem(this.level, itemStack);
+		}
+	}
+
+	public static class SmallChemicalReactorSlot extends SlotItemHandler
+	{
+		private final Level level;
+
+		public SmallChemicalReactorSlot(IItemHandler inv, int id, int x, int y, Level level) {
+			super(inv, id, x, y);
+			this.level = level;
+		}
+
+		public boolean mayPlace(@NotNull ItemStack itemStack) {
+			return BasicChemicalRecipe.acceptableCatalyst(this.level, itemStack);
 		}
 	}
 }

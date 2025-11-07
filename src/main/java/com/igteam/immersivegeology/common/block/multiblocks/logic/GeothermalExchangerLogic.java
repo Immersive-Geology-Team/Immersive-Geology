@@ -29,6 +29,7 @@ import blusunrize.immersiveengineering.common.util.CachedRecipe;
 import blusunrize.immersiveengineering.common.util.Utils;
 import com.igteam.immersivegeology.common.block.multiblocks.IGGeothermalExchangerMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.GeothermalHeatHelper;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.LazyGetter;
 import com.igteam.immersivegeology.common.block.multiblocks.part.GeothermalPart;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.*;
@@ -62,6 +63,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 
+import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -383,7 +385,7 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
         return LazyOptional.empty();
     }
 
-    public static class State implements IMultiblockState, ProcessContextInMachine<GeothermalExchangerRecipe>
+    public static class State implements IGMultiblockState, ProcessContextInMachine<GeothermalExchangerRecipe>
     {
         private final MultiblockProcessor<GeothermalExchangerRecipe, ProcessContextInMachine<GeothermalExchangerRecipe>> processor;
         private final FluidTank water_tank = new FluidTank(TANK_VOLUME);
@@ -564,6 +566,13 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
         public float getDisplayHeat()
         {
             return this.display_heat;
+        }
+
+        public void invalidate(@Nonnull IMultiblockContext<?> ctx)
+        {
+            this.fInputCap.get(ctx).invalidate();
+            this.fOutputCap.get(ctx).invalidate();
+            this.energyCap.get(ctx).invalidate();
         }
     }
 }

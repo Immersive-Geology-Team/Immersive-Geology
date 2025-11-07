@@ -2,6 +2,8 @@ package com.igteam.immersivegeology.core.registration;
 
 import blusunrize.immersiveengineering.api.IEApi;
 import blusunrize.immersiveengineering.api.ManualHelper;
+import blusunrize.immersiveengineering.api.excavator.ExcavatorHandler;
+import blusunrize.immersiveengineering.api.excavator.MineralMix;
 import blusunrize.immersiveengineering.api.tool.ChemthrowerHandler;
 import blusunrize.immersiveengineering.api.tool.ChemthrowerHandler.ChemthrowerEffect;
 import blusunrize.immersiveengineering.common.fluids.IEFluid;
@@ -49,6 +51,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.data.ForgeRecipeProvider;
 import org.jetbrains.annotations.Nullable;
 
 import java.text.DecimalFormat;
@@ -81,15 +84,27 @@ public class IGContent {
                 Vec3 vec = hitResult.getLocation();
                 BlockPos loc = new BlockPos((int)vec.x(), (int)vec.y(), (int)vec.z()).below();
                 BlockState state = level.getBlockState(new BlockPos(loc));
-
+                RandomSource random = level.getRandom();
                 if(state.is(Blocks.GRASS_BLOCK))
                 {
                     level.setBlock(loc, Blocks.DIRT.defaultBlockState(), 3);
                 }
-
-                if(state.is(Blocks.DIRT))
+                if(state.is(Blocks.TALL_GRASS) || state.is(Blocks.GRASS) || state.is(Blocks.FERN) || state.is(Blocks.LARGE_FERN))
                 {
-                    level.setBlock(loc, Blocks.COARSE_DIRT.defaultBlockState(), 3);
+                    level.setBlock(loc, Blocks.AIR.defaultBlockState(), 0);
+                }
+                if(state.is(Blocks.COARSE_DIRT))
+                {
+                    level.setBlock(loc, Blocks.DIRT.defaultBlockState(), 3);
+                }
+                if(state.is(Blocks.DIRT) && random.nextInt(10) == 1)
+                {
+                    level.setBlock(loc, Blocks.GRAVEL.defaultBlockState(), 3);
+                }
+
+                if(state.is(Blocks.GRAVEL) && random.nextInt(15) == 1)
+                {
+                    level.setBlock(loc, Blocks.SAND.defaultBlockState(), 3);
                 }
             }
         });
@@ -115,7 +130,6 @@ public class IGContent {
         });
 
         IGEnergyPipeEntity.initCovers();
-
         IGLib.IG_LOGGER.info("Finished");
     }
 
@@ -126,6 +140,7 @@ public class IGContent {
         MenuScreens.register(IGMenuTypes.GEOTHERMAL_EXCHANGER.getType(), GeothermalExchangerScreen::new);
         MenuScreens.register(IGMenuTypes.CRYSTALLIZER.getType(), CrystallizerScreen::new);
         MenuScreens.register(IGMenuTypes.CHEMICAL_REACTOR.getType(), ChemicalReactorScreen::new);
+        MenuScreens.register(IGMenuTypes.SMALL_CHEMICAL_REACTOR.getType(), SmallChemicalReactorScreen::new);
         MenuScreens.register(IGMenuTypes.ROTARY_KILN.getType(), RotaryKilnScreen::new);
         MenuScreens.register(IGMenuTypes.CRATE.get(), IGCrateScreen.StandardIGCrate::new);
     }
@@ -161,6 +176,8 @@ public class IGContent {
         multiblockEntry(instance, multiblock_category, "centrifuge");
         multiblockEntry(instance, multiblock_category, "pelletizer");
         multiblockEntry(instance, multiblock_category, "steam_turbine");
+        multiblockEntry(instance, multiblock_category, "alternator");
+        multiblockEntry(instance, multiblock_category, "small_chemical_reactor");
 
         // Build the manual entry for the contributors
         builder.readFromFile(new ResourceLocation(IGLib.MODID, "getting_started"));
@@ -414,6 +431,11 @@ public class IGContent {
             if(state.is(Blocks.GRASS_BLOCK))
             {
                 level.setBlock(loc, Blocks.DIRT.defaultBlockState(), 0);
+            }
+
+            if(state.is(Blocks.TALL_GRASS) || state.is(Blocks.GRASS) || state.is(Blocks.FERN) || state.is(Blocks.LARGE_FERN))
+            {
+                level.setBlock(loc, Blocks.AIR.defaultBlockState(), 0);
             }
         }
     };

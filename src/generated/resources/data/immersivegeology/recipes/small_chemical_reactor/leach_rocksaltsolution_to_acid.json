@@ -1,0 +1,25 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 0,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 125,
+    "tag": "forge:clean_brine_rocksalt"
+  },
+  "fluidInputB": {
+    "amount": 125,
+    "tag": "forge:sulfuric_acid"
+  },
+  "fluidResult": {
+    "amount": 125,
+    "fluid": "immersivegeology:fluid_hydrochloric_acid"
+  },
+  "itemInput": {
+    "base_ingredient": [],
+    "count": 0
+  },
+  "result": {
+    "item": "immersivegeology:compound_dust_sodium"
+  },
+  "time": 200
+}

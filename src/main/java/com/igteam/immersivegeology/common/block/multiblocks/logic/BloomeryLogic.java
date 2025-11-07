@@ -24,12 +24,17 @@ import blusunrize.immersiveengineering.common.util.CachedRecipe;
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler.IOConstraint;
 import com.igteam.immersivegeology.common.block.multiblocks.IGBloomeryMultiblock;
+import com.igteam.immersivegeology.common.block.multiblocks.IGReverberationFurnaceMultiblock;
+import com.igteam.immersivegeology.common.block.multiblocks.part.BloomeryPart;
+import com.igteam.immersivegeology.common.block.multiblocks.part.RevFurnacePart;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BloomeryFuel;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.InputSlot;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.OutputSlot;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BloomeryRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.BloomeryShape;
+import com.igteam.immersivegeology.common.block.multiblocks.skins.IGBloomerySkins;
+import com.igteam.immersivegeology.common.block.multiblocks.skins.IGRevFurnaceSkins;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -80,9 +85,12 @@ public class BloomeryLogic implements IMultiblockLogic<BloomeryLogic.State>, ISe
         final IMultiblockLevel level = context.getLevel();
         final Boolean wasActive = level.getBlockState(IGBloomeryMultiblock.INSTANCE.getMasterFromOriginOffset()).getValue(IEProperties.ACTIVE);
         final boolean active = state.furnace.tickServer(context, 0);
+
         if(active != wasActive)
         {
+            IGBloomerySkins current_skin = level.getBlockState(IGBloomeryMultiblock.INSTANCE.getMasterFromOriginOffset()).getValue(BloomeryPart.BLOOMERY);
             NonMirrorableWithActiveBlock.setActive(level, IGBloomeryMultiblock.INSTANCE, active);
+            BloomeryPart.setSkin(level, IGBloomeryMultiblock.INSTANCE, current_skin);
         }
     }
 

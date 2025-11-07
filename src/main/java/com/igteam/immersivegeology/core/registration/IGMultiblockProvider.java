@@ -91,15 +91,14 @@ public class IGMultiblockProvider {
 
     public static final MultiblockRegistration<SmallChemicalReactorLogic.State> SMALL_CHEMICAL_REACTOR = metal_skinnable(new SmallChemicalReactorLogic(), "small_chemical_reactor", false, SmallChemicalReactorPart::new)
             .structure(() -> IGRegistrationHolder.getMBTemplate.apply("small_chemical_reactor"))
-            .redstone(state -> state.rsState, GeothermalExchangerLogic.REDSTONE_IN)
+            .redstone(state -> state.rsState, SmallChemicalReactorLogic.REDSTONE_IN)
+            .gui(IGMenuTypes.SMALL_CHEMICAL_REACTOR)
             .build();
-
 
     public static final MultiblockRegistration<AlternatorLogic.State> ALTERNATOR = metal_skinnable(new AlternatorLogic(), "alternator", false, AlternatorPart::new)
             .structure(() -> IGRegistrationHolder.getMBTemplate.apply("alternator"))
-            .redstone(state -> state.rsState, GeothermalExchangerLogic.REDSTONE_IN)
+            .redstone(state -> state.rsState, AlternatorLogic.REDSTONE_IN)
             .build();
-
 
     private static <S extends IMultiblockState, B extends SkinableMultiblockPart<S, ?>>
     IGMultiblockBuilder<S> metal_skinnable(

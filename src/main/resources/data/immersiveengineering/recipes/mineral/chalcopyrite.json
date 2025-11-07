@@ -1,0 +1,66 @@
+{
+  "type": "immersiveengineering:mineral_mix",
+  "dimensions": [
+    "minecraft:overworld"
+  ],
+  "fail_chance": 0.05,
+  "ores": [
+    {
+      "chance": 0.45,
+      "output": {
+        "tag": "forge:poor_ore/chalcopyrite"
+      }
+    },
+    {
+      "chance": 0.25,
+      "output": {
+        "tag": "forge:poor_ore/pyrite"
+      }
+    },
+    {
+      "chance": 0.2,
+      "output": {
+        "tag": "forge:poor_ore/copper"
+      }
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "tag": "forge:rich_ore/copper"
+      }
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "tag": "forge:normal_ore/chalcopyrite"
+      }
+    },
+    {
+      "chance": 0.3,
+      "output": {
+        "tag": "forge:dusts/sulfur"
+      }
+    }
+  ],
+  "spoils": [
+    {
+      "chance": 0.2,
+      "output": {
+        "item": "minecraft:gravel"
+      }
+    },
+    {
+      "chance": 0.5,
+      "output": {
+        "item": "minecraft:cobblestone"
+      }
+    },
+    {
+      "chance": 0.3,
+      "output": {
+        "item": "minecraft:cobbled_deepslate"
+      }
+    }
+  ],
+  "weight": 25
+}

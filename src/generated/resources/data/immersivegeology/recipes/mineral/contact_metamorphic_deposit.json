@@ -1,0 +1,43 @@
+{
+  "type": "immersiveengineering:mineral_mix",
+  "dimensions": [
+    "minecraft:overworld"
+  ],
+  "fail_chance": 0.25,
+  "ores": [
+    {
+      "chance": 0.15,
+      "output": {
+        "tag": "forge:poor_ore/cobaltite"
+      }
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "tag": "forge:poor_ore/bauxite"
+      }
+    }
+  ],
+  "sample_background": "minecraft:stone",
+  "spoils": [
+    {
+      "chance": 0.2,
+      "output": {
+        "item": "minecraft:gravel"
+      }
+    },
+    {
+      "chance": 0.5,
+      "output": {
+        "item": "minecraft:cobblestone"
+      }
+    },
+    {
+      "chance": 0.3,
+      "output": {
+        "item": "minecraft:cobbled_deepslate"
+      }
+    }
+  ],
+  "weight": 12
+}

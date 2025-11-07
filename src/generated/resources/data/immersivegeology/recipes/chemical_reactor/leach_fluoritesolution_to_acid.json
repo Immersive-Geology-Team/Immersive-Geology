@@ -12,7 +12,7 @@
   "itemInput": {
     "item": "immersivegeology:powder_fluorite"
   },
-  "itemResult": {
+  "result": {
     "item": "immersivegeology:compound_dust_calcium"
   },
   "time": 200

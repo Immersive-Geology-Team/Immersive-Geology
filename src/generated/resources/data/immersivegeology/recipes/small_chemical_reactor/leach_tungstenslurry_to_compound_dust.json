@@ -1,0 +1,25 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 0,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 144,
+    "tag": "forge:clean_hydrochloric_acid_tungsten"
+  },
+  "fluidInputB": {
+    "amount": 144,
+    "tag": "forge:ammonia_solution"
+  },
+  "fluidResult": {
+    "amount": 120,
+    "fluid": "immersivegeology:fluid_chemical_waste"
+  },
+  "itemInput": {
+    "base_ingredient": [],
+    "count": 0
+  },
+  "result": {
+    "item": "immersivegeology:compound_dust_tungsten"
+  },
+  "time": 200
+}

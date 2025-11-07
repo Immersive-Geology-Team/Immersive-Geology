@@ -1,0 +1,61 @@
+{
+  "type": "immersiveengineering:mineral_mix",
+  "dimensions": [
+    "minecraft:the_nether"
+  ],
+  "fail_chance": 0.1,
+  "ores": [
+    {
+      "chance": 0.35,
+      "output": {
+        "tag": "forge:poor_ore/magnetite"
+      }
+    },
+    {
+      "chance": 0.25,
+      "output": {
+        "tag": "forge:poor_ore/ilmenite"
+      }
+    },
+    {
+      "chance": 0.2,
+      "output": {
+        "tag": "forge:poor_ore/chromite"
+      }
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "tag": "forge:normal_ore/magnetite"
+      }
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "tag": "forge:poor_ore/vanadinite"
+      }
+    }
+  ],
+  "sample_background": "minecraft:blackstone",
+  "spoils": [
+    {
+      "chance": 0.5,
+      "output": {
+        "item": "minecraft:netherrack"
+      }
+    },
+    {
+      "chance": 0.3,
+      "output": {
+        "item": "minecraft:basalt"
+      }
+    },
+    {
+      "chance": 0.2,
+      "output": {
+        "item": "minecraft:gravel"
+      }
+    }
+  ],
+  "weight": 15
+}

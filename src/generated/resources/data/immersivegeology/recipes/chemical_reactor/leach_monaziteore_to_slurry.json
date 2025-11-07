@@ -15,7 +15,8 @@
     },
     "count": 3
   },
-  "itemResult": {
+  "result": {
+    "count": 3,
     "item": "immersivegeology:sediment_monazite"
   },
   "time": 200

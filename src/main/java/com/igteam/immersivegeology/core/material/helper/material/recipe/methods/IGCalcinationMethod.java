@@ -62,6 +62,22 @@ public class IGCalcinationMethod extends IGRecipeMethod
 		return this;
 	}
 
+	public IGCalcinationMethod create(IFlagType<?> output_form, IngredientWithSize input_form, int time){
+		this.name = create_basic_method_name(output_form);
+		this.output = parentMaterial.getStack(output_form, 1);
+		this.input = input_form;
+		this.time = time;
+		return this;
+	}
+
+	public IGCalcinationMethod create(IFlagType<?> output_form, IngredientWithSize input_form, int time, int output_amount){
+		this.name = create_basic_method_name(output_form);
+		this.output = parentMaterial.getStack(output_form, output_amount);
+		this.input = input_form;
+		this.time = time;
+		return this;
+	}
+
 	public IGCalcinationMethod create(IFlagType<?> input_form, IFlagType<?> output_form, MaterialHelper output_material, int itemAmount, int time){
 		this.name = create_advanced_method_name(input_form, output_form);
 		this.output = output_material.getStack(output_form, 1);

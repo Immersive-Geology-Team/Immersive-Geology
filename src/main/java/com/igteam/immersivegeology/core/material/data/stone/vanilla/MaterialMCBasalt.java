@@ -27,7 +27,7 @@ public class MaterialMCBasalt extends MaterialStone {
     }
 
     @Override
-    public boolean useSedimentaryTextures()
+    public boolean useColumnBlockStyle(IFlagType<?> flag)
     {
         return true;
     }

@@ -236,7 +236,7 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
                         }
                     }
 
-                    boolean isSedimentary = ((MaterialStone)igOreBlock.getMaterial(MaterialTexture.base).instance()).getStoneFormation().equals(StoneFormation.SEDIMENTARY) || igOreBlock.getMaterial(MaterialTexture.base).useSedimentaryTextures();
+                    boolean isSedimentary = ((MaterialStone)igOreBlock.getMaterial(MaterialTexture.base).instance()).getStoneFormation().equals(StoneFormation.SEDIMENTARY) || igOreBlock.getMaterial(MaterialTexture.base).useSedimentaryTextures(igOreBlock.getFlag());
                     OreRichness richness = igOreBlock.getOreRichness();
                     String itemLocation = new ResourceLocation(IGLib.MODID, "item/"+item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.overlay), item.getMaterial(MaterialTexture.base), richness)).getPath();
                     ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "block/base/ore_block" + (isSedimentary ? "_sedimentary" : ""));

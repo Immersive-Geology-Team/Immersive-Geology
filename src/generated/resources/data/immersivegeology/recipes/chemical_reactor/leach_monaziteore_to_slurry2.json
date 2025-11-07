@@ -12,7 +12,7 @@
   "itemInput": {
     "item": "immersivegeology:sediment_monazite"
   },
-  "itemResult": {
+  "result": {
     "item": "immersivegeology:metal_oxide_thorium"
   },
   "time": 200

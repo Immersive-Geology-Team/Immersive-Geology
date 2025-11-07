@@ -24,9 +24,9 @@ public class ChemicalRecipeBuilder extends IEFinishedRecipe<ChemicalRecipeBuilde
 		super(ChemicalRecipe.SERIALIZER.get());
 	}
 
-	public static ChemicalRecipeBuilder builder(Item result, FluidStack fluidStack, IngredientWithSize itemInput, FluidTagInput fluidInputA, FluidTagInput fluidInputB, FluidTagInput fluidInputC)
+	public static ChemicalRecipeBuilder builder(IngredientWithSize result, FluidStack fluidStack, IngredientWithSize itemInput, FluidTagInput fluidInputA, FluidTagInput fluidInputB, FluidTagInput fluidInputC)
 	{
-		ChemicalRecipeBuilder builder = new ChemicalRecipeBuilder().addIngredient("itemResult",result).addFluid("fluidResult", fluidStack).addFluid("fluidResult", fluidStack)
+		ChemicalRecipeBuilder builder = new ChemicalRecipeBuilder().addResult(result).addFluid("fluidResult", fluidStack).addFluid("fluidResult", fluidStack)
 				.addIngredient("itemInput",itemInput);
 
 		if(fluidInputA != null)
@@ -46,9 +46,16 @@ public class ChemicalRecipeBuilder extends IEFinishedRecipe<ChemicalRecipeBuilde
 
 	public static ChemicalRecipeBuilder builder(ItemStack result, FluidStack fluidStack, IngredientWithSize itemInput, FluidTagInput fluidInputA, FluidTagInput fluidInputB, FluidTagInput fluidInputC)
 	{
-		ChemicalRecipeBuilder builder = new ChemicalRecipeBuilder().addIngredient("itemResult",result).addFluid("fluidResult", fluidStack).addFluid("fluidResult", fluidStack)
+		ChemicalRecipeBuilder builder = new ChemicalRecipeBuilder().addFluid("fluidResult", fluidStack).addFluid("fluidResult", fluidStack)
 				.addIngredient("itemInput",itemInput);
-
+		if(!result.isEmpty())
+		{
+			builder.addResult(result);
+		}
+		else
+		{
+			builder.addResult(IngredientWithSize.of(ItemStack.EMPTY));
+		}
 		if(fluidInputA != null)
 		{
 			builder.addFluidTag("fluidInputA", fluidInputA);

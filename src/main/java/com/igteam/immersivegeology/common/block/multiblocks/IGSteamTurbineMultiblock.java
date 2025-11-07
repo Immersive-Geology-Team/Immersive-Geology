@@ -9,10 +9,18 @@
 package com.igteam.immersivegeology.common.block.multiblocks;
 
 import blusunrize.immersiveengineering.api.multiblocks.ClientMultiblocks;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockBE;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.AlternatorLogic;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
+import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.function.Consumer;
 
@@ -22,6 +30,23 @@ public class IGSteamTurbineMultiblock extends IGTemplateMultiblock
 	public IGSteamTurbineMultiblock()
 	{
 		super(new ResourceLocation(IGLib.MODID, "multiblocks/steam_turbine"), new BlockPos(1, 1, 2), new BlockPos(0,1,11), new BlockPos(3,5,12), IGMultiblockProvider.STEAM_TURBINE);
+	}
+
+	@Override
+	public boolean createStructure(Level world, BlockPos pos, Direction side, Player player)
+	{
+		final boolean excavatorFormed = super.createStructure(world, pos, side, player);
+		if(excavatorFormed)
+		{
+			BlockEntity clickedTE = world.getBlockEntity(pos);
+			if(clickedTE instanceof IMultiblockBE<?> excavator)
+			{
+				final IMultiblockLevel mbLevel = excavator.getHelper().getContext().getLevel();
+				BlockPos wheelCenter = mbLevel.toAbsolute(AlternatorLogic.FORMATION_LOC);
+				IGAlternatorMultiblock.INSTANCE.createStructure(world, wheelCenter, side.getCounterClockWise(), player);
+			}
+		}
+		return excavatorFormed;
 	}
 
 	@Override

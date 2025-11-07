@@ -1,0 +1,15 @@
+{
+  "name": "immersivegeology:large_ruined_factory/start_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "immersivegeology:ruins/large_ruined_factory",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      }
+    }
+  ]
+}

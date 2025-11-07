@@ -12,7 +12,7 @@
   "itemInput": {
     "tag": "forge:powders/apatite"
   },
-  "itemResult": {
+  "result": {
     "item": "immersivegeology:compound_dust_calcium"
   },
   "time": 200

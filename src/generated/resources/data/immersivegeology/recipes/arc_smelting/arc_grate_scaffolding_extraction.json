@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 25600,
+  "input": {
+    "item": "immersivegeology:scaffolding_rusty_metal_grate_top"
+  },
+  "results": [
+    {
+      "item": "immersiveengineering:plate_iron"
+    }
+  ],
+  "time": 100
+}

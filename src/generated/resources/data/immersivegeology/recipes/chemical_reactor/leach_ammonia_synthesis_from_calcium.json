@@ -2,11 +2,11 @@
   "type": "immersivegeology:chemical_reactor",
   "energy": 51200,
   "fluidInputA": {
-    "amount": 62,
+    "amount": 125,
     "tag": "minecraft:water"
   },
   "fluidResult": {
-    "amount": 60,
+    "amount": 120,
     "fluid": "immersivegeology:fluid_ammonia_solution"
   },
   "itemInput": {
@@ -15,7 +15,8 @@
     },
     "count": 8
   },
-  "itemResult": {
+  "result": {
+    "count": 7,
     "item": "immersivegeology:compound_dust_calcium"
   },
   "time": 200

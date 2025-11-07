@@ -30,21 +30,71 @@ public class CrystallizerShape extends GenericShape {
 
         List<AABB> main = new ArrayList<>();
 
+
+        if(bY == 0)
+        {
+            main.add(new AABB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0));
+            if(bZ == 1) main.add(new AABB(0.0, 0.5, 0.0, 1.0, 1.0, 1.0));
+            if(bZ == 0)
+            {
+                if(bX == 0) main.add(new AABB(3/16f,0,3/16f,7/16f,1,7/16f));
+                if(bX == 1) main.add(new AABB(6/16f,0,3/16f,10/16f,1,7/16f));
+                if(bX == 2) main.add(new AABB(9/16f,0,3/16f,13/16f,1,7/16f));
+            }
+            if(bZ == 2)
+            {
+                if(bX == 0) main.add(new AABB(3/16f,0,9/16f,7/16f,1,13/16f));
+                if(bX == 1) main.add(new AABB(6/16f,0,9/16f,10/16f,1,13/16f));
+                if(bX == 2) main.add(new AABB(9/16f,0,9/16f,13/16f,1,13/16f));
+            }
+        }
+        if(bY == 1)
+        {
+            if(bZ == 0)
+            {
+                if(bX == 0) main.add(new AABB(1/16f,-1/16f,1/16f,1,1,1));
+                if(bX == 1) main.add(new AABB(0,-1/16f,1/16f,1,1,1));
+                if(bX == 2) main.add(new AABB(0,-1/16f,1/16f,15/16f,1,1));
+            }
+            if(bZ == 1)
+            {
+                if(bX == 0) main.add(new AABB(1/16f,0,0,1,1,1));
+                if(bX == 1) main.add(new AABB(0,0,0,1,1,1));
+                if(bX == 2) main.add(new AABB(0,0,0,15/16f,1,1));
+            }
+            if(bZ == 2)
+            {
+                if(bX == 0) main.add(new AABB(1/16f,-1/16f,0,1,1,15/16f));
+                if(bX == 1) main.add(new AABB(0,-1/16f,0,1,1,15/16f));
+                if(bX == 2) main.add(new AABB(0,-1/16f,0,15/16f,1,15/16f));
+            }
+        }
         if(bY == 2)
         {
-            if(bZ==1&&bX==bZ)
+            if(bZ == 0)
             {
-                main.add(new AABB(0.0, 0.0, 0.0, 1.0, .5, 1.0));
-                main.add(new AABB(0.125, .5, 0.125, 0.875, .75, 0.875));
-                main.add(new AABB(0.25, .75, 0.25, .75, 1, .75));
+                if(bX == 0) main.add(new AABB(1/16f,-1/16f,1/16f,1,12/16f,1));
+                if(bX == 1) main.add(new AABB(0,-1/16f,1/16f,1,12/16f,1));
+                if(bX == 2) main.add(new AABB(0,-1/16f,1/16f,15/16f,12/16f,1));
             }
-            else {
-                main.add(new AABB(0.0, 0.0, 0.0, 1.0, 0.5, 1.0));
+            if(bZ == 1)
+            {
+                if(bX == 0) main.add(new AABB(1/16f,0,0,1,12/16f,1));
+                if(bX == 1)
+                {
+                    main.add(new AABB(0,0,0,1,1,1));
+                    main.add(new AABB(1/16f,0,1/16f,15/16f,22/16f,15/16f));
+                }
+                if(bX == 2) main.add(new AABB(0,0,0,15/16f,12/16f,1));
+            }
+            if(bZ == 2)
+            {
+                if(bX == 0) main.add(new AABB(1/16f,-1/16f,0,1,12/16f,15/16f));
+                if(bX == 1) main.add(new AABB(0,-1/16f,0,1,12/16f,15/16f));
+                if(bX == 2) main.add(new AABB(0,-1/16f,0,15/16f,12/16f,15/16f));
             }
         }
-        else {
-            main.add(new AABB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0));
-        }
+
         return main;
     }
 }

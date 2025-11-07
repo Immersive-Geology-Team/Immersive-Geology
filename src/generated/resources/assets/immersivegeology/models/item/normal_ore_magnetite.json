@@ -1,6 +1,6 @@
 {
   "parent": "immersivegeology:item/base/ig_base_item",
   "textures": {
-    "layer0": "immersivegeology:palette/item/normal_ore/type_1_corroded_magnetite"
+    "layer0": "immersivegeology:palette/item/normal_ore/type_2_corroded_magnetite"
   }
 }

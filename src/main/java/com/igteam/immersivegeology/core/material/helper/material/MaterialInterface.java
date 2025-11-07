@@ -125,7 +125,7 @@ public interface MaterialInterface<T extends GeologyMaterial> {
     default MaterialInterface<?> getSecondaryProduct() {return instance().getSecondaryProduct();}
     default MaterialInterface<?> getTraceProduct(int index) {return instance().getTraceProduct(index);}
 
-    default boolean useSedimentaryTextures() {return instance().useSedimentaryTextures();}
+    default boolean useSedimentaryTextures(IFlagType<?> flag) {return instance().useColumnBlockStyle(flag);}
 
     default Set<MaterialHelper> getOriginMaterials() {return instance().getOriginMaterials();};
 

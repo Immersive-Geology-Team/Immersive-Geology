@@ -17,6 +17,7 @@ import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
@@ -61,14 +62,21 @@ public class IGAtlasProvider implements DataProvider {
 				textures.add("palette/item/" + flag.getName() + "/drill_head");
 			}
 		}
+
+		for(BlockCategoryFlags flag : BlockCategoryFlags.values())
+		{
+			if(flag.hasPalette())
+				for(int variation = 1; variation <= flag.getVariations(); variation++) textures.add("palette/block/" + flag.getName() + "/type_" + variation);
+		}
+
 		List<String> scaffolding_textures = new ArrayList<>();
 		scaffolding_textures.add("block/greyscale/scaffolding/scaffolding");
 		scaffolding_textures.add("block/greyscale/scaffolding/scaffolding_top_grate_top");
 		scaffolding_textures.add("block/greyscale/scaffolding/scaffolding_top_wooden_top");
 
-
 		IGPaletteKey key = new IGPaletteKey(new ResourceLocation(IGLib.MODID, "palette/palette_key"), new ResourceLocation(IGLib.MODID, "palette/palettes"));
 		addDirectorySource(sourcesArray,"item", "item/");
+		addDirectorySource(sourcesArray,"block", "block/");
 		key.addTextureData(textures);
 		key.addTextureData(scaffolding_textures);
 		key.addEntryData(MetalEnum.getAtlasPermutations());

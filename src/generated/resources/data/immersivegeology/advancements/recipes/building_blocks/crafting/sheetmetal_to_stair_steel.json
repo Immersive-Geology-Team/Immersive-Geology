@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sheetmetal_steel": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersiveengineering:sheetmetal_steel"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "immersivegeology:crafting/sheetmetal_to_stair_steel"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_sheetmetal_steel",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "immersivegeology:crafting/sheetmetal_to_stair_steel"
+    ]
+  },
+  "sends_telemetry_event": false
+}

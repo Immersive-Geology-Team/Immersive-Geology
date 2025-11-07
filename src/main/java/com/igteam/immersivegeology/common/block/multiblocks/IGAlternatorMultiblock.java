@@ -35,12 +35,12 @@ public class IGAlternatorMultiblock extends IGTemplateMultiblock
 
 	@Override
 	public float getManualScale() {
-		return 12;
+		return 11;
 	}
 
 	@Override
 	public void initializeClient(Consumer<MultiblockManualData> consumer) {
-		consumer.accept(new IGClientMultiblockProperties(this, 2.5, 4, 1.5));
+		consumer.accept(new IGClientMultiblockProperties(this, 2, 4, 1.5));
 	}
 
 	@Override

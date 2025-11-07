@@ -1,7 +1,6 @@
 package com.igteam.immersivegeology.core.material.data.types;
 
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
-import com.igteam.immersivegeology.core.material.helper.HazardTypes;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
@@ -10,7 +9,6 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class MaterialChemical extends GeologyMaterial {
 
@@ -43,5 +41,10 @@ public class MaterialChemical extends GeologyMaterial {
 	public void setupRecipeStages()
 	{
 
+	}
+
+	public HashSet<MaterialInterface<?>> getValidSlurryMaterials()
+	{
+		return slurry_material_set;
 	}
 }

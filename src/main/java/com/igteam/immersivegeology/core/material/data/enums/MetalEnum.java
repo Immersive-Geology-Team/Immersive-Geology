@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.core.material.data.enums;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.TurbineFuel;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.core.material.data.chemical.mantle.MaterialMoltenMantle;
@@ -191,6 +192,7 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
     @Override
     public IOreBlock getOreBlock(MaterialHelper stone, OreRichness richness)
     {
+
         return material.getOreBlock(stone, richness);
     }
 
@@ -232,7 +234,7 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
     public double getMaxDownfall()
     {
         return 1;
-    }
+    } 
 
     @Override
     public IWorldGenConfig getConfig()

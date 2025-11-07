@@ -26,6 +26,7 @@ public class JEIRecipeTypes
 	public static final RecipeType<RotaryKilnRecipe> ROTARYKILN = create(IGRecipeTypes.ROTARYKILN);
 	public static final RecipeType<BloomeryRecipe> BLOOMERY = create(IGRecipeTypes.BLOOMERY);
 	public static final RecipeType<ChemicalRecipe> CHEMICAL = create(IGRecipeTypes.CHEMICAL_REACTOR);
+	public static final RecipeType<BasicChemicalRecipe> BASIC_CHEMICAL = create(IGRecipeTypes.BASIC_CHEMICAL_REACTOR);
 	public static final RecipeType<BallmillRecipe> BALLMILL = create(IGRecipeTypes.BALLMILL);
 	public static final RecipeType<PelletizerRecipe> PELLETIZER = create(IGRecipeTypes.PELLETIZER);
 	public static final RecipeType<CentrifugeRecipe> CENTRIFUGE = create(IGRecipeTypes.CENTRIFUGE);

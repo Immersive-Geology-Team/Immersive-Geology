@@ -12,7 +12,7 @@
   "itemInput": {
     "item": "immersivegeology:powder_wolframite"
   },
-  "itemResult": {
+  "result": {
     "item": "immersivegeology:compound_dust_manganese"
   },
   "time": 200

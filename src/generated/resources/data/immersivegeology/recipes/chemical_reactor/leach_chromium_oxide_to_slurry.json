@@ -16,7 +16,7 @@
   "itemInput": {
     "item": "immersivegeology:compound_dust_chromium"
   },
-  "itemResult": {
+  "result": {
     "item": "immersivegeology:compound_dust_sodium"
   },
   "time": 200

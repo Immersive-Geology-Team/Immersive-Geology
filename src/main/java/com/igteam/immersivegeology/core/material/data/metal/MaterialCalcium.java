@@ -26,6 +26,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -74,15 +75,19 @@ public class MaterialCalcium extends MaterialMetal {
                 ItemCategoryFlags.POWDERED_SLAG).addToTree(ammonia_synthesis);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.SYNTHESIS).create("ammonia_synthesis_from_"+getName(),
-                getStack(ItemCategoryFlags.COMPOUND_DUST, 1),
-                ChemicalEnum.Ammonia.getFluidStack(IGLib.ACID_RECOVERED_FROM_SLURRY/2),
+                getStack(ItemCategoryFlags.COMPOUND_DUST, 7),
+                ChemicalEnum.Ammonia.getFluidStack(IGLib.ACID_RECOVERED_FROM_SLURRY),
                 new IngredientWithSize(getItemTag(ItemCategoryFlags.POWDERED_SLAG), 8),
-                new FluidTagInput(FluidTags.WATER, IGLib.ACID_TO_COMPOUND_AMOUNT/2),
+                new FluidTagInput(FluidTags.WATER, IGLib.ACID_TO_COMPOUND_AMOUNT),
                 null,null,200, 51200).addToTree(ammonia_synthesis);
 
         IGRecipeNode decompose = IGMethodBuilder.decompose(this, IGStageDesignation.PREPARATION).create(
                  ItemCategoryFlags.METAL_OXIDE, ItemCategoryFlags.COMPOUND_DUST,1,
                 300).setHVHeat().addToTree(ammonia_synthesis);
+
+        IGMethodBuilder.decompose(this, IGStageDesignation.REFINEMENT).create(
+                ItemCategoryFlags.METAL_OXIDE, IngredientWithSize.of(new ItemStack(Blocks.CALCITE, 1)),
+                300, 4).setMVHeat();
 
         decompose.addChild(smelting);
     }

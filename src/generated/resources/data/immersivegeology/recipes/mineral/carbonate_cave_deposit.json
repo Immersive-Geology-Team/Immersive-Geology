@@ -1,0 +1,49 @@
+{
+  "type": "immersiveengineering:mineral_mix",
+  "dimensions": [
+    "minecraft:overworld"
+  ],
+  "fail_chance": 0.15,
+  "ores": [
+    {
+      "chance": 0.35,
+      "output": {
+        "tag": "forge:poor_ore/gypsum"
+      }
+    },
+    {
+      "chance": 0.25,
+      "output": {
+        "tag": "forge:poor_ore/cuprite"
+      }
+    },
+    {
+      "chance": 0.2,
+      "output": {
+        "item": "minecraft:calcite"
+      }
+    }
+  ],
+  "sample_background": "minecraft:calcite",
+  "spoils": [
+    {
+      "chance": 0.2,
+      "output": {
+        "item": "minecraft:gravel"
+      }
+    },
+    {
+      "chance": 0.5,
+      "output": {
+        "item": "minecraft:cobblestone"
+      }
+    },
+    {
+      "chance": 0.3,
+      "output": {
+        "item": "minecraft:cobbled_deepslate"
+      }
+    }
+  ],
+  "weight": 12
+}

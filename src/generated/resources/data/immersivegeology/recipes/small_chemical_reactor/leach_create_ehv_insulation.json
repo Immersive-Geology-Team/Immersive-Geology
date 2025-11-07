@@ -1,0 +1,21 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 0,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 100,
+    "tag": "forge:phenolic_resin"
+  },
+  "fluidResult": {
+    "amount": 100,
+    "fluid": "immersivegeology:fluid_ehv_insulation"
+  },
+  "itemInput": {
+    "item": "immersivegeology:metal_oxide_aluminum"
+  },
+  "result": {
+    "base_ingredient": [],
+    "count": 0
+  },
+  "time": 200
+}

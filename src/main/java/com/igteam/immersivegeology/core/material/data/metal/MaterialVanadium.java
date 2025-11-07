@@ -13,6 +13,7 @@ import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
+import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
@@ -36,6 +37,11 @@ public class MaterialVanadium extends MaterialMetal {
         return ((p, i) -> (0xff8e1e1d));
     }
 
+    @Override
+    public boolean useColumnBlockStyle(IFlagType<?> flag)
+    {
+        return flag.equals(BlockCategoryFlags.STORAGE_BLOCK);
+    }
 
     @Override
     public void setupRecipeStages()

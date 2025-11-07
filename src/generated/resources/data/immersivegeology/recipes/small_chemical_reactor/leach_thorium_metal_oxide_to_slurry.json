@@ -1,0 +1,21 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 0,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 750,
+    "tag": "forge:hydrofluoric_acid"
+  },
+  "fluidResult": {
+    "amount": 648,
+    "fluid": "immersivegeology:slurry_hydrofluoric_acid_thorium"
+  },
+  "itemInput": {
+    "item": "immersivegeology:metal_oxide_thorium"
+  },
+  "result": {
+    "base_ingredient": [],
+    "count": 0
+  },
+  "time": 200
+}

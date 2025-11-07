@@ -1,0 +1,23 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 0,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 750,
+    "tag": "forge:sulfuric_acid"
+  },
+  "fluidResult": {
+    "amount": 648,
+    "fluid": "immersivegeology:slurry_sulfuric_acid_pyrite"
+  },
+  "itemInput": {
+    "base_ingredient": {
+      "item": "immersivegeology:powdered_slag_pyrite"
+    },
+    "count": 3
+  },
+  "result": {
+    "item": "immersivegeology:compound_dust_osmium"
+  },
+  "time": 200
+}

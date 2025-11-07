@@ -1,0 +1,23 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 1,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 750,
+    "tag": "forge:hydrochloric_acid"
+  },
+  "fluidResult": {
+    "amount": 648,
+    "fluid": "immersivegeology:slurry_hydrochloric_acid_galena"
+  },
+  "itemInput": {
+    "base_ingredient": {
+      "item": "immersivegeology:powdered_slag_galena"
+    },
+    "count": 3
+  },
+  "result": {
+    "item": "immersivegeology:compound_dust_osmium"
+  },
+  "time": 200
+}

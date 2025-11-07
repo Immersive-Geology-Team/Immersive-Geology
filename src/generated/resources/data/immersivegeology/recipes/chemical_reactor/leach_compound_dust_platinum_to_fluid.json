@@ -20,7 +20,7 @@
   "itemInput": {
     "item": "immersivegeology:compound_dust_platinum"
   },
-  "itemResult": {
+  "result": {
     "item": "immersivegeology:grit_platinum"
   },
   "time": 200

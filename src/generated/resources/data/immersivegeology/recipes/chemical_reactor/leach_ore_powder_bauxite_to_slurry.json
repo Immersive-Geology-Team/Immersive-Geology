@@ -12,6 +12,9 @@
   "itemInput": {
     "tag": "forge:powders/bauxite"
   },
-  "itemResult": [],
+  "result": {
+    "base_ingredient": [],
+    "count": 0
+  },
   "time": 200
 }
