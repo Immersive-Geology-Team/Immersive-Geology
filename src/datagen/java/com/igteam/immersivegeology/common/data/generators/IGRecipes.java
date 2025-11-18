@@ -420,7 +420,7 @@ public class IGRecipes extends RecipeProvider
 				.addOre(MineralEnum.Chalcocite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.3f) // Cu₂S
 				.addOre(MineralEnum.Cobaltite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.2f)  // CoAsS
 				.addOre(sulfur, 0.2f)
-				.setWeight(20).setFailchance(0.15f)
+				.setWeight(14).setFailchance(0.15f)
 				.setBackground(ForgeRegistries.BLOCKS.getKey(Blocks.NETHERRACK))
 				.build(consumer, new ResourceLocation(IGLib.MODID, "mineral/magmatic_sulfide_complex"));
 
@@ -430,7 +430,7 @@ public class IGRecipes extends RecipeProvider
 				.addOre(MineralEnum.Chromite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.2f)
 				.addOre(MineralEnum.Magnetite.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.05f)
 				.addOre(MineralEnum.Vanadinite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.05f)
-				.setWeight(15).setFailchance(0.1f)
+				.setWeight(11).setFailchance(0.1f)
 				.setBackground(ForgeRegistries.BLOCKS.getKey(Blocks.BLACKSTONE))
 				.build(consumer, new ResourceLocation(IGLib.MODID, "mineral/titaniferous_magnetite_layer"));
 
@@ -460,7 +460,7 @@ public class IGRecipes extends RecipeProvider
 				.addOre(MineralEnum.Fluorite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.1f)
 				.addOre(MineralEnum.Carnallite.getItemTag(ItemCategoryFlags.CRYSTAL), 0.05f)
 				.addOre(MineralEnum.Rocksalt.getItemTag(ItemCategoryFlags.CRYSTAL), 0.05f)
-				.setWeight(12).setFailchance(0.15f)
+				.setWeight(6).setFailchance(0.15f)
 				.setBackground(ForgeRegistries.BLOCKS.getKey(Blocks.SAND))
 				.build(consumer, new ResourceLocation(IGLib.MODID, "mineral/carnallitic_salt_tube"));
 
@@ -485,14 +485,14 @@ public class IGRecipes extends RecipeProvider
 				.addOre(MineralEnum.Lignite.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.35f)
 				.addOre(MineralEnum.Bituminous.getItemTag(ItemCategoryFlags.NORMAL_ORE), 0.15f)
 				.addOre(MineralEnum.Pyrite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.05f)
-				.setWeight(12).setFailchance(0.25f)
+				.setWeight(14).setFailchance(0.25f)
 				.setBackground(ForgeRegistries.BLOCKS.getKey(Blocks.COBBLESTONE))
 				.build(consumer, new ResourceLocation(IGLib.MODID, "mineral/coal_seam"));
 
 		MineralMixBuilder.builder(overworld).addSeabedSpoils()
 				.addOre(MineralEnum.Uraninite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.15f)
 				.addOre(Blocks.QUARTZ_BLOCK, 0.05f)
-				.setWeight(12).setFailchance(0.25f)
+				.setWeight(7).setFailchance(0.25f)
 				.setBackground(ForgeRegistries.BLOCKS.getKey(Blocks.SANDSTONE))
 				.build(consumer, new ResourceLocation(IGLib.MODID, "mineral/sandstone_deposit"));
 
@@ -512,6 +512,17 @@ public class IGRecipes extends RecipeProvider
 				.setWeight(12).setFailchance(0.25f)
 				.setBackground(ForgeRegistries.BLOCKS.getKey(Blocks.BASALT))
 				.build(consumer, new ResourceLocation(IGLib.MODID, "mineral/skarn_deposit"));
+
+		MineralMixBuilder.builder(overworld).addOverworldSpoils()
+				.addOre(MineralEnum.Apatite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.25f)
+				.addOre(MineralEnum.Fluorite.getItemTag(ItemCategoryFlags.POOR_ORE), 0.05f)
+				.addOre(Blocks.CALCITE, 0.20f)
+				.addOre(Items.GLOWSTONE_DUST, 0.02f)
+				.addOre(Items.REDSTONE, 0.02f)
+				.addOre(Items.BONE_MEAL, 0.075f)
+				.setWeight(6).setFailchance(0.25f)
+				.setBackground(ForgeRegistries.BLOCKS.getKey(Blocks.GRANITE))
+				.build(consumer, new ResourceLocation(IGLib.MODID, "mineral/phosphate_deposit"));
 	}
 
 	private static final List<MetalEnum> plates_and_rods_to_register = List.of(

@@ -9,7 +9,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 1
-map_Kd immersivegeology:block/multiblock/coredrill/bigcable
+map_Kd #default
 
 newmtl m_a8fe57a6-e0cc-4449-9f7c-b4002403fe34.001
 Ns 0.000000
@@ -19,7 +19,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 1
-map_Kd immersivegeology:block/multiblock/coredrill/common_concrete
+map_Kd #default
 
 newmtl m_cd4c468b-1ebe-5cd2-a6d4-ad6c1c92aeb7.001
 Ns 0.000000
@@ -29,7 +29,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 1
-map_Kd immersivegeology:block/multiblock/coredrill/drillesupport
+map_Kd #default
 
 newmtl m_fd61b9ea-1a45-8a62-c0dc-54e43fd39aba.001
 Ns 0.000000
@@ -39,4 +39,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 1
-map_Kd immersivegeology:block/multiblock/coredrill/drileee_fin_maybe
+map_Kd #default

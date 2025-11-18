@@ -1,11 +1,5 @@
-newmtl m_94b4196a-c089-3a69-5405-cad817ad1e54.001
-map_Kd immersivegeology:block/multiblock/coredrill/bigcable
+# Blender 4.2.3 LTS MTL File: 'None'
+# www.blender.org
 
-newmtl m_a8fe57a6-e0cc-4449-9f7c-b4002403fe34.001
-map_Kd immersivegeology:block/multiblock/coredrill/common_concrete
-
-newmtl m_cd4c468b-1ebe-5cd2-a6d4-ad6c1c92aeb7.001
-map_Kd immersivegeology:block/multiblock/coredrill/drillesupport
-
-newmtl m_fd61b9ea-1a45-8a62-c0dc-54e43fd39aba.001
-map_Kd immersivegeology:block/multiblock/coredrill/drileee_fin_maybe
+newmtl default
+map_Kd #default

@@ -139,9 +139,9 @@ public class IGBlockStateProvider extends BlockStateProvider {
         generateMultiskinMultiblock(IGMultiblockProvider.STEAM_TURBINE.block().get(), "steam_turbine", false, false, true, true);
         generateMultiskinMultiblock(IGMultiblockProvider.SMALL_CHEMICAL_REACTOR.block().get(), "small_chemical_reactor", false, false, true, true);
         generateMultiskinMultiblock(IGMultiblockProvider.ALTERNATOR.block().get(), "alternator", false, false, true, true);
+        generateMultiskinMultiblock(IGMultiblockProvider.COREDRILL.block().get(), "coredrill", false, false, true, true);
 
         genericmultiblock("foundry");
-        genericmultiblockMirror("coredrill");
         genericmultiblockMirror("centrifuge");
         genericmultiblock("ballmill");
 

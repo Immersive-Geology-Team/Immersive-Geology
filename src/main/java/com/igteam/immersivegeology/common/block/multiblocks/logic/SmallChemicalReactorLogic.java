@@ -118,18 +118,6 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
         Level rawLevel = ctx.getLevel().getRawLevel();
         boolean isMirrored = ctx.getLevel().getOrientation().mirrored();
         boolean isEnabled = state.rsState.isEnabled(ctx);
-        if(state.damage > 99) return;
-
-        if(state.tanks.output.getFluid().getAmount() > 0)
-        {
-            drainOutputTank(state, ctx, state.fluidOutput);
-        }
-
-        if(state.tanks.output.getSpace() == 0) return;
-
-        if(isEnabled) insertRecipeToProcess(state, ctx);
-        state.processor.tickServer(state, ctx.getLevel(), state.rsState.isEnabled(ctx));
-
         ItemStack repairStack = state.inventory.getStackInSlot(2);
         if(!repairStack.isEmpty())
         {
@@ -147,6 +135,20 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
                 }
             }
         }
+
+        if(state.tanks.output.getFluid().getAmount() > 0)
+        {
+            drainOutputTank(state, ctx, state.fluidOutput);
+        }
+
+        if(state.damage > 99) return;
+
+
+        if(state.tanks.output.getSpace() == 0) return;
+
+        if(isEnabled) insertRecipeToProcess(state, ctx);
+        state.processor.tickServer(state, ctx.getLevel(), state.rsState.isEnabled(ctx));
+
 
         if(!state.rsState.isEnabled(ctx))
         {

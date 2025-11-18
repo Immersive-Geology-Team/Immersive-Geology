@@ -60,7 +60,6 @@ public class MaterialVanadinite extends MaterialSulphideMineral
         logged_recipes.add(getName());
 
         IGMethodBuilder.separating(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.DIRTY_CRUSHED_ORE, ItemCategoryFlags.CRUSHED_ORE, new ItemStack(Blocks.GRAVEL), 0.33f, 100, 100);
-        IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.GRIT, 6000, 100);
 
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("pellet_"+getName()+"_to_ingot",
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE),
@@ -81,8 +80,6 @@ public class MaterialVanadinite extends MaterialSulphideMineral
                 getPrimaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE),
                 getSecondaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE),
                 0.0075f, 200, 250);
-
-
     }
 
     @Override
