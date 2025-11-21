@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_storage_osmium": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:sheetmetal_block_osmium"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "immersivegeology:crafting/slab_to_storage_osmium"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_storage_osmium",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "immersivegeology:crafting/slab_to_storage_osmium"
+    ]
+  },
+  "sends_telemetry_event": false
+}

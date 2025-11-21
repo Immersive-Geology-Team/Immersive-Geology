@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "i": {
+      "item": "immersivegeology:slab_neodymium"
+    }
+  },
+  "pattern": [
+    "i",
+    "i"
+  ],
+  "result": {
+    "item": "immersivegeology:storage_block_neodymium"
+  },
+  "show_notification": true
+}

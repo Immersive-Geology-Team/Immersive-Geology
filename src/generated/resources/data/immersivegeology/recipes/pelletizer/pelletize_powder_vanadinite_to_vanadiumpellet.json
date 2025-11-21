@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:pelletizer",
+  "energy": 4800,
+  "input": {
+    "tag": "forge:powders/vanadinite"
+  },
+  "result": {
+    "item": "immersivegeology:pellet_vanadinite"
+  },
+  "time": 600
+}

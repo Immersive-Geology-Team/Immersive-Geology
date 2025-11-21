@@ -31,7 +31,7 @@ public class HydroVent extends Structure
 					HydroVent.settingsCodec(instance),
 					StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(structure -> structure.startPool),
 					Codec.intRange(0, 30).fieldOf("size").forGetter(structure -> structure.size),
-					Codec.intRange(-61, 80).fieldOf("y_min").forGetter(structure -> structure.ymin),
+					Codec.intRange(-61, 50).fieldOf("y_min").forGetter(structure -> structure.ymin),
 					Codec.intRange(-31, 110).fieldOf("y_max").forGetter(structure -> structure.ymax),
 					Codec.intRange(1, 128).fieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter)
 			).apply(instance, HydroVent::new)
@@ -69,7 +69,7 @@ public class HydroVent extends Structure
 				context.heightAccessor(),
 				context.randomState()
 		);
-
+		if(height > 51) return Optional.empty();
 		BlockPos structurePos = new BlockPos(blockPos.getX(), height, blockPos.getZ());
 
 		// Use JigsawPlacement with minimal parameters for simple structures

@@ -202,7 +202,6 @@ public class IGBlockStateProvider extends BlockStateProvider {
                     baseModelName += "_active";
                 }
 
-                // === loop mirror states ===
                 for (boolean mirrored : mirrorStates) {
                     // Determine full model name based on mirror state and useMirrorModels flag
                     String mirrorStr = (mirrored && hasMirrorForm) ? "_mirrored" : "";
@@ -218,7 +217,6 @@ public class IGBlockStateProvider extends BlockStateProvider {
                             innerModels
                     );
 
-                    //
                     // Build the model
                     ModelFile modelToUse = split(
                             modelOBJ,

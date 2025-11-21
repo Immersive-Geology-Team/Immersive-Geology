@@ -29,7 +29,7 @@ import java.util.List;
 public class IGDynamicModel
 {
 	private static final List<ResourceLocation> MODELS = new ArrayList<>();
-
+	private final String raw_name;
 	@SubscribeEvent
 	public static void registerModels(ModelEvent.RegisterAdditional ev)
 	{
@@ -42,6 +42,7 @@ public class IGDynamicModel
 	public IGDynamicModel(String desc)
 	{
 		// References a generated json file
+		raw_name = desc;
 		this.name = new ResourceLocation(IGLib.MODID, "dynamic/"+desc);
 		MODELS.add(this.name);
 	}
@@ -65,5 +66,10 @@ public class IGDynamicModel
 	public ResourceLocation getName()
 	{
 		return name;
+	}
+
+	public String getSerializedName()
+	{
+		return raw_name;
 	}
 }

@@ -621,6 +621,7 @@ public class IGRecipes extends RecipeProvider
 					if(material.hasFlag(BlockCategoryFlags.SLAB) && !material.instance().hasExistingFlag(BlockCategoryFlags.SLAB))
 					{
 						ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, material.getBlock(BlockCategoryFlags.SLAB), 6).define('i', material.getBlock(BlockCategoryFlags.STORAGE_BLOCK)).pattern("iii").unlockedBy("has_storage_"+material.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(material.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK))).save(consumer, ig("storage_to_slab_"+material.getName().toLowerCase()));
+						ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, material.getBlock(BlockCategoryFlags.STORAGE_BLOCK), 1).define('i', material.getBlock(BlockCategoryFlags.SLAB)).pattern("i").pattern("i").unlockedBy("has_storage_"+material.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(material.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK))).save(consumer, ig("slab_to_storage_"+material.getName().toLowerCase()));
 					}
 				}
 				if(material.hasFlag(BlockCategoryFlags.SHEETMETAL_BLOCK) && material.hasFlag(ItemCategoryFlags.PLATE))
@@ -628,7 +629,10 @@ public class IGRecipes extends RecipeProvider
 					if(!material.instance().checkExistingImplementation(ModFlags.IMMERSIVEENGINEERING, ItemCategoryFlags.PLATE))
 						ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, material.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK), 4).define('i', material.getItem(ItemCategoryFlags.PLATE)).pattern(" i ").pattern("i i").pattern(" i ").unlockedBy("has_ingot_" + material.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(material.getItem(ItemCategoryFlags.PLATE))).save(consumer, ig("plate_to_sheetmetal_" + material.getName().toLowerCase()));
 					if(!material.instance().checkExistingImplementation(ModFlags.IMMERSIVEENGINEERING, BlockCategoryFlags.SHEETMETAL_SLAB))
-						ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, material.getBlock(BlockCategoryFlags.SHEETMETAL_SLAB), 6).define('i', material.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK)).pattern("iii").unlockedBy("has_sheetmetal_" + material.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(material.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK))).save(consumer, ig("sheetmetal_to_slab_" + material.getName().toLowerCase()));
+					{
+						ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, material.getBlock(BlockCategoryFlags.SHEETMETAL_SLAB), 6).define('i', material.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK)).pattern("iii").unlockedBy("has_sheetmetal_"+material.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(material.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK))).save(consumer, ig("sheetmetal_to_slab_"+material.getName().toLowerCase()));
+						ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, material.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK), 1).define('i', material.getBlock(BlockCategoryFlags.SHEETMETAL_SLAB)).pattern("i").pattern("i").unlockedBy("has_storage_"+material.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(material.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK))).save(consumer, ig("slab_to_sheetmetal_"+material.getName().toLowerCase()));
+					}
 					if(!material.instance().checkExistingImplementation(ModFlags.IMMERSIVEENGINEERING, BlockCategoryFlags.SHEETMETAL_STAIRS))
 						ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, material.getBlock(BlockCategoryFlags.SHEETMETAL_STAIRS), 4).define('i', material.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK)).pattern("i  ").pattern("ii ").pattern("iii").unlockedBy("has_sheetmetal_" + material.getName(), InventoryChangeTrigger.TriggerInstance.hasItems(material.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK))).save(consumer, ig("sheetmetal_to_stair_" + material.getName().toLowerCase()));
 				}
@@ -652,6 +656,11 @@ public class IGRecipes extends RecipeProvider
 				.unlockedBy("has_hastelloy_component", InventoryChangeTrigger.TriggerInstance.hasItems(MetalEnum.Hastelloy.getItem(ItemCategoryFlags.MECHANICAL_COMPONENT)))
 						.define('s', MetalEnum.Hastelloy.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK).asItem()).define('c', MetalEnum.Hastelloy.getItem(ItemCategoryFlags.MECHANICAL_COMPONENT)).define('o', MetalEnum.Silver.getItem(ItemCategoryFlags.INGOT))
 						.pattern("scs").pattern("coc").pattern("scs").save(consumer, ig("craft_chemical_engineering_block"));
+
+		BlueprintCraftingRecipeBuilder.builder("components", MetalEnum.Tungsten.getStack(ItemCategoryFlags.MECHANICAL_COMPONENT))
+				.addInput(new IngredientWithSize(MetalEnum.Tungsten.getItemTag(ItemCategoryFlags.PLATE), 2))
+				.addInput(new IngredientWithSize(IETags.getTagsFor(EnumMetals.COPPER).ingot))
+				.build(consumer, new ResourceLocation(IGLib.MODID, "blueprint/component_tungsten"));
 
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MetalEnum.Tungsten.getBlock(BlockCategoryFlags.ENGINEERING_BLOCK), 4)
 				.unlockedBy("has_tungsten_component", InventoryChangeTrigger.TriggerInstance.hasItems(MetalEnum.Tungsten.getItem(ItemCategoryFlags.MECHANICAL_COMPONENT)))

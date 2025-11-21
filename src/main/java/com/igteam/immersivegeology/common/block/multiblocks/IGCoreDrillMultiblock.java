@@ -15,8 +15,11 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockCon
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.MultiblockOrientation;
 import blusunrize.immersiveengineering.client.utils.RenderUtils;
 import com.igteam.immersivegeology.client.models.IGDynamicModel;
+import com.igteam.immersivegeology.client.renderer.IGBlockEntityRenderer;
+import com.igteam.immersivegeology.client.renderer.multiblocks.CoreDrillRenderer;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.CoreDrillLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.CoreDrillLogic.State;
+import com.igteam.immersivegeology.common.block.multiblocks.skins.IGCoreDrillSkins;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -133,8 +136,7 @@ public class IGCoreDrillMultiblock extends IGTemplateMultiblock {
         private void renderDynamicModel(IGDynamicModel model, PoseStack matrix, MultiBufferSource buffer, int light, int overlay)
         {
             matrix.pushPose();
-            List<BakedQuad> quads = model.get().getQuads(null, null, ApiUtils.RANDOM_SOURCE, ModelData.EMPTY, null);
-            RenderUtils.renderModelTESRFast(quads, buffer.getBuffer(RenderType.cutoutMipped()), matrix, light, overlay);
+            CoreDrillRenderer.renderStaticSkinModel(CoreDrillRenderer.class, model, matrix, buffer, Direction.NORTH, light, IGCoreDrillSkins.DEFAULT);
             matrix.popPose();
         }
     }

@@ -35,8 +35,6 @@ public class MaterialVanadinite extends MaterialSulphideMineral
         super();
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        removeMaterialFlags(ItemCategoryFlags.GRIT);
-        removeMaterialFlags(ItemCategoryFlags.POWDER);
         addFlags(ItemCategoryFlags.SLAG);
         addFlags(ItemCategoryFlags.PELLET);
         addFlags(ItemCategoryFlags.POWDERED_SLAG);
@@ -74,6 +72,16 @@ public class MaterialVanadinite extends MaterialSulphideMineral
         IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(
                 ItemCategoryFlags.SLAG,
                 ItemCategoryFlags.POWDERED_SLAG);
+
+        IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE,
+                ItemCategoryFlags.GRIT, 6000, 100);
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.GRIT,
+                ItemCategoryFlags.POWDER, 200, 16000);
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE,
+                ItemCategoryFlags.POWDER);
+
+
+        IGMethodBuilder.pelletize(this, IGStageDesignation.PREPARATION).create();
 
         IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(
                 getItemTag(ItemCategoryFlags.POWDERED_SLAG),

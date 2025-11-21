@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_storage_vanadium": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "immersivegeology:sheetmetal_block_vanadium"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "immersivegeology:crafting/slab_to_sheetmetal_vanadium"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_storage_vanadium",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "immersivegeology:crafting/slab_to_sheetmetal_vanadium"
+    ]
+  },
+  "sends_telemetry_event": false
+}

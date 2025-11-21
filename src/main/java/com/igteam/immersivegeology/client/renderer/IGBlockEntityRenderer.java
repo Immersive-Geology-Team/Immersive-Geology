@@ -53,7 +53,7 @@ public abstract class IGBlockEntityRenderer<T extends BlockEntity> implements Bl
 			}
 	);
 
-	private final Map<String, List<BakedQuad>> quadCache = new HashMap<>();
+	private static final Map<String, List<BakedQuad>> quadCache = new HashMap<>();
 
 	protected static void rotateForFacingNoCentering(PoseStack stack, Direction facing)
 	{
@@ -85,7 +85,7 @@ public abstract class IGBlockEntityRenderer<T extends BlockEntity> implements Bl
 	{
 		matrix.pushPose();
 
-		final String skinKey = skin.getSerializedName();
+		final String skinKey = skin.getSerializedName() + "_" + model.getSerializedName();
 
 		List<BakedQuad> outQuads = quadCache.computeIfAbsent(skinKey, key -> {
 			BlockRenderDispatcher brd = Minecraft.getInstance().getBlockRenderer();
@@ -137,6 +137,63 @@ public abstract class IGBlockEntityRenderer<T extends BlockEntity> implements Bl
 		RenderUtils.renderModelTESRFancy(outQuads, buffer.getBuffer(RenderType.cutout()), matrix, level, pos, false, 0xffffff, light);
 		matrix.popPose();
 	}
+
+	public static void renderStaticSkinModel(Class<?> rendererClass, IGDynamicModel model, PoseStack matrix, MultiBufferSource buffer, Direction facing, int light, IIGMultiSkinHelper skin)
+	{
+		matrix.pushPose();
+
+		final String skinKey = skin.getSerializedName() + "_" + model.getSerializedName();
+
+		List<BakedQuad> outQuads = quadCache.computeIfAbsent(skinKey, key -> {
+			BlockRenderDispatcher brd = Minecraft.getInstance().getBlockRenderer();
+
+			// Default fallback if annotation or INSTANCE not found
+			BlockState state = null;
+
+			try {
+				LinkedMultiSkin annotation = rendererClass.getAnnotation(LinkedMultiSkin.class);
+
+				if (annotation != null) {
+					Class<?> multiblockClass = annotation.multiblock();
+					Field instanceField = multiblockClass.getField("INSTANCE"); // public static final
+					Object instance = instanceField.get(null); // Static field, so null target
+					if (instance instanceof IGTemplateMultiblock multiblock) {
+						Block multipartBlock = multiblock.getBlock();
+						if(multipartBlock instanceof SkinableMultiblockPart<?,?> part)
+						{
+							int ord = skin.instance().ordinal();
+							state = multiblock.getBlock().defaultBlockState().setValue(castEnumProperty(part.getSkinProperty()),
+									castEnumProperty(part.getSkinProperty()).getPossibleValues().stream().toList().get(ord));
+						}
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			if (state == null) {
+				state = IGAlternatorMultiblock.INSTANCE.getBlock().defaultBlockState();
+			}
+
+			BakedModel baseModel = brd.getBlockModel(state);
+			TextureAtlasSprite newSprite = baseModel.getParticleIcon(ModelData.EMPTY);
+
+			List<BakedQuad> baseQuads = model.get().getQuads(null, null, ApiUtils.RANDOM_SOURCE, ModelData.EMPTY, null);
+
+			List<BakedQuad> remapped = new ArrayList<>(baseQuads.size());
+			for (BakedQuad q : baseQuads) {
+				TextureAtlasSprite oldSprite = q.getSprite();
+				remapped.add(remapQuad(q, oldSprite, newSprite));
+			}
+
+			return remapped;
+		});
+
+		rotateForFacing(matrix, facing);
+		RenderUtils.renderModelTESRFast(outQuads, buffer.getBuffer(RenderType.cutout()), matrix, 0xffffff, light);
+		matrix.popPose();
+	}
+
 	private static BakedQuad remapQuad(BakedQuad quad, TextureAtlasSprite oldSprite, TextureAtlasSprite newSprite) {
 		int[] vertices = Arrays.copyOf(quad.getVertices(), quad.getVertices().length);
 
