@@ -146,7 +146,8 @@ public class IGMultiblockProvider {
         else
             props.forceSolidOn();
 
-        return new IGMultiblockBuilder<>(logic, name)
+
+		return new IGMultiblockBuilder<>(logic, name)
                 .customBlock(
                         IGRegistrationHolder.getBlockRegister(),
                         IGRegistrationHolder.getItemRegister(),
