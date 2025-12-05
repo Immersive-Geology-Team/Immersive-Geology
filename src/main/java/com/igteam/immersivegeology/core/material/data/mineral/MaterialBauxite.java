@@ -69,7 +69,7 @@ public class MaterialBauxite extends MaterialMineral {
         IGRecipeNode powder_b = IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.GRIT,
                 ItemCategoryFlags.POWDER, 400, 32000).addToTree(bayer_process, crushing);
 
-        IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.GRIT, 6000, 100).addOptionalToTree(bayer_process);
+        IGMethodBuilder.separating(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.DIRTY_CRUSHED_ORE, ItemCategoryFlags.CRUSHED_ORE, new ItemStack(Blocks.GRAVEL), 0.33f, 100, 100).addOptionalToTree(bayer_process);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
                "ore_powder_" + getName() + "_to_slurry",
