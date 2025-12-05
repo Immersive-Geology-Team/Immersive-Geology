@@ -19,6 +19,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags.Biomes;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -76,10 +77,11 @@ public class MaterialBauxite extends MaterialMineral {
                 null, null, 200, 51200).joinBranches(bayer_process, powder_a, powder_b);
 
         IGMethodBuilder.centrifuge(this, IGStageDesignation.REFINEMENT).create(
-                ChemicalEnum.SodiumHydroxide.getCloudySlurryTagWith(MineralEnum.Bauxite),
-                IGLib.SLURRY_TO_CRYSTAL_MB, MetalEnum.Aluminum, ItemCategoryFlags.COMPOUND_DUST, IGLib.COMPOUND_FROM_ACID_AMOUNT,
-                ChemicalEnum.ChemicalWaste.getCloudySlurryWith(MineralEnum.Bauxite),
-                IGLib.ACID_RECOVERED_FROM_SLURRY, null, 0, 1200, 614400)
+                ChemicalEnum.SodiumHydroxide.getCloudySlurryTagWith(MineralEnum.Bauxite), IGLib.SLURRY_TO_CRYSTAL_MB,
+    this, Items.SAND, IGLib.COMPOUND_FROM_ACID_AMOUNT,
+                ChemicalEnum.ChemicalWaste.getCloudySlurryWith(MineralEnum.Bauxite), IGLib.ACID_RECOVERED_FROM_SLURRY,
+                ChemicalEnum.SodiumHydroxide.getSlurryWith(MetalEnum.Aluminum), IGLib.ACID_RECOVERED_FROM_SLURRY,
+           1200, 614400)
                 .addToTree(bayer_process);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
