@@ -61,8 +61,8 @@ public class MaterialAluminum extends MaterialMetal {
                 "solution_" + getName() + "_to_compound_dust",
                 getStack(ItemCategoryFlags.COMPOUND_DUST, 1), //STACK
                 new FluidStack(ChemicalEnum.ChemicalWaste.getCloudySlurryWith(MetalEnum.Sodium), 2*IGLib.ACID_RECOVERED_FROM_SLURRY),
-                null,
-                new FluidTagInput(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), 3*IGLib.ACID_RECOVERED_FROM_SLURRY),
+                        IngredientWithSize.of(ItemStack.EMPTY),
+                new FluidTagInput(ChemicalEnum.SodiumHydroxide.getSlurryTagWith(MetalEnum.Aluminum), 3*IGLib.ACID_RECOVERED_FROM_SLURRY),
                 new FluidTagInput(FluidTags.WATER, 3*IGLib.ACID_RECOVERED_FROM_SLURRY),
          null, 200, 51200)
                 .addToTree(hall_heroit_process);

@@ -20,6 +20,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags.Biomes;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -61,6 +62,10 @@ public class MaterialBauxite extends MaterialMineral {
     public void setupRecipeStages()
     {
         logged_recipes.add(getName());
+        IGMethodBuilder.separating(this, IGStageDesignation.PREPARATION)
+                .create(ItemCategoryFlags.DIRTY_CRUSHED_ORE, ItemCategoryFlags.CRUSHED_ORE, new ItemStack(Blocks.GRAVEL),
+                        0.33f, 100, 100);
+
         IGRecipeNode crushing =  IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(
                 ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.GRIT, 6000, 100).addToTree(bayer_process);
         IGRecipeNode powder_a = IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE,

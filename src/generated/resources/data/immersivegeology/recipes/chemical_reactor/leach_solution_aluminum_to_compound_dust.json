@@ -1,0 +1,24 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 360,
+    "tag": "forge:clean_sodium_hydroxide_aluminum"
+  },
+  "fluidInputB": {
+    "amount": 360,
+    "tag": "minecraft:water"
+  },
+  "fluidResult": {
+    "amount": 240,
+    "fluid": "immersivegeology:cloudy_slurry_chemical_waste_sodium"
+  },
+  "itemInput": {
+    "base_ingredient": [],
+    "count": 0
+  },
+  "result": {
+    "item": "immersivegeology:compound_dust_aluminum"
+  },
+  "time": 200
+}
