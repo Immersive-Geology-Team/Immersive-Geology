@@ -59,7 +59,7 @@ public class MaterialAluminum extends MaterialMetal {
         super.setupRecipeStages();
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(
                 "solution_" + getName() + "_to_compound_dust",
-                getStack(ItemCategoryFlags.COMPOUND_DUST, 1), //STACK
+                getStack(ItemCategoryFlags.COMPOUND_DUST, 3), //STACK
                 new FluidStack(ChemicalEnum.ChemicalWaste.getCloudySlurryWith(MetalEnum.Sodium), 2*IGLib.ACID_RECOVERED_FROM_SLURRY),
                         IngredientWithSize.of(ItemStack.EMPTY),
                 new FluidTagInput(ChemicalEnum.SodiumHydroxide.getSlurryTagWith(MetalEnum.Aluminum), 3*IGLib.ACID_RECOVERED_FROM_SLURRY),

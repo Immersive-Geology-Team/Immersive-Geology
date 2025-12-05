@@ -58,7 +58,7 @@ public class MaterialSodium extends MaterialMetal
 
 		IGMethodBuilder.chemical(this, IGStageDesignation.SYNTHESIS).create(
 				"solution_" + getName() + "_to_compound_dust",
-				getStack(ItemCategoryFlags.COMPOUND_DUST, 1), //STACK
+				getStack(ItemCategoryFlags.COMPOUND_DUST, 3), //STACK
 				new FluidStack(Fluids.EMPTY, 0), IngredientWithSize.of(ItemStack.EMPTY),
 				new FluidTagInput(ChemicalEnum.ChemicalWaste.getCloudySlurryTagWith(MetalEnum.Sodium), IGLib.ACID_RECOVERED_FROM_SLURRY),
 				new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(), IGLib.ACID_RECOVERED_FROM_SLURRY),
