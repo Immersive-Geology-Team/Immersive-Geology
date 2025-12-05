@@ -21,6 +21,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
+import com.mojang.math.OctahedralGroup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
@@ -128,7 +129,7 @@ public class IGTags
 			}
 
 			if(materialInterface.hasFlag(BlockCategoryFlags.CLOUDY_SLURRY)) {
-				for(MaterialInterface<?> slurry_material : MineralEnum.values()){
+				for(MaterialInterface<?> slurry_material : slurry_material_set){
 					if(materialInterface.instance() instanceof MaterialChemical chemical)
 					{
 						if(!chemical.hasSlurryWith(slurry_material)) {

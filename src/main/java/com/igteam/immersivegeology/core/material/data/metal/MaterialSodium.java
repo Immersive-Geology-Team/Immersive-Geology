@@ -20,6 +20,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -32,7 +33,7 @@ public class MaterialSodium extends MaterialMetal
 	public MaterialSodium()
 	{
 		super();
-		addFlags(ItemCategoryFlags.COMPOUND_DUST);
+		addFlags(ItemCategoryFlags.COMPOUND_DUST, BlockCategoryFlags.CLOUDY_SLURRY, BlockCategoryFlags.SLURRY, BlockCategoryFlags.FLUID);
 		removeMaterialFlags(ItemCategoryFlags.WIRE, ItemCategoryFlags.PLATE, ItemCategoryFlags.ROD, ItemCategoryFlags.GEAR, ItemCategoryFlags.INGOT);
 		removeMaterialFlags(BlockCategoryFlags.SHEETMETAL_BLOCK,BlockCategoryFlags.SHEETMETAL_SLAB, BlockCategoryFlags.SHEETMETAL_STAIRS);
 	}
