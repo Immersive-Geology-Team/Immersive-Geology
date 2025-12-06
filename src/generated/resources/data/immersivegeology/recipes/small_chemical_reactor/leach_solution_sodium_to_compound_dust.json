@@ -1,0 +1,26 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 0,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 120,
+    "tag": "forge:cloudy_chemical_waste_sodium"
+  },
+  "fluidInputB": {
+    "amount": 120,
+    "tag": "forge:sulfuric_acid"
+  },
+  "fluidResult": {
+    "amount": 0,
+    "fluid": "minecraft:empty"
+  },
+  "itemInput": {
+    "base_ingredient": [],
+    "count": 0
+  },
+  "result": {
+    "count": 3,
+    "item": "immersivegeology:compound_dust_sodium"
+  },
+  "time": 200
+}

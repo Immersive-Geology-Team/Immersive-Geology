@@ -422,7 +422,7 @@ public class IGRegistrationHolder {
                             {
                                 for(MaterialInterface<?> slurry_material : slurry_material_set)
                                 {
-                                    if(!chemical.hasSlurryWith(slurry_material) || slurry_material instanceof MetalEnum) continue;
+                                    if(!chemical.hasSlurryWith(slurry_material)) continue;
 
                                     String registryKey = blockCategory.getRegistryKey(material, slurry_material);
                                     // Fluid Type Registration

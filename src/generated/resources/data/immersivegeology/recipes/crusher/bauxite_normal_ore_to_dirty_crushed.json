@@ -1,0 +1,25 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 6000,
+  "input": {
+    "tag": "forge:normal_ore/bauxite"
+  },
+  "result": {
+    "item": "immersivegeology:dirty_crushed_ore_bauxite"
+  },
+  "secondaries": [
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_bauxite"
+      }
+    },
+    {
+      "chance": 0.165,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_bauxite"
+      }
+    }
+  ],
+  "time": 100
+}

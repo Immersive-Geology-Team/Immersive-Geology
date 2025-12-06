@@ -6,15 +6,15 @@
     "tag": "forge:cloudy_sodium_hydroxide_bauxite"
   },
   "item_output": {
-    "item": "immersivegeology:compound_dust_aluminum"
+    "item": "minecraft:sand"
   },
   "primary_fluid_out": {
     "amount": 120,
     "fluid": "immersivegeology:cloudy_slurry_chemical_waste_bauxite"
   },
   "secondary_fluid_out": {
-    "amount": 0,
-    "fluid": "minecraft:empty"
+    "amount": 120,
+    "fluid": "immersivegeology:slurry_sodium_hydroxide_aluminum"
   },
   "time": 1200
 }
