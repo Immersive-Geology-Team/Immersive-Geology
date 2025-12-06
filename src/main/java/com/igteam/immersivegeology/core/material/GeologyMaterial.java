@@ -30,6 +30,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
@@ -103,6 +104,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
                 case SHEETMETAL_BLOCK, SHEETMETAL_SLAB, SHEETMETAL_STAIRS -> IGLib.SHEETMETAL_PROPERTIES;
                 case STORAGE_BLOCK, ENGINEERING_BLOCK, ADVANCED_ENGINEERING_BLOCK -> IGLib.DEFAULT_METAL_PROPERTIES;
                 case SCAFFOLDING -> IGLib.METAL_PROPERTIES_NO_OCCLUSION;
+                case EVAPORATE, EVAPORATE_CRYSTAL -> IGLib.STONE_DECO_PROPS.mapColor(DyeColor.WHITE);
                 default -> BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK);
             };
         }
