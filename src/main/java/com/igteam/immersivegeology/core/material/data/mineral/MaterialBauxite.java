@@ -19,6 +19,8 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags.Biomes;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -60,6 +62,10 @@ public class MaterialBauxite extends MaterialMineral {
     public void setupRecipeStages()
     {
         logged_recipes.add(getName());
+        IGMethodBuilder.separating(this, IGStageDesignation.PREPARATION)
+                .create(ItemCategoryFlags.DIRTY_CRUSHED_ORE, ItemCategoryFlags.CRUSHED_ORE, new ItemStack(Blocks.GRAVEL),
+                        0.33f, 100, 100);
+
         IGRecipeNode crushing =  IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(
                 ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.GRIT, 6000, 100).addToTree(bayer_process);
         IGRecipeNode powder_a = IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE,
@@ -76,10 +82,11 @@ public class MaterialBauxite extends MaterialMineral {
                 null, null, 200, 51200).joinBranches(bayer_process, powder_a, powder_b);
 
         IGMethodBuilder.centrifuge(this, IGStageDesignation.REFINEMENT).create(
-                ChemicalEnum.SodiumHydroxide.getCloudySlurryTagWith(MineralEnum.Bauxite),
-                IGLib.SLURRY_TO_CRYSTAL_MB, MetalEnum.Aluminum, ItemCategoryFlags.COMPOUND_DUST, IGLib.COMPOUND_FROM_ACID_AMOUNT,
-                ChemicalEnum.ChemicalWaste.getCloudySlurryWith(MineralEnum.Bauxite),
-                IGLib.ACID_RECOVERED_FROM_SLURRY, null, 0, 1200, 614400)
+                ChemicalEnum.SodiumHydroxide.getCloudySlurryTagWith(MineralEnum.Bauxite), IGLib.SLURRY_TO_CRYSTAL_MB,
+    this, Items.SAND, IGLib.COMPOUND_FROM_ACID_AMOUNT,
+                ChemicalEnum.ChemicalWaste.getCloudySlurryWith(MineralEnum.Bauxite), IGLib.ACID_RECOVERED_FROM_SLURRY,
+                ChemicalEnum.SodiumHydroxide.getSlurryWith(MetalEnum.Aluminum), IGLib.ACID_RECOVERED_FROM_SLURRY,
+           1200, 614400)
                 .addToTree(bayer_process);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(

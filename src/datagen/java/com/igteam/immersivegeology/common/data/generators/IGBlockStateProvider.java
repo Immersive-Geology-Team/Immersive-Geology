@@ -139,9 +139,9 @@ public class IGBlockStateProvider extends BlockStateProvider {
         generateMultiskinMultiblock(IGMultiblockProvider.STEAM_TURBINE.block().get(), "steam_turbine", false, false, true, true);
         generateMultiskinMultiblock(IGMultiblockProvider.SMALL_CHEMICAL_REACTOR.block().get(), "small_chemical_reactor", false, false, true, true);
         generateMultiskinMultiblock(IGMultiblockProvider.ALTERNATOR.block().get(), "alternator", false, false, true, true);
+        generateMultiskinMultiblock(IGMultiblockProvider.COREDRILL.block().get(), "coredrill", false, false, true, true);
 
         genericmultiblock("foundry");
-        genericmultiblockMirror("coredrill");
         genericmultiblockMirror("centrifuge");
         genericmultiblock("ballmill");
 
@@ -202,7 +202,6 @@ public class IGBlockStateProvider extends BlockStateProvider {
                     baseModelName += "_active";
                 }
 
-                // === loop mirror states ===
                 for (boolean mirrored : mirrorStates) {
                     // Determine full model name based on mirror state and useMirrorModels flag
                     String mirrorStr = (mirrored && hasMirrorForm) ? "_mirrored" : "";
@@ -218,7 +217,6 @@ public class IGBlockStateProvider extends BlockStateProvider {
                             innerModels
                     );
 
-                    //
                     // Build the model
                     ModelFile modelToUse = split(
                             modelOBJ,

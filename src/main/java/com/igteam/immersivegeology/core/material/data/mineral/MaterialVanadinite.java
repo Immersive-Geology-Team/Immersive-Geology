@@ -35,8 +35,6 @@ public class MaterialVanadinite extends MaterialSulphideMineral
         super();
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        removeMaterialFlags(ItemCategoryFlags.GRIT);
-        removeMaterialFlags(ItemCategoryFlags.POWDER);
         addFlags(ItemCategoryFlags.SLAG);
         addFlags(ItemCategoryFlags.PELLET);
         addFlags(ItemCategoryFlags.POWDERED_SLAG);
@@ -60,7 +58,6 @@ public class MaterialVanadinite extends MaterialSulphideMineral
         logged_recipes.add(getName());
 
         IGMethodBuilder.separating(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.DIRTY_CRUSHED_ORE, ItemCategoryFlags.CRUSHED_ORE, new ItemStack(Blocks.GRAVEL), 0.33f, 100, 100);
-        IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.GRIT, 6000, 100);
 
         IGMethodBuilder.blasting(this, IGStageDesignation.EXTRACTION).create("pellet_"+getName()+"_to_ingot",
                 getItemTag(ItemCategoryFlags.CRUSHED_ORE),
@@ -76,13 +73,21 @@ public class MaterialVanadinite extends MaterialSulphideMineral
                 ItemCategoryFlags.SLAG,
                 ItemCategoryFlags.POWDERED_SLAG);
 
+        IGMethodBuilder.crushing(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE,
+                ItemCategoryFlags.GRIT, 6000, 100);
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.GRIT,
+                ItemCategoryFlags.POWDER, 200, 16000);
+        IGMethodBuilder.pulverization(this, IGStageDesignation.PREPARATION).create(ItemCategoryFlags.CRUSHED_ORE,
+                ItemCategoryFlags.POWDER);
+
+
+        IGMethodBuilder.pelletize(this, IGStageDesignation.PREPARATION).create();
+
         IGMethodBuilder.separating(this, IGStageDesignation.EXTRACTION).create(
                 getItemTag(ItemCategoryFlags.POWDERED_SLAG),
                 getPrimaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE),
                 getSecondaryProduct().getStack(ItemCategoryFlags.METAL_OXIDE),
                 0.0075f, 200, 250);
-
-
     }
 
     @Override

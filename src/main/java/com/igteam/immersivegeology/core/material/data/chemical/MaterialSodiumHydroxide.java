@@ -27,7 +27,7 @@ public class MaterialSodiumHydroxide extends MaterialChemical
 {
 	public MaterialSodiumHydroxide()
 	{
-		super(MetalEnum.Unobtanium, MineralEnum.Bauxite);
+		super(MetalEnum.Unobtanium, MineralEnum.Bauxite, MetalEnum.Aluminum);
 	}
 
 	@Override

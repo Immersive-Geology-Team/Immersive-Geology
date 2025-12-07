@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.common.block.structural.IGSlabBlock;
 import com.igteam.immersivegeology.common.block.structural.IGStairBlock;
 import com.igteam.immersivegeology.common.fluid.IGFluidBlock;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
@@ -82,7 +83,7 @@ public class IGBlockTags extends BlockTagsProvider
 			}
 			if(block.get() instanceof IGStairBlock stair)
 			{
-				if(!stair.getMaterial(MaterialTexture.base).instance().checkExistingImplementation(BlockCategoryFlags.STAIRS)) tag(BlockTags.MINEABLE_WITH_PICKAXE).add(stair);
+				if(!stair.getMaterial(MaterialTexture.base).instance().checkExistingImplementation(stair.getFlag())) tag(BlockTags.MINEABLE_WITH_PICKAXE).add(stair);
 			}
 			if(block.get() instanceof IGSlabBlock slab)
 			{

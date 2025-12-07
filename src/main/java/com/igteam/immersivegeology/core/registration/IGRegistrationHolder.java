@@ -422,7 +422,7 @@ public class IGRegistrationHolder {
                             {
                                 for(MaterialInterface<?> slurry_material : slurry_material_set)
                                 {
-                                    if(!chemical.hasSlurryWith(slurry_material) || slurry_material instanceof MetalEnum) continue;
+                                    if(!chemical.hasSlurryWith(slurry_material)) continue;
 
                                     String registryKey = blockCategory.getRegistryKey(material, slurry_material);
                                     // Fluid Type Registration
@@ -496,8 +496,8 @@ public class IGRegistrationHolder {
         registerMB("steam_turbine", IGSteamTurbineMultiblock.INSTANCE, IGMultiblockProvider.STEAM_TURBINE, IGSteamTurbineSkins.class);
         registerMB("small_chemical_reactor", IGSmallChemicalReactorMultiblock.INSTANCE, IGMultiblockProvider.SMALL_CHEMICAL_REACTOR, IGSmallChemicalReactorSkins.class);
         registerMB("alternator", IGAlternatorMultiblock.INSTANCE, IGMultiblockProvider.ALTERNATOR, IGAlternatorSkins.class);
+        registerMB("coredrill", IGCoreDrillMultiblock.INSTANCE, IGMultiblockProvider.COREDRILL, IGCoreDrillSkins.class);
 
-        registerMB("coredrill", IGCoreDrillMultiblock.INSTANCE, IGMultiblockProvider.COREDRILL);
         registerMB("centrifuge", IGCentrifugeMultiblock.INSTANCE, IGMultiblockProvider.CENTRIFUGE);
         registerMB("ballmill", IGBallmillMultiblock.INSTANCE, IGMultiblockProvider.BALLMILL);
         registerMB("foundry", IGFoundryMultiblock.INSTANCE, IGMultiblockProvider.FOUNDRY);

@@ -20,6 +20,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
@@ -54,7 +55,7 @@ public class IGCrystalBlock extends IGGenericBlock implements IGBlockType
 
 	public IGCrystalBlock(BlockCategoryFlags flag, MaterialInterface<?> material)
 	{
-		super(flag, material, Properties.of().randomTicks().sound(SoundType.AMETHYST_CLUSTER).noCollission().strength(1.5f, 1.0f).dynamicShape());
+		super(flag, material, Properties.of().randomTicks().sound(SoundType.AMETHYST_CLUSTER).noCollission().strength(1.5f, 1.0f).dynamicShape().mapColor(DyeColor.WHITE));
 		this.registerDefaultState(this.defaultBlockState().setValue(AGE, 0));
 		this.materialMap.put(MaterialTexture.base, material);
 		this.category = flag;

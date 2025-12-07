@@ -24,6 +24,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import org.jetbrains.annotations.Nullable;
 
@@ -36,7 +37,7 @@ public class IGEvaporateMineralBlock extends IGGenericBlock
 
 	public IGEvaporateMineralBlock(BlockCategoryFlags flag, MaterialInterface<?> material, Supplier<IGCrystalBlock> clusterType)
 	{
-		super(flag, material, BlockBehaviour.Properties.copy(Blocks.SAND).randomTicks());
+		super(flag, material, BlockBehaviour.Properties.copy(Blocks.SAND).randomTicks().mapColor(MapColor.SAND));
 		this.clusters = clusterType;
 	}
 

@@ -29,6 +29,7 @@ import net.minecraftforge.common.Tags.Biomes;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.BiFunction;
 
@@ -44,6 +45,12 @@ public class MaterialApatite extends MaterialSulphideMineral {
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         CONFIG = new MineralConfig(24,30,1,-64,212,600,0.85,false,Optional.of(Biomes.IS_COLD), IGGenerationType.TUBE);
+    }
+
+    @Override
+    public List<String> getAcceptableDimensions()
+    {
+        return List.of("minecraft:overworld");
     }
 
     @Override

@@ -54,6 +54,7 @@ public class IGDynamicModelProvider extends ModelProvider<SimpleModelBuilder>
 				.modelLocation(rl("models/block/multiblock/obj/coredrill/coredrill_vagons.obj"))
 				.flipV(true)
 				.end();
+
 		getBuilder(CoreDrillRenderer.DRILL_GEARSET_NAME)
 				.customLoader(ObjModelBuilder::begin)
 				.modelLocation(rl("models/block/multiblock/obj/coredrill/coredrill_gears.obj"))

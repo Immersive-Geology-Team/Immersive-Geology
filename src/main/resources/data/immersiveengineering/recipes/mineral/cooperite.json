@@ -3,7 +3,7 @@
   "dimensions": [
     "minecraft:overworld"
   ],
-  "fail_chance": 0.35,
+  "fail_chance": 0.5,
   "ores": [
     {
       "chance": 0.05,

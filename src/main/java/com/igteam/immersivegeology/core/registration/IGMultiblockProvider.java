@@ -38,10 +38,10 @@ public class IGMultiblockProvider {
                 builder.redstone(state -> state.rsState, FoundryLogic.REDSTONE_IN);
             });
 
-    public static final MultiblockRegistration<CoreDrillLogic.State> COREDRILL = IGRegistrationHolder.registerMetalMultiblock("coredrill", new CoreDrillLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("coredrill"),
-            builder -> {
-                builder.redstone(state -> state.rsState, CoreDrillLogic.REDSTONE_IN);
-            });
+    public static final MultiblockRegistration<CoreDrillLogic.State> COREDRILL = metal_skinnable(new CoreDrillLogic(), "coredrill", false, CoreDrillPart::new)
+            .structure(() -> IGRegistrationHolder.getMBTemplate.apply("coredrill"))
+            .redstone(state -> state.rsState, CoreDrillLogic.REDSTONE_IN)
+            .build();
 
     public static final MultiblockRegistration<RevFurnaceLogic.State> REVERBERATION_FURNACE = stone_skinnable(new RevFurnaceLogic(),"reverberation_furnace", false, RevFurnacePart::new)
             .structure(() -> IGRegistrationHolder.getMBTemplate.apply("reverberation_furnace"))
@@ -146,7 +146,8 @@ public class IGMultiblockProvider {
         else
             props.forceSolidOn();
 
-        return new IGMultiblockBuilder<>(logic, name)
+
+		return new IGMultiblockBuilder<>(logic, name)
                 .customBlock(
                         IGRegistrationHolder.getBlockRegister(),
                         IGRegistrationHolder.getItemRegister(),
