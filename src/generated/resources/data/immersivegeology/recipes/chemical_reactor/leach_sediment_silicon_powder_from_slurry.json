@@ -1,0 +1,19 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 216,
+    "tag": "forge:clean_hydrochloric_acid_silicon"
+  },
+  "fluidResult": {
+    "amount": 216,
+    "fluid": "immersivegeology:slurry_hydrochloric_acid_magnesium"
+  },
+  "itemInput": {
+    "item": "immersivegeology:grit_magnesium"
+  },
+  "result": {
+    "item": "immersivegeology:grit_silicon"
+  },
+  "time": 200
+}
