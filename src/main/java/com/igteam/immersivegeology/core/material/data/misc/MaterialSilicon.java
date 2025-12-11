@@ -85,7 +85,7 @@ public class MaterialSilicon extends MaterialMisc
 				200, 51200);
 
 		IGMethodBuilder.chemical(this, IGStageDesignation.EXTRACTION).create("sediment_silicon_powder_from_slurry",
-				getStack(ItemCategoryFlags.GRIT, 1),
+				getStack(ItemCategoryFlags.GRIT, 2),
 				ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Magnesium, IGLib.SLURRY_FROM_ACID_AMOUNT),
 				IngredientWithSize.of(MetalEnum.Magnesium.getStack(ItemCategoryFlags.GRIT, 1)),
 				new FluidTagInput(ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MiscEnum.Silicon), IGLib.SLURRY_FROM_ACID_AMOUNT),
