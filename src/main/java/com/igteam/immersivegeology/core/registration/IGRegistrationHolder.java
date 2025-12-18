@@ -50,7 +50,9 @@ import com.igteam.immersivegeology.common.particle.IGParticles;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.lib.ResourceUtils;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
+import com.igteam.immersivegeology.core.material.data.chemical.MaterialHydrochloricAcid;
 import com.igteam.immersivegeology.core.material.data.enums.*;
+import com.igteam.immersivegeology.core.material.data.misc.MaterialSilicon;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
@@ -262,7 +264,7 @@ public class IGRegistrationHolder {
         registerItem("refractory_brick", () -> new IGGenericItem(ItemCategoryFlags.MISC, MiscEnum.Refractory, new Item.Properties().fireResistant()).setCustomLangString("refractory_brick"));
         LinkedHashSet<MaterialInterface<?>> slurry_material_set = new LinkedHashSet<>(List.of(MetalEnum.values()));
         slurry_material_set.addAll(List.of(MineralEnum.values()));
-
+        slurry_material_set.add(MiscEnum.Silicon);
         IGLib.IG_LOGGER.info("- Material Based Items, Blocks and Fluids");
         for (MaterialInterface<?> material : IGLib.getGeologyMaterials()) {
             for(IFlagType<?> flags : material.getFlags()){

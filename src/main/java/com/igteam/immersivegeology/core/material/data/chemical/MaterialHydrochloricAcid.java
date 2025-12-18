@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.core.material.data.chemical;
 
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 
 public class MaterialHydrochloricAcid extends MaterialChemical
@@ -20,6 +21,6 @@ public class MaterialHydrochloricAcid extends MaterialChemical
 				MetalEnum.Nickel, MetalEnum.Chromium, MetalEnum.Manganese, MetalEnum.Magnesium,
 				MetalEnum.Copper, MetalEnum.Silver, MetalEnum.Neodymium, MetalEnum.Tungsten,MetalEnum.Uranium,
 				MetalEnum.Lead,
-				MineralEnum.Acanthite, MineralEnum.Galena, MineralEnum.Chalcocite);
+				MineralEnum.Acanthite, MineralEnum.Galena, MineralEnum.Chalcocite, MiscEnum.Silicon);
 	}
 }

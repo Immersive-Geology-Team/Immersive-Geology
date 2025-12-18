@@ -1,4 +1,4 @@
-// 1.20.1	2025-12-05T22:20:56.277861741	Tags for minecraft:fluid mod id immersivegeology
+// 1.20.1	2025-12-12T01:37:02.4381723	Tags for minecraft:fluid mod id immersivegeology
 4489299af4aa9d876479701264f77a7df0fd7a2c data/forge/tags/fluids/aluminum.json
 c911d9d82c742abc717d2350a1c52505a6d0a46c data/forge/tags/fluids/ammonia_solution.json
 cbd7066360f49fffe2c392da3588a6865e7623f3 data/forge/tags/fluids/aqua_regia.json
@@ -30,6 +30,7 @@ b222965e69d44a7411bc888f543324f1b4c8789d data/forge/tags/fluids/clean_hydrochlor
 163865c026d1ea20769ac10173b8c2c3f47407e4 data/forge/tags/fluids/clean_hydrochloric_acid_manganese.json
 91402158852d37e114d7bd8d2632881297491a13 data/forge/tags/fluids/clean_hydrochloric_acid_neodymium.json
 c4f591339b4bf0efd2f924fd59676b75477d35cd data/forge/tags/fluids/clean_hydrochloric_acid_nickel.json
+380195a74a0db1a5829d7c52ddc0e84c8b1814e3 data/forge/tags/fluids/clean_hydrochloric_acid_silicon.json
 1e9e483162c72ae1b213ed4d7e9eb8461a7a1c88 data/forge/tags/fluids/clean_hydrochloric_acid_silver.json
 d96e684d3ac8ef1f3967d1870c551651395b288d data/forge/tags/fluids/clean_hydrochloric_acid_titanium.json
 1bf7bc164952ee89859a7b135b846d2695d30bed data/forge/tags/fluids/clean_hydrochloric_acid_tungsten.json
@@ -78,6 +79,7 @@ eee5fe12655b1e662bf6e25abb62d39bf29bc099 data/forge/tags/fluids/cloudy_hydrochlo
 92344c0cfd934d47c0bdfd24e05237f9384870f4 data/forge/tags/fluids/cloudy_hydrochloric_acid_manganese.json
 e398c108fcfc043109e63dea5a7f98071d32f4e3 data/forge/tags/fluids/cloudy_hydrochloric_acid_neodymium.json
 4b769995a6fe1f85af8e00822cbe2f9176b39ffa data/forge/tags/fluids/cloudy_hydrochloric_acid_nickel.json
+5130ce52209b1a79ff68f2d860922af1746eee33 data/forge/tags/fluids/cloudy_hydrochloric_acid_silicon.json
 3112281e39477d619096b0d1e55f0fadd1cf9d09 data/forge/tags/fluids/cloudy_hydrochloric_acid_silver.json
 8396c7525998240843007d61eb36440066053238 data/forge/tags/fluids/cloudy_hydrochloric_acid_titanium.json
 e2cce418cdc8663b7398ca68ed54eec5bfb9dcf4 data/forge/tags/fluids/cloudy_hydrochloric_acid_tungsten.json
@@ -131,8 +133,8 @@ c316386cfb7aa77cafa7c9e7842acd3cf4808dd2 data/forge/tags/fluids/silver.json
 7d3699df15beb0b58322f6bf8d3c4c64d698510a data/forge/tags/fluids/stainless_steel.json
 1bb4c64c65b1588b9c636778ed0b7f75118c3523 data/forge/tags/fluids/steam.json
 fb8a1cff33b21edfbc0b4815ff642114f48bc29f data/forge/tags/fluids/steel.json
-9ee72396667d25c06cd34166af0d4b868ac55fba data/forge/tags/fluids/sulfur_dioxide.json
 85ea7a248686b306234cccf518425ad02233e83e data/forge/tags/fluids/sulfuric_acid.json
+9ee72396667d25c06cd34166af0d4b868ac55fba data/forge/tags/fluids/sulfur_dioxide.json
 65e32568170ef1155b607c50f14f89a515e3748f data/forge/tags/fluids/thorium.json
 36b31366f313c0671d83f8f929c3f26b5b047545 data/forge/tags/fluids/tin.json
 18c2191f81c78d59d3129e1546c5ed19a2ba0560 data/forge/tags/fluids/titanium.json

@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 6000,
+  "input": {
+    "tag": "forge:gems/quartz"
+  },
+  "result": {
+    "item": "immersivegeology:metal_oxide_silicon"
+  },
+  "secondaries": [],
+  "time": 100
+}
