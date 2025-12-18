@@ -42,7 +42,6 @@ public class IGTags
 	public static LinkedHashMap<GeologyMaterial, TagKey<Block>> BLOCK_MATERIAL_HOLDER = new LinkedHashMap<>();
 	public static LinkedHashMap<BlockCategoryFlags, TagKey<Block>> BLOCK_CATEGORY_FLAGS = new LinkedHashMap<>();
 
-
 	private static boolean initialized = false;
 	public static synchronized void initialize()
 	{
