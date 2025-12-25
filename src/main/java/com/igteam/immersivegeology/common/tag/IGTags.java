@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -41,7 +42,7 @@ public class IGTags
 	public static LinkedHashMap<GeologyMaterial, TagKey<Item>> ITEM_MATERIAL_HOLDER = new LinkedHashMap<>();
 	public static LinkedHashMap<GeologyMaterial, TagKey<Block>> BLOCK_MATERIAL_HOLDER = new LinkedHashMap<>();
 	public static LinkedHashMap<BlockCategoryFlags, TagKey<Block>> BLOCK_CATEGORY_FLAGS = new LinkedHashMap<>();
-
+	public static TagKey<Item> SILICON_TAG = ItemTags.create(new ResourceLocation("forge","silicon"));
 
 	private static boolean initialized = false;
 	public static synchronized void initialize()
@@ -86,6 +87,7 @@ public class IGTags
 
 		LinkedHashSet<MaterialInterface<?>> slurry_material_set = new LinkedHashSet<>(List.of(MetalEnum.values()));
 		slurry_material_set.addAll(List.of(MineralEnum.values()));
+		slurry_material_set.add(MiscEnum.Silicon);
 
 		for(MaterialInterface<?> materialInterface : IGLib.getGeologyMaterials())
 		{

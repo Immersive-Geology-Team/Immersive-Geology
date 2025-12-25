@@ -17,6 +17,7 @@ import java.util.Locale;
 public enum IGCoreDrillSkins implements IIGMultiSkinHelper
 {
 	DEFAULT("default", ChatFormatting.GOLD, SkinCreditType.PETER, "peter"),
+	FROSTBITE("frostbite", ChatFormatting.RED, SkinCreditType.DEVELOPER, "muddykat"),
 	SEAFOAM("seafoam", ChatFormatting.LIGHT_PURPLE, SkinCreditType.SUPPORTER, "radioisotopics");
 
 	private final String skin;

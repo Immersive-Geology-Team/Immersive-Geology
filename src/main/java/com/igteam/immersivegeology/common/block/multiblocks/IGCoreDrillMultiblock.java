@@ -63,12 +63,12 @@ public class IGCoreDrillMultiblock extends IGTemplateMultiblock {
     @Override
     public String getName()
     {
-        return "Core Drill";
+        return "Coredrill";
     }
 
     public static class CoredrillClientData extends IGClientMultiblockProperties {
         public CoredrillClientData(IGTemplateMultiblock multiblock, double offX, double offY, double offZ){
-            super(multiblock, offX, offY, offZ);
+            super(multiblock, offX, offY, offZ); 
         }
 
         @Override

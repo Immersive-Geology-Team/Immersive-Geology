@@ -75,7 +75,7 @@ public class IGMultiblockSkinItem<T extends Enum<T> & IIGMultiSkinHelper & Strin
 	{
 		super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
 
-		Component skin_name = Component.translatable("skin.immersivegeology."+skin.multiblockName()+"."+skin.getSerializedName()).withStyle(skin.getColor());
+		Component skin_name = Component.translatable("skin.immersivegeology."+skin.getSerializedName()).withStyle(skin.getColor());
 		Component skin_type = Component.translatable("skin.immersivegeology.credit."+skin.getType().name().toLowerCase()).withStyle(skin.getType().getColor());
 		Component credit = Component.translatable("skin.immersivegeology."+skin.getCredit()).withStyle(ChatFormatting.DARK_GRAY);
 		Component description = Component.translatable("skin.immersivegeology.description", credit, skin_name, skin_type).withStyle(ChatFormatting.DARK_GRAY);

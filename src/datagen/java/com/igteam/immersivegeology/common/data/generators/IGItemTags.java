@@ -12,8 +12,10 @@ import blusunrize.immersiveengineering.api.IETags;
 
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
+import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -59,6 +61,10 @@ public class IGItemTags extends ItemTagsProvider
 		tag(hammer_tag).add(StoneEnum.MCStone.getItem(ItemCategoryFlags.HAMMER));
 		tag(hammer_tag).add(MetalEnum.Bronze.getItem(ItemCategoryFlags.HAMMER));
 		tag(hammer_tag).add(MetalEnum.StainlessSteel.getItem(ItemCategoryFlags.HAMMER));
+
+		Item silicon = MiscEnum.Silicon.getItem(ItemCategoryFlags.INGOT);
+		tag(IGTags.SILICON_TAG).add(silicon);
+
 		for(MaterialInterface<?> material : IGLib.getGeologyMaterials())
 		{
 			for(IFlagType<?> category : IFlagType.getAllRegistryFlags())

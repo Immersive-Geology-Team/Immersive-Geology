@@ -1,4 +1,4 @@
-// 1.20.1	2025-12-05T22:20:56.270682263	Item models
+// 1.20.1	2025-12-06T17:01:40.524721651	Item models
 7d48f2b4469e5dd5953f6f9507355e31dcf47225 assets/immersivegeology/models/item/advanced_engineering_block_rusty_metal.json
 d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/alternator_multiblock_skin_default.json
 d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/alternator_multiblock_skin_hazard.json
@@ -171,6 +171,7 @@ c6f9daaf419b57fe0c01a57a1e6e742a520ad184 assets/immersivegeology/models/item/com
 66184556ff04768521841950ccda2763e1c77de8 assets/immersivegeology/models/item/compound_dust_zinc.json
 9ad7a5ef40501fd1ef1d71a5dd3a902ed39542e0 assets/immersivegeology/models/item/compound_dust_zirconium.json
 d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/coredrill_multiblock_skin_default.json
+d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/coredrill_multiblock_skin_frostbite.json
 d92b588698b9ae5ff80aafa0558b234c8053e195 assets/immersivegeology/models/item/coredrill_multiblock_skin_seafoam.json
 22fa523d7bef0989545b081228c779ca0b596e5f assets/immersivegeology/models/item/crate_rusty_metal.json
 2e6009e8e1b39802ea21cdc6133ae692ad544299 assets/immersivegeology/models/item/crate_stainless_steel.json
