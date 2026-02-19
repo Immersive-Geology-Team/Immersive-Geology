@@ -3,6 +3,7 @@
   "language.code": "ru_ru",
   "language.region": "Россия",
 
+  "desc.immersiveengineering.info.blueprint.electronics":"Продвинутая электроника",
   "itemGroup.immersivegeology": "Immersive Geology",
   "itemGroup.immersivegeology.geologic": " Геологические образования",
   "itemGroup.immersivegeology.pyrometallurgy": " Пирометаллургия",
@@ -14,6 +15,9 @@
   "immersivegeology.config.title": "",
   "generator.immersive": "Immersive",
   "block.immersivegeology.steam_turbine": "Паровая турбина",
+  "block.immersivegeology.alternator": "Альтернатор",
+  "block.immersivegeology.small_chemical_reactor": "Малый химический реактор",
+  "block.immersivegeology.foundry": "Литейная",
   "block.immersivegeology.geohint": "Подсказка о жиле",
   
   "immersivegeology.prospecting_pick.found": "%s",
@@ -25,6 +29,22 @@
   "manual.immersivegeology.sulphide_electrowining.subtext": "Электрообработка сульфидов",
   "manual.immersivegeology.hunter_process.subtext": "Процесс Хантера",
   "manual.immersivegeology.becher_process.subtext": "Процесс Бехера",
+
+  "desc.immersiveengineering.info.mineral.chromite_magnetite_mix": "Хромит-магнетитовая смесь",
+  "desc.immersiveengineering.info.mineral.carnallitic_salt_tube": "Карналитовые соляные трубки",
+  "desc.immersiveengineering.info.mineral.basaltic_pegmatite": "Базальтовый пегматит",
+  "desc.immersiveengineering.info.mineral.fumarolic_sulfur_deposit": "Серные Фумаролы",
+  "desc.immersiveengineering.info.mineral.magmatic_sulfide_complex": "Магматические сульфидные месторождения",
+  "desc.immersiveengineering.info.mineral.nether_uraninite_seam": "Пласт уранинита",
+  "desc.immersiveengineering.info.mineral.obsidian_contact_zone": "Зона контакта с обсидианом",
+  "desc.immersiveengineering.info.mineral.titaniferous_magnetite_layer": "Слой титаносодержащего магнетита",
+  "desc.immersiveengineering.info.mineral.volcanic_tube": "Вулканические трубки",
+
+  "desc.immersiveengineering.info.mineral.skarn_deposit": "Скарн",
+  "desc.immersiveengineering.info.mineral.contact_metamorphic_deposit": "Контактно-метаморфическое месторождение",
+  "desc.immersiveengineering.info.mineral.sandstone_deposit": "Залежь песчаника",
+  "desc.immersiveengineering.info.mineral.coal_seam": "Пласт угля",
+  "desc.immersiveengineering.info.mineral.carbonate_cave_deposit": "Пещерная залежь карбонатов",
 
   "manual.immersivegeology.bug_bounty_contributors": "Награжденные за поиски багов",
   "manual.immersivegeology.ig_processing_chains": "Цепочки переработки",
@@ -43,6 +63,8 @@
   "skin.immersivegeology.crimsontwilight": "Crimson Twilight's",
   "skin.immersivegeology.wanderingbeekeeper": "WanderingBeekeeper's",
   "skin.immersivegeology.unschtalch": "UnSchtalch's",
+  "skin.immersivegeology.yeshwamp": "Yeshwamp's",
+  "skin.immersivegeology.bilebirda": "Bilebirda's",
   "skin.immersivegeology.the_northern_harpy": "The Northern Harpy's",
 
   "skin.immersivegeology.gravity_separator.default": "Старый Служака",
@@ -50,6 +72,8 @@
   "skin.immersivegeology.gravity_separator.legacy": "Наследие",
   "skin.immersivegeology.gravity_separator.green": "Экологически чистый",
   "skin.immersivegeology.gravity_separator.steampunk": "Стимпанк",
+  
+  "skin.immersivegeology.small_chemical_reactor.steampunk": "Стимпанк",
 
   "skin.immersivegeology.chemical_reactor.default": "Старый Служака",
   "skin.immersivegeology.chemical_reactor.legacy": "Наследие",
@@ -64,7 +88,6 @@
 
   "skin.immersivegeology.bloomery.default": "Старый Служака",
   "skin.immersivegeology.bloomery.legacy": "Наследие",
-
 
   "skin.immersivegeology.reverberation_furnace.default": "Старый Служака",
   "skin.immersivegeology.reverberation_furnace.legacy": "Наследие",
@@ -189,6 +212,13 @@
   "manual.immersivegeology.cryolite": "Криолит",
   "manual.immersivegeology.unobtania": "Недобудий",
 
+  
+  "immersivegeology.gui.basic_chemical_reactor.nominal_status": "Цэл",
+  "immersivegeology.gui.basic_chemical_reactor.worn_status": "Изношен",
+  "immersivegeology.gui.basic_chemical_reactor.damaged_status": "Поврежден",
+  "immersivegeology.gui.basic_chemical_reactor.failed_status": "Сломан",
+  "immersivegeology.gui.basic_chemical_reactor.output_blocked": "Выход заблокирован",
+
   "immersivegeology.gui.schematic_table.button_0": "Предыдущая схема",
   "immersivegeology.gui.schematic_table.button_1": "Следующая схема",
   "immersivegeology.gui.schematic_table.mirror": "Отзеркалить",
@@ -259,6 +289,7 @@
   "item.immersivegeology.oxide_pellet": "%s оксидированная гранула",
 
   "block.immersivegeology.industrialsluice": "Промышленный шлюз",
+  "block.immersivegeology.turbine_fuel": "Топливо паровой турбины",
   "block.immersivegeology.geothermal_exchanger": "Геотермальный теплообменник",
   "block.immersivegeology.storage_block": "%s блок",
   "block.immersivegeology.default_block": "%s Panel Block",
@@ -329,7 +360,7 @@
   "fluid.immersivegeology.cloudy_slurry": "Мутный %s %s",
 
   "material.immersivegeology.steam": "Пар",
-  "material.immersivegeology.highpressuresteam": "Пар высокого давления",
+  "material.immersivegeology.high_pressure_steam": "Пар высокого давления",
 
   "material.immersivegeology.rusty_metal": "Ржавый",
   "material.immersivegeology.engineering.rusty_metal": "Ржавый лёгкий",
@@ -337,7 +368,7 @@
   "material.immersivegeology.ruined_concrete": "Брошенный стальной укреплённый бетон",
   "material.immersivegeology.reinforced_ruined_concrete": "Брошенный титановый укреплённый бетон",
   "material.immersivegeology.millerite": "Миллерит",
-  "material.immersivegeology.hydrogensulfide": "Сероводород",
+  "material.immersivegeology.hydrogen_sulfide": "Сероводород",
   "material.immersivegeology.vanilla": "Камень",
   "material.immersivegeology.sandstone": "Песчаник",
   "material.immersivegeology.dripstone": "Натёчный камень",
@@ -388,7 +419,7 @@
   "material.immersivegeology.iron": "Железо",
   "material.immersivegeology.quartz": "Кварц",
   "material.immersivegeology.phlebotinum": "Флеботинум",
-  "material.immersivegeology.refineduranium": "Обогащенный уран",
+  "material.immersivegeology.refined_uranium": "Обогащенный уран",
 
   "material.immersivegeology.stone": "Камень",
   "material.immersivegeology.ehv_insulation": "СВВ изоляция",
@@ -2145,4 +2176,7 @@
   "block.immersivegeology.ad_astra_poor_ore_block_vanadinite_venus_stone.prospected": "Ванадинит",
   "block.immersivegeology.tfc_poor_ore_block_fluorite_granite.prospected": "Флюорит",
   "block.immersivegeology.rich_ore_block_hubnerite_granite.prospected": "Гюбнерит"
+  "immersivegeology.steam_turbine.jei_fuel_time": "Расход пара",
+  "block.immersivegeology.basic_chemical_reactor": "Стандартный химический реактор",
+  "immersivegeology.alternator.rpm": "ОВМ:"
 }

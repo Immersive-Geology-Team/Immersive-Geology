@@ -87,6 +87,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipeCatalyst(IGMultiblockProvider.BLOOMERY.iconStack(), JEIRecipeTypes.BLOOMERY);
 		registration.addRecipeCatalyst(IGMultiblockProvider.BALLMILL.iconStack(), JEIRecipeTypes.BALLMILL);
 		registration.addRecipeCatalyst(IGMultiblockProvider.PELLETIZER.iconStack(), JEIRecipeTypes.PELLETIZER);
+		registration.addRecipeCatalyst(IGMultiblockProvider.CENTRIFUGE.iconStack(), JEIRecipeTypes.CENTRIFUGE);
 		registration.addRecipeCatalyst(IGMultiblockProvider.GEOTHERMAL_EXCHANGER.iconStack(), JEIRecipeTypes.GEOTHERMAL_EXCHANGER);
 	}
 
