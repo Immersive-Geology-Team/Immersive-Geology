@@ -82,8 +82,8 @@ public class MaterialSulfuricAcid extends MaterialChemical
 
 		// Logic for items
 		if (entity instanceof ItemEntity item && !item.fireImmune()) {
-			if (level instanceof ClientLevel client) {
-				client.addParticle(
+			if (level.isClientSide()) {
+				level.addParticle(
 						ParticleTypes.SMOKE,
 						item.getX(), item.getY(), item.getZ(),
 						0, 0.0625, 0

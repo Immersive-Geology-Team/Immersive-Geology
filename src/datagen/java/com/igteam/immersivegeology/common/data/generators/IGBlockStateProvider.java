@@ -198,9 +198,17 @@ public class IGBlockStateProvider extends BlockStateProvider {
 
                 // Determine base model location based on active state and useActiveModels flag
                 String baseModelName = multiname;
+
+                if(skin.alternativeModel())
+                {
+                    baseModelName += "_" + skinName;
+                }
+
                 if (active && hasActiveForm && useActiveModels) {
                     baseModelName += "_active";
                 }
+                // eg -> bloomery_industrial_active.obj
+
 
                 for (boolean mirrored : mirrorStates) {
                     // Determine full model name based on mirror state and useMirrorModels flag
