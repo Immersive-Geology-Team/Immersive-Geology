@@ -86,13 +86,12 @@ public class MaterialHydrofluoricAcid extends MaterialChemical
 
 		// Logic for items
 		if (entity instanceof ItemEntity item && !item.fireImmune()) {
-			if (level instanceof ClientLevel client) {
-				client.addParticle(
+				level.addParticle(
 						ParticleTypes.SMOKE,
 						item.getX(), item.getY(), item.getZ(),
 						0, 0.0625, 0
 				);
-			}
+
 			if (rand.nextInt(60) == 0) {
 				item.setSecondsOnFire(3);
 			}

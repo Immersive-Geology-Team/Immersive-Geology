@@ -59,9 +59,8 @@ public class IGGenericBlock extends Block implements IGBlockType {
         {
             texture = MaterialTexture.values()[index > 0 ? 1 : 0];
         }
-        if(index > materialMap.size()) return materialMap.get(texture).getColor(category, 0);
-        if(materialMap.get(texture) != null) return materialMap.get(texture).getColor(category, 0);
-        return 0xffffffff;
+        if(materialMap.get(texture) == null) return 0xffffffff;
+        return materialMap.get(texture).getColor(category, 0);
     }
 
     public @NotNull Collection<MaterialInterface<?>> getMaterials() {

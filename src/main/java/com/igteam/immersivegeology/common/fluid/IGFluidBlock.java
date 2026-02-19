@@ -38,7 +38,7 @@ public class IGFluidBlock extends LiquidBlock
 	@Override
 	public @NotNull MutableComponent getName()
 	{
-		return Component.translatable(getDescriptionId(), I18n.get("material.immersivegeology." + material.getName()));
+		return Component.translatable(getDescriptionId(), Component.translatable("material.immersivegeology." + material.getName()));
 	}
 
 	@Nonnull

@@ -155,9 +155,9 @@ public class PelletizerLogic implements ISkinnableMultiblockLogic<State>, IServe
             }
         }
 
-        if(state.processor.getQueueSize() > 0 && !state.tank.isEmpty() && isEnabled)
+        if(state.processor.getQueueSize() > 0 && !state.tank.isEmpty() && isEnabled && level.getGameTime() % 2 == 0)
         {
-            state.tank.drain(2, FluidAction.EXECUTE);
+            state.tank.drain(1, FluidAction.EXECUTE);
             context.requestMasterBESync();
         }
     }

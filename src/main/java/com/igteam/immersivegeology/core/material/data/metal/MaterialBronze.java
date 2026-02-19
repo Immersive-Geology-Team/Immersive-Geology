@@ -36,6 +36,7 @@ public class MaterialBronze extends MaterialMetalAlloy
         validMultiblocks.add(() -> IEMultiblocks.ALLOY_SMELTER);
         validMultiblocks.add(() -> IEMultiblocks.COKE_OVEN);
         validMultiblocks.add(() -> IEMultiblocks.BLAST_FURNACE);
+        validMultiblocks.add(() -> IEMultiblocks.FEEDTHROUGH);
         validMultiblocks.add(() -> IGReverberationFurnaceMultiblock.INSTANCE);
         validMultiblocks.add(() -> IGBloomeryMultiblock.INSTANCE);
     }

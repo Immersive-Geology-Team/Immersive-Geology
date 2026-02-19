@@ -210,7 +210,7 @@ dependencies {
     implementation fg.deobf("curse.maven:architectury-api-419699:5137938")
     implementation fg.deobf("curse.maven:kotlin-for-forge-351264:5402061")
     implementation fg.deobf("curse.maven:pipez-443900:6368313")
-
+    implementation fg.deobf("curse.maven:journeymap-32274:5789363")
     testImplementation    'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly      'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     annotationProcessor  'org.spongepowered:mixin:0.8.5:processor'

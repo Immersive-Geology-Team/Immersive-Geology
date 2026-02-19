@@ -51,7 +51,8 @@ public class IGLootModifierProvider extends GlobalLootModifierProvider
 				IGGravitySeparatorSkins.STEAMPUNK.getItem(),
 				IGGeothermalSkins.STEAMPUNK.getItem(),
 				IGRotaryKilnSkins.LEGACY.getItem(),
-				IGPelletizerSkins.LEGACY.getItem()
+				IGPelletizerSkins.LEGACY.getItem(),
+				IGBloomerySkins.INDUSTRIAL.getItem()
 		)));
 
 		add("desert_pyramid_loot", new IGLootModifier(new LootItemCondition[]{

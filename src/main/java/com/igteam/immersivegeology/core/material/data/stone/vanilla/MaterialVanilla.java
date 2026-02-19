@@ -34,6 +34,7 @@ public class MaterialVanilla extends MaterialStone {
         validMultiblocks.add(() -> IEMultiblocks.ALLOY_SMELTER);
         validMultiblocks.add(() -> IEMultiblocks.COKE_OVEN);
         validMultiblocks.add(() -> IEMultiblocks.BLAST_FURNACE);
+        validMultiblocks.add(() -> IEMultiblocks.FEEDTHROUGH);
         validMultiblocks.add(() -> IGBloomeryMultiblock.INSTANCE);
     }
 
