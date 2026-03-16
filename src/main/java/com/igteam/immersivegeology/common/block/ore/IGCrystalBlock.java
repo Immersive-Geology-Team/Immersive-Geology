@@ -172,6 +172,7 @@ public class IGCrystalBlock extends IGGenericBlock implements IGBlockType
 	public int getColor(int index, BlockState state) {
 		// By default, we don't need any additional information; the secondaryColors are used for mineral oxidation
 		// or other state based color changes
+		if(materialMap.get(MaterialTexture.values()[index > 0 ? 1 : 0]) == null) return 0xFFFFFFFF;
 		return materialMap.get(MaterialTexture.values()[index > 0 ? 1 : 0]).getColor(category, 0);
 	}
 

@@ -1,8 +1,11 @@
 {
   "type": "immersivegeology:evaporate_pool",
   "config": {
-    "state": {
-      "Name": "immersivegeology:evaporate_carnallite"
-    }
+    "downfall_max": 1.0,
+    "downfall_min": 0.0,
+    "entry": "Carnallite",
+    "random_name": 3343065944278360919,
+    "temp_range_max": 2.0,
+    "temp_range_min": -1.0
   }
 }

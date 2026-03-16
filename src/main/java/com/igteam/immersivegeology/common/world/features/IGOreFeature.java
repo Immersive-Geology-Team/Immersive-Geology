@@ -55,10 +55,14 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 		ChunkPos chunkPos = new ChunkPos(pos);
 		Objects.requireNonNull(level);
 		OreConfig rConfig = IGServerConfig.ORES.ores.get(config.entry());
-		RandomSource random = IGOreGenUtils.getReuseRandom(config.entry, level.getSeed(), chunkPos);
-		Vein vein = createVein(random, rConfig, config.entry);
-		IGOreFeature.placeVein(level, random, chunkPos, vein, config);
-		return true;
+		if(config.canSpawn())
+		{
+			RandomSource random = IGOreGenUtils.getReuseRandom(config.entry, level.getSeed(), chunkPos);
+			Vein vein = createVein(random, rConfig, config.entry);
+			IGOreFeature.placeVein(level, random, chunkPos, vein, config);
+			return true;
+		}
+		return false;
 	}
 
 	public static String formatTime(long timeInNanoSeconds) {
@@ -237,6 +241,9 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 
 		public boolean canSpawn()
 		{
+			boolean is_disabled = IGServerConfig.disable_mineral_generation.get();
+			if(is_disabled) return false;
+
 			IGServerConfig.Ores.OreConfig config = IGServerConfig.ORES.ores.get(entry);
 			return config.canSpawn.get();
 		}

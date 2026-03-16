@@ -53,7 +53,7 @@ public class IGWorldGen
 	public static RegistryObject<PlacementModifierType<IGCountPlacement>> IG_COUNT_PLACEMENT;
 	public static RegistryObject<PlacementModifierType<IGSparsePlacement>> IG_SPARSE_PLACEMENT;
 	public static RegistryObject<PlacementModifierType<IGDefaultPlacement>> IG_DEFAULT_PLACEMENT;
-	public static final RegistryObject<Feature<BlockStateConfiguration>> EVAPORITE_FEATURE;
+	public static final RegistryObject<IGEvaporateFeature> EVAPORITE_FEATURE;
 
 	public static final TagKey<Biome> SALT_FLATS_BIOMES = TagKey.create(
 			Registries.BIOME,
@@ -101,7 +101,7 @@ public class IGWorldGen
 
 		PLACEMENT_REGISTER = DeferredRegister.create(Registries.PLACEMENT_MODIFIER_TYPE, IGLib.MODID);
 
-		EVAPORITE_FEATURE = FEATURE_REGISTER.register("evaporate_pool", () -> new IGEvaporateFeature(BlockStateConfiguration.CODEC));
+		EVAPORITE_FEATURE = FEATURE_REGISTER.register("evaporate_pool", IGEvaporateFeature::new);
 
 		IG_COUNT_PLACEMENT = PLACEMENT_REGISTER.register("ig_count", () -> {
 			return () -> {

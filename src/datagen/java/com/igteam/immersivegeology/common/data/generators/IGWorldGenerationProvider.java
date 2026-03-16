@@ -15,6 +15,7 @@ import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.world.*;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
+import com.igteam.immersivegeology.common.world.features.helper.IGEvaporateConfig;
 import com.igteam.immersivegeology.common.world.modifiers.IGOreRemovalModifier;
 import com.igteam.immersivegeology.common.world.placements.IGCountPlacement;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -114,8 +115,7 @@ public class IGWorldGenerationProvider
 			// Register the configured feature using EvaporateFeature and its config
 			entry.getValue().registerConfigured(ctx, new ConfiguredFeature<>(
 					IGWorldGen.EVAPORITE_FEATURE.get(),
-					new BlockStateConfiguration(data.getDefaultBlockstate()) // Assuming IWorldGenConfig provides block state
-			));
+					new IGEvaporateConfig(data, data.seed(), data.getMinSpawnTemp(), data.getMaxSpawnTemp(), data.getMinDownfall(), data.getMaxDownfall())));
 		}
 	}
 

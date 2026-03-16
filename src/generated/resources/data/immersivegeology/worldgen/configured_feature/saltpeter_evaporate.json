@@ -1,8 +1,11 @@
 {
   "type": "immersivegeology:evaporate_pool",
   "config": {
-    "state": {
-      "Name": "immersivegeology:evaporate_saltpeter"
-    }
+    "downfall_max": 1.0,
+    "downfall_min": 0.0,
+    "entry": "Saltpeter",
+    "random_name": 6082358639534708638,
+    "temp_range_max": 2.0,
+    "temp_range_min": -1.0
   }
 }
