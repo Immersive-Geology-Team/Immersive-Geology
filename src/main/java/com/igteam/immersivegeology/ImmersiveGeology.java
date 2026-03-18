@@ -80,6 +80,7 @@ public class ImmersiveGeology {
         ModLoadingContext.get().registerConfig(Type.SERVER, IGServerConfig.CONFIG_SPEC);
 
         IGRegistrationHolder.addRegistersToEventBus(modEventBus);
+
         IGLib.IG_LOGGER.info("- Network Packet Handler Registration");
         IGPacketHandler.initialize();
 
