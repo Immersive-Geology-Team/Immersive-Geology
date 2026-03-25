@@ -1,0 +1,31 @@
+Bug Bounty Contributions
+Version 1.20.1-pre-bugfix-final-FINAL-thisoneWORKS
+Огромное спасибо §lEngineering Department Community§r за выявление и сообщение об ошибках, которые помогают улучшить проект для всех!
+
+§lCritical Bugs§r
+- Flix
+- Raeffi
+- xiaojuzi122
+- Royal-Jelly
+
+<np>
+§lExploit Bugs§r
+- ktos_777
+- Flix
+- oskarmbt
+
+<np>
+§lPerformance Bugs§r
+- xiaojuzi122
+- DeltaWolf7
+
+<np>
+§lOther Bugs§r
+- Flix
+- Andrew Ragland (Wandering Beekeeper)
+- FortyTwoCn
+- ElRichiRicon
+- Alator
+- Bluejay
+- AubriTheHuman
+- Scarfiremmi
