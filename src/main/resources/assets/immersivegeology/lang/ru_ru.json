@@ -2175,7 +2175,7 @@
   "block.immersivegeology.tfc_poor_ore_block_pyrite_claystone.prospected": "Пирит",
   "block.immersivegeology.ad_astra_poor_ore_block_vanadinite_venus_stone.prospected": "Ванадинит",
   "block.immersivegeology.tfc_poor_ore_block_fluorite_granite.prospected": "Флюорит",
-  "block.immersivegeology.rich_ore_block_hubnerite_granite.prospected": "Гюбнерит"
+  "block.immersivegeology.rich_ore_block_hubnerite_granite.prospected": "Гюбнерит",
   "immersivegeology.steam_turbine.jei_fuel_time": "Расход пара",
   "block.immersivegeology.basic_chemical_reactor": "Стандартный химический реактор",
   "immersivegeology.alternator.rpm": "ОВМ:"
