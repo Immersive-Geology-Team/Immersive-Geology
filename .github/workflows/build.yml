@@ -23,11 +23,13 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: build
+
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: minecraft-mod-artifacts
           path: build/libs/*.jar
+
   notify-discord:
     continue-on-error: true
     name: Notify Discord
