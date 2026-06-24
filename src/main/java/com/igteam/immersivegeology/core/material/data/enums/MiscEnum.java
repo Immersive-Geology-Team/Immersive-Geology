@@ -25,7 +25,8 @@ public enum MiscEnum implements MaterialInterface<MaterialMisc> {
     Steam(new MaterialSteam()),
     RustyMetal(new MaterialRuined()),
     HighPressureSteam(new MaterialHighPressureSteam()),
-    Silicon(new MaterialSilicon());
+    Silicon(new MaterialSilicon()),
+    IndustrialRefractoryBlock(new MaterialIndustrialRefractoryBlock());
 
     private final MaterialMisc material;
     MiscEnum(MaterialMisc m){
