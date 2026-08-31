@@ -25,7 +25,6 @@ import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.WorldMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
-import com.igteam.immersivegeology.common.block.helper.IGUndefinedEnergyInterface;
 import com.igteam.immersivegeology.common.block.helper.MultiblockCapabilityReference;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
@@ -37,7 +36,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -70,7 +68,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 
 @EventBusSubscriber(
@@ -146,28 +143,42 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 		});
 	}
 
+	/** Plain loop rather than a stream - this runs on every energy transfer. */
+	private static boolean allValid(Set<DirectionalEnergyOutput> outputs) {
+		for (DirectionalEnergyOutput output : outputs) {
+			if (!output.isValid()) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 	public static Set<DirectionalEnergyOutput> getConnectedEnergyHandlers(BlockPos node, Level world) {
 		if (world.isClientSide) {
 			return ImmutableSet.of();
 		} else {
-			// Check cache first
+			// Check cache first. The cached entries hold hard references to capability handlers and
+			// block entities, and nothing tells us when a multiblock disassembles, so re-validate
+			// before handing them out rather than pushing energy into an orphaned buffer.
 			Set<DirectionalEnergyOutput> cachedResult = indirectConnections.get(world, node);
-			if (cachedResult != null) {
+			if (cachedResult != null && allValid(cachedResult)) {
 				return cachedResult;
 			} else {
-				ArrayList<BlockPos> openList = new ArrayList<>();
-				ArrayList<BlockPos> closedList = new ArrayList<>();
-				Set<DirectionalEnergyOutput> energyHandlers = Collections.newSetFromMap(new ConcurrentHashMap<>());
+				if (cachedResult != null) indirectConnections.clearDimension(world);
+				ArrayDeque<BlockPos> openList = new ArrayDeque<>();
+				Set<BlockPos> closedList = new HashSet<>();
+				// Keyed on the resolved handler so a multiblock that exposes one buffer at several
+				// CapabilityPositions (the Rotary Kiln exposes the same storage at three) is counted once.
+				Map<IEnergyStorage, DirectionalEnergyOutput> energyHandlers = new IdentityHashMap<>();
 				openList.add(node);
 
 				// Breadth-first search through connected pipes
 				while (!openList.isEmpty() && closedList.size() < 1024) {
-					BlockPos next = openList.get(0);
-					openList.remove(0);
+					BlockPos next = openList.poll();
 
 					BlockEntity pipeTile = Utils.getExistingTileEntity(world, next);
-					if (!closedList.contains(next) && pipeTile instanceof IGEnergyPipeEntity) {
-						closedList.add(next);
+					if (closedList.add(next) && pipeTile instanceof IGEnergyPipeEntity) {
 						// Check all six directions
 						for (Direction fd : DirectionUtils.VALUES) {
 							if (((IGEnergyPipeEntity)pipeTile).hasOutputConnection(fd)) {
@@ -177,16 +188,14 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 								if (adjacentTile != null) {
 									if (adjacentTile instanceof IGEnergyPipeEntity) {
 										// Add connected pipe to open list for further exploration
-										openList.add(nextPos);
+										if (!closedList.contains(nextPos)) openList.add(nextPos);
 									} else {
 										// Check if the adjacent tile has energy capability
 										LazyOptional<IEnergyStorage> handlerOptional = adjacentTile.getCapability(
 												ForgeCapabilities.ENERGY, fd.getOpposite());
 
-										handlerOptional.ifPresent(handler -> {
-											// Add to energy handlers list
-											energyHandlers.add(new DirectionalEnergyOutput(handler, fd, adjacentTile));
-										});
+										handlerOptional.ifPresent(handler -> energyHandlers.putIfAbsent(handler,
+												new DirectionalEnergyOutput(handlerOptional, fd, adjacentTile)));
 									}
 								}
 							}
@@ -195,8 +204,9 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 				}
 
 				// Cache the result
-				indirectConnections.put(world, node, energyHandlers);
-				return energyHandlers;
+				Set<DirectionalEnergyOutput> result = ImmutableSet.copyOf(energyHandlers.values());
+				indirectConnections.put(world, node, result);
+				return result;
 			}
 		}
 	}
@@ -316,25 +326,36 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 
 	}
 
-	private void invalidateHandler(Direction side) {
+	/**
+	 * All six handlers are registered once in the constructor. Toggling a side only resets the
+	 * capability so neighbours re-query it - dropping the entry and calling registerCapability again
+	 * would grow {@code IEBaseBlockEntity}'s capability list every time a side is hammered.
+	 */
+	private void resetHandler(Direction side) {
 		ResettableCapability<IEnergyStorage> handler = this.sidedHandlers.get(side);
 		if (handler != null) {
-			this.sidedHandlers.put(side, null);
 			handler.reset();
 		}
+	}
 
+	private void invalidateHandler(Direction side) {
+		this.resetHandler(side);
 	}
 
 	private void setValidHandler(Direction side) {
-		ResettableCapability<IEnergyStorage> handler = this.sidedHandlers.get(side);
-		if (handler == null) {
-			this.sidedHandlers.put(side, this.registerCapability(new PipeEnergyHandler(this, side)));
-		}
+		this.resetHandler(side);
 	}
 
 	@Nonnull
 	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction facing) {
-		return capability == ForgeCapabilities.ENERGY && facing != null && this.sideConfig.getBoolean(facing) ? ((ResettableCapability)this.sidedHandlers.get(facing)).cast() : super.getCapability(capability, facing);
+		if (capability == ForgeCapabilities.ENERGY && facing != null && this.sideConfig.getBoolean(facing)) {
+			ResettableCapability<IEnergyStorage> handler = this.sidedHandlers.get(facing);
+			if (handler != null) {
+				return handler.cast();
+			}
+		}
+
+		return super.getCapability(capability, facing);
 	}
 
 	protected boolean hasCover() {
@@ -365,9 +386,12 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 			int mask = 1 << i;
 			this.connections = (byte)(this.connections & ~mask);
 			if (this.sideConfig.getBoolean(dir)) {
+				// Connect to anything that exposes an energy capability. The old guard also tested
+				// "getEnergyStored() >= 0 || !(handler instanceof IGUndefinedEnergyInterface)", which is
+				// always true - keeping the behaviour, dropping the dead condition.
 				MultiblockCapabilityReference<IEnergyStorage> neighbor = this.neighbors.get(dir);
 				IEnergyStorage handler = neighbor.getNullable();
-				if (handler != null &&  (handler.getEnergyStored() >= 0  || !(handler instanceof IGUndefinedEnergyInterface))) {
+				if (handler != null) {
 					this.connections = (byte)(this.connections | mask);
 				}
 //				BlockEntity be = this.level.getBlockEntity(this.getBlockPos().relative(dir));
@@ -402,8 +426,10 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 				if (be instanceof IGEnergyPipeEntity) {
 					availableConnections = (byte)(availableConnections | mask);
 				} else {
+					// Match updateConnectionByte: an exposed energy capability is enough. Testing
+					// getEnergyStored() > 0 here made an idle machine render as unconnectable.
 					IEnergyStorage handler = this.neighbors.get(dir).getNullable();
-					if (handler != null && handler.getEnergyStored() > 0) {
+					if (handler != null) {
 						availableConnections = (byte)(availableConnections | mask);
 						continue;
 					}
@@ -433,7 +459,10 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 		} else if (this.connections != 3 && this.connections != 12 && this.connections != 48) {
 			IEnergyStorage handler = this.neighbors.get(connection).getNullable();
 			BlockEntity con = Utils.getExistingTileEntity(this.level, this.getBlockPos().relative(connection));
-			if(handler!=null&& (handler.getEnergyStored() >= 0) &! (con instanceof IGEnergyPipeEntity))
+			// A machine on this side gets a plug, another pipe gets a flange. The old form was
+			// "handler.getEnergyStored() >= 0 &! (con instanceof ...)" - a dead test and a
+			// non-short-circuiting '&' where '&&' was meant.
+			if(handler != null && !(con instanceof IGEnergyPipeEntity))
 			{
 				return ConnectionStyle.PLUGGED;
 			}
@@ -449,7 +478,7 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 			} else
 			{
 				IEnergyStorage handler = this.neighbors.get(connection).getNullable();
-				if(handler!=null&& (handler.getEnergyStored() >= 0  || !(handler instanceof IGUndefinedEnergyInterface)))
+				if(handler != null)
 				{
 					return ConnectionStyle.PLUGGED;
 				}
@@ -722,6 +751,8 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 
 	static class PipeEnergyHandler implements IEnergyStorage {
 		private static final Random CURRENT_TICK_RANDOM = new Random();
+		/** Fallback throughput for a handler whose own block somehow isn't an {@link IGEnergyPipe}. */
+		private static final int DEFAULT_TRANSFER_LIMIT = 32768;
 		IGEnergyPipeEntity pipe;
 		Direction facing;
 
@@ -741,73 +772,82 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 				return 0;
 			}
 
-			BlockPos sourcePos = new BlockPos(this.pipe.getBlockPos().relative(this.facing));
-			int sum = 0;
-			HashMap<DirectionalEnergyOutput, Integer> sorting = new HashMap<>();
+			BlockPos sourcePos = this.pipe.getBlockPos().relative(this.facing);
+			int budget = Math.min(maxReceive, getTransferLimit());
 
-			// First pass: Identify all possible outputs and how much each can accept
+			// First pass: how much is each output willing to take? Insertion-ordered so the second
+			// pass walks the outputs in the same order it measured them.
+			LinkedHashMap<IEnergyStorage, Integer> demands = new LinkedHashMap<>();
+			long totalDemand = 0;
 			for (DirectionalEnergyOutput output : outputList) {
-				BlockPos outputPos = output.containingTile().getBlockPos();
-				// Skip the source block we received energy from and invalid outputs
-				if (!outputPos.equals(sourcePos) &&
-						this.pipe.level.hasChunkAt(outputPos) &&
-						!this.pipe.equals(output.containingTile()) &&
-						output.output().canReceive()) {
+				IEnergyStorage handler = getReceiver(output, sourcePos);
+				if (handler == null) {
+					continue;
+				}
 
-					int transferableAmount = getTransferableAmount(output.containingTile());
-					int amountToTry = Math.min(transferableAmount, maxReceive);
-
-					int accepted = 0;
-					if (output.limitVoltage()) {
-						// Standard voltage transfer
-						accepted = output.output().receiveEnergy(amountToTry, true);
-					}
-
-					if (accepted > 0) {
-						sorting.put(output, accepted);
-						sum += accepted;
-					}
+				int accepted = handler.receiveEnergy(budget, true);
+				if (accepted > 0) {
+					demands.put(handler, accepted);
+					totalDemand += accepted;
 				}
 			}
 
-			// Second pass: Actually transfer the energy
-			int energyTransferred = 0;
-			for (DirectionalEnergyOutput output : sorting.keySet()) {
-				int amount = sorting.get(output);
+			if (demands.isEmpty()) {
+				return 0;
+			}
 
-				// Handle case where total possible distribution exceeds available energy
-				if (sum > maxReceive) {
-					int transferableAmount = getTransferableAmount(output.containingTile());
-					int amountToTransfer = Math.min(transferableAmount, maxReceive - energyTransferred);
-
-					// Calculate proportional amount based on this output's capacity
-					float priority = (float)amount / (float)sum;
-					amount = (int)Math.ceil(Mth.clamp(amount, 1,
-							Math.min(maxReceive * priority, amountToTransfer)));
-					amount = Math.min(amount, maxReceive - energyTransferred);
-				}
-
-				// Perform the actual transfer if not simulating
-				int transferred = 0;
-				if (output.limitVoltage()) {
-					transferred = output.output().receiveEnergy(amount, simulate);
-				}
-
-				energyTransferred += transferred;
-				maxReceive -= transferred;
-
-				if (maxReceive <= 0) {
+			// Second pass: hand out the budget. "remaining" is the single source of truth for what is
+			// left to give - deriving it from two counters is what used to produce negative shares,
+			// and Forge's EnergyStorage applies a negative receiveEnergy as "energy += negative".
+			int remaining = budget;
+			for (Map.Entry<IEnergyStorage, Integer> entry : demands.entrySet()) {
+				if (remaining <= 0) {
 					break;
 				}
+
+				int demand = entry.getValue();
+				int share = demand;
+				if (totalDemand > budget) {
+					// Proportional split, rounded up so rounding never strands part of the budget.
+					long proportional = ((long)demand * budget + totalDemand - 1) / totalDemand;
+					share = (int)Math.min(demand, Math.max(1L, proportional));
+				}
+				share = Math.min(share, remaining);
+
+				int transferred = entry.getKey().receiveEnergy(share, simulate);
+				if (transferred > 0) {
+					remaining -= transferred;
+				}
 			}
 
-			return energyTransferred;
+			return budget - remaining;
 		}
 
-		private int getTransferableAmount(BlockEntity target) {
-			Block block = target.getBlockState().getBlock();
-			if(block instanceof IGEnergyPipe cable) return pipe.getTransferableAmount(cable);
-			return 32768;
+		/**
+		 * The receiving handler behind {@code output}, or null if it should be skipped: stale, out of
+		 * world, the neighbour that just pushed into this face, or unable to accept energy at all.
+		 */
+		@Nullable
+		private IEnergyStorage getReceiver(DirectionalEnergyOutput output, BlockPos sourcePos) {
+			BlockEntity tile = output.containingTile();
+			BlockPos outputPos = tile.getBlockPos();
+			if (outputPos.equals(sourcePos) || this.pipe.equals(tile) || !output.isValid()
+					|| !this.pipe.level.hasChunkAt(outputPos) || !output.limitVoltage()) {
+				return null;
+			}
+
+			IEnergyStorage handler = output.output();
+			return handler != null && handler.canReceive() ? handler : null;
+		}
+
+		/**
+		 * Throughput of the cable this handler belongs to. This used to be read off the <em>target</em>
+		 * block, which is never a pipe, so the cable's own limit never applied.
+		 */
+		private int getTransferLimit() {
+			Block self = this.pipe.getBlockState().getBlock();
+			if (self instanceof IGEnergyPipe cable) return this.pipe.getTransferableAmount(cable);
+			return DEFAULT_TRANSFER_LIMIT;
 		}
 
 		@Override
@@ -817,34 +857,36 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 			}
 
 			Level world = this.pipe.getLevelNonnull();
-			List<DirectionalEnergyOutput> outputList = new ArrayList<>(
+			List<DirectionalEnergyOutput> sources = new ArrayList<>(
 					IGEnergyPipeEntity.getConnectedEnergyHandlers(this.pipe.getBlockPos(), world));
-			BlockPos sourcePos = new BlockPos(this.pipe.getBlockPos().relative(this.facing));
+			BlockPos sinkPos = this.pipe.getBlockPos().relative(this.facing);
 
-			// Remove the block we're extracting to from potential sources
-			outputList.removeIf(output -> sourcePos.equals(output.containingTile().getBlockPos()));
+			// Remove the block we're extracting to, plus anything stale or not actually a source
+			sources.removeIf(output -> sinkPos.equals(output.containingTile().getBlockPos())
+					|| !output.isValid()
+					|| !output.output().canExtract());
 
-			if (outputList.isEmpty()) {
+			if (sources.isEmpty()) {
 				return 0;
 			}
 
-			// Randomly select a connected energy source to extract from
+			int budget = Math.min(maxExtract, getTransferLimit());
+
+			// Start somewhere different each tick so one source isn't always drained first, but walk
+			// the rest of the list too rather than giving up when the first pick happens to be empty.
 			CURRENT_TICK_RANDOM.setSeed(HashCommon.mix(world.getGameTime()));
-			int chosen = outputList.size() == 1 ? 0 : CURRENT_TICK_RANDOM.nextInt(outputList.size());
-			DirectionalEnergyOutput output = outputList.get(chosen);
+			int start = sources.size() == 1 ? 0 : CURRENT_TICK_RANDOM.nextInt(sources.size());
 
-			if (!output.output().canExtract()) {
-				return 0;
+			int extracted = 0;
+			for (int i = 0; i < sources.size() && extracted < budget; i++) {
+				IEnergyStorage source = sources.get((start + i) % sources.size()).output();
+				if (source == null) {
+					continue;
+				}
+				extracted += Math.max(0, source.extractEnergy(budget - extracted, simulate));
 			}
 
-			// Check how much energy is available to extract
-			int available = output.output().extractEnergy(maxExtract, true);
-			BlockEntity extractingBE = SafeChunkUtils.getSafeBE(world, this.pipe.getBlockPos().relative(this.facing));
-			int limit = getTransferableAmount(extractingBE);
-			int actualExtract = Math.min(limit, Math.min(available, maxExtract));
-
-			// Perform the actual extraction if not simulating
-			return output.output().extractEnergy(actualExtract, simulate);
+			return extracted;
 		}
 
 		@Override
@@ -906,9 +948,9 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 		}
 	}
 
-	public static record DirectionalEnergyOutput(IEnergyStorage output, Direction direction, BlockEntity containingTile) {
-		public DirectionalEnergyOutput(IEnergyStorage output, Direction direction, BlockEntity containingTile) {
-			this.output = output;
+	public static record DirectionalEnergyOutput(LazyOptional<IEnergyStorage> reference, Direction direction, BlockEntity containingTile) {
+		public DirectionalEnergyOutput(LazyOptional<IEnergyStorage> reference, Direction direction, BlockEntity containingTile) {
+			this.reference = reference;
 			this.direction = direction;
 			this.containingTile = containingTile;
 		}
@@ -921,8 +963,17 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 			return true;
 		}
 
+		/**
+		 * False once the block entity is gone or the capability behind it has been invalidated, which
+		 * is the point at which anything cached for this output has to be thrown away.
+		 */
+		public boolean isValid() {
+			return !this.containingTile.isRemoved() && this.reference.isPresent();
+		}
+
+		@Nullable
 		public IEnergyStorage output() {
-			return this.output;
+			return this.reference.orElse(null);
 		}
 
 		public Direction direction() {

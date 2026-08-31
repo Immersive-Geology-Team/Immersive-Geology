@@ -17,6 +17,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 
 import static com.igteam.immersivegeology.core.registration.IGRegistrationHolder.getBlockRegistryMap;
+import java.util.Locale;
 
 public class ScaffoldingHelper
 {
@@ -33,7 +34,7 @@ public class ScaffoldingHelper
 
 	public IGScaffoldingBlock getDefault()
 	{
-		String key = BlockCategoryFlags.SCAFFOLDING.getRegistryKey(scaffolding_material) + "_" + MetalScaffoldingType.STANDARD.name().toLowerCase();
+		String key = BlockCategoryFlags.SCAFFOLDING.getRegistryKey(scaffolding_material) + "_" + MetalScaffoldingType.STANDARD.name().toLowerCase(Locale.ROOT);
 		if(getBlockRegistryMap().containsKey(key)) {
 			return (IGScaffoldingBlock) IGRegistrationHolder.getBlock.apply(key);
 		}
@@ -44,7 +45,7 @@ public class ScaffoldingHelper
 
 	public IGScaffoldingBlock getGrate()
 	{
-		String key = BlockCategoryFlags.SCAFFOLDING.getRegistryKey(scaffolding_material) + "_" + MetalScaffoldingType.GRATE_TOP.name().toLowerCase();
+		String key = BlockCategoryFlags.SCAFFOLDING.getRegistryKey(scaffolding_material) + "_" + MetalScaffoldingType.GRATE_TOP.name().toLowerCase(Locale.ROOT);
 		if(getBlockRegistryMap().containsKey(key)) {
 			return (IGScaffoldingBlock) IGRegistrationHolder.getBlock.apply(key);
 		}
@@ -55,7 +56,7 @@ public class ScaffoldingHelper
 
 	public IGScaffoldingBlock getWoodenTop()
 	{
-		String key = BlockCategoryFlags.SCAFFOLDING.getRegistryKey(scaffolding_material) + "_" + MetalScaffoldingType.WOODEN_TOP.name().toLowerCase();
+		String key = BlockCategoryFlags.SCAFFOLDING.getRegistryKey(scaffolding_material) + "_" + MetalScaffoldingType.WOODEN_TOP.name().toLowerCase(Locale.ROOT);
 		if(getBlockRegistryMap().containsKey(key)) {
 			return (IGScaffoldingBlock) IGRegistrationHolder.getBlock.apply(key);
 		}

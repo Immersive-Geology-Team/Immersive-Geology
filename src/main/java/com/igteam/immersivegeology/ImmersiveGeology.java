@@ -45,6 +45,7 @@ import net.minecraftforge.fml.loading.FMLLoader;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 
@@ -194,7 +195,7 @@ public class ImmersiveGeology {
         if(pattern.equals(ItemCategoryFlags.NORMAL_ORE) || pattern.equals(ItemCategoryFlags.RICH_ORE) || pattern.equals(ItemCategoryFlags.POOR_ORE))
         {
             OreRichness richness = pattern.equals(ItemCategoryFlags.NORMAL_ORE) ? OreRichness.NORMAL : (pattern.equals(ItemCategoryFlags.RICH_ORE) ? OreRichness.RICH : OreRichness.POOR);
-            test = new ResourceLocation(IGLib.MODID, "textures/item/colored/raw_ore/"+base.getName().toLowerCase()+"/"+richness.getSanitizedName() + ".png");
+            test = new ResourceLocation(IGLib.MODID, "textures/item/colored/raw_ore/"+base.getName().toLowerCase(Locale.ROOT)+"/"+richness.getSanitizedName() + ".png");
         }
         return test;
     }

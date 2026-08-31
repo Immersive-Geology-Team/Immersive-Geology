@@ -30,6 +30,7 @@ import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler.IOConstraintGroup;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler.IntRange;
+import com.igteam.immersivegeology.common.block.helper.IGReceiveOnlyEnergy;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.CrystallizerLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.CrystallizerRecipe;
@@ -206,7 +207,7 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
 
         public State(IInitialMultiblockContext<State> ctx)
         {
-            this.energyCap = new StoredCapability<>(this.energy);
+            this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.energy));
             this.output = ctx.getCapabilityAt(ForgeCapabilities.ITEM_HANDLER, OUTPUT_POS);
             this.processor = new MultiblockProcessor<>(
                 1, 0, 1, ctx.getMarkDirtyRunnable(), CrystallizerRecipe.RECIPES::getById

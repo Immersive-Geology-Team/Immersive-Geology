@@ -27,6 +27,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.function.Consumer;
 
 public abstract class IGRecipeMethod
@@ -258,17 +259,17 @@ public abstract class IGRecipeMethod
 
 	protected String create_basic_method_name(IFlagType<?> starting_form, IFlagType<?> output_form)
 	{
-		return starting_form.getName().toLowerCase() + "_" + parentMaterial.getName() + "_to_" + output_form.getName().toLowerCase();
+		return starting_form.getName().toLowerCase(Locale.ROOT) + "_" + parentMaterial.getName() + "_to_" + output_form.getName().toLowerCase(Locale.ROOT);
 	}
 
 	protected String create_advanced_method_name(IFlagType<?> starting_form, IFlagType<?> output_form)
 	{
-		return starting_form.getName().toLowerCase() + "_" + parentMaterial.getName() + "_to_" + parentMaterial.getPrimaryProduct().getName() + output_form.getName().toLowerCase();
+		return starting_form.getName().toLowerCase(Locale.ROOT) + "_" + parentMaterial.getName() + "_to_" + parentMaterial.getPrimaryProduct().getName() + output_form.getName().toLowerCase(Locale.ROOT);
 	}
 
 	protected String create_advanced_method_name(IFlagType<?> output_form)
 	{
-		return parentMaterial.getName() + "_to_" + parentMaterial.getPrimaryProduct().getName() + output_form.getName().toLowerCase();
+		return parentMaterial.getName() + "_to_" + parentMaterial.getPrimaryProduct().getName() + output_form.getName().toLowerCase(Locale.ROOT);
 	}
 
 	protected String create_basic_method_name(IFlagType<?> output_form)

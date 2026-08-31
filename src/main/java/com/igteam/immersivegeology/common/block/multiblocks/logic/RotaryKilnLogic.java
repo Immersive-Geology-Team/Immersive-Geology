@@ -25,6 +25,7 @@ import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler.IOConstraint;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler.IntRange;
+import com.igteam.immersivegeology.common.block.helper.IGReceiveOnlyEnergy;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.ISkinnableMultiblockLogic;
@@ -299,7 +300,7 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
         private final MultiblockProcessor.InMachineProcessor<RotaryKilnRecipe> processor;
         Runnable markDirty;
         public State(IInitialMultiblockContext<State> ctx) {
-            this.energyCap = new StoredCapability<>(this.total_energy);
+            this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.total_energy));
             this.processor = new InMachineProcessor<>(7, 0, 7, ctx.getMarkDirtyRunnable(), RotaryKilnRecipe.RECIPES::getById);
             this.tube_rotation = 0.0f;
             this.isActive = false;

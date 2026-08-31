@@ -73,19 +73,19 @@ public interface MaterialHelper {
                 {
                     case INGOT ->
                     {
-                        return Metals.INGOTS.get(EnumMetals.valueOf(getName().toUpperCase())).get().asItem();
+                        return Metals.INGOTS.get(EnumMetals.valueOf(getName().toUpperCase(Locale.ROOT))).get().asItem();
                     }
                     case GRIT ->
                     {
-                        return Metals.DUSTS.get(EnumMetals.valueOf(getName().toUpperCase())).get().asItem();
+                        return Metals.DUSTS.get(EnumMetals.valueOf(getName().toUpperCase(Locale.ROOT))).get().asItem();
                     }
                     case PLATE ->
                     {
-                        return Metals.PLATES.get(EnumMetals.valueOf(getName().toUpperCase())).get().asItem();
+                        return Metals.PLATES.get(EnumMetals.valueOf(getName().toUpperCase(Locale.ROOT))).get().asItem();
                     }
                     case NUGGET ->
                     {
-                        return Metals.NUGGETS.get(EnumMetals.valueOf(getName().toUpperCase())).get().asItem();
+                        return Metals.NUGGETS.get(EnumMetals.valueOf(getName().toUpperCase(Locale.ROOT))).get().asItem();
                     }
                     case WIRE ->
                     {
@@ -208,7 +208,7 @@ public interface MaterialHelper {
 
             try
             {
-                EnumMetals IEMetal = EnumMetals.valueOf(getName().toUpperCase());
+                EnumMetals IEMetal = EnumMetals.valueOf(getName().toUpperCase(Locale.ROOT));
                 IETags.MetalTags ieMetalTags = IETags.getTagsFor(IEMetal);
                 switch(flag.getValue())
                 {
@@ -247,7 +247,7 @@ public interface MaterialHelper {
         // Check for edge cases, like in the menu where this can be used to get an Ore Block
         try
         {
-            EnumMetals IEMetal = EnumMetals.valueOf(getName().toUpperCase());
+            EnumMetals IEMetal = EnumMetals.valueOf(getName().toUpperCase(Locale.ROOT));
             switch(flag.getValue())
             {
                 case STORAGE_BLOCK ->

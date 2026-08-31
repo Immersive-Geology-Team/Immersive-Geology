@@ -18,13 +18,14 @@ import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
+import java.util.Locale;
 
 public class IGGeoHintBuilder extends IEFinishedRecipe<IGGeoHintBuilder>
 {
 
 	private static String capitalize(String input)
 	{
-		return input.substring(0,1).toUpperCase() + input.substring(1);
+		return input.substring(0,1).toUpperCase(Locale.ROOT) + input.substring(1);
 	}
 
 	private IGGeoHintBuilder(GeologyMaterial material) {

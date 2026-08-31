@@ -74,6 +74,14 @@ public class SpawnChunkCapture {
 	private static final Map<Integer, Color> PALETTE_KEY_COLORS = new HashMap<>();
 	private static BufferedImage oreItemImage;
 
+	/** mineral name -> richness -> block count */
+	private static final Map<String, Map<OreRichness, Integer>> oreCensus = new TreeMap<>();
+	/** mineral name -> number of rolled deposits */
+	private static final Map<String, Integer> depositCount = new TreeMap<>();
+	/** mineral name -> deposits that produced no ore at all */
+	private static final Map<String, Integer> barrenCount = new TreeMap<>();
+	private static int columnsSampled = 0;
+
 	/**
 	 * Static initialization block to load image resources
 	 */
@@ -99,18 +107,20 @@ public class SpawnChunkCapture {
 		server = level.getServer();
 		seed = level.getSeed();
 		BlockPos spawnPos = level.getSharedSpawnPos();
+		oreCensus.clear();
+		depositCount.clear();
+		barrenCount.clear();
+		columnsSampled = 0;
 		try {
 			BufferedImage image = generateMapImage(level, spawnPos);
-			saveImage(image, helper, server.getServerDirectory(), "World Map");
+			String label = worldLabel();
+			saveImage(image, helper, server.getServerDirectory(), "World Map "+label);
+			writeCensus(server.getServerDirectory(), label);
 			helper.succeed();
 		} catch (Exception e) {
 			helper.fail("Error generating map: " + e.getMessage());
 		}
 	}
-
-	// ===============================
-	// Map Generation Methods
-	// ===============================
 
 	/**
 	 * Generates the main world map image centered on spawn position
@@ -270,6 +280,9 @@ public class SpawnChunkCapture {
 	 */
 	private static void renderDepositDetails(ServerLevel level, Graphics2D g2d, IGOreFeatureConfig feature,
 											 ChunkPos chunkPos, int radius) {
+		String mineralName = feature.entry().getName();
+		depositCount.merge(mineralName, 1, Integer::sum);
+		int found = 0;
 		int total = radius * radius;
 		BlockPos worldPos = chunkPos.getWorldPosition();
 		int chunkXPos = worldPos.getX() - 16;
@@ -292,6 +305,9 @@ public class SpawnChunkCapture {
 				if(blockState.getBlock() instanceof IGOreBlock block)
 				{
 					OreRichness grade = block.getOreRichness();
+					found++;
+					oreCensus.computeIfAbsent(mineralName, k -> new EnumMap<>(OreRichness.class))
+							.merge(grade, 1, Integer::sum);
 
 					// Color based on ore richness
 					switch(grade)
@@ -313,7 +329,68 @@ public class SpawnChunkCapture {
 				}
 			}
 		}
+		columnsSampled += total;
+		if(found == 0)
+			barrenCount.merge(mineralName, 1, Integer::sum);
 		g2d.setColor(Color.WHITE);
+	}
+
+
+	// ===============================
+	// Ore census reporting
+	// ===============================
+
+	/** Short identifier for the loaded world, so vanilla and TFC runs don't overwrite each other. */
+	private static String worldLabel()
+	{
+		String name = server.getWorldData().getLevelName();
+		return name == null || name.isBlank() ? "world" : name.replaceAll("[^A-Za-z0-9_.-]", "_");
+	}
+
+	/**
+	 * Writes the per-mineral ore census beside the map. This is the number the vanilla/TFC parity
+	 * comparison is based on: rolled deposits, how many produced nothing, and ore blocks by richness.
+	 */
+	private static void writeCensus(File dir, String label)
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("IG ore census - world '").append(label).append("'\n");
+		sb.append("map area: ").append(MAP_SIZE_IN_CHUNKS).append("x").append(MAP_SIZE_IN_CHUNKS)
+				.append(" chunks, columns sampled: ").append(columnsSampled).append("\n\n");
+		sb.append(String.format("%-20s %9s %8s %9s %9s %9s %9s%n",
+				"MINERAL", "DEPOSITS", "BARREN", "POOR", "NORMAL", "RICH", "TOTAL"));
+
+		int gDep = 0, gBarren = 0;
+		long gTotal = 0;
+		for(String mineral : depositCount.keySet())
+		{
+			Map<OreRichness, Integer> byGrade = oreCensus.getOrDefault(mineral, Map.of());
+			int poor = byGrade.getOrDefault(OreRichness.POOR, 0);
+			int normal = byGrade.getOrDefault(OreRichness.NORMAL, 0);
+			int rich = byGrade.getOrDefault(OreRichness.RICH, 0);
+			int deposits = depositCount.get(mineral);
+			int barren = barrenCount.getOrDefault(mineral, 0);
+			int sum = poor+normal+rich;
+
+			gDep += deposits; gBarren += barren; gTotal += sum;
+			sb.append(String.format("%-20s %9d %8d %9d %9d %9d %9d%n",
+					mineral, deposits, barren, poor, normal, rich, sum));
+		}
+		sb.append(String.format("%n%-20s %9d %8d %9s %9s %9s %9d%n",
+				"TOTAL", gDep, gBarren, "", "", "", gTotal));
+		sb.append(String.format("barren deposits: %.1f%%%n", gDep == 0 ? 0.0 : (gBarren*100.0)/gDep));
+		sb.append(String.format("ore blocks per rolled deposit: %.1f%n", gDep == 0 ? 0.0 : (double)gTotal/gDep));
+
+		String report = sb.toString();
+		IGLib.IG_LOGGER.info("[IG ORE CENSUS]\n{}", report);
+		try
+		{
+			java.nio.file.Files.writeString(new File(dir, "ore-census-"+label+".txt").toPath(), report);
+		}
+		catch(IOException e)
+		{
+			IGLib.IG_LOGGER.warn("Could not write ore census: {}", e.getMessage());
+		}
 	}
 
 	// ===============================
@@ -377,7 +454,7 @@ public class SpawnChunkCapture {
 	private static void loadOrePalettes() throws IOException {
 		List<MaterialInterface<?>> toGenerate = IGLib.getGeneratedMaterials();
 		Set<String> oreNames = toGenerate.stream()
-				.map(e -> e.getName().toLowerCase())
+				.map(e -> e.getName().toLowerCase(Locale.ROOT))
 				.collect(Collectors.toSet());
 
 		for (String ore : oreNames) {
@@ -441,7 +518,7 @@ public class SpawnChunkCapture {
 	 * Gets ore palette for the specified ore name
 	 */
 	private static BufferedImage getOrePalette(String oreName) {
-		return ORE_PALETTES.getOrDefault(oreName.toLowerCase(), null);
+		return ORE_PALETTES.getOrDefault(oreName.toLowerCase(Locale.ROOT), null);
 	}
 
 	/**

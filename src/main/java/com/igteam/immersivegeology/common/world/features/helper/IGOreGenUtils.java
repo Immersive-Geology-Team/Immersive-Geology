@@ -67,7 +67,6 @@ public class IGOreGenUtils
 		if (stoneState.is(Blocks.BASALT)) return mineral.acceptableStoneType(StoneEnum.MCBasalt);
 		if (stoneState.is(Blocks.END_STONE)) return mineral.acceptableStoneType(StoneEnum.MCEndStone);
 
-		// Try to match other stone types
 		StoneEnum stone = StoneEnum.selectWorldState(stoneState);
 		return stone != null && stone.isStoneTypeValid() && mineral.acceptableStoneType(stone.instance());
 	}
@@ -114,8 +113,15 @@ public class IGOreGenUtils
 		// Use the same 3x3 chunk area approach
 		try
 		{
-			int sectionMin = level.getSectionIndex(Math.max(minY, level.getMinBuildHeight()));
-			int sectionMax = level.getSectionIndex(Math.min(maxY, level.getMaxBuildHeight()));
+			int lowestY = Math.max(minY, level.getMinBuildHeight());
+			int highestY = Math.min(maxY, level.getMaxBuildHeight()-1);
+			if(lowestY > highestY)
+			{
+				return 0;
+			}
+
+			int sectionMin = level.getSectionIndex(lowestY);
+			int sectionMax = level.getSectionIndex(highestY);
 			if(sectionMin < 0)
 			{
 				throw(new IllegalArgumentException("Section Min is Negative, this should be impossible. \n" +
@@ -128,27 +134,24 @@ public class IGOreGenUtils
 				{
 					ChunkPos currentChunkPos = new ChunkPos(centerChunk.x+chunkDX, centerChunk.z+chunkDZ);
 					ChunkAccess currentChunk = level.getChunk(currentChunkPos.x, currentChunkPos.z);
-					for(int sectionIndex = sectionMin; sectionIndex < sectionMax; sectionIndex++)
+					for(int sectionIndex = sectionMin; sectionIndex <= sectionMax; sectionIndex++)
 					{
 						LevelChunkSection section = currentChunk.getSection(sectionIndex);
-						// Skip if section is empty or doesn't have potential viable blocks
 						if(section.hasOnlyAir()||!section.maybeHas(b -> b.is(stoneTag)||b.is(netherackTag)||b.is(endStoneTag)))
 						{
 							continue;
 						}
-						// Calculate Y bounds for this section
-						int sectionMinY = SectionPos.sectionToBlockCoord(sectionIndex);
-						int sectionMaxY = sectionMinY + 15;
 
-						// Process this section to count viable locations
-						totalViableLocations += countViableLocationsInSection(currentChunk, sectionMinY, sectionMaxY, vein, centerChunk);
+						int sectionMinY = SectionPos.sectionToBlockCoord(sectionIndex);
+						int fromY = Math.max(sectionMinY, lowestY);
+						int toY = Math.min(sectionMinY+16, highestY+1);
+
+						totalViableLocations += countViableLocationsInSection(currentChunk, fromY, toY, vein, centerChunk);
 					}
 				}
 			}
-			// Calculate the total volume of blocks in the 3x3 chunk area within the Y range
-			int areaMinY = SectionPos.sectionToBlockCoord(sectionMin);
-			int areaMaxY = SectionPos.sectionToBlockCoord(sectionMax);
-			int totalBlocks = 48*48*(Math.abs(areaMinY-areaMaxY));
+
+			int totalBlocks = 48*48*(highestY-lowestY+1);
 			return (float)totalViableLocations/totalBlocks;
 		} catch(Exception ex)
 		{
@@ -163,6 +166,7 @@ public class IGOreGenUtils
 	private static int countViableLocationsInSection(ChunkAccess chunk,int minY, int maxY, Vein vein, ChunkPos centreChunk) {
 		int viablePositions = 0;
 		ChunkPos chunkPos = chunk.getPos();
+		MaterialHelper mineral = vein.material().instance();
 		for (int y = minY; y < maxY; y++) {
 			for (int x = 0; x < 16; x++) {
 				for (int z = 0; z < 16; z++) {
@@ -170,7 +174,7 @@ public class IGOreGenUtils
 					if (noiseValue > IGOreFeature.THRESHOLD) {
 						mutablePos.set(x,y,z);
 						BlockState state = chunk.getBlockState(mutablePos);
-						boolean viable = state.is(stoneTag) || state.is(endStoneTag) || state.is(netherackTag) || state.getBlock() instanceof IGOreBlock;
+						boolean viable = canStateGenerate(state, mineral) || state.getBlock() instanceof IGOreBlock;
 						if (viable) {
 							viablePositions++;
 						}
@@ -186,14 +190,12 @@ public class IGOreGenUtils
 		BlockPos middleBlockPosition = centerChunkPos.getMiddleBlockPosition(0);
 		BlockPos currentBlockPosition = pos.getBlockAt(x,y,z);
 
-		// Calculate horizontal distance (creates cylindrical shape)
 		double dx = currentBlockPosition.getX() - middleBlockPosition.getX();
 		double dz = currentBlockPosition.getZ() - middleBlockPosition.getZ();
 		double horizontalDistance = Math.hypot(dx, dz);
 
-		// Define cylinder radius and thresholds
-		double radius = 24.0; // Total radius
-		double outerThreshold = 16.0; // 8 blocks from edge (24-8=16)
+		double radius = 24.0;
+		double outerThreshold = 16.0;
 		double boundaryMultiplication = getBoundaryMultiplication(horizontalDistance, outerThreshold, radius);
 
 		return noiseGen.noise(currentBlockPosition) * boundaryMultiplication;
@@ -203,24 +205,18 @@ public class IGOreGenUtils
 	{
 		double middleThreshold = 20.0; // 4 blocks from edge (24-4=20)
 
-		// Calculate boundary multiplication with steeper falloff
-		double boundaryMultiplication = 1.0; // Default is full strength
+		double boundaryMultiplication = 1.0;
 
 		if (horizontalDistance > outerThreshold) {
 			if (horizontalDistance > middleThreshold) {
-				// Between middleThreshold and radius (4 blocks from edge to edge)
-				// Goes from 50% to 0%
 				double t = (horizontalDistance- middleThreshold) / (radius- middleThreshold);
 				boundaryMultiplication = 0.5 * (1.0 - t);
 			} else {
-				// Between outerThreshold and middleThreshold (8 blocks from edge to 4 blocks from edge)
-				// Goes from 75% to 50%
 				double t = (horizontalDistance-outerThreshold) / (middleThreshold -outerThreshold);
 				boundaryMultiplication = 0.75 - 0.25 * t;
 			}
 		}
 
-		// Make sure multiplier is at least 0
 		boundaryMultiplication = Math.max(0.0, boundaryMultiplication);
 		return boundaryMultiplication;
 	}

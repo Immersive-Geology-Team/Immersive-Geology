@@ -117,17 +117,31 @@ public class IGServerConfig
 		Machines(ForgeConfigSpec.Builder builder)
 		{
 			builder.push("machines").comment("=== IG Machine Config Start ===");
-				for(TemplateMultiblock mb : IGRegistrationHolder.MB_TEMPLATE_MAP.values())
+				// Keyed on the registry name, which is what IIGMultiSkinHelper#multiblockName and
+				// MB_TEMPLATE_MAP use. Deriving it from getName() tied the config section to the
+				// human-readable display name, so any machine whose display name differed from its
+				// registry name ("Crude Bloomery" vs "bloomery") got a section nothing could look up.
+				for(Map.Entry<String, TemplateMultiblock> entry : IGRegistrationHolder.MB_TEMPLATE_MAP.entrySet())
 				{
-					if(mb instanceof IGConfigurableMachine config)
+					if(entry.getValue() instanceof IGConfigurableMachine config)
 					{
-						String mb_name = config.getName().toLowerCase().replace(' ', '_');
+						String mb_name = entry.getKey();
 						builder.push(mb_name);
 						machines.put(mb_name, new MachineConfig(builder, config));
 						builder.pop();
 					}
 				}
 			builder.pop();
+		}
+
+		/**
+		 * Configured default skin index for a multiblock's registry name, or the spec default if the
+		 * machine has no config section.
+		 */
+		public int getDefaultSkinOrdinal(String registryName)
+		{
+			MachineConfig config = machines.get(registryName);
+			return config!=null?config.default_skin_ordinal.get(): 0;
 		}
 
 		public static class MachineConfig

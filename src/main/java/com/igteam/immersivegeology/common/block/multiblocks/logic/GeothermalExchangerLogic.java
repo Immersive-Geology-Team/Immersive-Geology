@@ -27,6 +27,7 @@ import blusunrize.immersiveengineering.common.blocks.multiblocks.process.Process
 import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
 import blusunrize.immersiveengineering.common.util.CachedRecipe;
 import blusunrize.immersiveengineering.common.util.Utils;
+import com.igteam.immersivegeology.common.block.helper.IGReceiveOnlyEnergy;
 import com.igteam.immersivegeology.common.block.multiblocks.IGGeothermalExchangerMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.GeothermalHeatHelper;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
@@ -413,7 +414,7 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
         private final MultiblockProcessor.InMachineProcessor<GeothermalExchangerRecipe> dummy;
         private final GeothermalHeatHelper heatHelper;
         public State(IInitialMultiblockContext<State> context) {
-            this.energyCap = new StoredCapability<>(this.energy_storage);
+            this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.energy_storage));
             this.isActive = false;
             this.currentY = 4;
             this.display_heat = 0;

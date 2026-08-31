@@ -3,6 +3,7 @@ package com.igteam.immersivegeology.core.material.helper.flags;
 import net.minecraftforge.data.loading.DatagenModLoader;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLLoader;
+import java.util.Locale;
 
 public enum ModFlags implements IFlagType<ModFlags> {
     MINECRAFT,
@@ -24,10 +25,10 @@ public enum ModFlags implements IFlagType<ModFlags> {
 
     public boolean isLoaded()
     {
-        return this.equals(MINECRAFT) || DatagenModLoader.isRunningDataGen() || ModList.get().isLoaded(getName().toLowerCase());
+        return this.equals(MINECRAFT) || DatagenModLoader.isRunningDataGen() || ModList.get().isLoaded(getName().toLowerCase(Locale.ROOT));
     }
 
     public boolean isStrictlyLoaded(){
-        return this.equals(MINECRAFT) || ModList.get().isLoaded(getName().toLowerCase());
+        return this.equals(MINECRAFT) || ModList.get().isLoaded(getName().toLowerCase(Locale.ROOT));
     }
 }

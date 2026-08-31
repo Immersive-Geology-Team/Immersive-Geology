@@ -317,6 +317,11 @@
   "machine.immersivegeology.hydrojet": "Hydrojet Cutter",
   "machine.immersivegeology.ballmill": "Ballmill",
 
+  "jei.immersivegeology.caustic.title": "Caustic Recipe",
+  "jei.immersivegeology.caustic.rate": "Corrodes the reactor by %s per second while running.",
+  "jei.immersivegeology.caustic.seize": "Seizes up after about %s seconds if left unrepaired.",
+  "jei.immersivegeology.caustic.repair": "Repair it from the maintenance slot to keep it running.",
+
   "block.immersivegeology.pelletizer": "Pelletizer",
   "block.immersivegeology.rotary_kiln": "Rotary Kiln",
   "block.immersivegeology.rotarykiln": "Rotary Kiln",

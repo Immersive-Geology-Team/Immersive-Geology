@@ -13,6 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class ManualTextProvider
 {
@@ -25,7 +26,7 @@ public class ManualTextProvider
 
 	public ManualTextProvider(ResourceLocation location) {
 		this.location = location;
-		this.name = location.getPath().toLowerCase();
+		this.name = location.getPath().toLowerCase(Locale.ROOT);
 
 		this.finalString = new StringBuilder();
 	}

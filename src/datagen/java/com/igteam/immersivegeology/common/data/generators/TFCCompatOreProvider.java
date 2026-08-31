@@ -35,6 +35,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.CompletableFuture;
@@ -75,7 +76,7 @@ public class TFCCompatOreProvider implements DataProvider {
 	public void generateSoilDisc(int minRadius, int maxRadius, int height, MaterialInterface<?> mineral) {
 		JsonObject root = new JsonObject();
 		List<StateMapping> stateMapping = new ArrayList<>();
-		String name = mineral.getName().toLowerCase() + "_tfc";
+		String name = mineral.getName().toLowerCase(Locale.ROOT) + "_tfc";
 		stateMapping.add(new StateMapping("tfc:dirt/sandy_loam", new ResourceLocation(IGLib.MODID, BlockCategoryFlags.EVAPORATE.getRegistryKey(mineral)).toString()));
 		stateMapping.add(new StateMapping("tfc:dirt/silty_loam", new ResourceLocation(IGLib.MODID, BlockCategoryFlags.EVAPORATE.getRegistryKey(mineral)).toString()));
 		stateMapping.add(new StateMapping("tfc:grass/sandy_loam", new ResourceLocation(IGLib.MODID, BlockCategoryFlags.EVAPORATE.getRegistryKey(mineral)).toString()));

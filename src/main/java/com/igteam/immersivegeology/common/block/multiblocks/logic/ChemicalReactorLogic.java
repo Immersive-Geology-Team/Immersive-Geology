@@ -41,6 +41,7 @@ import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler.IOConstraint;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler.IntRange;
+import com.igteam.immersivegeology.common.block.helper.IGReceiveOnlyEnergy;
 import com.igteam.immersivegeology.common.block.multiblocks.IGChemicalReactorMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.IGGravitySeparatorMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.ChemicalReactorLogic.State;
@@ -364,7 +365,7 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 		{
 			final Supplier<@Nullable Level> getLevel = ctx.levelSupplier();
 			final Runnable markDirty = ctx.getMarkDirtyRunnable();
-			this.energyCap = new StoredCapability<>(this.energy);
+			this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.energy));
 
 			this.inventory = new SlotwiseItemHandler(List.of(
 					new IOConstraint(true, i -> ChemicalRecipe.acceptableCatalyst(getLevel.get(), i)),

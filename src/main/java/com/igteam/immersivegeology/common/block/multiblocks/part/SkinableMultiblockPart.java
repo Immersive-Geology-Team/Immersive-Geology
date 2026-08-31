@@ -23,7 +23,6 @@ import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMulti
 import com.igteam.immersivegeology.common.block.multiblocks.skins.helpers.IIGMultiSkinHelper;
 import com.igteam.immersivegeology.common.block.multiblocks.skins.helpers.IMultiSkinBlock;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
-import com.igteam.immersivegeology.common.config.IGServerConfig.Machines.MachineConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
@@ -92,13 +91,9 @@ public abstract class SkinableMultiblockPart<S extends IMultiblockState, T exten
 		if(!pMovedByPiston)
 		{
 			String multiblock = skinClass.getEnumConstants()[0].multiblockName();
-			MachineConfig config = IGServerConfig.MACHINES.machines.get(multiblock);
-			if(config!=null)
-			{
-				int skin_ordinal = config.default_skin_ordinal.get() % skinClass.getEnumConstants().length;
-				BlockState state = pState.setValue(skinProperty, skinClass.getEnumConstants()[skin_ordinal]);
-				pLevel.setBlock(pPos, state, 3);
-			}
+			int skin_ordinal = IGServerConfig.MACHINES.getDefaultSkinOrdinal(multiblock)%skinClass.getEnumConstants().length;
+			BlockState state = pState.setValue(skinProperty, skinClass.getEnumConstants()[skin_ordinal]);
+			pLevel.setBlock(pPos, state, 3);
 		}
 		super.onPlace(pState, pLevel, pPos, pOldState, pMovedByPiston);
 	}
@@ -150,8 +145,7 @@ public abstract class SkinableMultiblockPart<S extends IMultiblockState, T exten
 				{
 					Class<T> skinClass = (Class<T>)skinValue.getDeclaringClass();
 					String multiblock = skinClass.getEnumConstants()[0].multiblockName();
-					MachineConfig config = IGServerConfig.MACHINES.machines.get(multiblock);
-					int skin_ordinal = config.default_skin_ordinal.get() % skinClass.getEnumConstants().length;
+					int skin_ordinal = IGServerConfig.MACHINES.getDefaultSkinOrdinal(multiblock)%skinClass.getEnumConstants().length;
 					if(skinClass.getEnumConstants()[skin_ordinal].equals(skinValue)) return false;
 					BlockState state = current.setValue(prop, skinClass.getEnumConstants()[skin_ordinal]);
 					rawLevel.setBlock(realPos, state, 67);

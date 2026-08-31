@@ -32,6 +32,7 @@ import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler.IOConstraint;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler.IntRange;
+import com.igteam.immersivegeology.common.block.helper.IGReceiveOnlyEnergy;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.ChemicalReactorLogic.ChemicalReactorTanks;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.SmallChemicalReactorLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.BasicChemicalProcessor;
@@ -42,8 +43,6 @@ import com.igteam.immersivegeology.common.block.multiblocks.recipe.BasicChemical
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRepairRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.SmallChemicalReactorShape;
-import com.igteam.immersivegeology.common.network.IGPacketHandler;
-import com.igteam.immersivegeology.common.network.msg.MessageSCRFail;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -329,7 +328,7 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
             final Runnable markDirty = ctx.getMarkDirtyRunnable();
 
             this.damage = 0;
-            this.energyCap = new StoredCapability<>(this.energy);
+            this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.energy));
             this.inventory = new SlotwiseItemHandler(List.of(
                     new IOConstraint(true, i -> BasicChemicalRecipe.acceptableCatalyst(getLevel.get(), i)),
                     IOConstraint.OUTPUT,
@@ -432,11 +431,12 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
             {
                 if(ctx.getState() instanceof State state)
                 {
-                    boolean isMirrored = ctx.getLevel().getOrientation().mirrored();
-                    if(state.damage > 1)
+                    Level level = ctx.getLevel().getRawLevel();
+                    if(!level.isClientSide&&state.damage > 1)
                     {
+                        boolean isMirrored = ctx.getLevel().getOrientation().mirrored();
                         BlockPos realPos = ctx.getLevel().toAbsolute(new BlockPos(isMirrored?2: 1, 1, 0));
-                        IGPacketHandler.sendToServer(new MessageSCRFail(realPos, damage));
+                        scatterFailureDebris(level, realPos, state.damage);
                     }
                 }
                 isInvalidated = true;
@@ -448,6 +448,23 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
             this.outputHandler.get(ctx).invalidate();
             this.itemInputCap.get(ctx).invalidate();
             this.outputCap.get(ctx).invalidate();
+        }
+
+        public static void scatterFailureDebris(Level level, BlockPos origin, float damage)
+        {
+            if(!level.isAreaLoaded(origin, 1))
+                return;
+
+            MutableBlockPos cursor = new MutableBlockPos();
+            cursor.set(origin);
+            RandomSource random = level.getRandom();
+            BlockState debris = MiscEnum.RustyMetal.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK).defaultBlockState();
+
+            for(int x = 0; x <= 1; x++)
+                for(int z = 0; z <= 1; z++)
+                    for(int y = 0; y < 4; y++)
+                        if(random.nextInt(1, 95) < damage)
+                            level.setBlock(cursor.offset(x, y, z), debris, 1|2);
         }
     }
 

@@ -27,6 +27,7 @@ import blusunrize.immersiveengineering.common.util.DroppingMultiblockOutput;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler.IOConstraint;
+import com.igteam.immersivegeology.common.block.helper.IGReceiveOnlyEnergy;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.PelletizerLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.ISkinnableMultiblockLogic;
@@ -285,7 +286,7 @@ public class PelletizerLogic implements ISkinnableMultiblockLogic<State>, IServe
                     IOConstraint.OUTPUT
             ), markDirty);
 
-            this.energyCap = new StoredCapability<>(this.energy);
+            this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.energy));
             this.output = new DroppingMultiblockOutput(OUTPUT_POS, ctx);
             this.processor = new MultiblockProcessor<>(64, 0, 8, ctx.getMarkDirtyRunnable(), PelletizerRecipe.RECIPES::getById);
 

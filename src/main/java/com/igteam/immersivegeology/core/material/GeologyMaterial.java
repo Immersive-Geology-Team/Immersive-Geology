@@ -81,7 +81,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
         // As long as the class itself is named appropriately we do not need to specify a name in the class.
         String className = this.getClass().getName();
         String classNameNormal = this.getClass().getName();
-        this.name = className.substring(className.lastIndexOf(".") + 1).replace("Material", "").replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase();
+        this.name = className.substring(className.lastIndexOf(".") + 1).replace("Material", "").replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase(Locale.ROOT);
         this.unserialized_name =  classNameNormal.substring(classNameNormal.lastIndexOf(".") + 1).replace("Material", "");
 
         this.generation_group.add(Pair.of((i) -> this, 100));
@@ -171,7 +171,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
     }
 
     public ResourceLocation getTextureLocation(IFlagType<?> flag) {
-        ResourceLocation texture = new ResourceLocation(IGLib.MODID, (flag instanceof ItemCategoryFlags ? "item" : "block") + "/colored/" + getName() + "/" + flag.toString().toLowerCase());
+        ResourceLocation texture = new ResourceLocation(IGLib.MODID, (flag instanceof ItemCategoryFlags ? "item" : "block") + "/colored/" + getName() + "/" + flag.toString().toLowerCase(Locale.ROOT));
 
         // This function, is normally ONLY called during data generation
         // And the Existing File Helper is only available during it, hence we default to greyscale textures during runtime
@@ -191,7 +191,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
         {
             return switch(b)
             {
-                case STORAGE_BLOCK -> new ResourceLocation(IGLib.MODID, "palette/block/"+b.getName()+"/type_"+getPaletteVariation(b)+"_pristine_"+getName().toLowerCase());
+                case STORAGE_BLOCK -> new ResourceLocation(IGLib.MODID, "palette/block/"+b.getName()+"/type_"+getPaletteVariation(b)+"_pristine_"+getName().toLowerCase(Locale.ROOT));
                 case ORE_BLOCK ->
                 {
                     String ore_overlay = getCrystalFamily()!=null?getCrystalFamily().getName(): "vanilla_normal";
@@ -218,20 +218,20 @@ public abstract class GeologyMaterial implements MaterialHelper {
                 }
                 case GEAR, INGOT, NUGGET, PLATE, SLAG, COMPOUND_DUST, TOOL_HOE, CRUSHED_ORE ->
                 {
-                    return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_pristine_"+getName().toLowerCase());
+                    return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_pristine_"+getName().toLowerCase(Locale.ROOT));
                 }
                 case POOR_ORE, NORMAL_ORE, RICH_ORE, GRIT, POWDER, POWDERED_SLAG, DIRTY_CRUSHED_ORE ->
                 {
                     String weathering = canTarnish() ? "corroded" : "pristine";
-                    return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_"+weathering+"_"+getName().toLowerCase());
+                    return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_"+weathering+"_"+getName().toLowerCase(Locale.ROOT));
                 }
                 case METAL_OXIDE ->
                 {
-                    return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_corroded_"+getName().toLowerCase());
+                    return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_corroded_"+getName().toLowerCase(Locale.ROOT));
                 }
                 case DRILL_HEAD ->
                 {
-                    return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/drill_pristine_"+getName().toLowerCase());
+                    return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/drill_pristine_"+getName().toLowerCase(Locale.ROOT));
                 }
                 case ROD, WIRE ->
                 {
@@ -298,7 +298,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
                 .canPushEntity(true)
                 .motionScale(hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? 0.025f : 0.05f)
                 .fallDistanceModifier(0.25f)
-                .descriptionId("fluid.immersivegeology."+flag.getName().toLowerCase());
+                .descriptionId("fluid.immersivegeology."+flag.getName().toLowerCase(Locale.ROOT));
     }
 
     public static Consumer<FluidType.Properties> createBuildAttributes(int density, int viscosity, String name)

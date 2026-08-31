@@ -27,7 +27,7 @@ public class IGRecipeChain
 
 	public IGRecipeChain(GeologyMaterial material, String chainName, int priority) {
 		this.material = material;
-		this.chainName = chainName.toLowerCase().replace(' ', '_');
+		this.chainName = chainName.toLowerCase(Locale.ROOT).replace(' ', '_');
 		this.priority = priority;
 	}
 
@@ -352,6 +352,6 @@ public class IGRecipeChain
 
 	public String getName()
 	{
-		return chainName.toLowerCase();
+		return chainName.toLowerCase(Locale.ROOT);
 	}
 }

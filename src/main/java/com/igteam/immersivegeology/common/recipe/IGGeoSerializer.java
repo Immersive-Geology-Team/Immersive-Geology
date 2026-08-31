@@ -32,6 +32,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 public class IGGeoSerializer extends IERecipeSerializer<IGGeoRecipe>
 {
@@ -72,7 +73,7 @@ public class IGGeoSerializer extends IERecipeSerializer<IGGeoRecipe>
 		int type = material instanceof MaterialMineral ? 0 : 1;
 
 		String input = material.getName();
-		input = input.substring(0,1).toUpperCase() + input.substring(1);
+		input = input.substring(0,1).toUpperCase(Locale.ROOT) + input.substring(1);
 
 		int index = type == 1 ? MetalEnum.valueOf(input).ordinal() : MineralEnum.valueOf(input).ordinal();
 

@@ -19,7 +19,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
-import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -74,7 +73,7 @@ public class IGGenericBucketItem extends BucketItem implements IGFlagItem, Dispe
 
     @Override
     public @NotNull Component getName(ItemStack stack) {
-        List<String> materialList = new ArrayList<>();
+        List<Component> materialList = new ArrayList<>();
         String type = "bucket";
         MaterialInterface<?> baseMaterial = getMaterial(MaterialTexture.base);
         MaterialInterface<?> overlayMaterial = getMaterial(MaterialTexture.overlay);
@@ -82,7 +81,7 @@ public class IGGenericBucketItem extends BucketItem implements IGFlagItem, Dispe
         if(bucket_type.equals(ItemCategoryFlags.BUCKET))
         {
             type = "bucket_molten";
-            materialList.add(I18n.get("material.immersivegeology." + baseMaterial.getName()));
+            materialList.add(Component.translatable("material.immersivegeology." + baseMaterial.getName()));
         }
 
         if(bucket_type.equals(ItemCategoryFlags.CLEAN_FLASK))
@@ -93,20 +92,20 @@ public class IGGenericBucketItem extends BucketItem implements IGFlagItem, Dispe
                 if(baseMaterial instanceof ChemicalEnum chemical_base) {
                     if(chemical_base.hasComplexNamingScheme())
                     {
-                        materialList.add(I18n.get("component.immersivegeology." + baseMaterial.getName()));
-                        materialList.add(I18n.get("component.immersivegeology." + overlayMaterial.getName()));
+                        materialList.add(Component.translatable("component.immersivegeology." + baseMaterial.getName()));
+                        materialList.add(Component.translatable("component.immersivegeology." + overlayMaterial.getName()));
                         return Component.translatable("item.immersivegeology.complex_" + type, materialList.toArray());
                     } else
                     {
-                        materialList.add(I18n.get("material.immersivegeology."+overlayMaterial.getName()));
-                        materialList.add(I18n.get("component.immersivegeology."+baseMaterial.getName()));
+                        materialList.add(Component.translatable("material.immersivegeology."+overlayMaterial.getName()));
+                        materialList.add(Component.translatable("component.immersivegeology."+baseMaterial.getName()));
                     }
                 } else {
                     IGLib.IG_LOGGER.warn("Clean Slurry Flask being used for non ChemicalEnum Base Material see {} {}", baseMaterial.getName(), overlayMaterial.getName());
                 }
             } else {
                 type = "flask";
-                materialList.add(I18n.get("material.immersivegeology." + baseMaterial.getName()));
+                materialList.add(Component.translatable("material.immersivegeology." + baseMaterial.getName()));
             }
         }
 
@@ -115,11 +114,11 @@ public class IGGenericBucketItem extends BucketItem implements IGFlagItem, Dispe
             type = "cloudy_flask_slurry";
 
             if(overlayMaterial != null) {
-                materialList.add(I18n.get("material.immersivegeology." + overlayMaterial.getName()));
-                materialList.add(I18n.get("component.immersivegeology." + baseMaterial.getName()));
+                materialList.add(Component.translatable("material.immersivegeology." + overlayMaterial.getName()));
+                materialList.add(Component.translatable("component.immersivegeology." + baseMaterial.getName()));
             } else {
                 type = "flask";
-                materialList.add(I18n.get("material.immersivegeology." + baseMaterial.getName()));
+                materialList.add(Component.translatable("material.immersivegeology." + baseMaterial.getName()));
             }
         }
 

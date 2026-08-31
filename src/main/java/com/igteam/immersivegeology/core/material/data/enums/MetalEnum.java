@@ -88,7 +88,7 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
         for(MetalEnum metal : values()) {
             for(MineralWeathering weathering : MineralWeathering.values())
             {
-                permutations.add(metal.getName()+"/"+weathering.name().toLowerCase());
+                permutations.add(metal.getName()+"/"+weathering.name().toLowerCase(Locale.ROOT));
             }
         }
 
@@ -100,7 +100,7 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
         List<String> permutations = new ArrayList<>();
         scaffoldingMetals().forEach((e) ->
         {
-            permutations.add(e.getName() +"/"+ MineralWeathering.PRISTINE.name().toLowerCase());
+            permutations.add(e.getName() +"/"+ MineralWeathering.PRISTINE.name().toLowerCase(Locale.ROOT));
         });
 
         return permutations;

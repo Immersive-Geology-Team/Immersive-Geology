@@ -31,6 +31,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CreativeMenuHandler {
     private static final ResourceLocation CEX_GUI_TEXTURES = new ResourceLocation(IGLib.MODID,"textures/gui/creative_tabs/creative_expansion.png");
@@ -173,7 +174,7 @@ public class CreativeMenuHandler {
             //Tool tip on hover
             if(hovered) {
                 String name = group.name();
-                String name_part = name.substring(0, 1).toUpperCase();
+                String name_part = name.substring(0, 1).toUpperCase(Locale.ROOT);
                 String corrected_name = name_part + name.substring(1);
 
                 //we divide the width by four to force the tooltip to the left, as it's on a lower layer then the items in the creative menu.

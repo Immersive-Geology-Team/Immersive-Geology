@@ -120,6 +120,11 @@ public class IGBlockLootProvider implements LootTableSubProvider
 		this.registerMultiblock(IGMultiblockProvider.CRYSTALLIZER);
 		this.registerMultiblock(IGMultiblockProvider.COREDRILL);
 		this.registerMultiblock(IGMultiblockProvider.CENTRIFUGE);
+		this.registerMultiblock(IGMultiblockProvider.SMALL_CHEMICAL_REACTOR);
+		this.registerMultiblock(IGMultiblockProvider.FOUNDRY);
+		this.registerMultiblock(IGMultiblockProvider.STEAM_TURBINE);
+		this.registerMultiblock(IGMultiblockProvider.GEOTHERMAL_EXCHANGER);
+		this.registerMultiblock(IGMultiblockProvider.ALTERNATOR);
 	}
 
 	EnchantmentPredicate HAS_SILK = new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1));

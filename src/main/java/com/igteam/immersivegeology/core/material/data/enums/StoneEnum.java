@@ -21,7 +21,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.mojang.serialization.Codec;
-import net.minecraft.client.resources.language.I18n;
 import net.minecraft.locale.Language;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -34,6 +33,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -91,7 +91,7 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
 
     static {
         for (StoneEnum stoneEnum : values()) {
-            stoneEnumMap.put(stoneEnum.name().toLowerCase(), stoneEnum);
+            stoneEnumMap.put(stoneEnum.name().toLowerCase(Locale.ROOT), stoneEnum);
         }
     }
     private final MaterialStone material;
@@ -101,17 +101,17 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
     public static StoneEnum selectWorldState(BlockState stoneState) {
         try
         {
-            String name = stoneState.getBlock().getDescriptionId().toLowerCase();
+            String name = stoneState.getBlock().getDescriptionId().toLowerCase(Locale.ROOT);
             String stoneName = capitalizeFirstLetter(name.substring(name.lastIndexOf('.')+1));
 
             // Check for Minecraft stones first
             if(name.contains(ModFlags.MINECRAFT.getName()))
             {
-                return stoneEnumMap.get("mc"+stoneName.toLowerCase());
+                return stoneEnumMap.get("mc"+stoneName.toLowerCase(Locale.ROOT));
             }
 
             // Try direct lookup of the stone name
-            StoneEnum result = stoneEnumMap.get(stoneName.toLowerCase());
+            StoneEnum result = stoneEnumMap.get(stoneName.toLowerCase(Locale.ROOT));
             if(result!=null)
             {
                 return result;
@@ -128,7 +128,7 @@ public enum StoneEnum implements MaterialInterface<MaterialStone> {
             return input; // Return input as is if it's null or empty
         }
         // Convert first character to uppercase and concatenate with the rest of the string
-        return input.substring(0, 1).toUpperCase() + input.substring(1);
+        return input.substring(0, 1).toUpperCase(Locale.ROOT) + input.substring(1);
     }
 
     @Override

@@ -32,6 +32,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraftforge.network.PacketDistributor;
 
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Objects;
 
 public class IGCrateScreen<C extends IGCrateMenu> extends IEContainerScreen<C>
@@ -64,7 +65,7 @@ public class IGCrateScreen<C extends IGCrateMenu> extends IEContainerScreen<C>
 			{
 				String contentString = title.getContents().toString();
 				String formatString = contentString.substring(contentString.lastIndexOf("args=[")+6, contentString.lastIndexOf("]}"));
-				String sanitized = formatString.replace(" ", "").toLowerCase();
+				String sanitized = formatString.replace(" ", "").toLowerCase(Locale.ROOT);
 				return new ResourceLocation(IGLib.MODID, "textures/gui/block/crate_"+sanitized+".png");
 			}catch(Exception ignored)
 			{

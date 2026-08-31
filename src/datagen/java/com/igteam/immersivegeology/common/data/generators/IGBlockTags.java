@@ -34,6 +34,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
@@ -107,7 +108,7 @@ public class IGBlockTags extends BlockTagsProvider
 
 				if(useOptionalTag) {
 					useOptionalTag = false;
-					String name = oreBlock.getIGDescriptionId().toLowerCase();
+					String name = oreBlock.getIGDescriptionId().toLowerCase(Locale.ROOT);
 					String id = name.substring(name.lastIndexOf('.') +1);
 					tag(BlockTags.MINEABLE_WITH_PICKAXE).addOptional(new ResourceLocation(IGLib.MODID, id));
 					tag(BlockTags.NEEDS_STONE_TOOL).addOptional(new ResourceLocation(IGLib.MODID, id));
@@ -133,7 +134,7 @@ public class IGBlockTags extends BlockTagsProvider
 
 				if(ModFlags.TFC.isStrictlyLoaded())
 				{
-					String name = oreBlock.getIGDescriptionId().toLowerCase();
+					String name = oreBlock.getIGDescriptionId().toLowerCase(Locale.ROOT);
 					String id = name.substring(name.lastIndexOf('.') +1);
 					tag(getTFCBlockTag("CAN_COLLAPSE")).addOptional(new ResourceLocation(IGLib.MODID, id));
 					tag(getTFCBlockTag("CAN_START_COLLAPSE")).addOptional(new ResourceLocation(IGLib.MODID, id));
@@ -166,7 +167,7 @@ public class IGBlockTags extends BlockTagsProvider
 				if(useOptionalTag)
 				{
 					useOptionalTag = false;
-					String name = genericBlock.getIGBlock().getDescriptionId().toLowerCase();
+					String name = genericBlock.getIGBlock().getDescriptionId().toLowerCase(Locale.ROOT);
 					String id = name.substring(name.lastIndexOf('.')+1);
 					tag(BlockTags.MINEABLE_WITH_PICKAXE).addOptional(new ResourceLocation(IGLib.MODID, id));
 				}
@@ -194,7 +195,7 @@ public class IGBlockTags extends BlockTagsProvider
 				if(useOptionalTag)
 				{
 					useOptionalTag = false;
-					String name = slab.getIGBlock().getDescriptionId().toLowerCase();
+					String name = slab.getIGBlock().getDescriptionId().toLowerCase(Locale.ROOT);
 					String id = name.substring(name.lastIndexOf('.')+1);
 					tag(BlockTags.MINEABLE_WITH_PICKAXE).addOptional(new ResourceLocation(IGLib.MODID, id));
 				}

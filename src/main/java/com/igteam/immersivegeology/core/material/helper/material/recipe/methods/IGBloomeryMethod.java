@@ -25,6 +25,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Locale;
 import java.util.function.Consumer;
 
 public class IGBloomeryMethod extends IGRecipeMethod
@@ -40,7 +41,7 @@ public class IGBloomeryMethod extends IGRecipeMethod
 	private ItemStack itemResult;
 
 	public IGBloomeryMethod create(IFlagType<?> input, int inputAmount, MaterialHelper outputMaterial, IFlagType<?> output, int outputAmount, int time){
-		this.name = input.getName().toLowerCase() + "_" + parentMaterial.getName().toLowerCase() + "_to_" + output.getName().toLowerCase() + "_" + outputMaterial.getName().toLowerCase();
+		this.name = input.getName().toLowerCase(Locale.ROOT) + "_" + parentMaterial.getName().toLowerCase(Locale.ROOT) + "_to_" + output.getName().toLowerCase(Locale.ROOT) + "_" + outputMaterial.getName().toLowerCase(Locale.ROOT);
 		this.itemResult = outputMaterial.getStack(output, outputAmount);
 		this.itemInput = new IngredientWithSize(parentMaterial.getItemTag(input), inputAmount);
 		this.time = time;

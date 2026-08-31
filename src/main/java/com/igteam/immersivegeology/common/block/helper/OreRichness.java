@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.common.block.helper;
 
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import java.util.Locale;
 
 public enum OreRichness
 {
@@ -23,6 +24,6 @@ public enum OreRichness
 
 	public String getSanitizedName()
 	{
-		return name().toLowerCase();
+		return name().toLowerCase(Locale.ROOT);
 	}
 }

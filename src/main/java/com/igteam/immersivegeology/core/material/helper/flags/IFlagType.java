@@ -11,6 +11,7 @@ import net.minecraft.world.level.ItemLike;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public interface IFlagType<T extends Enum<T>> {
     T getValue();
@@ -25,11 +26,11 @@ public interface IFlagType<T extends Enum<T>> {
     }
 
     default String getRegistryKey(MaterialHelper material) {
-        return getValue().name().toLowerCase() + "_" + material.getName().toLowerCase();
+        return getValue().name().toLowerCase(Locale.ROOT) + "_" + material.getName().toLowerCase(Locale.ROOT);
     }
 
     default String getRegistryKey(MaterialHelper ore, MaterialHelper stone) {
-        return getValue().name().toLowerCase() + "_" + ore.getName().toLowerCase() + "_" + stone.getName().toLowerCase();
+        return getValue().name().toLowerCase(Locale.ROOT) + "_" + ore.getName().toLowerCase(Locale.ROOT) + "_" + stone.getName().toLowerCase(Locale.ROOT);
     }
 
     default String getRegistryKey(MaterialInterface<?> material) {
@@ -47,11 +48,11 @@ public interface IFlagType<T extends Enum<T>> {
         {
             if(stone.hasFlag(modflag))
             {
-                prefix = modflag.name().toLowerCase() + "_";
+                prefix = modflag.name().toLowerCase(Locale.ROOT) + "_";
             }
         }
 
-        return prefix + (richness.name().toLowerCase() + "_" + getRegistryKey(ore.instance(), stone.instance()));
+        return prefix + (richness.name().toLowerCase(Locale.ROOT) + "_" + getRegistryKey(ore.instance(), stone.instance()));
     }
 
     default String getRegistryKey(MaterialHelper ore, MaterialInterface<?> stone, OreRichness richness) {
@@ -61,11 +62,11 @@ public interface IFlagType<T extends Enum<T>> {
         {
             if(stone.hasFlag(modflag))
             {
-                prefix = modflag.name().toLowerCase() + "_";
+                prefix = modflag.name().toLowerCase(Locale.ROOT) + "_";
             }
         }
 
-        return prefix +(richness.name().toLowerCase() + "_" + getRegistryKey(ore, stone.instance()));
+        return prefix +(richness.name().toLowerCase(Locale.ROOT) + "_" + getRegistryKey(ore, stone.instance()));
     }
 
     default String getRegistryKey(MaterialHelper ore, MaterialHelper stone, OreRichness richness) {
@@ -75,15 +76,15 @@ public interface IFlagType<T extends Enum<T>> {
         {
             if(stone.hasFlag(modflag))
             {
-                prefix = modflag.name().toLowerCase() + "_";
+                prefix = modflag.name().toLowerCase(Locale.ROOT) + "_";
             }
         }
 
-        return prefix +(richness.name().toLowerCase() + "_" + getRegistryKey(ore, stone));
+        return prefix +(richness.name().toLowerCase(Locale.ROOT) + "_" + getRegistryKey(ore, stone));
     }
 
     default String getRegistryKey(MaterialInterface<?> material, BlockCategoryFlags blockCategory){
-        return getValue().name().toLowerCase() + "_" + material.getName().toLowerCase() + "_" + blockCategory.getName().toLowerCase();
+        return getValue().name().toLowerCase(Locale.ROOT) + "_" + material.getName().toLowerCase(Locale.ROOT) + "_" + blockCategory.getName().toLowerCase(Locale.ROOT);
     }
 
     default ItemSubGroup getSubGroup() {
@@ -91,7 +92,7 @@ public interface IFlagType<T extends Enum<T>> {
     };
 
     default String getName() {
-        return getValue().name().toLowerCase();
+        return getValue().name().toLowerCase(Locale.ROOT);
     }
 
 	default RenderTypeSkeleton getRenderType() {return RenderTypeSkeleton.SOLID;};

@@ -98,7 +98,7 @@ public class IGGeologyCategory extends IGRecipeCategory<IGGeoRecipe>
 	}
 
 	private String formatMaterialName(String name) {
-		return name.substring(0, 1).toUpperCase() + name.substring(1);
+		return name.substring(0, 1).toUpperCase(Locale.ROOT) + name.substring(1);
 	}
 
 	private OreConfig getOreConfig(GeologyMaterial material, String materialName) {
@@ -185,7 +185,7 @@ public class IGGeologyCategory extends IGRecipeCategory<IGGeoRecipe>
 	private String computeDimensionName(String dimensionId) {
 		String name = dimensionId.contains(":") ? dimensionId.substring(dimensionId.indexOf(":") + 1) : dimensionId;
 		return Arrays.stream(name.split("_"))
-				.map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
+				.map(word -> word.substring(0, 1).toUpperCase(Locale.ROOT) + word.substring(1).toLowerCase(Locale.ROOT))
 				.collect(Collectors.joining(" "));
 	}
 

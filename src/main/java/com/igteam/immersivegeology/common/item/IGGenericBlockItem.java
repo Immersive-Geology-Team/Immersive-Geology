@@ -32,6 +32,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class IGGenericBlockItem extends BlockItem implements IGFlagItem {
@@ -91,7 +92,7 @@ public class IGGenericBlockItem extends BlockItem implements IGFlagItem {
         {
             case ORE_BLOCK -> {
                 if(getBlock() instanceof IOreBlock oreBlock){
-                    MutableComponent normalName = Component.translatable("material.immersivegeology.ore." + oreBlock.getOreRichness().name().toLowerCase());
+                    MutableComponent normalName = Component.translatable("material.immersivegeology.ore." + oreBlock.getOreRichness().name().toLowerCase(Locale.ROOT));
                     if(!oreBlock.getOreRichness().equals(OreRichness.NORMAL)) normalName.append(Component.translatable("formatting.space"));
                     normalName.append(Component.translatable("material.immersivegeology." + materialMap.get(MaterialTexture.base).getName()));
                     normalName.append(Component.translatable("formatting.space"));

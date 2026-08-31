@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.common.block.helper;
 
 import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.NotNull;
+import java.util.Locale;
 
 public enum MineralWeathering implements StringRepresentable
 {
@@ -20,6 +21,6 @@ public enum MineralWeathering implements StringRepresentable
 	@Override
 	public @NotNull String getSerializedName()
 	{
-		return name().toLowerCase();
+		return name().toLowerCase(Locale.ROOT);
 	}
 }

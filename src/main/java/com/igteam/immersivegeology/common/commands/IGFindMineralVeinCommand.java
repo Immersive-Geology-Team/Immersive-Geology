@@ -36,6 +36,7 @@ import net.minecraftforge.server.command.EnumArgument;
 import org.slf4j.Logger;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 public class IGFindMineralVeinCommand
 {
@@ -65,7 +66,7 @@ public class IGFindMineralVeinCommand
 										.suggests((ctx, builder) -> {
 											for (MetalEnum metal : MetalEnum.values()) {
 												if (metal.hasFlag(BlockCategoryFlags.ORE_BLOCK)) {
-													builder.suggest(metal.name().toLowerCase());
+													builder.suggest(metal.name().toLowerCase(Locale.ROOT));
 												}
 											}
 											return builder.buildFuture();

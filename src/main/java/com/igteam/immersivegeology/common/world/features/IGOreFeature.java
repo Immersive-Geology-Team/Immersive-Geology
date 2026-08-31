@@ -85,8 +85,10 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 	}
 
 	protected static int defaultYPos(int verticalShrinkRange, RandomSource random, OreConfig config) {
-		int actualRange = config.maxY.get() - config.minY.get() - 2 * verticalShrinkRange;
-		return actualRange > 0 ? config.minY.get() + verticalShrinkRange + random.nextInt(actualRange) : (config.minY.get() + config.maxY.get()) / 2;
+		int minY = IGServerConfig.getOrDefault(config.minY);
+		int maxY = IGServerConfig.getOrDefault(config.maxY);
+		int actualRange = maxY - minY - 2 * verticalShrinkRange;
+		return actualRange > 0 ? minY + verticalShrinkRange + random.nextInt(actualRange) : (minY + maxY) / 2;
 	}
 
 	private static MaterialHelper getFriendMaterial(RandomSource random, int height, Set<Pair<Function<Integer, MaterialHelper>, Integer>> friends)
@@ -113,40 +115,54 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 
 	public static void placeVein(LevelAccessor level, RandomSource random, ChunkPos centerChunk, Vein vein, IGOreFeatureConfig config)
 	{
-		// Get config values once
-		int veinMinY = config.entry().getMinY();
-		int veinMaxY = config.entry().getMaxY();
+		int veinMinY = configuredMinY(config);
+		int veinMaxY = configuredMaxY(config);
 		double associateChance = config.getConfig().associateChance.get();
 		MaterialInterface<?> parentMaterial = (MaterialInterface<?>) config.entry;
 		Set<Pair<Function<Integer, MaterialHelper>, Integer>> friends = parentMaterial.instance().getAssociateMaterialSet();
 
-		int sectionMin = level.getSectionIndex(Math.max(veinMinY, level.getMinBuildHeight()));
-		int sectionMax = level.getSectionIndex(Math.min(veinMaxY, level.getMaxBuildHeight()));
-		// Iterate over the 3x3 chunk area
+		int lowestY = Math.max(veinMinY, level.getMinBuildHeight());
+		int highestY = Math.min(veinMaxY, level.getMaxBuildHeight()-1);
+		if (lowestY > highestY) {
+			return;
+		}
+
+		int sectionMin = level.getSectionIndex(lowestY);
+		int sectionMax = level.getSectionIndex(highestY);
 		for (int chunkDX = -1; chunkDX <= 1; chunkDX++) {
 			for (int chunkDZ = -1; chunkDZ <= 1; chunkDZ++) {
 				ChunkPos currentChunkPos = new ChunkPos(centerChunk.x + chunkDX, centerChunk.z + chunkDZ);
 				ChunkAccess currentChunk = level.getChunk(currentChunkPos.x, currentChunkPos.z);
-				for (int sectionIndex = sectionMin; sectionIndex < sectionMax; sectionIndex++) {
+				for (int sectionIndex = sectionMin; sectionIndex <= sectionMax; sectionIndex++) {
 					LevelChunkSection section = currentChunk.getSection(sectionIndex);
 
-					// Skip if section is empty or doesn't have replaceable blocks
 					if (section.hasOnlyAir() || !section.maybeHas((b) -> IGOreGenUtils.canStateGenerate(b, parentMaterial.instance()))) {
 						continue;
 					}
 
-					// Calculate Y bounds for this section
 					int sectionMinY = SectionPos.sectionToBlockCoord(sectionIndex);
-					int sectionMaxY = sectionMinY + 15;
+					int fromY = Math.max(sectionMinY, lowestY);
+					int toY = Math.min(sectionMinY+16, highestY+1);
 
-					// Process this section
 					processChunkSection(
-							level, random, currentChunk, sectionMinY, sectionMaxY,
+							level, random, currentChunk, fromY, toY,
 							vein, associateChance, config.getDensity(), parentMaterial, friends, centerChunk
 					);
 				}
 			}
 		}
+	}
+
+	private static int configuredMinY(IGOreFeatureConfig config)
+	{
+		OreConfig ore = config.getConfig();
+		return ore!=null?IGServerConfig.getOrDefault(ore.minY): config.entry().getMinY();
+	}
+
+	private static int configuredMaxY(IGOreFeatureConfig config)
+	{
+		OreConfig ore = config.getConfig();
+		return ore!=null?IGServerConfig.getOrDefault(ore.maxY): config.entry().getMaxY();
 	}
 
 	private static void processChunkSection(
@@ -167,7 +183,6 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 						BlockState stoneState = chunk.getBlockState(new BlockPos(x,y,z));
 						if (stoneState.isAir()) continue;
 
-						// Determine material to use
 						MaterialHelper useMaterial = parentMaterial.instance();
 						if (useFriendMaterials && reusableFriendMaterial != null) {
 							useMaterial = reusableFriendMaterial;

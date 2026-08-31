@@ -355,7 +355,7 @@ public class IGRegistrationHolder {
                             if(hasExistingImplementation) continue;
                             for(MetalScaffoldingType type : MetalScaffoldingType.values())
                             {
-                                String registryKey = blockCategory.getRegistryKey(material) + "_" + type.name().toLowerCase();
+                                String registryKey = blockCategory.getRegistryKey(material) + "_" + type.name().toLowerCase(Locale.ROOT);
                                 Supplier<Block> blockProvider = () -> new IGScaffoldingBlock(type, material);
                                 registerBlock(registryKey, blockProvider);
                                 registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));

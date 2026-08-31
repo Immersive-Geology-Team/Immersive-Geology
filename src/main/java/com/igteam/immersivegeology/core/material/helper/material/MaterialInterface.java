@@ -30,6 +30,7 @@ import net.minecraftforge.fluids.FluidType;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedHashSet;
+import java.util.Locale;
 import java.util.Set;
 
 public interface MaterialInterface<T extends GeologyMaterial> {
@@ -153,7 +154,7 @@ public interface MaterialInterface<T extends GeologyMaterial> {
 
     default String getTranslationName()
     {
-        return Component.translatable("material.immersivegeology." + getName().toLowerCase()).getString();
+        return Component.translatable("material.immersivegeology." + getName().toLowerCase(Locale.ROOT)).getString();
     };
 
     default float getDefaultNoiseProbability()

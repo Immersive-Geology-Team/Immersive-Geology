@@ -32,6 +32,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import org.slf4j.Logger;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import static com.igteam.immersivegeology.core.material.GeologyMaterial.EXISTING_HELPER;
@@ -96,8 +97,8 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
     private void generateDrillHead(IGGenericDrillHead item)
     {
         String itemLocation = new ResourceLocation(IGLib.MODID, "item/" + item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base))).getPath();
-        ResourceLocation coloredTexture = new ResourceLocation(IGLib.MODID, "item/colored/" + item.getMaterial(MaterialTexture.base).getName() + "/" + item.getFlag().name().toLowerCase());
-        ResourceLocation texture = new ResourceLocation(IGLib.MODID, "palette/item/drill_head/drill_head_pristine_"+item.getMaterial(MaterialTexture.base).getName().toLowerCase());
+        ResourceLocation coloredTexture = new ResourceLocation(IGLib.MODID, "item/colored/" + item.getMaterial(MaterialTexture.base).getName() + "/" + item.getFlag().name().toLowerCase(Locale.ROOT));
+        ResourceLocation texture = new ResourceLocation(IGLib.MODID, "palette/item/drill_head/drill_head_pristine_"+item.getMaterial(MaterialTexture.base).getName().toLowerCase(Locale.ROOT));
         boolean colored = this.existingFileHelper.exists(new ResourceLocation(IGLib.MODID, "textures/" + coloredTexture.getPath()).withSuffix(".png"), PackType.CLIENT_RESOURCES);
         try {
             ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");
@@ -170,7 +171,7 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
     private void generateGenericOreItem(IGGenericOreItem item)
     {
         String itemLocation = new ResourceLocation(IGLib.MODID, "item/" + item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base))).getPath();
-        ResourceLocation coloredTexture = new ResourceLocation(IGLib.MODID, "item/colored/raw_ore/" + item.getMaterial(MaterialTexture.base).getName().toLowerCase() + "/" + item.getOreRichness().getSanitizedName());
+        ResourceLocation coloredTexture = new ResourceLocation(IGLib.MODID, "item/colored/raw_ore/" + item.getMaterial(MaterialTexture.base).getName().toLowerCase(Locale.ROOT) + "/" + item.getOreRichness().getSanitizedName());
         boolean color_exists = EXISTING_HELPER.exists(new ResourceLocation(IGLib.MODID, "textures/" + coloredTexture.getPath() + ".png"), CLIENT_RESOURCES);
         ResourceLocation useTextureBase = color_exists ? coloredTexture : item.getMaterial(MaterialTexture.base).getTextureLocation(item.getFlag());
 
@@ -232,7 +233,7 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
                     {
                         if(flags.contains(mod))
                         {
-                            prefix = mod.name().toLowerCase();
+                            prefix = mod.name().toLowerCase(Locale.ROOT);
                         }
                     }
 
@@ -246,8 +247,8 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
                 }
 
                 if(blockItem.getBlock() instanceof IGScaffoldingBlock scaffoldingBlock){
-                    String itemLocation = new ResourceLocation(IGLib.MODID, "item/scaffolding_" + scaffoldingBlock.getMaterial(MaterialTexture.base).getName().toLowerCase() + "_" + scaffoldingBlock.getScaffoldingType().name().toLowerCase()).getPath();
-                    ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "block/scaffolding/"+scaffoldingBlock.getMaterial(MaterialTexture.base).getName().toLowerCase()+"_scaffolding_"+scaffoldingBlock.getScaffoldingType().name().toLowerCase());
+                    String itemLocation = new ResourceLocation(IGLib.MODID, "item/scaffolding_" + scaffoldingBlock.getMaterial(MaterialTexture.base).getName().toLowerCase(Locale.ROOT) + "_" + scaffoldingBlock.getScaffoldingType().name().toLowerCase(Locale.ROOT)).getPath();
+                    ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "block/scaffolding/"+scaffoldingBlock.getMaterial(MaterialTexture.base).getName().toLowerCase(Locale.ROOT)+"_scaffolding_"+scaffoldingBlock.getScaffoldingType().name().toLowerCase(Locale.ROOT));
 
                     withExistingParent(itemLocation, parentLocation);
                     return;

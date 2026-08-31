@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration.TargetBlockState;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 public class MaterialStone extends GeologyMaterial {
@@ -57,6 +58,6 @@ public class MaterialStone extends GeologyMaterial {
 
     public String getTFCStoneLoc()
     {
-        return "tfc:rock/raw/" + getName().toLowerCase();
+        return "tfc:rock/raw/" + getName().toLowerCase(Locale.ROOT);
     }
 }

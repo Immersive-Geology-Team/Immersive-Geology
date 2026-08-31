@@ -33,6 +33,7 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.Collection;
+import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
@@ -148,7 +149,7 @@ public class IGItemTags extends ItemTagsProvider
 				if(useOptionalTag)
 				{
 					useOptionalTag = false;
-					String name = oreBlock.getIGDescriptionId().toLowerCase();
+					String name = oreBlock.getIGDescriptionId().toLowerCase(Locale.ROOT);
 					String id = name.substring(name.lastIndexOf('.')+1);
 					tag(Tags.Items.ORES).addOptional(new ResourceLocation(IGLib.MODID, id));
 					continue;

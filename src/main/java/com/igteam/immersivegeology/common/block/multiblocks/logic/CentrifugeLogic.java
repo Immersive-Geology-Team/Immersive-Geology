@@ -34,6 +34,7 @@ import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler.IOConstraintGroup;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler.IntRange;
+import com.igteam.immersivegeology.common.block.helper.IGReceiveOnlyEnergy;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.CentrifugeLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.CentrifugeRecipe;
@@ -247,7 +248,7 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
         {
             final Supplier<@Nullable Level> getLevel = ctx.levelSupplier();
             this.rotation = 0;
-            this.energyCap = new StoredCapability<>(this.energy);
+            this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.energy));
             this.output = new DroppingMultiblockOutput(OUTPUT_POS, ctx);
             this.processor = new MultiblockProcessor<>(
                 16, 0, 8, ctx.getMarkDirtyRunnable(), CentrifugeRecipe.RECIPES::getById

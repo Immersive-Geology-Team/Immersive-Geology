@@ -2,7 +2,6 @@ package com.igteam.immersivegeology.common.network;
 
 import blusunrize.immersiveengineering.common.network.IMessage;
 import blusunrize.immersiveengineering.common.network.MessageMagnetEquip;
-import com.igteam.immersivegeology.common.network.msg.MessageSCRFail;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
@@ -39,7 +38,6 @@ public class IGPacketHandler
 
 	public static void initialize()
 	{
-		handler.registerMessage(MessageSCRFail.class, MessageSCRFail::new);
 	}
 
 	private <T extends IMessage> void registerMessage(Class<T> packetType, Function<FriendlyByteBuf, T> decoder) {

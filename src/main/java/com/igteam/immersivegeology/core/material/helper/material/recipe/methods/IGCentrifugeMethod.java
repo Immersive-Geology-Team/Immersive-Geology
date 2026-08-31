@@ -31,6 +31,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Locale;
 import java.util.function.Consumer;
 
 public class IGCentrifugeMethod extends IGRecipeMethod
@@ -58,7 +59,7 @@ public class IGCentrifugeMethod extends IGRecipeMethod
 
 	public IGCentrifugeMethod create(TagKey<Fluid> input_fluid_tag, int input_amount, MaterialHelper output_material, Item output_item, int item_output_amount, Fluid primary_fluid_output, int primary_fluid_amount, Fluid secondary_fluid_output, int secondary_fluid_amount, int time, int energy) {
 
-		String tag_name = input_fluid_tag.toString().toLowerCase();
+		String tag_name = input_fluid_tag.toString().toLowerCase(Locale.ROOT);
 		String serialized_tag_name = tag_name.substring(tag_name.lastIndexOf(":") + 1, tag_name.lastIndexOf("]"));
 
 		this.name = serialized_tag_name + "_to_" + output_material.getPrimaryProduct().getName() + "_centrifuge";

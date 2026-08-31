@@ -31,6 +31,7 @@ import blusunrize.immersiveengineering.common.register.IEFluids;
 import blusunrize.immersiveengineering.common.register.IEParticles;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.MultiFluidTank;
+import com.igteam.immersivegeology.common.block.helper.IGReceiveOnlyEnergy;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.CoreDrillLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.ISkinnableMultiblockLogic;
@@ -408,7 +409,7 @@ public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServer
             // Allows us to 'fill' it
             this.fluidOutput = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, FLUID_OUTPUT.face().offsetRelative(FLUID_OUTPUT.posInMultiblock(), 1), FLUID_OUTPUT.face());
             this.processor = new MultiblockProcessor<>(2048, 0, 1, ctx.getMarkDirtyRunnable(), CoreDrillRecipe.RECIPES::getById);
-            this.energyCap = new StoredCapability<>(this.energy);
+            this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.energy));
             Runnable changedAndSync = () -> {
                 ctx.getSyncRunnable().run();
                 ctx.getMarkDirtyRunnable().run();

@@ -19,7 +19,6 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
@@ -30,6 +29,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -52,14 +52,14 @@ public class IGFluidType extends FluidType
 	@Override
 	public Component getDescription()
 	{
-		List<String> materialList = new ArrayList<>();
+		List<Component> materialList = new ArrayList<>();
 		String type = "";
 
 		MaterialInterface<?> baseMaterial = base;
 		MaterialInterface<?> overlayMaterial = overlay;
 
 		if(baseMaterial instanceof MaterialMetal){
-			materialList.add(I18n.get("material.immersivegeology.fluid_type.molten"));
+			materialList.add(Component.translatable("material.immersivegeology.fluid_type.molten"));
 			type = "_molten";
 		}
 
@@ -67,32 +67,32 @@ public class IGFluidType extends FluidType
 		{
 			if(chemical_base.hasComplexNamingScheme())
 			{
-				materialList.add(I18n.get("component.immersivegeology." + baseMaterial.getName()));
-				materialList.add(I18n.get("component.immersivegeology." + overlayMaterial.getName()));
-				return Component.translatable("fluid.immersivegeology." + category.getName().toLowerCase() + type, materialList.toArray());
+				materialList.add(Component.translatable("component.immersivegeology." + baseMaterial.getName()));
+				materialList.add(Component.translatable("component.immersivegeology." + overlayMaterial.getName()));
+				return Component.translatable("fluid.immersivegeology." + category.getName().toLowerCase(Locale.ROOT) + type, materialList.toArray());
 			} else
 			{
-				materialList.add(I18n.get("material.immersivegeology."+overlayMaterial.getName()));
-				materialList.add(I18n.get("component.immersivegeology."+baseMaterial.getName()));
+				materialList.add(Component.translatable("material.immersivegeology."+overlayMaterial.getName()));
+				materialList.add(Component.translatable("component.immersivegeology."+baseMaterial.getName()));
 			}
 		}
 
 		if (baseMaterial != null) {
-			materialList.add(I18n.get("material.immersivegeology." + baseMaterial.getName()));
+			materialList.add(Component.translatable("material.immersivegeology." + baseMaterial.getName()));
 		}
 		if (overlayMaterial != null) {
-			materialList.add(I18n.get("material.immersivegeology." + overlayMaterial.getName()));
+			materialList.add(Component.translatable("material.immersivegeology." + overlayMaterial.getName()));
 		}
-		if(category.equals(BlockCategoryFlags.SLURRY)) materialList.add(I18n.get("material.immersivegeology.fluid_type.clean_slurry"));
-		if(category.equals(BlockCategoryFlags.CLOUDY_SLURRY)) materialList.add(I18n.get("material.immersivegeology.fluid_type.cloudy_slurry"));
+		if(category.equals(BlockCategoryFlags.SLURRY)) materialList.add(Component.translatable("material.immersivegeology.fluid_type.clean_slurry"));
+		if(category.equals(BlockCategoryFlags.CLOUDY_SLURRY)) materialList.add(Component.translatable("material.immersivegeology.fluid_type.cloudy_slurry"));
 
-		return Component.translatable("fluid.immersivegeology." + category.getName().toLowerCase() + type, materialList.toArray());
+		return Component.translatable("fluid.immersivegeology." + category.getName().toLowerCase(Locale.ROOT) + type, materialList.toArray());
 	}
 
 	@Override
 	public Component getDescription(FluidStack stack)
 	{
-		List<String> materialList = new ArrayList<>();
+		List<Component> materialList = new ArrayList<>();
 		String type = "fluid";
 		MaterialInterface<?> baseMaterial = base;
 		MaterialInterface<?> overlayMaterial = overlay;
@@ -103,20 +103,20 @@ public class IGFluidType extends FluidType
 
 		if(baseMaterial instanceof ChemicalEnum chemical_base && overlayMaterial != null)
 		{
-			type = category.getName().toLowerCase();
+			type = category.getName().toLowerCase(Locale.ROOT);
 			if(chemical_base.hasComplexNamingScheme())
 			{
-				materialList.add(I18n.get("component.immersivegeology."+baseMaterial.getName()));
-				materialList.add(I18n.get("component.immersivegeology."+overlayMaterial.getName()));
+				materialList.add(Component.translatable("component.immersivegeology."+baseMaterial.getName()));
+				materialList.add(Component.translatable("component.immersivegeology."+overlayMaterial.getName()));
 				type = category.equals(BlockCategoryFlags.CLOUDY_SLURRY) ? "cloudy_complex_slurry" : "complex_slurry";
 			}
 			else
 			{
-				materialList.add(I18n.get("material.immersivegeology."+overlayMaterial.getName()));
-				materialList.add(I18n.get("component.immersivegeology."+baseMaterial.getName()));
+				materialList.add(Component.translatable("material.immersivegeology."+overlayMaterial.getName()));
+				materialList.add(Component.translatable("component.immersivegeology."+baseMaterial.getName()));
 			}
 		} else {
-			materialList.add(I18n.get("material.immersivegeology." + baseMaterial.getName()));
+			materialList.add(Component.translatable("material.immersivegeology." + baseMaterial.getName()));
 		}
 
 		return Component.translatable("fluid.immersivegeology." + type, materialList.toArray());

@@ -27,6 +27,7 @@ import blusunrize.immersiveengineering.common.blocks.multiblocks.process.Process
 import blusunrize.immersiveengineering.common.util.DroppingMultiblockOutput;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.InsertOnlyInventory;
+import com.igteam.immersivegeology.common.block.helper.IGReceiveOnlyEnergy;
 import com.igteam.immersivegeology.common.block.multiblocks.IGBallmillMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.BloomeryLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
@@ -139,7 +140,7 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
         Supplier<@Nullable Level> levelGetter;
         public State(IInitialMultiblockContext<State> ctx){
             this.rotation = 0;
-            this.energyCap = new StoredCapability<>(this.energy);
+            this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.energy));
             this.output = new DroppingMultiblockOutput(OUTPUT_POS, ctx);
             this.processor = new MultiblockProcessor<>(64, 0, 8, ctx.getMarkDirtyRunnable(), BallmillRecipe.RECIPES::getById);
             final Supplier<@Nullable Level> levelGetter = ctx.levelSupplier();

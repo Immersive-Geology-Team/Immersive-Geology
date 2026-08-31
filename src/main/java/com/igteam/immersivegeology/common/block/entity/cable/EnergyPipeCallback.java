@@ -124,7 +124,7 @@ public class EnergyPipeCallback implements BlockCallback<EnergyPipeCallback.Key>
 					}
 				}
 				if(!hasAddedStraight) {
-					parts.add("pipe_" + d.getName().toLowerCase());
+					parts.add("pipe_" + d.getName().toLowerCase(Locale.ROOT));
 				}
 				addedDirections.add(f);
 			}

@@ -1,4 +1,7 @@
 package com.igteam.immersivegeology.core.material.helper.material;
+
+import java.util.Locale;
+
 public enum CrystalFamily {
     CUBIC,
     HEXAGONAL,
@@ -23,6 +26,6 @@ public enum CrystalFamily {
      */
 
     public String getName() {
-        return name().toLowerCase();
+        return name().toLowerCase(Locale.ROOT);
     }
 }

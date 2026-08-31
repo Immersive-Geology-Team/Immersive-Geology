@@ -30,6 +30,7 @@ import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler.IOConstraintGroup;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler.IntRange;
+import com.igteam.immersivegeology.common.block.helper.IGReceiveOnlyEnergy;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.CrystallizerLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.CrystallizerRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.FoundryRecipe;
@@ -168,7 +169,7 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
         public final FluidTank tank = new FluidTank(TANK_VOLUME);
 
         public State(IInitialMultiblockContext<State> ctx){
-            this.energyCap = new StoredCapability<>(this.energy);
+            this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.energy));
             this.output = ctx.getCapabilityAt(ForgeCapabilities.ITEM_HANDLER, OUTPUT_POS);
             this.processor = new MultiblockProcessor<>(
                     1, 0, 1, ctx.getMarkDirtyRunnable(), FoundryRecipe.RECIPES::getById

@@ -48,8 +48,8 @@ public class IGAtlasProvider implements DataProvider {
 		{
 			for(OreRichness richness : OreRichness.values())
 			{
-				textures.add("palette/block/ore_bearing/" + vein_type + "/" + richness.name().toLowerCase() + "_1");
-				textures.add("palette/block/ore_bearing/" + vein_type + "/" + richness.name().toLowerCase() + "_2");
+				textures.add("palette/block/ore_bearing/" + vein_type + "/" + richness.name().toLowerCase(Locale.ROOT) + "_1");
+				textures.add("palette/block/ore_bearing/" + vein_type + "/" + richness.name().toLowerCase(Locale.ROOT) + "_2");
 			}
 		}
 		for(ItemCategoryFlags flag : ItemCategoryFlags.values())
@@ -108,7 +108,7 @@ public class IGAtlasProvider implements DataProvider {
 		JsonObject permutationsObj = new JsonObject();
 		for (String item : paletteItems) {
 			if(item.equalsIgnoreCase("kaolinite")) continue;
-			permutationsObj.addProperty(item.toLowerCase().substring(item.lastIndexOf('/')+1) + "_" + item.substring(0,item.lastIndexOf('/')), "immersivegeology:color_palettes/" + paletteKey + "/" + item.toLowerCase());
+			permutationsObj.addProperty(item.toLowerCase(Locale.ROOT).substring(item.lastIndexOf('/')+1) + "_" + item.substring(0,item.lastIndexOf('/')), "immersivegeology:color_palettes/" + paletteKey + "/" + item.toLowerCase(Locale.ROOT));
 		}
 		paletteObj.add("permutations", permutationsObj);
 
@@ -167,7 +167,7 @@ public class IGAtlasProvider implements DataProvider {
 			JsonObject permutationsObj = new JsonObject();
 			for (String item : entries) {
 				if(item.equalsIgnoreCase("kaolinite")) continue;
-				permutationsObj.addProperty(item.toLowerCase().substring(item.lastIndexOf('/')+1) + "_" + item.substring(0,item.lastIndexOf('/')), paletteLoc.toString() + "/" + item.toLowerCase());
+				permutationsObj.addProperty(item.toLowerCase(Locale.ROOT).substring(item.lastIndexOf('/')+1) + "_" + item.substring(0,item.lastIndexOf('/')), paletteLoc.toString() + "/" + item.toLowerCase(Locale.ROOT));
 			}
 			obj.add("permutations", permutationsObj);
 		}
