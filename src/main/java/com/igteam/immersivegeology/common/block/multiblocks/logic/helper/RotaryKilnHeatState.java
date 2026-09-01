@@ -11,12 +11,11 @@ package com.igteam.immersivegeology.common.block.multiblocks.logic.helper;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic.State;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
-import net.minecraft.world.level.Level;
 
-import java.util.List;
-import java.util.Objects;
-
+/**
+ * Drives the kiln's heat each tick. Power buys heat, recipes spend it; every state either
+ * pays its upkeep out of the energy buffer or bleeds heat at {@link #PASSIVE_COOL_RATE}.
+ */
 public enum RotaryKilnHeatState
 {
 	HEATING_UP
@@ -25,21 +24,14 @@ public enum RotaryKilnHeatState
 				public void execute(IMultiblockContext<State> context)
 				{
 					State state = context.getState();
-					Level level = context.getLevel().getRawLevel();
-					int energy = state.total_energy.getEnergyStored();
-					float currentHeat = state.getHeat();
-					float targetHeat = state.getTargetHeat();
-					int processing = state.getProcessorQueue().size();
-					int energyCostToRaiseHeat = energyCostForHeat(currentHeat);
-
-					if(energy > energyCostToRaiseHeat)
+					if(!payUpkeep(state, HEATING_UPKEEP))
 					{
-						state.total_energy.extractEnergy(energyCostToRaiseHeat, false);
-						state.modifyHeat(0.7f - (0.05f * processing));
+						state.modifyHeat(-PASSIVE_COOL_RATE);
+						return;
 					}
-					else {
-						state.modifyHeat(-0.5f * processing);
-					}
+					// A fuller kiln has more mass to bring up to temperature, so it heats slower
+					int processing = state.getProcessorQueue().size();
+					state.modifyHeat(BASE_HEAT_RATE-(HEAT_RATE_LOAD_PENALTY*processing));
 				}
 			},
 	COOLING_DOWN
@@ -47,10 +39,7 @@ public enum RotaryKilnHeatState
 				@Override
 				public void execute(IMultiblockContext<State> context)
 				{
-					State state = context.getState();
-					float currentHeat = state.getHeat();
-					if(currentHeat > 0) state.modifyHeat(-0.05f);
-					if(currentHeat < 0) state.setHeat(0f);
+					context.getState().modifyHeat(-PASSIVE_COOL_RATE);
 				}
 			},
 	MACHINE_OFF
@@ -58,10 +47,7 @@ public enum RotaryKilnHeatState
 				@Override
 				public void execute(IMultiblockContext<State> context)
 				{
-					State state = context.getState();
-					float currentHeat = state.getHeat();
-					if(currentHeat > 0) state.modifyHeat(-1f);
-					if(currentHeat < 0) state.setHeat(0f);
+					context.getState().modifyHeat(-PASSIVE_COOL_RATE);
 				}
 			},
 	MAINTAINING_HEAT
@@ -70,21 +56,12 @@ public enum RotaryKilnHeatState
 				public void execute(IMultiblockContext<State> context)
 				{
 					State state = context.getState();
-					Level level = context.getLevel().getRawLevel();
-					int energy = state.total_energy.getEnergyStored();
-					float currentHeat = state.getHeat();
-					float targetHeat = state.getTargetHeat();
-
-					int energyCostToRaiseHeat = (int) (energyCostForHeat(currentHeat) * 0.9f);
-					if(energy > energyCostToRaiseHeat)
+					if(!payUpkeep(state, IDLE_UPKEEP))
 					{
-						state.total_energy.extractEnergy(energyCostToRaiseHeat, false);
-						float modDir = -1;
-						if(currentHeat < targetHeat) modDir = 1;
-						state.modifyHeat(modDir * 0.02f);
+						state.modifyHeat(-PASSIVE_COOL_RATE);
 						return;
 					}
-					state.modifyHeat(-0.6f);
+					state.modifyHeat(state.getHeat() < state.getTargetHeat()? HOLD_HEAT_RATE: -HOLD_HEAT_RATE);
 				}
 			},
 	RUNNING_RECIPE
@@ -93,32 +70,68 @@ public enum RotaryKilnHeatState
 				public void execute(IMultiblockContext<State> context)
 				{
 					State state = context.getState();
-					int energy = state.total_energy.getEnergyStored();
-					float currentHeat = state.getHeat();
-					int processing = state.getProcessorQueue().size();
-					int energyCostToRaiseHeat = (int) (energyCostForHeat(currentHeat) * 0.9f);
-
-					if(energy > energyCostToRaiseHeat)
-					{
-						state.total_energy.extractEnergy(energyCostToRaiseHeat, false);
-						return;
-					}
-					state.modifyHeat(-0.5f * processing);
+					// Heat itself is drawn down by the processes, see State#consumeProcessHeat
+					if(!payUpkeep(state, runningUpkeep(state.getProcessorQueue().size())))
+						state.modifyHeat(-PASSIVE_COOL_RATE);
 				}
 			};
 
-	private static final float lv_heat_target = 45;
-	private static final float mv_heat_target = 75;
-	private static final float hv_heat_target = 145;
-	private static final float ehv_heat_target = 165;
+	/**
+	 * The one rate at which heat bleeds away whenever the kiln is not paying upkeep, whether
+	 * that is because it is too hot, switched off, or out of power. Cooling is the same
+	 * process in all three cases, so it runs at the same speed in all three.
+	 */
+	private static final float PASSIVE_COOL_RATE = 0.05f;
+	/** Heat gained per tick while climbing to the target, before the load penalty below. */
+	private static final float BASE_HEAT_RATE = 0.7f;
+	private static final float HEAT_RATE_LOAD_PENALTY = 0.05f;
+	/** How hard the kiln nudges itself back onto the target once it is sitting on it. */
+	private static final float HOLD_HEAT_RATE = 0.02f;
+
+	/** Reaching a heat tier costs the full input power that tier is defined by. */
+	private static final float HEATING_UPKEEP = 1.00f;
+	/** Holding a tier with nothing to process is cheaper. */
+	private static final float IDLE_UPKEEP = 0.33f;
+	/** Running costs between these, scaling with how much of the queue is in use. */
+	private static final float MIN_RUNNING_UPKEEP = 0.25f;
+	private static final float MAX_RUNNING_UPKEEP = 0.75f;
 
 	private static final float lv_cost_cutoff = 5f;
 	private static final float mv_cost_cutoff = 31;
 	private static final float hv_cost_cutoff = 76f;
 	private static final float ehv_cost_cutoff = 121;
 
-	public void execute(IMultiblockContext<RotaryKilnLogic.State> context){};
+	public abstract void execute(IMultiblockContext<RotaryKilnLogic.State> context);
 
+	/**
+	 * Upkeep for a kiln running {@code processing} recipes, ramping from
+	 * {@link #MIN_RUNNING_UPKEEP} at one recipe to {@link #MAX_RUNNING_UPKEEP} at a full queue.
+	 */
+	private static float runningUpkeep(int processing)
+	{
+		int slots = RotaryKilnLogic.MAX_PROCESSES;
+		if(slots < 2) return MAX_RUNNING_UPKEEP;
+		int clamped = Math.max(1, Math.min(processing, slots));
+		return MIN_RUNNING_UPKEEP+(MAX_RUNNING_UPKEEP-MIN_RUNNING_UPKEEP)*((float)(clamped-1)/(slots-1));
+	}
+
+	/**
+	 * Draws this tick's upkeep out of the buffer, returning false (drawing nothing) if the
+	 * kiln cannot cover it in full.
+	 */
+	private static boolean payUpkeep(State state, float upkeepFraction)
+	{
+		int cost = Math.round(energyCostForHeat(state.getHeat())*upkeepFraction);
+		if(cost <= 0) return true;
+		if(state.getEnergy().getEnergyStored() < cost) return false;
+		state.getEnergy().extractEnergy(cost, false);
+		return true;
+	}
+
+	/**
+	 * Power needed to hold the kiln at {@code heat}. Each step is set so that the cost at a
+	 * tier's cap equals the input power that tier is reached at, see RotaryKilnLogic.
+	 */
 	private static int energyCostForHeat(float heat)
 	{
 		int upkeepCost = 0;

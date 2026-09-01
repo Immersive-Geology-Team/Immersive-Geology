@@ -15,6 +15,7 @@ import blusunrize.lib.manual.ManualEntry.SpecialElementData;
 import blusunrize.lib.manual.Tree.InnerNode;
 import com.igteam.immersivegeology.client.manual.IGRecipeOverview;
 import com.igteam.immersivegeology.client.menu.IGCrateScreen;
+import com.igteam.immersivegeology.client.menu.IGMetalDetectorScreen;
 import com.igteam.immersivegeology.client.menu.multiblock.*;
 import com.igteam.immersivegeology.common.block.entity.cable.IGEnergyPipeEntity;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
@@ -143,6 +144,7 @@ public class IGContent {
         MenuScreens.register(IGMenuTypes.SMALL_CHEMICAL_REACTOR.getType(), SmallChemicalReactorScreen::new);
         MenuScreens.register(IGMenuTypes.ROTARY_KILN.getType(), RotaryKilnScreen::new);
         MenuScreens.register(IGMenuTypes.CRATE.get(), IGCrateScreen.StandardIGCrate::new);
+        MenuScreens.register(IGMenuTypes.METAL_DETECTOR.get(), IGMetalDetectorScreen::new);
     }
 
     public static void initializeManualEntries()

@@ -209,6 +209,11 @@ public class IGBlockTags extends BlockTagsProvider
 		IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> tag = this.tag(BlockTags.MINEABLE_WITH_PICKAXE);
 		for(MultiblockRegistration<?> multi : ALL_IG_MULTIBLOCKS) tag.add(multi.block().get());
 
+		// Devices are plain blocks rather than one of the material driven types the loop above matches on, so
+		// nothing up there reaches them. The detector asks for the correct tool before it drops, which without a
+		// mineable tag is a tool that does not exist.
+		tag.add(IGRegistrationHolder.getBlockRegistryMap().get(IGRegistrationHolder.METAL_DETECTOR_KEY).get());
+
 
 		IGLib.IG_LOGGER.info("Finished Registration of Immersive Geology Block Tags");
 	}

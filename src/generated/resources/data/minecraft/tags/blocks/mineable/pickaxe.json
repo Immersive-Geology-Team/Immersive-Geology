@@ -5473,6 +5473,7 @@
     "immersivegeology:steam_turbine",
     "immersivegeology:geothermal_exchanger",
     "immersivegeology:small_chemical_reactor",
-    "immersivegeology:alternator"
+    "immersivegeology:alternator",
+    "immersivegeology:metal_detector"
   ]
 }

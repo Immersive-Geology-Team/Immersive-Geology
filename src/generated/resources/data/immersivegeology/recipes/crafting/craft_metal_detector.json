@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "immersiveengineering:coil_lv"
+    },
+    "S": {
+      "tag": "forge:ingots/steel"
+    },
+    "n": {
+      "tag": "forge:plates/neodymium"
+    },
+    "s": {
+      "tag": "forge:ingots/silicon"
+    }
+  },
+  "pattern": [
+    "nnn",
+    "sCs",
+    "SSS"
+  ],
+  "result": {
+    "item": "immersivegeology:metal_detector"
+  },
+  "show_notification": true
+}

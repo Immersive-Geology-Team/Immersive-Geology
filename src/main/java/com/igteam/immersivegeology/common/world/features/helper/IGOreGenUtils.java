@@ -162,8 +162,9 @@ public class IGOreGenUtils
 		}
 		return 0;
 	}
-	static BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
 	private static int countViableLocationsInSection(ChunkAccess chunk,int minY, int maxY, Vein vein, ChunkPos centreChunk) {
+		// Kept local: world generation calls this from several worker threads at once.
+		BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
 		int viablePositions = 0;
 		ChunkPos chunkPos = chunk.getPos();
 		MaterialHelper mineral = vein.material().instance();
@@ -186,19 +187,26 @@ public class IGOreGenUtils
 	}
 
 	public static double noise(ChunkPos pos, int x, int y, int z, @NotNull Vein vein, ChunkPos centerChunkPos) {
+		return noise(pos.getMinBlockX()+x, y, pos.getMinBlockZ()+z, vein, centerChunkPos);
+	}
+
+	/**
+	 * Vein density at an absolute world position. Depends only on the world position, the vein's noise and the
+	 * chunk the vein is centred on, so it can be evaluated without touching (or generating) any chunk.
+	 */
+	public static double noise(int worldX, int worldY, int worldZ, @NotNull Vein vein, ChunkPos centerChunkPos) {
 		INoise3D noiseGen = vein.noise();
 		BlockPos middleBlockPosition = centerChunkPos.getMiddleBlockPosition(0);
-		BlockPos currentBlockPosition = pos.getBlockAt(x,y,z);
 
-		double dx = currentBlockPosition.getX() - middleBlockPosition.getX();
-		double dz = currentBlockPosition.getZ() - middleBlockPosition.getZ();
+		double dx = worldX - middleBlockPosition.getX();
+		double dz = worldZ - middleBlockPosition.getZ();
 		double horizontalDistance = Math.hypot(dx, dz);
 
 		double radius = 24.0;
 		double outerThreshold = 16.0;
 		double boundaryMultiplication = getBoundaryMultiplication(horizontalDistance, outerThreshold, radius);
 
-		return noiseGen.noise(currentBlockPosition) * boundaryMultiplication;
+		return noiseGen.noise(worldX, worldY, worldZ) * boundaryMultiplication;
 	}
 
 	private static double getBoundaryMultiplication(double horizontalDistance, double outerThreshold, double radius)

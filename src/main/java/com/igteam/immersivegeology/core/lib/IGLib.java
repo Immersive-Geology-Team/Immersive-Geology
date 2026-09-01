@@ -55,6 +55,7 @@ public class IGLib {
     public static final String GUIID_RotaryKiln= "rotary_kiln";
     public static final String GUIID_GeothermalExchanger= "geothermal_exchanger";
     public static final String GUIID_Crate = "crate_menu";
+    public static final String GUIID_MetalDetector = "metal_detector";
 	public static final int PELLETIZER_DEFAULT_TIME = 600;
 
 

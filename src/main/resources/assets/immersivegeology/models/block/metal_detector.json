@@ -1,0 +1,11 @@
+{
+  "loader": "forge:obj",
+  "render_type": "minecraft:cutout",
+  "_comment": "28px tall, so the upper half is drawn by the lower block. Forge would cullface any quad lying on a unit-cube plane, and those get tested against the LOWER block's neighbours.",
+  "automatic_culling": false,
+  "flip_v": true,
+  "model": "immersivegeology:models/block/obj/metal_detector.obj",
+  "textures": {
+    "particle": "immersivegeology:block/static_block/metal_detector"
+  }
+}

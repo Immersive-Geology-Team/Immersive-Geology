@@ -20,10 +20,15 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockS
 import blusunrize.immersiveengineering.common.blocks.metal.MetalScaffoldingType;
 import com.google.common.collect.ImmutableSet;
 import com.igteam.immersivegeology.client.menu.IGItemGroup;
+import com.igteam.immersivegeology.client.menu.ItemSubGroup;
+import com.igteam.immersivegeology.common.item.IGMetalDetectorItem;
+import com.igteam.immersivegeology.common.item.IGUshankaItem;
 import com.igteam.immersivegeology.common.block.*;
 import com.igteam.immersivegeology.common.block.entity.cable.IGEnergyPipe;
 import com.igteam.immersivegeology.common.block.entity.cable.IGEnergyPipeEntity;
 import com.igteam.immersivegeology.common.block.entity.crate.IGCrateEntity;
+import com.igteam.immersivegeology.common.block.entity.device.IGMetalDetector;
+import com.igteam.immersivegeology.common.block.entity.device.IGMetalDetectorEntity;
 import com.igteam.immersivegeology.common.block.entity.crate.IGCrateEntityType;
 import com.igteam.immersivegeology.common.block.entity.vent.IGHydroVent;
 import com.igteam.immersivegeology.common.block.entity.vent.IGHydroVentEntity;
@@ -64,6 +69,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -250,11 +256,20 @@ public class IGRegistrationHolder {
     }
 
     public static RegistryObject<BlockEntityType<IGEnergyPipeEntity>> ENERGY_PIPE;
+    public static RegistryObject<BlockEntityType<IGMetalDetectorEntity>> METAL_DETECTOR;
+    public static final String METAL_DETECTOR_KEY = "metal_detector";
+    public static final String USHANKA_KEY = "armor_russian_helmet";
     public static RegistryObject<BlockEntityType<IGHydroVentEntity>> IG_HYDROVENT;
     public static void initialize()
     {
 
         IGLib.IG_LOGGER.info("- Static Items and Blocks");
+        registerBlock(METAL_DETECTOR_KEY, IGMetalDetector::new);
+        registerItem(METAL_DETECTOR_KEY, () -> new IGMetalDetectorItem(getBlock.apply(METAL_DETECTOR_KEY)));
+
+        IGItemGroup.addLooseItem(ItemSubGroup.structural, () -> getItem.apply(METAL_DETECTOR_KEY));
+        registerItem(USHANKA_KEY, IGUshankaItem::new);
+        IGItemGroup.addLooseItem(ItemSubGroup.structural, () -> getItem.apply(USHANKA_KEY));
         registerItem("prospector_kit", () -> new IGMineralTestingItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, 128));
         registerItem("prospector_kit_steel", () -> new IGMineralTestingItem(ItemCategoryFlags.MISC, MetalEnum.StainlessSteel, 4096));
         registerItem(ItemCategoryFlags.HAMMER.getRegistryKey(MetalEnum.Bronze), () -> new IGMBFormationItem(ItemCategoryFlags.HAMMER, MetalEnum.Bronze, 256));
@@ -476,6 +491,7 @@ public class IGRegistrationHolder {
         }
 
         ENERGY_PIPE = TE_REGISTER.register("energy_pipe_type", makeType(IGEnergyPipeEntity::new, () -> MiscEnum.Cable.getBlock(BlockCategoryFlags.ENERGY_PIPE)));
+        METAL_DETECTOR = TE_REGISTER.register("metal_detector_type", makeType((pos, state) -> new IGMetalDetectorEntity(METAL_DETECTOR.get(), pos, state), () -> getBlock.apply(METAL_DETECTOR_KEY)));
 
         IGLib.IG_LOGGER.info("Finished");
     }

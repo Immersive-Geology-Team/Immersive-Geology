@@ -19,7 +19,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Rotation;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.util.*;
+import java.util.function.Supplier;
 
 public class IGItemGroup extends CreativeModeTab {
     private static final ResourceLocation GEOLOGIC_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/backgrounds/geologic.png");
@@ -35,6 +37,21 @@ public class IGItemGroup extends CreativeModeTab {
     private static final ResourceLocation STRUCTURAL_TAB_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/tabs/structural.png");
 
     public static ItemSubGroup selectedGroup = ItemSubGroup.geologic;
+
+    private static final Map<ItemSubGroup, List<Supplier<Item>>> LOOSE_ITEMS = new EnumMap<>(ItemSubGroup.class);
+
+    public static void addLooseItem(ItemSubGroup group, Supplier<Item> item)
+    {
+        LOOSE_ITEMS.computeIfAbsent(group, ignored -> new ArrayList<>()).add(item);
+    }
+
+    private static void addLooseItems(Collection<ItemStack> target, @Nullable ItemSubGroup group)
+    {
+        LOOSE_ITEMS.forEach((itemGroup, items) -> {
+            if(group!=null&&itemGroup!=group) return;
+            for(Supplier<Item> item : items) target.add(new ItemStack(item.get()));
+        });
+    }
 
     public IGItemGroup(CreativeModeTab.Builder builder)
     {
@@ -127,6 +144,7 @@ public class IGItemGroup extends CreativeModeTab {
                     }
                 }
             }
+            addLooseItems(ret, selectedGroup);
         }
         return ret;
     }
@@ -171,6 +189,7 @@ public class IGItemGroup extends CreativeModeTab {
                     }
                 }
             }
+            addLooseItems(dis, null);
         }
         return dis;
     }

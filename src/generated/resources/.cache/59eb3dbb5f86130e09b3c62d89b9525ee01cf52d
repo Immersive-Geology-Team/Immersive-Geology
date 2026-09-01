@@ -1,4 +1,4 @@
-// 1.20.1	2026-09-01T00:35:11.932385461	Loot Tables
+// 1.20.1	2026-09-04T19:12:56.63925566	Loot Tables
 c3ba476a910748a3d60d066f18bc407bd29bb957 data/immersivegeology/loot_tables/blocks/advanced_engineering_block_rusty_metal.json
 5a9587d2bf0beba3f09dd6c63758d544de7dbe0f data/immersivegeology/loot_tables/blocks/alternator.json
 5669eb705e091e12e49ef2aa7f900b9f9d5ceddd data/immersivegeology/loot_tables/blocks/ballmill.json
@@ -34,6 +34,7 @@ d976637b324654c1e2778ed2ef92ed372ba012ab data/immersivegeology/loot_tables/block
 b34aa6c12bafd2f3248648113d3f9f7e8eed9e95 data/immersivegeology/loot_tables/blocks/gravity_separator.json
 760f855ee5ffa1e92b53a851aeb85086001d4ea0 data/immersivegeology/loot_tables/blocks/hydrovent_hydrogen_sulfide.json
 b5d3bb5fd3b4c708cff6e55c6e9c2f05705db986 data/immersivegeology/loot_tables/blocks/hydrovent_sulfur_dioxide.json
+15a1188c61949202c0d532518ee51e6488dd90b7 data/immersivegeology/loot_tables/blocks/metal_detector.json
 d32c2bf5ab95ff932874a19ba286738907f73b14 data/immersivegeology/loot_tables/blocks/minecraft_normal_ore_block_acanthite_basalt.json
 95fa587d11375594fda348abc25fca41c382e478 data/immersivegeology/loot_tables/blocks/minecraft_normal_ore_block_acanthite_netherrack.json
 cd251e7f1c187ff1e3af3f4fcd5fcb910528cf72 data/immersivegeology/loot_tables/blocks/minecraft_normal_ore_block_alumina_end_stone.json

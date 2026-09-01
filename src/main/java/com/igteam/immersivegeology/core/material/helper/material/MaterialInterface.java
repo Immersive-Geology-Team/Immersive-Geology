@@ -152,9 +152,18 @@ public interface MaterialInterface<T extends GeologyMaterial> {
         return null;
     }
 
+    /**
+     * Prefer this over {@link #getTranslationName()} for anything sent to a player: a dedicated server has no mod
+     * language files loaded, so resolving the key there yields the key itself.
+     */
+    default Component getTranslation()
+    {
+        return Component.translatable("material.immersivegeology." + getName().toLowerCase(Locale.ROOT));
+    };
+
     default String getTranslationName()
     {
-        return Component.translatable("material.immersivegeology." + getName().toLowerCase(Locale.ROOT)).getString();
+        return getTranslation().getString();
     };
 
     default float getDefaultNoiseProbability()

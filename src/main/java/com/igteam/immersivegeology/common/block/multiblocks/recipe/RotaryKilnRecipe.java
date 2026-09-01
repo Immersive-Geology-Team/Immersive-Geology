@@ -88,6 +88,7 @@ public class RotaryKilnRecipe extends MultiblockRecipe
 	@Override
 	public int getMultipleProcessTicks()
 	{
-		return 1;
+		// No surplus-power overclock: the kiln is paced by heat, not by how hard it is fed
+		return 0;
 	}
 }

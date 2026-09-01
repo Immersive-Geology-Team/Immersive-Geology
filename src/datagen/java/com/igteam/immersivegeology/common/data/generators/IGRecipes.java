@@ -670,6 +670,32 @@ public class IGRecipes extends RecipeProvider
 				.define('s', MetalEnum.Tungsten.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK).asItem()).define('c', MetalEnum.Tungsten.getItem(ItemCategoryFlags.MECHANICAL_COMPONENT)).define('o', Items.DIAMOND)
 				.pattern("scs").pattern("coc").pattern("scs").save(consumer, ig("craft_thermal_engineering_block"));
 
+		// Metal detector. Read top to bottom it is the machine itself: a neodymium sensing head over the copper
+		// coil that does the detecting, the silicon that reads it, and the solid steel plinth it all stands on.
+		Item detector = IGRegistrationHolder.getItem.apply(IGRegistrationHolder.METAL_DETECTOR_KEY);
+		Item silicon_ingot = MiscEnum.Silicon.getItem(ItemCategoryFlags.INGOT);
+		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, detector)
+				.pattern("nnn")
+				.pattern("sCs")
+				.pattern("SSS")
+				.define('n', MetalEnum.Neodymium.getItemTag(ItemCategoryFlags.PLATE))
+				.define('C', MetalDecoration.LV_COIL)
+				.define('s', MiscEnum.Silicon.getItemTag(ItemCategoryFlags.INGOT))
+				.define('S', Ingredient.of(IETags.getTagsFor(EnumMetals.STEEL).ingot))
+				.unlockedBy("has_silicon", InventoryChangeTrigger.TriggerInstance.hasItems(silicon_ingot))
+				.save(consumer, ig("craft_metal_detector"));
+
+		Item ushanka = IGRegistrationHolder.getItem.apply(IGRegistrationHolder.USHANKA_KEY);
+		ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ushanka)
+				.pattern(" w ")
+				.pattern(" h ")
+				.pattern(" g ")
+				.define('w', ItemTags.WOOL)
+				.define('h', Items.LEATHER_HELMET)
+				.define('g', MetalEnum.Gold.getItemTag(ItemCategoryFlags.PLATE))
+				.unlockedBy("has_leather_helmet", InventoryChangeTrigger.TriggerInstance.hasItems(Items.LEATHER_HELMET))
+				.save(consumer, ig("craft_ushanka"));
+
 		BloomeryFuelBuilder.builder(Items.CHARCOAL).setTime(BASE_CHARCOAL_TIME).build(consumer, IGLib.rl("bloomery/bloomery_fuel_charcoal"));
 		BloomeryFuelBuilder.builder(Ingredients.COAL_COKE).setTime(BASE_COAL_COKE_TIME).build(consumer, IGLib.rl("bloomery/bloomery_fuel_coke"));
 		BloomeryFuelBuilder.builder(Items.COAL).setTime(BASE_COAL_TIME).build(consumer, IGLib.rl("bloomery/bloomery_fuel_coal"));

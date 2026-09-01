@@ -61,10 +61,10 @@ public class RotaryKilnProcess extends MultiblockProcessInMachine<RotaryKilnReci
 		RotaryKilnRecipe recipe = getRecipe(level.getRawLevel());
 		if(context instanceof RotaryKilnLogic.State state && recipe != null)
 		{
-			int recipeHeat = recipe.getHeatRequired();
-			boolean canProcess = state.hasRequiredHeat(recipeHeat);
-			if(canProcess)
+			if(state.hasRequiredHeat(recipe.getHeatRequired()))
 			{
+				// The recipe is the consumer of heat: take its share before making progress
+				state.consumeProcessHeat();
 				super.doProcessTick(context, level);
 			}
 		}

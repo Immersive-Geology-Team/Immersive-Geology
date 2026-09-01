@@ -92,6 +92,11 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
 
 
         this.obj(MiscEnum.Cable.getBlock(BlockCategoryFlags.ENERGY_PIPE), IGLib.rl("block/obj/energy_cable_centre.obj")).transforms(IGLib.rl("item/block"));
+
+        // Hand written items are not material driven, so the loop above has no flag to build a path from.
+        withExistingParent("item/"+IGRegistrationHolder.USHANKA_KEY,
+                new ResourceLocation(IGLib.MODID, "item/base/ig_base_item"))
+                .texture("layer0", new ResourceLocation(IGLib.MODID, "item/"+IGRegistrationHolder.USHANKA_KEY));
     }
 
     private void generateDrillHead(IGGenericDrillHead item)

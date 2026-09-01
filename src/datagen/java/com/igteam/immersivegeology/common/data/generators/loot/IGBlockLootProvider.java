@@ -13,7 +13,9 @@ import blusunrize.immersiveengineering.common.util.loot.BEDropLootEntry;
 import blusunrize.immersiveengineering.common.util.loot.DropInventoryLootEntry;
 import blusunrize.immersiveengineering.data.loot.LootUtils;
 import com.igteam.immersivegeology.common.block.entity.crate.IGCrateEntityType;
+import com.igteam.immersivegeology.common.block.entity.device.IGMetalDetector;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
+import com.igteam.immersivegeology.common.item.IGMetalDetectorItem;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.ore.IGCrystalBlock;
 import com.igteam.immersivegeology.common.block.ore.IGEvaporateMineralBlock;
@@ -42,6 +44,9 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction;
+import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootPool.Builder;
@@ -77,6 +82,7 @@ public class IGBlockLootProvider implements LootTableSubProvider
 		registerMultiblocks();
 		registerSlabs();
 		registerCrates();
+		registerDevices();
 		registerAllRemainingAsDefault();
 
 		IGLib.IG_LOGGER.info("Finished Registration of Immersive Geology Block Loot");
@@ -198,6 +204,24 @@ public class IGBlockLootProvider implements LootTableSubProvider
 		}
 	}
 
+
+	/**
+	 * Blocks that are neither ores nor multiblocks nor built from a material, so
+	 * {@link #registerAllRemainingAsDefault()} - which only looks at {@link IGBlockType} - never reaches them.
+	 * Without an entry here they simply vanish when mined.
+	 */
+	private void registerDevices() {
+		// Both halves are the same block, so the drop is pinned to the lower one; otherwise breaking either half
+		// would hand back two detectors.
+		RegistryObject<Block> detector = IGRegistrationHolder.getBlockRegistryMap()
+				.get(IGRegistrationHolder.METAL_DETECTOR_KEY);
+		// Charge survives being picked up: the item hands the same tag straight back to the block entity when it
+		// is placed again, so a detector is never wiped by moving it.
+		this.register(detector, LootTable.lootTable().withPool(this.singleItem(detector.get().asItem())
+				.apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
+						.copy(IGMetalDetectorItem.ENERGY_TAG, "BlockEntityTag."+IGMetalDetectorItem.ENERGY_TAG))
+				.when(this.propertyIs(detector, IGMetalDetector.HALF, DoubleBlockHalf.LOWER))));
+	}
 
 	private void registerMultiblock(MultiblockRegistration<?> registration) {
 		this.registerMultiblock(registration.block());

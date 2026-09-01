@@ -12,6 +12,7 @@ import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.*;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.*;
 import com.igteam.immersivegeology.common.menu.IGCrateMenu;
+import com.igteam.immersivegeology.common.menu.IGMetalDetectorMenu;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -23,6 +24,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.network.IContainerFactory;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -46,6 +48,17 @@ public class IGMenuTypes
 	public static final MultiblockContainer<GeothermalExchangerLogic.State, GeothermalExchangerMenu> GEOTHERMAL_EXCHANGER = registerMultiblock(IGLib.GUIID_GeothermalExchanger, GeothermalExchangerMenu::makeServer, GeothermalExchangerMenu::makeClient);
 
 	public static final RegistryObject<MenuType<IGCrateMenu>> CRATE = registerSimple(IGLib.GUIID_Crate, IGCrateMenu::new);
+	public static final RegistryObject<MenuType<IGMetalDetectorMenu>> METAL_DETECTOR = registerWithData(IGLib.GUIID_MetalDetector, IGMetalDetectorMenu::new);
+
+	/**
+	 * For menus that need something from the server at open time - here, which block entity the screen belongs to.
+	 * The vanilla factory used by {@link #registerSimple} gets no such buffer.
+	 */
+	public static <M extends AbstractContainerMenu>
+	RegistryObject<MenuType<M>> registerWithData(String name, IContainerFactory<M> factory)
+	{
+		return REGISTER.register(name, () -> IForgeMenuType.create(factory));
+	}
 
 	public static <M extends AbstractContainerMenu>
 	RegistryObject<MenuType<M>> registerSimple(String name, SimpleContainerConstructor<M> factory)

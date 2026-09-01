@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.Vein;
+import com.igteam.immersivegeology.common.world.compat.IGTFCWorld;
 import com.igteam.immersivegeology.common.world.features.helper.IGOreGenUtils;
 import com.igteam.immersivegeology.common.world.placements.IGCountPlacement;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -120,7 +121,11 @@ public class IGDefaultPlacement extends PlacementFilter
 			boolean possiblePlace = (isEnd ? canPlaceVeinEnd(chunkPos, seed, config) : canPlaceVein(chunkPos, seed, config)) && canSpawnAt(biome);
 			if(!possiblePlace) return false;
 			MaterialHelper material = entry.instance();
-			boolean canSpawnOverworld = material.acceptableStoneType(StoneEnum.MCStone);
+			// Whether the overworld can host this at all is a question about the rock it is made of, and a TFC
+			// overworld is not made of Minecraft stone. isVeinWorthwhile below still has the final say, block by
+			// block, so this only widens which materials get that far.
+			boolean canSpawnOverworld = material.acceptableStoneType(StoneEnum.MCStone)
+					|| (tfcOverworldOverride(level) && IGTFCWorld.canHostInOverworld(entry.instance()));
 			boolean canSpawnNether = material.acceptableStoneType(StoneEnum.MCNetherrack);
 			boolean canSpawnEnd = material.acceptableStoneType(StoneEnum.MCEndStone);
 			RandomSource random = IGOreGenUtils.getReuseRandom(entry, level.getSeed(), chunkPos);
@@ -152,8 +157,27 @@ public class IGDefaultPlacement extends PlacementFilter
 		ResourceKey<Level> dimensionKey = serverLevel.dimension();
 		ResourceLocation dimensionID = dimensionKey.location();
 		Set<ResourceLocation> dimension_whitelist = getWhitelistedDimensions();
-		if(dimension_whitelist.contains(dimensionID)) return exposedPlace(serverLevel.getSeed(), ctx.getLevel(), new ChunkPos(pos), null);
+		if(dimension_whitelist.contains(dimensionID) || allowedByTFCOverworld(serverLevel))
+		{
+			return exposedPlace(serverLevel.getSeed(), ctx.getLevel(), new ChunkPos(pos), null);
+		}
 		return false;
+	}
+
+	/**
+	 * Whether this material rides the TFC overworld override into a dimension its whitelist does not name. Off by
+	 * config, off outside a TFC world, and off for materials TFC's rock cannot host in the first place.
+	 */
+	public boolean allowedByTFCOverworld(ServerLevel level)
+	{
+		return IGTFCWorld.isOverworld(level)
+				&& IGTFCWorld.overridesDimensionWhitelist(level)
+				&& IGTFCWorld.canHostInOverworld(entry.instance());
+	}
+
+	private static boolean tfcOverworldOverride(WorldGenLevel level)
+	{
+		return IGTFCWorld.isOverworld(level.getLevel()) && IGTFCWorld.overridesDimensionWhitelist(level.getLevel());
 	}
 
 	private Set<ResourceLocation> getWhitelistedDimensions()

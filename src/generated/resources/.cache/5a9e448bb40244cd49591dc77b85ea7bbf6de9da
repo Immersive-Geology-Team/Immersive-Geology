@@ -1,4 +1,4 @@
-// 1.20.1	2026-06-08T01:42:52.29638169	Tags for minecraft:block mod id immersivegeology
+// 1.20.1	2026-09-04T19:58:49.895893746	Tags for minecraft:block mod id immersivegeology
 50509a63835e273d88cbf8fba0446e638eeb07a8 data/forge/tags/blocks/advanced_engineering_block.json
 90ea2289f0ac3ff7d6229814cdb6dc584fdcc519 data/forge/tags/blocks/default_block.json
 a8f61dc4d9f6cf94919bfb0582e4284c920c1830 data/forge/tags/blocks/engineering_block.json
@@ -50,7 +50,7 @@ da1f56d166016472ac8816126b041f5c243bf48e data/forge/tags/blocks/material/uranini
 8d1b796f14f1f56f2c54cf2af3387fa4f8fd011c data/forge/tags/blocks/sheetmetal_block.json
 dfc2257b738b58d0923cbd3215ed32fceb56161a data/forge/tags/blocks/storage_block.json
 b83d29642c04acfc6a948d5b4b86de39d5274031 data/minecraft/tags/blocks/fences.json
-d764a3d147e3b957d7294fe1aebad00a2585a16d data/minecraft/tags/blocks/mineable/pickaxe.json
+692d7f863de7e0cf44db6e6fe78052061b0676e5 data/minecraft/tags/blocks/mineable/pickaxe.json
 a3cf156f511e6cd5e4e48c785c1a701475a96170 data/minecraft/tags/blocks/mineable/shovel.json
 6b9a565ee84aa1bef0633bae458a08701f45dab7 data/minecraft/tags/blocks/needs_stone_tool.json
 13590d3b57e53e798fb4f0fd4df69f781180581f data/minecraft/tags/blocks/replaceable.json

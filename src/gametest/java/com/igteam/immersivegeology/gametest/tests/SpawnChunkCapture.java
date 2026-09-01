@@ -51,7 +51,6 @@ import java.util.stream.Collectors;
 
 /**
  * Debug utility for generating visual maps of world generation and ore distribution.
- * This class captures spawn chunks and visualizes ore deposits for debugging purposes.
  */
 public class SpawnChunkCapture {
 	// Constants
@@ -74,11 +73,8 @@ public class SpawnChunkCapture {
 	private static final Map<Integer, Color> PALETTE_KEY_COLORS = new HashMap<>();
 	private static BufferedImage oreItemImage;
 
-	/** mineral name -> richness -> block count */
 	private static final Map<String, Map<OreRichness, Integer>> oreCensus = new TreeMap<>();
-	/** mineral name -> number of rolled deposits */
 	private static final Map<String, Integer> depositCount = new TreeMap<>();
-	/** mineral name -> deposits that produced no ore at all */
 	private static final Map<String, Integer> barrenCount = new TreeMap<>();
 	private static int columnsSampled = 0;
 
@@ -335,12 +331,6 @@ public class SpawnChunkCapture {
 		g2d.setColor(Color.WHITE);
 	}
 
-
-	// ===============================
-	// Ore census reporting
-	// ===============================
-
-	/** Short identifier for the loaded world, so vanilla and TFC runs don't overwrite each other. */
 	private static String worldLabel()
 	{
 		String name = server.getWorldData().getLevelName();

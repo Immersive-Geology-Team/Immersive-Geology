@@ -31,18 +31,14 @@ import java.util.List;
 
 public class IGBasicChemicalCategory extends IGRecipeCategory<BasicChemicalRecipe>
 {
-	/** Damage at which SmallChemicalReactorLogic#tickServer stops processing entirely. */
 	private static final int SEIZE_THRESHOLD = 99;
-	/** At or above this rate the badge switches from caution to danger colouring. */
 	private static final int SEVERE_RATE = 2;
 
 	private static final int BADGE_X = 4;
 	private static final int BADGE_Y = 4;
 	private static final int BADGE_HEIGHT = 12;
-	/** One more on the left than the right, so the glyph sits optically centred in the badge. */
 	private static final int BADGE_PADDING_LEFT = 5;
 	private static final int BADGE_PADDING_RIGHT = 4;
-	/** The rate itself is in the tooltip - the badge just flags the recipe. */
 	private static final String BADGE_LABEL = "!";
 
 	private static final int BADGE_BACKDROP = 0xC0140A04;
@@ -131,10 +127,6 @@ public class IGBasicChemicalCategory extends IGRecipeCategory<BasicChemicalRecip
 		return font.width(BADGE_LABEL)+BADGE_PADDING_LEFT+BADGE_PADDING_RIGHT;
 	}
 
-	/**
-	 * Seconds of uninterrupted running before the reactor passes {@link #SEIZE_THRESHOLD} and refuses
-	 * to process, assuming it is never repaired.
-	 */
 	private static int secondsUntilSeized(int rate)
 	{
 		return SEIZE_THRESHOLD/rate+1;

@@ -15,6 +15,7 @@ import com.igteam.immersivegeology.common.commands.IGFindMineralVeinCommand;
 import com.igteam.immersivegeology.common.loot.IGLootModifier;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.igteam.immersivegeology.common.block.entity.device.IGDepositMapMarks;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.mojang.brigadier.Command;
@@ -38,6 +39,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.MapItem;
 import net.minecraft.world.item.crafting.Recipe;
@@ -100,60 +102,67 @@ public class IGCommonForgeEvents
 	}
 
 
-	public static final List<VeinScanTask> activeVeinScans  = Collections.synchronizedList(new ArrayList<>());
+	public static final List<VeinScanTask> activeVeinScans = Collections.synchronizedList(new ArrayList<>());
 
 	@SubscribeEvent
-	public void updateMapData(TickEvent.LevelTickEvent event)
+	public void updateVeinScans(TickEvent.LevelTickEvent event)
 	{
-		if (event.side.isClient()) return;
+		// LevelTickEvent fires once per phase and once per dimension; only advance a scan on its own level,
+		// at the end of the tick, so a task is not stepped several times per tick.
+		if(event.side.isClient()||event.phase!=TickEvent.Phase.END) return;
+		if(activeVeinScans.isEmpty()) return;
 
-		List<VeinScanTask> toRemove = new ArrayList<>();
-
-		for (VeinScanTask task : activeVeinScans) {
-			if (task.isComplete()) {
-				task.source.sendFailure(Component.literal("No " + task.type.getTranslationName() + " ore vein found within " + task.radius + " chunk radius."));
-				toRemove.add(task);
-				continue;
-			}
-
-			ChunkPos currentChunkPos = task.nextChunk();
-			LevelChunk chunk = task.level.getChunk(currentChunkPos.x, currentChunkPos.z);
-
-			int sectionMin = task.level.getSectionIndex(task.level.getMinBuildHeight());
-			int sectionMax = task.level.getSectionIndex(task.level.getMaxBuildHeight());
-			TagKey<Block> materialTag = task.type.getBlockMaterialTag();
-			Component progressMessage = Component.literal("Scanning chunk: [" + currentChunkPos.x + ", " + currentChunkPos.z + "]")
-					.withStyle(ChatFormatting.YELLOW);
-
-			task.source.getPlayer().displayClientMessage(
-					progressMessage,
-					true
-			);
-
-			for (int sectionIndex = sectionMin; sectionIndex < sectionMax; sectionIndex++) {
-				LevelChunkSection section = chunk.getSection(sectionIndex);
-				if (section.hasOnlyAir()) continue;
-				if (!section.maybeHas(b -> b.is(materialTag))) continue;
-
-				BlockPos orePosition = chunk.getPos().getWorldPosition();
-				int distance = Mth.floor(Mth.sqrt((float) task.source.getPosition().distanceToSqr(orePosition.getX(), orePosition.getY(), orePosition.getZ())));
-
-				Component coordinates = ComponentUtils.wrapInSquareBrackets(
-						Component.translatable("chat.coordinates", orePosition.getX(), orePosition.getY(), orePosition.getZ())
-				).withStyle(style -> style.withColor(ChatFormatting.GREEN)
-						.withClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tp @s " + orePosition.getX() + " ~ " + orePosition.getZ()))
-						.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.translatable("chat.coordinates.tooltip")))
-				);
-
-				task.source.sendSuccess(() -> Component.translatable("command.immersivegeology.veinlocate", task.type.getTranslationName(), coordinates, distance), false);
-
-				toRemove.add(task);
-				break;
-			}
+		synchronized(activeVeinScans)
+		{
+			activeVeinScans.removeIf(task -> task.level==event.level&&task.tick());
 		}
+	}
 
-		// Remove after iteration
-		activeVeinScans.removeAll(toRemove);
+	/**
+	 * Maps whose deposit labels have already been put back this session, so the pass below runs once per map
+	 * rather than once per tick. Cleared when a server starts, since map ids only mean anything within one save.
+	 */
+	private static final Set<Integer> relabelledMaps = new HashSet<>();
+
+	@SubscribeEvent
+	public void clearMapLabelCache(ServerStartingEvent event)
+	{
+		relabelledMaps.clear();
+	}
+
+	/**
+	 * Restores the labels on deposit maps.
+	 * <p>
+	 * The markers themselves come back on their own - vanilla replays an item's {@code Decorations} list into the
+	 * saved data every tick a player carries it - but it replays them unnamed. This puts the material and grade
+	 * back, once per map, by adding the decoration again under the same id.
+	 */
+	@SubscribeEvent
+	public void restoreDepositMapLabels(TickEvent.PlayerTickEvent event)
+	{
+		if(event.side.isClient()||event.phase!=TickEvent.Phase.END) return;
+		// The markers are already correct without this; the labels can wait a second for a cheaper sweep.
+		if(event.player.tickCount%20!=0) return;
+
+		Inventory inventory = event.player.getInventory();
+		for(int slot = 0; slot < inventory.getContainerSize(); slot++)
+		{
+			relabelDepositMap(inventory.getItem(slot), event.player.level());
+		}
+	}
+
+	private static void relabelDepositMap(ItemStack stack, Level level)
+	{
+		if(stack.isEmpty()||!(stack.getItem() instanceof MapItem)) return;
+		// Checked off the item first so an ordinary map never reaches the level's saved data over this.
+		if(!IGDepositMapMarks.hasMarks(stack)) return;
+
+		Integer mapId = MapItem.getMapId(stack);
+		if(mapId==null||relabelledMaps.contains(mapId)) return;
+
+		MapItemSavedData data = MapItem.getSavedData(mapId, level);
+		if(data==null) return;
+		if(IGDepositMapMarks.restore(stack, data, level)) relabelledMaps.add(mapId);
 	}
 
 	private static void checkAndRenderMap(ItemStack stack, Level level, Player player)

@@ -11,6 +11,8 @@ package com.igteam.immersivegeology.common.block.multiblocks.recipe.serializer;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
@@ -37,6 +39,7 @@ public class RotaryKilnRecipeSerializer extends IERecipeSerializer<RotaryKilnRec
 		IngredientWithSize input = IngredientWithSize.deserialize(GsonHelper.getAsJsonObject(json, "input"));
 		int time = GsonHelper.getAsInt(json, "time");
 		int heat = GsonHelper.getAsInt(json, "heat");
+		validate(resourceLocation, time, heat);
 		return new RotaryKilnRecipe(resourceLocation, input, output, time, heat);
 	}
 
@@ -48,6 +51,19 @@ public class RotaryKilnRecipeSerializer extends IERecipeSerializer<RotaryKilnRec
 		int time = buffer.readInt();
 		int heat = buffer.readInt();
 		return new RotaryKilnRecipe(resourceLocation, input, output, time, heat);
+	}
+
+	/**
+	 * A time of zero divides by zero when Immersive Engineering works out the per-tick energy,
+	 * and a heat the kiln cannot physically reach would leave it heating forever, so both are
+	 * rejected at load rather than at runtime.
+	 */
+	private static void validate(ResourceLocation id, int time, int heat)
+	{
+		if(time <= 0)
+			throw new JsonSyntaxException("Rotary Kiln recipe "+id+" has a time of "+time+", it must be at least 1 tick");
+		if(heat < 0||heat > RotaryKilnLogic.EHV_HEAT_CAP)
+			throw new JsonSyntaxException("Rotary Kiln recipe "+id+" requires a heat of "+heat+", it must be between 0 and "+RotaryKilnLogic.EHV_HEAT_CAP);
 	}
 
 	@Override
