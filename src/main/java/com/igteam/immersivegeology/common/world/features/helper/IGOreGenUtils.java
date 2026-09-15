@@ -107,11 +107,6 @@ public class IGOreGenUtils
 	}
 
 
-	/**
-	 * Neighbour offsets for the 3x3 chunk area, centre first and then outwards. The centre chunk sits inside the
-	 * vein's full-strength radius, so it should yield viable positions the fastest. Which is what lets
-	 * {@link #isVeinWorthwhile} stop scanning early on a vein that is going to pass.
-	 */
 	private static final int[] NEIGHBOUR_DX = {0, -1, 0, 1, 0, -1, 1, -1, 1};
 	private static final int[] NEIGHBOUR_DZ = {0, 0, -1, 0, 1, -1, -1, 1, 1};
 
@@ -119,13 +114,6 @@ public class IGOreGenUtils
 		return worthwhileFraction(level, centerChunk, maxY, minY, vein, Integer.MAX_VALUE);
 	}
 
-	/**
-	 * The fraction of the 3x3 chunk area, over the vein's Y band, that the vein could actually turn into ore.
-	 *
-	 * @param stopAt stop counting once this many viable positions have been found and report the fraction reached
-	 *               so far. Callers that only need to know whether the count clears a threshold pass that
-	 *               threshold; callers that need the true fraction pass {@link Integer#MAX_VALUE}.
-	 */
 	private static float worthwhileFraction(LevelAccessor level, ChunkPos centerChunk, int maxY, int minY, Vein vein, int stopAt) {
 		try
 		{
@@ -166,11 +154,6 @@ public class IGOreGenUtils
 		int centerX = centerChunk.getMiddleBlockX();
 		int centerZ = centerChunk.getMiddleBlockZ();
 
-		// The vein's boundary falloff depends only on the horizontal distance from the centre chunk, so it is the
-		// same for every Y in a column. Computing it once per column, instead of once per block position. As a
-		// square root each time also lets the sampling skip the corners of the 3x3 area outright: roughly a
-		// fifth of the columns sit outside the vein radius, where the falloff is zero and no noise value can ever
-		// clear the threshold.
 		double[] columnMultiplier = new double[256];
 		int totalViableLocations = 0;
 
@@ -192,17 +175,13 @@ public class IGOreGenUtils
 			for(int sectionIndex = sectionMin; sectionIndex <= sectionMax; sectionIndex++)
 			{
 				LevelChunkSection section = currentChunk.getSection(sectionIndex);
-				// Ask whether this material can generate in anything the section holds, rather than
-				// testing three hardcoded rock tags. A rock type declared in the configuration is in
-				// none of them... so the old check would throw away every section it appeared in and the vein
-				// was never judged worthwhile, so now we do this to ensure pack developers can have specific
-				// stones generate IG ores.
+
 				if(section.hasOnlyAir()||!section.maybeHas(b -> canStateGenerate(b, veinMaterial)))
 				{
 					continue;
 				}
 
-				int sectionMinY = SectionPos.sectionToBlockCoord(sectionIndex);
+				int sectionMinY = SectionPos.sectionToBlockCoord(level.getSectionYFromSectionIndex(sectionIndex));
 				int fromY = Math.max(sectionMinY, lowestY);
 				int toY = Math.min(sectionMinY+16, highestY+1);
 
@@ -222,8 +201,7 @@ public class IGOreGenUtils
 							{
 								continue;
 							}
-							// The section is already in hand, so read through it rather than making the chunk
-							// resolve the section again for every position.
+
 							BlockState state = section.getBlockState(x, y&15, z);
 							if(canStateGenerate(state, veinMaterial)||state.getBlock() instanceof IGOreBlock)
 							{
@@ -244,10 +222,6 @@ public class IGOreGenUtils
 		return noise(pos.getMinBlockX()+x, y, pos.getMinBlockZ()+z, vein, centerChunkPos);
 	}
 
-	/**
-	 * Vein density at an absolute world position. Depends only on the world position, the vein's noise and the
-	 * chunk the vein is centred on, so it can be evaluated without touching (or generating) any chunk.
-	 */
 	public static double noise(int worldX, int worldY, int worldZ, @NotNull Vein vein, ChunkPos centerChunkPos) {
 		INoise3D noiseGen = vein.noise();
 
@@ -260,10 +234,6 @@ public class IGOreGenUtils
 		return noiseGen.noise(worldX, worldY, worldZ) * boundaryMultiplication;
 	}
 
-	/**
-	 * Horizontal distance from a vein centre. Math.sqrt rather than Math.hypot: the offsets here are whole blocks,
-	 * where the two agree exactly, hypot did some extra stuff that isn't needed anymore.
-	 */
 	private static double distanceFrom(int worldX, int worldZ, int centerX, int centerZ)
 	{
 		double dx = worldX-centerX;
@@ -293,9 +263,6 @@ public class IGOreGenUtils
 
 	public static boolean isVeinWorthwhile(LevelAccessor level, ChunkPos chunk, int maxY, int minY, Vein vein)
 	{
-		// The gate is one percent of the 3x3 area, so there is no reason to keep sampling once the count is clear
-		// of it. The center chunk is scanned first, where the vein is at full strength and reaches that one
-		// percent faster than other areas.
 		int lowestY = Math.max(minY, level.getMinBuildHeight());
 		int highestY = Math.min(maxY, level.getMaxBuildHeight()-1);
 		int totalBlocks = 48*48*(highestY-lowestY+1);

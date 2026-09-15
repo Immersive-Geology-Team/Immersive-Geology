@@ -19,7 +19,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -92,13 +91,17 @@ public class IGGenericBlockItem extends BlockItem implements IGFlagItem {
         {
             case ORE_BLOCK -> {
                 if(getBlock() instanceof IOreBlock oreBlock){
-                    MutableComponent normalName = Component.translatable("material.immersivegeology.ore." + oreBlock.getOreRichness().name().toLowerCase(Locale.ROOT));
-                    if(!oreBlock.getOreRichness().equals(OreRichness.NORMAL)) normalName.append(Component.translatable("formatting.space"));
-                    normalName.append(Component.translatable("material.immersivegeology." + materialMap.get(MaterialTexture.base).getName()));
-                    normalName.append(Component.translatable("formatting.space"));
-                    normalName.append(Component.translatable("material.immersivegeology." + materialMap.get(MaterialTexture.overlay).getName()));
-                    return normalName;
+                    Component host = Component.translatable("material.immersivegeology." + materialMap.get(MaterialTexture.base).getName());
+                    Component mineral = Component.translatable("material.immersivegeology." + materialMap.get(MaterialTexture.overlay).getName());
+
+                    Component grade = Component.translatable("material.immersivegeology.ore." + oreBlock.getOreRichness().name().toLowerCase(Locale.ROOT));
+                    String key = oreBlock.getOreRichness().equals(OreRichness.NORMAL)
+                            ?"block.immersivegeology.ore_block.ungraded"
+                            :"block.immersivegeology.ore_block";
+                    return Component.translatable(key, grade, host, mineral);
                 }
+
+                addMaterialNames(materialMap, materialList);
             }
             case ENGINEERING_BLOCK -> {
                 materialList.add(Component.translatable("material.immersivegeology.engineering." + materialMap.get(MaterialTexture.base).getName()).getString());
@@ -106,17 +109,21 @@ public class IGGenericBlockItem extends BlockItem implements IGFlagItem {
             case ADVANCED_ENGINEERING_BLOCK -> {
                 materialList.add(Component.translatable("material.immersivegeology.adv_engineering." + materialMap.get(MaterialTexture.base).getName()).getString());
             }
-            default ->
-            {
-                for(MaterialTexture t : MaterialTexture.values()){
-                    if (materialMap.containsKey(t)) {
-                        materialList.add(Component.translatable("material.immersivegeology." + materialMap.get(t).getName()).getString());
-                    }
-                }
-            }
+            default -> addMaterialNames(materialMap, materialList);
         }
 
         return Component.translatable("block.immersivegeology." + block.getFlag().getName(), materialList.toArray());
+    }
+
+    private static void addMaterialNames(Map<MaterialTexture, MaterialInterface<?>> materialMap, List<String> into)
+    {
+        for(MaterialTexture t : MaterialTexture.values())
+        {
+            if(materialMap.containsKey(t))
+            {
+                into.add(Component.translatable("material.immersivegeology." + materialMap.get(t).getName()).getString());
+            }
+        }
     }
 
     public boolean cancelDatagen()

@@ -140,7 +140,12 @@ public class IGOreFeature extends Feature<IGOreFeatureConfig>
 						continue;
 					}
 
-					int sectionMinY = SectionPos.sectionToBlockCoord(sectionIndex);
+					// sectionIndex counts up from the world floor, so it has to go back through the height
+					// accessor before it means anything as a coordinate. Handing the raw index to
+					// sectionToBlockCoord shifts every write up by the floor depth - 64 blocks in a vanilla
+					// world, 256 under Tectonic's default - and once the shifted band clears highestY the
+					// section is skipped outright, which is why a deep world generated no ore at all.
+					int sectionMinY = SectionPos.sectionToBlockCoord(level.getSectionYFromSectionIndex(sectionIndex));
 					int fromY = Math.max(sectionMinY, lowestY);
 					int toY = Math.min(sectionMinY+16, highestY+1);
 

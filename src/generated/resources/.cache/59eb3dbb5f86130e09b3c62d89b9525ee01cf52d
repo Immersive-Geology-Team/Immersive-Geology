@@ -1,8 +1,9 @@
-// 1.20.1	2026-09-09T23:41:19.875361429	Loot Tables
+// 1.20.1	2026-09-16T05:22:52.836427829	Loot Tables
 c3ba476a910748a3d60d066f18bc407bd29bb957 data/immersivegeology/loot_tables/blocks/advanced_engineering_block_rusty_metal.json
 5a9587d2bf0beba3f09dd6c63758d544de7dbe0f data/immersivegeology/loot_tables/blocks/alternator.json
 5669eb705e091e12e49ef2aa7f900b9f9d5ceddd data/immersivegeology/loot_tables/blocks/ballmill.json
 25558435e3d54e546141db6300fa8732ebc582e1 data/immersivegeology/loot_tables/blocks/bloomery.json
+b62640a8539fcee68247f2b42da06b78fc94d68b data/immersivegeology/loot_tables/blocks/bulk_blast_furnace.json
 761f673ac000aeaacfe25a7bb1e2938a91894dca data/immersivegeology/loot_tables/blocks/centrifuge.json
 6f5bc3941be14bd92268a1130c7f3ad48da36db7 data/immersivegeology/loot_tables/blocks/chemical_reactor.json
 c69c0f3a94ded8cf37ac8c0197371baacc5f0e15 data/immersivegeology/loot_tables/blocks/coredrill.json

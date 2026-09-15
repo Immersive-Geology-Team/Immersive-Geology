@@ -61,11 +61,6 @@ public class IGOreBlock extends IGGenericBlock implements IOreBlock
         super.initializeClient(consumer);
     }
 
-    /**
-     * Never. Registration builds this variant precisely when the ore does not tarnish - anything that weathers
-     * gets an {@link IGWeatheringOreBlock} instead, which is the only ore block carrying oxidation properties.
-     * Hopefully this will help with performance a bit more.
-     */
     @Override
     public boolean isRandomlyTicking(BlockState state)
     {

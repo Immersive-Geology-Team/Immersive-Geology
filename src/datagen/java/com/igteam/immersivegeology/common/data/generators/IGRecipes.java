@@ -23,6 +23,7 @@ import blusunrize.immersiveengineering.common.register.IEItems.Metals;
 import blusunrize.immersiveengineering.common.register.IEItems.Molds;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.BulkBlastFurnaceCharge;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GeothermalBiomeRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.*;
 import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
@@ -85,12 +86,59 @@ public class IGRecipes extends RecipeProvider
 	{
 		IGLib.IG_LOGGER.info("Started Registration of Immersive Geology Recipes");
 		multiblockRecipes(consumer);
+		bulkBlastFurnaceRecipes(consumer);
 		tfcCompatRecipes(consumer);
 		manualRecipes(consumer);
 		IGRegistrationHolder.buildMaterialRecipes();
 		methodRecipes(consumer);
 		igMineralMixes(consumer);
 		IGLib.IG_LOGGER.info("Finished Registration of Immersive Geology Recipes");
+	}
+
+	private void bulkBlastFurnaceRecipes(Consumer<FinishedRecipe> consumer)
+	{
+		IGLib.IG_LOGGER.info("- Bulk Blast Furnace Recipe Registration");
+
+		for(BulkBlastFurnaceCharge charge : BulkBlastFurnaceCharge.values())
+		{
+			BulkBlastFurnaceRecipeBuilder builder = BulkBlastFurnaceRecipeBuilder
+					.builder(new FluidStack(charge.getMetal().getFluid(BlockCategoryFlags.FLUID), charge.getMeltPerUnit()))
+					.setOre(charge.getOre().getItemTag(ItemCategoryFlags.CRUSHED_ORE), 1)
+					.setRatios(charge.getCokeRatio(), charge.getFluxRatio())
+					.setYield(charge.getMinYield(), charge.getMaxYield())
+					.setHeat(charge.getHeat())
+					.setTime(charge.getTimeFactor());
+			if(charge.isCarbonRich())
+				builder.setRichRegime(
+						new FluidStack(MiscEnum.MoltenPigIron.getFluid(BlockCategoryFlags.FLUID), BulkBlastFurnaceCharge.PIG_IRON_MELT),
+						BulkBlastFurnaceCharge.PIG_IRON_COKE_RATIO
+				);
+			builder.build(consumer, new ResourceLocation(IGLib.MODID, "bulk_blast_furnace/"+charge.getRecipeName()));
+
+			if(!charge.hasPelletForm()) continue;
+			BulkBlastFurnaceRecipeBuilder pellets = BulkBlastFurnaceRecipeBuilder
+					.builder(new FluidStack(charge.getMetal().getFluid(BlockCategoryFlags.FLUID), charge.getMeltPerUnit()))
+					.setOre(charge.getOre().getItemTag(ItemCategoryFlags.PELLET), 1)
+					.setRatios(charge.getPelletCokeRatio(), charge.getFluxRatio())
+					.setYield(charge.getPelletMinYield(), charge.getPelletMaxYield())
+					.setHeat(charge.getHeat())
+					.setTime(charge.getPelletTimeFactor());
+			if(charge.isCarbonRich())
+				pellets.setRichRegime(
+						new FluidStack(MiscEnum.MoltenPigIron.getFluid(BlockCategoryFlags.FLUID), BulkBlastFurnaceCharge.PIG_IRON_MELT),
+						BulkBlastFurnaceCharge.PIG_IRON_COKE_RATIO*BulkBlastFurnaceCharge.PELLET_COKE_MULTIPLIER
+				);
+			pellets.build(consumer, new ResourceLocation(IGLib.MODID, "bulk_blast_furnace/"+charge.getPelletRecipeName()));
+		}
+
+		BulkBlastFurnaceRecipeBuilder
+				.builder(new FluidStack(MetalEnum.Steel.getFluid(BlockCategoryFlags.FLUID), BulkBlastFurnaceCharge.STEEL_UNIT))
+				.setMeltInput(new FluidTagInput(MiscEnum.MoltenPigIron.getFluidTag(), BulkBlastFurnaceCharge.STEEL_UNIT))
+				.setRatios(BulkBlastFurnaceCharge.STEEL_COKE_RATIO, BulkBlastFurnaceCharge.STEEL_FLUX_RATIO)
+				.setYield(BulkBlastFurnaceCharge.STEEL_MIN_YIELD, BulkBlastFurnaceCharge.STEEL_MAX_YIELD)
+				.setHeat(BulkBlastFurnaceCharge.STEEL_HEAT)
+				.setTime(BulkBlastFurnaceCharge.STEEL_TIME_FACTOR)
+				.build(consumer, new ResourceLocation(IGLib.MODID, "bulk_blast_furnace/pig_iron_to_molten_steel"));
 	}
 
 	private void methodRecipes(Consumer<FinishedRecipe> consumer)
@@ -202,6 +250,28 @@ public class IGRecipes extends RecipeProvider
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, reinforced_refractory_slab, 2)
 				.pattern("SBS").define('B', MetalEnum.Bronze.getItemTag(ItemCategoryFlags.PLATE)).define('S', refractory_slab)
 				.group("ig_tools").unlockedBy("has_refractory_bricks", InventoryChangeTrigger.TriggerInstance.hasItems(refractory)).save(consumer, ig("craft_reinforced_refractory_bricks_slab_alt"));
+
+		// Industrial Refractory Brick Block
+		Item aluminum_oxide = MetalEnum.Aluminum.getItem(ItemCategoryFlags.METAL_OXIDE);
+		Item industrial_refractory = MiscEnum.IndustrialRefractoryBlock.getStack(BlockCategoryFlags.STORAGE_BLOCK).getItem();
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, industrial_refractory, 4)
+				.pattern("XBX")
+				.pattern("MZM")
+				.pattern("XBX")
+				.define('X', MetalEnum.Aluminum.getItemTag(ItemCategoryFlags.METAL_OXIDE))
+				.define('B', refractory_brick)
+				.define('M', MetalEnum.Magnesium.getItemTag(ItemCategoryFlags.METAL_OXIDE))
+				.define('Z', MetalEnum.Zirconium.getItemTag(ItemCategoryFlags.METAL_OXIDE))
+				.group("ig_tools").unlockedBy("has_aluminum_oxide", InventoryChangeTrigger.TriggerInstance.hasItems(aluminum_oxide)).save(consumer, ig("craft_industrial_refractory_bricks"));
+
+		Item industrial_refractory_slab = MiscEnum.IndustrialRefractoryBlock.getStack(BlockCategoryFlags.SLAB).getItem();
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, industrial_refractory_slab, 6)
+				.pattern("BBB").define('B', industrial_refractory)
+				.group("ig_tools").unlockedBy("has_aluminum_oxide", InventoryChangeTrigger.TriggerInstance.hasItems(aluminum_oxide)).save(consumer, ig("craft_industrial_refractory_bricks_slab"));
+
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MiscEnum.IndustrialRefractoryBlock.getBlock(BlockCategoryFlags.STAIRS), 4)
+				.pattern("B  ").pattern("BB ").pattern("BBB").define('B', industrial_refractory)
+				.group("ig_tools").unlockedBy("has_aluminum_oxide", InventoryChangeTrigger.TriggerInstance.hasItems(aluminum_oxide)).save(consumer, ig("craft_industrial_refractory_bricks_stairs"));
 
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MetalEnum.TungstenCarbide.getItem(ItemCategoryFlags.POWDER))
 				.requires(MetalEnum.Tungsten.getItem(ItemCategoryFlags.POWDER))

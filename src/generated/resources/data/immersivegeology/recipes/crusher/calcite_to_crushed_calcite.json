@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "item": "minecraft:calcite"
+  },
+  "result": {
+    "count": 2,
+    "item": "immersivegeology:compound_dust_calcium"
+  },
+  "secondaries": [],
+  "time": 100
+}

@@ -1,0 +1,17 @@
+{
+  "type": "immersivegeology:bulk_blast_furnace",
+  "coke_ratio": 0.1,
+  "flux_ratio": 0.5,
+  "heat": 150,
+  "max_yield": 0.95,
+  "melt": {
+    "amount": 144,
+    "fluid": "immersivegeology:fluid_steel"
+  },
+  "melt_input": {
+    "amount": 144,
+    "tag": "forge:pig_iron"
+  },
+  "min_yield": 0.35,
+  "time": 320
+}

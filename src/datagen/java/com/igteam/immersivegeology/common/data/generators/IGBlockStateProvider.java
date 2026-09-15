@@ -133,6 +133,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         generateMultiskinMultiblock(IGMultiblockProvider.GRAVITY_SEPARATOR.block().get(), "gravity_separator", false, false, true, true);
         generateMultiskinMultiblock(IGMultiblockProvider.CHEMICAL_REACTOR.block().get(), "chemical_reactor", false, false,true, true);
         generateMultiskinMultiblock(IGMultiblockProvider.REVERBERATION_FURNACE.block().get(), "reverberation_furnace", true, false, true, true);
+        generateActiveMultiblock(IGMultiblockProvider.BULK_BLAST_FURNACE.block().get(), "bulk_blast_furnace");
         generateMultiskinMultiblock(IGMultiblockProvider.ROTARYKILN.block().get(),"rotary_kiln", false, false, true, true);
         generateMultiskinMultiblock(IGMultiblockProvider.PELLETIZER.block().get(), "pelletizer", false, false, true, true);
         generateMultiskinMultiblock(IGMultiblockProvider.GEOTHERMAL_EXCHANGER.block().get(), "geothermal_exchanger", false, false, true, true);
@@ -161,6 +162,30 @@ public class IGBlockStateProvider extends BlockStateProvider {
         NongeneratedModel m = obj(name, rl("block/multiblock/obj/bloomery/bloomery.obj"), ImmutableMap.of("bloomery", texture), innerModels);
         IGTemplateMultiblock template = (IGTemplateMultiblock) IGRegistrationHolder.getMBTemplate.apply("bloomery");
         return split(m, template);
+    }
+
+    private void generateActiveMultiblock(Block block, String multiname)
+    {
+        IGTemplateMultiblock template = (IGTemplateMultiblock) IGRegistrationHolder.getMBTemplate.apply(multiname);
+        VariantBlockStateBuilder builder = getVariantBuilder(block);
+
+        for(boolean active : new boolean[]{false, true})
+        {
+            String activeStr = active ? "_active" : "";
+            NongeneratedModel modelOBJ = obj(
+                    multiname+activeStr,
+                    rl("block/multiblock/obj/"+multiname+"/"+multiname+".obj"),
+                    ImmutableMap.of(multiname, rl("block/multiblock/"+multiname+"/default"+activeStr)),
+                    innerModels
+            );
+            ModelFile modelToUse = split(modelOBJ, template, false);
+
+            for(Direction dir : IEProperties.FACING_HORIZONTAL.getPossibleValues())
+                builder.partialState()
+                        .with(IEProperties.FACING_HORIZONTAL, dir)
+                        .with(IEProperties.ACTIVE, active)
+                        .setModels(new ConfiguredModel(modelToUse, 0, getAngle(dir, 180), true));
+        }
     }
 
     private <T extends Enum<T> & IIGMultiSkinHelper & StringRepresentable> void generateMultiskinMultiblock(Block block, String multiname, boolean hasActiveForm, boolean useActiveModels, boolean hasMirrorForm, boolean useMirrorModels)

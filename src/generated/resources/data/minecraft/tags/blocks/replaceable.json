@@ -35,6 +35,8 @@
     "immersivegeology:fluid_ehv_insulation_block",
     "immersivegeology:fluid_steam_block",
     "immersivegeology:fluid_high_pressure_steam_block",
+    "immersivegeology:fluid_slag_block",
+    "immersivegeology:fluid_pig_iron_block",
     "immersivegeology:slurry_sulfuric_acid_chromium_block",
     "immersivegeology:slurry_sulfuric_acid_iron_block",
     "immersivegeology:slurry_sulfuric_acid_neodymium_block",

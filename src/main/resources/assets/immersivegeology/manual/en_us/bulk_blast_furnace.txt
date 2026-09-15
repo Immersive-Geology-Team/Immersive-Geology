@@ -1,0 +1,50 @@
+Bulk Blast Furnace
+Feed the beast
+<&multiblock>
+The Bulk Blast Furnace smelts crushed ore into §lmolten metal§r in large batches.
+
+The multiblock has a GUI with a 4x4 input grid, everything within the grid is considered a single §lbatch§r.
+
+A batch needs three things to work:
+- §lOre§r, which sets the size.
+- §lCoal Coke§r for fuel, from the <link;cokeoven;Coke Oven>.
+- §lCalcite§r for flux.
+<np>
+§lRatios§r
+Coke and flux are measured §lper unit of ore§r.
+
+When making a batch, it's output is a ratio between metal and slag, slag is always a partial output, however, bad ratios in the batch will turn more of the metal to slag.
+The green band on the fuel and flux gauges is a range that will provide a mostly metal output provided everything is within that range.
+
+<np>
+§lHeat§r
+Fuel sets the §lheat ceiling§r. Without any fuel, this ceiling is zero and the furnace isn't possible to operate.
+
+Heat carries over between batches. So continuous use will discount the coke cost of a followup batch.
+
+Each batch has a minimum heat:
+<np>
+§lPreheaters§r
+<link;improved_blast_furnace;Blast Furnace Preheaters;preheater> fit on either side. They create a minimum level of heat.
+
+This means that:
+- The furnace can start smelting sooner.
+- With both preheaters you can reach §l160§r heat.
+
+You need at least one preheater running to start a recipe.
+
+<np>
+§lInput and Output§r
+- §lItems§r are inserted from the §ltop§r.
+- §lMolten metal§r is extracted from the §lfront§r, whilst §lslag§r is extracted from the §lback§r.
+- Both outputs will eject into any connected tank or pipe.
+- A §lredstone signal§r stops the furnace.
+
+Coke can be added as blocks, worth §l9§r coal coke each. Ore can be added in as pellets from the <link;immersivegeology:pelletizer;Pelletizer>, which require less coke and makes less slag.
+<np>
+§lPig Iron and Steel§r
+Create a batch with iron and §lmore coke than required§r the furance will then output §lMolten Pig Iron§r instead of Molten Iron.
+
+You can then use this same furnace to process it into steel. Leave the pig iron in the internal tank, add flux and a small amount of coke, and ensure that the furnace remains above §l150§r heat.
+
+This will create §lMolten Steel§r.
