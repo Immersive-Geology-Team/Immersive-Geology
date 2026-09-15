@@ -73,11 +73,21 @@ public class IGGenericItem extends Item implements IGFlagItem {
         List<String> materialList = new ArrayList<>();
         for(MaterialTexture t : MaterialTexture.values()){
             if (materialMap.containsKey(t)) {
-                materialList.add(Component.translatable("material.immersivegeology." + materialMap.get(t).getName()).getString());
+                materialList.add(materialName(materialMap.get(t)).getString());
             }
         }
 
         return Component.translatable("item.immersivegeology." + category.getName(), materialList.toArray()).withStyle(getMaterial(MaterialTexture.base).getRarity().color);
+    }
+
+    /**
+     * How one of this item's materials reads inside the flag's own name pattern. Subclasses override this
+     * where a material needs qualifying rather than naming outright - a native metal ore being the case that
+     * wanted it.
+     */
+    protected Component materialName(MaterialInterface<?> material)
+    {
+        return Component.translatable("material.immersivegeology." + material.getName());
     }
 
     @Override

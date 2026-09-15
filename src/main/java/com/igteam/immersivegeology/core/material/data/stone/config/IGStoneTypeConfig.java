@@ -95,22 +95,14 @@ public final class IGStoneTypeConfig
 		return value;
 	}
 
-	/**
-	 * Parses the declared rock types straight from the config file, it's early enough to register blocks for them.
-	 * Returns empty when the file does not exist yet, which is the normal case on a first launch.
-	 */
 	public static List<ConfigStoneEntry> load()
 	{
-		// Declared rock types are served at runtime by IGDeclaredStonePack. Data generation shares
-		// the development config directory, so without this a rock type someone was testing with would have its
-		// ore blocks and assets baked into the mod's own generated resources.
 		if(DatagenModLoader.isRunningDataGen()) return List.of();
 
 		Path path = FMLPaths.CONFIGDIR.get().resolve(FILE_NAME);
 		if(!Files.isRegularFile(path))
 		{
-			// Forge writes the file, with its documentation, once the config loads later in start-up. That is
-			// after the point where blocks have to exist, so the first launch of a fresh instance never has one.
+
 			IGLib.IG_LOGGER.info("No stone type configuration yet. {} will be written during this launch; "+
 					"add a rock type to it and restart to generate ore in it.", path);
 			return List.of();
@@ -152,11 +144,9 @@ public final class IGStoneTypeConfig
 		return List.copyOf(accepted);
 	}
 
-	/** Known keys, so a typo's can be flagged in logging. */
 	private static final Set<String> KNOWN_KEYS = Set.of(
 			"block", "formation", "dimensions", "texture", "columns", "properties", "mod", "exclude");
 
-	/** Turns one declared rock type into an entry, or explains in the log why it cannot be used. */
 	private static ConfigStoneEntry parse(UnmodifiableConfig declaration)
 	{
 		if(declaration==null) return null;
@@ -214,7 +204,6 @@ public final class IGStoneTypeConfig
 		return validate(entry, label)?entry: null;
 	}
 
-	/** A configured value that may be written as a single string or as a list of them. */
 	private static List<String> strings(UnmodifiableConfig declaration, String key)
 	{
 		Object raw = declaration.get(key);
@@ -229,7 +218,6 @@ public final class IGStoneTypeConfig
 		return null;
 	}
 
-	/** Fills in the resolved fields, or explains in the log why the entry cannot be used. */
 	private static boolean validate(ConfigStoneEntry entry, String label)
 	{
 		entry.resolvedId = parseId(entry.id, label, "block");
@@ -278,9 +266,6 @@ public final class IGStoneTypeConfig
 				: entry.resolvedBlock;
 		if(entry.resolvedProperties==null) return false;
 
-		// A sedimentary rock usually has a top and a side, but a mod may have only one texture - hence the
-		// override. Getting this wrong shows up as a missing texture on the top face, nothing so it's not a crash if
-		// it's misconfigured, but can be a bit of a gotcha.
 		entry.resolvedColumns = entry.sedimentary_textures!=null
 				?entry.sedimentary_textures
 				: entry.resolvedFormation==StoneFormation.SEDIMENTARY;

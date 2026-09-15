@@ -12,15 +12,10 @@ import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public class IGGenericOreItem extends IGGenericItem
 {
@@ -43,22 +38,13 @@ public class IGGenericOreItem extends IGGenericItem
 	}
 
 	@Override
-	public @NotNull Component getName(ItemStack stack) {
-		String grade = getFlag().equals(ItemCategoryFlags.NORMAL_ORE) ? "normal" : (getFlag().equals(ItemCategoryFlags.RICH_ORE) ? "rich" : "poor");
-		MutableComponent normalName = Component.translatable("material.immersivegeology.ore." + grade);
-		if(!grade.equals("normal")) normalName.append(Component.translatable("formatting.space"));
-		for(MaterialTexture t : MaterialTexture.values()){
-			if (materialMap.containsKey(t)) {
-				MaterialInterface<?> base = materialMap.get(t);
-
-				if(List.of(ItemCategoryFlags.CRUSHED_ORE, ItemCategoryFlags.POOR_ORE, ItemCategoryFlags.NORMAL_ORE, ItemCategoryFlags.RICH_ORE, ItemCategoryFlags.DIRTY_CRUSHED_ORE).contains(getFlag()) && base.instance() instanceof MaterialNativeMetal)
-				{
-					normalName.append(Component.translatable("material.immersivegeology.native")).append(Component.translatable("formatting.space"));
-				}
-				normalName.append(Component.translatable("material.immersivegeology." + base.getName()));
-			}
+	protected Component materialName(MaterialInterface<?> material)
+	{
+		if(material.instance() instanceof MaterialNativeMetal)
+		{
+			return Component.translatable("material.immersivegeology.native_material", super.materialName(material));
 		}
-		return normalName;
+		return super.materialName(material);
 	}
 
 	public OreRichness getOreRichness()

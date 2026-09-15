@@ -202,7 +202,10 @@ public class IGOreGenUtils
 					continue;
 				}
 
-				int sectionMinY = SectionPos.sectionToBlockCoord(sectionIndex);
+				// Section indices are relative to the world floor; only the height accessor can turn one back
+				// into a block coordinate. Sampling the shifted band made this count the stone 64 blocks
+				// above where the vein would land, so isVeinWorthwhile rejected veins that were fine.
+				int sectionMinY = SectionPos.sectionToBlockCoord(level.getSectionYFromSectionIndex(sectionIndex));
 				int fromY = Math.max(sectionMinY, lowestY);
 				int toY = Math.min(sectionMinY+16, highestY+1);
 

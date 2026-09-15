@@ -45,15 +45,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 
 /**
- * Seed driven lookup for {@link IGOreFeature} veins.
- * <p>
- * Vein placement is decided by {@link IGDefaultPlacement}: a per chunk roll seeded from the world seed and the
- * material, plus a biome climate check. Both of those are pure functions of data we can obtain without loading -
- * let alone generating - a single chunk, so a whole search radius can be filtered down to a handful of candidate
- * chunks off the server thread before anything touches the world.
- * <p>
- * The one part of placement that genuinely needs blocks is {@link IGOreGenUtils#isVeinWorthwhile}, which asks
- * whether the stone in the area accepts the ore. That check is what {@code absolute} mode pays for.
+ * Seed driven lookup for IGOreFeature veins.
  */
 public final class IGVeinLocator
 {
@@ -61,7 +53,6 @@ public final class IGVeinLocator
 	{
 	}
 
-	/** How far, in chunks, {@link IGOreFeature#placeVein} writes either side of the chunk a vein is rolled for. */
 	public static final int VEIN_CHUNK_SPREAD = 1;
 
 	private static final AtomicInteger THREAD_COUNTER = new AtomicInteger();
@@ -69,12 +60,12 @@ public final class IGVeinLocator
 	private static final ExecutorService SCAN_POOL = Executors.newFixedThreadPool(SCAN_THREADS, task -> {
 		Thread thread = new Thread(task, "IG Vein Scan #"+THREAD_COUNTER.incrementAndGet());
 		thread.setDaemon(true);
-		// Never outrank the server thread; a locate is not worth a tick.
+		// Never outrank the server thread, this isn't worth lagging the game
 		thread.setPriority(Thread.NORM_PRIORITY-1);
 		return thread;
 	});
 
-	/** Why a prediction came back with no candidates, so the command can say something better than "not found". */
+	/** Enum for outcome of the command so the command can say something better than just "not found". */
 	public enum Outcome
 	{
 		FOUND,
@@ -98,10 +89,9 @@ public final class IGVeinLocator
 		}
 	}
 
-	/** One material's placement rule, resolved once so a slice can roll it against many chunks cheaply. */
+	/** One material's placement rule, it's cached for performence. */
 	private record MaterialRoll(IWorldGenConfig entry, OreConfig config, IGDefaultPlacement placement)
 	{
-		/** null when the material cannot generate in this dimension at all. */
 		@Nullable
 		static MaterialRoll of(ServerLevel level, IWorldGenConfig entry)
 		{
@@ -112,11 +102,6 @@ public final class IGVeinLocator
 		}
 	}
 
-	/**
-	 * Filters every chunk in the radius down to those a vein of {@code entry} is actually rolled for, spread across
-	 * the scan pool. No chunk is loaded or generated, so the cost is a handful of arithmetic ops and one biome
-	 * sample per chunk.
-	 */
 	public static CompletableFuture<Prediction> predictAsync(ServerLevel level, IWorldGenConfig entry, ChunkPos origin, int radius)
 	{
 		if(IGServerConfig.disable_mineral_generation.get()) return refused(Outcome.DISABLED);
@@ -128,11 +113,6 @@ public final class IGVeinLocator
 		return predict(level, List.of(new MaterialRoll(entry, config, new IGDefaultPlacement(entry))), origin, radius);
 	}
 
-	/**
-	 * The same, for any Immersive Geology deposit at all: every material that can generate in this dimension,
-	 * rolled together. Sharing one biome sample per chunk across the whole set makes this barely more expensive
-	 * than searching for a single material - the roll itself is only arithmetic.
-	 */
 	public static CompletableFuture<Prediction> predictAnyAsync(ServerLevel level, ChunkPos origin, int radius)
 	{
 		if(IGServerConfig.disable_mineral_generation.get()) return refused(Outcome.DISABLED);
@@ -143,22 +123,13 @@ public final class IGVeinLocator
 			MaterialRoll roll = MaterialRoll.of(level, entry);
 			if(roll!=null) materials.add(roll);
 		}
-		// rollSlice takes the first material that rolls for a chunk, so this order decides who wins a chunk two
-		// materials both roll for. The config map is a HashMap keyed on enum identity, whose iteration order is
-		// fixed within a run but not across launches, so it is sorted into one the seed can be held to.
+
 		materials.sort(Comparator.comparing(roll -> roll.entry().name()));
 		if(materials.isEmpty()) return refused(Outcome.WRONG_DIMENSION);
 
 		return predict(level, materials, origin, radius);
 	}
 
-	/**
-	 * Every chunk in the radius the world seed rolls a deposit for, with the material it rolled - the data a metal
-	 * detector's display is built from.
-	 * <p>
-	 * This reads no blocks at all, so it works over terrain that has never been generated. What it reports is where
-	 * the seed puts deposits, not what is still in the ground: a vein someone has already mined out still shows.
-	 */
 	public static CompletableFuture<List<ChunkDeposit>> scanDepositsAsync(ServerLevel level, ChunkPos origin, int radius)
 	{
 		if(IGServerConfig.disable_mineral_generation.get()) return CompletableFuture.completedFuture(List.of());
@@ -169,16 +140,13 @@ public final class IGVeinLocator
 			MaterialRoll roll = MaterialRoll.of(level, entry);
 			if(roll!=null) materials.add(roll);
 		}
-		// rollSlice takes the first material that rolls for a chunk, so this order decides who wins a chunk two
-		// materials both roll for. The config map is a HashMap keyed on enum identity, whose iteration order is
-		// fixed within a run but not across launches, so it is sorted into one the seed can be held to.
+
 		materials.sort(Comparator.comparing(roll -> roll.entry().name()));
 		if(materials.isEmpty()) return CompletableFuture.completedFuture(List.of());
 
 		return rollAll(level, materials, origin, radius);
 	}
 
-	/** Fans the roll out across the scan pool without ever blocking one of its threads. */
 	private static CompletableFuture<List<ChunkDeposit>> rollAll(ServerLevel level, List<MaterialRoll> materials,
 																ChunkPos origin, int radius)
 	{
@@ -215,10 +183,6 @@ public final class IGVeinLocator
 		return CompletableFuture.completedFuture(new Prediction(0, 0, List.of(), outcome));
 	}
 
-	/**
-	 * Nothing here ever blocks on the pool - the fan-in is a {@code handle} - so several searches can be in flight
-	 * at once without starving each other.
-	 */
 	private static CompletableFuture<Prediction> predict(ServerLevel level, List<MaterialRoll> materials,
 														 ChunkPos origin, int radius)
 	{
@@ -278,10 +242,9 @@ public final class IGVeinLocator
 		{
 			ChunkPos chunk = new ChunkPos(origin.x+(index/span)-radius, origin.z+(index%span)-radius);
 
-			// The biome the generator would pick here, read straight from the noise router rather than from a
-			// chunk. Datapack biome modifiers can still shuffle this after the fact, which is what the block scan
-			// that follows catches. Sampling it is the expensive part of the roll, so it is done once and reused
-			// across every material.
+			// The biome the generator would pick here, read straight from the noise router
+			// Datapack biome modifiers can still shuffle this after the fact, which we can adjust for via a block scan
+			// Sampling it is the expensive, so it is done once and reused across every material.
 			Holder<Biome> biome = level.getUncachedNoiseBiome(
 					QuartPos.fromBlock(chunk.getMinBlockX()), 0, QuartPos.fromBlock(chunk.getMinBlockZ()));
 			boolean isEnd = biome.containsTag(BiomeTags.IS_END);
@@ -298,10 +261,6 @@ public final class IGVeinLocator
 		return hits;
 	}
 
-	/**
-	 * Mirrors {@link IGDefaultPlacement#shouldPlace} minus the block level {@code isVeinWorthwhile} pass, which is
-	 * the only part that needs a generated chunk.
-	 */
 	private static boolean rollsVein(MaterialRoll material, ChunkPos chunk, long seed, Holder<Biome> biome, boolean isEnd)
 	{
 		IGDefaultPlacement placement = material.placement();
@@ -310,10 +269,6 @@ public final class IGVeinLocator
 		return placed&&placement.canSpawnAt(biome);
 	}
 
-	/**
-	 * Whether this material's own placement can run in this dimension: either the dimension whitelist names it, or
-	 * the TFC overworld override in {@link IGTFCWorld} lets it in anyway.
-	 */
 	public static boolean canGenerateIn(ServerLevel level, IWorldGenConfig entry)
 	{
 		OreConfig config = IGServerConfig.ORES.ores.get(entry);
@@ -329,26 +284,12 @@ public final class IGVeinLocator
 				&&IGTFCWorld.canHostInOverworld(entry.instance());
 	}
 
-	/**
-	 * Whether the rock this dimension is built from can hold the material even though nothing lets the material's
-	 * own placement run here.
-	 * <p>
-	 * A vanilla overworld is {@link StoneFormation#MINECRAFT_STONE} throughout, so the sulphide minerals - which
-	 * accept metamorphic and igneous rock but not Minecraft stone - really are confined to the Nether there, which
-	 * is exactly what their whitelist says. A TFC overworld is built out of those very formations, so with the
-	 * override switched off they can still turn up in it: not from their own placement, but as associate materials
-	 * carried in by whatever vein generated nearby.
-	 * <p>
-	 * Nothing about that is visible to the seed roll, so a search in this situation has to look at the blocks
-	 * themselves rather than predict.
-	 */
 	public static boolean canLocalStoneHost(ServerLevel level, IWorldGenConfig entry)
 	{
 		return IGTFCWorld.isOverworld(level)&&IGTFCWorld.isTFCWorld(level)
 				&&IGTFCWorld.canHostInOverworld(entry.instance());
 	}
 
-	/** The entry of {@code packed} closest to {@code target}. */
 	@Nullable
 	private static BlockPos nearest(LongArrayList packed, BlockPos target)
 	{
@@ -395,7 +336,7 @@ public final class IGVeinLocator
 			LevelChunkSection section = chunk.getSection(sectionIndex);
 			if(section.hasOnlyAir()||!section.maybeHas(matches)) continue;
 
-			int sectionMinY = SectionPos.sectionToBlockCoord(sectionIndex);
+			int sectionMinY = SectionPos.sectionToBlockCoord(chunk.getSectionYFromSectionIndex(sectionIndex));
 			int fromY = Math.max(sectionMinY, lowestY);
 			int toY = Math.min(sectionMinY+16, highestY+1);
 			for(int y = fromY; y < toY; y++)
@@ -411,22 +352,14 @@ public final class IGVeinLocator
 		}
 		return found;
 	}
+			// As in countMatching: the index has to go back through the height accessor. Reading the section
+			// by its index while reporting the unconverted Y is what made a located vein come back one floor
+			// depth too high - 64 blocks in a vanilla world.
 
-	/** A deposit found inside a chunk: the block best representing its middle, and which mineral it is. */
 	public record OreHit(BlockPos position, @Nullable MaterialInterface<?> material)
 	{
 	}
 
-	/**
-	 * The deposits present in {@code chunk}, one entry per distinct ore material.
-	 * <p>
-	 * Splitting by material is what makes a search that accepts any mineral useful: the centre of mass of two
-	 * different minerals sharing a chunk is a point in between that belongs to neither of them, and whichever ore
-	 * happens to sit nearest it would get reported under the wrong name. Grouped, every entry is the middle of one
-	 * actual deposit and is named for what it is.
-	 *
-	 * @return empty when the chunk holds nothing matching {@code matches} in the given height range
-	 */
 	public static List<OreHit> locateOreCentres(ChunkAccess chunk, Predicate<BlockState> matches, int minY, int maxY)
 	{
 		int lowestY = Math.max(minY, chunk.getMinBuildHeight());
@@ -443,7 +376,7 @@ public final class IGVeinLocator
 			LevelChunkSection section = chunk.getSection(sectionIndex);
 			if(section.hasOnlyAir()||!section.maybeHas(matches)) continue;
 
-			int sectionMinY = SectionPos.sectionToBlockCoord(sectionIndex);
+			int sectionMinY = SectionPos.sectionToBlockCoord(chunk.getSectionYFromSectionIndex(sectionIndex));
 			int fromY = Math.max(sectionMinY, lowestY);
 			int toY = Math.min(sectionMinY+16, highestY+1);
 			for(int y = fromY; y < toY; y++)
@@ -472,7 +405,6 @@ public final class IGVeinLocator
 		return hits;
 	}
 
-	/** Centre of mass of {@code positions}, snapped onto the nearest one so the answer always lands on ore. */
 	@Nullable
 	private static BlockPos centreOf(LongArrayList positions)
 	{

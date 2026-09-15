@@ -179,6 +179,12 @@ minecraft {
     }
 }
 
+// ----------------------------------------------------------------------------
+// PATCHED THIRD-PARTY DEV JARS
+// ----------------------------------------------------------------------------
+def patchedModsDir = layout.buildDirectory.dir('patched-mods').get().asFile
+patchedModsDir.mkdirs()
+
 repositories {
     maven { url 'https://maven.blamejared.com/' }
     maven { url 'https://www.cursemaven.com' }
@@ -192,6 +198,76 @@ repositories {
     }
     mavenCentral()
     gradlePluginPortal()
+    // Holds third-party mod jars we have to repackage before they can run in
+    // userdev; see the Tectonic block below.
+    flatDir { dirs patchedModsDir }
+}
+
+// ----------------------------------------------------------------------------
+// TECTONIC USERDEV PATCH
+// ----------------------------------------------------------------------------
+// Tectonic ships its mixin configs with no "refmap", and its @Inject/@At targets
+// are baked in as literal SRG names (m_62095_, f_158363_, ...). That is fine in
+// production, where the runtime is SRG-named, but in userdev the runtime is
+// MCP/parchment-named and Mixin only installs the SRG->MCP remapper for configs
+// that declare a refmap -- RemappingReferenceMapper.of() bails out when
+// IReferenceMapper.isDefault() is true, which is exactly the "No refMap loaded"
+// half of the ChunkAccessMixin crash. Repackaging the jar with an (empty) refmap
+// wired into both configs flips that remapper on; it then rewrites every SRG
+// reference itself using build/createSrgToMcp/output.srg, so no per-member
+// mapping data of our own is needed.
+//
+// Nothing here touches the published jar -- the patched copy only ever lands on
+// the dev runtime classpath.
+ext.tectonic_version = '3.0.17'
+def tectonicProjectId = 686836
+def tectonicFileId    = 7197834
+def tectonicPatched   = null
+
+// Fetched straight off CurseMaven rather than through a detached configuration:
+// resolving anything at configuration time freezes the repository descriptors
+// before ForgeGradle is done filtering its own deobf repo, which breaks the
+// whole build.
+try {
+    def rawTectonic = new File(patchedModsDir, "tectonic-${tectonicProjectId}-${tectonicFileId}.jar")
+    if (!rawTectonic.exists()) {
+        def src = "https://www.cursemaven.com/curse/maven/tectonic-${tectonicProjectId}/${tectonicFileId}/tectonic-${tectonicProjectId}-${tectonicFileId}.jar"
+        def tmp = new File(patchedModsDir, rawTectonic.name + '.part')
+        new URL(src).withInputStream { input -> tmp.withOutputStream { out -> out << input } }
+        tmp.renameTo(rawTectonic)
+    }
+
+    def refmapName = 'tectonic.refmap.json'
+    def refmapJson = JsonOutput.toJson([mappings: [:], data: [searge: [:]]])
+    def patched = new File(patchedModsDir, "tectonic-${tectonic_version}-refmap.jar")
+
+    if (!patched.exists() || patched.lastModified() < rawTectonic.lastModified()) {
+        new java.util.zip.ZipFile(rawTectonic).withCloseable { zin ->
+            new java.util.zip.ZipOutputStream(new FileOutputStream(patched)).withCloseable { zos ->
+                zin.entries().each { entry ->
+                    if (entry.name == refmapName) return
+                    byte[] bytes = entry.directory ? new byte[0] : zin.getInputStream(entry).bytes
+                    if (entry.name ==~ /tectonic[^\/]*\.mixins\.json/) {
+                        def cfg = new JsonSlurper().parseText(new String(bytes, 'UTF-8'))
+                        cfg.refmap = refmapName
+                        bytes = JsonOutput.toJson(cfg).getBytes('UTF-8')
+                    }
+                    def copy = new java.util.zip.ZipEntry(entry.name)
+                    if (entry.time >= 0) copy.time = entry.time
+                    zos.putNextEntry(copy)
+                    zos.write(bytes)
+                    zos.closeEntry()
+                }
+                zos.putNextEntry(new java.util.zip.ZipEntry(refmapName))
+                zos.write(refmapJson.getBytes('UTF-8'))
+                zos.closeEntry()
+            }
+        }
+        println "-> repackaged Tectonic for userdev: ${patched.name}"
+    }
+    tectonicPatched = "dev.worldgen:tectonic:${tectonic_version}-refmap"
+} catch (Exception e) {
+    logger.warn("-> Tectonic left out of the dev runtime, could not repackage it: ${e}")
 }
 
 dependencies {
@@ -206,6 +282,10 @@ dependencies {
     implementation       fg.deobf("curse.maven:engineered-schematics-1207780:6293337")
     implementation fg.deobf("curse.maven:chisels-bits-231095:5203366")
     //implementation fg.deobf("curse.maven:distant-horizons-508933:6791186")
+
+    implementation fg.deobf("curse.maven:lithostitched-936015:6742615")
+    if (tectonicPatched != null) implementation fg.deobf(tectonicPatched)
+
     implementation fg.deobf("curse.maven:glitchcore-955399:5787839")
     implementation fg.deobf("curse.maven:terrablender-563928:6290448")
     implementation fg.deobf("curse.maven:biomes-o-plenty-220318:6364065")
