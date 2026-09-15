@@ -48,6 +48,12 @@ public class IGMultiblockProvider {
             .gui(IGMenuTypes.REVERBERATION_FURNACE)
             .build();
 
+    public static final MultiblockRegistration<BulkBlastFurnaceLogic.State> BULK_BLAST_FURNACE = stone(new BulkBlastFurnaceLogic(), "bulk_blast_furnace", false)
+            .structure(() -> IGRegistrationHolder.getMBTemplate.apply("bulk_blast_furnace"))
+            .redstone(state -> state.rsState, BulkBlastFurnaceLogic.REDSTONE_IN)
+            .gui(IGMenuTypes.BULK_BLAST_FURNACE)
+            .build();
+
     public static final MultiblockRegistration<BloomeryLogic.State> BLOOMERY = stone_skinnable(new BloomeryLogic(), "bloomery", false, BloomeryPart::new)
                     .structure(() -> IGRegistrationHolder.getMBTemplate.apply("bloomery"))
                     .gui(IGMenuTypes.BLOOMERY)

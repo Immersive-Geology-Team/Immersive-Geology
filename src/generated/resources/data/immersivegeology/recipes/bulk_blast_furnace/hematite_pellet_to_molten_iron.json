@@ -1,0 +1,21 @@
+{
+  "type": "immersivegeology:bulk_blast_furnace",
+  "coke_ratio": 0.375,
+  "flux_ratio": 0.25,
+  "heat": 0,
+  "max_yield": 0.92999995,
+  "melt": {
+    "amount": 144,
+    "fluid": "immersivegeology:fluid_iron"
+  },
+  "min_yield": 0.35000002,
+  "ore": {
+    "tag": "forge:pellets/hematite"
+  },
+  "rich_coke_ratio": 0.9375,
+  "rich_melt": {
+    "amount": 160,
+    "fluid": "immersivegeology:fluid_pig_iron"
+  },
+  "time": 119
+}

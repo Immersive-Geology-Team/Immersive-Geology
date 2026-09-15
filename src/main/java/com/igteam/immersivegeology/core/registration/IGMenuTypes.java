@@ -46,6 +46,7 @@ public class IGMenuTypes
 	public static final MultiblockContainer<SmallChemicalReactorLogic.State, SmallChemicalReactorMenu> SMALL_CHEMICAL_REACTOR = registerMultiblock(IGLib.GUIID_SmallChemicalReactor, SmallChemicalReactorMenu::makeServer, SmallChemicalReactorMenu::makeClient);
 	public static final MultiblockContainer<RotaryKilnLogic.State, RotaryKilnMenu> ROTARY_KILN = registerMultiblock(IGLib.GUIID_RotaryKiln, RotaryKilnMenu::makeServer, RotaryKilnMenu::makeClient);
 	public static final MultiblockContainer<GeothermalExchangerLogic.State, GeothermalExchangerMenu> GEOTHERMAL_EXCHANGER = registerMultiblock(IGLib.GUIID_GeothermalExchanger, GeothermalExchangerMenu::makeServer, GeothermalExchangerMenu::makeClient);
+	public static final MultiblockContainer<BulkBlastFurnaceLogic.State, BulkBlastFurnaceMenu> BULK_BLAST_FURNACE = registerMultiblock(IGLib.GUIID_BulkBlastFurnace, BulkBlastFurnaceMenu::makeServer, BulkBlastFurnaceMenu::makeClient);
 
 	public static final RegistryObject<MenuType<IGCrateMenu>> CRATE = registerSimple(IGLib.GUIID_Crate, IGCrateMenu::new);
 	public static final RegistryObject<MenuType<IGMetalDetectorMenu>> METAL_DETECTOR = registerWithData(IGLib.GUIID_MetalDetector, IGMetalDetectorMenu::new);

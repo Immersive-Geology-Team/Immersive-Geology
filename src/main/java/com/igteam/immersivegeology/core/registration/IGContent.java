@@ -145,6 +145,7 @@ public class IGContent {
         MenuScreens.register(IGMenuTypes.CHEMICAL_REACTOR.getType(), ChemicalReactorScreen::new);
         MenuScreens.register(IGMenuTypes.SMALL_CHEMICAL_REACTOR.getType(), SmallChemicalReactorScreen::new);
         MenuScreens.register(IGMenuTypes.ROTARY_KILN.getType(), RotaryKilnScreen::new);
+        MenuScreens.register(IGMenuTypes.BULK_BLAST_FURNACE.getType(), BulkBlastFurnaceScreen::new);
         MenuScreens.register(IGMenuTypes.CRATE.get(), IGCrateScreen.StandardIGCrate::new);
         MenuScreens.register(IGMenuTypes.METAL_DETECTOR.get(), IGMetalDetectorScreen::new);
     }
@@ -173,6 +174,7 @@ public class IGContent {
         multiblockEntry(instance, multiblock_category, "gravity_separator");
         multiblockRotaryKilnEntry(instance, multiblock_category, "rotary_kiln");
         multiblockEntry(instance, multiblock_category, "reverberation_furnace");
+        multiblockEntry(instance, multiblock_category, "bulk_blast_furnace");
         multiblockEntry(instance, multiblock_category, "geothermal_exchanger");
         multiblockEntry(instance, multiblock_category, "bloomery");
         multiblockEntry(instance, multiblock_category, "chemical_reactor");

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "ig_tools",
+  "key": {
+    "B": {
+      "item": "immersivegeology:storage_block_industrial_refractory_brick"
+    }
+  },
+  "pattern": [
+    "B  ",
+    "BB ",
+    "BBB"
+  ],
+  "result": {
+    "count": 4,
+    "item": "immersivegeology:stairs_industrial_refractory_brick"
+  },
+  "show_notification": true
+}
