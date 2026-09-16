@@ -123,6 +123,11 @@ public interface MaterialInterface<T extends GeologyMaterial> {
         return instance().getVeinTextureType();
     }
 
+	default boolean hasStoneBackdrop()
+    {
+        return instance().hasStoneBackdrop();
+    }
+
     default MaterialInterface<?> getPrimaryProduct() {return instance().getPrimaryProduct();}
     default MaterialInterface<?> getSecondaryProduct() {return instance().getSecondaryProduct();}
     default MaterialInterface<?> getTraceProduct(int index) {return instance().getTraceProduct(index);}

@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration.TargetBlockState;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 /**
@@ -72,6 +73,12 @@ public interface IStoneType extends MaterialInterface<MaterialStone>
 	default ResourceLocation getHostBlockId()
 	{
 		return null;
+	}
+
+	static String backdropPaletteKey(MaterialInterface<?> stone)
+	{
+		if(stone instanceof IStoneType type) return type.getRegistryPrefix()+type.getName().toLowerCase(Locale.ROOT);
+		return stone.getName().toLowerCase(Locale.ROOT);
 	}
 
 	/** Whether this rock refuses to host the given ore, to allow tuning when other mods have duplicate ores. */

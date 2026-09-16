@@ -1,7 +1,8 @@
 {
-  "parent": "immersivegeology:block/base/ore_block/ore_block_up",
+  "parent": "immersivegeology:block/base/ore_block_backdrop/ore_block_up",
   "textures": {
     "base": "minecraft:block/andesite",
-    "ore_up": "immersivegeology:palette/block/ore_bearing/metallic/poor_2_corroded_copper"
+    "ore_up": "immersivegeology:palette/block/ore_bearing/native_metal/poor_2_corroded_copper",
+    "stone_backdrop_up": "immersivegeology:palette/block/stone_backdrop/native_metal/poor_2_base_minecraft_andesite"
   }
 }

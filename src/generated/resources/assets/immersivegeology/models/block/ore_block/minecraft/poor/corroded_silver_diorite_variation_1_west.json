@@ -1,7 +1,8 @@
 {
-  "parent": "immersivegeology:block/base/ore_block/ore_block_west",
+  "parent": "immersivegeology:block/base/ore_block_backdrop/ore_block_west",
   "textures": {
     "base": "minecraft:block/diorite",
-    "ore_west": "immersivegeology:palette/block/ore_bearing/metallic/poor_1_corroded_silver"
+    "ore_west": "immersivegeology:palette/block/ore_bearing/native_metal/poor_1_corroded_silver",
+    "stone_backdrop_west": "immersivegeology:palette/block/stone_backdrop/native_metal/poor_1_base_minecraft_diorite"
   }
 }

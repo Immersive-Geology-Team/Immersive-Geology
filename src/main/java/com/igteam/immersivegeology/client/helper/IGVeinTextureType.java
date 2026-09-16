@@ -18,7 +18,13 @@ public enum IGVeinTextureType
 	METALLIC,
 	CRYSTAL,
 	LAYERED,
-	MINERAL;
+	MINERAL,
+	NATIVE_METAL;
+
+	public boolean hasStoneBackdrop()
+	{
+		return this==NATIVE_METAL;
+	}
 
 	public String getSanitizedName()
 	{

@@ -17,6 +17,8 @@ import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.helper.material.IStoneType;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import net.minecraft.data.CachedOutput;
@@ -24,12 +26,19 @@ import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 
+import static com.igteam.immersivegeology.core.material.GeologyMaterial.EXISTING_HELPER;
+import static net.minecraft.server.packs.PackType.CLIENT_RESOURCES;
+
 import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 public class IGAtlasProvider implements DataProvider {
+	private static final String STONE_BACKDROP_PATH = "palette/block/stone_backdrop/";
+	private static final String STONE_BACKDROP_VARIANT = "base";
+	private static final String STONE_BACKDROP_FALLBACK = "default_stone";
+
 	private final PackOutput output;
 	private final Map<String, Supplier<JsonElement>> elements = new HashMap<>();
 
@@ -82,8 +91,43 @@ public class IGAtlasProvider implements DataProvider {
 		key.addEntryData(MetalEnum.getAtlasPermutations());
 		key.addEntryData(MineralEnum.getAtlasPermutations());
 		sourcesArray.add(key.getJsonObj());
+		sourcesArray.add(buildStoneBackdropKey().getJsonObj());
 		atlasJson.add("sources", sourcesArray);
 		elements.put("atlas", () -> atlasJson);
+	}
+
+	private IGPaletteKey buildStoneBackdropKey()
+	{
+		IGPaletteKey key = new IGPaletteKey(new ResourceLocation(IGLib.MODID, "palette/palette_key"), new ResourceLocation(IGLib.MODID, "palette/palettes"));
+
+		List<String> textures = new ArrayList<>();
+		for(IGVeinTextureType vein : IGVeinTextureType.values())
+		{
+			if(!vein.hasStoneBackdrop()) continue;
+			for(OreRichness richness : OreRichness.values())
+			{
+				textures.add(STONE_BACKDROP_PATH+vein.getSanitizedName()+"/"+richness.name().toLowerCase(Locale.ROOT)+"_1");
+				textures.add(STONE_BACKDROP_PATH+vein.getSanitizedName()+"/"+richness.name().toLowerCase(Locale.ROOT)+"_2");
+			}
+		}
+		key.addTextureData(textures);
+
+		for(StoneEnum stone : StoneEnum.values())
+		{
+			String stoneKey = IStoneType.backdropPaletteKey(stone);
+			key.addExplicitEntry(STONE_BACKDROP_VARIANT+"_"+stoneKey, palettePathFor(stoneKey));
+		}
+		return key;
+	}
+
+	private String palettePathFor(String stoneKey)
+	{
+		ResourceLocation authored = new ResourceLocation(IGLib.MODID, "palette/palettes/"+stoneKey+"/"+STONE_BACKDROP_VARIANT);
+		boolean exists = EXISTING_HELPER!=null&&EXISTING_HELPER.exists(
+				new ResourceLocation(IGLib.MODID, "textures/"+authored.getPath()+".png"), CLIENT_RESOURCES);
+		return exists
+				?authored.toString()
+				:new ResourceLocation(IGLib.MODID, "palette/palettes/"+STONE_BACKDROP_FALLBACK+"/"+STONE_BACKDROP_VARIANT).toString();
 	}
 
 	private void addDirectorySource(JsonArray sourcesArray, String source, String prefix) {
@@ -133,6 +177,7 @@ public class IGAtlasProvider implements DataProvider {
 	{
 		private ResourceLocation key, paletteLoc;
 		private List<String> textures, entries;
+		private final Map<String, String> explicitEntries = new LinkedHashMap<>();
 		JsonObject obj;
 		public IGPaletteKey(ResourceLocation key, ResourceLocation paletteLoc)
 		{
@@ -140,6 +185,11 @@ public class IGAtlasProvider implements DataProvider {
 			this.paletteLoc = paletteLoc;
 			this.textures = new ArrayList<>();
 			this.entries = new ArrayList<>();
+		}
+
+		public void addExplicitEntry(String permutation, String palette)
+		{
+			this.explicitEntries.put(permutation, palette);
 		}
 
 		public void addTextureData(Collection<String> textureData)
@@ -169,6 +219,7 @@ public class IGAtlasProvider implements DataProvider {
 				if(item.equalsIgnoreCase("kaolinite")) continue;
 				permutationsObj.addProperty(item.toLowerCase(Locale.ROOT).substring(item.lastIndexOf('/')+1) + "_" + item.substring(0,item.lastIndexOf('/')), paletteLoc.toString() + "/" + item.toLowerCase(Locale.ROOT));
 			}
+			explicitEntries.forEach(permutationsObj::addProperty);
 			obj.add("permutations", permutationsObj);
 		}
 

@@ -22,7 +22,7 @@ public class IGBulkBlastFurnaceMultiblock extends IGTemplateMultiblock
 
 	public IGBulkBlastFurnaceMultiblock()
 	{
-		super(new ResourceLocation(IGLib.MODID, "multiblocks/bulk_blast_furnace"), new BlockPos(1, 0, 1), new BlockPos(1, 1, 2), new BlockPos(3, 7, 3), IGMultiblockProvider.BULK_BLAST_FURNACE);
+		super(new ResourceLocation(IGLib.MODID, "multiblocks/bulk_blast_furnace"), new BlockPos(1, 0, 1), new BlockPos(1, 1, 2), new BlockPos(3, 8, 3), IGMultiblockProvider.BULK_BLAST_FURNACE);
 	}
 
 	@Override

@@ -1,7 +1,8 @@
 {
-  "parent": "immersivegeology:block/base/ore_block",
+  "parent": "immersivegeology:block/base/ore_block_backdrop",
   "textures": {
     "base": "tfc:block/rock/raw/andesite",
-    "ore": "immersivegeology:palette/block/ore_bearing/metallic/rich_2_pristine_platinum"
+    "ore": "immersivegeology:palette/block/ore_bearing/native_metal/rich_2_pristine_platinum",
+    "stone_backdrop": "immersivegeology:palette/block/stone_backdrop/native_metal/rich_2_base_tfc_andesite"
   }
 }

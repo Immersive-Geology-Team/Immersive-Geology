@@ -94,7 +94,7 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 
 	public static final BlockPos REDSTONE_IN = new BlockPos(2, 0, 0);
 
-	private static final CapabilityPosition ITEM_INPUT_CAP = new CapabilityPosition(1, 6, 1, RelativeBlockFace.UP);
+	private static final CapabilityPosition ITEM_INPUT_CAP = new CapabilityPosition(1, 7, 1, RelativeBlockFace.UP);
 	private static final MultiblockFace METAL_OUTPUT = new MultiblockFace(1, 0, 0, RelativeBlockFace.FRONT);
 	private static final MultiblockFace SLAG_OUTPUT = new MultiblockFace(1, 0, 2, RelativeBlockFace.BACK);
 	private static final CapabilityPosition METAL_OUTPUT_CAP = new CapabilityPosition(1, 0, 0, RelativeBlockFace.FRONT);
@@ -447,7 +447,7 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 	public <T> LazyOptional<T> getCapability(IMultiblockContext<State> ctx, CapabilityPosition position, Capability<T> cap)
 	{
 		final State state = ctx.getState();
-		if(cap==ForgeCapabilities.ITEM_HANDLER&&ITEM_INPUT_CAP.equals(position))
+		if(cap==ForgeCapabilities.ITEM_HANDLER&&ITEM_INPUT_CAP.equalsOrNullFace(position))
 			return state.itemInputCap.cast(ctx);
 		if(cap==ForgeCapabilities.FLUID_HANDLER)
 		{

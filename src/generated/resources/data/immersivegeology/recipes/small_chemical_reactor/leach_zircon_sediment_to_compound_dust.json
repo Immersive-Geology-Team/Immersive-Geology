@@ -1,0 +1,20 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 1,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 250,
+    "tag": "forge:hydrochloric_acid"
+  },
+  "fluidResult": {
+    "amount": 250,
+    "fluid": "immersivegeology:fluid_chemical_waste"
+  },
+  "itemInput": {
+    "item": "immersivegeology:sediment_zircon"
+  },
+  "result": {
+    "item": "immersivegeology:compound_dust_zirconium"
+  },
+  "time": 200
+}

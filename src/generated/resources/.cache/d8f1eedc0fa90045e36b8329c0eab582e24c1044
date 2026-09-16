@@ -1,4 +1,4 @@
-// 1.20.1	2026-09-16T05:22:52.840170995	Tags for minecraft:item mod id immersivegeology
+// 1.20.1	2026-09-17T01:03:54.319197082	Tags for minecraft:item mod id immersivegeology
 e56adb03218e45c59aec8be5897a83ad852a915b data/forge/tags/items/compound_dust.json
 a474cefed341534d35ef94390868bfb60032bd4b data/forge/tags/items/compound_dust/aluminum.json
 24a62424adfc489796a9bf426edff2967ee92da8 data/forge/tags/items/compound_dust/calcium.json
@@ -319,7 +319,7 @@ a07caee32328c293a8a086c4ad0c956c86425d00 data/forge/tags/items/material/unobtani
 4b61ca8828988069af9246a7c658e969c58557f0 data/forge/tags/items/material/vanadium.json
 a02cd2425d8ce46202f1b2509c096a18b9daea2f data/forge/tags/items/material/wolframite.json
 064477ddd4f8a095c12ebc49e2a0d3a73781348b data/forge/tags/items/material/zinc.json
-77015752971cb382a9d9032033d8df6e838210f4 data/forge/tags/items/material/zircon.json
+81bb3d0c20764c792781e717866c249204d4d5ee data/forge/tags/items/material/zircon.json
 246840de51a501a625dbb56d5640312de765e99c data/forge/tags/items/material/zirconium.json
 f035edbbd907392adb6c77cf8b312e22d3077837 data/forge/tags/items/mechanical_component.json
 1487bab9edb5d22f5e54451ad8aa27e493ce7588 data/forge/tags/items/mechanical_component/hastelloy.json
@@ -613,11 +613,12 @@ ecf09d3a69f44dea90d2f62bf48172e6dbf66602 data/forge/tags/items/rods/unobtanium.j
 17390eecff0cab9a9facba8cb626c82b0caaa3e6 data/forge/tags/items/rods/vanadium.json
 badfc2bdc77bd289139617a0f7495c7346aeaa84 data/forge/tags/items/rods/zinc.json
 b802d95d20a58ac1e1f2bb714ef62875bf42922c data/forge/tags/items/rods/zirconium.json
-d67862ad38747dfc9fccfbe9731d1f18995fee70 data/forge/tags/items/sediment.json
+8bd4915ad9f4821aa0f980ffecbb835b41f50cb4 data/forge/tags/items/sediment.json
 c4fe6f59011d7ba984c76866c820f959ee425aa7 data/forge/tags/items/sediment/carnallite.json
 53e38f4905d6abb25a92fb9227d4ee21811f418b data/forge/tags/items/sediment/monazite.json
 dc68b153844a135f505ac8b39a1844368ec56c6d data/forge/tags/items/sediment/rocksalt.json
 368613ba35fbc48162368eb644a0cd9b79682eb5 data/forge/tags/items/sediment/saltpeter.json
+156b17b14cee9e2386f45da045281601795a6e2f data/forge/tags/items/sediment/zircon.json
 798322960b646b3e9f7d5177774d41296a06a825 data/forge/tags/items/silicon.json
 70ea7f50534940ec5fac1624073d120967a39f10 data/forge/tags/items/slag.json
 9cc06381331b08cee2e243503d35d0c1b6d90cc6 data/forge/tags/items/slag/acanthite.json

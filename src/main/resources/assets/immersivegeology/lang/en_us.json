@@ -54,6 +54,11 @@
   "manual.immersivegeology.sulphide_electrowining.subtext": "Sulphide Electrowining",
   "manual.immersivegeology.hunter_process.subtext": "Hunter Process",
   "manual.immersivegeology.becher_process.subtext": "Becher Process",
+  "manual.immersivegeology.caustic_fusion.subtext": "Caustic Fusion",
+  "manual.immersivegeology.ammonia_synthesis.subtext": "Ammonia Synthesis",
+  "manual.immersivegeology.basic_preparation.subtext": "Basic Preparation",
+  "manual.immersivegeology.basic_synthesis.subtext": "Basic Synthesis",
+  "manual.immersivegeology.phosphoric_acid_production.subtext": "Phosphoric Acid Production",
 
   "desc.immersiveengineering.info.mineral.chromite_magnetite_mix": "Chromite Magnetite Mix",
   "desc.immersiveengineering.info.mineral.carnallitic_salt_tube": "Carnallitic Salt Tube",

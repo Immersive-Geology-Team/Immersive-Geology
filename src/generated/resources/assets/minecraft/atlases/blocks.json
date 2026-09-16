@@ -259,6 +259,12 @@
         "immersivegeology:palette/block/ore_bearing/mineral/normal_2",
         "immersivegeology:palette/block/ore_bearing/mineral/rich_1",
         "immersivegeology:palette/block/ore_bearing/mineral/rich_2",
+        "immersivegeology:palette/block/ore_bearing/native_metal/poor_1",
+        "immersivegeology:palette/block/ore_bearing/native_metal/poor_2",
+        "immersivegeology:palette/block/ore_bearing/native_metal/normal_1",
+        "immersivegeology:palette/block/ore_bearing/native_metal/normal_2",
+        "immersivegeology:palette/block/ore_bearing/native_metal/rich_1",
+        "immersivegeology:palette/block/ore_bearing/native_metal/rich_2",
         "immersivegeology:palette/item/ingot/type_1",
         "immersivegeology:palette/item/ingot/type_2",
         "immersivegeology:palette/item/ingot/type_3",
@@ -327,6 +333,50 @@
         "immersivegeology:block/greyscale/scaffolding/scaffolding",
         "immersivegeology:block/greyscale/scaffolding/scaffolding_top_grate_top",
         "immersivegeology:block/greyscale/scaffolding/scaffolding_top_wooden_top"
+      ]
+    },
+    {
+      "type": "paletted_permutations",
+      "palette_key": "immersivegeology:palette/palette_key",
+      "permutations": {
+        "base_minecraft_andesite": "immersivegeology:palette/palettes/minecraft_andesite/base",
+        "base_minecraft_basalt": "immersivegeology:palette/palettes/minecraft_basalt/base",
+        "base_minecraft_deepslate": "immersivegeology:palette/palettes/minecraft_deepslate/base",
+        "base_minecraft_diorite": "immersivegeology:palette/palettes/minecraft_diorite/base",
+        "base_minecraft_dripstone_block": "immersivegeology:palette/palettes/minecraft_dripstone_block/base",
+        "base_minecraft_end_stone": "immersivegeology:palette/palettes/minecraft_end_stone/base",
+        "base_minecraft_granite": "immersivegeology:palette/palettes/minecraft_granite/base",
+        "base_minecraft_netherrack": "immersivegeology:palette/palettes/minecraft_netherrack/base",
+        "base_minecraft_sandstone": "immersivegeology:palette/palettes/minecraft_sandstone/base",
+        "base_minecraft_stone": "immersivegeology:palette/palettes/minecraft_stone/base",
+        "base_tfc_andesite": "immersivegeology:palette/palettes/default_stone/base",
+        "base_tfc_basalt": "immersivegeology:palette/palettes/default_stone/base",
+        "base_tfc_chalk": "immersivegeology:palette/palettes/default_stone/base",
+        "base_tfc_chert": "immersivegeology:palette/palettes/default_stone/base",
+        "base_tfc_claystone": "immersivegeology:palette/palettes/default_stone/base",
+        "base_tfc_conglomerate": "immersivegeology:palette/palettes/default_stone/base",
+        "base_tfc_dacite": "immersivegeology:palette/palettes/default_stone/base",
+        "base_tfc_diorite": "immersivegeology:palette/palettes/default_stone/base",
+        "base_tfc_dolomite": "immersivegeology:palette/palettes/default_stone/base",
+        "base_tfc_gabbro": "immersivegeology:palette/palettes/default_stone/base",
+        "base_tfc_gneiss": "immersivegeology:palette/palettes/default_stone/base",
+        "base_tfc_granite": "immersivegeology:palette/palettes/default_stone/base",
+        "base_tfc_limestone": "immersivegeology:palette/palettes/default_stone/base",
+        "base_tfc_marble": "immersivegeology:palette/palettes/default_stone/base",
+        "base_tfc_phyllite": "immersivegeology:palette/palettes/default_stone/base",
+        "base_tfc_quartzite": "immersivegeology:palette/palettes/default_stone/base",
+        "base_tfc_rhyolite": "immersivegeology:palette/palettes/default_stone/base",
+        "base_tfc_schist": "immersivegeology:palette/palettes/default_stone/base",
+        "base_tfc_shale": "immersivegeology:palette/palettes/default_stone/base",
+        "base_tfc_slate": "immersivegeology:palette/palettes/default_stone/base"
+      },
+      "textures": [
+        "immersivegeology:palette/block/stone_backdrop/native_metal/poor_1",
+        "immersivegeology:palette/block/stone_backdrop/native_metal/poor_2",
+        "immersivegeology:palette/block/stone_backdrop/native_metal/normal_1",
+        "immersivegeology:palette/block/stone_backdrop/native_metal/normal_2",
+        "immersivegeology:palette/block/stone_backdrop/native_metal/rich_1",
+        "immersivegeology:palette/block/stone_backdrop/native_metal/rich_2"
       ]
     }
   ]

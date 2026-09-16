@@ -200,39 +200,33 @@ public class IGContent {
         List<MaterialInterface<?>> materials = IGLib.getGeneratedMaterials();
         for(MaterialInterface<?> mineral : materials)
         {
-            if(mineral.instance().acceptableStoneType(StoneEnum.MCStone)) mineralTreeEntry(instance, overworld, mineral);
-            if(mineral.instance().acceptableStoneType(StoneEnum.MCNetherrack)) mineralTreeEntry(instance, nether, mineral);
-            if(mineral.instance().acceptableStoneType(StoneEnum.MCEndStone)) mineralTreeEntry(instance, the_end, mineral);
+            List<InnerNode<ResourceLocation, ManualEntry>> hosts = new ArrayList<>();
+            if(mineral.instance().acceptableStoneType(StoneEnum.MCStone)) hosts.add(overworld);
+            if(mineral.instance().acceptableStoneType(StoneEnum.MCNetherrack)) hosts.add(nether);
+            if(mineral.instance().acceptableStoneType(StoneEnum.MCEndStone)) hosts.add(the_end);
+            if(hosts.isEmpty()) continue;
+
+            ManualEntry entry = materialEntry(mineral);
+            for(InnerNode<ResourceLocation, ManualEntry> host : hosts) instance.addEntry(host, entry);
+        }
+
+        InnerNode<ResourceLocation, ManualEntry> metal_category = parent_category.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "metals"), 3);
+        for(MaterialInterface<?> metal : metals)
+        {
+            if(metal.instance().getRecipeChains().isEmpty()) continue;
+            if(materials.contains(metal)) continue;
+            instance.addEntry(metal_category, materialEntry(metal));
         }
 
 //        InnerNode<ResourceLocation, ManualEntry> chemical_entries = processing_chains.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_chemical_chains"), 3);
     }
 
-    private static void mineralTreeEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, MaterialInterface<?> material)
+    private static ManualEntry materialEntry(MaterialInterface<?> material)
     {
-        ManualEntry.ManualEntryBuilder mineral = new ManualEntry.ManualEntryBuilder(ManualHelper.getManual());
-        mineral.setLocation(new ResourceLocation(IGLib.MODID, material.getName()));
-        mineral.setContent(() -> createMineralContent(material));
-
-        instance.addEntry(category, mineral.create());
-    }
-
-    private static void metalTreeEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, MaterialInterface<?> material)
-    {
-        ManualEntry.ManualEntryBuilder mineral = new ManualEntry.ManualEntryBuilder(ManualHelper.getManual());
-        mineral.setLocation(new ResourceLocation(IGLib.MODID, material.getName()));
-        mineral.setContent(() -> createMineralContent(material));
-
-        instance.addEntry(category, mineral.create());
-    }
-
-    private static void chemicalTreeEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, MaterialInterface<?> material)
-    {
-        ManualEntry.ManualEntryBuilder mineral = new ManualEntry.ManualEntryBuilder(ManualHelper.getManual());
-        mineral.setLocation(new ResourceLocation(IGLib.MODID, material.getName()));
-        mineral.setContent(() -> createMineralContent(material));
-
-        instance.addEntry(category, mineral.create());
+        ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(ManualHelper.getManual());
+        builder.setLocation(new ResourceLocation(IGLib.MODID, material.getName()));
+        builder.setContent(() -> createMineralContent(material));
+        return builder.create();
     }
 
     protected static EntryData createMineralContent(MaterialInterface<?> material)
@@ -281,7 +275,8 @@ public class IGContent {
             String finalDerived = derivedString.toString();
             contentBuilder.append("<np>").append(Component.translatable("manual.immersivegeology.generic.pre_chain_desc", material.getTranslationName(), finalDerived).getString());
         }
-        itemList.add(new SpecialElementData("list", 0, new ManualElementTable(ManualHelper.getManual(), formatTable(getOreConfigTable(config, material.getDefaultNoiseProbability()), ""), true)));
+        if(config!=null)
+            itemList.add(new SpecialElementData("list", 0, new ManualElementTable(ManualHelper.getManual(), formatTable(getOreConfigTable(config, material.getDefaultNoiseProbability()), ""), true)));
 
         for(int i = 0; i < recipe_chain_data.size(); i++)
         {

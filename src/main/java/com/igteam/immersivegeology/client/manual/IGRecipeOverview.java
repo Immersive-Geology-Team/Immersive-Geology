@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.client.manual;
 import blusunrize.lib.manual.ManualInstance;
 import blusunrize.lib.manual.ManualUtils;
 import blusunrize.lib.manual.SpecialManualElements;
+import blusunrize.lib.manual.gui.GuiButtonManual;
 import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
@@ -18,19 +19,18 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipe
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGGraphLayoutManager;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
-import org.lwjgl.glfw.GLFW;
 
 import java.util.*;
 
@@ -38,8 +38,26 @@ public class IGRecipeOverview extends SpecialManualElements
 {
 	private final GeologyMaterial material;
 	private IGRecipeNode selectedNode = null;
-	private boolean setChainPositions = false;
 	private final IGRecipeChain chain_to_display;
+	private Button closeButton;
+	private final Map<IGRecipeNode, Button> nodeButtons = new LinkedHashMap<>();
+
+	private static final ResourceLocation TEXTURE_CLOSE = IGLib.makeTextureLocation("manual/close");
+
+	private static final int PANEL_SIZE = 101;
+	private static final int CLOSE_SIZE = 16;
+	private static final int CLOSE_MARGIN = 1;
+	private static final int NODE_SIZE = 16;
+	private static final int MAX_STEP = 32;
+	private static final int MIN_STEP = 18;
+	private static final int MAX_HEIGHT = 140;
+	private static final int SCROLLBAR_WIDTH = 3;
+
+	private boolean layoutDone = false;
+	private boolean scrollable = false;
+	private int gridMinX, gridMinY, stepX = MAX_STEP, stepY = MAX_STEP;
+	private int offsetX = 0, contentHeight = NODE_SIZE, visibleHeight = NODE_SIZE;
+	private int scrollY = 0;
 
 	private static final ResourceLocation TEXTURE_ARROWS = IGLib.makeTextureLocation("manual/arrows");
 
@@ -60,7 +78,134 @@ public class IGRecipeOverview extends SpecialManualElements
 	@Override
 	public int getPixelsTaken()
 	{
-		return 100;
+		ensureLayout();
+		return visibleHeight;
+	}
+
+	private void ensureLayout()
+	{
+		if(layoutDone) return;
+		layoutDone = true;
+		if(chain_to_display==null||chain_to_display.getRootNodes().isEmpty()) return;
+
+		manager.layoutChain(chain_to_display);
+
+		Set<IGRecipeNode> seen = new HashSet<>();
+		Deque<IGRecipeNode> queue = new ArrayDeque<>(chain_to_display.getRootNodes());
+		int maxX = Integer.MIN_VALUE, maxY = Integer.MIN_VALUE;
+		gridMinX = Integer.MAX_VALUE;
+		gridMinY = Integer.MAX_VALUE;
+		while(!queue.isEmpty())
+		{
+			IGRecipeNode node = queue.poll();
+			if(!seen.add(node)) continue;
+			gridMinX = Math.min(gridMinX, node.getX());
+			gridMinY = Math.min(gridMinY, node.getY());
+			maxX = Math.max(maxX, node.getX());
+			maxY = Math.max(maxY, node.getY());
+			queue.addAll(node.getChildren());
+		}
+		if(seen.isEmpty()) return;
+
+		int columns = maxX-gridMinX+1;
+		int rows = maxY-gridMinY+1;
+
+		stepX = columns > 1?Math.min(MAX_STEP, (manual.pageWidth-NODE_SIZE)/(columns-1)): MAX_STEP;
+		stepY = rows > 1?Math.min(MAX_STEP, Math.max(MIN_STEP, (MAX_HEIGHT-NODE_SIZE)/(rows-1))): MAX_STEP;
+
+		contentHeight = (rows-1)*stepY+NODE_SIZE;
+		visibleHeight = Math.min(contentHeight, MAX_HEIGHT);
+		scrollable = contentHeight > visibleHeight;
+
+		int contentWidth = (columns-1)*stepX+NODE_SIZE;
+		int usable = manual.pageWidth-(scrollable?SCROLLBAR_WIDTH+2: 0);
+		offsetX = Math.max(0, (usable-contentWidth)/2);
+	}
+
+	private int nodePixelX(IGRecipeNode node)
+	{
+		return offsetX+(node.getX()-gridMinX)*stepX;
+	}
+
+	private int nodePixelY(IGRecipeNode node)
+	{
+		return (node.getY()-gridMinY)*stepY-scrollY;
+	}
+
+	@Override
+	public void mouseDragged(int x, int y, double clickX, double clickY, double mx, double my, double lastX, double lastY, int mouseButton)
+	{
+		if(!scrollable||selectedNode!=null) return;
+		int delta = (int)Math.round(lastY-my);
+		if(delta==0) return;
+		scrollY = Math.max(0, Math.min(contentHeight-visibleHeight, scrollY+delta));
+	}
+
+	private void drawScrollbar(GuiGraphics graphics)
+	{
+		int trackX = manual.pageWidth-SCROLLBAR_WIDTH;
+		graphics.fill(trackX, 0, trackX+SCROLLBAR_WIDTH, visibleHeight, 0x33000000);
+		int thumb = Math.max(8, visibleHeight*visibleHeight/contentHeight);
+		int travel = visibleHeight-thumb;
+		int thumbY = travel<=0?0: (int)((long)scrollY*travel/(contentHeight-visibleHeight));
+		graphics.fill(trackX, thumbY, trackX+SCROLLBAR_WIDTH, thumbY+thumb, 0x88cb7f32);
+	}
+
+	private int panelX(ManualScreen screen)
+	{
+		return (screen.getManual().pageWidth/2)-50;
+	}
+
+	@Override
+	public void onOpened(ManualScreen gui, int x, int y, List<Button> pageButtons)
+	{
+		super.onOpened(gui, x, y, pageButtons);
+		ensureLayout();
+		selectedNode = null;
+		nodeButtons.clear();
+
+		closeButton = new IconButton(x+manual.pageWidth-CLOSE_SIZE-CLOSE_MARGIN, y+CLOSE_MARGIN, CLOSE_SIZE,
+				TEXTURE_CLOSE, btn -> selectedNode = null);
+		closeButton.visible = false;
+		closeButton.active = false;
+		pageButtons.add(closeButton);
+
+		if(chain_to_display==null) return;
+		Set<IGRecipeNode> seen = new HashSet<>();
+		Deque<IGRecipeNode> queue = new ArrayDeque<>(chain_to_display.getRootNodes());
+		while(!queue.isEmpty())
+		{
+			IGRecipeNode node = queue.poll();
+			if(!seen.add(node)) continue;
+			Button button = new GuiButtonManual(gui, x+nodePixelX(node), y+nodePixelY(node), NODE_SIZE, NODE_SIZE,
+					Component.empty(), btn -> selectedNode = node)
+					.setColour(0x00000000, 0x33cb7f32);
+			nodeButtons.put(node, button);
+			pageButtons.add(button);
+			queue.addAll(node.getChildren());
+		}
+	}
+
+	private static class IconButton extends Button
+	{
+		private static final int TEXTURE_SIZE = 16;
+
+		private final ResourceLocation texture;
+
+		IconButton(int x, int y, int size, ResourceLocation texture, OnPress handler)
+		{
+			super(x, y, size, size, Component.empty(), handler, DEFAULT_NARRATION);
+			this.texture = texture;
+		}
+
+		@Override
+		public void renderWidget(GuiGraphics graphics, int mx, int my, float partial)
+		{
+			isHovered = mx >= getX()&&mx < getX()+width&&my >= getY()&&my < getY()+height;
+			RenderSystem.enableBlend();
+			if(isHovered) graphics.fill(getX(), getY(), getX()+width, getY()+height, 0x33cb7f32);
+			graphics.blit(texture, getX(), getY(), 0, 0, width, height, TEXTURE_SIZE, TEXTURE_SIZE);
+		}
 	}
 
 	private void drawCenteredStringScaled(GuiGraphics graphics, Font fr, String s, int x, int y, int colour, boolean shadow) {
@@ -84,6 +229,20 @@ public class IGRecipeOverview extends SpecialManualElements
 	@Override
 	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
+		boolean detailOpen = selectedNode!=null;
+		if(closeButton!=null)
+		{
+			closeButton.visible = detailOpen;
+			closeButton.active = detailOpen;
+		}
+		for(Map.Entry<IGRecipeNode, Button> entry : nodeButtons.entrySet())
+		{
+			Button button = entry.getValue();
+			button.visible = !detailOpen;
+			button.active = !detailOpen;
+			if(scrollable) button.setY(y+nodePixelY(entry.getKey()));
+		}
+
 		if(chain_to_display != null) {
 			rendered_nodes.clear();
 			IGRecipeChain chain = chain_to_display;
@@ -93,11 +252,7 @@ public class IGRecipeOverview extends SpecialManualElements
 
 			// Check if the chain has a root node.
 			if(!roots.isEmpty()) {
-				if(!setChainPositions)
-				{
-					manager.layoutChain(chain);
-					setChainPositions = true;
-				}
+				ensureLayout();
 
 				int baseX = x;
 				int baseY = y;
@@ -106,6 +261,16 @@ public class IGRecipeOverview extends SpecialManualElements
 				graphics.pose().pushPose();
 				if(selectedNode == null)
 				{
+					boolean clipped = scrollable;
+					if(clipped)
+					{
+						Matrix4f pose = graphics.pose().last().pose();
+						int originX = (int)pose.m30();
+						int originY = (int)pose.m31();
+						float scale = pose.m00();
+						graphics.enableScissor(originX, originY,
+								originX+(int)(manual.pageWidth*scale), originY+(int)(visibleHeight*scale));
+					}
 
 					for(IGRecipeNode root : roots)
 					{
@@ -115,6 +280,12 @@ public class IGRecipeOverview extends SpecialManualElements
 					for(IGRecipeNode root : roots)
 					{
 						root.resetRender();
+					}
+
+					if(clipped)
+					{
+						graphics.disableScissor();
+						drawScrollbar(graphics);
 					}
 				}
 				graphics.pose().popPose();
@@ -135,24 +306,13 @@ public class IGRecipeOverview extends SpecialManualElements
 					}
 					graphics.pose().popPose();
 
-					int renderX = (screen.getManual().pageWidth / 2) - 50;
+					int renderX = panelX(screen);
 					int renderY = 0;
 
-					ManualUtils.drawTexturedRect(graphics, method.getMethod().getGuiLocation(), renderX, renderY,101,101, 0,1,0,1);
+					ManualUtils.drawTexturedRect(graphics, method.getMethod().getGuiLocation(), renderX, renderY, PANEL_SIZE, PANEL_SIZE, 0,1,0,1);
 					method.render(graphics,screen,renderX,renderY, mx, my);
 
 					graphics.pose().popPose();
-					if(mx > -8 && mx < 8 && my > -20 && my < -4)
-					{
-
-						if(GLFW.glfwGetMouseButton(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_MOUSE_BUTTON_1)==GLFW.GLFW_PRESS)
-						{
-							selectedNode = null;
-						}
-						graphics.setColor(.75f,.75f,.75f,1);
-					}
-					graphics.renderItem( new ItemStack(Items.BARRIER), -8,-20);
-					graphics.setColor(1,1,1,1);
 				}
 			}
 		}
@@ -166,20 +326,11 @@ public class IGRecipeOverview extends SpecialManualElements
 			return;
 		}
 
-		int nodeX = baseX + (node.getX() * 32);
-		int nodeY = baseY + (node.getY() * 32);
+		int nodeX = baseX + nodePixelX(node);
+		int nodeY = baseY + nodePixelY(node);
 
 		// Retrieve the method wrapped by this node.
 		IGRecipeMethod method = node.getMethod();
-
-		// Render the main body of the recipe method.
-		if(mx > nodeX&&(nodeX+16) > mx && my > nodeY&&(nodeY+16) > my)
-		{
-			//graphics.renderTooltip(screen.getMinecraft().font, Component.literal("P: " + p), mx, my);
-			if (GLFW.glfwGetMouseButton(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_MOUSE_BUTTON_1) == GLFW.GLFW_PRESS) {
-				selectedNode = node;
-			}
-		}
 
 		method.renderMB(graphics, method.getIconStack(), nodeX, nodeY, mx, my);
 
@@ -194,22 +345,18 @@ public class IGRecipeOverview extends SpecialManualElements
 		}
 	}
 
-	private final int NODE_SIZE = 16;
 	private void drawConnectionLine(GuiGraphics graphics, int baseX, int baseY, IGRecipeNode from, IGRecipeNode to, int color) {
-		// Get center points of nodes
-		int x1 = baseX + (from.getX() + (NODE_SIZE / 2) * 32);
-		int y1 = baseY + (from.getY() + (NODE_SIZE / 2) * 32);
-		int x2 = baseX + (to.getX() + (NODE_SIZE / 2) * 32);
-		int y2 = baseY + (to.getY() + (NODE_SIZE / 2) * 32);
+		int x1 = baseX + nodePixelX(from) + NODE_SIZE/2;
+		int y1 = baseY + nodePixelY(from) + NODE_SIZE/2;
+		int x2 = baseX + nodePixelX(to) + NODE_SIZE/2;
+		int y2 = baseY + nodePixelY(to) + NODE_SIZE/2;
 
-		// Calculate angle between points
 		double deltaX = x2 - x1;
 		double deltaY = y2 - y1;
 		float angle = (float) Math.atan2(deltaY, deltaX);
+		int length = (int)Math.round(Math.sqrt(deltaX * deltaX + deltaY * deltaY));
 
-		// Calculate direct distance between points
-		double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY) * 32;
-		drawDirectLine(graphics, baseX + (from.getX() * 32) + (NODE_SIZE / 2) , baseY + (from.getY() * 32)+ (NODE_SIZE / 2) , angle, (int)distance, color);
+		drawDirectLine(graphics, x1, y1, angle, length, color);
 	}
 
 

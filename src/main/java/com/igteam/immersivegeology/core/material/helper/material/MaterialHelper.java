@@ -299,6 +299,8 @@ public interface MaterialHelper {
     }
 
     default IGVeinTextureType getVeinTextureType() {return IGVeinTextureType.METALLIC;}
+
+    default boolean hasStoneBackdrop() {return getVeinTextureType().hasStoneBackdrop();}
     MaterialInterface<?> getPrimaryProduct();
     MaterialInterface<?> getSecondaryProduct();
     MaterialInterface<?> getTraceProduct(int index);
