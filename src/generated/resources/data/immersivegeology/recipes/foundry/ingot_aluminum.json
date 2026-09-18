@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:foundry",
+  "energy": 1152,
+  "input": {
+    "amount": 144,
+    "tag": "forge:aluminum"
+  },
+  "mold": "immersivegeology:mold_ingot_graphite",
+  "result": {
+    "item": "immersiveengineering:ingot_aluminum"
+  },
+  "time": 3
+}

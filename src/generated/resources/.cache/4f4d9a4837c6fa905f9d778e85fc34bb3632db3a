@@ -1,4 +1,4 @@
-// 1.20.1	2026-09-17T02:09:02.514826989	Block States: immersivegeology
+// 1.20.1	2026-09-19T01:28:21.668206098	Block States: immersivegeology
 4b8ae81278db8ef6b1f1cb5010feea607c18f726 assets/immersivegeology/blockstates/advanced_engineering_block_rusty_metal.json
 ceb695b9cbf4f6684018c1fe95cc1bf98a38d89a assets/immersivegeology/blockstates/alternator.json
 8d6072517ffd29aa8fe4c02bbfb3a68ed3798e26 assets/immersivegeology/blockstates/ballmill.json
@@ -1961,8 +1961,8 @@ db7cb0941ef0248b9706afd2baa1c25fa764295f assets/immersivegeology/models/block/gr
 105e09e3e5ea462675a481f1aff82552018cafcc assets/immersivegeology/models/block/multiblock/obj/ballmill/ballmill_split.json
 ef89c482cda6eeb46b800214bf9339a7aa33339b assets/immersivegeology/models/block/multiblock/obj/centrifuge/centrifuge_mirrored_split.json
 5f2bf12956a1fd18bf773f2380ac260a1132a0e1 assets/immersivegeology/models/block/multiblock/obj/centrifuge/centrifuge_split.json
-82cfec7a77e515f32d85e83eaae6024ae0e6f13a assets/immersivegeology/models/block/multiblock/obj/foundry/foundry_mirrored_split.json
-ec5a8e5d4038d923628229e448d34c94023737fe assets/immersivegeology/models/block/multiblock/obj/foundry/foundry_split.json
+0ccb4b8a698e032593e1d0def2ef689f58231cac assets/immersivegeology/models/block/multiblock/obj/foundry/foundry_mirrored_split.json
+e479ae9c3fe0f4eed5d37de7ecc0f7f9d951eb6f assets/immersivegeology/models/block/multiblock/obj/foundry/foundry_split.json
 8940c80ab22a57956ee1bd2fb23c77f005a8fa6d assets/immersivegeology/models/block/obj/energy_cable.json
 4398f959115b4d275c9da703a280d95637efd2dd assets/immersivegeology/models/block/ore_block/minecraft/normal/acanthite_basalt_variation_1.json
 6561fb960080c7b45763d8fb1fcf16e4a004b6d0 assets/immersivegeology/models/block/ore_block/minecraft/normal/acanthite_basalt_variation_2.json

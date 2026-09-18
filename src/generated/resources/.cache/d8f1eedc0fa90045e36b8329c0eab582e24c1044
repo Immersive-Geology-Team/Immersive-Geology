@@ -1,4 +1,4 @@
-// 1.20.1	2026-09-17T01:03:54.319197082	Tags for minecraft:item mod id immersivegeology
+// 1.20.1	2026-09-19T06:32:39.579923457	Tags for minecraft:item mod id immersivegeology
 e56adb03218e45c59aec8be5897a83ad852a915b data/forge/tags/items/compound_dust.json
 a474cefed341534d35ef94390868bfb60032bd4b data/forge/tags/items/compound_dust/aluminum.json
 24a62424adfc489796a9bf426edff2967ee92da8 data/forge/tags/items/compound_dust/calcium.json
@@ -270,6 +270,7 @@ ccf34816bce87661c03e5303ca6f389a951077d6 data/forge/tags/items/material/chromium
 6bc1bb65cc138936f8b46d766004ea60ae747559 data/forge/tags/items/material/fluorite.json
 8e74decd76078bd56375febf0f1b362155df4662 data/forge/tags/items/material/galena.json
 f15124ea62066cdd71d49a59c3de90afdde172d7 data/forge/tags/items/material/gold.json
+689519bb46a320ed8b731a2c81d25f777d3d6115 data/forge/tags/items/material/graphite.json
 d1828829ecfa34756531473babec1134052e020b data/forge/tags/items/material/gypsum.json
 bada35dadf3f8022364cc1de8f8a6b5ce0c8a43f data/forge/tags/items/material/hastelloy.json
 18c5b75b1f8cf5f36a531a73f8c68d8ce600913e data/forge/tags/items/material/hematite.json
@@ -349,6 +350,22 @@ b76eb4636802db24f47611626706290ef2085b0d data/forge/tags/items/metal_oxide/urani
 bfe79401c49cd296a093f7287e195f24a2147d54 data/forge/tags/items/metal_oxide/vanadium.json
 b3782b11d0446fb76751da4589742572d48bd7de data/forge/tags/items/metal_oxide/zinc.json
 533f7de930889b3bb1783bc49313d1335145d071 data/forge/tags/items/metal_oxide/zirconium.json
+a72301fa5eeb058176ff52c84479b16bd80f7225 data/forge/tags/items/mold_blank.json
+a72301fa5eeb058176ff52c84479b16bd80f7225 data/forge/tags/items/mold_blank/graphite.json
+e3ff7f06d010d8a07783bf4e3f54f97ad095d669 data/forge/tags/items/mold_block.json
+e3ff7f06d010d8a07783bf4e3f54f97ad095d669 data/forge/tags/items/mold_block/graphite.json
+74fe6bd13db34afc8c4e3600875b81bc1326b0d1 data/forge/tags/items/mold_gear.json
+74fe6bd13db34afc8c4e3600875b81bc1326b0d1 data/forge/tags/items/mold_gear/graphite.json
+314dc90d772f635d99a068176ac4822eb4e3c40c data/forge/tags/items/mold_ingot.json
+314dc90d772f635d99a068176ac4822eb4e3c40c data/forge/tags/items/mold_ingot/graphite.json
+14305e20e6c9ea01e933f5816106e220c628c2e4 data/forge/tags/items/mold_nugget.json
+14305e20e6c9ea01e933f5816106e220c628c2e4 data/forge/tags/items/mold_nugget/graphite.json
+f511e9d1a24ccb9b4b967a08517acb35d1c2c1b1 data/forge/tags/items/mold_plate.json
+f511e9d1a24ccb9b4b967a08517acb35d1c2c1b1 data/forge/tags/items/mold_plate/graphite.json
+51db21f81f27fbc016cb02cbf8788a37f150b918 data/forge/tags/items/mold_rod.json
+51db21f81f27fbc016cb02cbf8788a37f150b918 data/forge/tags/items/mold_rod/graphite.json
+6d86d12a37e8781fa046883ca0d110309d1b0154 data/forge/tags/items/mold_wire.json
+6d86d12a37e8781fa046883ca0d110309d1b0154 data/forge/tags/items/mold_wire/graphite.json
 e12c96c17152eb826da785acecbd2da60cccd027 data/forge/tags/items/normal_ore.json
 2febf12729165faa249942befdccf0d007fe21b4 data/forge/tags/items/normal_ore/acanthite.json
 503a01f4632571fb2525432b69f6fbc119b3775b data/forge/tags/items/normal_ore/alumina.json
@@ -655,5 +672,6 @@ de4e36a2b59605f65c14af501ad5c29cee8ab8ae data/forge/tags/items/wires/unobtanium.
 0ffebbf6fbaef2fef295187a7eee2c7f9207db81 data/forge/tags/items/wires/vanadium.json
 a8aeb8ea26795f7f0b5c300c657dbca091598d52 data/forge/tags/items/wires/zinc.json
 fdbfccc9746e4044bde943f8591e5f5cd1e34e7c data/forge/tags/items/wires/zirconium.json
+26cc7a08da4c01029036095cad62d2e0a5455576 data/immersiveengineering/tags/items/recycling/blacklist.json
 b624db72693bcbb266490a9367328bf042dbe201 data/immersiveengineering/tags/items/toolbox/tools.json
 50a9ff584c267dd4ea9164f42c04eddd1b8844f0 data/tfc/tags/items/pileable_ingots.json

@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:foundry",
+  "energy": 128,
+  "input": {
+    "amount": 16,
+    "tag": "forge:gold"
+  },
+  "mold": "immersivegeology:mold_nugget_graphite",
+  "result": {
+    "item": "minecraft:gold_nugget"
+  },
+  "time": 2
+}

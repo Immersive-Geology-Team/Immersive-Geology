@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:foundry",
+  "energy": 1152,
+  "input": {
+    "amount": 144,
+    "tag": "forge:titanium"
+  },
+  "mold": "immersivegeology:mold_plate_graphite",
+  "result": {
+    "item": "immersivegeology:plate_titanium"
+  },
+  "time": 3
+}

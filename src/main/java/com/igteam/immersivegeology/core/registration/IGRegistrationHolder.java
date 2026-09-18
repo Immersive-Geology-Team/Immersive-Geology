@@ -37,6 +37,7 @@ import com.igteam.immersivegeology.common.block.entity.vent.IGHydroVentEntity;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.block.multiblocks.*;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.FoundryLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.skins.*;
 import com.igteam.immersivegeology.common.block.multiblocks.skins.helpers.IIGMultiSkinHelper;
@@ -485,6 +486,10 @@ public class IGRegistrationHolder {
                         case TOOL_HOE ->
                         {
                             registerItem(itemCategoryFlags.getRegistryKey(material), () -> new IGCustomTool(material.getToolTier(), material.getToolDamage(), material.getToolSpeed(), itemCategoryFlags, material));
+                        }
+                        case MOLD_PLATE, MOLD_GEAR, MOLD_ROD, MOLD_WIRE, MOLD_BLOCK, MOLD_INGOT, MOLD_NUGGET ->
+                        {
+                            registerItem(itemCategoryFlags.getRegistryKey(material), () -> new IGGenericItem(itemCategoryFlags, material, new Item.Properties().durability(FoundryLogic.MOLD_DURABILITY)));
                         }
                         default -> {
                             if(hasExistingImplementation) continue;

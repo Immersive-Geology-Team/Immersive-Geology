@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:foundry",
+  "energy": 1152,
+  "input": {
+    "amount": 144,
+    "tag": "forge:thorium"
+  },
+  "mold": "immersivegeology:mold_ingot_graphite",
+  "result": {
+    "item": "immersivegeology:ingot_thorium"
+  },
+  "time": 3
+}

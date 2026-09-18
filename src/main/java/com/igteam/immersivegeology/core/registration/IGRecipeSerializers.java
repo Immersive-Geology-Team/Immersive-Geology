@@ -16,6 +16,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.Turbi
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.serializer.*;
 import com.igteam.immersivegeology.common.recipe.IGGeoRecipe;
 import com.igteam.immersivegeology.common.recipe.IGGeoSerializer;
+import com.igteam.immersivegeology.common.recipe.IGMoldShapingSerializer;
 import com.igteam.immersivegeology.common.recipe.IGRepairItemRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.helper.EmptyRecipe;
@@ -36,6 +37,7 @@ public class IGRecipeSerializers
 
 	public static final RegistryObject<IERecipeSerializer<EmptyRecipe>> EMPTY_SERIALIZER;
 	public static final RegistryObject<SimpleRecipeSerializer<IGRepairItemRecipe>> IG_REPAIR_SERIALIZER;
+	public static final RegistryObject<IGMoldShapingSerializer> MOLD_SHAPING_SERIALIZER;
 
 
 	static {
@@ -62,6 +64,7 @@ public class IGRecipeSerializers
 		IGGeoRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("geo_hint", IGGeoSerializer::new);
 
 		IG_REPAIR_SERIALIZER = RECIPE_SERIALIZERS.register("ig_item_repair", special(IGRepairItemRecipe::new));
+		MOLD_SHAPING_SERIALIZER = RECIPE_SERIALIZERS.register("mold_shaping", IGMoldShapingSerializer::new);
 
 		EMPTY_SERIALIZER = RECIPE_SERIALIZERS.register("empty", EmptySerializer::new);
 	}

@@ -36,6 +36,7 @@ public class IGMultiblockProvider {
     public static final MultiblockRegistration<FoundryLogic.State> FOUNDRY = IGRegistrationHolder.registerMetalMultiblock("foundry", new FoundryLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("foundry"),
             builder -> {
                 builder.redstone(state -> state.rsState, FoundryLogic.REDSTONE_IN);
+                builder.gui(IGMenuTypes.FOUNDRY);
             });
 
     public static final MultiblockRegistration<CoreDrillLogic.State> COREDRILL = metal_skinnable(new CoreDrillLogic(), "coredrill", false, CoreDrillPart::new)

@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 51200,
+  "input": {
+    "item": "immersivegeology:gear_silver"
+  },
+  "results": [
+    {
+      "item": "immersiveengineering:ingot_silver"
+    }
+  ],
+  "time": 100
+}

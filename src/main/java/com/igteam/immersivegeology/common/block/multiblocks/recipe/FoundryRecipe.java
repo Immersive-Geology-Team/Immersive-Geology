@@ -18,6 +18,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
@@ -36,17 +37,19 @@ public class FoundryRecipe extends MultiblockRecipe
 	Lazy<Integer> totalProcessEnergy;
 	Lazy<Integer> totalProcessTime;
 	public final Item mold;
+	private final Lazy<IngredientWithSize> moldInput;
 
 	public <T extends Recipe<?>> FoundryRecipe(ResourceLocation id, FluidTagInput fluidInput, Lazy<ItemStack> output, Item mold, int energy, int time)
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.PELLETIZER, id);
+		super(LAZY_EMPTY, IGRecipeTypes.FOUNDRY, id);
 		this.itemOutput = output;
 		this.fluidIn = fluidInput;
 		this.mold = mold;
+		this.moldInput = Lazy.of(() -> new IngredientWithSize(Ingredient.of(mold), 1));
 		totalProcessEnergy = Lazy.of(() -> energy);
 		totalProcessTime = Lazy.of(() -> time);
 		this.outputList = Lazy.of(() -> NonNullList.of(ItemStack.EMPTY, this.itemOutput.get()));
-
+		this.fluidInputList = List.of(fluidInput);
 	}
 
 	@Override
@@ -67,10 +70,17 @@ public class FoundryRecipe extends MultiblockRecipe
 		return totalProcessTime.get();
 	}
 
-	public static FoundryRecipe findRecipe(Level level, FluidStack input)
+	@Override
+	public List<IngredientWithSize> getItemInputs()
 	{
+		return List.of(moldInput.get());
+	}
+
+	public static FoundryRecipe findRecipe(Level level, FluidStack input, ItemStack mold)
+	{
+		if(mold.isEmpty()) return null;
 		for(FoundryRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.fluidIn.test(input))
+			if(recipe.mold==mold.getItem()&&recipe.fluidIn.test(input))
 				return recipe;
 		return null;
 	}

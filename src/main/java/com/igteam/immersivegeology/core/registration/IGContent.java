@@ -146,6 +146,7 @@ public class IGContent {
         MenuScreens.register(IGMenuTypes.SMALL_CHEMICAL_REACTOR.getType(), SmallChemicalReactorScreen::new);
         MenuScreens.register(IGMenuTypes.ROTARY_KILN.getType(), RotaryKilnScreen::new);
         MenuScreens.register(IGMenuTypes.BULK_BLAST_FURNACE.getType(), BulkBlastFurnaceScreen::new);
+        MenuScreens.register(IGMenuTypes.FOUNDRY.getType(), FoundryScreen::new);
         MenuScreens.register(IGMenuTypes.CRATE.get(), IGCrateScreen.StandardIGCrate::new);
         MenuScreens.register(IGMenuTypes.METAL_DETECTOR.get(), IGMetalDetectorScreen::new);
     }
@@ -177,6 +178,7 @@ public class IGContent {
         multiblockEntry(instance, multiblock_category, "bulk_blast_furnace");
         multiblockEntry(instance, multiblock_category, "geothermal_exchanger");
         multiblockEntry(instance, multiblock_category, "bloomery");
+        multiblockEntry(instance, multiblock_category, "foundry");
         multiblockEntry(instance, multiblock_category, "chemical_reactor");
         multiblockEntry(instance, multiblock_category, "ballmill");
         multiblockEntry(instance, multiblock_category, "centrifuge");

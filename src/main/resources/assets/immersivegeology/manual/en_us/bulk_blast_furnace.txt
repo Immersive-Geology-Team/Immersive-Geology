@@ -8,7 +8,7 @@ The multiblock has a GUI with a 4x4 input grid, everything within the grid is co
 A batch needs three things to work:
 - §lOre§r, which sets the size.
 - §lCoal Coke§r for fuel, from the <link;cokeoven;Coke Oven>.
-- §lCalcite§r for flux.
+- §lCalcium Oxide§r for flux, burnt from calcite in the <link;immersivegeology:rotary_kiln;Rotary Kiln>.
 <np>
 §lRatios§r
 Coke and flux are measured §lper unit of ore§r.

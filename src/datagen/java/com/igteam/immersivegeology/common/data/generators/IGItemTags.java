@@ -110,6 +110,10 @@ public class IGItemTags extends ItemTagsProvider
 							{
 
 							}
+							if(itemFlag.equals(ItemCategoryFlags.GEAR))
+							{
+								tag(IETags.recyclingBlacklist).add(item);
+							}
 						}
 					}
 

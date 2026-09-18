@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:foundry",
+  "energy": 10368,
+  "input": {
+    "amount": 1296,
+    "tag": "forge:nickel"
+  },
+  "mold": "immersivegeology:mold_block_graphite",
+  "result": {
+    "item": "immersiveengineering:storage_nickel"
+  },
+  "time": 27
+}

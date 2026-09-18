@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:foundry",
+  "energy": 128,
+  "input": {
+    "amount": 16,
+    "tag": "forge:unobtanium"
+  },
+  "mold": "immersivegeology:mold_nugget_graphite",
+  "result": {
+    "item": "immersivegeology:nugget_unobtanium"
+  },
+  "time": 2
+}

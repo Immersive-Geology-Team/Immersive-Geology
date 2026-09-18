@@ -24,6 +24,7 @@ import blusunrize.immersiveengineering.common.register.IEItems.Molds;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BulkBlastFurnaceCharge;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.BulkBlastFurnaceOxideCharge;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GeothermalBiomeRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.*;
 import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
@@ -31,6 +32,7 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialRadioactiveMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
@@ -38,6 +40,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipe
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.registration.IGRecipeSerializers;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
+import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.PackOutput;
@@ -53,6 +56,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
@@ -87,12 +91,148 @@ public class IGRecipes extends RecipeProvider
 		IGLib.IG_LOGGER.info("Started Registration of Immersive Geology Recipes");
 		multiblockRecipes(consumer);
 		bulkBlastFurnaceRecipes(consumer);
+		foundryRecipes(consumer);
+		arcRecyclingOverrides(consumer);
 		tfcCompatRecipes(consumer);
 		manualRecipes(consumer);
 		IGRegistrationHolder.buildMaterialRecipes();
 		methodRecipes(consumer);
 		igMineralMixes(consumer);
 		IGLib.IG_LOGGER.info("Finished Registration of Immersive Geology Recipes");
+	}
+
+	private static final int INGOT_MELT = 144;
+
+	private record CastingMold(ItemCategoryFlags mold, IFlagType<?> result, TagKey<Item> example, int melt, int count)
+	{
+		int time()
+		{
+			return Math.max(2, melt/48);
+		}
+
+		int energy()
+		{
+			return melt*8;
+		}
+	}
+
+	private void foundryRecipes(Consumer<FinishedRecipe> consumer)
+	{
+		IGLib.IG_LOGGER.info("- Foundry Recipe Registration");
+
+		List<CastingMold> patterns = List.of(
+				new CastingMold(ItemCategoryFlags.MOLD_PLATE, ItemCategoryFlags.PLATE, ItemCategoryFlags.PLATE.getCategoryTag(), INGOT_MELT, 1),
+				new CastingMold(ItemCategoryFlags.MOLD_GEAR, ItemCategoryFlags.GEAR, ItemCategoryFlags.GEAR.getCategoryTag(), INGOT_MELT, 1),
+				new CastingMold(ItemCategoryFlags.MOLD_ROD, ItemCategoryFlags.ROD, ItemCategoryFlags.ROD.getCategoryTag(), INGOT_MELT, 3),
+				new CastingMold(ItemCategoryFlags.MOLD_WIRE, ItemCategoryFlags.WIRE, ItemCategoryFlags.WIRE.getCategoryTag(), INGOT_MELT, 3),
+				new CastingMold(ItemCategoryFlags.MOLD_INGOT, ItemCategoryFlags.INGOT, ItemCategoryFlags.INGOT.getCategoryTag(), INGOT_MELT, 1),
+				new CastingMold(ItemCategoryFlags.MOLD_NUGGET, ItemCategoryFlags.NUGGET, ItemCategoryFlags.NUGGET.getCategoryTag(), INGOT_MELT/9, 1),
+				new CastingMold(ItemCategoryFlags.MOLD_BLOCK, BlockCategoryFlags.STORAGE_BLOCK, Tags.Items.STORAGE_BLOCKS, 9*INGOT_MELT, 1)
+		);
+
+		Item blank = MiscEnum.Graphite.getItem(ItemCategoryFlags.MOLD_BLANK);
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, blank)
+				.requires(IETags.hopGraphiteDust)
+				.requires(IETags.hopGraphiteDust)
+				.requires(IETags.hopGraphiteDust)
+				.requires(IETags.hopGraphiteDust)
+				.group("ig_graphite_molds")
+				.unlockedBy("has_hop_graphite_dust", InventoryChangeTrigger.TriggerInstance.hasItems(Ingredients.DUST_HOP_GRAPHITE.get()))
+				.save(consumer, ig("craft_graphite_mold_blank"));
+
+		for(CastingMold pattern : patterns)
+		{
+			Item mold = MiscEnum.Graphite.getItem(pattern.mold());
+			ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, mold)
+					.requires(blank)
+					.requires(pattern.example())
+					.group("ig_graphite_molds")
+					.unlockedBy("has_graphite_mold_blank", InventoryChangeTrigger.TriggerInstance.hasItems(blank))
+					.save(moldShaping(consumer), ig("craft_"+pattern.mold().getName()+"_graphite"));
+
+			for(MetalEnum metal : MetalEnum.values())
+			{
+				if(!metal.hasFlag(BlockCategoryFlags.FLUID)||!metal.hasFlag(pattern.result())) continue;
+				ItemStack result = metal.getStack(pattern.result(), pattern.count());
+				if(!existsAtRuntime(metal, pattern.result(), result)) continue;
+
+				FoundryRecipeBuilder.builder(result)
+						.addInput(new FluidTagInput(metal.getFluidTag(BlockCategoryFlags.FLUID), pattern.melt()))
+						.setMold(mold)
+						.setTime(pattern.time())
+						.setEnergy(pattern.energy())
+						.build(consumer, new ResourceLocation(IGLib.MODID, "foundry/"+pattern.result().getName()+"_"+metal.getName()));
+			}
+		}
+	}
+
+	private static final int ARC_RECYCLING_TIME = 100;
+	private static final int ARC_RECYCLING_ENERGY = 51200;
+
+	private void arcRecyclingOverrides(Consumer<FinishedRecipe> consumer)
+	{
+		IGLib.IG_LOGGER.info("- Arc Furnace Recycling Override Registration");
+
+		for(MetalEnum metal : MetalEnum.values())
+		{
+			if(!metal.hasFlag(ItemCategoryFlags.GEAR)||!metal.hasFlag(ItemCategoryFlags.INGOT)) continue;
+			ItemStack gear = metal.getStack(ItemCategoryFlags.GEAR, 1);
+			ItemStack ingot = metal.getStack(ItemCategoryFlags.INGOT, 1);
+			if(!existsAtRuntime(metal, ItemCategoryFlags.GEAR, gear)) continue;
+			if(!existsAtRuntime(metal, ItemCategoryFlags.INGOT, ingot)) continue;
+
+			ArcFurnaceRecipeBuilder.builder(ingot)
+					.addIngredient("input", IngredientWithSize.of(gear))
+					.setTime(ARC_RECYCLING_TIME)
+					.setEnergy(ARC_RECYCLING_ENERGY)
+					.build(consumer, new ResourceLocation(IGLib.MODID, "arc_smelting/recycle_gear_"+metal.getName()));
+		}
+	}
+
+	private static Consumer<FinishedRecipe> moldShaping(Consumer<FinishedRecipe> consumer)
+	{
+		return finished -> consumer.accept(new FinishedRecipe()
+		{
+			@Override
+			public void serializeRecipeData(@NotNull JsonObject json)
+			{
+				finished.serializeRecipeData(json);
+			}
+
+			@NotNull
+			@Override
+			public ResourceLocation getId()
+			{
+				return finished.getId();
+			}
+
+			@NotNull
+			@Override
+			public RecipeSerializer<?> getType()
+			{
+				return IGRecipeSerializers.MOLD_SHAPING_SERIALIZER.get();
+			}
+
+			@Override
+			public JsonObject serializeAdvancement()
+			{
+				return finished.serializeAdvancement();
+			}
+
+			@Override
+			public ResourceLocation getAdvancementId()
+			{
+				return finished.getAdvancementId();
+			}
+		});
+	}
+
+	private static boolean existsAtRuntime(MetalEnum metal, IFlagType<?> flag, ItemStack result)
+	{
+		if(result==null||result.isEmpty()||result.is(Items.COOKIE)) return false;
+		ResourceLocation id = ForgeRegistries.ITEMS.getKey(result.getItem());
+		if(id==null) return false;
+		return !IGLib.MODID.equals(id.getNamespace())||!metal.instance().weakCheckExistingImplementation(flag);
 	}
 
 	private void bulkBlastFurnaceRecipes(Consumer<FinishedRecipe> consumer)
@@ -129,6 +269,19 @@ public class IGRecipes extends RecipeProvider
 						BulkBlastFurnaceCharge.PIG_IRON_COKE_RATIO*BulkBlastFurnaceCharge.PELLET_COKE_MULTIPLIER
 				);
 			pellets.build(consumer, new ResourceLocation(IGLib.MODID, "bulk_blast_furnace/"+charge.getPelletRecipeName()));
+		}
+
+		for(BulkBlastFurnaceOxideCharge charge : BulkBlastFurnaceOxideCharge.values())
+		{
+			if(!charge.getMetal().hasFlag(ItemCategoryFlags.OXIDE_PELLET)) continue;
+			BulkBlastFurnaceRecipeBuilder
+					.builder(new FluidStack(charge.getMetal().getFluid(BlockCategoryFlags.FLUID), BulkBlastFurnaceOxideCharge.OXIDE_MELT_PER_UNIT))
+					.setOre(charge.getMetal().getItemTag(ItemCategoryFlags.OXIDE_PELLET), 1)
+					.setRatios(BulkBlastFurnaceOxideCharge.OXIDE_COKE_RATIO, BulkBlastFurnaceOxideCharge.OXIDE_FLUX_RATIO)
+					.setYield(BulkBlastFurnaceOxideCharge.OXIDE_MIN_YIELD, BulkBlastFurnaceOxideCharge.OXIDE_MAX_YIELD)
+					.setHeat(charge.getHeat())
+					.setTime(charge.getTimeFactor())
+					.build(consumer, new ResourceLocation(IGLib.MODID, "bulk_blast_furnace/"+charge.getRecipeName()));
 		}
 
 		BulkBlastFurnaceRecipeBuilder

@@ -1,0 +1,16 @@
+{
+  "type": "immersivegeology:bulk_blast_furnace",
+  "coke_ratio": 0.45000002,
+  "flux_ratio": 0.5,
+  "heat": 80,
+  "max_yield": 0.84999996,
+  "melt": {
+    "amount": 144,
+    "fluid": "immersivegeology:fluid_nickel"
+  },
+  "min_yield": 0.3,
+  "ore": {
+    "tag": "forge:pellets/millerite"
+  },
+  "time": 115
+}

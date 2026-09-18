@@ -35,6 +35,14 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
     CLEAN_FLASK(3),
     CLOUDY_FLASK(3),
     MECHANICAL_COMPONENT(1),
+    MOLD_BLANK(1),
+    MOLD_PLATE(1),
+    MOLD_GEAR(1),
+    MOLD_ROD(1),
+    MOLD_WIRE(1),
+    MOLD_BLOCK(1),
+    MOLD_INGOT(1),
+    MOLD_NUGGET(1),
     HAMMER(4),
     DRILL_HEAD(4),
     MISC(4),
@@ -88,6 +96,15 @@ public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
         {
             case INGOT, GEAR, CRUSHED_ORE, POOR_ORE, NORMAL_ORE, RICH_ORE, NUGGET,
                  DIRTY_CRUSHED_ORE, PLATE, SLAG, GRIT, POWDER, METAL_OXIDE, COMPOUND_DUST, DRILL_HEAD, TOOL_HOE, POWDERED_SLAG -> true;
+            default -> false;
+        };
+    }
+
+    public boolean isMold()
+    {
+        return switch(this)
+        {
+            case MOLD_PLATE, MOLD_GEAR, MOLD_ROD, MOLD_WIRE, MOLD_BLOCK, MOLD_INGOT, MOLD_NUGGET -> true;
             default -> false;
         };
     }

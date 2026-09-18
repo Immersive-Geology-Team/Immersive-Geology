@@ -16,10 +16,24 @@ import java.util.Locale;
 
 public enum BulkBlastFurnaceCharge
 {
-	HEMATITE(MineralEnum.Hematite, MetalEnum.Iron, 144, 0.5f, 0.25f, 0.2f, 0.9f, 0, 140, true),
-	MAGNETITE(MineralEnum.Magnetite, MetalEnum.Iron, 144, 0.5f, 0.25f, 0.2f, 0.95f, 60, 140, true),
-	CHALCOPYRITE(MineralEnum.Chalcopyrite, MetalEnum.Copper, 144, 0.5f, 0.5f, 0.15f, 0.85f, 60, 140, false),
-	ILMENITE(MineralEnum.Ilmenite, MetalEnum.Titanium, 144, 1.0f, 0.5f, 0.1f, 0.8f, 120, 280, false);
+	HEMATITE(MineralEnum.Hematite, MetalEnum.Iron, 144, 0.5f, 0.25f, 0.2f, 0.9f, 0, 1538, true),
+	MAGNETITE(MineralEnum.Magnetite, MetalEnum.Iron, 144, 0.5f, 0.25f, 0.2f, 0.95f, 60, 1538, true),
+	PYRITE(MineralEnum.Pyrite, MetalEnum.Iron, 144, 0.6f, 0.6f, 0.1f, 0.75f, 40, 1538, true),
+	CHALCOPYRITE(MineralEnum.Chalcopyrite, MetalEnum.Copper, 144, 0.5f, 0.5f, 0.15f, 0.85f, 60, 1085, false),
+	CHALCOCITE(MineralEnum.Chalcocite, MetalEnum.Copper, 144, 0.5f, 0.5f, 0.2f, 0.88f, 40, 1085, false),
+	CUPRITE(MineralEnum.Cuprite, MetalEnum.Copper, 144, 0.4f, 0.3f, 0.25f, 0.9f, 0, 1085, false),
+	CASSITERITE(MineralEnum.Cassiterite, MetalEnum.Tin, 144, 0.45f, 0.25f, 0.3f, 0.92f, 0, 232, false),
+	GALENA(MineralEnum.Galena, MetalEnum.Lead, 144, 0.35f, 0.4f, 0.25f, 0.9f, 0, 327, false),
+	VANADINITE(MineralEnum.Vanadinite, MetalEnum.Lead, 144, 0.4f, 0.45f, 0.15f, 0.8f, 0, 327, false),
+	SMITHSONITE(MineralEnum.Smithsonite, MetalEnum.Zinc, 144, 0.4f, 0.35f, 0.25f, 0.88f, 0, 420, false),
+	SPHALERITE(MineralEnum.Sphalerite, MetalEnum.Zinc, 144, 0.5f, 0.5f, 0.2f, 0.85f, 20, 420, false),
+	ACANTHITE(MineralEnum.Acanthite, MetalEnum.Silver, 144, 0.4f, 0.4f, 0.2f, 0.85f, 20, 962, false),
+	PYROLUSITE(MineralEnum.Pyrolusite, MetalEnum.Manganese, 144, 0.7f, 0.4f, 0.15f, 0.8f, 60, 1246, false),
+	MILLERITE(MineralEnum.Millerite, MetalEnum.Nickel, 144, 0.6f, 0.5f, 0.15f, 0.82f, 80, 1455, false),
+	ILMENITE(MineralEnum.Ilmenite, MetalEnum.Titanium, 144, 1.0f, 0.5f, 0.1f, 0.8f, 120, 1668, false);
+
+	public static final int TIME_BASE = 40;
+	public static final float TIME_PER_DEGREE = 0.065f;
 
 	public static final float PIG_IRON_COKE_RATIO = 1.25f;
 	public static final int PIG_IRON_MELT = 160;
@@ -45,12 +59,12 @@ public enum BulkBlastFurnaceCharge
 	private final float minYield;
 	private final float maxYield;
 	private final int heat;
-	private final int timeFactor;
+	private final int meltingPoint;
 	private final boolean carbonRich;
 
 	BulkBlastFurnaceCharge(
 			MineralEnum ore, MetalEnum metal, int meltPerUnit, float cokeRatio, float fluxRatio,
-			float minYield, float maxYield, int heat, int timeFactor, boolean carbonRich
+			float minYield, float maxYield, int heat, int meltingPoint, boolean carbonRich
 	)
 	{
 		this.ore = ore;
@@ -61,7 +75,7 @@ public enum BulkBlastFurnaceCharge
 		this.minYield = minYield;
 		this.maxYield = maxYield;
 		this.heat = heat;
-		this.timeFactor = timeFactor;
+		this.meltingPoint = meltingPoint;
 		this.carbonRich = carbonRich;
 	}
 
@@ -105,9 +119,19 @@ public enum BulkBlastFurnaceCharge
 		return heat;
 	}
 
+	public int getMeltingPoint()
+	{
+		return meltingPoint;
+	}
+
+	public static int timeFactorFor(int meltingPoint)
+	{
+		return TIME_BASE+Math.round(meltingPoint*TIME_PER_DEGREE);
+	}
+
 	public int getTimeFactor()
 	{
-		return timeFactor;
+		return timeFactorFor(meltingPoint);
 	}
 
 	public boolean isCarbonRich()
@@ -137,7 +161,7 @@ public enum BulkBlastFurnaceCharge
 
 	public int getPelletTimeFactor()
 	{
-		return Math.max(1, Math.round(timeFactor*PELLET_TIME_MULTIPLIER));
+		return Math.max(1, Math.round(getTimeFactor()*PELLET_TIME_MULTIPLIER));
 	}
 
 	public String getPelletRecipeName()

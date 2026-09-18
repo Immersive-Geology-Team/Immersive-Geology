@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:foundry",
+  "energy": 1152,
+  "input": {
+    "amount": 144,
+    "tag": "forge:gold"
+  },
+  "mold": "immersivegeology:mold_plate_graphite",
+  "result": {
+    "item": "immersiveengineering:plate_gold"
+  },
+  "time": 3
+}

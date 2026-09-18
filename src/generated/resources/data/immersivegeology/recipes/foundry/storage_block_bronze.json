@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:foundry",
+  "energy": 10368,
+  "input": {
+    "amount": 1296,
+    "tag": "forge:bronze"
+  },
+  "mold": "immersivegeology:mold_block_graphite",
+  "result": {
+    "item": "immersivegeology:storage_block_bronze"
+  },
+  "time": 27
+}

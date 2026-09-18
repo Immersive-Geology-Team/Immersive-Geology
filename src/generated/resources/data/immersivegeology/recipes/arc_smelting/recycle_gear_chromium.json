@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 51200,
+  "input": {
+    "item": "immersivegeology:gear_chromium"
+  },
+  "results": [
+    {
+      "item": "immersivegeology:ingot_chromium"
+    }
+  ],
+  "time": 100
+}

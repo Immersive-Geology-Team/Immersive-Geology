@@ -1,0 +1,17 @@
+Foundry
+Pour Decisions
+<&multiblock>
+The Foundry casts §lmolten metal§r into solid parts.
+<np>
+§lRunning It§r
+It needs §lmolten metal§r, §lenergy§r, and a §lmold§r to work.
+The internal tanks hold several different metals at once, you can purge a metal portion by clicking on it, a confirmation box will ask you to confirm before doing so.
+<np>
+<&mold_blank>
+Molds start as a §lblank§r, created from HOP Graphite dust.
+<np>
+<&mold_shaping>
+Shape a blank by crafting it with the part you want it to make, you will §lget the part back§r.
+<np>
+<&mold_set>
+Every mold wears out after a set number of castings.

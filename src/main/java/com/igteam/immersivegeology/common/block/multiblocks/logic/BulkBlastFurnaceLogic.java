@@ -39,6 +39,7 @@ import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -105,7 +106,10 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 			{new BlockPos(3, 1, 1), new BlockPos(3, 2, 1)}
 	};
 
-	private static final Vec3 FLUE_VENT = new Vec3(1.5, 2.0625, 2.5);
+	private static final Vec3 FLUE_VENT = new Vec3(1.5, 2.0625, 2.8125);
+	private static final RelativeBlockFace FLUE_FACE = RelativeBlockFace.BACK;
+	private static final double FLUE_SPEED = 0.15;
+	private static final double FLUE_RISE = 0.03125;
 
 	private static MultiblockFace neighbourOf(MultiblockFace port)
 	{
@@ -114,7 +118,7 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 
 	public static TagKey<Item> fluxTag()
 	{
-		return MetalEnum.Calcium.getItemTag(ItemCategoryFlags.COMPOUND_DUST);
+		return MetalEnum.Calcium.getItemTag(ItemCategoryFlags.METAL_OXIDE);
 	}
 
 	public static int fuelValue(ItemStack stack)
@@ -431,10 +435,12 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 		if(!state.active||!context.getLevel().shouldTickModulo(2)) return;
 
 		final Vec3 vent = context.getLevel().toAbsolute(FLUE_VENT);
+		final Direction out = context.getLevel().toAbsolute(FLUE_FACE);
+		final double speed = FLUE_SPEED*ApiUtils.RANDOM.nextDouble(0.6, 1.4);
 		context.getLevel().getRawLevel().addAlwaysVisibleParticle(
 				ParticleTypes.CAMPFIRE_COSY_SMOKE,
 				vent.x, vent.y, vent.z,
-				drift(), 0.03125, drift()
+				out.getStepX()*speed+drift(), FLUE_RISE, out.getStepZ()*speed+drift()
 		);
 	}
 

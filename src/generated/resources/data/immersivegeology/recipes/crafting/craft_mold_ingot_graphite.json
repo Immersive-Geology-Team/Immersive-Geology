@@ -1,0 +1,16 @@
+{
+  "type": "immersivegeology:mold_shaping",
+  "category": "misc",
+  "group": "ig_graphite_molds",
+  "ingredients": [
+    {
+      "item": "immersivegeology:mold_blank_graphite"
+    },
+    {
+      "tag": "forge:ingots"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:mold_ingot_graphite"
+  }
+}

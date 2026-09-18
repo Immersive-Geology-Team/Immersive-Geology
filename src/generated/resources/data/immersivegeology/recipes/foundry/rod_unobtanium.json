@@ -1,0 +1,14 @@
+{
+  "type": "immersivegeology:foundry",
+  "energy": 1152,
+  "input": {
+    "amount": 144,
+    "tag": "forge:unobtanium"
+  },
+  "mold": "immersivegeology:mold_rod_graphite",
+  "result": {
+    "count": 3,
+    "item": "immersivegeology:rod_unobtanium"
+  },
+  "time": 3
+}

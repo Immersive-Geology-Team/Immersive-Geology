@@ -1,8 +1,2 @@
-# Blender 4.2.3 LTS MTL File: 'None'
-# www.blender.org
-
-newmtl base
+newmtl foundry
 map_Kd immersivegeology:block/multiblock/foundry/foundry
-
-newmtl belt
-map_Kd immersivegeology:block/multiblock/foundry/conveyor

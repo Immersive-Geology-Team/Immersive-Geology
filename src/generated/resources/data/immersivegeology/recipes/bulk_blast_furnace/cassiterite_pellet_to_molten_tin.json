@@ -1,0 +1,16 @@
+{
+  "type": "immersivegeology:bulk_blast_furnace",
+  "coke_ratio": 0.33749998,
+  "flux_ratio": 0.25,
+  "heat": 0,
+  "max_yield": 0.95,
+  "melt": {
+    "amount": 144,
+    "fluid": "immersivegeology:fluid_tin"
+  },
+  "min_yield": 0.45000002,
+  "ore": {
+    "tag": "forge:pellets/cassiterite"
+  },
+  "time": 47
+}

@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:foundry",
+  "energy": 1152,
+  "input": {
+    "amount": 144,
+    "tag": "forge:copper"
+  },
+  "mold": "immersivegeology:mold_gear_graphite",
+  "result": {
+    "item": "immersivegeology:gear_copper"
+  },
+  "time": 3
+}

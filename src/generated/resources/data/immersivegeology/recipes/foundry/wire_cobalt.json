@@ -1,0 +1,14 @@
+{
+  "type": "immersivegeology:foundry",
+  "energy": 1152,
+  "input": {
+    "amount": 144,
+    "tag": "forge:cobalt"
+  },
+  "mold": "immersivegeology:mold_wire_graphite",
+  "result": {
+    "count": 3,
+    "item": "immersivegeology:wire_cobalt"
+  },
+  "time": 3
+}

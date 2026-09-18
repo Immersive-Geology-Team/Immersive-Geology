@@ -1,0 +1,44 @@
+{
+  "multiblock": {
+    "type": "multiblock",
+    "name": "immersivegeology:multiblocks/foundry"
+  },
+  "mold_blank": {
+    "type": "crafting",
+    "recipes":
+    [
+      [
+        {"recipe": "immersivegeology:crafting/craft_graphite_mold_blank"}
+      ]
+    ]
+  },
+  "mold_shaping": {
+    "type": "crafting",
+    "recipes":
+    [
+      [
+        {"recipe": "immersivegeology:crafting/craft_mold_ingot_graphite"},
+        {"recipe": "immersivegeology:crafting/craft_mold_nugget_graphite"},
+        {"recipe": "immersivegeology:crafting/craft_mold_plate_graphite"},
+        {"recipe": "immersivegeology:crafting/craft_mold_rod_graphite"},
+        {"recipe": "immersivegeology:crafting/craft_mold_wire_graphite"},
+        {"recipe": "immersivegeology:crafting/craft_mold_gear_graphite"},
+        {"recipe": "immersivegeology:crafting/craft_mold_block_graphite"}
+      ]
+    ]
+  },
+  "mold_set": {
+    "type": "item_display",
+    "items":
+    [
+      {"item": "immersivegeology:mold_blank_graphite"},
+      {"item": "immersivegeology:mold_ingot_graphite"},
+      {"item": "immersivegeology:mold_nugget_graphite"},
+      {"item": "immersivegeology:mold_plate_graphite"},
+      {"item": "immersivegeology:mold_rod_graphite"},
+      {"item": "immersivegeology:mold_wire_graphite"},
+      {"item": "immersivegeology:mold_gear_graphite"},
+      {"item": "immersivegeology:mold_block_graphite"}
+    ]
+  }
+}

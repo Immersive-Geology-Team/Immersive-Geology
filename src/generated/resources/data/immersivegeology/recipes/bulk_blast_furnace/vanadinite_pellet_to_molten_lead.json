@@ -1,0 +1,16 @@
+{
+  "type": "immersivegeology:bulk_blast_furnace",
+  "coke_ratio": 0.3,
+  "flux_ratio": 0.45,
+  "heat": 0,
+  "max_yield": 0.83,
+  "melt": {
+    "amount": 144,
+    "fluid": "immersivegeology:fluid_lead"
+  },
+  "min_yield": 0.3,
+  "ore": {
+    "tag": "forge:pellets/vanadinite"
+  },
+  "time": 52
+}

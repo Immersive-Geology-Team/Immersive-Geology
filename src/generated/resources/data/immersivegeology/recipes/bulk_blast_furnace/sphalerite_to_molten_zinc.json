@@ -1,0 +1,16 @@
+{
+  "type": "immersivegeology:bulk_blast_furnace",
+  "coke_ratio": 0.5,
+  "flux_ratio": 0.5,
+  "heat": 20,
+  "max_yield": 0.85,
+  "melt": {
+    "amount": 144,
+    "fluid": "immersivegeology:fluid_zinc"
+  },
+  "min_yield": 0.2,
+  "ore": {
+    "tag": "forge:crushed_ore/sphalerite"
+  },
+  "time": 67
+}
