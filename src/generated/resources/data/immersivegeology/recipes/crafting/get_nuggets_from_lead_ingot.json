@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "immersiveengineering:ingot_lead"
+      "tag": "forge:ingots/lead"
     }
   ],
   "result": {

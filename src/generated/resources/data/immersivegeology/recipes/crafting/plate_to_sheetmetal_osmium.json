@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "i": {
-      "item": "immersivegeology:plate_osmium"
+      "tag": "forge:plates/osmium"
     }
   },
   "pattern": [

@@ -6,7 +6,7 @@
       "item": "immersivegeology:storage_block_high_speed_steel"
     },
     "I": {
-      "item": "immersivegeology:ingot_high_speed_steel"
+      "tag": "forge:ingots/high_speed_steel"
     }
   },
   "pattern": [

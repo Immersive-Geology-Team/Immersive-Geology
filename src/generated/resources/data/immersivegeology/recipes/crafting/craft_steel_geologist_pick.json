@@ -4,16 +4,16 @@
   "group": "ig_tools",
   "key": {
     "B": {
-      "item": "immersivegeology:ingot_stainless_steel"
+      "tag": "forge:ingots/stainless_steel"
     },
     "F": {
-      "item": "immersivegeology:plate_stainless_steel"
+      "tag": "forge:plates/stainless_steel"
     },
     "S": {
-      "item": "immersiveengineering:wire_steel"
+      "tag": "forge:wires/steel"
     },
     "W": {
-      "item": "immersivegeology:rod_stainless_steel"
+      "tag": "forge:rods/stainless_steel"
     }
   },
   "pattern": [

@@ -6,7 +6,7 @@
       "item": "immersivegeology:storage_block_titanium"
     },
     "I": {
-      "item": "immersivegeology:ingot_titanium"
+      "tag": "forge:ingots/titanium"
     }
   },
   "pattern": [

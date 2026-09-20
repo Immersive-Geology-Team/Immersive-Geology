@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "immersivegeology:ingot_bronze"
+      "tag": "forge:ingots/bronze"
     }
   ],
   "result": {

@@ -6,6 +6,7 @@ The Foundry casts §lmolten metal§r into solid parts.
 §lRunning It§r
 It needs §lmolten metal§r, §lenergy§r, and a §lmold§r to work.
 The internal tanks hold several different metals at once, you can purge a metal portion by clicking on it, a confirmation box will ask you to confirm before doing so.
+Redstone can be input from any block, it will prevent any operations from starting whilst powered.
 <np>
 <&mold_blank>
 Molds start as a §lblank§r, created from HOP Graphite dust.
@@ -15,3 +16,7 @@ Shape a blank by crafting it with the part you want it to make, you will §lget 
 <np>
 <&mold_set>
 Every mold wears out after a set number of castings.
+<np>
+§lAlloying§r
+The Foundry cam §lmerge metals§r.
+When the tanks hold every metal an alloy needs, it will blend them over time, this will prevent casting during the process.

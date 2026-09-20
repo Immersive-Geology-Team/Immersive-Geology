@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "immersivegeology:ingot_cobalt"
+      "tag": "forge:ingots/cobalt"
     }
   ],
   "result": {

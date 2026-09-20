@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "n": {
-      "item": "immersivegeology:nugget_bronze"
+      "tag": "forge:nuggets/bronze"
     }
   },
   "pattern": [

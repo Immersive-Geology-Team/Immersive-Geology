@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "i": {
-      "item": "immersivegeology:plate_bronze"
+      "tag": "forge:plates/bronze"
     }
   },
   "pattern": [

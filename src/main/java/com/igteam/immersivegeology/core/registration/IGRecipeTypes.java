@@ -34,6 +34,7 @@ public class IGRecipeTypes
 	public static final TypeWithClass<RevFurnaceRecipe> REVFURNACE = register("reverberation_furnace", RevFurnaceRecipe.class);
 	public static final TypeWithClass<RotaryKilnRecipe> ROTARYKILN = register("rotary_kiln", RotaryKilnRecipe.class);
 	public static final TypeWithClass<BulkBlastFurnaceRecipe> BULK_BLAST_FURNACE = register("bulk_blast_furnace", BulkBlastFurnaceRecipe.class);
+	public static final TypeWithClass<BulkBlastFluxRecipe> BULK_BLAST_FLUX = register("bulk_blast_flux", BulkBlastFluxRecipe.class);
 	public static final TypeWithClass<ChemicalRecipe> CHEMICAL_REACTOR = register("chemical_reactor", ChemicalRecipe.class);
 	public static final TypeWithClass<BasicChemicalRecipe> BASIC_CHEMICAL_REACTOR = register("basic_chemical_reactor", BasicChemicalRecipe.class);
 	public static final TypeWithClass<GeothermalExchangerRecipe> GEOTHERMAL_EXCHANGER = register("geothermal_exchanger", GeothermalExchangerRecipe.class);
@@ -43,6 +44,7 @@ public class IGRecipeTypes
 	public static final TypeWithClass<BallmillRecipe> BALLMILL = register("ballmill", BallmillRecipe.class);
 	public static final TypeWithClass<PelletizerRecipe> PELLETIZER = register("pelletizer",PelletizerRecipe.class);
 	public static final TypeWithClass<FoundryRecipe> FOUNDRY = register("foundry",FoundryRecipe.class);
+	public static final TypeWithClass<FoundryAlloyRecipe> FOUNDRY_ALLOYING = register("foundry_alloying",FoundryAlloyRecipe.class);
 	public static final TypeWithClass<EmptyRecipe> EMPTY = register("empty", EmptyRecipe.class);
 
 	public static final TypeWithClass<BloomeryFuel> BLOOMERY_FUEL = register("bloomery_fuel", BloomeryFuel.class);

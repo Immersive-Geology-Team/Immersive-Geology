@@ -15,6 +15,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.logic.FoundryLogic;
 import com.google.common.collect.ImmutableList;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.FoundryMenu;
 import com.igteam.immersivegeology.core.lib.IGLib;
+import com.mojang.math.Axis;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -52,6 +53,26 @@ public class FoundryScreen extends IEContainerScreen<FoundryMenu>
 	private static final int ARROW_V = 0;
 	private static final int ARROW_WIDTH = 18;
 	private static final int ARROW_HEIGHT = 10;
+
+	private static final int ALLOY_COG_X = 42;
+	private static final int ALLOY_COG_Y = 55;
+	private static final int ALLOY_COG_U = 223;
+	private static final int ALLOY_COG_V = 0;
+	private static final int ALLOY_COG_SIZE = 16;
+
+	private static final int CAST_BLOCKED_X = 42;
+	private static final int CAST_BLOCKED_Y = 74;
+	private static final int CAST_BLOCKED_U = 226;
+	private static final int CAST_BLOCKED_V = 19;
+	private static final int CAST_BLOCKED_SIZE = 15;
+
+	private static final int REDSTONE_X = 9;
+	private static final int REDSTONE_Y = 8;
+	private static final int REDSTONE_OFF_U = 189;
+	private static final int REDSTONE_ON_U = 185;
+	private static final int REDSTONE_V = 102;
+	private static final int REDSTONE_WIDTH = 4;
+	private static final int REDSTONE_HEIGHT = 11;
 
 	private static final int OVERLAY_X = 20;
 	private static final int OVERLAY_Y = 20;
@@ -108,6 +129,34 @@ public class FoundryScreen extends IEContainerScreen<FoundryMenu>
 		final int width = Math.round(ARROW_WIDTH*Mth.clamp(menu.progress.get(), 0, 1));
 		if(width > 0)
 			graphics.blit(TEXTURE, leftPos+ARROW_X, topPos+ARROW_Y, ARROW_U, ARROW_V, width, ARROW_HEIGHT);
+
+		drawRedstoneTorch(graphics);
+
+		final float alloy = Mth.clamp(menu.alloyProgress.get(), 0, 1);
+		if(menu.alloying.get())
+		{
+			drawAlloyCog(graphics, alloy);
+			graphics.blit(TEXTURE, leftPos+CAST_BLOCKED_X, topPos+CAST_BLOCKED_Y,
+					CAST_BLOCKED_U, CAST_BLOCKED_V, CAST_BLOCKED_SIZE, CAST_BLOCKED_SIZE);
+		}
+	}
+
+	private void drawRedstoneTorch(GuiGraphics graphics)
+	{
+		graphics.blit(TEXTURE, leftPos+REDSTONE_X, topPos+REDSTONE_Y,
+				menu.redstoneInput.get()?REDSTONE_ON_U: REDSTONE_OFF_U, REDSTONE_V, REDSTONE_WIDTH, REDSTONE_HEIGHT);
+	}
+
+	private void drawAlloyCog(GuiGraphics graphics, float progress)
+	{
+		final float centreX = leftPos+ALLOY_COG_X+ALLOY_COG_SIZE/2f;
+		final float centreY = topPos+ALLOY_COG_Y+ALLOY_COG_SIZE/2f;
+		graphics.pose().pushPose();
+		graphics.pose().translate(centreX, centreY, 0);
+		graphics.pose().mulPose(Axis.ZP.rotationDegrees(progress*360f));
+		graphics.pose().translate(-centreX, -centreY, 0);
+		graphics.blit(TEXTURE, leftPos+ALLOY_COG_X, topPos+ALLOY_COG_Y, ALLOY_COG_U, ALLOY_COG_V, ALLOY_COG_SIZE, ALLOY_COG_SIZE);
+		graphics.pose().popPose();
 	}
 
 	private int popupLeft()
@@ -243,8 +292,38 @@ public class FoundryScreen extends IEContainerScreen<FoundryMenu>
 	{
 		return ImmutableList.of(
 				new StackedTankArea(new Rect2i(leftPos+TANK_X, topPos+TANK_Y, TANK_WIDTH, TANK_HEIGHT)),
-				new EnergyArea(new Rect2i(leftPos+ENERGY_X, topPos+ENERGY_Y, ENERGY_WIDTH, ENERGY_HEIGHT))
+				new EnergyArea(new Rect2i(leftPos+ENERGY_X, topPos+ENERGY_Y, ENERGY_WIDTH, ENERGY_HEIGHT)),
+				new AlloyingTooltipArea(
+						new Rect2i(leftPos+ALLOY_COG_X, topPos+ALLOY_COG_Y, ALLOY_COG_SIZE, ALLOY_COG_SIZE),
+						Component.translatable("gui.immersivegeology.foundry.alloying.active")
+				),
+				new AlloyingTooltipArea(
+						new Rect2i(leftPos+CAST_BLOCKED_X, topPos+CAST_BLOCKED_Y, CAST_BLOCKED_SIZE, CAST_BLOCKED_SIZE),
+						Component.translatable("gui.immersivegeology.foundry.casting_disabled")
+				)
 		);
+	}
+
+	private class AlloyingTooltipArea extends InfoArea
+	{
+		private final Component text;
+
+		private AlloyingTooltipArea(Rect2i area, Component text)
+		{
+			super(area);
+			this.text = text;
+		}
+
+		@Override
+		public void draw(GuiGraphics graphics)
+		{
+		}
+
+		@Override
+		protected void fillTooltipOverArea(int mouseX, int mouseY, List<Component> tooltip)
+		{
+			if(menu.alloying.get()) tooltip.add(text);
+		}
 	}
 
 	private class StackedTankArea extends InfoArea

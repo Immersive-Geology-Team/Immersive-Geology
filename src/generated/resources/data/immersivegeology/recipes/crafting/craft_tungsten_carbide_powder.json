@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "immersivegeology:powder_tungsten"
+      "tag": "forge:powders/tungsten"
     },
     {
       "item": "immersiveengineering:dust_hop_graphite"

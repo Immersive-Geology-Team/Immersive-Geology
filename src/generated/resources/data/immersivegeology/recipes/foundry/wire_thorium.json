@@ -1,0 +1,25 @@
+{
+  "type": "immersivegeology:foundry",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:wires/thorium"
+      }
+    }
+  ],
+  "energy": 1152,
+  "input": {
+    "amount": 144,
+    "tag": "forge:thorium"
+  },
+  "mold": "immersivegeology:mold_wire_graphite",
+  "result": {
+    "base_ingredient": {
+      "tag": "forge:wires/thorium"
+    },
+    "count": 3
+  },
+  "time": 3
+}

@@ -281,7 +281,7 @@ dependencies {
     implementation       fg.deobf("curse.maven:patchouli-306770:6164575")
     implementation       fg.deobf("curse.maven:engineered-schematics-1207780:6293337")
     implementation fg.deobf("curse.maven:chisels-bits-231095:5203366")
-    //implementation fg.deobf("curse.maven:distant-horizons-508933:6791186")
+    implementation fg.deobf("curse.maven:distant-horizons-508933:8907237")
 
     implementation fg.deobf("curse.maven:lithostitched-936015:6742615")
     if (tectonicPatched != null) implementation fg.deobf(tectonicPatched)
@@ -357,7 +357,7 @@ tasks.register('optimizePng') {
     doLast {
         sourceSets.main.resources.srcDirs.each { dir ->
             fileTree(dir: dir, includes: ['**/*.png']).each { minimizePNGFile(it) }
-        }
+        }e
     }
 }
 

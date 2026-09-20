@@ -44,6 +44,21 @@ public class IGTags
 	public static LinkedHashMap<BlockCategoryFlags, TagKey<Block>> BLOCK_CATEGORY_FLAGS = new LinkedHashMap<>();
 	public static TagKey<Item> SILICON_TAG = ItemTags.create(new ResourceLocation("forge","silicon"));
 
+	public static TagKey<Item> getStorageBlockItemTag(MaterialHelper material)
+	{
+		return ItemTags.create(storageBlockTag(material));
+	}
+
+	public static TagKey<Block> getStorageBlockBlockTag(MaterialHelper material)
+	{
+		return BlockTags.create(storageBlockTag(material));
+	}
+
+	private static ResourceLocation storageBlockTag(MaterialHelper material)
+	{
+		return new ResourceLocation("forge", "storage_blocks/"+material.getName().toLowerCase(Locale.ROOT));
+	}
+
 	private static boolean initialized = false;
 	public static synchronized void initialize()
 	{

@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "i": {
-      "item": "immersivegeology:plate_neodymium"
+      "tag": "forge:plates/neodymium"
     }
   },
   "pattern": [

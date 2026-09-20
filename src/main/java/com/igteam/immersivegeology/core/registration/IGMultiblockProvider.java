@@ -35,7 +35,7 @@ public class IGMultiblockProvider {
 
     public static final MultiblockRegistration<FoundryLogic.State> FOUNDRY = IGRegistrationHolder.registerMetalMultiblock("foundry", new FoundryLogic(), () -> IGRegistrationHolder.getMBTemplate.apply("foundry"),
             builder -> {
-                builder.redstone(state -> state.rsState, FoundryLogic.REDSTONE_IN);
+                builder.redstone(state -> state.rsState, FoundryLogic.REDSTONE_INPUTS);
                 builder.gui(IGMenuTypes.FOUNDRY);
             });
 
@@ -51,7 +51,7 @@ public class IGMultiblockProvider {
 
     public static final MultiblockRegistration<BulkBlastFurnaceLogic.State> BULK_BLAST_FURNACE = stone(new BulkBlastFurnaceLogic(), "bulk_blast_furnace", false)
             .structure(() -> IGRegistrationHolder.getMBTemplate.apply("bulk_blast_furnace"))
-            .redstone(state -> state.rsState, BulkBlastFurnaceLogic.REDSTONE_IN)
+            .redstone(state -> state.rsState, BulkBlastFurnaceLogic.REDSTONE_INPUTS)
             .gui(IGMenuTypes.BULK_BLAST_FURNACE)
             .build();
 

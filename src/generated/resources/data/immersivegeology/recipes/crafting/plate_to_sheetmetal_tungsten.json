@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "i": {
-      "item": "immersivegeology:plate_tungsten"
+      "tag": "forge:plates/tungsten"
     }
   },
   "pattern": [

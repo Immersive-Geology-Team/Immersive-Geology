@@ -3,10 +3,10 @@
   "category": "building",
   "key": {
     "i": {
-      "item": "immersivegeology:ingot_bronze"
+      "tag": "forge:ingots/bronze"
     },
     "r": {
-      "item": "immersivegeology:rod_bronze"
+      "tag": "forge:rods/bronze"
     }
   },
   "pattern": [

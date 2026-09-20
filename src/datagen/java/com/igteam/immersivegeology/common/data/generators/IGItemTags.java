@@ -123,11 +123,25 @@ public class IGItemTags extends ItemTagsProvider
 						{
 							generateOreBlockTags(material);
 						}
+						if(blockFlag.equals(BlockCategoryFlags.STORAGE_BLOCK))
+						{
+							generateStorageBlockTags(material);
+						}
 					}
 				}
 			}
 		}
 		IGLib.IG_LOGGER.info("Finished Registration of Immersive Geology Fluid Tags");
+	}
+
+	private void generateStorageBlockTags(MaterialInterface<?> material)
+	{
+		if(material.instance().checkExistingImplementation(BlockCategoryFlags.STORAGE_BLOCK)) return;
+		Item item = material.instance().getItem(BlockCategoryFlags.STORAGE_BLOCK);
+		if(item.equals(Items.COOKIE)||item.equals(Blocks.AIR.asItem())) return;
+
+		tag(IGTags.getStorageBlockItemTag(material.instance())).add(item);
+		tag(Tags.Items.STORAGE_BLOCKS).add(item);
 	}
 
 	boolean useOptionalTag = false;
@@ -158,9 +172,11 @@ public class IGItemTags extends ItemTagsProvider
 					String name = oreBlock.getIGDescriptionId().toLowerCase(Locale.ROOT);
 					String id = name.substring(name.lastIndexOf('.')+1);
 					tag(Tags.Items.ORES).addOptional(new ResourceLocation(IGLib.MODID, id));
+					tag(material.getItemMaterialTag()).addOptional(new ResourceLocation(IGLib.MODID, id));
 					continue;
 				}
 				tag(Tags.Items.ORES).add(oreBlock.asIGItem());
+				tag(material.getItemMaterialTag()).add(oreBlock.asIGItem());
 			}
 		}
 	}

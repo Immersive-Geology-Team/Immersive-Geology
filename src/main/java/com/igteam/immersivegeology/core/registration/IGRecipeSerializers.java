@@ -46,6 +46,7 @@ public class IGRecipeSerializers
 		RevFurnaceRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("reverberation_furnace", RevFurnaceRecipeSerializer::new);
 		RotaryKilnRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("rotary_kiln", RotaryKilnRecipeSerializer::new);
 		BulkBlastFurnaceRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("bulk_blast_furnace", BulkBlastFurnaceRecipeSerializer::new);
+		BulkBlastFluxRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("bulk_blast_flux", BulkBlastFluxSerializer::new);
 		ChemicalRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("chemical_reactor", ChemicalRecipeSerializer::new);
 		BasicChemicalRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("small_chemical_reactor", BasicChemicalRecipeSerializer::new);
 		CentrifugeRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("centrifuge", CentrifugeRecipeSerializer::new);
@@ -58,6 +59,7 @@ public class IGRecipeSerializers
 		PelletizerRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("pelletizer", PelletizerRecipeSerializer::new);
 		CoreDrillRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("coredrill", CoreDrillSerializer::new);
 		FoundryRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("foundry", FoundryRecipeSerializer::new);
+		FoundryAlloyRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("foundry_alloying", FoundryAlloyRecipeSerializer::new);
 		GeothermalExchangerRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("geothermal_exchanger", GeothermalExchangerRecipeSerializer::new);
 		GeothermalConversionRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("geothermal_conversion", GeothermalConversionRecipeSerializer::new);
 		GeothermalBiomeRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("geothermal_biome", GeothermalBiomeRecipeSerializer::new);

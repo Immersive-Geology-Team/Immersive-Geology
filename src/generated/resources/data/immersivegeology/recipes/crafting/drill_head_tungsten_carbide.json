@@ -6,7 +6,7 @@
       "item": "immersivegeology:storage_block_tungsten_carbide"
     },
     "I": {
-      "item": "immersivegeology:ingot_tungsten_carbide"
+      "tag": "forge:ingots/tungsten_carbide"
     }
   },
   "pattern": [

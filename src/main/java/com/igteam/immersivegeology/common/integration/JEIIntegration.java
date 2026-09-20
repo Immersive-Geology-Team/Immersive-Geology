@@ -56,6 +56,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipeCategories(new IGCentrifugeCategory(guiHelper));
 		registration.addRecipeCategories(new IGBasicChemicalCategory(guiHelper));
 		registration.addRecipeCategories(new IGFoundryCategory(guiHelper));
+		registration.addRecipeCategories(new IGFoundryAlloyCategory(guiHelper));
 		registration.addRecipeCategories(new IGBulkBlastFurnaceCategory(guiHelper));
 	}
 
@@ -76,6 +77,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipes(JEIRecipeTypes.CENTRIFUGE, getRecipes(CentrifugeRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.GEOTHERMAL_EXCHANGER, getRecipes(GeothermalExchangerRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.FOUNDRY, getRecipes(FoundryRecipe.RECIPES));
+		registration.addRecipes(JEIRecipeTypes.FOUNDRY_ALLOYING, getRecipes(FoundryAlloyRecipe.RECIPES));
 		registration.addRecipes(JEIRecipeTypes.BULK_BLAST_FURNACE, getRecipes(BulkBlastFurnaceRecipe.RECIPES));
 	}
 
@@ -94,6 +96,7 @@ public class JEIIntegration implements IModPlugin
 		registration.addRecipeCatalyst(IGMultiblockProvider.CENTRIFUGE.iconStack(), JEIRecipeTypes.CENTRIFUGE);
 		registration.addRecipeCatalyst(IGMultiblockProvider.GEOTHERMAL_EXCHANGER.iconStack(), JEIRecipeTypes.GEOTHERMAL_EXCHANGER);
 		registration.addRecipeCatalyst(IGMultiblockProvider.FOUNDRY.iconStack(), JEIRecipeTypes.FOUNDRY);
+		registration.addRecipeCatalyst(IGMultiblockProvider.FOUNDRY.iconStack(), JEIRecipeTypes.FOUNDRY_ALLOYING);
 		registration.addRecipeCatalyst(IGMultiblockProvider.BULK_BLAST_FURNACE.iconStack(), JEIRecipeTypes.BULK_BLAST_FURNACE);
 	}
 

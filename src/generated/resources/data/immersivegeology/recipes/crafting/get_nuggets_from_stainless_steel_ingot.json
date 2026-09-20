@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "immersivegeology:ingot_stainless_steel"
+      "tag": "forge:ingots/stainless_steel"
     }
   ],
   "result": {

@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "immersivegeology:ingot_chromium"
+      "tag": "forge:ingots/chromium"
     }
   ],
   "result": {

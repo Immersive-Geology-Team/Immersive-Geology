@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "immersivegeology:ingot_magnesium"
+      "tag": "forge:ingots/magnesium"
     }
   ],
   "result": {

@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "i": {
-      "item": "immersivegeology:plate_platinum"
+      "tag": "forge:plates/platinum"
     }
   },
   "pattern": [

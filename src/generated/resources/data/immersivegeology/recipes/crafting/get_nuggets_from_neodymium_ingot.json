@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "immersivegeology:ingot_neodymium"
+      "tag": "forge:ingots/neodymium"
     }
   ],
   "result": {

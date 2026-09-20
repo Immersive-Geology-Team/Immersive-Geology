@@ -51,6 +51,7 @@ public class BulkBlastFurnaceMenu extends IEContainerMenu
 	public final GetterAndSetter<Float> fuelNeeded;
 	public final GetterAndSetter<Integer> status;
 	public final GetterAndSetter<Float> heatingProgress;
+	public final GetterAndSetter<Boolean> redstoneInput;
 
 	public static BulkBlastFurnaceMenu makeServer(MenuType<?> type, int id, Inventory invPlayer, MultiblockMenuContext<BulkBlastFurnaceLogic.State> ctx)
 	{
@@ -73,7 +74,8 @@ public class BulkBlastFurnaceMenu extends IEContainerMenu
 				GetterAndSetter.getterOnly(state::getFuel),
 				GetterAndSetter.getterOnly(state::getFuelNeeded),
 				GetterAndSetter.getterOnly(state::getStatus),
-				GetterAndSetter.getterOnly(state::getHeatingProgress)
+				GetterAndSetter.getterOnly(state::getHeatingProgress),
+				GetterAndSetter.getterOnly(state::hasRedstoneInput)
 		);
 	}
 
@@ -99,7 +101,8 @@ public class BulkBlastFurnaceMenu extends IEContainerMenu
 				GetterAndSetter.standalone(0f),
 				GetterAndSetter.standalone(0f),
 				GetterAndSetter.standalone(0),
-				GetterAndSetter.standalone(0f)
+				GetterAndSetter.standalone(0f),
+				GetterAndSetter.standalone(false)
 		);
 	}
 
@@ -110,7 +113,7 @@ public class BulkBlastFurnaceMenu extends IEContainerMenu
 								 GetterAndSetter<Float> fluxNeeded, GetterAndSetter<Float> carbonTarget, GetterAndSetter<Float> heatCap,
 								 GetterAndSetter<Integer> heatRequired, GetterAndSetter<Float> fuel,
 								 GetterAndSetter<Float> fuelNeeded, GetterAndSetter<Integer> status,
-								 GetterAndSetter<Float> heatingProgress)
+								 GetterAndSetter<Float> heatingProgress, GetterAndSetter<Boolean> redstoneInput)
 	{
 		super(ctx);
 		this.metalTank = metalTank;
@@ -131,6 +134,7 @@ public class BulkBlastFurnaceMenu extends IEContainerMenu
 		this.fuelNeeded = fuelNeeded;
 		this.status = status;
 		this.heatingProgress = heatingProgress;
+		this.redstoneInput = redstoneInput;
 
 		final Level level = inventoryPlayer.player.level();
 		for(int row = 0; row < BulkBlastFurnaceLogic.GRID_WIDTH; row++)
@@ -173,5 +177,6 @@ public class BulkBlastFurnaceMenu extends IEContainerMenu
 		addGenericData(new GenericContainerData<>(GenericDataSerializers.FLOAT, fuelNeeded));
 		addGenericData(new GenericContainerData<>(GenericDataSerializers.INT32, status));
 		addGenericData(new GenericContainerData<>(GenericDataSerializers.FLOAT, heatingProgress));
+		addGenericData(new GenericContainerData<>(GenericDataSerializers.BOOLEAN, redstoneInput));
 	}
 }

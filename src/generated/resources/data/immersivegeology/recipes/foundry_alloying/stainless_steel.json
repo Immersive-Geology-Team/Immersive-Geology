@@ -1,0 +1,19 @@
+{
+  "type": "immersivegeology:foundry_alloying",
+  "energy": 32,
+  "inputs": [
+    {
+      "amount": 6,
+      "tag": "forge:steel"
+    },
+    {
+      "amount": 2,
+      "tag": "forge:chromium"
+    }
+  ],
+  "result": {
+    "amount": 8,
+    "fluid": "immersivegeology:fluid_stainless_steel"
+  },
+  "time": 120
+}

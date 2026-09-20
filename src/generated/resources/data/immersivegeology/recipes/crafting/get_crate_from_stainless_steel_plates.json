@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "p": {
-      "item": "immersivegeology:plate_stainless_steel"
+      "tag": "forge:plates/stainless_steel"
     }
   },
   "pattern": [

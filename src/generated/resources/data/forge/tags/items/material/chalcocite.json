@@ -1,5 +1,77 @@
 {
   "values": [
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_chalcocite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_chalcocite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_chalcocite_andesite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_chalcocite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_chalcocite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_chalcocite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_chalcocite_dacite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_chalcocite_dacite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_chalcocite_dacite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_poor_ore_block_chalcocite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_normal_ore_block_chalcocite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:tfc_rich_ore_block_chalcocite_rhyolite",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_chalcocite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_chalcocite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_chalcocite_basalt",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_chalcocite_netherrack",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_chalcocite_netherrack",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_chalcocite_netherrack",
+      "required": false
+    },
     "immersivegeology:powder_chalcocite",
     "immersivegeology:grit_chalcocite",
     "immersivegeology:slag_chalcocite",

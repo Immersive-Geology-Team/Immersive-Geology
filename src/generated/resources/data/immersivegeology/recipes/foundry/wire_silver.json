@@ -1,0 +1,25 @@
+{
+  "type": "immersivegeology:foundry",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:wires/silver"
+      }
+    }
+  ],
+  "energy": 1152,
+  "input": {
+    "amount": 144,
+    "tag": "forge:silver"
+  },
+  "mold": "immersivegeology:mold_wire_graphite",
+  "result": {
+    "base_ingredient": {
+      "tag": "forge:wires/silver"
+    },
+    "count": 3
+  },
+  "time": 3
+}

@@ -1,0 +1,25 @@
+{
+  "type": "immersivegeology:foundry",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:rods/gold"
+      }
+    }
+  ],
+  "energy": 1152,
+  "input": {
+    "amount": 144,
+    "tag": "forge:gold"
+  },
+  "mold": "immersivegeology:mold_rod_graphite",
+  "result": {
+    "base_ingredient": {
+      "tag": "forge:rods/gold"
+    },
+    "count": 3
+  },
+  "time": 3
+}

@@ -43,6 +43,9 @@ public class FoundryMenu extends IEContainerMenu
 	public final FluidTank[] tanks;
 	public final MutableEnergyStorage energy;
 	public final GetterAndSetter<Float> progress;
+	public final GetterAndSetter<Float> alloyProgress;
+	public final GetterAndSetter<Boolean> alloying;
+	public final GetterAndSetter<Boolean> redstoneInput;
 	private final IntConsumer purge;
 
 	public static FoundryMenu makeServer(MenuType<?> type, int id, Inventory invPlayer, MultiblockMenuContext<FoundryLogic.State> ctx)
@@ -51,7 +54,10 @@ public class FoundryMenu extends IEContainerMenu
 		return new FoundryMenu(
 				multiblockCtx(type, id, ctx), invPlayer,
 				state.getInventory(), state.getTanks(), state.getEnergy(),
-				GetterAndSetter.getterOnly(state::getProgress), state::purgeTank
+				GetterAndSetter.getterOnly(state::getProgress),
+				GetterAndSetter.getterOnly(state::getAlloyProgress),
+				GetterAndSetter.getterOnly(state::isAlloying),
+				GetterAndSetter.getterOnly(state::hasRedstoneInput), state::purgeTank
 		);
 	}
 
@@ -69,16 +75,20 @@ public class FoundryMenu extends IEContainerMenu
 				new ItemStackHandler(FoundryLogic.SLOT_COUNT),
 				clientTanks(),
 				new MutableEnergyStorage(FoundryLogic.ENERGY_CAPACITY),
-				GetterAndSetter.standalone(0f), index -> {}
+				GetterAndSetter.standalone(0f), GetterAndSetter.standalone(0f),
+				GetterAndSetter.standalone(false), GetterAndSetter.standalone(false), index -> {}
 		);
 	}
 
-	private FoundryMenu(MenuContext ctx, Inventory inventoryPlayer, IItemHandler inv, FluidTank[] tanks, MutableEnergyStorage energy, GetterAndSetter<Float> progress, IntConsumer purge)
+	private FoundryMenu(MenuContext ctx, Inventory inventoryPlayer, IItemHandler inv, FluidTank[] tanks, MutableEnergyStorage energy, GetterAndSetter<Float> progress, GetterAndSetter<Float> alloyProgress, GetterAndSetter<Boolean> alloying, GetterAndSetter<Boolean> redstoneInput, IntConsumer purge)
 	{
 		super(ctx);
 		this.tanks = tanks;
 		this.energy = energy;
 		this.progress = progress;
+		this.alloyProgress = alloyProgress;
+		this.alloying = alloying;
+		this.redstoneInput = redstoneInput;
 		this.purge = purge;
 
 		addSlot(new SlotItemHandler(inv, FoundryLogic.MOLD_SLOT, MOLD_X, MOLD_Y)
@@ -102,6 +112,10 @@ public class FoundryMenu extends IEContainerMenu
 
 		addGenericData(GenericContainerData.energy(energy));
 		for(FluidTank tank : tanks) addGenericData(GenericContainerData.fluid(tank));
+		addGenericData(new GenericContainerData<>(GenericDataSerializers.FLOAT, progress));
+		addGenericData(new GenericContainerData<>(GenericDataSerializers.FLOAT, alloyProgress));
+		addGenericData(new GenericContainerData<>(GenericDataSerializers.BOOLEAN, alloying));
+		addGenericData(new GenericContainerData<>(GenericDataSerializers.BOOLEAN, redstoneInput));
 	}
 
 	public static CompoundTag purgeMessage(int tank)
@@ -115,6 +129,5 @@ public class FoundryMenu extends IEContainerMenu
 	public void receiveMessageFromScreen(CompoundTag message)
 	{
 		if(message.contains(PURGE_KEY)) purge.accept(message.getInt(PURGE_KEY));
-		addGenericData(new GenericContainerData<>(GenericDataSerializers.FLOAT, progress));
 	}
 }

@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "immersivegeology:ingot_platinum"
+      "tag": "forge:ingots/platinum"
     }
   ],
   "result": {

@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "immersivegeology:ingot_molybdenum"
+      "tag": "forge:ingots/molybdenum"
     }
   ],
   "result": {

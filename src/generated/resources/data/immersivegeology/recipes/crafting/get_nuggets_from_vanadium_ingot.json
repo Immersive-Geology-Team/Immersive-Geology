@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "immersivegeology:ingot_vanadium"
+      "tag": "forge:ingots/vanadium"
     }
   ],
   "result": {

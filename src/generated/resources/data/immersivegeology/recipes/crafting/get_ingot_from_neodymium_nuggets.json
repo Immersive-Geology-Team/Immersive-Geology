@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "n": {
-      "item": "immersivegeology:nugget_neodymium"
+      "tag": "forge:nuggets/neodymium"
     }
   },
   "pattern": [

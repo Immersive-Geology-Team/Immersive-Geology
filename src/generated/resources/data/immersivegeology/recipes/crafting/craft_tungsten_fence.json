@@ -3,10 +3,10 @@
   "category": "building",
   "key": {
     "i": {
-      "item": "immersivegeology:ingot_tungsten"
+      "tag": "forge:ingots/tungsten"
     },
     "r": {
-      "item": "immersivegeology:rod_tungsten"
+      "tag": "forge:rods/tungsten"
     }
   },
   "pattern": [

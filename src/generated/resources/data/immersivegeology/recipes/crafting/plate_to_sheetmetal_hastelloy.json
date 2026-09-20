@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "i": {
-      "item": "immersivegeology:plate_hastelloy"
+      "tag": "forge:plates/hastelloy"
     }
   },
   "pattern": [

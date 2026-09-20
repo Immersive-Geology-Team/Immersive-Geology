@@ -31,7 +31,6 @@
     "type": "item_display",
     "items":
     [
-      {"item": "immersivegeology:mold_blank_graphite"},
       {"item": "immersivegeology:mold_ingot_graphite"},
       {"item": "immersivegeology:mold_nugget_graphite"},
       {"item": "immersivegeology:mold_plate_graphite"},

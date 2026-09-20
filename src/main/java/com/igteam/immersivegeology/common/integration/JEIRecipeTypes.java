@@ -31,6 +31,7 @@ public class JEIRecipeTypes
 	public static final RecipeType<PelletizerRecipe> PELLETIZER = create(IGRecipeTypes.PELLETIZER);
 	public static final RecipeType<CentrifugeRecipe> CENTRIFUGE = create(IGRecipeTypes.CENTRIFUGE);
 	public static final RecipeType<FoundryRecipe> FOUNDRY = create(IGRecipeTypes.FOUNDRY);
+	public static final RecipeType<FoundryAlloyRecipe> FOUNDRY_ALLOYING = create(IGRecipeTypes.FOUNDRY_ALLOYING);
 	public static final RecipeType<BulkBlastFurnaceRecipe> BULK_BLAST_FURNACE = create(IGRecipeTypes.BULK_BLAST_FURNACE);
 	public static final RecipeType<IGGeoRecipe> GEOHINT = create(IGRecipeTypes.GEOHINT);
 	public static final RecipeType<TurbineFuel> TURBINE_FUEL = create(IGRecipeTypes.TURBINE_FUEL);

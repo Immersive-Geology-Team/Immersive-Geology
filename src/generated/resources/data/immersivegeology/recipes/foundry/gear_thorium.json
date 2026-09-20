@@ -1,0 +1,22 @@
+{
+  "type": "immersivegeology:foundry",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:gears/thorium"
+      }
+    }
+  ],
+  "energy": 1152,
+  "input": {
+    "amount": 144,
+    "tag": "forge:thorium"
+  },
+  "mold": "immersivegeology:mold_gear_graphite",
+  "result": {
+    "tag": "forge:gears/thorium"
+  },
+  "time": 3
+}

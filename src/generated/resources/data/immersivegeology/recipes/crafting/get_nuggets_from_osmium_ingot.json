@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "immersivegeology:ingot_osmium"
+      "tag": "forge:ingots/osmium"
     }
   ],
   "result": {

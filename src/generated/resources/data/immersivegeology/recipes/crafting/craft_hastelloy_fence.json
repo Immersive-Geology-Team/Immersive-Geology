@@ -3,10 +3,10 @@
   "category": "building",
   "key": {
     "i": {
-      "item": "immersivegeology:ingot_hastelloy"
+      "tag": "forge:ingots/hastelloy"
     },
     "r": {
-      "item": "immersivegeology:rod_hastelloy"
+      "tag": "forge:rods/hastelloy"
     }
   },
   "pattern": [

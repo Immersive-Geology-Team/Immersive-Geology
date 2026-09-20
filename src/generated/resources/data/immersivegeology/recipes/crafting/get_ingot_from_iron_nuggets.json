@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "n": {
-      "item": "minecraft:iron_nugget"
+      "tag": "forge:nuggets/iron"
     }
   },
   "pattern": [

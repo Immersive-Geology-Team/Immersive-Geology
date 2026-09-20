@@ -1,5 +1,8 @@
 {
   "values": [
+    "immersivegeology:minecraft_poor_ore_block_alumina_end_stone",
+    "immersivegeology:minecraft_normal_ore_block_alumina_end_stone",
+    "immersivegeology:minecraft_rich_ore_block_alumina_end_stone",
     "immersivegeology:powder_alumina",
     "immersivegeology:grit_alumina",
     "immersivegeology:poor_ore_alumina",

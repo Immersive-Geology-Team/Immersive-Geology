@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "i": {
-      "item": "immersivegeology:plate_unobtanium"
+      "tag": "forge:plates/unobtanium"
     }
   },
   "pattern": [

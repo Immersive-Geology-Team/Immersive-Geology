@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "n": {
-      "item": "immersivegeology:nugget_osmium"
+      "tag": "forge:nuggets/osmium"
     }
   },
   "pattern": [

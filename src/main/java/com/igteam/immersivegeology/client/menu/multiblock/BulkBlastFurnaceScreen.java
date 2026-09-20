@@ -46,6 +46,14 @@ public class BulkBlastFurnaceScreen extends IEContainerScreen<BulkBlastFurnaceMe
 	private static final int TANK_WIDTH = 16;
 	private static final int TANK_HEIGHT = 47;
 
+	private static final int REDSTONE_X = 9;
+	private static final int REDSTONE_Y = 8;
+	private static final int REDSTONE_OFF_U = 189;
+	private static final int REDSTONE_ON_U = 185;
+	private static final int REDSTONE_V = 102;
+	private static final int REDSTONE_WIDTH = 4;
+	private static final int REDSTONE_HEIGHT = 11;
+
 	private static final int PROGRESS_X = 53;
 	private static final int PROGRESS_Y = 93;
 	private static final int PROGRESS_WIDTH = 69;
@@ -104,6 +112,13 @@ public class BulkBlastFurnaceScreen extends IEContainerScreen<BulkBlastFurnaceMe
 		drawRatioGauge(graphics, FUEL_X, menu.fuel.get(), menu.fuelNeeded.get(), FUEL_COLOUR);
 		drawProgress(graphics);
 		drawChips(graphics);
+		drawRedstoneTorch(graphics);
+	}
+
+	private void drawRedstoneTorch(GuiGraphics graphics)
+	{
+		graphics.blit(TEXTURE, REDSTONE_X, REDSTONE_Y,
+				menu.redstoneInput.get()?REDSTONE_ON_U: REDSTONE_OFF_U, REDSTONE_V, REDSTONE_WIDTH, REDSTONE_HEIGHT);
 	}
 
 	private void drawHeatGauge(GuiGraphics graphics)

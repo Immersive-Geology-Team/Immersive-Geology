@@ -3,13 +3,13 @@
   "category": "misc",
   "key": {
     "A": {
-      "item": "immersivegeology:wire_tungsten_carbide"
+      "tag": "forge:wires/tungsten_carbide"
     },
     "C": {
       "item": "immersiveengineering:storage_electrum"
     },
     "R": {
-      "item": "immersivegeology:plate_ehv_insulation"
+      "tag": "forge:plates/ehv_insulation"
     }
   },
   "pattern": [

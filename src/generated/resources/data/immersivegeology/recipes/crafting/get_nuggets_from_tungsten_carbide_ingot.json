@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "immersivegeology:ingot_tungsten_carbide"
+      "tag": "forge:ingots/tungsten_carbide"
     }
   ],
   "result": {

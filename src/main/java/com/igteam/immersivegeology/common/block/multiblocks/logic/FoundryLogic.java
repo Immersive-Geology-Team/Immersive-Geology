@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.logic;
 
+import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.energy.AveragingEnergyStorage;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IServerTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.RedstoneControl;
@@ -26,6 +27,8 @@ import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler.IntRange;
 import com.igteam.immersivegeology.common.block.helper.IGReceiveOnlyEnergy;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.MultiblockRedstone;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.FoundryAlloyRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.FoundryRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.FoundryShape;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
@@ -60,7 +63,7 @@ import java.util.function.Function;
 
 public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServerTickableComponent<FoundryLogic.State>, MBOverlayText<FoundryLogic.State>
 {
-    public static final BlockPos REDSTONE_IN = new BlockPos(0, 1, 1);
+    public static final BlockPos[] REDSTONE_INPUTS = MultiblockRedstone.allPositions(5, 5, 5);
 
     public static final int MOLD_SLOT = 0;
     public static final int FIRST_OUTPUT_SLOT = 1;
@@ -71,6 +74,7 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
     public static final int ENERGY_CAPACITY = 48000;
     public static final int TANK_VOLUME = 16*FluidType.BUCKET_VOLUME;
     public static final int TANK_COUNT = 8;
+    public static final int ALLOY_OUTPUT_PER_CYCLE = 576;
 
     private static final CapabilityPosition ENERGY_INPUT = new CapabilityPosition(3, 1, 0, RelativeBlockFace.FRONT);
     private static final CapabilityPosition FLUID_INPUT_CAP = new CapabilityPosition(1, 2, 0, RelativeBlockFace.FRONT);
@@ -86,9 +90,16 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
 
         if(state.rsState.isEnabled(context))
         {
-            if(state.castTotalTicks > 0) tickCast(state);
-            if(state.castTotalTicks <= 0) startCast(state, context.getLevel().getRawLevel());
+            final Level level = context.getLevel().getRawLevel();
+            if(state.alloyTotalTicks <= 0)
+            {
+                if(state.castTotalTicks > 0) tickCast(state);
+                if(state.castTotalTicks <= 0) startCast(state, level);
+            }
+            if(state.alloyTotalTicks > 0) tickAlloy(state);
+            if(state.alloyTotalTicks <= 0) startAlloy(state, level);
         }
+        state.redstoneInput = MultiblockRedstone.hasInput(context, REDSTONE_INPUTS);
         ejectOutput(state);
 
         if(before!=state.storedFluid()) context.requestMasterBESync();
@@ -160,6 +171,96 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
         state.castTotalTicks = Math.max(1, recipe.getTotalProcessTime());
         state.castEnergyPerTick = Math.max(1, energyPerTick(recipe.getTotalProcessEnergy(), recipe.getTotalProcessTime()));
         return true;
+    }
+
+    private void tickAlloy(State state)
+    {
+        if(state.alloyTicks >= state.alloyTotalTicks)
+        {
+            finishAlloy(state);
+            return;
+        }
+        if(state.energy.extractEnergy(state.alloyEnergyPerTick, true) < state.alloyEnergyPerTick) return;
+        state.energy.extractEnergy(state.alloyEnergyPerTick, false);
+        state.alloyTicks++;
+        if(state.alloyTicks >= state.alloyTotalTicks) finishAlloy(state);
+    }
+
+    private void finishAlloy(State state)
+    {
+        state.alloyResult.shrink(fillTanks(state, state.alloyResult));
+        if(!state.alloyResult.isEmpty()) return;
+        state.alloyResult = FluidStack.EMPTY;
+        state.alloyTicks = 0;
+        state.alloyTotalTicks = 0;
+        state.alloyEnergyPerTick = 0;
+    }
+
+    private void startAlloy(State state, Level level)
+    {
+        if(!state.alloyResult.isEmpty()) return;
+        List<FluidStack> stored = new ArrayList<>(state.tanks.length);
+        for(FluidTank tank : state.tanks) stored.add(tank.getFluid());
+        for(FoundryAlloyRecipe recipe : FoundryAlloyRecipe.RECIPES.getRecipes(level))
+            if(startAlloyFrom(state, recipe, stored)) return;
+    }
+
+    private boolean startAlloyFrom(State state, FoundryAlloyRecipe recipe, List<FluidStack> stored)
+    {
+        final int perUnit = recipe.getOutputVolumePerUnit();
+        final int inputPerUnit = recipe.getInputVolumePerUnit();
+        if(perUnit <= 0||inputPerUnit <= 0) return false;
+
+        int units = recipe.unitsFrom(stored, Math.max(1, ALLOY_OUTPUT_PER_CYCLE/perUnit));
+        if(units <= 0) return false;
+
+        final int surplus = perUnit-inputPerUnit;
+        if(surplus > 0) units = Math.min(units, (TANK_VOLUME-state.storedFluid())/surplus);
+        if(units <= 0||!hasAlloySpace(state, recipe.alloyOutput)) return false;
+
+        for(FluidTagInput input : recipe.alloyInputs) drainInput(state, input, input.getAmount()*units);
+        state.alloyResult = new FluidStack(recipe.alloyOutput, perUnit*units);
+        state.alloyTicks = 0;
+        state.alloyTotalTicks = Math.max(1, recipe.getTotalProcessTime());
+        state.alloyEnergyPerTick = Math.max(1, energyPerTick(recipe.getTotalProcessEnergy()*units, recipe.getTotalProcessTime()));
+        return true;
+    }
+
+    private boolean hasAlloySpace(State state, FluidStack alloy)
+    {
+        for(FluidTank tank : state.tanks)
+            if(tank.getFluid().isEmpty()||tank.getFluid().isFluidEqual(alloy)) return true;
+        return false;
+    }
+
+    private void drainInput(State state, FluidTagInput input, int amount)
+    {
+        for(FluidTank tank : state.tanks)
+        {
+            if(amount <= 0) return;
+            FluidStack fluid = tank.getFluid();
+            if(fluid.isEmpty()||!input.testIgnoringAmount(fluid)) continue;
+            amount -= tank.drain(Math.min(amount, fluid.getAmount()), FluidAction.EXECUTE).getAmount();
+        }
+    }
+
+    private int fillTanks(State state, FluidStack fluid)
+    {
+        int filled = fillTanks(state, fluid, 0, false);
+        if(filled < fluid.getAmount()) filled = fillTanks(state, fluid, filled, true);
+        return filled;
+    }
+
+    private int fillTanks(State state, FluidStack fluid, int filled, boolean useEmpty)
+    {
+        for(FluidTank tank : state.tanks)
+        {
+            if(filled >= fluid.getAmount()) break;
+            FluidStack present = tank.getFluid();
+            if(present.isEmpty()?!useEmpty: !present.isFluidEqual(fluid)) continue;
+            filled += tank.fill(new FluidStack(fluid, fluid.getAmount()-filled), FluidAction.EXECUTE);
+        }
+        return filled;
     }
 
     private static int energyPerTick(int energy, int time)
@@ -317,6 +418,12 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
     public static class State implements IMultiblockState
     {
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
+        private boolean redstoneInput = false;
+
+        public boolean hasRedstoneInput()
+        {
+            return redstoneInput;
+        }
         public final AveragingEnergyStorage energy = new AveragingEnergyStorage(ENERGY_CAPACITY);
         public final SlotwiseItemHandler inventory;
         public final SharedTank[] tanks = SharedTank.group(TANK_COUNT);
@@ -332,6 +439,10 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
         private int castTicks;
         private int castTotalTicks;
         private int castEnergyPerTick;
+        private FluidStack alloyResult = FluidStack.EMPTY;
+        private int alloyTicks;
+        private int alloyTotalTicks;
+        private int alloyEnergyPerTick;
 
         public State(IInitialMultiblockContext<State> ctx)
         {
@@ -368,6 +479,10 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
             nbt.putInt("castTicks", castTicks);
             nbt.putInt("castTotalTicks", castTotalTicks);
             nbt.putInt("castEnergyPerTick", castEnergyPerTick);
+            nbt.put("alloyResult", alloyResult.writeToNBT(new CompoundTag()));
+            nbt.putInt("alloyTicks", alloyTicks);
+            nbt.putInt("alloyTotalTicks", alloyTotalTicks);
+            nbt.putInt("alloyEnergyPerTick", alloyEnergyPerTick);
         }
 
         @Override
@@ -380,6 +495,10 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
             castTicks = nbt.getInt("castTicks");
             castTotalTicks = nbt.getInt("castTotalTicks");
             castEnergyPerTick = nbt.getInt("castEnergyPerTick");
+            alloyResult = FluidStack.loadFluidStackFromNBT(nbt.getCompound("alloyResult"));
+            alloyTicks = nbt.getInt("alloyTicks");
+            alloyTotalTicks = nbt.getInt("alloyTotalTicks");
+            alloyEnergyPerTick = nbt.getInt("alloyEnergyPerTick");
         }
 
         @Override
@@ -412,6 +531,16 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
             return castTotalTicks > 0?Math.min(1f, castTicks/(float)castTotalTicks): 0f;
         }
 
+        public boolean isAlloying()
+        {
+            return alloyTotalTicks > 0;
+        }
+
+        public float getAlloyProgress()
+        {
+            return alloyTotalTicks > 0?Math.min(1f, alloyTicks/(float)alloyTotalTicks): 0f;
+        }
+
         private void readTanks(CompoundTag nbt)
         {
             for(FluidTank tank : tanks) tank.setFluid(FluidStack.EMPTY);
@@ -423,6 +552,24 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
             ListTag tankList = nbt.getList("tanks", Tag.TAG_COMPOUND);
             for(int i = 0; i < Math.min(tankList.size(), tanks.length); i++)
                 tanks[i].readFromNBT(tankList.getCompound(i));
+            mergeDuplicateTanks();
+        }
+
+        private void mergeDuplicateTanks()
+        {
+            for(int i = 0; i < tanks.length; i++)
+            {
+                FluidStack kept = tanks[i].getFluid();
+                if(kept.isEmpty()) continue;
+                for(int j = i+1; j < tanks.length; j++)
+                {
+                    FluidStack other = tanks[j].getFluid();
+                    if(other.isEmpty()||!other.isFluidEqual(kept)) continue;
+                    kept.grow(other.getAmount());
+                    tanks[j].setFluid(FluidStack.EMPTY);
+                }
+                tanks[i].setFluid(kept);
+            }
         }
 
         public void purgeTank(int index)

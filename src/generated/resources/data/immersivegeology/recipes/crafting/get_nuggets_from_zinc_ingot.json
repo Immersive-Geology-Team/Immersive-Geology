@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "immersivegeology:ingot_zinc"
+      "tag": "forge:ingots/zinc"
     }
   ],
   "result": {

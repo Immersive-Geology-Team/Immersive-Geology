@@ -15,6 +15,7 @@ import blusunrize.lib.manual.*;
 import blusunrize.lib.manual.ManualEntry.EntryData;
 import blusunrize.lib.manual.ManualEntry.SpecialElementData;
 import blusunrize.lib.manual.Tree.InnerNode;
+import com.igteam.immersivegeology.client.manual.IGMaterialShowcase;
 import com.igteam.immersivegeology.client.manual.IGRecipeOverview;
 import com.igteam.immersivegeology.client.menu.IGCrateScreen;
 import com.igteam.immersivegeology.client.menu.IGMetalDetectorScreen;
@@ -31,7 +32,10 @@ import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
+import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -48,6 +52,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -199,6 +204,7 @@ public class IGContent {
         InnerNode<ResourceLocation, ManualEntry> nether = geology.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "nether"), 1);
         InnerNode<ResourceLocation, ManualEntry> the_end = geology.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "the_end"), 2);
 
+        Map<MaterialInterface<?>, ManualEntry> materialEntries = new LinkedHashMap<>();
         List<MaterialInterface<?>> materials = IGLib.getGeneratedMaterials();
         for(MaterialInterface<?> mineral : materials)
         {
@@ -208,23 +214,25 @@ public class IGContent {
             if(mineral.instance().acceptableStoneType(StoneEnum.MCEndStone)) hosts.add(the_end);
             if(hosts.isEmpty()) continue;
 
-            ManualEntry entry = materialEntry(mineral);
+            ManualEntry entry = materialEntries.computeIfAbsent(mineral, IGContent::materialEntry);
             for(InnerNode<ResourceLocation, ManualEntry> host : hosts) instance.addEntry(host, entry);
         }
 
         InnerNode<ResourceLocation, ManualEntry> metal_category = parent_category.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "metals"), 3);
         for(MaterialInterface<?> metal : metals)
         {
-            if(metal.instance().getRecipeChains().isEmpty()) continue;
-            if(materials.contains(metal)) continue;
-            instance.addEntry(metal_category, materialEntry(metal));
+            if(itemForms(metal).isEmpty()) continue;
+            instance.addEntry(metal_category, materialEntries.computeIfAbsent(metal, IGContent::materialEntry));
         }
 
 //        InnerNode<ResourceLocation, ManualEntry> chemical_entries = processing_chains.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_chemical_chains"), 3);
     }
 
+    private static final Set<String> LINKABLE_ENTRIES = new HashSet<>();
+
     private static ManualEntry materialEntry(MaterialInterface<?> material)
     {
+        LINKABLE_ENTRIES.add(material.getName());
         ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(ManualHelper.getManual());
         builder.setLocation(new ResourceLocation(IGLib.MODID, material.getName()));
         builder.setContent(() -> createMineralContent(material));
@@ -247,38 +255,26 @@ public class IGContent {
     {
         List<IGRecipeChain> recipe_chain_data = material.instance().getRecipeChains().stream().sorted(Comparator.comparingInt(IGRecipeChain::getPriority)).toList();
         OreConfig config = IGServerConfig.ORES.ores.get(material.getConfig());
-        String process_info = Component.translatable("manual.immersivegeology.generic.desc", material.getTranslationName()).getString();
-        contentBuilder.append("<&item_display>").append(process_info);
-        StringBuilder derivedString = new StringBuilder();
-        List<MaterialInterface<?>> derivedMaterials = material.getDerivedMaterials().stream().toList();
-        int size = material.getDerivedMaterials().size();
-        for(int index = 0; index < size; index++)
+        List<MaterialInterface<?>> primarySources = sourcesOf(material, true);
+        List<MaterialInterface<?>> secondarySources = sourcesOf(material, false);
+
+        contentBuilder.append("<&item_display>").append(describeMaterial(material, config, primarySources, secondarySources));
+        String derivedString = joinNames(material.getDerivedMaterials().stream().toList());
+
+        if(config!=null)
         {
-            MaterialInterface<?> derived = derivedMaterials.get(index);
-            derivedString.append(derived.getTranslationName());
-            if(size > 1)
-            {
-                if(index==(size-2))
-                {
-                    derivedString.append(Component.translatable("formatting.space").getString());
-                    derivedString.append(Component.translatable("formatting.and").getString());
-                    derivedString.append(Component.translatable("formatting.space").getString());
-                }
-                else if(index < size-1)
-                {
-                    derivedString.append(", ");
-                }
-            }
+            contentBuilder.append("<np>").append("<&list>");
+            itemList.add(new SpecialElementData("list", 0, new ManualElementTable(ManualHelper.getManual(), formatTable(getOreConfigTable(config, material.getDefaultNoiseProbability()), ""), true)));
         }
 
-        contentBuilder.append("<&list>");
+        appendPrimarySourcePage(contentBuilder, itemList, material, primarySources);
+        appendSecondarySourcePage(contentBuilder, material, secondarySources);
+        appendExtraSourcePage(contentBuilder, material);
+
         if(!derivedString.isEmpty())
         {
-            String finalDerived = derivedString.toString();
-            contentBuilder.append("<np>").append(Component.translatable("manual.immersivegeology.generic.pre_chain_desc", material.getTranslationName(), finalDerived).getString());
+            contentBuilder.append("<np>").append(Component.translatable("manual.immersivegeology.generic.pre_chain_desc", material.getTranslationName(), derivedString).getString());
         }
-        if(config!=null)
-            itemList.add(new SpecialElementData("list", 0, new ManualElementTable(ManualHelper.getManual(), formatTable(getOreConfigTable(config, material.getDefaultNoiseProbability()), ""), true)));
 
         for(int i = 0; i < recipe_chain_data.size(); i++)
         {
@@ -293,7 +289,13 @@ public class IGContent {
 
         NonNullList<ItemStack> displayStacks = NonNullList.create();
 
-        if(material.hasFlag(BlockCategoryFlags.ORE_BLOCK))
+        if(material.instance() instanceof MaterialMetal)
+        {
+            addStack(displayStacks, material, BlockCategoryFlags.STORAGE_BLOCK);
+            addStack(displayStacks, material, ItemCategoryFlags.INGOT);
+        }
+
+        if(displayStacks.isEmpty()&&material.hasFlag(BlockCategoryFlags.ORE_BLOCK))
         {
             for(IStoneType stone : IGStoneTypes.all())
             {
@@ -305,7 +307,175 @@ public class IGContent {
             }
         }
 
+        if(displayStacks.isEmpty()) displayStacks.addAll(itemForms(material));
+
         itemList.add(new SpecialElementData("item_display", 0, new ManualElementItem(ManualHelper.getManual(), displayStacks)));
+    }
+
+    private static String describeMaterial(MaterialInterface<?> material, OreConfig config, List<MaterialInterface<?>> primarySources, List<MaterialInterface<?>> secondarySources)
+    {
+        StringJoiner description = new StringJoiner(Component.translatable("formatting.space").getString());
+        if(config!=null)
+            description.add(Component.translatable("manual.immersivegeology.generic.desc", material.getTranslationName()).getString());
+
+        List<MaterialInterface<?>> named = primarySources.isEmpty()?secondarySources: primarySources;
+        if(!named.isEmpty())
+            description.add(Component.translatable("manual.immersivegeology.generic.source_desc",
+                    material.getTranslationName(), joinNames(named)).getString());
+        else if(config==null)
+            description.add(Component.translatable("manual.immersivegeology.generic.no_source_desc",
+                    material.getTranslationName()).getString());
+
+        return description.toString();
+    }
+
+    private static void appendPrimarySourcePage(StringBuilder contentBuilder, ArrayList<SpecialElementData> itemList, MaterialInterface<?> material, List<MaterialInterface<?>> sources)
+    {
+        if(sources.isEmpty()) return;
+
+        contentBuilder.append("<np>")
+                .append(Component.translatable("manual.immersivegeology.generic.primary_sources").getString())
+                .append("\n")
+                .append(Component.translatable("manual.immersivegeology.generic.primary_sources.desc",
+                        material.getTranslationName(), linkNames(sources)).getString());
+
+        List<ItemStack> variants = oreVariants(sources);
+        if(variants.isEmpty()) return;
+
+        contentBuilder.append("<&primary_sources>");
+        itemList.add(new SpecialElementData("primary_sources", 0, new IGMaterialShowcase(ManualHelper.getManual(), variants)));
+    }
+
+    private static void appendSecondarySourcePage(StringBuilder contentBuilder, MaterialInterface<?> material, List<MaterialInterface<?>> sources)
+    {
+        if(sources.isEmpty()) return;
+
+        contentBuilder.append("<np>")
+                .append(Component.translatable("manual.immersivegeology.generic.secondary_sources").getString())
+                .append("\n")
+                .append(Component.translatable("manual.immersivegeology.generic.secondary_sources.desc",
+                        material.getTranslationName(), linkNames(sources)).getString());
+    }
+
+    private static void appendExtraSourcePage(StringBuilder contentBuilder, MaterialInterface<?> material)
+    {
+        String key = "manual.immersivegeology."+material.getName()+".extra_source";
+        if(!I18n.exists(key)) return;
+        contentBuilder.append("<np>").append(I18n.get(key));
+    }
+
+    private static List<ItemStack> oreVariants(List<MaterialInterface<?>> sources)
+    {
+        List<ItemStack> variants = new ArrayList<>();
+        for(MaterialInterface<?> source : sources)
+        {
+            if(!source.hasFlag(BlockCategoryFlags.ORE_BLOCK))
+            {
+                ItemStack stack = representativeStack(source);
+                if(!stack.isEmpty()) variants.add(stack);
+                continue;
+            }
+
+            for(IStoneType stone : IGStoneTypes.all())
+            {
+                if(!source.instance().acceptableStoneType(stone.instance())) continue;
+                IOreBlock ore = source.getOreBlock(stone, OreRichness.NORMAL);
+                if(ore==null) continue;
+                variants.add(new ItemStack(ore.asIGItem(), 1));
+            }
+        }
+        return variants;
+    }
+
+    private static void addStack(NonNullList<ItemStack> stacks, MaterialInterface<?> material, IFlagType<?> flag)
+    {
+        if(!material.hasFlag(flag)) return;
+        ItemStack stack = material.getStack(flag);
+        if(stack==null||stack.isEmpty()||stack.is(Items.COOKIE)) return;
+        stacks.add(stack);
+    }
+
+    private static List<MaterialInterface<?>> sourcesOf(MaterialInterface<?> product, boolean primary)
+    {
+        List<MaterialInterface<?>> sources = new ArrayList<>();
+        for(MaterialInterface<?> source : IGLib.getGeologyMaterials())
+        {
+            if(source.equals(product)) continue;
+            int index = source.getDerivedMaterials().stream().toList().indexOf(product);
+            if(index < 0) continue;
+            if((index==0)!=primary) continue;
+            sources.add(source);
+        }
+        return sources;
+    }
+
+    private static ItemStack representativeStack(MaterialInterface<?> material)
+    {
+        if(material.hasFlag(BlockCategoryFlags.ORE_BLOCK))
+            for(IStoneType stone : IGStoneTypes.all())
+            {
+                if(!material.instance().acceptableStoneType(stone.instance())) continue;
+                if(!stone.isVanilla()) continue;
+                IOreBlock ore = material.getOreBlock(stone, OreRichness.NORMAL);
+                if(ore==null) continue;
+                return new ItemStack(ore.asIGItem(), 1);
+            }
+
+        NonNullList<ItemStack> forms = itemForms(material);
+        return forms.isEmpty()?ItemStack.EMPTY: forms.get(0);
+    }
+
+    private static String linkNames(List<MaterialInterface<?>> materials)
+    {
+        List<String> names = new ArrayList<>();
+        for(MaterialInterface<?> material : materials)
+            names.add(LINKABLE_ENTRIES.contains(material.getName())
+                    ?"<link;"+IGLib.MODID+":"+material.getName()+";"+material.getTranslationName()+">"
+                    : material.getTranslationName());
+        return joinStrings(names);
+    }
+
+    private static String joinNames(List<MaterialInterface<?>> materials)
+    {
+        return joinStrings(materials.stream().map(MaterialInterface::getTranslationName).toList());
+    }
+
+    private static String joinStrings(List<String> entries)
+    {
+        StringBuilder names = new StringBuilder();
+        for(int index = 0; index < entries.size(); index++)
+        {
+            names.append(entries.get(index));
+            if(entries.size() <= 1) continue;
+            if(index==entries.size()-2)
+            {
+                names.append(Component.translatable("formatting.space").getString());
+                names.append(Component.translatable("formatting.and").getString());
+                names.append(Component.translatable("formatting.space").getString());
+            }
+            else if(index < entries.size()-1) names.append(", ");
+        }
+        return names.toString();
+    }
+
+    private static final List<ItemCategoryFlags> ITEM_FORMS = List.of(
+            ItemCategoryFlags.INGOT, ItemCategoryFlags.NUGGET, ItemCategoryFlags.PLATE,
+            ItemCategoryFlags.ROD, ItemCategoryFlags.WIRE, ItemCategoryFlags.GEAR,
+            ItemCategoryFlags.GRIT, ItemCategoryFlags.POWDER, ItemCategoryFlags.PELLET,
+            ItemCategoryFlags.METAL_OXIDE, ItemCategoryFlags.COMPOUND_DUST
+    );
+
+    private static NonNullList<ItemStack> itemForms(MaterialInterface<?> material)
+    {
+        NonNullList<ItemStack> stacks = NonNullList.create();
+        for(ItemCategoryFlags flag : ITEM_FORMS)
+        {
+            if(!material.hasFlag(flag)) continue;
+            ItemStack stack = material.getStack(flag);
+            if(stack.isEmpty()||stack.is(Items.COOKIE)) continue;
+            stacks.add(stack);
+        }
+        return stacks;
     }
 
     public static HashMap<Component, Double> getOreConfigTable(OreConfig config, float noise_probability) {

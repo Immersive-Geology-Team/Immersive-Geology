@@ -3,10 +3,10 @@
   "category": "building",
   "key": {
     "i": {
-      "item": "immersivegeology:ingot_titanium"
+      "tag": "forge:ingots/titanium"
     },
     "r": {
-      "item": "immersivegeology:rod_titanium"
+      "tag": "forge:rods/titanium"
     }
   },
   "pattern": [

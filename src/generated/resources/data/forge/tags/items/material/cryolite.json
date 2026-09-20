@@ -1,5 +1,17 @@
 {
   "values": [
+    {
+      "id": "immersivegeology:minecraft_poor_ore_block_cryolite_end_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_normal_ore_block_cryolite_end_stone",
+      "required": false
+    },
+    {
+      "id": "immersivegeology:minecraft_rich_ore_block_cryolite_end_stone",
+      "required": false
+    },
     "immersivegeology:powder_cryolite",
     "immersivegeology:grit_cryolite",
     "immersivegeology:poor_ore_cryolite",

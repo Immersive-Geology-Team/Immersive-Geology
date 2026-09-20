@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "immersivegeology:ingot_unobtanium"
+      "tag": "forge:ingots/unobtanium"
     }
   ],
   "result": {

@@ -14,6 +14,10 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraftforge.common.Tags.Biomes;
 
+import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.BiFunction;
 
@@ -37,6 +41,12 @@ public class MaterialGypsum extends MaterialMineral {
     public CrystalFamily getCrystalFamily() {
         return CrystalFamily.MONOCLINIC;
     }
+    @Override
+    public LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
+    {
+        return new LinkedHashSet<>(List.of(MetalEnum.Calcium));
+    }
+
     @Override
     public void setupRecipeStages()
     {

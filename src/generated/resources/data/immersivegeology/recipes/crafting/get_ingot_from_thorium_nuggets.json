@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "n": {
-      "item": "immersivegeology:nugget_thorium"
+      "tag": "forge:nuggets/thorium"
     }
   },
   "pattern": [

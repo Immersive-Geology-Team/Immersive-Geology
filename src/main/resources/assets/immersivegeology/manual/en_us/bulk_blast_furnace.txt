@@ -1,13 +1,14 @@
 Bulk Blast Furnace
 Feed the beast
 <&multiblock>
-The Bulk Blast Furnace smelts crushed ore into §lmolten metal§r in large batches.
+The Bulk Blast Furnace smelts crushed ore into §lmolten metal§r in large batches,
+a significant boost in speed and output than the <link:immersiveengineering:improved_blast_furnace;Blast Furnace>
 
 The multiblock has a GUI with a 4x4 input grid, everything within the grid is considered a single §lbatch§r.
 
 A batch needs three things to work:
 - §lOre§r, which sets the size.
-- §lCoal Coke§r for fuel, from the <link;cokeoven;Coke Oven>.
+- §lBlast Furnace Fuel§r, such as §lCoal Coke§r from the <link;cokeoven;Coke Oven>. Anything the Blast Furnace burns works here.
 - §lCalcium Oxide§r for flux, burnt from calcite in the <link;immersivegeology:rotary_kiln;Rotary Kiln>.
 <np>
 §lRatios§r
@@ -36,15 +37,18 @@ You need at least one preheater running to start a recipe.
 <np>
 §lInput and Output§r
 - §lItems§r are inserted from the §ltop§r.
-- §lMolten metal§r is extracted from the §lfront§r, whilst §lslag§r is extracted from the §lback§r.
+- §lMolten metal§r is extracted from the §lback§r, whilst §lslag§r is extracted from the §lfront§r.
 - Both outputs will eject into any connected tank or pipe.
-- A §lredstone signal§r stops the furnace.
+- A §lredstone signal§r will prevent any operations from starting whilst powered, it will not pause one in progress. This can signal can be input from any part of the multiblock.
 
-Coke can be added as blocks, worth §l9§r coal coke each. Ore can be added in as pellets from the <link;immersivegeology:pelletizer;Pelletizer>, which require less coke and makes less slag.
+Fuel is measured by burn time, any fuel that's valid in the <link:immersiveengineering:improved_blast_furnace;Blast Furnace> will be accepted.
+Ore can be added in as pellets from the <link;immersivegeology:pelletizer;Pelletizer>, which require less coke and create less slag.
 <np>
 §lPig Iron and Steel§r
-Create a batch with iron and §lmore coke than required§r the furance will then output §lMolten Pig Iron§r instead of Molten Iron.
+Create a batch with iron and §lmore coke than is initially required§r the furance will then output §lMolten Pig Iron§r instead of Molten Iron.
 
-You can then use this same furnace to process it into steel. Leave the pig iron in the internal tank, add flux and a small amount of coke, and ensure that the furnace remains above §l150§r heat.
+You can tell when this works as the fuel gauge will change it's requested amount of fuel.
 
-This will create §lMolten Steel§r.
+If Pig Iron is extracted, it can instead be cast into normal iron in the <link;immersivegeology:foundry;Foundry>.
+
+If you leave the pig iron within the bulk blast furnace, and then follow it up by adding additional flux and a small amount of coke, it will create §lMolten Steel§r.

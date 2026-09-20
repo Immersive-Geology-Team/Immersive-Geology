@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "n": {
-      "item": "minecraft:gold_nugget"
+      "tag": "forge:nuggets/gold"
     }
   },
   "pattern": [

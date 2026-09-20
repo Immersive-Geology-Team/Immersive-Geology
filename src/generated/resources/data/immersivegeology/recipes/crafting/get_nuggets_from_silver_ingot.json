@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "immersiveengineering:ingot_silver"
+      "tag": "forge:ingots/silver"
     }
   ],
   "result": {

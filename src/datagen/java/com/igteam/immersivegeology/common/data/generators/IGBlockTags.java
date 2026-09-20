@@ -12,6 +12,7 @@ import com.igteam.immersivegeology.common.block.structural.IGScaffoldingBlock;
 import com.igteam.immersivegeology.common.block.structural.IGSlabBlock;
 import com.igteam.immersivegeology.common.block.structural.IGStairBlock;
 import com.igteam.immersivegeology.common.fluid.IGFluidBlock;
+import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -150,6 +151,11 @@ public class IGBlockTags extends BlockTagsProvider
 				BlockCategoryFlags blockFlag = (BlockCategoryFlags) genericBlock.getFlag();
 				if(!genericBlock.getMaterial(MaterialTexture.base).instance().checkExistingImplementation(blockFlag)) {
 					 tag(blockFlag.getCategoryTag()).add(genericBlock);
+					 if(blockFlag.equals(BlockCategoryFlags.STORAGE_BLOCK))
+					 {
+						 tag(IGTags.getStorageBlockBlockTag(genericBlock.getMaterial(MaterialTexture.base).instance())).add(genericBlock);
+						 tag(Tags.Blocks.STORAGE_BLOCKS).add(genericBlock);
+					 }
 				}
 
 				boolean hasExistingImplementation = false;

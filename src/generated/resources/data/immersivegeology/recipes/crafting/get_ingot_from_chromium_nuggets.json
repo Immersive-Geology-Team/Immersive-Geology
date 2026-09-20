@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "n": {
-      "item": "immersivegeology:nugget_chromium"
+      "tag": "forge:nuggets/chromium"
     }
   },
   "pattern": [

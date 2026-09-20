@@ -13,6 +13,7 @@ import blusunrize.immersiveengineering.api.IEProperties;
 import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IClientTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IServerTickableComponent;
+import blusunrize.immersiveengineering.api.crafting.BlastFurnaceFuel;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.RedstoneControl;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
@@ -32,6 +33,8 @@ import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler.IntRange;
 import com.igteam.immersivegeology.common.block.multiblocks.IGBulkBlastFurnaceMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
+import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.MultiblockRedstone;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.BulkBlastFluxRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BulkBlastFurnaceRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.BulkBlastFurnaceShape;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -90,10 +93,10 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 	private static final float HEAT_DECAY = 0.05f;
 	public static final float MIN_RATIO_TOLERANCE = 0.25f;
 	public static final float GOOD_QUALITY = 0.75f;
-	private static final int COKE_BLOCK_VALUE = 9;
+	private static final int COKE_UNIT_TIME = 1200;
 	private static final float MAX_BANKED_COKE_FRACTION = 0.25f;
 
-	public static final BlockPos REDSTONE_IN = new BlockPos(2, 0, 0);
+	public static final BlockPos[] REDSTONE_INPUTS = MultiblockRedstone.allPositions(3, 8, 3);
 
 	private static final CapabilityPosition ITEM_INPUT_CAP = new CapabilityPosition(1, 7, 1, RelativeBlockFace.UP);
 	private static final MultiblockFace METAL_OUTPUT = new MultiblockFace(1, 0, 0, RelativeBlockFace.FRONT);
@@ -116,31 +119,30 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 		return new MultiblockFace(port.face(), port.face().offsetRelative(port.posInMultiblock(), 1));
 	}
 
-	public static TagKey<Item> fluxTag()
+	public static int fuelTime(@Nullable Level level, ItemStack stack)
 	{
-		return MetalEnum.Calcium.getItemTag(ItemCategoryFlags.METAL_OXIDE);
+		if(stack.isEmpty()) return 0;
+		return BlastFurnaceFuel.getBlastFuelTime(level, stack)*stack.getCount();
 	}
 
-	public static int fuelValue(ItemStack stack)
+	public static boolean isFuel(@Nullable Level level, ItemStack stack)
 	{
-		if(stack.is(IETags.coalCoke)) return stack.getCount();
-		if(stack.is(IETags.getItemTag(IETags.coalCokeBlock))) return stack.getCount()*COKE_BLOCK_VALUE;
-		return 0;
+		return fuelTime(level, stack) > 0;
 	}
 
-	public static boolean isCoke(ItemStack stack)
+	public static int fluxValue(@Nullable Level level, ItemStack stack)
 	{
-		return fuelValue(stack) > 0;
+		return BulkBlastFluxRecipe.getFluxValue(level, stack)*stack.getCount();
 	}
 
-	public static boolean isFlux(ItemStack stack)
+	public static boolean isFlux(@Nullable Level level, ItemStack stack)
 	{
-		return stack.is(fluxTag());
+		return fluxValue(level, stack) > 0;
 	}
 
 	public static boolean isChargeComponent(@Nullable Level level, ItemStack stack)
 	{
-		return isCoke(stack)||isFlux(stack)||BulkBlastFurnaceRecipe.findRecipe(level, stack)!=null;
+		return isFuel(level, stack)||isFlux(level, stack)||BulkBlastFurnaceRecipe.findRecipe(level, stack)!=null;
 	}
 
 	@Override
@@ -187,6 +189,7 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 			state.active = false;
 			if(state.rsState.isEnabled(context)) tryStartCharge(context);
 		}
+		state.redstoneInput = MultiblockRedstone.hasInput(context, REDSTONE_INPUTS);
 		updateReadout(state, level.getRawLevel());
 
 		if(state.metalTank.getFluidAmount() > 0) pushFluid(context, state.metalTank, state.metalOutput);
@@ -227,15 +230,16 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 		if(refining) recipe = BulkBlastFurnaceRecipe.findRefiningRecipe(level, state.metalTank.getFluid());
 		if(recipe==null) return null;
 
-		int ore = 0, coke = 0, flux = 0;
+		int ore = 0, fuelTime = 0, flux = 0;
 		for(int slot = 0; slot < NUM_INPUT_SLOTS; slot++)
 		{
 			ItemStack stack = state.inventory.getStackInSlot(slot);
 			if(stack.isEmpty()) continue;
 			if(recipe.oreInput!=null&&recipe.oreInput.testIgnoringSize(stack)) ore += stack.getCount();
-			else if(isCoke(stack)) coke += fuelValue(stack);
-			else if(isFlux(stack)) flux += stack.getCount();
+			else if(isFuel(level, stack)) fuelTime += fuelTime(level, stack);
+			else if(isFlux(level, stack)) flux += fluxValue(level, stack);
 		}
+		final int coke = fuelTime/COKE_UNIT_TIME;
 
 		final int drained;
 		final float units;
@@ -359,7 +363,8 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 	private void tryStartCharge(IMultiblockContext<State> context)
 	{
 		final State state = context.getState();
-		final ChargeAnalysis analysis = analyse(state, context.getLevel().getRawLevel());
+		final Level level = context.getLevel().getRawLevel();
+		final ChargeAnalysis analysis = analyse(state, level);
 		if(analysis==null) return;
 
 		storeReadout(state, analysis);
@@ -372,7 +377,7 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 		{
 			ItemStack stack = state.inventory.getStackInSlot(slot);
 			if(stack.isEmpty()) continue;
-			if((recipe.oreInput!=null&&recipe.oreInput.testIgnoringSize(stack))||isCoke(stack)||isFlux(stack))
+			if((recipe.oreInput!=null&&recipe.oreInput.testIgnoringSize(stack))||isFuel(level, stack)||isFlux(level, stack))
 				state.inventory.setStackInSlot(slot, ItemStack.EMPTY);
 		}
 		if(analysis.refining()) state.metalTank.drain(analysis.drained(), FluidAction.EXECUTE);
@@ -529,6 +534,12 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 	public static class State implements IGMultiblockState
 	{
 		public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
+		private boolean redstoneInput = false;
+
+		public boolean hasRedstoneInput()
+		{
+			return redstoneInput;
+		}
 		public final SlotwiseItemHandler inventory;
 		private final SharedTank metalTank = new SharedTank();
 		private final SharedTank slagTank = new SharedTank();

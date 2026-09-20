@@ -3,10 +3,10 @@
   "category": "building",
   "key": {
     "i": {
-      "item": "immersivegeology:ingot_stainless_steel"
+      "tag": "forge:ingots/stainless_steel"
     },
     "r": {
-      "item": "immersivegeology:rod_stainless_steel"
+      "tag": "forge:rods/stainless_steel"
     }
   },
   "pattern": [

@@ -27,6 +27,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
 
+import blusunrize.immersiveengineering.api.crafting.BlastFurnaceFuel;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.BulkBlastFluxRecipe;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Arrays;
 
 public class IGBulkBlastFurnaceCategory extends IGRecipeCategory<BulkBlastFurnaceRecipe>
@@ -69,15 +76,33 @@ public class IGBulkBlastFurnaceCategory extends IGRecipeCategory<BulkBlastFurnac
 					.addTooltipCallback(JEIHelper.fluidTooltipCallback);
 
 		builder.addSlot(RecipeIngredientRole.INPUT, COKE_X, SLOT_Y)
-				.addIngredients(Ingredient.of(IETags.coalCoke))
+				.addItemStacks(fuelStacks())
 				.setBackground(JEIHelper.slotDrawable, -1, -1);
 
 		builder.addSlot(RecipeIngredientRole.INPUT, FLUX_X, SLOT_Y)
-				.addIngredients(Ingredient.of(BulkBlastFurnaceLogic.fluxTag()))
+				.addItemStacks(fluxStacks())
 				.setBackground(JEIHelper.slotDrawable, -1, -1);
 
 		addMelt(builder, MELT_X, recipe.meltPerUnit);
 		if(recipe.hasRichRegime()) addMelt(builder, RICH_X, recipe.richMelt);
+	}
+
+	private static List<ItemStack> fuelStacks()
+	{
+		Level level = Minecraft.getInstance().level;
+		List<ItemStack> stacks = new ArrayList<>();
+		for(BlastFurnaceFuel fuel : BlastFurnaceFuel.RECIPES.getRecipes(level))
+			stacks.addAll(Arrays.asList(fuel.input.getItems()));
+		return stacks;
+	}
+
+	private static List<ItemStack> fluxStacks()
+	{
+		Level level = Minecraft.getInstance().level;
+		List<ItemStack> stacks = new ArrayList<>();
+		for(BulkBlastFluxRecipe flux : BulkBlastFluxRecipe.RECIPES.getRecipes(level))
+			stacks.addAll(Arrays.asList(flux.input.getItems()));
+		return stacks;
 	}
 
 	private void addMelt(IRecipeLayoutBuilder builder, int x, FluidStack melt)

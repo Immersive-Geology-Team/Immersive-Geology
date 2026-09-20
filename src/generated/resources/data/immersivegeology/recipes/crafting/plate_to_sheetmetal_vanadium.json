@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "i": {
-      "item": "immersivegeology:plate_vanadium"
+      "tag": "forge:plates/vanadium"
     }
   },
   "pattern": [

@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "n": {
-      "item": "immersiveengineering:nugget_steel"
+      "tag": "forge:nuggets/steel"
     }
   },
   "pattern": [

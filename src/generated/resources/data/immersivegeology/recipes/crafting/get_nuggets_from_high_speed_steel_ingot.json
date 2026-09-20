@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "immersivegeology:ingot_high_speed_steel"
+      "tag": "forge:ingots/high_speed_steel"
     }
   ],
   "result": {
