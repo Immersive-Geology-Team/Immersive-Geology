@@ -1,7 +1,8 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.FluidTagInput;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IngredientWithSize;
+
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
@@ -15,8 +16,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.Tags.Biomes;
+import net.minecraft.item.ItemStack;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -31,7 +31,7 @@ public class MaterialScheelite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
 
-        CONFIG = new MineralConfig(33,60,1,-32,160,800, 0.5,false,Optional.of(Biomes.IS_MOUNTAIN), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(33,60,1,-32,160,800, 0.5,false,Optional.empty(), IGGenerationType.DEFAULT);
     }
 
     @Override

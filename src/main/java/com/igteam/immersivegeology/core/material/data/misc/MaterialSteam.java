@@ -11,10 +11,8 @@ package com.igteam.immersivegeology.core.material.data.misc;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMisc;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraftforge.fluids.FluidType.Properties;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.block.SoundType;
 
 import java.util.function.BiFunction;
 

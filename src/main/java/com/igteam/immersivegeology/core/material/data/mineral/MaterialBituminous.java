@@ -10,7 +10,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
-import net.minecraft.tags.BiomeTags;
 
 import java.util.Optional;
 
@@ -29,7 +28,7 @@ public class MaterialBituminous extends MaterialMineral
 
 		addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
 		setBurntime(800);
-		CONFIG = new MineralConfig(30, 50, 1, -64, 320, 1000, 0.75,false, Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.BANDED);
+		CONFIG = new MineralConfig(30, 50, 1, -64, 320, 1000, 0.75,false, Optional.empty(), IGGenerationType.BANDED);
 		this.colorFunction = (flag,v) -> 0xff242227;
 		addGenerationFriend(MaterialBituminous::getFriends, 300);
 	}

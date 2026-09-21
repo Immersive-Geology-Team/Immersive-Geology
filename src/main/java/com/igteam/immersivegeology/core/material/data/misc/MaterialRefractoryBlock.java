@@ -8,14 +8,15 @@
 
 package com.igteam.immersivegeology.core.material.data.misc;
 
+import com.igteam.immersivegeology.core.material.helper.material.IGBlockProperties;
+
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMisc;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.util.ResourceLocation;
 
 public class MaterialRefractoryBlock extends MaterialMisc
 {
@@ -29,7 +30,7 @@ public class MaterialRefractoryBlock extends MaterialMisc
 	}
 
 	@Override
-	public Properties getProperties(IFlagType<?> flag)
+	public IGBlockProperties getProperties(IFlagType<?> flag)
 	{
 		return IGLib.STONE_DECO_PROPS;
 	}

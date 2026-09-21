@@ -1,55 +1,36 @@
-/*
- * Muddykat
- * Copyright (c) 2025
- *
- * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
- * Details can be found in the license file in the root folder of this project
- */
-
 package com.igteam.immersivegeology.core;
 
+import com.igteam.immersivegeology.client.pack.IGPackInjector;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 
-import blusunrize.immersiveengineering.api.client.ieobj.IEOBJCallbacks;
-import blusunrize.immersiveengineering.client.gui.IEContainerScreen;
-import com.igteam.immersivegeology.common.block.entity.cable.EnergyPipeCallback;
-import com.igteam.immersivegeology.core.lib.IGLib;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-
-@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = IGLib.MODID, bus = Bus.MOD)
 public class ClientProxy extends CommonProxy
 {
-
 	@Override
-	public void reinitializeGUI()
+	public void preInit(FMLPreInitializationEvent event)
 	{
-		Screen currentScreen = Minecraft.getInstance().screen;
-		if(currentScreen instanceof IEContainerScreen)
-			currentScreen.init(Minecraft.getInstance(), currentScreen.width, currentScreen.height);
+		super.preInit(event);
+		IGPackInjector.inject();
 	}
 
 	@Override
-	public void modConstruction()
+	public void init(FMLInitializationEvent event)
 	{
-		super.modConstruction();
-		IEOBJCallbacks.register(new ResourceLocation(IGLib.MODID, "energy_pipe"), EnergyPipeCallback.INSTANCE);
+		super.init(event);
 	}
 
 	@Override
-	public Level getClientWorld()
+	public void postInit(FMLPostInitializationEvent event)
 	{
-		return Minecraft.getInstance().level;
+		super.postInit(event);
 	}
 
 	@Override
-	public Player getClientPlayer()
+	public void loadComplete(FMLLoadCompleteEvent event)
 	{
-		return Minecraft.getInstance().player;
+		super.loadComplete(event);
+		IGPackInjector.populateAndReload();
 	}
 }

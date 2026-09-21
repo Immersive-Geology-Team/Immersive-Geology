@@ -1,7 +1,0 @@
-{
-  "type": "immersivegeology:bloomery_fuel",
-  "input": {
-    "item": "immersivegeology:normal_ore_bituminous"
-  },
-  "time": 1000
-}

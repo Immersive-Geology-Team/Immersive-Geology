@@ -1,26 +1,28 @@
-/*
- * Muddykat
- * Copyright (c) 2024
- *
- * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
- * Details can be found in the license file in the root folder of this project
- */
-
 package com.igteam.immersivegeology.common.block.helper;
 
-import net.minecraft.util.StringRepresentable;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.util.IStringSerializable;
+
 import java.util.Locale;
 
-public enum MineralWeathering implements StringRepresentable
+public enum MineralWeathering implements IStringSerializable
 {
 	PRISTINE,
 	TARNISHED,
 	CORRODED;
 
-	@Override
-	public @NotNull String getSerializedName()
+	public MineralWeathering next()
+	{
+		return this==CORRODED?this: values()[ordinal()+1];
+	}
+
+	public String getSanitizedName()
 	{
 		return name().toLowerCase(Locale.ROOT);
+	}
+
+	@Override
+	public String getName()
+	{
+		return getSanitizedName();
 	}
 }

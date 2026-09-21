@@ -1,34 +1,23 @@
 package com.igteam.immersivegeology.core.material.helper.flags;
 
-import net.minecraftforge.data.loading.DatagenModLoader;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.loading.FMLLoader;
+import net.minecraftforge.fml.common.Loader;
+
 import java.util.Locale;
 
-public enum ModFlags implements IFlagType<ModFlags> {
-    MINECRAFT,
-    BEYOND_EARTH,
-    AD_ASTRA,
-    IMMERSIVEENGINEERING,
-    TFC;
+public enum ModFlags implements IFlagType<ModFlags>
+{
+	MINECRAFT,
+	IMMERSIVEENGINEERING,
+	TFC;
 
-    @Override
-    public ModFlags getValue() {
-        return this;
-    }
+	@Override
+	public ModFlags getValue()
+	{
+		return this;
+	}
 
-    @Override
-    public String getTagPrefix()
-    {
-        return "";
-    }
-
-    public boolean isLoaded()
-    {
-        return this.equals(MINECRAFT) || DatagenModLoader.isRunningDataGen() || ModList.get().isLoaded(getName().toLowerCase(Locale.ROOT));
-    }
-
-    public boolean isStrictlyLoaded(){
-        return this.equals(MINECRAFT) || ModList.get().isLoaded(getName().toLowerCase(Locale.ROOT));
-    }
+	public boolean isLoaded()
+	{
+		return this==MINECRAFT||Loader.isModLoaded(name().toLowerCase(Locale.ROOT));
+	}
 }

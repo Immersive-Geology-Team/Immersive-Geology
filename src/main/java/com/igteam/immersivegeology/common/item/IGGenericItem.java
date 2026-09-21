@@ -1,134 +1,46 @@
-/*
- * Muddykat
- * Copyright (c) 2024
- *
- * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
- * Details can be found in the license file in the root folder of this project
- */
-
 package com.igteam.immersivegeology.common.item;
 
-import com.igteam.immersivegeology.client.menu.ItemSubGroup;
-import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
-import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
-import java.util.*;
+public class IGGenericItem extends Item
+{
+	protected final ItemCategoryFlags category;
+	protected final MaterialInterface<?> material;
 
-public class IGGenericItem extends Item implements IGFlagItem {
-    protected final Map<MaterialTexture, MaterialInterface<?>> materialMap = new HashMap<>();
-    protected final ItemCategoryFlags category;
-    protected String customLang = "";
-    boolean hasCustomLang = false;
-    public IGGenericItem(ItemCategoryFlags flag, MaterialInterface<?> material) {
-        this(flag, material, new Properties());
-    }
-
-    public IGGenericItem(ItemCategoryFlags flag, MaterialInterface<?> material, Properties properties) {
-        super(properties);
-        this.materialMap.put(MaterialTexture.base, material);
-        this.category = flag;
-    }
-
-    public int getColor(int index) {
-        if(getFlag().hasPalette() || getFlag().equals(ItemCategoryFlags.PELLET) || getFlag().equals(ItemCategoryFlags.OXIDE_PELLET) || getFlag().equals(ItemCategoryFlags.HAMMER) || getMaxStackSize(getDefaultInstance()) == 1) return 0xffffff;
-        if (index >= materialMap.values().size()) index = index % materialMap.values().size();
-
-        //let's use last available colour. map could not be empty
-        return materialMap.get(MaterialTexture.values()[index]).getColor(category, 0);
-    }
-
-    public boolean isIGRepairable(ItemStack stack)
-    {
-        return false;
-    }
-
-    @Override
-    public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType)
-    {
-        MaterialInterface<?> base = getMaterial(MaterialTexture.base);
-        if(base.hasBurnTime()) return base.getBurnTime();
-        return super.getBurnTime(itemStack, recipeType);
-    }
-
-    @Override
-    public @NotNull Component getName(ItemStack stack) {
-        if(hasCustomLang)
-        {
-            return Component.translatable("item.immersivegeology." + customLang).withStyle(getMaterial(MaterialTexture.base).getRarity().color);
-        }
-
-        List<String> materialList = new ArrayList<>();
-        for(MaterialTexture t : MaterialTexture.values()){
-            if (materialMap.containsKey(t)) {
-                materialList.add(materialName(materialMap.get(t)).getString());
-            }
-        }
-
-        return Component.translatable("item.immersivegeology." + category.getName(), materialList.toArray()).withStyle(getMaterial(MaterialTexture.base).getRarity().color);
-    }
-
-    /**
-     * How one of this item's materials reads inside the flag's own name pattern. Subclasses override this
-     * where a material needs qualifying rather than naming outright - a native metal ore being the case that
-     * wanted it.
-     */
-    protected Component materialName(MaterialInterface<?> material)
-    {
-        return Component.translatable("material.immersivegeology." + material.getName());
-    }
-
-    @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced)
-    {
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
-        if(getFlag().equals(ItemCategoryFlags.INGOT) && (getMaterial(MaterialTexture.base) instanceof MetalEnum metal))
-        {
-            pTooltipComponents.add(Component.translatable("immersivegeology.item.text.sources"));
-            Set<MaterialHelper> sources = metal.getOriginMaterials();
-            for(MaterialHelper source : sources)
-            {
-                pTooltipComponents.add(Component.translatable("material.immersivegeology." + source.getName()).withStyle(ChatFormatting.GOLD));
-            }
-        }
-    }
-
-    @Override
-    public ItemCategoryFlags getFlag() {
-        return category;
-    }
-
-    @Override
-    public ItemSubGroup getSubGroup() {
-        return category.getSubGroup();
-    }
-
-    @Override
-    public Collection<MaterialInterface<?>> getMaterials() {
-        return materialMap.values();
-    }
-
-    @Override
-    public MaterialInterface<?> getMaterial(MaterialTexture t) {
-        return materialMap.get(t);
-    }
-
-	public Item setCustomLangString(String rawRefractoryBrick)
+	public IGGenericItem(ItemCategoryFlags category, MaterialInterface<?> material)
 	{
-        hasCustomLang = true;
-        customLang = rawRefractoryBrick;
-        return this;
+		this.category = category;
+		this.material = material;
+	}
+
+	public ItemCategoryFlags getCategory()
+	{
+		return category;
+	}
+
+	public MaterialInterface<?> getMaterial()
+	{
+		return material;
+	}
+
+	public IFlagType<?> getFlag()
+	{
+		return category;
+	}
+
+	public int getColor(ItemStack stack, int tintIndex)
+	{
+		if(usesPaletteSprite()) return 0xFFFFFF;
+		return material.getColor(category, tintIndex);
+	}
+
+	public boolean usesPaletteSprite()
+	{
+		return category.hasPalette()||category==ItemCategoryFlags.PELLET
+				||category==ItemCategoryFlags.OXIDE_PELLET||category==ItemCategoryFlags.HAMMER;
 	}
 }

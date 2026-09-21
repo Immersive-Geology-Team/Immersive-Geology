@@ -16,7 +16,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.Optional;
 import java.util.function.BiFunction;
@@ -33,7 +32,7 @@ public class MaterialLead extends MaterialNativeMetal
 
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
-        this.CONFIG = new MaterialMineral.MineralConfig(12,99,1,0,50,300,0.5, true, Optional.of(Biomes.IS_WET), IGGenerationType.DEFAULT);
+        this.CONFIG = new MaterialMineral.MineralConfig(12,99,1,0,50,300,0.5, true, Optional.empty(), IGGenerationType.DEFAULT);
     }
 
     @Override

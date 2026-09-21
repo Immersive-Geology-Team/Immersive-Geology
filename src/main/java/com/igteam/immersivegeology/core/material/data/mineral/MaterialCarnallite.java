@@ -1,8 +1,8 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
+
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.FluidTagInput;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IngredientWithSize;
             
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import blusunrize.immersiveengineering.common.register.IEItems;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -12,8 +12,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.Tags.Biomes;
+import net.minecraft.item.ItemStack;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -26,7 +25,7 @@ public class MaterialCarnallite extends MaterialEvaporateMineral
     public MaterialCarnallite() {
         super();
 
-        CONFIG = new MineralConfig(12,45,1,24,128,5,0.5,false,Optional.of(Biomes.IS_SANDY), IGGenerationType.EVAPORATE);
+        CONFIG = new MineralConfig(12,45,1,24,128,5,0.5,false,Optional.empty(), IGGenerationType.EVAPORATE);
     }
 
     @Override

@@ -1,387 +1,94 @@
-import groovy.json.JsonOutput
-import groovy.json.JsonSlurper
-import groovy.json.JsonParserType
-import net.minecraftforge.gradle.common.tasks.SignJar
-
 plugins {
-    id 'net.minecraftforge.gradle'         version '[6.0,6.2)'
-    id 'com.github.johnrengelman.shadow' version '8.1.1'
-    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
-    id 'org.spongepowered.mixin'         version '0.7-SNAPSHOT'
-    id 'org.jetbrains.gradle.plugin.idea-ext' version '1.1.6'
-    id 'eclipse'
+    id 'java'
+    id 'java-library'
     id 'idea'
-}
-// Load version and build number from version.properties
-import java.util.Properties
-
-def versionProps = new Properties()
-file('version.properties').withInputStream { versionProps.load(it) }
-
-version = versionProps.getProperty('version')
-ext.version_buildnumber = versionProps.getProperty('build_number')?.toInteger() ?: 0
-
-println "-> build.gradle applying version: $version (build ${version_buildnumber})"
-
-gradle.taskGraph.whenReady { graph ->
-    // Only bump build number when doing a full build
-    if (graph.hasTask(':build')) {
-        ext.version_buildnumber = gradle.ext.nextBuildNumber
-    } else {
-        // preserve existing build number for non-build tasks
-        ext.version_buildnumber = project.findProperty('version_buildnumber') ?: 0
-    }
+    id 'xyz.wagyourtail.unimined' version '1.4.36-kappa'
 }
 
+version = gradle.ext.nextVersion
 group = 'com.igteam.immersivegeology'
-archivesBaseName = 'ImmersiveGeology'
+
+base {
+    archivesName = 'ImmersiveGeology'
+}
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(25)
     }
 }
 
-// ----------------------------------------------------------------------------
-// RESOURCE EXPANSION & REPLACEMENTS
-// ----------------------------------------------------------------------------
-
-// 1) read the published version
-version = gradle.ext.nextVersion
-// 2) version_buildnumber set via taskGraph.whenReady above
-
-println "-> build.gradle applying version: $version (build ${version_buildnumber})"
-
-ext {
-    versionReplacements = [
-            version        : project.version,
-            build_number   : version_buildnumber,
-            mc_version     : version_minecraft,
-            forge_version  : version_forge,
-            jei_version    : version_jei,
-            mod_license    : mod_license,
-            mod_name       : mod_name,
-            mod_authors    : mod_authors,
-            mod_description: mod_description,
-            version_ie     : version_ie
-    ]
+configurations {
+    modCompileOnly
+    compileOnly.extendsFrom(modCompileOnly)
+    modRuntimeOnly
+    runtimeOnly.extendsFrom(modRuntimeOnly)
 }
 
-sourceSets {
-    main {
-        resources {
-            srcDirs = [
-                    "$rootDir/src/main/resources",
-                    "$rootDir/src/generated/resources"
-            ]
+unimined.minecraft {
+    version version_minecraft
+
+    mappings {
+        mcp('stable', '39-1.12')
+    }
+
+    cleanroom {
+        loader version_cleanroom
+        runs.all {
+            args += ['--username', minecraft_username]
+            workingDir = project.file('run1122')
+            return
         }
     }
-    datagen {
-        compileClasspath += main.output + main.compileClasspath
-        runtimeClasspath += main.output + main.runtimeClasspath
-    }
-    gametest {
-        compileClasspath += main.output + main.compileClasspath
-        runtimeClasspath += main.output + main.runtimeClasspath
+
+    defaultRemapJar = false
+    remap(tasks.named('jar').get())
+
+    mods {
+        remap(configurations.modCompileOnly)
+        remap(configurations.modRuntimeOnly)
     }
 }
-
-tasks.withType(ProcessResources).configureEach {
-    duplicatesStrategy = DuplicatesStrategy.FAIL
-
-    // Declare inputs so Gradle can track changes
-    inputs.property 'mod_version', project.version
-    inputs.property 'mod_buildNumber', version_buildnumber
-    inputs.properties versionReplacements
-
-    filesMatching('META-INF/mods.toml') {
-        expand versionReplacements
-    }
-    exclude '.cache'
-
-    doLast {
-        def slurper = new JsonSlurper()
-        // For lenient parsing (if you ever need comments/trailing commas):
-        // slurper.setType(JsonParserType.LAX)
-
-        fileTree(dir: outputs.files.asPath, include: ['**/*.json', '**/*.mcmeta']).each { File f ->
-            try {
-                def parsed = slurper.parse(f)
-                f.text = JsonOutput.prettyPrint(JsonOutput.toJson(parsed))
-            } catch (Exception e) {
-                logger.warn("Skipping invalid JSON file ${f.name}: ${e.message}")
-            }
-        }
-    }
-}
-
-tasks.withType(Jar).configureEach {
-    zip64 = true
-}
-
-// ----------------------------------------------------------------------------
-// FORGE RUNS & DEPENDENCIES
-// ----------------------------------------------------------------------------
-
-minecraft {
-    mappings channel: 'parchment', version: "1.19.3-2023.06.25-1.20.1"
-    accessTransformers {
-        file 'src/main/resources/META-INF/accesstransformer.cfg'
-    }
-    runs {
-        client {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'SCAN'
-            property 'forge.enabledGameTestNamespaces', 'immersivegeology'
-            property 'forge.logging.console.level', 'debug'
-            ideaModule "${project.name}.main"
-            mods { immersivegeology { source sourceSets.main } }
-        }
-        server {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', ''
-            property 'forge.enabledGameTestNamespaces', 'immersivegeology'
-            property 'forge.logging.console.level', 'debug'
-            arg '-nogui'
-            mods { immersivegeology { source sourceSets.main } }
-        }
-        data {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', ''
-            property 'forge.logging.console.level', 'debug'
-            property 'fml.earlyprogresswindow', 'false'
-            args '--mod', 'immersivegeology', '--all',
-                    '--output', file('src/generated/resources/'),
-                    '--validate', '--existing', sourceSets.main.resources.srcDirs[0]
-            ideaModule "${project.name}.datagen"
-            mods {
-                immersivegeology {
-                    source sourceSets.main
-                    source sourceSets.datagen
-                }
-            }
-        }
-
-        gameTestServer {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.enabledGameTestNamespaces', 'immersivegeology'
-            property 'forge.logging.console.level', 'debug'
-            arg '-nogui'
-            ideaModule "${project.name}.gametest"
-            mods {
-                immersivegeology {
-                    source sourceSets.main
-                    source sourceSets.gametest
-                }
-            }
-        }
-    }
-}
-
-// ----------------------------------------------------------------------------
-// PATCHED THIRD-PARTY DEV JARS
-// ----------------------------------------------------------------------------
-def patchedModsDir = layout.buildDirectory.dir('patched-mods').get().asFile
-patchedModsDir.mkdirs()
 
 repositories {
-    maven { url 'https://maven.blamejared.com/' }
-    maven { url 'https://www.cursemaven.com' }
-    maven { url 'https://cfa2.cursemaven.com' }
-    maven {
-        url 'https://squiddev.cc/maven/'
-        content {
-            includeGroup 'cc.tweaked'
-            includeModule 'org.squiddev', 'Cobalt'
-        }
-    }
+    maven { name = 'CleanroomMC'; url = 'https://maven.cleanroommc.com' }
+    maven { name = 'CurseMaven'; url = 'https://cursemaven.com' }
+    maven { name = 'CleanroomCurseMaven'; url = 'https://curse.cleanroommc.com' }
+    maven { name = 'Modrinth'; url = 'https://api.modrinth.com/maven' }
     mavenCentral()
-    gradlePluginPortal()
-    // Holds third-party mod jars we have to repackage before they can run in
-    // userdev; see the Tectonic block below.
-    flatDir { dirs patchedModsDir }
-}
-
-// ----------------------------------------------------------------------------
-// TECTONIC USERDEV PATCH
-// ----------------------------------------------------------------------------
-// Tectonic ships its mixin configs with no "refmap", and its @Inject/@At targets
-// are baked in as literal SRG names (m_62095_, f_158363_, ...). That is fine in
-// production, where the runtime is SRG-named, but in userdev the runtime is
-// MCP/parchment-named and Mixin only installs the SRG->MCP remapper for configs
-// that declare a refmap -- RemappingReferenceMapper.of() bails out when
-// IReferenceMapper.isDefault() is true, which is exactly the "No refMap loaded"
-// half of the ChunkAccessMixin crash. Repackaging the jar with an (empty) refmap
-// wired into both configs flips that remapper on; it then rewrites every SRG
-// reference itself using build/createSrgToMcp/output.srg, so no per-member
-// mapping data of our own is needed.
-//
-// Nothing here touches the published jar -- the patched copy only ever lands on
-// the dev runtime classpath.
-ext.tectonic_version = '3.0.17'
-def tectonicProjectId = 686836
-def tectonicFileId    = 7197834
-def tectonicPatched   = null
-
-// Fetched straight off CurseMaven rather than through a detached configuration:
-// resolving anything at configuration time freezes the repository descriptors
-// before ForgeGradle is done filtering its own deobf repo, which breaks the
-// whole build.
-try {
-    def rawTectonic = new File(patchedModsDir, "tectonic-${tectonicProjectId}-${tectonicFileId}.jar")
-    if (!rawTectonic.exists()) {
-        def src = "https://www.cursemaven.com/curse/maven/tectonic-${tectonicProjectId}/${tectonicFileId}/tectonic-${tectonicProjectId}-${tectonicFileId}.jar"
-        def tmp = new File(patchedModsDir, rawTectonic.name + '.part')
-        new URL(src).withInputStream { input -> tmp.withOutputStream { out -> out << input } }
-        tmp.renameTo(rawTectonic)
-    }
-
-    def refmapName = 'tectonic.refmap.json'
-    def refmapJson = JsonOutput.toJson([mappings: [:], data: [searge: [:]]])
-    def patched = new File(patchedModsDir, "tectonic-${tectonic_version}-refmap.jar")
-
-    if (!patched.exists() || patched.lastModified() < rawTectonic.lastModified()) {
-        new java.util.zip.ZipFile(rawTectonic).withCloseable { zin ->
-            new java.util.zip.ZipOutputStream(new FileOutputStream(patched)).withCloseable { zos ->
-                zin.entries().each { entry ->
-                    if (entry.name == refmapName) return
-                    byte[] bytes = entry.directory ? new byte[0] : zin.getInputStream(entry).bytes
-                    if (entry.name ==~ /tectonic[^\/]*\.mixins\.json/) {
-                        def cfg = new JsonSlurper().parseText(new String(bytes, 'UTF-8'))
-                        cfg.refmap = refmapName
-                        bytes = JsonOutput.toJson(cfg).getBytes('UTF-8')
-                    }
-                    def copy = new java.util.zip.ZipEntry(entry.name)
-                    if (entry.time >= 0) copy.time = entry.time
-                    zos.putNextEntry(copy)
-                    zos.write(bytes)
-                    zos.closeEntry()
-                }
-                zos.putNextEntry(new java.util.zip.ZipEntry(refmapName))
-                zos.write(refmapJson.getBytes('UTF-8'))
-                zos.closeEntry()
-            }
-        }
-        println "-> repackaged Tectonic for userdev: ${patched.name}"
-    }
-    tectonicPatched = "dev.worldgen:tectonic:${tectonic_version}-refmap"
-} catch (Exception e) {
-    logger.warn("-> Tectonic left out of the dev runtime, could not repackage it: ${e}")
+    mavenLocal()
 }
 
 dependencies {
-    minecraft            "net.minecraftforge:forge:${version_minecraft}-${version_forge}"
-    compileOnly          fg.deobf("mezz.jei:jei-1.20.1-forge-api:${version_jei}")
-    compileOnly          fg.deobf("mezz.jei:jei-1.20.1-common-api:${version_jei}")
-    implementation       fg.deobf("mezz.jei:jei-1.20.1-forge:${version_jei}")
-    implementation fg.deobf("curse.maven:immersive-engineering-231951:6206989")
-    datagenImplementation "blusunrize.immersiveengineering:ImmersiveEngineering:${version_ie}:datagen"
-    implementation       fg.deobf("curse.maven:terrafirmacraft-302973:6187491")
-    implementation       fg.deobf("curse.maven:patchouli-306770:6164575")
-    implementation       fg.deobf("curse.maven:engineered-schematics-1207780:6293337")
-    implementation fg.deobf("curse.maven:chisels-bits-231095:5203366")
-    implementation fg.deobf("curse.maven:distant-horizons-508933:8907237")
-
-    implementation fg.deobf("curse.maven:lithostitched-936015:6742615")
-    if (tectonicPatched != null) implementation fg.deobf(tectonicPatched)
-
-    implementation fg.deobf("curse.maven:glitchcore-955399:5787839")
-    implementation fg.deobf("curse.maven:terrablender-563928:6290448")
-    implementation fg.deobf("curse.maven:biomes-o-plenty-220318:6364065")
-    implementation fg.deobf("curse.maven:observable-509575:5643037")
-    implementation fg.deobf("curse.maven:architectury-api-419699:5137938")
-    implementation fg.deobf("curse.maven:kotlin-for-forge-351264:5402061")
-    implementation fg.deobf("curse.maven:pipez-443900:6368313")
-    implementation fg.deobf("curse.maven:journeymap-32274:5789363")
-    testImplementation    'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly      'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-    annotationProcessor  'org.spongepowered:mixin:0.8.5:processor'
+    modImplementation "curse.maven:immersive-engineering-${curse_ie_project}:${curse_ie_file}"
+    modImplementation "curse.maven:engineered-schematics-1207780:8799257"
+    modImplementation "curse.maven:immersive-intelligence-344344:8933879"
 }
 
-// ----------------------------------------------------------------------------
-// TEST CONFIG, JAR SIGNING, EXTRA TASKS
-// ----------------------------------------------------------------------------
+processResources {
+    inputs.property 'version', project.version
+    inputs.property 'mcversion', version_minecraft
 
-tasks.named('test') {
-    useJUnitPlatform()
-    outputs.upToDateWhen { false }
-    testLogging.events 'passed', 'skipped', 'failed'
-}
-
-tasks.register('copyModsTomlForIntelliJ', Copy) {
-    from tasks.processResources.get().destinationDir
-    into "$projectDir/out/production/resources"
-    include 'META-INF/mods.toml'
-}
-tasks.named('copyModsTomlForIntelliJ') { dependsOn tasks.processResources }
-
-tasks.register('signJar', SignJar) {
-    onlyIf    { project.hasProperty('keyStore') }
-    keyStore  = project.findProperty('keyStore')
-    alias     = project.findProperty('storeAlias')
-    storePass = project.findProperty('storePass')
-
-    inputFile = shadowJar.archiveFile
-    outputFile = shadowJar.archiveFile
-    dependsOn tasks.named('shadowJar')
-}
-
-tasks.named('build') { dependsOn tasks.named('signJar') }
-
-tasks.register('datagenJar', Jar) {
-    dependsOn tasks.named('datagenClasses')
-    archiveClassifier.set('datagen')
-    from sourceSets.datagen.output
-    manifest { attributes 'FMLModType': 'GAMELIBRARY' }
-}
-
-tasks.register('sourcesJar', Jar) {
-    dependsOn tasks.classes
-    archiveClassifier.set('sources')
-    from sourceSets.main.allSource, sourceSets.datagen.allSource
-}
-artifacts {
-    archives tasks.named('sourcesJar')
-    archives tasks.named('datagenJar')
-}
-
-void minimizePNGFile(File file) {
-    long oldSize = file.length()
-    exec { executable 'optipng'; args '-q','-o7','-zm1-9','-strip','all', file }
-    long newSize = file.length()
-    if (newSize < oldSize) println "Optimized ${file.name}: ${oldSize} → ${newSize} bytes"
-}
-
-tasks.register('optimizePng') {
-    doLast {
-        sourceSets.main.resources.srcDirs.each { dir ->
-            fileTree(dir: dir, includes: ['**/*.png']).each { minimizePNGFile(it) }
-        }e
+    filesMatching('mcmod.info') {
+        expand 'version': project.version, 'mcversion': version_minecraft
     }
 }
 
-tasks.register('speedUpPreRun') {
-    doLast {
-        ['Client','Server','Data'].each { type ->
-            ant.replace(
-                    file: ".idea/runConfigurations/run${type}.xml",
-                    token: "prepareRun${type}",
-                    value: 'prepareRuns'
-            )
-        }
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-Xmaxerrs' << '2000'
+}
+
+jar {
+    manifest {
+        attributes([
+                'Specification-Title'   : mod_name,
+                'Specification-Vendor'  : mod_authors,
+                'Specification-Version' : project.version,
+                'Implementation-Title'  : mod_name,
+                'Implementation-Version': project.version,
+                'Implementation-Vendor' : mod_authors
+        ])
     }
 }
 
-tasks.withType(org.gradle.api.tasks.TaskContainer) {
-    it.matching { it.name == 'genIntellijRuns' }.all    { finalizedBy tasks.named('speedUpPreRun') }
-    it.matching { it.name == 'runServer'      }.all    { standardInput = System.in }
-}
-
-tasks.register('genIntellijRunsDummy') {}
-
-def customGradle = rootProject.file('custom.gradle')
-if (customGradle.exists()) apply from: customGradle
-afterEvaluate {
-    tasks.named('reobfJar').configure { enabled = true }
-}

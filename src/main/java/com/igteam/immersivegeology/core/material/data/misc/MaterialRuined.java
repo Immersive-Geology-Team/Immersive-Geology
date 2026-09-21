@@ -8,10 +8,10 @@
 
 package com.igteam.immersivegeology.core.material.data.misc;
 
-import blusunrize.immersiveengineering.api.EnumMetals;
-import blusunrize.immersiveengineering.common.register.IEItems;
-import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
-import blusunrize.immersiveengineering.common.register.IEItems.Metals;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.EnumMetals;
+
+import com.igteam.immersivegeology.core.material.helper.material.IGBlockProperties;
+
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMisc;
 import com.igteam.immersivegeology.core.material.helper.ScaffoldingHelper;
@@ -22,13 +22,9 @@ import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraft.world.level.material.MapColor;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.item.ItemStack;
+import net.minecraft.block.SoundType;
 
 public class MaterialRuined extends MaterialMisc
 {
@@ -58,53 +54,53 @@ public class MaterialRuined extends MaterialMisc
 				.setTimeAndEnergy(100, 25600);
 
 		IGMethodBuilder.arcSmelting(this, IGStageDesignation.EXTRACTION)
-				.create("light_engineering_extraction", this.getBlock(BlockCategoryFlags.ENGINEERING_BLOCK).asItem(), 1, new ItemStack(Metals.PLATES.get(EnumMetals.IRON), 2), new ItemStack(Metals.INGOTS.get(EnumMetals.COPPER)))
+				.create("light_engineering_extraction", net.minecraft.item.Item.getItemFromBlock(this.getBlock(BlockCategoryFlags.ENGINEERING_BLOCK)), 1, new ItemStack(Metals.PLATES.get(EnumMetals.IRON), 2), new ItemStack(Metals.INGOTS.get(EnumMetals.COPPER)))
 				.setTimeAndEnergy(100, 25600);
 
 		IGMethodBuilder.arcSmelting(this, IGStageDesignation.EXTRACTION)
-				.create("heavy_engineering_extraction", this.getBlock(BlockCategoryFlags.ADVANCED_ENGINEERING_BLOCK).asItem(), 1, new ItemStack(Metals.PLATES.get(EnumMetals.STEEL), 2), new ItemStack(Metals.INGOTS.get(EnumMetals.ELECTRUM)))
+				.create("heavy_engineering_extraction", net.minecraft.item.Item.getItemFromBlock(this.getBlock(BlockCategoryFlags.ADVANCED_ENGINEERING_BLOCK)), 1, new ItemStack(Metals.PLATES.get(EnumMetals.STEEL), 2), new ItemStack(Metals.INGOTS.get(EnumMetals.ELECTRUM)))
 				.setTimeAndEnergy(100, 25600);
 
 		IGMethodBuilder.arcSmelting(this, IGStageDesignation.EXTRACTION)
-				.create("scaffolding_extraction", this.getScaffoldingBlock().getDefault().asItem(), 1, new ItemStack(Metals.PLATES.get(EnumMetals.IRON), 1), ItemStack.EMPTY)
+				.create("scaffolding_extraction", net.minecraft.item.Item.getItemFromBlock(this.getScaffoldingBlock().getDefault()), 1, new ItemStack(Metals.PLATES.get(EnumMetals.IRON), 1), ItemStack.EMPTY)
 				.setTimeAndEnergy(100, 25600);
 		IGMethodBuilder.arcSmelting(this, IGStageDesignation.EXTRACTION)
-				.create("grate_scaffolding_extraction", this.getScaffoldingBlock().getGrate().asItem(), 1, new ItemStack(Metals.PLATES.get(EnumMetals.IRON), 1), ItemStack.EMPTY)
+				.create("grate_scaffolding_extraction", net.minecraft.item.Item.getItemFromBlock(this.getScaffoldingBlock().getGrate()), 1, new ItemStack(Metals.PLATES.get(EnumMetals.IRON), 1), ItemStack.EMPTY)
 				.setTimeAndEnergy(100, 25600);
 		IGMethodBuilder.arcSmelting(this, IGStageDesignation.EXTRACTION)
-				.create("top_scaffolding_extraction", this.getScaffoldingBlock().getWoodenTop().asItem(), 1, new ItemStack(Metals.PLATES.get(EnumMetals.IRON), 1), ItemStack.EMPTY)
-				.setTimeAndEnergy(100, 25600);
-
-		IGMethodBuilder.arcSmelting(this, IGStageDesignation.EXTRACTION)
-				.create("steel_extraction", this.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK).asItem(), 1, new ItemStack(Metals.NUGGETS.get(EnumMetals.IRON), 6), ItemStack.EMPTY)
+				.create("top_scaffolding_extraction", net.minecraft.item.Item.getItemFromBlock(this.getScaffoldingBlock().getWoodenTop()), 1, new ItemStack(Metals.PLATES.get(EnumMetals.IRON), 1), ItemStack.EMPTY)
 				.setTimeAndEnergy(100, 25600);
 
 		IGMethodBuilder.arcSmelting(this, IGStageDesignation.EXTRACTION)
-				.create("storage_extraction", this.getBlock(BlockCategoryFlags.STORAGE_BLOCK).asItem(), 1, new ItemStack(Metals.INGOTS.get(EnumMetals.STEEL), 4), ItemStack.EMPTY)
+				.create("steel_extraction", net.minecraft.item.Item.getItemFromBlock(this.getBlock(BlockCategoryFlags.SHEETMETAL_BLOCK)), 1, new ItemStack(Metals.NUGGETS.get(EnumMetals.IRON), 6), ItemStack.EMPTY)
 				.setTimeAndEnergy(100, 25600);
 
 		IGMethodBuilder.arcSmelting(this, IGStageDesignation.EXTRACTION)
-				.create("panel_extraction", this.getBlock(BlockCategoryFlags.DEFAULT_BLOCK).asItem(), 1, new ItemStack(Metals.PLATES.get(EnumMetals.STEEL), 4), ItemStack.EMPTY)
+				.create("storage_extraction", net.minecraft.item.Item.getItemFromBlock(this.getBlock(BlockCategoryFlags.STORAGE_BLOCK)), 1, new ItemStack(Metals.INGOTS.get(EnumMetals.STEEL), 4), ItemStack.EMPTY)
 				.setTimeAndEnergy(100, 25600);
 
 		IGMethodBuilder.arcSmelting(this, IGStageDesignation.EXTRACTION)
-				.create("stair_extraction", this.getBlock(BlockCategoryFlags.STAIRS).asItem(), 1, new ItemStack(Metals.INGOTS.get(EnumMetals.STEEL), 2), ItemStack.EMPTY)
+				.create("panel_extraction", net.minecraft.item.Item.getItemFromBlock(this.getBlock(BlockCategoryFlags.DEFAULT_BLOCK)), 1, new ItemStack(Metals.PLATES.get(EnumMetals.STEEL), 4), ItemStack.EMPTY)
 				.setTimeAndEnergy(100, 25600);
 
 		IGMethodBuilder.arcSmelting(this, IGStageDesignation.EXTRACTION)
-				.create("sheetmetal_stair_extraction", this.getBlock(BlockCategoryFlags.SHEETMETAL_STAIRS).asItem(), 1, new ItemStack(Metals.NUGGETS.get(EnumMetals.STEEL), 4), ItemStack.EMPTY)
+				.create("stair_extraction", net.minecraft.item.Item.getItemFromBlock(this.getBlock(BlockCategoryFlags.STAIRS)), 1, new ItemStack(Metals.INGOTS.get(EnumMetals.STEEL), 2), ItemStack.EMPTY)
 				.setTimeAndEnergy(100, 25600);
 
 		IGMethodBuilder.arcSmelting(this, IGStageDesignation.EXTRACTION)
-				.create("slab_extraction", this.getBlock(BlockCategoryFlags.SLAB).asItem(), 1, new ItemStack(Metals.INGOTS.get(EnumMetals.STEEL), 1), ItemStack.EMPTY)
+				.create("sheetmetal_stair_extraction", net.minecraft.item.Item.getItemFromBlock(this.getBlock(BlockCategoryFlags.SHEETMETAL_STAIRS)), 1, new ItemStack(Metals.NUGGETS.get(EnumMetals.STEEL), 4), ItemStack.EMPTY)
 				.setTimeAndEnergy(100, 25600);
 
 		IGMethodBuilder.arcSmelting(this, IGStageDesignation.EXTRACTION)
-				.create("sheetmetal_slab_extraction", this.getBlock(BlockCategoryFlags.SHEETMETAL_SLAB).asItem(), 1, new ItemStack(Metals.NUGGETS.get(EnumMetals.STEEL), 3), ItemStack.EMPTY)
+				.create("slab_extraction", net.minecraft.item.Item.getItemFromBlock(this.getBlock(BlockCategoryFlags.SLAB)), 1, new ItemStack(Metals.INGOTS.get(EnumMetals.STEEL), 1), ItemStack.EMPTY)
 				.setTimeAndEnergy(100, 25600);
 
 		IGMethodBuilder.arcSmelting(this, IGStageDesignation.EXTRACTION)
-				.create("fence_extraction", this.getBlock(BlockCategoryFlags.FENCE).asItem(), 1, new ItemStack(Ingredients.STICK_STEEL, 2), new ItemStack(Metals.INGOTS.get(EnumMetals.STEEL), 1))
+				.create("sheetmetal_slab_extraction", net.minecraft.item.Item.getItemFromBlock(this.getBlock(BlockCategoryFlags.SHEETMETAL_SLAB)), 1, new ItemStack(Metals.NUGGETS.get(EnumMetals.STEEL), 3), ItemStack.EMPTY)
+				.setTimeAndEnergy(100, 25600);
+
+		IGMethodBuilder.arcSmelting(this, IGStageDesignation.EXTRACTION)
+				.create("fence_extraction", net.minecraft.item.Item.getItemFromBlock(this.getBlock(BlockCategoryFlags.FENCE)), 1, new ItemStack(Ingredients.STICK_STEEL, 2), new ItemStack(Metals.INGOTS.get(EnumMetals.STEEL), 1))
 				.setTimeAndEnergy(100, 25600);
 	}
 
@@ -138,7 +134,7 @@ public class MaterialRuined extends MaterialMisc
 	}
 
 	@Override
-	public Properties getProperties(IFlagType<?> flag)
+	public IGBlockProperties getProperties(IFlagType<?> flag)
 	{
 		return super.getProperties(flag).sound(SoundType.COPPER);
 	}

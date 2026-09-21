@@ -5,7 +5,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.HashSet;
 import java.util.List;

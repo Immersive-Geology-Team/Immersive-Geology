@@ -1,7 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/block",
-  "textures": {
-    "all": "immersivegeology:block/colored/rocksalt/sediment",
-    "particle": "immersivegeology:block/colored/rocksalt/sediment"
-  }
-}

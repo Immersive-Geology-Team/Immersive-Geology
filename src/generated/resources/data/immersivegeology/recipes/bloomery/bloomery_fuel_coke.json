@@ -1,7 +1,0 @@
-{
-  "type": "immersivegeology:bloomery_fuel",
-  "input": {
-    "item": "immersiveengineering:coal_coke"
-  },
-  "time": 1400
-}

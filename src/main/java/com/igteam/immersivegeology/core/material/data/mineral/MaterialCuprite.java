@@ -13,7 +13,6 @@ import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
-import net.minecraft.tags.BiomeTags;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -33,7 +32,7 @@ public class MaterialCuprite extends MaterialMineral
 		this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 		addFlags(ItemCategoryFlags.PELLET);
 
-		CONFIG = new MineralConfig(30, 50, 1, -64, 200, 3570, 0.7,false, Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.DEFAULT);
+		CONFIG = new MineralConfig(30, 50, 1, -64, 200, 3570, 0.7,false, Optional.empty(), IGGenerationType.DEFAULT);
 	}
 
 	public boolean canTarnish()

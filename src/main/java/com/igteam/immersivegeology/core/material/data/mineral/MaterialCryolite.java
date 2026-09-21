@@ -1,7 +1,8 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.FluidTagInput;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IngredientWithSize;
+
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
@@ -15,10 +16,8 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
-import net.minecraft.tags.BiomeTags;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.material.Fluids;
+import net.minecraft.item.ItemStack;
+import net.minecraft.init.Blocks;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.List;
@@ -38,7 +37,7 @@ public class MaterialCryolite extends MaterialMineral {
         addFlags(ModFlags.TFC, MaterialFlags.EXISTING_IMPLEMENTATION);
 
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
-        CONFIG = new MineralConfig(31,90,1,0,80,2000, 0.8,true,Optional.of(BiomeTags.IS_END), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(31,90,1,0,80,2000, 0.8,true,Optional.empty(), IGGenerationType.DEFAULT);
     }
 
     @Override

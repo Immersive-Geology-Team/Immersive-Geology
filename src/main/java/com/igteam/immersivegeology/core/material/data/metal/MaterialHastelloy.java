@@ -8,7 +8,8 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IngredientWithSize;
+
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetalAlloy;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;

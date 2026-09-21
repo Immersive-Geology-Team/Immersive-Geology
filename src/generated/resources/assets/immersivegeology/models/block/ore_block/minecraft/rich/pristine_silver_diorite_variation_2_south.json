@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_backdrop/ore_block_south",
-  "textures": {
-    "base": "minecraft:block/diorite",
-    "ore_south": "immersivegeology:palette/block/ore_bearing/native_metal/rich_2_pristine_silver",
-    "stone_backdrop_south": "immersivegeology:palette/block/stone_backdrop/native_metal/rich_2_base_minecraft_diorite"
-  }
-}

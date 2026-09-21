@@ -1,336 +1,169 @@
-/*
- * Muddykat
- * Copyright (c) 2024
- *
- * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
- * Details can be found in the license file in the root folder of this project
- */
-
 package com.igteam.immersivegeology.core.material.helper.material;
 
-import blusunrize.immersiveengineering.ImmersiveEngineering;
-import blusunrize.immersiveengineering.api.EnumMetals;
-import blusunrize.immersiveengineering.api.IETags;
-import blusunrize.immersiveengineering.common.register.IEBlocks;
-import blusunrize.immersiveengineering.common.register.IEBlocks.MetalDecoration;
-import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
-import blusunrize.immersiveengineering.common.register.IEItems.Metals;
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
-
-import com.igteam.immersivegeology.common.block.helper.IOreBlock;
+import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
+import com.igteam.immersivegeology.common.block.helper.OreBlockMeta;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
-import com.igteam.immersivegeology.common.item.IGGenericDrillHead.DrillHeadProps;
-import com.igteam.immersivegeology.common.tag.IGTags;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
-import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
-import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
-import com.igteam.immersivegeology.core.material.helper.ScaffoldingHelper;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
-import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGStageProvider;
-import com.igteam.immersivegeology.core.registration.IGOreBlockIndex;
-import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
+import com.igteam.immersivegeology.core.registration.IGContent;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
-import static com.igteam.immersivegeology.core.registration.IGRegistrationHolder.*;
+public interface MaterialHelper
+{
+	String getName();
 
-public interface MaterialHelper {
+	boolean hasFlag(IFlagType<?> category);
 
-    default ItemStack getStack(IFlagType<?> unknownFlag, int amount) {
-        if(unknownFlag instanceof ItemCategoryFlags flag)return new ItemStack(getItem(flag), amount);
-        if(unknownFlag instanceof BlockCategoryFlags flag)return new ItemStack(getItem(flag), amount);
-        IGLib.IG_LOGGER.error("{} is not an Item or Block Flag", unknownFlag.getName());
-        return ItemStack.EMPTY;
-    }
+	Set<IFlagType<?>> getFlags();
 
-    default boolean canTarnish()
-    {
-        return false;
-    }
+	int getColor(IFlagType<?> flag, int secondaryColors);
 
-    default Item getItem(ItemCategoryFlags flag){
-        if(flag == null) {
-            flag = ItemCategoryFlags.INGOT;
-            IGLib.getNewLogger().error("Attempted to grab an item from registry with a null flag, replacing with INGOT to prevent crash");
-        }
+	boolean acceptableStoneType(MaterialStone instance);
 
-        try
-        {
-            if(Arrays.stream(EnumMetals.values()).anyMatch(e -> e.name().equalsIgnoreCase(getName())))
-            {
-                switch(flag)
-                {
-                    case INGOT ->
-                    {
-                        return Metals.INGOTS.get(EnumMetals.valueOf(getName().toUpperCase(Locale.ROOT))).get().asItem();
-                    }
-                    case GRIT ->
-                    {
-                        return Metals.DUSTS.get(EnumMetals.valueOf(getName().toUpperCase(Locale.ROOT))).get().asItem();
-                    }
-                    case PLATE ->
-                    {
-                        return Metals.PLATES.get(EnumMetals.valueOf(getName().toUpperCase(Locale.ROOT))).get().asItem();
-                    }
-                    case NUGGET ->
-                    {
-                        return Metals.NUGGETS.get(EnumMetals.valueOf(getName().toUpperCase(Locale.ROOT))).get().asItem();
-                    }
-                    case WIRE ->
-                    {
-                        if(this.equals(MetalEnum.Aluminum.instance())) return Ingredients.WIRE_ALUMINUM.get();
-                        if(this.equals(MetalEnum.Copper.instance())) return Ingredients.WIRE_COPPER.get();
-                        if(this.equals(MetalEnum.Lead.instance())) return Ingredients.WIRE_LEAD.get();
-                        if(this.equals(MetalEnum.Steel.instance())) return Ingredients.WIRE_STEEL.get();
-                    }
-                    case POWDER ->
-                    {
-                        if(this.equals(MineralEnum.Saltpeter.instance())) return Ingredients.DUST_SALTPETER.get();
-                    }
-                }
-            }
-        } catch(Exception e) {
-            IGLib.IG_LOGGER.info("Unable to find an IE variant for {}", flag.getName());
-            IGLib.IG_LOGGER.error("Exception: {}", e.getMessage());
-        };
+	boolean checkExistingImplementation(IFlagType<?> flag);
 
-        if(getItemRegistryMap().containsKey(flag.getRegistryKey(this)))
-        {
-            return IGRegistrationHolder.getItem.apply(flag.getRegistryKey(this));
-        }
+	boolean checkExistingImplementation(ModFlags mod, IFlagType<?> flag);
 
-        IGLib.IG_LOGGER.error("Attempting to get a missing Item? {}", flag.getRegistryKey(this));
-        return Items.COOKIE;
-    }
+	void addExistingFlag(ModFlags mod, ItemCategoryFlags... flags);
 
-    default Fluid getFluid(BlockCategoryFlags flag)
-    {
-        if(flag == null)
-        {
-            flag = BlockCategoryFlags.FLUID;
-            IGLib.IG_LOGGER.warn("Null Flag Pass for fluid getter, defaulting to FLUID");
-        }
+	void addExistingFlag(ModFlags mod, BlockCategoryFlags... flags);
 
-        String id = flag.getRegistryKey(this);
-        if(getFluidRegistryMap().containsKey(id)){
-            return IGRegistrationHolder.getFluid.apply(id);
-        }
-        IGLib.IG_LOGGER.warn("Unable to find Fluid for material {}", id);
-        return Fluids.EMPTY;
-    }
-
-    default Fluid getFluid(BlockCategoryFlags flag, MaterialInterface<?> secondary)
-    {
-        return getFluid(flag, secondary.instance());
-    }
-
-    default Fluid getFluid(BlockCategoryFlags flag, MaterialHelper secondary)
-    {
-        if(flag == null)
-        {
-            flag = BlockCategoryFlags.SLURRY;
-            IGLib.IG_LOGGER.warn("Null Flag Pass for slurry fluid getter, defaulting to SLURRY");
-        }
-
-        String id = flag.getRegistryKey(this, secondary);
-        if(getFluidRegistryMap().containsKey(id)){
-            return IGRegistrationHolder.getFluid.apply(id);
-        }
-        IGLib.IG_LOGGER.warn("Unable to find Fluid/Slurry for material {}, {}", this, secondary);
-        return Fluids.EMPTY;
-    }
-
-    TagKey<Fluid> getFluidTag(BlockCategoryFlags type, MaterialHelper... helper);
-
-    default TagKey<Fluid> getSlurryTagWith(BlockCategoryFlags type, MaterialHelper... helper)
-    {
-        return getFluidTag(type, helper);
-    }
-
-    default Item getItem(BlockCategoryFlags flag){
-        return this.getBlock(flag).asItem();
-    }
-
-    boolean hasFlag(IFlagType<?> category);
-    void addExistingFlag(ModFlags m, ItemCategoryFlags... f);
-    void addExistingFlag(ModFlags m, BlockCategoryFlags... f);
-
-    boolean checkExistingImplementation(IFlagType<?> h);
-    boolean checkExistingImplementation(ModFlags m, IFlagType<?> h);
-    boolean weakCheckExistingImplementation(IFlagType<?> h);
-    String getName();
-
-    default LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
-    {
-        return new LinkedHashSet<>();
-    };
-
-    void addStage(IGRecipeStage stage);
-    Set<IGRecipeStage> getMaterialStageSet();
-
-    default Set<IGRecipeStage> getStageSet()
-    {
-        return IGStageProvider.get(this);
-    }
-
-    void setupRecipeStages();
-
-    default void buildRecipe()
-    {
-        setupRecipeStages();
-        IGStageProvider.add(this, getMaterialStageSet());
-    }
-
-    Set<String> logged_recipes = new HashSet<>();
-	static void logRecipeStages()
+	default boolean acceptableStoneType(IStoneType stone)
 	{
-        IGLib.IG_LOGGER.info("{} Recipe Stages have been registered", logged_recipes.size());
+		return acceptableStoneType(stone.instance());
 	}
 
-	default TagKey<Item> getItemTag(IFlagType<?> unknownFlag)
-    {
-        try
-        {
-            if(!(unknownFlag instanceof ItemCategoryFlags))
-                throw (new IllegalArgumentException("Non Item Category Flag Parsed to getItemTag"));
-            ItemCategoryFlags flag = (ItemCategoryFlags)unknownFlag;
+	default boolean canTarnish()
+	{
+		return false;
+	}
 
-            try
-            {
-                EnumMetals IEMetal = EnumMetals.valueOf(getName().toUpperCase(Locale.ROOT));
-                IETags.MetalTags ieMetalTags = IETags.getTagsFor(IEMetal);
-                switch(flag.getValue())
-                {
-                    case INGOT ->
-                    {
-                        return ieMetalTags.ingot;
-                    }
-                    case POWDER ->
-                    {
-                        return ieMetalTags.dust;
-                    }
-                    case NUGGET ->
-                    {
-                        return ieMetalTags.nugget;
-                    }
-                    case PLATE ->
-                    {
-                        return ieMetalTags.plate;
-                    }
-                }
-            } catch(Exception ignored){}
+	default IGVeinTextureType getVeinTextureType()
+	{
+		return IGVeinTextureType.METALLIC;
+	}
 
-            HashMap<String, TagKey<Item>> data_map = IGTags.ITEM_TAG_HOLDER.get(flag);
-            LinkedHashSet<MaterialHelper> material_set = new LinkedHashSet<>(Collections.singletonList(this));
-            String key = IGTags.getWrapFromSet(material_set);
-            return data_map.get(key);
-        } catch(Exception e)
-        {
-            IGLib.IG_LOGGER.error(e.getLocalizedMessage());
-        }
-        IGLib.IG_LOGGER.warn("Null Tag Returned for {} {}", getName(), unknownFlag);
-        return null;
-    }
+	default boolean hasStoneBackdrop()
+	{
+		return getVeinTextureType().hasStoneBackdrop();
+	}
 
-	default Block getBlock(BlockCategoryFlags flag){
-        // Check for edge cases, like in the menu where this can be used to get an Ore Block
-        try
-        {
-            EnumMetals IEMetal = EnumMetals.valueOf(getName().toUpperCase(Locale.ROOT));
-            switch(flag.getValue())
-            {
-                case STORAGE_BLOCK ->
-                {
-                    return IEBlocks.Metals.STORAGE.get(IEMetal).get();
-                }
-                case SCAFFOLDING ->
-                {
-                    return IEBlocks.Metals.SHEETMETAL.get(IEMetal).get();
-                }
-                case SHEETMETAL_BLOCK ->
-                {
-                    if(checkExistingImplementation(flag)) return IEBlocks.Metals.SHEETMETAL.get(IEMetal).get();
-                }
-			}
-        } catch(Exception ignored){}
+	default LinkedHashSet<MaterialInterface<?>> getDerivedMaterials()
+	{
+		return new LinkedHashSet<MaterialInterface<?>>();
+	}
 
-        if(flag.equals(BlockCategoryFlags.ORE_BLOCK)){
-            return IGRegistrationHolder.getBlock.apply(flag.getRegistryKey(this, StoneEnum.Shale, OreRichness.RICH));
-        }
+	default Set<MaterialHelper> getOriginMaterials()
+	{
+		return Collections.emptySet();
+	}
 
-        if(getBlockRegistryMap().containsKey(flag.getRegistryKey(this))) {
-            return IGRegistrationHolder.getBlock.apply(flag.getRegistryKey(this));
-        }
+	default Item getItem(ItemCategoryFlags flag)
+	{
+		if(flag==null)
+		{
+			IGLib.IG_LOGGER.error("Null flag passed to getItem for {}, defaulting to INGOT", getName());
+			flag = ItemCategoryFlags.INGOT;
+		}
 
-        IGLib.IG_LOGGER.error("Attempting to get a missing block? {}", flag.getRegistryKey(this));
-        return Blocks.AIR;
-    }
+		Item own = IGContent.getItem(flag.getRegistryKey(this));
+		if(own!=null) return own;
 
-    default IOreBlock getOreBlock(IStoneType stone, OreRichness richness)
-    {
-        // Resolved through the index rather than by rebuilding the registry key: world generation calls this once
-        // per candidate block, and the key alone costs about six string allocations. Null still means the
-        // combination was never registered.
-        return IGOreBlockIndex.get(this, stone, richness);
-    }
+		ItemStack borrowed = lookupOreDictionary(flag);
+		if(!borrowed.isEmpty()) return borrowed.getItem();
 
-    default IOreBlock getOreBlock(MaterialHelper stone, OreRichness richness)
-    {
-        try
-        {
-            return (IOreBlock)IGRegistrationHolder.getBlock.apply(BlockCategoryFlags.ORE_BLOCK.getRegistryKey(this, stone, richness));
-        } catch(Exception exception)
-        {
-            IGLib.IG_LOGGER.error("Unable to get Ore Block: {}", exception.getMessage());
-            return null;
-        }
-    }
+		IGLib.IG_LOGGER.error("Attempting to get a missing item: {}", flag.getRegistryKey(this));
+		return null;
+	}
 
-    default IGVeinTextureType getVeinTextureType() {return IGVeinTextureType.METALLIC;}
+	default Block getBlock(BlockCategoryFlags flag)
+	{
+		Block own = IGContent.getBlock(flag.getRegistryKey(this));
+		if(own!=null) return own;
 
-    default boolean hasStoneBackdrop() {return getVeinTextureType().hasStoneBackdrop();}
-    MaterialInterface<?> getPrimaryProduct();
-    MaterialInterface<?> getSecondaryProduct();
-    MaterialInterface<?> getTraceProduct(int index);
+		ItemStack borrowed = lookupOreDictionary(flag);
+		if(!borrowed.isEmpty()&&borrowed.getItem() instanceof net.minecraft.item.ItemBlock)
+			return ((net.minecraft.item.ItemBlock)borrowed.getItem()).getBlock();
 
-    default boolean useColumnBlockStyle(IFlagType<?> flag) { return false;};
+		IGLib.IG_LOGGER.error("Attempting to get a missing block: {}", flag.getRegistryKey(this));
+		return Blocks.AIR;
+	}
 
-    default ScaffoldingHelper getScaffoldingBlock() {
-        return new ScaffoldingHelper(this);
-    }
+	default ItemStack getStack(IFlagType<?> flag, int amount)
+	{
+		if(flag instanceof ItemCategoryFlags)
+		{
+			Item item = getItem((ItemCategoryFlags)flag);
+			return item==null?ItemStack.EMPTY: new ItemStack(item, amount);
+		}
+		if(flag instanceof BlockCategoryFlags)
+		{
+			Block block = getBlock((BlockCategoryFlags)flag);
+			return block==Blocks.AIR?ItemStack.EMPTY: new ItemStack(block, amount);
+		}
+		IGLib.IG_LOGGER.error("{} is not an item or block flag", flag.getName());
+		return ItemStack.EMPTY;
+	}
 
-    boolean acceptableStoneType(MaterialStone instance);
-    default boolean acceptableStoneType(IStoneType stone)
-    {
-        return acceptableStoneType(stone.instance());
-    };
+	default ItemStack lookupOreDictionary(IFlagType<?> flag)
+	{
+		String name = flag.getOreDictName(this);
+		if(name.isEmpty()||!OreDictionary.doesOreNameExist(name)) return ItemStack.EMPTY;
+		List<ItemStack> ores = OreDictionary.getOres(name, false);
+		return ores.isEmpty()?ItemStack.EMPTY: ores.get(0).copy();
+	}
 
-	default Set<MaterialHelper> getOriginMaterials() {
-        return Set.of();
-    };
+	default Block getOreBlock(IStoneType stone)
+	{
+		return IGContent.getBlock(BlockCategoryFlags.ORE_BLOCK.getRegistryKey(this, stone.instance()));
+	}
 
-	default DrillHeadProps drillHeadInstance() {return new DrillHeadProps(getName(), IETags.getTagsFor(EnumMetals.STEEL).ingot, 3, 1, Tiers.DIAMOND, 10.0F, 7, 10000, () -> ImmersiveEngineering.rl("item/drill_diesel"));};
+	default ItemStack getOreStack(IStoneType stone, OreRichness richness, MineralWeathering weathering, int amount)
+	{
+		Block block = getOreBlock(stone);
+		if(block==null) return ItemStack.EMPTY;
+		return new ItemStack(block, amount, OreBlockMeta.pack(richness, weathering));
+	}
 
-	default int getToolDamage() {return 3;};
+	default IGTag getItemTag(IFlagType<?> flag)
+	{
+		return new IGTag(flag==null?"": flag.getOreDictName(this));
+	}
 
-    default int getToolSpeed()  {return 3;};
+	default IGTag getFluidTag(BlockCategoryFlags type, MaterialHelper... helper)
+	{
+		StringBuilder name = new StringBuilder(type==null?"fluid": type.getName());
+		name.append(getName());
+		for(MaterialHelper extra : helper)
+			if(extra!=null) name.append(extra.getName());
+		return new IGTag(name.toString());
+	}
 
-    default Tier getToolTier() {return Tiers.IRON;};
+	default IGTag getSlurryTagWith(BlockCategoryFlags type, MaterialHelper... helper)
+	{
+		return getFluidTag(type, helper);
+	}
 
-	default boolean hasCustomTexture(BlockCategoryFlags blockCategoryFlags)
-    {
-        return false;
-    };
+	Set<IGRecipeStage> logged_recipes = new java.util.HashSet<>();
+
+	MaterialInterface<?> getPrimaryProduct();
+
+	MaterialInterface<?> getSecondaryProduct();
+
+	MaterialInterface<?> getTraceProduct(int index);
 }

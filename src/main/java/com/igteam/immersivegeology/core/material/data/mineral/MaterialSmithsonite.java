@@ -1,6 +1,5 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
-import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -14,8 +13,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
-import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.Tags.Biomes;
+import net.minecraft.item.ItemStack;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -33,7 +31,7 @@ public class MaterialSmithsonite extends MaterialMineral {
         addFlags(ItemCategoryFlags.PELLET);
         addFlags(ItemCategoryFlags.POWDERED_SLAG);
 
-		CONFIG = new MineralConfig(33,50,2,30,70,550,0.5,false,Optional.of(Biomes.IS_WET), IGGenerationType.DEFAULT);
+		CONFIG = new MineralConfig(33,50,2,30,70,550,0.5,false,Optional.empty(), IGGenerationType.DEFAULT);
 	}
 
     @Override

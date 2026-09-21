@@ -1,83 +1,77 @@
-/*
- * Muddykat
- * Copyright (c) 2024
- *
- * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
- * Details can be found in the license file in the root folder of this project
- */
-
 package com.igteam.immersivegeology.common.block;
 
-import com.igteam.immersivegeology.client.menu.ItemSubGroup;
-import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockRenderLayer;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+public class IGGenericBlock extends Block
+{
+	protected final BlockCategoryFlags category;
+	protected final MaterialInterface<?> material;
 
-public class IGGenericBlock extends Block implements IGBlockType {
-    protected final Map<MaterialTexture, MaterialInterface<?>> materialMap = new HashMap<>();
-    protected final BlockCategoryFlags category;
+	public IGGenericBlock(BlockCategoryFlags category, MaterialInterface<?> material)
+	{
+		super(materialFor(category));
+		this.category = category;
+		this.material = material;
 
-    public IGGenericBlock(BlockCategoryFlags flag, MaterialInterface<?> material) {
-        this(flag, material, material.instance().getProperties(flag));
-    }
+		setHardness(hardnessFor(category));
+		setResistance(resistanceFor(category));
+	}
 
-    public IGGenericBlock(BlockCategoryFlags flag, MaterialInterface<?> material, Properties props) {
-        super(props);
-        this.materialMap.put(MaterialTexture.base, material);
-        this.category = flag;
-    }
+	private static Material materialFor(BlockCategoryFlags category)
+	{
+		return switch(category)
+		{
+			case STORAGE_BLOCK, SHEETMETAL_BLOCK, SHEETMETAL_SLAB, SHEETMETAL_STAIRS,
+				 ENGINEERING_BLOCK, ADVANCED_ENGINEERING_BLOCK, SCAFFOLDING -> Material.IRON;
+			case DUST_BLOCK -> Material.SAND;
+			default -> Material.ROCK;
+		};
+	}
 
-    public IFlagType<?> getFlag() {
-        return category;
-    }
+	private static float hardnessFor(BlockCategoryFlags category)
+	{
+		return switch(category)
+		{
+			case DUST_BLOCK -> 0.5F;
+			case SCAFFOLDING -> 2.0F;
+			case STORAGE_BLOCK, ENGINEERING_BLOCK, ADVANCED_ENGINEERING_BLOCK -> 5.0F;
+			default -> 3.0F;
+		};
+	}
 
-    public ItemSubGroup getGroup() {
-        return category.getSubGroup();
-    }
+	private static float resistanceFor(BlockCategoryFlags category)
+	{
+		return switch(category)
+		{
+			case DUST_BLOCK -> 2.5F;
+			case STORAGE_BLOCK, ENGINEERING_BLOCK, ADVANCED_ENGINEERING_BLOCK -> 10.0F;
+			default -> 5.0F;
+		};
+	}
 
-    @Override
-    public int getColor(int index, BlockState state) {
-        // By default, we don't need any additional information; the secondaryColors are used for mineral oxidation
-        // or other state based color changes
-        if(materialMap == null || materialMap.isEmpty()) return 0xffffffff;
-        MaterialTexture texture = MaterialTexture.base;
-        if(MaterialTexture.values()[index > 0 ? 1 : 0] != null)
-        {
-            texture = MaterialTexture.values()[index > 0 ? 1 : 0];
-        }
-        if(materialMap.get(texture) == null) return 0xffffffff;
-        return materialMap.get(texture).getColor(category, 0);
-    }
+	public BlockCategoryFlags getCategory()
+	{
+		return category;
+	}
 
-    public @NotNull Collection<MaterialInterface<?>> getMaterials() {
-        return materialMap.values();
-    }
+	public MaterialInterface<?> getMaterial()
+	{
+		return material;
+	}
 
-    @Override
-    public MaterialInterface<?> getMaterial(MaterialTexture t) {
-        return materialMap.get(t);
-    }
-    @Override
-    public Block getIGBlock() {
-        return this;
-    }
+	public int getColor(int tintIndex, IBlockState state)
+	{
+		return material.getColor(category, tintIndex);
+	}
 
-    @Override
-    public Map<MaterialTexture, MaterialInterface<?>> getMaterialMap() {
-        return materialMap;
-    }
+	@Override
+	public BlockRenderLayer getRenderLayer()
+	{
+		return category.getRenderLayer();
+	}
 }

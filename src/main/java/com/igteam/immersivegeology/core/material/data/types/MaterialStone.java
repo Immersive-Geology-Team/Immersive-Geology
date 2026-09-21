@@ -1,5 +1,7 @@
 package com.igteam.immersivegeology.core.material.data.types;
 
+import com.igteam.immersivegeology.core.material.helper.material.IGBlockProperties;
+
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
@@ -8,11 +10,8 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration.TargetBlockState;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.init.Blocks;
 
 import java.util.List;
 import java.util.Locale;
@@ -25,7 +24,7 @@ public class MaterialStone extends GeologyMaterial {
     /**
      * The dimensions this stone makes can spawn in. Overworld unless a subclass says otherwise.
      */
-    protected Set<ResourceLocation> DIMENSIONS = Set.of(Level.OVERWORLD.location());
+    protected Set<ResourceLocation> DIMENSIONS = Set.of(World.OVERWORLD.location());
 
     public MaterialStone() {
         super();
@@ -56,7 +55,7 @@ public class MaterialStone extends GeologyMaterial {
 
     }
 
-    public BlockBehaviour.Properties getProperties(IFlagType<?> flag)
+    public IGBlockProperties getProperties(IFlagType<?> flag)
     {
         return IGLib.STONE_DECO_PROPS;
     }

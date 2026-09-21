@@ -1,9 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/slab/slab",
-  "textures": {
-    "all": "immersivegeology:palette/block/storage_block/type_1_pristine_tungsten_carbide",
-    "cover": "immersivegeology:palette/block/storage_block/type_1_pristine_tungsten_carbide",
-    "particle": "immersivegeology:palette/block/storage_block/type_1_pristine_tungsten_carbide",
-    "side": "immersivegeology:palette/block/storage_block/type_1_pristine_tungsten_carbide"
-  }
-}

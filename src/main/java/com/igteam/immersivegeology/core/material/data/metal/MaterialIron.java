@@ -17,7 +17,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.Optional;
 import java.util.Set;
@@ -35,7 +34,7 @@ public class MaterialIron extends MaterialNativeMetal {
         addExistingFlag(ModFlags.MINECRAFT, ItemCategoryFlags.INGOT, ItemCategoryFlags.NUGGET);
         addExistingFlag(ModFlags.MINECRAFT, BlockCategoryFlags.STORAGE_BLOCK);
         acceptableStoneTypes.clear();
-        this.CONFIG = new MaterialMineral.MineralConfig(0, 550,0,0,60,0,0.1, true, Optional.of(Biomes.IS_COLD), IGGenerationType.DEFAULT);
+        this.CONFIG = new MaterialMineral.MineralConfig(0, 550,0,0,60,0,0.1, true, Optional.empty(), IGGenerationType.DEFAULT);
     }
 
     @Override

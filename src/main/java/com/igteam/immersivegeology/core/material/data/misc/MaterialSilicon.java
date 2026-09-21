@@ -8,9 +8,11 @@
 
 package com.igteam.immersivegeology.core.material.data.misc;
 
-import blusunrize.immersiveengineering.api.IETags;
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.IETags;
+
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.FluidTagInput;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IngredientWithSize;
+
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -22,9 +24,8 @@ import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.Tags.Items;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.item.ItemStack;
 
 
 

@@ -13,7 +13,7 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialMisc;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ResourceLocation;
 
 public class MaterialGraphite extends MaterialMisc
 {

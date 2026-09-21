@@ -1,7 +1,11 @@
 package com.igteam.immersivegeology.core.material.data.stone.vanilla;
 
-import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler.IMultiblock;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
+import net.minecraft.block.state.IBlockState;
+
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.IEMultiblocks;
+
+import com.igteam.immersivegeology.core.material.helper.material.IGBlockProperties;
+
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.block.multiblocks.IGBloomeryMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.IGReverberationFurnaceMultiblock;
@@ -12,14 +16,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration.TargetBlockState;
-import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
-import net.minecraftforge.common.Tags;
+import net.minecraft.init.Blocks;
 
 import java.util.List;
 import java.util.function.BiFunction;
@@ -46,9 +43,9 @@ public class MaterialVanilla extends MaterialStone {
     @Override
     public List<TargetBlockState> getTargets(MineralEnum mineral)
     {
-        BlockState poor = mineral.getOreBlock(this, OreRichness.POOR).getIGDefaultBlockState();
-        BlockState normal = mineral.getOreBlock(this, OreRichness.NORMAL).getIGDefaultBlockState();
-        BlockState rich = mineral.getOreBlock(this, OreRichness.RICH).getIGDefaultBlockState();
+        IBlockState poor = mineral.getOreBlock(this, OreRichness.POOR).getIGDefaultBlockState();
+        IBlockState normal = mineral.getOreBlock(this, OreRichness.NORMAL).getIGDefaultBlockState();
+        IBlockState rich = mineral.getOreBlock(this, OreRichness.RICH).getIGDefaultBlockState();
         return List.of(OreConfiguration.target(new TagMatchTest(Tags.Blocks.STONE), normal));
     }
 
@@ -59,8 +56,8 @@ public class MaterialVanilla extends MaterialStone {
     }
 
     @Override
-    public Properties getProperties(IFlagType<?> flag)
+    public IGBlockProperties getProperties(IFlagType<?> flag)
     {
-        return BlockBehaviour.Properties.copy(Blocks.STONE);
+        return IGBlockProperties.copy(Blocks.STONE);
     }
 }

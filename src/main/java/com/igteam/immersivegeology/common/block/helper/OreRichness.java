@@ -1,17 +1,12 @@
-/*
- * Muddykat
- * Copyright (c) 2024
- *
- * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
- * Details can be found in the license file in the root folder of this project
- */
-
 package com.igteam.immersivegeology.common.block.helper;
 
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+
+import net.minecraft.util.IStringSerializable;
+
 import java.util.Locale;
 
-public enum OreRichness
+public enum OreRichness implements IStringSerializable
 {
 	POOR,
 	NORMAL,
@@ -19,11 +14,25 @@ public enum OreRichness
 
 	public ItemCategoryFlags toCategory()
 	{
-		return this == POOR ? ItemCategoryFlags.POOR_ORE : (this == NORMAL ? ItemCategoryFlags.NORMAL_ORE : ItemCategoryFlags.RICH_ORE);
+		switch(this)
+		{
+			case POOR:
+				return ItemCategoryFlags.POOR_ORE;
+			case RICH:
+				return ItemCategoryFlags.RICH_ORE;
+			default:
+				return ItemCategoryFlags.NORMAL_ORE;
+		}
 	}
 
 	public String getSanitizedName()
 	{
 		return name().toLowerCase(Locale.ROOT);
+	}
+
+	@Override
+	public String getName()
+	{
+		return getSanitizedName();
 	}
 }

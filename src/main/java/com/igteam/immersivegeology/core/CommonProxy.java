@@ -1,65 +1,25 @@
-/*
- * Muddykat
- * Copyright (c) 2025
- *
- * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
- * Details can be found in the license file in the root folder of this project
- */
-
 package com.igteam.immersivegeology.core;
 
-import com.igteam.immersivegeology.common.block.entity.cable.IGIMCHandler;
-import com.igteam.immersivegeology.common.fluid.IGFluid;
-import com.igteam.immersivegeology.common.tag.IGTags;
-import com.igteam.immersivegeology.common.world.IGWorldGen;
-import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.registration.IGContent;
-import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
-import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
-import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.fml.InterModComms;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 
 public class CommonProxy
 {
-
-	public void modConstruction()
+	public void preInit(FMLPreInitializationEvent event)
 	{
-		IGMultiblockProvider.forceClassLoad();
-		IGRegistrationHolder.initialize();
-		IGRegistrationHolder.initializeLootModifications();
-		IGTags.initialize();
-		IGWorldGen.init();
-		IGRecipeTypes.init();
-		IGContent.initializeIETweaks();
-		IGIMCHandler.init();
-		IGIMCHandler.handleIMCMessages(InterModComms.getMessages(IGLib.MODID));
 	}
 
-	public void registerFluidBehaviour(FMLCommonSetupEvent event)
+	public void init(FMLInitializationEvent event)
 	{
-		event.enqueueWork(() -> {
-			for(Fluid value : IGRegistrationHolder.supplyDeferredFluids().get())
-			{
-				IGFluid fluid = (IGFluid)value;
-				DispenserBlock.registerBehavior(fluid.getBucket(), IGFluid.BUCKET_DISPENSE_BEHAVIOR);
-			}
-		});
 	}
 
-	public void reinitializeGUI(){}
-
-	public Level getClientWorld()
+	public void postInit(FMLPostInitializationEvent event)
 	{
-		return null;
 	}
 
-	public Player getClientPlayer()
+	public void loadComplete(FMLLoadCompleteEvent event)
 	{
-		return null;
 	}
 }

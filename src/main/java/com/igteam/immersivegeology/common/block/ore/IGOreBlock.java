@@ -1,146 +1,128 @@
-/*
- * Muddykat
- * Copyright (c) 2025
- *
- * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
- * Details can be found in the license file in the root folder of this project
- */
-
 package com.igteam.immersivegeology.common.block.ore;
 
-import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
-import com.igteam.immersivegeology.common.block.IGGenericBlock;
-import com.igteam.immersivegeology.common.block.helper.IOreBlock;
+import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
+import com.igteam.immersivegeology.common.block.helper.OreBlockMeta;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
-import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
-import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
-import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
-import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
+import com.igteam.immersivegeology.core.material.helper.material.IStoneType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
-import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
-import com.mojang.datafixers.util.Pair;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.client.extensions.common.IClientBlockExtensions;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.block.Block;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.function.Consumer;
+import java.util.Random;
 
-public class IGOreBlock extends IGGenericBlock implements IOreBlock
+public class IGOreBlock extends Block
 {
-    protected final OreRichness richness;
+	public static final PropertyEnum<OreRichness> RICHNESS = PropertyEnum.create("richness", OreRichness.class);
+	public static final PropertyEnum<MineralWeathering> WEATHERING = PropertyEnum.create("weathering", MineralWeathering.class);
 
-    public IGOreBlock(BlockCategoryFlags flag, MaterialInterface<?> baseMaterial, MaterialInterface<?> oreMaterial, OreRichness richness) {
-        super(flag, baseMaterial);
-        this.materialMap.put(MaterialTexture.overlay, oreMaterial);
-        this.richness = richness;
-    }
+	private static final float WEATHER_CHANCE = 0.2F;
 
-    @Override
-    public int getColor(int index, BlockState state) {
-        if(index > 0)
-        {
-            return materialMap.get(MaterialTexture.values()[1]).getColor(category, 0);
-        } else {
-            return materialMap.get(MaterialTexture.values()[0]).getColor(category, 0);
-        }
-    }
+	private final MaterialInterface<?> oreMaterial;
+	private final IStoneType stoneType;
+	private final boolean weathers;
 
-    @Override
-    public void initializeClient(Consumer<IClientBlockExtensions> consumer)
-    {
+	public IGOreBlock(MaterialInterface<?> oreMaterial, IStoneType stoneType)
+	{
+		super(stoneType.instance().getHostState().getMaterial());
+		this.oreMaterial = oreMaterial;
+		this.stoneType = stoneType;
+		this.weathers = oreMaterial.canTarnish();
 
-        super.initializeClient(consumer);
-    }
+		setHardness(3.0F);
+		setResistance(5.0F);
+		setDefaultState(blockState.getBaseState()
+				.withProperty(RICHNESS, OreRichness.NORMAL)
+				.withProperty(WEATHERING, MineralWeathering.PRISTINE));
+		setTickRandomly(weathers);
+	}
 
-    @Override
-    public boolean isRandomlyTicking(BlockState state)
-    {
-        return false;
-    }
+	public MaterialInterface<?> getOreMaterial()
+	{
+		return oreMaterial;
+	}
 
-    @Override
-    public BlockState getIGDefaultBlockState()
-    {
-        return defaultBlockState();
-    }
+	public IStoneType getStoneType()
+	{
+		return stoneType;
+	}
 
-    @Override
-    public String getIGDescriptionId()
-    {
-        return getDescriptionId();
-    }
+	public boolean weathers()
+	{
+		return weathers;
+	}
 
-    @Override
-    public Item asIGItem()
-    {
-        return asItem();
-    }
+	@Override
+	protected BlockStateContainer createBlockState()
+	{
+		return new BlockStateContainer(this, new IProperty[]{RICHNESS, WEATHERING});
+	}
 
-    @Override
-    public @NotNull Block asIGBlock()
-    {
-        return asBlock();
-    }
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		return getDefaultState()
+				.withProperty(RICHNESS, OreBlockMeta.richness(meta))
+				.withProperty(WEATHERING, OreBlockMeta.weathering(meta));
+	}
 
-    public OreRichness getOreRichness()
-    {
-        return richness;
-    }
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		return OreBlockMeta.pack(state.getValue(RICHNESS), state.getValue(WEATHERING));
+	}
 
-    public StoneFormation getStoneFormation()
-    {
-        if(materialMap.get(MaterialTexture.base).instance() instanceof MaterialStone stone){
-            return stone.getStoneFormation();
-        }
-        return null;
-    }
+	@Override
+	public int damageDropped(IBlockState state)
+	{
+		return getMetaFromState(state);
+	}
 
-    @Override
-    public ModFlags getModFlag()
-    {
-        ModFlags flag = ModFlags.MINECRAFT;
-        if(materialMap.get(MaterialTexture.base).instance() instanceof MaterialStone stone){
-            Set<IFlagType<?>> flags = stone.getFlags();
-            for(IFlagType<?> unknown_flag : flags)
-            {
-                if(unknown_flag.getValue() instanceof ModFlags modFlag)
-                {
-                    if(Arrays.asList(ModFlags.values()).contains(modFlag))
-                    {
-                        flag = modFlag;
-                    }
-                }
-            }
-        }
+	@Override
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items)
+	{
+		for(OreRichness richness : OreRichness.values())
+		{
+			items.add(new ItemStack(this, 1, OreBlockMeta.pack(richness, MineralWeathering.PRISTINE)));
+			if(weathers)
+				for(MineralWeathering weathering : MineralWeathering.values())
+					if(weathering!=MineralWeathering.PRISTINE)
+						items.add(new ItemStack(this, 1, OreBlockMeta.pack(richness, weathering)));
+		}
+	}
 
-        return flag;
-    }
+	@Override
+	public BlockRenderLayer getRenderLayer()
+	{
+		return BlockRenderLayer.CUTOUT_MIPPED;
+	}
 
-    @Override
-    public ItemStack getItemDrop()
-    {
-        MaterialInterface<?> ore_mat = getMaterial(MaterialTexture.overlay);
-        if(ore_mat.hasFlag(ItemCategoryFlags.POOR_ORE) && ore_mat.hasFlag(ItemCategoryFlags.RICH_ORE))
-        {
-			return ore_mat.getStack(this.getOreRichness().toCategory());
-        }
-		return ore_mat.getStack(ItemCategoryFlags.NORMAL_ORE, 1 + this.getOreRichness().ordinal());
-    }
+	@Override
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
+	{
+		if(world.isRemote||!weathers) return;
 
-    @Override
-    public List<Pair<ItemStack, Float>> getExtraDrops()
-    {
-        MaterialInterface<?> ore_mat = getMaterial(MaterialTexture.overlay);
-        if(ore_mat.equals(MineralEnum.Bituminous)) return List.of(Pair.of(new ItemStack(Ingredients.DUST_SULFUR), 0.075f));
-        return List.of();
-    }
+		MineralWeathering current = state.getValue(WEATHERING);
+		MineralWeathering next = current.next();
+		if(next==current) return;
+		if(!isExposed(world, pos)) return;
+		if(rand.nextFloat() >= WEATHER_CHANCE) return;
+
+		world.setBlockState(pos, state.withProperty(WEATHERING, next), 2);
+	}
+
+	private boolean isExposed(World world, BlockPos pos)
+	{
+		for(net.minecraft.util.EnumFacing facing : net.minecraft.util.EnumFacing.values())
+			if(world.isAirBlock(pos.offset(facing))) return true;
+		return false;
+	}
 }

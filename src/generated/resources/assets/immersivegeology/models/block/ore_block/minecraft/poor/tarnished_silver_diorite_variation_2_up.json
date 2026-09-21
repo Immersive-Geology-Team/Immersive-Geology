@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_backdrop/ore_block_up",
-  "textures": {
-    "base": "minecraft:block/diorite",
-    "ore_up": "immersivegeology:palette/block/ore_bearing/native_metal/poor_2_tarnished_silver",
-    "stone_backdrop_up": "immersivegeology:palette/block/stone_backdrop/native_metal/poor_2_base_minecraft_diorite"
-  }
-}

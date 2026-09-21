@@ -8,14 +8,14 @@
 
 package com.igteam.immersivegeology.core.material.data.enums;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.FluidTagInput;
+
 import com.igteam.immersivegeology.core.material.data.chemical.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.HashSet;

@@ -8,6 +8,10 @@
 
 package com.igteam.immersivegeology.core.material.data.types;
 
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.FluidTags;
+
+import com.igteam.immersivegeology.core.material.helper.material.IGBlockProperties;
+
 import com.igteam.immersivegeology.common.world.IGWorldGen;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -17,11 +21,8 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraftforge.common.Tags.Biomes;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.init.Items;
 
 import java.util.Optional;
 
@@ -37,11 +38,11 @@ public class MaterialEvaporateMineral extends MaterialMineral
 		int minSea = 62;
 		int maxSea = 72;
 
-		CONFIG = new MineralConfig(8,50,1, minSea, maxSea,5, 0.5,true, Optional.of(Biomes.IS_DESERT), IGGenerationType.EVAPORATE);
+		CONFIG = new MineralConfig(8,50,1, minSea, maxSea,5, 0.5,true, Optional.empty(), IGGenerationType.EVAPORATE);
 	}
 
 	@Override
-	public Properties getProperties(IFlagType<?> flag)
+	public IGBlockProperties getProperties(IFlagType<?> flag)
 	{
 		return flag.equals(BlockCategoryFlags.STORAGE_BLOCK) ? IGLib.CRYSTAL_DECO_PROPS : super.getProperties(flag);
 	}

@@ -1,0 +1,15 @@
+[
+  {
+    "modid": "immersivegeology",
+    "name": "Immersive Geology",
+    "description": "A 1.12.2 backport of Immersive Geology.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://github.com/muddykat-tech/Immersive-Geology",
+    "authorList": ["muddykat-tech"],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": ["immersiveengineering"]
+  }
+]

@@ -7,7 +7,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
-import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -25,7 +24,7 @@ public class MaterialThorite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.END_STONE);
 
         // TODO BANISH FROM EXISTENCE or to the END
-        CONFIG = new MineralConfig(31,20,1,0,80,3000,0.5,false,Optional.of(Biomes.IS_DRY), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(31,20,1,0,80,3000,0.5,false,Optional.empty(), IGGenerationType.DEFAULT);
     }
 
     @Override

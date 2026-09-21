@@ -1,7 +1,9 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
+
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.IETags;
+
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IngredientWithSize;
             
-import blusunrize.immersiveengineering.api.IETags;
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
@@ -11,8 +13,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.Tags.Biomes;
+import net.minecraft.item.ItemStack;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -27,7 +28,7 @@ public class MaterialChromite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
-        CONFIG = new MineralConfig(30,45,1,-64,24,1350,0.5,false,Optional.of(Biomes.IS_COLD), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(30,45,1,-64,24,1350,0.5,false,Optional.empty(), IGGenerationType.DEFAULT);
     }
 
     @Override

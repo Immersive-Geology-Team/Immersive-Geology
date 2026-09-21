@@ -16,9 +16,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.material.Fluids;
+import net.minecraft.init.Items;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.List;

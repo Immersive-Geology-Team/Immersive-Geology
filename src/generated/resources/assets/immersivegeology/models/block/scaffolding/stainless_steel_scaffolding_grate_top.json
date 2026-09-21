@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/scaffolding/scaffolding_grate_top",
-  "textures": {
-    "bottom": "immersivegeology:block/colored/stainless_steel/scaffolding/scaffolding",
-    "side": "immersivegeology:block/colored/stainless_steel/scaffolding/scaffolding",
-    "top": "immersivegeology:block/colored/stainless_steel/scaffolding/scaffolding_grate_top"
-  }
-}

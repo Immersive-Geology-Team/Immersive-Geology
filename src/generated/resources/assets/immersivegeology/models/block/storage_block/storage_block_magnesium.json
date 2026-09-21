@@ -1,7 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/block",
-  "textures": {
-    "all": "immersivegeology:palette/block/storage_block/type_1_pristine_magnesium",
-    "particle": "immersivegeology:palette/block/storage_block/type_1_pristine_magnesium"
-  }
-}

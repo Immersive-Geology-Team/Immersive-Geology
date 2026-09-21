@@ -1,17 +1,16 @@
 package com.igteam.immersivegeology.core.material.data.stone.vanilla;
 
+import com.igteam.immersivegeology.core.material.helper.material.IGBlockProperties;
+
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
-import net.minecraft.world.level.Level;
 
 import java.util.Set;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.init.Blocks;
 
 import java.util.function.BiFunction;
 
@@ -21,7 +20,7 @@ public class MaterialMCEndStone extends MaterialStone {
         super();
         this.name = "end_stone"; // Special Case as we need to override the default name assignment method
         this.STONE_FORMATION = StoneFormation.END_STONE;
-        this.DIMENSIONS = Set.of(Level.END.location());
+        this.DIMENSIONS = Set.of(World.END.location());
         addFlags(MaterialFlags.EXISTING_IMPLEMENTATION, ModFlags.MINECRAFT);
     }
 
@@ -32,8 +31,8 @@ public class MaterialMCEndStone extends MaterialStone {
 
 
     @Override
-    public Properties getProperties(IFlagType<?> flag)
+    public IGBlockProperties getProperties(IFlagType<?> flag)
     {
-        return BlockBehaviour.Properties.copy(Blocks.END_STONE);
+        return IGBlockProperties.copy(Blocks.END_STONE);
     }
 }

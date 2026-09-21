@@ -10,7 +10,6 @@ package com.igteam.immersivegeology.core.material.data.misc;
 
 import com.igteam.immersivegeology.core.material.data.types.MaterialMisc;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
-import net.minecraftforge.fluids.FluidType.Properties;
 
 import java.util.function.BiFunction;
 

@@ -1,8 +1,5 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
-import blusunrize.immersiveengineering.api.IETags;
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -17,10 +14,8 @@ import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.common.Tags.Biomes;
+import net.minecraft.item.ItemStack;
+import net.minecraft.init.Blocks;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.LinkedHashSet;
@@ -39,7 +34,7 @@ public class MaterialVanadinite extends MaterialSulphideMineral
         addFlags(ItemCategoryFlags.PELLET);
         addFlags(ItemCategoryFlags.POWDERED_SLAG);
 
-        CONFIG = new MineralConfig(12,70,1,-32,140,700, 0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.TUBE);
+        CONFIG = new MineralConfig(12,70,1,-32,140,700, 0.5,false,Optional.empty(), IGGenerationType.TUBE);
     }
 
     @Override

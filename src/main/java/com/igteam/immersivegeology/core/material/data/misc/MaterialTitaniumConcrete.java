@@ -8,17 +8,16 @@
 
 package com.igteam.immersivegeology.core.material.data.misc;
 
+import com.igteam.immersivegeology.core.material.helper.material.IGBlockProperties;
+
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMisc;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.block.SoundType;
 
 public class MaterialTitaniumConcrete extends MaterialMisc
 {
@@ -30,9 +29,9 @@ public class MaterialTitaniumConcrete extends MaterialMisc
 		removeMaterialFlags(MaterialFlags.IS_ORE_BEARING);
 	}
 
-	public BlockBehaviour.Properties getProperties(IFlagType<?> flag)
+	public IGBlockProperties getProperties(IFlagType<?> flag)
 	{
-		return Properties.of().sound(SoundType.POLISHED_DEEPSLATE).instrument(NoteBlockInstrument.COW_BELL).strength(30, 1200);
+		return IGBlockProperties.of().sound(SoundType.POLISHED_DEEPSLATE).instrument(NoteBlockInstrument.COW_BELL).strength(30, 1200);
 	}
 
 	@Override

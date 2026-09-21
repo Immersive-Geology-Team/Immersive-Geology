@@ -8,9 +8,10 @@
 
 package com.igteam.immersivegeology.core.material.data.chemical;
 
-import blusunrize.immersiveengineering.api.EnumMetals;
-import blusunrize.immersiveengineering.common.register.IEItems;
-import blusunrize.immersiveengineering.common.register.IEItems.Metals;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.EnumMetals;
+
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.FluidTags;
+
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -21,9 +22,8 @@ import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.world.level.material.Fluid;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.Fluid;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -45,7 +45,7 @@ public class MaterialSulfurDioxide extends MaterialChemical
 		IGMethodBuilder.synthesis(this, IGStageDesignation.SYNTHESIS)
 				.create("sulfuric_acid_from_water_and_sulfur_dioxide",
 						FluidTags.WATER, 2, getFluidTag(), 50,
-						Metals.PLATES.get(EnumMetals.LEAD).asItem(),
+						net.minecraft.item.Item.getItemFromBlock(Metals.PLATES.get(EnumMetals.LEAD)),
 						ChemicalEnum.SulfuricAcid.getFluidStack(6));
 
 		IGMethodBuilder.synthesis(this, IGStageDesignation.SYNTHESIS)

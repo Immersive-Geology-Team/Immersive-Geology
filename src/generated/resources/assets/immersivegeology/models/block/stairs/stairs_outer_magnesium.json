@@ -1,6 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/stairs_outer",
-  "textures": {
-    "all": "immersivegeology:palette/block/storage_block/type_1_pristine_magnesium"
-  }
-}

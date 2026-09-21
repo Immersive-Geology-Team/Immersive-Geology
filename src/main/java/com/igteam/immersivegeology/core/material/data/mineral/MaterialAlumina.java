@@ -8,9 +8,11 @@
 
 package com.igteam.immersivegeology.core.material.data.mineral;
 
-import blusunrize.immersiveengineering.api.IETags;
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.IETags;
+
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.FluidTagInput;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IngredientWithSize;
+
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
@@ -27,8 +29,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
-import net.minecraft.tags.BiomeTags;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.LinkedHashSet;
@@ -44,7 +45,7 @@ public class MaterialAlumina extends MaterialMineral {
     public MaterialAlumina() {
         super();
         this.acceptableStoneTypes.add(StoneFormation.END_STONE);
-        CONFIG = new MineralConfig(33,20,2,0,80,2000, 0.5,false,Optional.of(BiomeTags.IS_END), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(33,20,2,0,80,2000, 0.5,false,Optional.empty(), IGGenerationType.DEFAULT);
     }
 
     @Override

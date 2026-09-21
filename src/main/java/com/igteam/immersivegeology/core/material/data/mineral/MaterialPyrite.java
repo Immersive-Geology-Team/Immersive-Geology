@@ -1,7 +1,8 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.FluidTagInput;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IngredientWithSize;
+
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
@@ -21,7 +22,6 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
-import net.minecraft.tags.BiomeTags;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -44,7 +44,7 @@ public class MaterialPyrite extends MaterialSulphideMineral
         addFlags(ItemCategoryFlags.SLAG);
         addFlags(ItemCategoryFlags.PELLET);
         addFlags(ItemCategoryFlags.POWDERED_SLAG);
-        CONFIG = new MineralConfig(12,30,3,-64,112,2000, 0.5,false,Optional.of(BiomeTags.IS_NETHER), IGGenerationType.TUBE);
+        CONFIG = new MineralConfig(12,30,3,-64,112,2000, 0.5,false,Optional.empty(), IGGenerationType.TUBE);
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(

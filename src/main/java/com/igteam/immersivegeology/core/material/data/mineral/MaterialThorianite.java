@@ -6,7 +6,6 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
-import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -21,7 +20,7 @@ public class MaterialThorianite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.SEDIMENTARY);
         this.acceptableStoneTypes.add(StoneFormation.END_STONE);
         // TODO BANISH FROM EXISTENCE or to the END
-        CONFIG = new MineralConfig(31,20,1,-32,128,1024,0.5,false,Optional.of(Biomes.IS_HOT), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(31,20,1,-32,128,1024,0.5,false,Optional.empty(), IGGenerationType.DEFAULT);
     }
 
     @Override

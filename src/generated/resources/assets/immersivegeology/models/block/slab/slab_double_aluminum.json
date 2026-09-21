@@ -1,9 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/slab/slab_double",
-  "textures": {
-    "all": "immersivegeology:palette/block/storage_block/type_1_pristine_aluminum",
-    "cover": "immersivegeology:palette/block/storage_block/type_1_pristine_aluminum",
-    "particle": "immersivegeology:palette/block/storage_block/type_1_pristine_aluminum",
-    "side": "immersivegeology:palette/block/storage_block/type_1_pristine_aluminum"
-  }
-}

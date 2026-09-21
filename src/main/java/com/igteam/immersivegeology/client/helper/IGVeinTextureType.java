@@ -1,17 +1,10 @@
-/*
- * Muddykat
- * Copyright (c) 2024
- *
- * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
- * Details can be found in the license file in the root folder of this project
- */
-
 package com.igteam.immersivegeology.client.helper;
 
-import net.minecraft.core.Direction;
-import net.minecraft.core.Direction.Plane;
-import net.minecraft.util.RandomSource;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumFacing.Plane;
+
 import java.util.Locale;
+import java.util.Random;
 
 public enum IGVeinTextureType
 {
@@ -28,15 +21,13 @@ public enum IGVeinTextureType
 
 	public String getSanitizedName()
 	{
-		return this.name().toLowerCase(Locale.ROOT);
+		return name().toLowerCase(Locale.ROOT);
 	}
 
-	public Direction getDirectionalBias(RandomSource random)
+	public EnumFacing getDirectionalBias(Random random)
 	{
-		if(this == LAYERED) {
-			return random.nextInt(5) == 1 ? Direction.getRandom(random) : Plane.HORIZONTAL.getRandomDirection(random);
-		}
-		return Direction.getRandom(random);
+		if(this==LAYERED&&random.nextInt(5)!=1)
+			return Plane.HORIZONTAL.random(random);
+		return EnumFacing.random(random);
 	}
 }
-

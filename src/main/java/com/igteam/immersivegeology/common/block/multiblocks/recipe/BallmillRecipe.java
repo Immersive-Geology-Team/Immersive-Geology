@@ -1,82 +1,82 @@
-/*
- * Muddykat
- * Copyright (c) 2024
- *
- * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
- * Details can be found in the license file in the root folder of this project
- */
-
 package com.igteam.immersivegeology.common.block.multiblocks.recipe;
 
-import blusunrize.immersiveengineering.api.crafting.CrusherRecipe;
-import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import blusunrize.immersiveengineering.api.ApiUtils;
+import blusunrize.immersiveengineering.api.crafting.IngredientStack;
 import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
-import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
-import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
-import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.common.util.Lazy;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.NonNullList;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class BallmillRecipe extends MultiblockRecipe
 {
-	public static RegistryObject<IERecipeSerializer<BallmillRecipe>> SERIALIZER;
-	public static final CachedRecipeList<BallmillRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.BALLMILL);
-	public final IngredientWithSize itemOutput;
-	public final IngredientWithSize itemIn;
-	Lazy<Integer> totalProcessEnergy;
-	Lazy<Integer> totalProcessTime;
+	public static final List<BallmillRecipe> recipeList = new ArrayList<>();
 
-	public <T extends Recipe<?>> BallmillRecipe(ResourceLocation id, IngredientWithSize input, IngredientWithSize output, int energy, int time)
+	public final IngredientStack input;
+	public final ItemStack output;
+
+	private final int processEnergy;
+	private final int processTime;
+
+	public BallmillRecipe(ItemStack output, Object input, int energy, int time)
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.BALLMILL, id);
-		this.itemOutput = output;
-		this.itemIn = input;
-		totalProcessEnergy = Lazy.of(() -> energy);
-		totalProcessTime = Lazy.of(() -> time);
-		this.outputList = Lazy.of(() -> NonNullList.of(ItemStack.EMPTY, this.itemOutput.getRandomizedExampleStack(0)));
+		this.output = output;
+		this.input = ApiUtils.createIngredientStack(input);
+
+		this.inputList = Collections.singletonList(this.input);
+		this.outputList = NonNullList.from(ItemStack.EMPTY, output);
+		this.processEnergy = energy;
+		this.processTime = time;
+	}
+
+	public static BallmillRecipe addRecipe(ItemStack output, Object input, int energy, int time)
+	{
+		BallmillRecipe recipe = new BallmillRecipe(output, input, energy, time);
+		recipeList.add(recipe);
+		return recipe;
+	}
+
+	public static BallmillRecipe findRecipe(ItemStack stack)
+	{
+		if(stack.isEmpty()) return null;
+		for(BallmillRecipe recipe : recipeList)
+			if(recipe.input!=null&&recipe.input.matchesItemStackIgnoringSize(stack)) return recipe;
+		return null;
+	}
+
+	public static BallmillRecipe loadFromNBT(NBTTagCompound nbt)
+	{
+		IngredientStack stored = IngredientStack.readFromNBT(nbt.getCompoundTag("input"));
+		for(BallmillRecipe recipe : recipeList)
+			if(recipe.input.equals(stored)) return recipe;
+		return null;
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer()
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt)
 	{
-		return SERIALIZER.get();
+		nbt.setTag("input", input.writeToNBT(new NBTTagCompound()));
+		return nbt;
 	}
 
 	@Override
 	public int getTotalProcessEnergy()
 	{
-		return totalProcessEnergy.get();
+		return processEnergy;
 	}
 
 	@Override
 	public int getTotalProcessTime()
 	{
-		return totalProcessTime.get();
-	}
-
-	public static BallmillRecipe findRecipe(Level level, ItemStack input)
-	{
-		for(BallmillRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.itemIn.test(input))
-				return recipe;
-		return null;
-	}
-
-	@Override
-	protected IERecipeSerializer<?> getIESerializer()
-	{
-		return SERIALIZER.get();
+		return processTime;
 	}
 
 	@Override
 	public int getMultipleProcessTicks()
 	{
-		return 1;
+		return 0;
 	}
 }

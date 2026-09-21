@@ -8,13 +8,15 @@
 
 package com.igteam.immersivegeology.core.material.data.chemical;
 
+import net.minecraft.block.state.IBlockState;
+
 import com.igteam.immersivegeology.common.block.multiblocks.skins.IGChemicalReactorSkins;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.core.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -29,9 +31,7 @@ import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.monster.Witch;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.item.ItemStack;
 
 import java.security.spec.RSAPrivateKeySpec;
 import java.util.Random;
@@ -46,7 +46,7 @@ public class MaterialHydrofluoricAcid extends MaterialChemical
 
 	Random rand = new Random();
 	@Override
-	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity)
+	public void entityInside(IBlockState state, World level, BlockPos pos, Entity entity)
 	{
 		if (entity instanceof LivingEntity living) {
 			// Apply wither effect to players and zombies

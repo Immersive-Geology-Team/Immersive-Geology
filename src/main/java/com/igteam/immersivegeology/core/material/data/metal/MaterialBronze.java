@@ -8,8 +8,8 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
-import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler.IMultiblock;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.IEMultiblocks;
+
 import com.igteam.immersivegeology.common.block.multiblocks.IGBloomeryMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.IGReverberationFurnaceMultiblock;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;

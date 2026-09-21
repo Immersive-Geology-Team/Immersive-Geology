@@ -1,7 +1,0 @@
-{
-  "type": "immersivegeology:bloomery_fuel",
-  "input": {
-    "item": "immersivegeology:storage_block_lignite"
-  },
-  "time": 3000
-}

@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_backdrop/ore_block_west",
-  "textures": {
-    "base": "minecraft:block/stone",
-    "ore_west": "immersivegeology:palette/block/ore_bearing/native_metal/normal_2_pristine_copper",
-    "stone_backdrop_west": "immersivegeology:palette/block/stone_backdrop/native_metal/normal_2_base_minecraft_stone"
-  }
-}

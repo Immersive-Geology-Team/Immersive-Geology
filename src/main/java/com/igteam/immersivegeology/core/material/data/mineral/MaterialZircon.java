@@ -1,7 +1,8 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.FluidTagInput;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IngredientWithSize;
+
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
@@ -18,9 +19,8 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
-import net.minecraft.tags.BiomeTags;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.init.Blocks;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -39,7 +39,7 @@ public class MaterialZircon extends MaterialMineral {
 
         addFlags(ItemCategoryFlags.SEDIMENT);
         // TODO Remove fully probably
-        CONFIG = new MineralConfig(30, 50, 1, -64, 200, 1000, 0.7,false, Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(30, 50, 1, -64, 200, 1000, 0.7,false, Optional.empty(), IGGenerationType.DEFAULT);
     }
 
     @Override

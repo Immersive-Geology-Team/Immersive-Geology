@@ -10,7 +10,6 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -27,7 +26,7 @@ public class MaterialHematite extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
-        CONFIG = new MineralConfig(32,50,2,-64,256,2000, 0.66,false,Optional.of(Biomes.IS_MOUNTAIN), IGGenerationType.BANDED);
+        CONFIG = new MineralConfig(32,50,2,-64,256,2000, 0.66,false,Optional.empty(), IGGenerationType.BANDED);
     }
 
     @Override

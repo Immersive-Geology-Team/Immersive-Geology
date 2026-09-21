@@ -7,7 +7,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
-import net.minecraftforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -22,7 +21,7 @@ public class MaterialUnobtania extends MaterialMineral {
         this.acceptableStoneTypes.add(StoneFormation.METAMORPHIC);
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
 
-        CONFIG = new MineralConfig(42,300,1,-64,32,5, 0.88,true, Optional.of(Biomes.IS_RARE), IGGenerationType.DEFAULT);
+        CONFIG = new MineralConfig(42,300,1,-64,32,5, 0.88,true, Optional.empty(), IGGenerationType.DEFAULT);
     }
 
     @Override

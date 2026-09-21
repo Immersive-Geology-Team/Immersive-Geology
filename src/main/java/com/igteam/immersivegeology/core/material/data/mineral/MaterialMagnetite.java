@@ -11,7 +11,6 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import net.minecraft.tags.BiomeTags;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -29,7 +28,7 @@ public class MaterialMagnetite extends MaterialMineral {
         addFlags(ItemCategoryFlags.PELLET);
 
         addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
-        CONFIG = new MineralConfig(43,35,1,-64,320,1150, 0.60,false,Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.BANDED);
+        CONFIG = new MineralConfig(43,35,1,-64,320,1150, 0.60,false,Optional.empty(), IGGenerationType.BANDED);
     }
 
     Function<Integer, Integer> coloredWeathering = MaterialColorHelper.setupWeatheredColors(

@@ -1,6 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/evaporate_crystal_cross",
-  "textures": {
-    "cross": "immersivegeology:block/colored/saltpeter/crystal_growth/stage_0"
-  }
-}

@@ -8,8 +8,9 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.FluidTagInput;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IngredientWithSize;
+
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
@@ -22,7 +23,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import net.minecraft.tags.BiomeTags;
 
 import java.util.Optional;
 import java.util.function.BiFunction;
@@ -34,7 +34,7 @@ public class MaterialPlatinum extends MaterialNativeMetal {
         this.acceptableStoneTypes.add(StoneFormation.MINECRAFT_STONE);
         this.acceptableStoneTypes.add(StoneFormation.IGNEOUS_INTRUSIVE);
         removeMaterialFlags(ItemCategoryFlags.METAL_OXIDE);
-        this.CONFIG = new MaterialMineral.MineralConfig(12,90,1,10,150,400,0.5, true,Optional.of(BiomeTags.IS_END), IGGenerationType.DEFAULT);
+        this.CONFIG = new MaterialMineral.MineralConfig(12,90,1,10,150,400,0.5, true,Optional.empty(), IGGenerationType.DEFAULT);
     }
 
     @Override

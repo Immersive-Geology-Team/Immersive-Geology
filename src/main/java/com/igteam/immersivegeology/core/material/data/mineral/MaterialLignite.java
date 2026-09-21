@@ -10,8 +10,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import net.minecraft.tags.BiomeTags;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Optional;
@@ -31,7 +29,7 @@ public class MaterialLignite extends MaterialMineral
 
 		addExistingFlag(ModFlags.TFC, BlockCategoryFlags.ORE_BLOCK);
 		setBurntime(425);
-		CONFIG = new MineralConfig(30, 50, 1, 0, 320, 3500, 0.9,true, Optional.of(BiomeTags.IS_OVERWORLD), IGGenerationType.BANDED);
+		CONFIG = new MineralConfig(30, 50, 1, 0, 320, 3500, 0.9,true, Optional.empty(), IGGenerationType.BANDED);
 		this.colorFunction = (flag,v) -> 0xff3b3f2e;
 	}
 

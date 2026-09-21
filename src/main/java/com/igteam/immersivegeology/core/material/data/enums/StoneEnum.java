@@ -8,6 +8,8 @@
 
 package com.igteam.immersivegeology.core.material.data.enums;
 
+import net.minecraft.block.state.IBlockState;
+
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.stone.compat.adastra.*;
 import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.*;
@@ -21,16 +23,9 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.IStoneType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import com.mojang.serialization.Codec;
-import net.minecraft.locale.Language;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration.TargetBlockState;
-import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -112,7 +107,7 @@ public enum StoneEnum implements IStoneType {
      */
     private static final Map<Block, Optional<StoneEnum>> worldStateCache = new ConcurrentHashMap<>();
 
-    public static StoneEnum selectWorldState(BlockState stoneState) {
+    public static StoneEnum selectWorldState(IBlockState stoneState) {
         Block block = stoneState.getBlock();
         Optional<StoneEnum> cached = worldStateCache.get(block);
         if(cached==null)
@@ -170,7 +165,7 @@ public enum StoneEnum implements IStoneType {
         return instance().getTargets(mineral);
 	}
 
-    public boolean isWorldState(BlockState stoneState)
+    public boolean isWorldState(IBlockState stoneState)
     {
         return stoneState.getBlock().getName().getString().equalsIgnoreCase(material.getName());
     }

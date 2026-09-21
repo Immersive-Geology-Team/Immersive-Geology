@@ -1,6 +1,0 @@
-{
-  "parent": "immersivegeology:item/base/ig_base_item",
-  "textures": {
-    "layer0": "immersivegeology:palette/item/powdered_slag/type_1_pristine_millerite"
-  }
-}

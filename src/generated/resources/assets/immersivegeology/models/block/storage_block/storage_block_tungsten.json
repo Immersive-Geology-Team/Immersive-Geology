@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/column",
-  "textures": {
-    "particle": "immersivegeology:block/colored/tungsten/storage_block",
-    "side": "immersivegeology:block/colored/tungsten/storage_block",
-    "top": "immersivegeology:block/colored/tungsten/storage_block_top"
-  }
-}

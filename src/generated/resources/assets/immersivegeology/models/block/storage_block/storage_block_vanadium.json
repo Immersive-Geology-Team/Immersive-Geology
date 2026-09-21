@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/column",
-  "textures": {
-    "particle": "immersivegeology:block/colored/vanadium/storage_block",
-    "side": "immersivegeology:block/colored/vanadium/storage_block",
-    "top": "immersivegeology:block/colored/vanadium/storage_block_top"
-  }
-}

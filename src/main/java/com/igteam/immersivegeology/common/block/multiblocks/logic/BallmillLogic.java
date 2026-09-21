@@ -1,233 +1,183 @@
-/*
- * Muddykat
- * Copyright (c) 2024
- *
- * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
- * Details can be found in the license file in the root folder of this project
- */
-
 package com.igteam.immersivegeology.common.block.multiblocks.logic;
 
-import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
-import blusunrize.immersiveengineering.api.energy.AveragingEnergyStorage;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IClientTickableComponent;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IServerTickableComponent;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.component.RedstoneControl;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultiblockContext;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.CrusherLogic;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.process.DirectProcessingItemHandler;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessInWorld;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext.ProcessContextInWorld;
-import blusunrize.immersiveengineering.common.util.DroppingMultiblockOutput;
-import blusunrize.immersiveengineering.common.util.Utils;
-import blusunrize.immersiveengineering.common.util.inventory.InsertOnlyInventory;
-import com.igteam.immersivegeology.common.block.helper.IGReceiveOnlyEnergy;
-import com.igteam.immersivegeology.common.block.multiblocks.IGBallmillMultiblock;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.BloomeryLogic.State;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BallmillRecipe;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.PelletizerRecipe;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
-import com.igteam.immersivegeology.common.block.multiblocks.shapes.BallmillShape;
-import com.igteam.immersivegeology.common.block.multiblocks.shapes.RotaryKilnShape;
-import com.igteam.immersivegeology.common.config.IGServerConfig;
-import com.igteam.immersivegeology.core.lib.IGLib;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import com.igteam.immersivegeology.common.block.multiblocks.shim.component.AveragingEnergyStorage;
+import com.igteam.immersivegeology.common.block.multiblocks.shim.component.IClientTickableComponent;
+import com.igteam.immersivegeology.common.block.multiblocks.shim.component.IGReceiveOnlyEnergy;
+import com.igteam.immersivegeology.common.block.multiblocks.shim.component.IServerTickableComponent;
+import com.igteam.immersivegeology.common.block.multiblocks.shim.component.RedstoneControl;
+import com.igteam.immersivegeology.common.block.multiblocks.shim.env.IInitialMultiblockContext;
+import com.igteam.immersivegeology.common.block.multiblocks.shim.env.IMultiblockContext;
+import com.igteam.immersivegeology.common.block.multiblocks.shim.env.IMultiblockLevel;
+import com.igteam.immersivegeology.common.block.multiblocks.shim.inventory.DroppingMultiblockOutput;
+import com.igteam.immersivegeology.common.block.multiblocks.shim.inventory.InsertOnlyInventory;
+import com.igteam.immersivegeology.common.block.multiblocks.shim.logic.IMultiblockLogic;
+import com.igteam.immersivegeology.common.block.multiblocks.shim.logic.IMultiblockState;
+import com.igteam.immersivegeology.common.block.multiblocks.shim.process.MultiblockProcessInWorld;
+import com.igteam.immersivegeology.common.block.multiblocks.shim.process.MultiblockProcessor;
+import com.igteam.immersivegeology.common.block.multiblocks.shim.process.ProcessContext.ProcessContextInWorld;
+import com.igteam.immersivegeology.common.block.multiblocks.shim.util.CapabilityPosition;
+import com.igteam.immersivegeology.common.block.multiblocks.shim.util.MultiblockFace;
+import com.igteam.immersivegeology.common.block.multiblocks.shim.util.RelativeBlockFace;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
-public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, IServerTickableComponent<BallmillLogic.State>, IClientTickableComponent<BallmillLogic.State> {
-    public static final BlockPos REDSTONE_IN = new BlockPos(4,1,3);
-    private static final int ENERGY_CAPACITY = 64000;
-    private static final Set<CapabilityPosition> ENERGY_INPUTS = Set.of(new CapabilityPosition(0,1, 3, RelativeBlockFace.UP));
-    private static final MultiblockFace OUTPUT_POS = new MultiblockFace(2,0,4, RelativeBlockFace.FRONT);
-    private static final MultiblockFace INPUT_POS = new MultiblockFace(0,0,1, RelativeBlockFace.FRONT);
-    private static final CapabilityPosition ITEM_OUTPUT_CAP = CapabilityPosition.opposing(OUTPUT_POS);
-    private static final CapabilityPosition ITEM_INPUT_CAP = new CapabilityPosition(0,0,1, RelativeBlockFace.RIGHT);
+public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>,
+		IServerTickableComponent<BallmillLogic.State>, IClientTickableComponent<BallmillLogic.State>
+{
+	public static final MultiblockFace REDSTONE_IN = new MultiblockFace(4, 1, 3, RelativeBlockFace.UP);
+	private static final int ENERGY_CAPACITY = 64000;
+	private static final Set<CapabilityPosition> ENERGY_INPUTS =
+			Set.of(new CapabilityPosition(0, 1, 3, RelativeBlockFace.UP));
+	private static final MultiblockFace OUTPUT_POS = new MultiblockFace(2, 0, 4, RelativeBlockFace.FRONT);
+	private static final CapabilityPosition ITEM_INPUT_CAP = new CapabilityPosition(0, 0, 1, RelativeBlockFace.RIGHT);
 
-    public static final int ENERGY_CONSUMPTION_RATE = 80; // Per tick
+	public static final int ENERGY_CONSUMPTION_RATE = 80;
 
-    @Override
-    public void tickClient(IMultiblockContext<State> context) {
-        final BallmillLogic.State state = context.getState();
-        if(state.renderAsActive)
-        {
-            float rot = state.rotation;
-            state.rotation = (float)((rot+2.5)%360);
-        }
-    }
+	@Override
+	public void tickClient(IMultiblockContext<State> context)
+	{
+		State state = context.getState();
+		if(state.renderAsActive) state.rotation = (float)((state.rotation+2.5)%360);
+	}
 
-    @Override
-    public void tickServer(IMultiblockContext<State> context) {
-        final BallmillLogic.State state = context.getState();
+	@Override
+	public void tickServer(IMultiblockContext<State> context)
+	{
+		State state = context.getState();
+		boolean wasActive = state.renderAsActive;
 
-        final boolean wasActive = state.renderAsActive;
-        state.renderAsActive = state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
+		state.energy.tick();
+		state.renderAsActive = state.processor.tickServer(state, context.getLevel(), state.rsState.isEnabled(context));
 
-        if(wasActive != state.renderAsActive)
-        {
-            context.requestMasterBESync();
-        }
-    }
+		if(wasActive!=state.renderAsActive) context.requestMasterBESync();
+	}
 
-    @Override
-    public State createInitialState(IInitialMultiblockContext<State> capability) {
-        return new BallmillLogic.State(capability);
-    }
+	@Override
+	public State createInitialState(IInitialMultiblockContext<State> context)
+	{
+		return new State(context);
+	}
 
+	@Override
+	public <T> T getCapability(IMultiblockContext<State> context, CapabilityPosition position, Capability<T> capability)
+	{
+		State state = context.getState();
 
-    @Override
-    public void dropExtraItems(State state, Consumer<ItemStack> drop)
-    {
-        MBInventoryUtils.dropItems(state.getInventory(), drop);
-    }
+		if(capability==CapabilityEnergy.ENERGY&&(position.side()==null||matchesEnergyInput(position)))
+			return CapabilityEnergy.ENERGY.cast(state.energyCap);
 
-    @Override
-    public <T> LazyOptional<T> getCapability(IMultiblockContext<State> ctx, CapabilityPosition position, Capability<T> cap)
-    {
-        final BallmillLogic.State state = ctx.getState();
-        if(cap == ForgeCapabilities.ENERGY)
-        {
-            if((position.side()==null || ENERGY_INPUTS.contains(position))) return state.energyCap.cast(ctx);
-        }
+		if(capability==CapabilityItemHandler.ITEM_HANDLER_CAPABILITY&&ITEM_INPUT_CAP.equalsOrNullFace(position))
+			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(state.insertionHandler);
 
-        if(cap == ForgeCapabilities.ITEM_HANDLER && ITEM_INPUT_CAP.equals(position))
-        {
-            return state.insertionHandler.cast(ctx);
-        }
+		return null;
+	}
 
-        return LazyOptional.empty();
-    }
+	private static boolean matchesEnergyInput(CapabilityPosition position)
+	{
+		for(CapabilityPosition input : ENERGY_INPUTS)
+			if(input.equalsOrNullFace(position)) return true;
+		return false;
+	}
 
-    @Override
-    public Function<BlockPos, VoxelShape> shapeGetter(ShapeType shapeType) {
-        return BallmillShape.GETTER;
-    }
+	public static class State implements IMultiblockState, ProcessContextInWorld<BallmillRecipe>
+	{
+		public final AveragingEnergyStorage energy = new AveragingEnergyStorage(ENERGY_CAPACITY);
+		public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault(REDSTONE_IN);
 
-    public static class State implements IGMultiblockState, ProcessContextInWorld<BallmillRecipe>
-    {
-        public final AveragingEnergyStorage energy = new AveragingEnergyStorage(ENERGY_CAPACITY);
-        public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
+		private final DroppingMultiblockOutput output;
+		private final IEnergyStorage energyCap;
+		private final IItemHandler insertionHandler;
+		private final MultiblockProcessor<BallmillRecipe, ProcessContextInWorld<BallmillRecipe>> processor;
 
-        private final DroppingMultiblockOutput output;
-        private final StoredCapability<IItemHandler> insertionHandler;
-        private float rotation;
-        private boolean renderAsActive;
-        private final StoredCapability<IEnergyStorage> energyCap;
-        private final MultiblockProcessor<BallmillRecipe, ProcessContextInWorld<BallmillRecipe>> processor;
-        Supplier<@Nullable Level> levelGetter;
-        public State(IInitialMultiblockContext<State> ctx){
-            this.rotation = 0;
-            this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.energy));
-            this.output = new DroppingMultiblockOutput(OUTPUT_POS, ctx);
-            this.processor = new MultiblockProcessor<>(64, 0, 8, ctx.getMarkDirtyRunnable(), BallmillRecipe.RECIPES::getById);
-            final Supplier<@Nullable Level> levelGetter = ctx.levelSupplier();
-            final Runnable markDirty = ctx.getMarkDirtyRunnable();
-            final Runnable sync = ctx.getSyncRunnable();
-            Runnable changedAndSync = () -> {
-                markDirty.run();
-                sync.run();
-            };
+		private float rotation;
+		private boolean renderAsActive;
 
-            this.insertionHandler = new StoredCapability<>(new InsertOnlyInventory()
-            {
-                @Override
-                protected ItemStack insert(ItemStack toInsert, boolean simulate)
-                {
-                    ItemStack stack = toInsert.copy();
-                    BallmillRecipe recipe = BallmillRecipe.findRecipe(levelGetter.get(), stack);
-                    if (recipe == null) {
-                        return stack;
-                    } else {
-                        MultiblockProcessInWorld<BallmillRecipe> process = new MultiblockProcessInWorld<>(recipe, stack);
+		public State(IInitialMultiblockContext<State> context)
+		{
+			this.energyCap = IGReceiveOnlyEnergy.of(this.energy);
+			this.output = new DroppingMultiblockOutput(OUTPUT_POS);
+			this.processor = new MultiblockProcessor<>(64, 0, 8, context.getMarkDirtyRunnable());
 
-                        if (processor.addProcessToQueue(process, levelGetter.get(), simulate)) {
-                            stack.shrink(recipe.itemIn.getCount());
-                        }
+			this.insertionHandler = new InsertOnlyInventory()
+			{
+				@Override
+				protected ItemStack insert(ItemStack toInsert, boolean simulate)
+				{
+					ItemStack stack = toInsert.copy();
+					BallmillRecipe recipe = BallmillRecipe.findRecipe(stack);
+					if(recipe==null) return stack;
 
-                        return stack;
-                    }
-                }
-            });
-        }
+					MultiblockProcessInWorld<BallmillRecipe> process = new MultiblockProcessInWorld<>(recipe, stack);
+					if(processor.addProcessToQueue(process, simulate))
+						stack.shrink(recipe.input.inputSize);
 
+					return stack;
+				}
+			};
+		}
 
-        @Override
-        public void doProcessOutput(ItemStack result, IMultiblockLevel level)
-        {
-            output.insertOrDrop(result, level);
-        }
+		@Override
+		public void doProcessOutput(ItemStack result, IMultiblockLevel level)
+		{
+			output.insertOrDrop(result, level);
+		}
 
-        @Override
-        public void writeSaveNBT(CompoundTag nbt){
-            nbt.put("energy", energy.serializeNBT());
-            nbt.put("processor", processor.toNBT());
-        }
+		@Override
+		public AveragingEnergyStorage getEnergy()
+		{
+			return energy;
+		}
 
-        public boolean shouldRenderActive()
-        {
-            return renderAsActive;
-        }
+		public boolean shouldRenderActive()
+		{
+			return renderAsActive;
+		}
 
-        @Override
-        public void readSaveNBT(CompoundTag nbt){
-            this.energy.deserializeNBT(nbt.get("energy"));
-            this.processor.fromNBT(nbt.get("processor"), MultiblockProcessInWorld::new);
-        }
+		public float getRotation()
+		{
+			return rotation;
+		}
 
-        @Override
-        public void writeSyncNBT(CompoundTag nbt)
-        {
-            writeSaveNBT(nbt);
-            nbt.putBoolean("renderActive", renderAsActive);
-        }
+		@Override
+		public void writeSaveNBT(NBTTagCompound nbt)
+		{
+			energy.writeNBT(nbt);
+			rsState.writeNBT(nbt);
+			nbt.setTag("processor", processor.toNBT());
+		}
 
-        @Override
-        public void readSyncNBT(CompoundTag nbt)
-        {
-            readSaveNBT(nbt);
-            renderAsActive = nbt.getBoolean("renderActive");
-        }
+		@Override
+		public void readSaveNBT(NBTTagCompound nbt)
+		{
+			energy.readNBT(nbt);
+			rsState.readNBT(nbt);
+			processor.fromNBT(nbt.getTagList("processor", 10), tag -> {
+				BallmillRecipe recipe = BallmillRecipe.loadFromNBT(tag);
+				return recipe==null?null: new MultiblockProcessInWorld<>(recipe, ItemStack.EMPTY);
+			});
+		}
 
-        @Override
-        public AveragingEnergyStorage getEnergy()
-        {
-            return energy;
-        }
+		@Override
+		public void writeSyncNBT(NBTTagCompound nbt)
+		{
+			writeSaveNBT(nbt);
+			nbt.setBoolean("renderActive", renderAsActive);
+		}
 
-        public float getRotation()
-        {
-            return rotation;
-        }
-
-        @Override
-        public void invalidate(@NotNull IMultiblockContext<?> context)
-        {
-            this.energyCap.get(context).invalidate();
-            this.insertionHandler.get(context).invalidate();
-        }
-    }
-
+		@Override
+		public void readSyncNBT(NBTTagCompound nbt)
+		{
+			readSaveNBT(nbt);
+			renderAsActive = nbt.getBoolean("renderActive");
+		}
+	}
 }

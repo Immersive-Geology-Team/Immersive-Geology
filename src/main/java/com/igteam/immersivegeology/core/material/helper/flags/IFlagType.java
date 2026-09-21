@@ -1,97 +1,98 @@
 package com.igteam.immersivegeology.core.material.helper.flags;
 
-import com.igteam.immersivegeology.client.IGClientRenderHandler.RenderTypeSkeleton;
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
-import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.core.material.helper.material.IStoneType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.ItemLike;
+import net.minecraft.util.BlockRenderLayer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-public interface IFlagType<T extends Enum<T>> {
-    T getValue();
+public interface IFlagType<T extends Enum<T>>
+{
+	T getValue();
 
-    String getTagPrefix();
+	static List<IFlagType<?>> getAllRegistryFlags()
+	{
+		List<IFlagType<?>> list = new ArrayList<IFlagType<?>>();
+		list.addAll(Arrays.asList(BlockCategoryFlags.values()));
+		list.addAll(Arrays.asList(ItemCategoryFlags.values()));
+		return list;
+	}
 
-    static List<IFlagType<?>> getAllRegistryFlags() {
-        List<IFlagType<?>> list = new ArrayList<>();
-        list.addAll(List.of(BlockCategoryFlags.values()));
-        list.addAll(List.of(ItemCategoryFlags.values()));
-        return list;
-    }
+	default String getName()
+	{
+		return getValue().name().toLowerCase(Locale.ROOT);
+	}
 
-    default String getRegistryKey(MaterialHelper material) {
-        return getValue().name().toLowerCase(Locale.ROOT) + "_" + material.getName().toLowerCase(Locale.ROOT);
-    }
+	default String getRegistryKey(MaterialHelper material)
+	{
+		return getName()+"_"+material.getName().toLowerCase(Locale.ROOT);
+	}
 
-    default String getRegistryKey(MaterialHelper ore, MaterialHelper stone) {
-        return getValue().name().toLowerCase(Locale.ROOT) + "_" + ore.getName().toLowerCase(Locale.ROOT) + "_" + stone.getName().toLowerCase(Locale.ROOT);
-    }
+	default String getRegistryKey(MaterialHelper ore, MaterialHelper stone)
+	{
+		return stonePrefix(stone)+getName()+"_"+ore.getName().toLowerCase(Locale.ROOT)
+				+"_"+stone.getName().toLowerCase(Locale.ROOT);
+	}
 
-    default String getRegistryKey(MaterialInterface<?> material) {
-        return getRegistryKey(material.instance());
-    }
+	default String getRegistryKey(MaterialInterface<?> material)
+	{
+		return getRegistryKey(material.instance());
+	}
 
-    default String getRegistryKey(MaterialInterface<?> ore, MaterialInterface<?> stone) {
-        return getRegistryKey(ore.instance(), stone.instance());
-    }
+	default String getRegistryKey(MaterialInterface<?> ore, MaterialInterface<?> stone)
+	{
+		return getRegistryKey(ore.instance(), stone.instance());
+	}
 
-    default String getRegistryKey(MaterialInterface<?> ore, MaterialInterface<?> stone, OreRichness richness) {
-        String prefix = stonePrefix(stone);
+	default String getRegistryKey(MaterialInterface<?> material, BlockCategoryFlags blockCategory)
+	{
+		return getName()+"_"+material.getName().toLowerCase(Locale.ROOT)
+				+"_"+blockCategory.getName().toLowerCase(Locale.ROOT);
+	}
 
-        return prefix + (richness.name().toLowerCase(Locale.ROOT) + "_" + getRegistryKey(ore.instance(), stone.instance()));
-    }
+	static String stonePrefix(Object stone)
+	{
+		if(stone instanceof IStoneType) return ((IStoneType)stone).getRegistryPrefix();
 
-    default String getRegistryKey(MaterialHelper ore, MaterialInterface<?> stone, OreRichness richness) {
-        String prefix = stonePrefix(stone);
+		String prefix = "";
+		if(stone instanceof MaterialHelper)
+		{
+			MaterialHelper helper = (MaterialHelper)stone;
+			for(ModFlags modflag : ModFlags.values())
+				if(helper.hasFlag(modflag)) prefix = modflag.getName()+"_";
+		}
+		return prefix;
+	}
 
-        return prefix +(richness.name().toLowerCase(Locale.ROOT) + "_" + getRegistryKey(ore, stone.instance()));
-    }
+	default String getOreDictName(MaterialHelper material)
+	{
+		String base = getOreDictBase();
+		if(base.isEmpty()) return "";
+		String name = material.getName();
+		return base+Character.toUpperCase(name.charAt(0))+name.substring(1);
+	}
 
-    default String getRegistryKey(MaterialHelper ore, MaterialHelper stone, OreRichness richness) {
-        String prefix = stonePrefix(stone);
+	default String getOreDictBase()
+	{
+		String[] parts = getValue().name().toLowerCase(Locale.ROOT).split("_");
+		StringBuilder builder = new StringBuilder(parts[0]);
+		for(int i = 1; i < parts.length; i++)
+			builder.append(Character.toUpperCase(parts[i].charAt(0))).append(parts[i].substring(1));
+		return builder.toString();
+	}
 
-        return prefix +(richness.name().toLowerCase(Locale.ROOT) + "_" + getRegistryKey(ore, stone));
-    }
+	default ItemSubGroup getSubGroup()
+	{
+		return ItemSubGroup.values()[0];
+	}
 
-    /**
-     * Ore block names are prefixed by where the host rock comes from. A rock type has its own prefix; anything
-     * else falls back to deriving one from its mod flags, which is how these ids were built normally.
-     * <p>
-     * Obviously, not feasible for a pack developer's custom stone types.
-     */
-    private static String stonePrefix(Object stone)
-    {
-        if(stone instanceof IStoneType type) return type.getRegistryPrefix();
-
-        String prefix = "";
-        if(stone instanceof MaterialHelper helper)
-        {
-            for(ModFlags modflag : ModFlags.values())
-            {
-                if(helper.hasFlag(modflag)) prefix = modflag.name().toLowerCase(Locale.ROOT)+"_";
-            }
-        }
-        return prefix;
-    }
-
-    default String getRegistryKey(MaterialInterface<?> material, BlockCategoryFlags blockCategory){
-        return getValue().name().toLowerCase(Locale.ROOT) + "_" + material.getName().toLowerCase(Locale.ROOT) + "_" + blockCategory.getName().toLowerCase(Locale.ROOT);
-    }
-
-    default ItemSubGroup getSubGroup() {
-        return ItemSubGroup.values()[0];
-    };
-
-    default String getName() {
-        return getValue().name().toLowerCase(Locale.ROOT);
-    }
-
-	default RenderTypeSkeleton getRenderType() {return RenderTypeSkeleton.SOLID;};
+	default BlockRenderLayer getRenderLayer()
+	{
+		return BlockRenderLayer.SOLID;
+	}
 }

@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_backdrop/ore_block_up",
-  "textures": {
-    "base": "minecraft:block/granite",
-    "ore_up": "immersivegeology:palette/block/ore_bearing/native_metal/poor_1_pristine_copper",
-    "stone_backdrop_up": "immersivegeology:palette/block/stone_backdrop/native_metal/poor_1_base_minecraft_granite"
-  }
-}

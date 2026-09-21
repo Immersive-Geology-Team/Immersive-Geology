@@ -8,6 +8,9 @@
 
 package com.igteam.immersivegeology.core.material.data.types;
 
+import com.igteam.immersivegeology.core.material.helper.material.IGBlockProperties;
+
+import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -19,11 +22,8 @@ import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.item.ItemStack;
+import net.minecraft.init.Blocks;
 
 import java.util.Optional;
 
@@ -35,7 +35,7 @@ public class MaterialMetal extends GeologyMaterial {
     }
 
     @Override
-    public Properties getProperties(IFlagType<?> flag)
+    public IGBlockProperties getProperties(IFlagType<?> flag)
     {
         return super.getProperties(flag);
     }

@@ -1,9 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/slab/slab",
-  "textures": {
-    "all": "immersivegeology:palette/block/storage_block/type_1_pristine_copper",
-    "cover": "immersivegeology:palette/block/storage_block/type_1_pristine_copper",
-    "particle": "immersivegeology:palette/block/storage_block/type_1_pristine_copper",
-    "side": "immersivegeology:palette/block/storage_block/type_1_pristine_copper"
-  }
-}

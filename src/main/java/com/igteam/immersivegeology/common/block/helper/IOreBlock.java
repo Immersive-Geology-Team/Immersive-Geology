@@ -1,40 +1,27 @@
-/*
- * Muddykat
- * Copyright (c) 2024
- *
- * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
- * Details can be found in the license file in the root folder of this project
- */
-
 package com.igteam.immersivegeology.common.block.helper;
 
-import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
-import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
-import com.mojang.datafixers.util.Pair;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
 
 import java.util.Collection;
-import java.util.List;
 
 public interface IOreBlock
 {
-	// We use IG in the name of these methods to prevent shadowing of Obfuscated Methods.
-	BlockState getIGDefaultBlockState();
+	IBlockState getIGDefaultBlockState();
 
 	Collection<MaterialInterface<?>> getMaterials();
 
 	String getIGDescriptionId();
 
 	Item asIGItem();
+
 	Block asIGBlock();
 
-	MaterialInterface<?> getMaterial(MaterialTexture t);
+	MaterialInterface<?> getMaterial(MaterialTexture texture);
 
 	default MaterialInterface<?> getOreMaterial()
 	{
@@ -49,12 +36,4 @@ public interface IOreBlock
 	OreRichness getOreRichness();
 
 	StoneFormation getStoneFormation();
-
-	IFlagType<?> getFlag();
-
-	ModFlags getModFlag();
-
-	ItemStack getItemDrop();
-
-	List<Pair<ItemStack, Float>> getExtraDrops();
 }

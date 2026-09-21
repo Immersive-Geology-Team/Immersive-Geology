@@ -1,8 +1,0 @@
-{
-  "parent": "immersivegeology:block/base/ore_block_backdrop",
-  "textures": {
-    "base": "minecraft:block/netherrack",
-    "ore": "immersivegeology:palette/block/ore_bearing/native_metal/normal_2_pristine_gold",
-    "stone_backdrop": "immersivegeology:palette/block/stone_backdrop/native_metal/normal_2_base_minecraft_netherrack"
-  }
-}

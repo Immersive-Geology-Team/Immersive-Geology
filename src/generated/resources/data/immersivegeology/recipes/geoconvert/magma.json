@@ -1,9 +1,0 @@
-{
-  "type": "immersivegeology:geothermal_conversion",
-  "blockHeat": 900,
-  "lowerBoundBlock": "minecraft:basalt",
-  "lowerHeat": 300,
-  "transitionBlock": "minecraft:magma_block",
-  "upperBoundBlock": "minecraft:lava",
-  "upperHeat": 1173
-}
