@@ -1,6 +1,10 @@
 package com.igteam.immersivegeology.core.registration;
 
+import blusunrize.immersiveengineering.api.MultiblockHandler;
 import com.igteam.immersivegeology.common.block.IGGenericBlock;
+import com.igteam.immersivegeology.common.block.multiblocks.IGMultiblockBlock;
+import com.igteam.immersivegeology.common.block.multiblocks.entity.TileEntityBallmill;
+import com.igteam.immersivegeology.common.block.multiblocks.structure.IGBallmillStructure;
 import com.igteam.immersivegeology.common.block.helper.OreBlockMeta;
 import com.igteam.immersivegeology.common.block.ore.IGOreBlock;
 import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
@@ -83,6 +87,8 @@ public class IGContent
 		if(built) return;
 		built = true;
 
+		registerMultiblocks();
+
 		int blockCount = 0;
 		int itemCount = 0;
 
@@ -126,6 +132,20 @@ public class IGContent
 		}
 
 		IGLib.IG_LOGGER.info("- Built {} material blocks and {} material items", blockCount, itemCount);
+	}
+
+	private static void registerMultiblocks()
+	{
+		IGMultiblockBlock ballmill = new IGMultiblockBlock(IGBallmillStructure.INSTANCE, TileEntityBallmill::new);
+		registerBlock(IGBallmillStructure.NAME, ballmill);
+		registerItem(IGBallmillStructure.NAME, new net.minecraft.item.ItemBlock(ballmill));
+
+		net.minecraftforge.fml.common.registry.GameRegistry.registerTileEntity(
+				TileEntityBallmill.class, new ResourceLocation(IGLib.MODID, "ballmill"));
+
+		MultiblockHandler.registerMultiblock(IGBallmillStructure.INSTANCE);
+
+		IGLib.IG_LOGGER.info("- Registered multiblock: {}", IGBallmillStructure.NAME);
 	}
 
 	private static boolean isOreItem(ItemCategoryFlags category)
@@ -178,11 +198,46 @@ public class IGContent
 		IGLib.IG_LOGGER.info("- Registered {} blocks", BLOCKS.size());
 	}
 
+	public static void verifyMultiblocks()
+	{
+		com.igteam.immersivegeology.common.block.multiblocks.structure.IGMultiblockStructure structure =
+				IGBallmillStructure.INSTANCE;
+		net.minecraft.block.state.IBlockState trigger = structure.getTriggerState();
+		IGLib.IG_LOGGER.info("- Multiblock {} trigger at {} resolves to {}",
+				structure.getUniqueName(), structure.getTriggerOffset(), trigger);
+
+		int unresolved = 0;
+		net.minecraft.item.ItemStack[][][] manual = structure.getStructureManual();
+		for(net.minecraft.item.ItemStack[][] layer : manual)
+			for(net.minecraft.item.ItemStack[] row : layer)
+				for(net.minecraft.item.ItemStack stack : row)
+					if(stack==null||stack.isEmpty()) unresolved++;
+		IGLib.IG_LOGGER.info("- Multiblock {} manual: {} layers, {} empty/air slots",
+				structure.getUniqueName(), manual.length, unresolved);
+
+		// Prove the hammer path: IE passes the clicked block's state straight to isBlockTrigger
+		if(trigger!=null)
+		{
+			boolean accepts = structure.isBlockTrigger(trigger);
+			IGLib.IG_LOGGER.info("- Multiblock {} isBlockTrigger(trigger state) = {}",
+					structure.getUniqueName(), accepts);
+			if(!accepts)
+				IGLib.IG_LOGGER.error("- Multiblock {} will NOT form: trigger state rejected by its own check",
+						structure.getUniqueName());
+
+			boolean registered = blusunrize.immersiveengineering.api.MultiblockHandler.getMultiblocks()
+					.contains(structure);
+			IGLib.IG_LOGGER.info("- Multiblock {} present in IE registry = {}",
+					structure.getUniqueName(), registered);
+		}
+	}
+
 	@SubscribeEvent
 	public static void onItemRegistry(RegistryEvent.Register<Item> event)
 	{
 		for(Item item : ITEMS) event.getRegistry().register(item);
 		IGLib.IG_LOGGER.info("- Registered {} items", ITEMS.size());
 		registerOreDictionary();
+		verifyMultiblocks();
 	}
 }

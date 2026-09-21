@@ -8,6 +8,8 @@
 
 package com.igteam.immersivegeology.core.material.data.enums;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.TagKey;
+
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.FluidTagInput;
 
 import com.igteam.immersivegeology.core.material.data.chemical.*;

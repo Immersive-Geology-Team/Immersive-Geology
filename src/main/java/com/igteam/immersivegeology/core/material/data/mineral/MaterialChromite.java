@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.IETags;
 
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IngredientWithSize;

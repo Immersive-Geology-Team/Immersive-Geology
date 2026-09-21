@@ -1,5 +1,7 @@
 package com.igteam.immersivegeology.core.material.data.stone.vanilla;
 
+import net.minecraft.world.World;
+
 import com.igteam.immersivegeology.core.material.helper.material.IGBlockProperties;
 
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
@@ -20,7 +22,7 @@ public class MaterialMCNetherrack extends MaterialStone {
         super();
         this.name = "netherrack"; // Special Case as we need to override the default name assignment method
         this.STONE_FORMATION = StoneFormation.NETHER_STONE;
-        this.DIMENSIONS = Set.of(World.NETHER.location());
+        this.DIMENSIONS = java.util.Collections.singleton(new net.minecraft.util.ResourceLocation("the_nether"));
         addFlags(MaterialFlags.EXISTING_IMPLEMENTATION, ModFlags.MINECRAFT);
     }
 

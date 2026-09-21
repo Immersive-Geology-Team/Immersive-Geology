@@ -1,5 +1,7 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Items;
+
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.FluidTagInput;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IngredientWithSize;
 
@@ -19,7 +21,6 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 import net.minecraft.item.ItemStack;
-import net.minecraft.init.Items;
 
 import java.util.LinkedHashSet;
 import java.util.List;

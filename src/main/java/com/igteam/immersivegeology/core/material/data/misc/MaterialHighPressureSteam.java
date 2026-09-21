@@ -8,6 +8,8 @@
 
 package com.igteam.immersivegeology.core.material.data.misc;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Properties;
+
 import com.igteam.immersivegeology.core.material.data.types.MaterialMisc;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;

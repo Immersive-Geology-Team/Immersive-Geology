@@ -8,6 +8,8 @@
 
 package com.igteam.immersivegeology.core.material.data.chemical;
 
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGRegistrationHolder;
+
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -15,7 +17,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.init.Items;
 import net.minecraftforge.fluids.FluidStack;
 

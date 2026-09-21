@@ -15,7 +15,7 @@ public class MaterialMCStone extends MaterialStone
 	{
 		super();
 		this.name = "stone";
-		this.stoneFormation = StoneFormation.MINECRAFT_STONE;
+		this.STONE_FORMATION = StoneFormation.MINECRAFT_STONE;
 		this.textureName = "stone";
 		addFlags(MaterialFlags.EXISTING_IMPLEMENTATION, ModFlags.MINECRAFT);
 	}

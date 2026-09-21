@@ -8,6 +8,8 @@
 
 package com.igteam.immersivegeology.core.material.data.stone.config;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.TargetBlockState;
+
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.material.IStoneType;

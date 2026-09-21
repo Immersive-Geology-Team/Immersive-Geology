@@ -36,6 +36,7 @@ unimined.minecraft {
         loader version_cleanroom
         runs.all {
             args += ['--username', minecraft_username]
+            systemProperty('ig.debugMultiblockFormation', 'true')
             workingDir = project.file('run1122')
             return
         }

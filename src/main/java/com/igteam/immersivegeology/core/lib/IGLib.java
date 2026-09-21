@@ -6,6 +6,7 @@ import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import com.igteam.immersivegeology.core.material.helper.material.IGBlockProperties;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,6 +24,17 @@ public class IGLib
 	public static final String DEPENDENCIES = "required-after:immersiveengineering";
 
 	public static final Logger IG_LOGGER = LogManager.getLogger(NAME);
+
+	public static final IGBlockProperties STONE_DECO_PROPS =
+			IGBlockProperties.of(net.minecraft.block.material.Material.ROCK);
+	public static final IGBlockProperties CRYSTAL_DECO_PROPS =
+			IGBlockProperties.of(net.minecraft.block.material.Material.GLASS);
+	public static final IGBlockProperties DEFAULT_METAL_PROPERTIES =
+			IGBlockProperties.of(net.minecraft.block.material.Material.IRON);
+	public static final IGBlockProperties SHEETMETAL_PROPERTIES =
+			IGBlockProperties.of(net.minecraft.block.material.Material.IRON);
+	public static final IGBlockProperties METAL_PROPERTIES_NO_OCCLUSION =
+			IGBlockProperties.of(net.minecraft.block.material.Material.IRON);
 
 	public static final int SLURRY_TO_CRYSTAL_MB = 144;
 	public static final int SULFUR_OUTGAS = 25;

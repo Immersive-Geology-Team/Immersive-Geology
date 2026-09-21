@@ -16,6 +16,11 @@ public class FluidTagInput
 		return tag;
 	}
 
+	public Object serialize()
+	{
+		return String.valueOf(tag)+"@"+amount;
+	}
+
 	public int getAmount()
 	{
 		return amount;

@@ -12,9 +12,6 @@ import net.minecraft.block.state.IBlockState;
 
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
-import com.igteam.immersivegeology.core.material.data.stone.config.ConfigStoneEntry;
-import com.igteam.immersivegeology.core.material.data.stone.config.ConfigStoneType;
-import com.igteam.immersivegeology.core.material.data.stone.config.IGStoneTypeConfig;
 import com.igteam.immersivegeology.core.material.helper.material.IStoneType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
@@ -45,12 +42,8 @@ public final class IGStoneTypes
 	{
 		List<IStoneType> registered = new ArrayList<>(List.of(StoneEnum.values()));
 
-		int index = registered.size();
-		for(ConfigStoneEntry entry : IGStoneTypeConfig.load())
-		{
-			registered.add(new ConfigStoneType(entry, index++));
-		}
-
+		// Config-declared stone types are deferred to Phase 4 with world generation;
+		// see deferred/phase4/stone-config. Built-in rock types are unaffected.
 		REGISTERED = List.copyOf(registered);
 
 		int declared = REGISTERED.size()-StoneEnum.values().length;
@@ -80,7 +73,7 @@ public final class IGStoneTypes
 			for(ResourceLocation dimension : stone.getDimensions())
 			{
 				List<String> hosts = new ArrayList<>();
-				for(MaterialInterface<?> material : IGLib.getGeneratedMaterials())
+				for(MaterialInterface<?> material : IGLib.getGeologyMaterials())
 				{
 					if(!material.instance().isValidStoneFormation(formation)) continue;
 					if(!material.instance().getAcceptableDimensions().contains(dimension.toString())) continue;
@@ -124,7 +117,7 @@ public final class IGStoneTypes
 
 	private static IStoneType resolve(Block block, IBlockState state)
 	{
-		IStoneType declared = declaredHosts().get(ForgeRegistries.BLOCKS.getKey(block));
+		IStoneType declared = declaredHosts().get(block.getRegistryName());
 		if(declared!=null) return declared;
 
 		return StoneEnum.selectWorldState(state);

@@ -7,6 +7,8 @@ import java.util.Locale;
 public enum ModFlags implements IFlagType<ModFlags>
 {
 	MINECRAFT,
+	BEYOND_EARTH,
+	AD_ASTRA,
 	IMMERSIVEENGINEERING,
 	TFC;
 
@@ -19,5 +21,10 @@ public enum ModFlags implements IFlagType<ModFlags>
 	public boolean isLoaded()
 	{
 		return this==MINECRAFT||Loader.isModLoaded(name().toLowerCase(Locale.ROOT));
+	}
+
+	public boolean isStrictlyLoaded()
+	{
+		return isLoaded();
 	}
 }

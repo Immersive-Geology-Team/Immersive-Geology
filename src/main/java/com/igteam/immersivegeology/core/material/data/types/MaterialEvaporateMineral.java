@@ -8,11 +8,15 @@
 
 package com.igteam.immersivegeology.core.material.data.types;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Items;
+
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGWorldGen;
+
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.FluidTags;
 
 import com.igteam.immersivegeology.core.material.helper.material.IGBlockProperties;
 
-import com.igteam.immersivegeology.common.world.IGWorldGen;
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGWorldGen;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
@@ -22,7 +26,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.init.Items;
 
 import java.util.Optional;
 

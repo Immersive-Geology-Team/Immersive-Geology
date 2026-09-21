@@ -1,7 +1,9 @@
 package com.igteam.immersivegeology.core.material.data.types;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.TagKey;
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Biome;
+
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
-import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;

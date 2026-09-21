@@ -8,6 +8,11 @@
 
 package com.igteam.immersivegeology.core.material.data.enums;
 
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGShimTypes.Pair;
+
+import com.igteam.immersivegeology.core.lib.shim.MCShims.TagKey;
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Biome;
+
 import net.minecraft.block.state.IBlockState;
 
 
@@ -23,7 +28,6 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import com.mojang.datafixers.util.Pair;
 
 import java.util.*;
 import java.util.function.Function;
@@ -110,7 +114,7 @@ public enum MineralEnum implements MaterialInterface<MaterialMineral>, IWorldGen
     @Override
     public IBlockState getDefaultBlockstate()
     {
-        return material.getBlock(BlockCategoryFlags.EVAPORATE).defaultBlockState();
+        return material.getBlock(BlockCategoryFlags.EVAPORATE).getDefaultState();
     }
 
     @Override

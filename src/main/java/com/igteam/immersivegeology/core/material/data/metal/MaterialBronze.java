@@ -8,16 +8,18 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGMultiblockProvider;
+
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGBloomeryMultiblock;
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGReverberationFurnaceMultiblock;
+
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.IEMultiblocks;
 
-import com.igteam.immersivegeology.common.block.multiblocks.IGBloomeryMultiblock;
-import com.igteam.immersivegeology.common.block.multiblocks.IGReverberationFurnaceMultiblock;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetalAlloy;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
-import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 
 import java.util.ArrayList;
 import java.util.List;

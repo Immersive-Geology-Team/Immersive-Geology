@@ -1,5 +1,7 @@
 package com.igteam.immersivegeology.core.material.data.stone.vanilla;
 
+import net.minecraft.world.World;
+
 import com.igteam.immersivegeology.core.material.helper.material.IGBlockProperties;
 
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
@@ -20,7 +22,7 @@ public class MaterialMCEndStone extends MaterialStone {
         super();
         this.name = "end_stone"; // Special Case as we need to override the default name assignment method
         this.STONE_FORMATION = StoneFormation.END_STONE;
-        this.DIMENSIONS = Set.of(World.END.location());
+        this.DIMENSIONS = java.util.Collections.singleton(new net.minecraft.util.ResourceLocation("the_end"));
         addFlags(MaterialFlags.EXISTING_IMPLEMENTATION, ModFlags.MINECRAFT);
     }
 

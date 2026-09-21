@@ -13,6 +13,11 @@ public class IngredientWithSize
 		this.count = count;
 	}
 
+	public IngredientWithSize(Object ingredient)
+	{
+		this(ingredient, 1);
+	}
+
 	public static IngredientWithSize of(ItemStack stack)
 	{
 		return new IngredientWithSize(stack, stack==null?0: stack.getCount());

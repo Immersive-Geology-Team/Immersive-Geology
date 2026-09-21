@@ -1,5 +1,6 @@
 package com.igteam.immersivegeology.core;
 
+import com.igteam.immersivegeology.client.manual.IGManualEntries;
 import com.igteam.immersivegeology.client.pack.IGPackInjector;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -25,6 +26,7 @@ public class ClientProxy extends CommonProxy
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		super.postInit(event);
+		IGManualEntries.register();
 	}
 
 	@Override

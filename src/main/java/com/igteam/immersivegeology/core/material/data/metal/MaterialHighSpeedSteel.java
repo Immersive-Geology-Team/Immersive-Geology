@@ -8,6 +8,8 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Tiers;
+
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IngredientWithSize;
 
 import com.igteam.immersivegeology.common.item.IGGenericDrillHead.DrillHeadProps;
@@ -22,7 +24,6 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraft.init.Items;
-import net.minecraft.world.item.Tiers;
 
 import java.util.function.BiFunction;
 

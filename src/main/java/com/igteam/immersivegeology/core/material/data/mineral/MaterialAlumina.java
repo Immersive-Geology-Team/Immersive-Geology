@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.IETags;
 
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.FluidTagInput;
@@ -84,7 +85,7 @@ public class MaterialAlumina extends MaterialMineral {
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING)
                 .create("alumina_dust_to_compound_aluminum_dust", MetalEnum.Aluminum.getStack(ItemCategoryFlags.COMPOUND_DUST),
-                        FluidStack.EMPTY, new IngredientWithSize(getItemTag(ItemCategoryFlags.POWDER), IGLib.COMPOUND_FROM_ACID_AMOUNT),
+                        (net.minecraftforge.fluids.FluidStack)null, new IngredientWithSize(getItemTag(ItemCategoryFlags.POWDER), IGLib.COMPOUND_FROM_ACID_AMOUNT),
                         new FluidTagInput(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_COMPOUND_AMOUNT),
                         null, null, 200, 51200).joinBranches(bayer_process, powder_a, powder_b);
 

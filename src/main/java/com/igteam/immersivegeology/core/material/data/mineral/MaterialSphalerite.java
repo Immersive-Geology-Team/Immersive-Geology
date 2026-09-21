@@ -1,5 +1,8 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Ingredients;
+
+
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;

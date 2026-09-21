@@ -8,6 +8,10 @@
 
 package com.igteam.immersivegeology.core.material.data.enums;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Codec;
+
+import com.igteam.immersivegeology.core.lib.shim.MCShims.TargetBlockState;
+
 import net.minecraft.block.state.IBlockState;
 
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -120,7 +124,7 @@ public enum StoneEnum implements IStoneType {
     private static StoneEnum resolveWorldState(Block block) {
         try
         {
-            String name = block.getDescriptionId().toLowerCase(Locale.ROOT);
+            String name = block.getTranslationKey().toLowerCase(Locale.ROOT);
             String stoneName = capitalizeFirstLetter(name.substring(name.lastIndexOf('.')+1));
 
             // Check for Minecraft stones first
@@ -167,7 +171,7 @@ public enum StoneEnum implements IStoneType {
 
     public boolean isWorldState(IBlockState stoneState)
     {
-        return stoneState.getBlock().getName().getString().equalsIgnoreCase(material.getName());
+        return stoneState.getBlock().getTranslationKey().equalsIgnoreCase(material.getName());
     }
 
     public String getTFCStoneLoc()

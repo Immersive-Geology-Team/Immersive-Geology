@@ -8,6 +8,8 @@
 
 package com.igteam.immersivegeology.core.material.data.chemical;
 
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.Metals;
+
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.EnumMetals;
 
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.FluidTags;
@@ -45,7 +47,7 @@ public class MaterialSulfurDioxide extends MaterialChemical
 		IGMethodBuilder.synthesis(this, IGStageDesignation.SYNTHESIS)
 				.create("sulfuric_acid_from_water_and_sulfur_dioxide",
 						FluidTags.WATER, 2, getFluidTag(), 50,
-						net.minecraft.item.Item.getItemFromBlock(Metals.PLATES.get(EnumMetals.LEAD)),
+						Metals.PLATES.get(EnumMetals.LEAD),
 						ChemicalEnum.SulfuricAcid.getFluidStack(6));
 
 		IGMethodBuilder.synthesis(this, IGStageDesignation.SYNTHESIS)

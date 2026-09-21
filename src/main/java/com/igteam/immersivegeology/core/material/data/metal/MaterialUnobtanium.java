@@ -8,11 +8,12 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Tier;
+
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.helper.ToolTierHelper;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
-import net.minecraft.world.item.Tier;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -24,7 +25,7 @@ public class MaterialUnobtanium extends MaterialMetal {
         addFlags(ItemCategoryFlags.TOOL_HOE);
     }
 
-    public Tier getToolTier()
+    public com.igteam.immersivegeology.core.lib.shim.MCShims.ITier getToolTier()
     {
         return ToolTierHelper.UNOBTANIUM;
     }

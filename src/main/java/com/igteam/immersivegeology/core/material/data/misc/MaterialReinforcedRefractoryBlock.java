@@ -8,6 +8,8 @@
 
 package com.igteam.immersivegeology.core.material.data.misc;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.SoundType;
+
 import com.igteam.immersivegeology.core.material.helper.material.IGBlockProperties;
 
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -15,7 +17,6 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialMisc;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.block.SoundType;
 
 public class MaterialReinforcedRefractoryBlock extends MaterialMisc
 {

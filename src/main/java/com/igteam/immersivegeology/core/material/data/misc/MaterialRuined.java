@@ -8,7 +8,13 @@
 
 package com.igteam.immersivegeology.core.material.data.misc;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.SoundType;
+
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGRegistrationHolder;
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Ingredients;
+
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.EnumMetals;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.Metals;
 
 import com.igteam.immersivegeology.core.material.helper.material.IGBlockProperties;
 
@@ -21,10 +27,8 @@ import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.item.ItemStack;
-import net.minecraft.block.SoundType;
 
 public class MaterialRuined extends MaterialMisc
 {

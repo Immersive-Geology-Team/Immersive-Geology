@@ -8,6 +8,9 @@
 
 package com.igteam.immersivegeology.core.material.data.misc;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Items;
+
+
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.IETags;
 
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.FluidTagInput;

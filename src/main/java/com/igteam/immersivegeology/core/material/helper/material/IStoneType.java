@@ -16,11 +16,24 @@ public interface IStoneType extends MaterialInterface<MaterialStone>
 
 	String getRegistryPrefix();
 
-	Set<String> getDimensions();
+	Set<net.minecraft.util.ResourceLocation> getDimensions();
 
 	boolean declaresPresence();
 
-	IBlockState getHostState();
+	default IBlockState getHostState()
+	{
+		return instance().getHostState();
+	}
+
+	default net.minecraft.util.ResourceLocation getHostBlockId()
+	{
+		return null;
+	}
+
+	default String getTFCStoneLoc()
+	{
+		return "";
+	}
 
 	static String backdropPaletteKey(MaterialInterface<?> stone)
 	{

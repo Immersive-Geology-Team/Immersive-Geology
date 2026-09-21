@@ -8,6 +8,11 @@ public class IGBlockProperties
 	private float hardness = 3.0F;
 	private float resistance = 5.0F;
 
+	public static IGBlockProperties of()
+	{
+		return new IGBlockProperties();
+	}
+
 	public static IGBlockProperties of(Object material)
 	{
 		IGBlockProperties properties = new IGBlockProperties();
@@ -48,6 +53,21 @@ public class IGBlockProperties
 		return this;
 	}
 
+	public IGBlockProperties forceSolidOn()
+	{
+		return this;
+	}
+
+	public IGBlockProperties lightLevel(Object value)
+	{
+		return this;
+	}
+
+	public IGBlockProperties randomTicks()
+	{
+		return this;
+	}
+
 	public IGBlockProperties noOcclusion()
 	{
 		return this;
@@ -56,6 +76,11 @@ public class IGBlockProperties
 	public IGBlockProperties requiresCorrectToolForDrops()
 	{
 		return this;
+	}
+
+	public String getDescriptionId()
+	{
+		return "";
 	}
 
 	public Material getMaterial()

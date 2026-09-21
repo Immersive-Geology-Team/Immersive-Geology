@@ -8,13 +8,18 @@
 
 package com.igteam.immersivegeology.core.material.data.enums;
 
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGShimTypes.Pair;
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGShimTypes.TurbineFuel;
+
+import com.igteam.immersivegeology.core.lib.shim.MCShims.TagKey;
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Biome;
+
 import net.minecraft.block.state.IBlockState;
 
 import com.igteam.immersivegeology.core.material.helper.material.IStoneType;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.MineralWeathering;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.TurbineFuel;
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.core.material.data.chemical.mantle.MaterialMoltenMantle;
@@ -24,7 +29,6 @@ import com.igteam.immersivegeology.core.material.helper.ScaffoldingHelper;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import com.mojang.datafixers.util.Pair;
 
 import java.util.*;
 import java.util.function.Function;
@@ -100,7 +104,7 @@ public enum MetalEnum implements MaterialInterface<MaterialMetal>, IWorldGenConf
         List<String> permutations = new ArrayList<>();
         scaffoldingMetals().forEach((e) ->
         {
-            permutations.add(e.getName() +"/"+ MineralWeathering.PRISTINE.name().toLowerCase(Locale.ROOT));
+            permutations.add(e.name() +"/"+ MineralWeathering.PRISTINE.name().toLowerCase(Locale.ROOT));
         });
 
         return permutations;

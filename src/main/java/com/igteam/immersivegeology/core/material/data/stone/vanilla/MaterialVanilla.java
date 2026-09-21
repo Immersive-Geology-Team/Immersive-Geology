@@ -1,5 +1,16 @@
 package com.igteam.immersivegeology.core.material.data.stone.vanilla;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.OreConfiguration;
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Tags;
+
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IMultiblock;
+
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGBloomeryMultiblock;
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGReverberationFurnaceMultiblock;
+
+import com.igteam.immersivegeology.core.lib.shim.MCShims.TargetBlockState;
+import com.igteam.immersivegeology.core.lib.shim.MCShims.TagMatchTest;
+
 import net.minecraft.block.state.IBlockState;
 
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.IEMultiblocks;
@@ -7,8 +18,6 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import com.igteam.immersivegeology.core.material.helper.material.IGBlockProperties;
 
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
-import com.igteam.immersivegeology.common.block.multiblocks.IGBloomeryMultiblock;
-import com.igteam.immersivegeology.common.block.multiblocks.IGReverberationFurnaceMultiblock;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;

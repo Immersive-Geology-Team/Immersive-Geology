@@ -1,5 +1,9 @@
 package com.igteam.immersivegeology.core.material.data.types;
 
+import net.minecraft.world.World;
+
+import com.igteam.immersivegeology.core.lib.shim.MCShims.TargetBlockState;
+
 import com.igteam.immersivegeology.core.material.helper.material.IGBlockProperties;
 
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -24,7 +28,19 @@ public class MaterialStone extends GeologyMaterial {
     /**
      * The dimensions this stone makes can spawn in. Overworld unless a subclass says otherwise.
      */
-    protected Set<ResourceLocation> DIMENSIONS = Set.of(World.OVERWORLD.location());
+    protected String textureName = null;
+
+    public net.minecraft.block.state.IBlockState getHostState()
+    {
+        return net.minecraft.init.Blocks.STONE.getDefaultState();
+    }
+
+    public String getTextureName()
+    {
+        return textureName==null?getName(): textureName;
+    }
+
+    protected Set<ResourceLocation> DIMENSIONS = java.util.Collections.singleton(new net.minecraft.util.ResourceLocation("overworld"));
 
     public MaterialStone() {
         super();

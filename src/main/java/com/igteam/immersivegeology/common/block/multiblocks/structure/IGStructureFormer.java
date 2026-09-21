@@ -31,7 +31,43 @@ public final class IGStructureFormer
 				return true;
 			}
 		}
+
+		if(DEBUG_FORMATION)
+			for(EnumFacing facing : EnumFacing.HORIZONTALS)
+				reportMismatch(structure, template, world, findOrigin(structure, clicked, facing), facing);
+
 		return false;
+	}
+
+	private static final boolean DEBUG_FORMATION = Boolean.getBoolean("ig.debugMultiblockFormation");
+    // I think I have this backwards... I might be reading things backwards...
+	private static void reportMismatch(IGMultiblockStructure structure, IGStructureTemplate template, World world,
+									   BlockPos origin, EnumFacing facing)
+	{
+		int mismatches = 0;
+		for(int y = 0; y < template.sizeY()&&mismatches < 4; y++)
+			for(int z = 0; z < template.sizeZ()&&mismatches < 4; z++)
+				for(int x = 0; x < template.sizeX()&&mismatches < 4; x++)
+				{
+					String id = template.getBlockId(x, y, z);
+					IBlockState expected = IGBlockMapping.toState(id);
+					BlockPos target = origin.add(rotate(new BlockPos(x, y, z), facing));
+					IBlockState actual = world.getBlockState(target);
+
+					boolean ok = expected==null
+							?actual.getBlock().isAir(actual, world, target)
+							: actual.getBlock()==expected.getBlock()
+							&&actual.getBlock().getMetaFromState(actual)
+							==expected.getBlock().getMetaFromState(expected);
+
+					if(!ok)
+					{
+						com.igteam.immersivegeology.core.lib.IGLib.IG_LOGGER.warn(
+								"[{}] facing {} at template ({},{},{}) world {}: wanted {} ({}), found {}",
+								structure.getUniqueName(), facing, x, y, z, target, id, expected, actual);
+						mismatches++;
+					}
+				}
 	}
 
 	private static BlockPos findOrigin(IGMultiblockStructure structure, BlockPos clicked, EnumFacing facing)
@@ -40,6 +76,7 @@ public final class IGStructureFormer
 		return clicked.subtract(rotate(trigger, facing));
 	}
 
+	// I'll need to recheck this once I've had full sleep.
 	private static boolean matches(IGMultiblockStructure structure, IGStructureTemplate template, World world,
 								   BlockPos origin, EnumFacing facing)
 	{
@@ -47,20 +84,19 @@ public final class IGStructureFormer
 			for(int z = 0; z < template.sizeZ(); z++)
 				for(int x = 0; x < template.sizeX(); x++)
 				{
-					ItemStack expected = IGBlockMapping.toStack(template.getBlockId(x, y, z));
+					IBlockState expected = IGBlockMapping.toState(template.getBlockId(x, y, z));
 					BlockPos target = origin.add(rotate(new BlockPos(x, y, z), facing));
 					IBlockState actual = world.getBlockState(target);
 
-					if(expected.isEmpty())
+					if(expected==null)
 					{
 						if(!actual.getBlock().isAir(actual, world, target)) return false;
 						continue;
 					}
 
-					Block expectedBlock = Block.getBlockFromItem(expected.getItem());
-					if(expectedBlock==Blocks.AIR) continue;
-					if(actual.getBlock()!=expectedBlock) return false;
-					if(expected.getMetadata()!=expectedBlock.getMetaFromState(actual)) return false;
+					if(actual.getBlock()!=expected.getBlock()) return false;
+					if(actual.getBlock().getMetaFromState(actual)
+							!=expected.getBlock().getMetaFromState(expected)) return false;
 				}
 		return true;
 	}
@@ -77,6 +113,7 @@ public final class IGStructureFormer
 					BlockPos target = origin.add(rotate(new BlockPos(x, y, z), facing));
 					IBlockState previous = world.getBlockState(target);
 					ItemStack original = IGBlockMapping.toStack(template.getBlockId(x, y, z));
+					if(IGBlockMapping.toState(template.getBlockId(x, y, z))==null) continue;
 
 					world.setBlockState(target, partState, 3);
 

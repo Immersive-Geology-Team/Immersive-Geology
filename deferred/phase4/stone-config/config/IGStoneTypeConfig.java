@@ -8,6 +8,8 @@
 
 package com.igteam.immersivegeology.core.material.data.stone.config;
 
+import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGShimTypes.Pair;
+
 import com.electronwill.nightconfig.core.UnmodifiableConfig;
 import com.electronwill.nightconfig.toml.TomlParser;
 import com.igteam.immersivegeology.core.lib.IGLib;

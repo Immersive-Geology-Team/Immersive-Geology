@@ -43,6 +43,12 @@ public interface MaterialHelper
 
 	void addExistingFlag(ModFlags mod, BlockCategoryFlags... flags);
 
+	default boolean acceptableStoneType(MaterialHelper stone)
+	{
+		return stone instanceof com.igteam.immersivegeology.core.material.data.types.MaterialStone mcStone
+				&&acceptableStoneType(mcStone);
+	}
+
 	default boolean acceptableStoneType(IStoneType stone)
 	{
 		return acceptableStoneType(stone.instance());
@@ -128,6 +134,19 @@ public interface MaterialHelper
 		return ores.isEmpty()?ItemStack.EMPTY: ores.get(0).copy();
 	}
 
+	default com.igteam.immersivegeology.common.block.helper.IOreBlock getOreBlock(MaterialHelper stone,
+			com.igteam.immersivegeology.common.block.helper.OreRichness richness)
+	{
+		return stone instanceof IStoneType type?getOreBlock(type, richness): null;
+	}
+
+	default com.igteam.immersivegeology.common.block.helper.IOreBlock getOreBlock(IStoneType stone,
+			com.igteam.immersivegeology.common.block.helper.OreRichness richness)
+	{
+		Block block = getOreBlock(stone);
+		return block instanceof com.igteam.immersivegeology.common.block.helper.IOreBlock ore?ore: null;
+	}
+
 	default Block getOreBlock(IStoneType stone)
 	{
 		return IGContent.getBlock(BlockCategoryFlags.ORE_BLOCK.getRegistryKey(this, stone.instance()));
@@ -145,6 +164,11 @@ public interface MaterialHelper
 		return new IGTag(flag==null?"": flag.getOreDictName(this));
 	}
 
+	default com.igteam.immersivegeology.core.lib.shim.MCShims.TagKey<Object> getFluidTagKey(BlockCategoryFlags type, MaterialHelper... helper)
+	{
+		return new com.igteam.immersivegeology.core.lib.shim.MCShims.TagKey<>(getFluidTag(type, helper).getName());
+	}
+
 	default IGTag getFluidTag(BlockCategoryFlags type, MaterialHelper... helper)
 	{
 		StringBuilder name = new StringBuilder(type==null?"fluid": type.getName());
@@ -159,7 +183,32 @@ public interface MaterialHelper
 		return getFluidTag(type, helper);
 	}
 
-	Set<IGRecipeStage> logged_recipes = new java.util.HashSet<>();
+	Set<String> logged_recipes = new java.util.HashSet<>();
+
+	default net.minecraftforge.fluids.Fluid getFluid(BlockCategoryFlags flag)
+	{
+		return null;
+	}
+
+	default net.minecraftforge.fluids.Fluid getFluid(BlockCategoryFlags flag, MaterialHelper secondary)
+	{
+		return null;
+	}
+
+	default net.minecraftforge.fluids.Fluid getFluid(BlockCategoryFlags flag, MaterialInterface<?> secondary)
+	{
+		return getFluid(flag, secondary==null?null: secondary.instance());
+	}
+
+	default java.util.HashSet<MaterialInterface<?>> getValidSlurryMaterials()
+	{
+		return new java.util.HashSet<>();
+	}
+
+	default com.igteam.immersivegeology.core.material.helper.ScaffoldingHelper getScaffoldingBlock()
+	{
+		return new com.igteam.immersivegeology.core.material.helper.ScaffoldingHelper(this);
+	}
 
 	MaterialInterface<?> getPrimaryProduct();
 

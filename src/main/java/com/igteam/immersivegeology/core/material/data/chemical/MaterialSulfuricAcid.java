@@ -8,32 +8,30 @@
 
 package com.igteam.immersivegeology.core.material.data.chemical;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumHand;
+import net.minecraft.world.World;
+
+
 import net.minecraft.block.state.IBlockState;
 
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
-import net.minecraft.client.gui.screens.social.PlayerEntry;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Pig;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.monster.Skeleton;
-import net.minecraft.world.entity.monster.Zombie;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.util.EnumHand;
 import net.minecraft.item.ItemStack;
 import net.minecraft.init.Items;
 import net.minecraft.init.Blocks;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.event.ForgeEventFactory;
 
 import java.util.HashMap;
@@ -52,39 +50,37 @@ public class MaterialSulfuricAcid extends MaterialChemical
 	@Override
 	public void entityInside(IBlockState state, World level, BlockPos pos, Entity entity)
 	{
-		if (entity instanceof LivingEntity living) {
+		if (entity instanceof EntityLivingBase living) {
 			// Apply wither effect to players and zombies
-			if (living instanceof Player || living instanceof Zombie || living instanceof Animal) {
-				living.addEffect(new MobEffectInstance(MobEffects.WITHER, 60, 1));
+			if (living instanceof EntityPlayer || living instanceof EntityZombie || living instanceof EntityAnimal) {
+				living.addPotionEffect(new net.minecraft.potion.PotionEffect(net.minecraft.init.MobEffects.WITHER, 60, 1));
 			}
 
 			// Additional logic for zombies
-			if (living instanceof Zombie zombie && zombie.getHealth() < 4) {
-				if (level instanceof ServerLevel) {
-					if(!zombie.isBaby()) {
-						zombie.convertTo(EntityType.SKELETON, true);
+			if (living instanceof EntityZombie zombie && zombie.getHealth() < 4) {
+				if (!level.isRemote) {
+					if(!zombie.isChild()) {
+						zombie.setDead();
 					}
-				} else if (level instanceof ClientLevel client) {
-					client.addParticle(
-							ParticleTypes.POOF,
-							zombie.getX(), zombie.getY(), zombie.getZ(),
+				} else {
+					level.spawnParticle(net.minecraft.util.EnumParticleTypes.EXPLOSION_NORMAL,
+							zombie.posX, zombie.posY, zombie.posZ,
 							0, 0.0625, 0
 					);
 				}
 			}
-			if(!(living instanceof Skeleton)) living.setSecondsOnFire(40);
+			if(!(living instanceof EntitySkeleton)) living.setFire(40);
 		}
 
 		// Logic for items
-		if (entity instanceof ItemEntity item && !item.fireImmune()) {
-			level.addParticle(
-					ParticleTypes.SMOKE,
-					item.getX(), item.getY(), item.getZ(),
+		if (entity instanceof EntityItem item && !item.isImmuneToFire()) {
+			level.spawnParticle(net.minecraft.util.EnumParticleTypes.SMOKE_NORMAL,
+					item.posX, item.posY, item.posZ,
 					0, 0.0625, 0
 			);
 
 			if (rand.nextInt(60) == 0) {
-				item.setSecondsOnFire(3);
+				item.setFire(3);
 			}
 		}
 	}

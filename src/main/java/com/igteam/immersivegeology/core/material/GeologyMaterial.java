@@ -38,18 +38,30 @@ import java.util.Set;
 public abstract class GeologyMaterial implements MaterialHelper
 {
 	protected String name;
-	protected final String unserializedName;
+	protected String unserialized_name;
 
 	private final LinkedHashSet<IFlagType<?>> materialDataFlags = new LinkedHashSet<IFlagType<?>>();
 	private final Map<ModFlags, Map<IFlagType<?>, MaterialHelper>> existingImplementations =
 			new HashMap<ModFlags, Map<IFlagType<?>, MaterialHelper>>();
+
+	protected Object materialRarity = null;
+
+	public void setRarity(Object rarity)
+	{
+		this.materialRarity = rarity;
+	}
+
+	public Object getRarity()
+	{
+		return materialRarity;
+	}
 
 	protected Set<StoneFormation> acceptableStoneTypes = new HashSet<StoneFormation>();
 
 	public GeologyMaterial()
 	{
 		String className = getClass().getSimpleName().replace("Material", "");
-		this.unserializedName = className;
+		this.unserialized_name = className;
 		this.name = className.replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase(Locale.ROOT);
 		initializeFlags();
 	}
@@ -90,7 +102,7 @@ public abstract class GeologyMaterial implements MaterialHelper
 
 	public String getUnserializedName()
 	{
-		return unserializedName;
+		return unserialized_name;
 	}
 
 	protected BiFunction<IFlagType<?>, Integer, Integer> colorFunction = materialColorFunction();
@@ -169,6 +181,126 @@ public abstract class GeologyMaterial implements MaterialHelper
 		IGStageProvider.add(this, stageSet);
 	}
 
+	private float asocialMaterialChance = 1f;
+
+	public void setAsocialMaterialChance(float chance)
+	{
+		this.asocialMaterialChance = chance;
+	}
+
+	public double getAssociateMaterialChance()
+	{
+		return asocialMaterialChance;
+	}
+
+	private final Set<com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGShimTypes.Pair<
+			java.util.function.Function<Integer, com.igteam.immersivegeology.core.material.helper.material.MaterialHelper>, Integer>>
+			associateMaterials = new java.util.LinkedHashSet<>();
+
+	public void addGenerationFriend(
+			java.util.function.Function<Integer, com.igteam.immersivegeology.core.material.helper.material.MaterialHelper> material,
+			int chance)
+	{
+		associateMaterials.add(
+				com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGShimTypes.Pair.of(material, chance));
+	}
+
+	public Set<com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGShimTypes.Pair<
+			java.util.function.Function<Integer, com.igteam.immersivegeology.core.material.helper.material.MaterialHelper>, Integer>>
+			getAssociateMaterialSet()
+	{
+		return associateMaterials;
+	}
+
+	public com.igteam.immersivegeology.common.item.IGGenericDrillHead.DrillHeadProps drillHeadInstance()
+	{
+		return null;
+	}
+
+	public double getMinDownfall()
+	{
+		return 0d;
+	}
+
+	public double getMaxDownfall()
+	{
+		return 1d;
+	}
+
+	public long seed()
+	{
+		return 0L;
+	}
+
+	public Object getConfig()
+	{
+		return null;
+	}
+
+	public void entityInside(net.minecraft.block.state.IBlockState state, net.minecraft.world.World level,
+			net.minecraft.util.math.BlockPos pos, net.minecraft.entity.Entity entity)
+	{
+	}
+
+	public double getMinSpawnTemp()
+	{
+		return 0d;
+	}
+
+	public double getMaxSpawnTemp()
+	{
+		return 2d;
+	}
+
+	public com.igteam.immersivegeology.core.lib.shim.MCShims.Properties getFluidProperties(IFlagType<?> flag)
+	{
+		return new com.igteam.immersivegeology.core.lib.shim.MCShims.Properties();
+	}
+
+	public Set<MaterialInterface<?>> getGeneratedMaterials()
+	{
+		return java.util.Collections.emptySet();
+	}
+
+	public com.igteam.immersivegeology.core.lib.shim.MCShims.ITier getToolTier()
+	{
+		return null;
+	}
+
+	public int getToolDamage()
+	{
+		return 3;
+	}
+
+	public int getToolSpeed()
+	{
+		return 3;
+	}
+
+	public boolean hasCustomTexture(BlockCategoryFlags blockCategoryFlags)
+	{
+		return false;
+	}
+
+	private int burnTime = 0;
+
+	public void setBurntime(int ticks)
+	{
+		this.burnTime = ticks;
+	}
+
+	public int getBurntime()
+	{
+		return burnTime;
+	}
+
+	public boolean canFormMB(com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IMultiblock multiblock)
+	{
+		for(java.util.function.Supplier<Object> supplier : validMultiblocks)
+			if(supplier.get().equals(multiblock)) return true;
+		return false;
+	}
+
 	public float getNoiseProbability()
 	{
 		return 1.0f;
@@ -189,7 +321,7 @@ public abstract class GeologyMaterial implements MaterialHelper
 		return false;
 	}
 
-	public Set<HazardTypes> getHazards()
+	public Set<com.igteam.immersivegeology.core.material.helper.HazardTypes> getHazards()
 	{
 		return Collections.emptySet();
 	}

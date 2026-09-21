@@ -3,7 +3,7 @@ package com.igteam.immersivegeology.core.material.helper.material.recipe;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 
-public class IGRecipeMethod
+public class IGRecipeMethod extends IGRecipeNode
 {
 	protected final MaterialHelper parentMaterial;
 	protected final IGStageDesignation stage;
@@ -24,8 +24,18 @@ public class IGRecipeMethod
 		return stage;
 	}
 
-	public IGRecipeNode create(Object... arguments)
+	public IGRecipeMethod create(String name, Object... arguments)
 	{
-		return new IGRecipeNode();
+		return this;
+	}
+
+	public IGRecipeMethod create(Object... arguments)
+	{
+		return this;
+	}
+
+	public IGRecipeMethod setBurntime(Object... context)
+	{
+		return this;
 	}
 }

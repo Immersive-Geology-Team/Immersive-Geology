@@ -8,6 +8,10 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Blocks;
+
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.RotaryKilnLogic;
+
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.IETags;
 
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.FluidTagInput;
@@ -28,12 +32,11 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 import net.minecraft.item.ItemStack;
 import net.minecraft.init.Items;
-import net.minecraft.init.Blocks;
 
 import java.util.Set;
 import java.util.function.BiFunction;
 
-import static com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic.MV_HEAT_CAP;
+import static com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.RotaryKilnLogic.MV_HEAT_CAP;
 
 public class MaterialCalcium extends MaterialMetal {
 

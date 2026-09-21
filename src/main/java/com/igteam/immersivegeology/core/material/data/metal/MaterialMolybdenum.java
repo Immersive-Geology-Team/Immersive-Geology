@@ -9,7 +9,8 @@ M
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
-import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.RotaryKilnLogic;
+
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;

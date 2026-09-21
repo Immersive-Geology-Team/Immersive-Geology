@@ -8,13 +8,14 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Rarity;
+
 import com.igteam.immersivegeology.core.material.data.types.MaterialRadioactiveMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
-import net.minecraft.world.item.Rarity;
 
 import java.util.function.BiFunction;
 

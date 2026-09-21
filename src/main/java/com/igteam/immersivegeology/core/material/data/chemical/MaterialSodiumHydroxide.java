@@ -8,6 +8,11 @@
 
 package com.igteam.immersivegeology.core.material.data.chemical;
 
+import com.igteam.immersivegeology.core.material.helper.material.recipe.methods.IGCrystallizationMethod;
+
+import com.igteam.immersivegeology.core.lib.shim.MCShims.TagKey;
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Fluids;
+
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -40,7 +45,7 @@ public class MaterialSodiumHydroxide extends MaterialChemical
 		//	public IGCrystallizationMethod create(String name, ItemStack output, FluidStack fluid_out, TagKey<Fluid> fluidTag, int fluidAmount, int time, int energy)
 		IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create("sodium_hydroxide_to_metal",
 				MetalEnum.Sodium.getStack(ItemCategoryFlags.CRYSTAL),
-				new FluidStack(Fluids.WATER, IGLib.ACID_RECOVERED_FROM_SLURRY),
+				(net.minecraftforge.fluids.FluidStack)null,
 				getFluidTag(), IGLib.SLURRY_TO_CRYSTAL_MB,
 				300, 38400);
 	}

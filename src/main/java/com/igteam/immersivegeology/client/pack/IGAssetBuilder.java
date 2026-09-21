@@ -54,16 +54,64 @@ public final class IGAssetBuilder
 				items++;
 			}
 
+		buildMultiblocks(pack);
 		buildLang(pack);
 
 		IGLib.IG_LOGGER.info("- Generated assets for {} ore blocks and {} items ({} resources)",
 				blocks, items, pack.size());
 	}
 
+	private static void buildMultiblocks(IGGeneratedPack pack)
+	{
+		for(Block block : IGContent.getRegisteredBlocks())
+		{
+			if(!(block instanceof com.igteam.immersivegeology.common.block.multiblocks.IGMultiblockBlock)) continue;
+			if(block.getRegistryName()==null) continue;
+
+			String name = block.getRegistryName().getPath();
+
+			StringBuilder variants = new StringBuilder();
+			for(net.minecraft.util.EnumFacing facing : net.minecraft.util.EnumFacing.Plane.HORIZONTAL)
+				for(boolean dummy : new boolean[]{false, true})
+				{
+					if(variants.length() > 0) variants.append(",\n");
+					variants.append("    \"facing=").append(facing.getName())
+							.append(",dummy=").append(dummy)
+							.append("\": { \"model\": \"").append(IGLib.MODID).append(":").append(name)
+							.append("\", \"y\": ").append(rotationFor(facing)).append(" }");
+				}
+
+			pack.put(blockstatePath(name), "{\n  \"variants\": {\n"+variants+"\n  }\n}\n");
+
+			pack.put(modelPath("block/"+name),
+					"{\n  \"parent\": \"block/cube_all\",\n"
+							+"  \"textures\": { \"all\": \"immersiveengineering:blocks/sheetmetal_steel\" }\n}\n");
+
+			pack.put(modelPath("item/"+name), "{ \"parent\": \""+IGLib.MODID+":block/"+name+"\" }\n");
+		}
+	}
+
+	private static int rotationFor(net.minecraft.util.EnumFacing facing)
+	{
+		return switch(facing)
+		{
+			case SOUTH -> 180;
+			case WEST -> 270;
+			case EAST -> 90;
+			default -> 0;
+		};
+	}
+
 	private static void buildLang(IGGeneratedPack pack)
 	{
 		StringBuilder lang = new StringBuilder();
 		lang.append("itemGroup.").append(IGLib.MODID).append("=Immersive Geology\n");
+
+		// IE manual entry: names, subtext and page bodies are read from these keys
+		lang.append("ie.manual.entry.ballmill.name=Ball Mill\n");
+		lang.append("ie.manual.entry.ballmill.subtext=Grinding ore into powder\n");
+		lang.append("ie.manual.entry.ballmill.ballmill0=The §lBall Mill§r grinds crushed ore into fine powder.\n");
+		lang.append("ie.manual.entry.ballmill.ballmill1=Strike the highlighted §lRedstone Engineering Block§r with an Engineer's Hammer to form the structure.\n");
 
 		for(Map.Entry<String, Block> entry : blockEntries().entrySet())
 			if(entry.getValue() instanceof IGOreBlock ore)
@@ -83,6 +131,12 @@ public final class IGAssetBuilder
 									.append(oreDisplayName(ore, richness)).append("\n");
 				}
 			}
+
+		for(Block block : IGContent.getRegisteredBlocks())
+			if(block instanceof com.igteam.immersivegeology.common.block.multiblocks.IGMultiblockBlock
+					&&block.getRegistryName()!=null)
+				lang.append("tile.").append(IGLib.MODID).append(".").append(block.getRegistryName().getPath())
+						.append(".name=").append(titleCase(block.getRegistryName().getPath())).append("\n");
 
 		for(Map.Entry<String, Item> entry : itemEntries().entrySet())
 			if(entry.getValue() instanceof IGGenericItem generic)

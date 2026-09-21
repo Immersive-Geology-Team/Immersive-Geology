@@ -50,9 +50,11 @@ public final class IGMethodBuilder
 		return method(parentMaterial, stage);
 	}
 
-	public static IGRecipeMethod crystallize(MaterialHelper parentMaterial, IGStageDesignation stage)
+	public static com.igteam.immersivegeology.core.material.helper.material.recipe.methods.IGCrystallizationMethod
+			crystallize(MaterialHelper parentMaterial, IGStageDesignation stage)
 	{
-		return method(parentMaterial, stage);
+		return new com.igteam.immersivegeology.core.material.helper.material.recipe.methods.IGCrystallizationMethod(
+				parentMaterial, stage);
 	}
 
 	public static IGRecipeMethod blasting(MaterialHelper parentMaterial, IGStageDesignation stage)
@@ -60,9 +62,11 @@ public final class IGMethodBuilder
 		return method(parentMaterial, stage);
 	}
 
-	public static IGRecipeMethod crushing(MaterialHelper parentMaterial, IGStageDesignation stage)
+	public static com.igteam.immersivegeology.core.material.helper.material.recipe.methods.IECrushingMethod
+			crushing(MaterialHelper parentMaterial, IGStageDesignation stage)
 	{
-		return method(parentMaterial, stage);
+		return new com.igteam.immersivegeology.core.material.helper.material.recipe.methods.IECrushingMethod(
+				parentMaterial, stage);
 	}
 
 	public static IGRecipeMethod squeezing(MaterialHelper parentMaterial, IGStageDesignation stage)

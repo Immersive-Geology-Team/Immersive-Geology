@@ -1,6 +1,5 @@
 package com.igteam.immersivegeology.common.block.multiblocks.structure;
 
-import blusunrize.immersiveengineering.api.ApiUtils;
 import blusunrize.immersiveengineering.api.MultiblockHandler.IMultiblock;
 import blusunrize.immersiveengineering.api.crafting.IngredientStack;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -29,6 +28,7 @@ public abstract class IGMultiblockStructure implements IMultiblock
 	private IGStructureTemplate template;
 	private ItemStack[][][] structureManual;
 	private IngredientStack[] totalMaterials;
+	private IBlockState triggerState;
 
 	protected IGMultiblockStructure(String name, ResourceLocation templateLocation,
 									BlockPos masterOffset, BlockPos triggerOffset)
@@ -73,25 +73,29 @@ public abstract class IGMultiblockStructure implements IMultiblock
 	@Override
 	public boolean isBlockTrigger(IBlockState state)
 	{
+		IBlockState expected = getTriggerState();
+		if(expected==null) return false;
+
+		if(state.getBlock()!=expected.getBlock()) return false;
+		return state.getBlock().getMetaFromState(state)==expected.getBlock().getMetaFromState(expected);
+	}
+
+	public IBlockState getTriggerState()
+	{
+		if(triggerState!=null) return triggerState;
+
 		IGStructureTemplate loaded = getTemplate();
-		if(loaded==null) return false;
+		if(loaded==null) return null;
 
 		String triggerId = loaded.getBlockId(triggerOffset.getX(), triggerOffset.getY(), triggerOffset.getZ());
-		ItemStack expected = IGBlockMapping.toStack(triggerId);
-		return !expected.isEmpty()&&ApiUtils.compareToOreName(expected, "")
-				?false
-				: !expected.isEmpty()&&Block_matches(expected, state);
-	}
+		triggerState = IGBlockMapping.toState(triggerId);
 
-	private static boolean Block_matches(ItemStack expected, IBlockState state)
-	{
-		net.minecraft.block.Block block = net.minecraft.block.Block.getBlockFromItem(expected.getItem());
-		if(block==net.minecraft.init.Blocks.AIR) return false;
-		if(state.getBlock()!=block) return false;
-		return expected.getMetadata()==OreDictionaryWildcard||expected.getMetadata()==block.getMetaFromState(state);
-	}
+		if(triggerState==null)
+			IGLib.IG_LOGGER.error("Multiblock {} has no resolvable trigger block at {} (template says {})",
+					name, triggerOffset, triggerId);
 
-	private static final int OreDictionaryWildcard = 32767;
+		return triggerState;
+	}
 
 	@Override
 	public ItemStack[][][] getStructureManual()

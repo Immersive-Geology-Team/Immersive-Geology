@@ -8,6 +8,10 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Tier;
+
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Tiers;
+
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.FluidTagInput;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IngredientWithSize;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.FluidTags;
@@ -28,8 +32,6 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.Tiers;
 
 import java.util.Set;
 import java.util.function.BiFunction;

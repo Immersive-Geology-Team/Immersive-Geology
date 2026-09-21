@@ -1,5 +1,7 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Fluids;
+
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.FluidTagInput;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IngredientWithSize;
 
@@ -62,13 +64,13 @@ public class MaterialCryolite extends MaterialMineral {
                 ItemCategoryFlags.POWDER, 400, 32000).addToTree(basic_preparation, crushing);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create("metal_oxide_"+getName()+"_to_compound_dust",
-                MetalEnum.Aluminum.getStack(ItemCategoryFlags.COMPOUND_DUST, IGLib.COMPOUND_FROM_ACID_AMOUNT), new FluidStack(Fluids.EMPTY, 0),
+                MetalEnum.Aluminum.getStack(ItemCategoryFlags.COMPOUND_DUST, IGLib.COMPOUND_FROM_ACID_AMOUNT), (net.minecraftforge.fluids.FluidStack)null,
                 new IngredientWithSize(MetalEnum.Aluminum.getItemTag(ItemCategoryFlags.METAL_OXIDE)),
                 new FluidTagInput(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_COMPOUND_AMOUNT),
                 null, null, 200, 51200).addToTree(al_synthesis);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create("compound_dust_"+MetalEnum.Aluminum.getName()+"_to_cryolite",
-                MineralEnum.Cryolite.getStack(ItemCategoryFlags.POWDER, IGLib.DUST_FROM_COMPOUND_ACID_AMOUNT), new FluidStack(Fluids.EMPTY, 0),
+                MineralEnum.Cryolite.getStack(ItemCategoryFlags.POWDER, IGLib.DUST_FROM_COMPOUND_ACID_AMOUNT), (net.minecraftforge.fluids.FluidStack)null,
                 new IngredientWithSize(MetalEnum.Aluminum.getItemTag(ItemCategoryFlags.COMPOUND_DUST), IGLib.COMPOUND_ACID_TO_DUST_AMOUNT),
                 new FluidTagInput(ChemicalEnum.HydrofluoricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_DUST_AMOUNT),
                 null, null, 200, 51200).addToTree(al_synthesis);

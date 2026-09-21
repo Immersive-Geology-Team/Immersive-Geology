@@ -1,5 +1,7 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Fluids;
+
 
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
@@ -44,7 +46,7 @@ public class MaterialLignite extends MaterialMineral
 	{
 		super.setupRecipeStages();
 		IGMethodBuilder.crushing(this, IGStageDesignation.EXTRACTION).create(this, ItemCategoryFlags.NORMAL_ORE, 1, this, ItemCategoryFlags.GRIT, 1, 2400, 200);
-		IGMethodBuilder.squeezing(this, IGStageDesignation.REFINEMENT).create(this, ItemCategoryFlags.GRIT, 4, this, ItemCategoryFlags.INGOT, 1, new FluidStack(Fluids.WATER, 250), 19200, 80);
+		IGMethodBuilder.squeezing(this, IGStageDesignation.REFINEMENT).create(this, ItemCategoryFlags.GRIT, 4, this, ItemCategoryFlags.INGOT, 1, (net.minecraftforge.fluids.FluidStack)null, 19200, 80);
 	}
 
 	@Override

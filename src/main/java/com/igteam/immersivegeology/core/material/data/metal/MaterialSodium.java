@@ -8,11 +8,14 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.RotaryKilnLogic;
+
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Fluids;
+
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.FluidTagInput;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IngredientWithSize;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.FluidTags;
 
-import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
@@ -59,7 +62,7 @@ public class MaterialSodium extends MaterialMetal
 		IGMethodBuilder.chemical(this, IGStageDesignation.SYNTHESIS).create(
 				"solution_" + getName() + "_to_compound_dust",
 				getStack(ItemCategoryFlags.COMPOUND_DUST, 3), //STACK
-				new FluidStack(Fluids.EMPTY, 0), IngredientWithSize.of(ItemStack.EMPTY),
+				(net.minecraftforge.fluids.FluidStack)null, IngredientWithSize.of(ItemStack.EMPTY),
 				new FluidTagInput(ChemicalEnum.ChemicalWaste.getCloudySlurryTagWith(MetalEnum.Sodium), IGLib.ACID_RECOVERED_FROM_SLURRY),
 				new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(), IGLib.ACID_RECOVERED_FROM_SLURRY),
 				null, 200, 51200);

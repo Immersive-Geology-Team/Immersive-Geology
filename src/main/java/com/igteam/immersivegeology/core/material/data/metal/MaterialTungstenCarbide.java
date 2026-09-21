@@ -8,6 +8,8 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Tiers;
+
 import com.igteam.immersivegeology.common.item.IGGenericDrillHead.DrillHeadProps;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetalAlloy;
@@ -17,7 +19,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.item.Tiers;
 
 import java.util.function.BiFunction;
 

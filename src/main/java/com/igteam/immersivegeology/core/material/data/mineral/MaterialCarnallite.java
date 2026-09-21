@@ -1,5 +1,7 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.IEItems;
+
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.FluidTagInput;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IngredientWithSize;
             
@@ -45,7 +47,7 @@ public class MaterialCarnallite extends MaterialEvaporateMineral
         super.setupRecipeStages();
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(getName()+"solution_to_acid",
-                new ItemStack(IEItems.Misc.FERTILIZER.get()),
+                new ItemStack(com.igteam.immersivegeology.core.lib.shim.MCShims.IEItems.Misc.FERTILIZER.get()),
                 ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Magnesium, 125),
                 IngredientWithSize.of(ItemStack.EMPTY),
                 new FluidTagInput(ChemicalEnum.Brine.getSlurryTagWith(BlockCategoryFlags.SLURRY, this), 125),
@@ -54,7 +56,7 @@ public class MaterialCarnallite extends MaterialEvaporateMineral
                 200, 51200);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(getName()+"solution_to_acid",
-                new ItemStack(IEItems.Misc.FERTILIZER.get()),
+                new ItemStack(com.igteam.immersivegeology.core.lib.shim.MCShims.IEItems.Misc.FERTILIZER.get()),
                 ChemicalEnum.HydrochloricAcid.getFluidStack(125),
                 IngredientWithSize.of(ItemStack.EMPTY),
                 new FluidTagInput(ChemicalEnum.Brine.getSlurryTagWith(BlockCategoryFlags.SLURRY, this), 125),

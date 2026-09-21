@@ -82,6 +82,18 @@ public interface MaterialInterface<T extends GeologyMaterial>
 		return instance().getFluidTag(flag, materials);
 	}
 
+	default IGTag getFluidTag(BlockCategoryFlags flag,
+			com.igteam.immersivegeology.core.material.helper.material.MaterialHelper... materials)
+	{
+		return instance().getFluidTag(flag, materials);
+	}
+
+	default com.igteam.immersivegeology.core.lib.shim.MCShims.TagKey<Object> getFluidTagKey(BlockCategoryFlags flag,
+			com.igteam.immersivegeology.core.material.helper.material.MaterialHelper... materials)
+	{
+		return instance().getFluidTagKey(flag, materials);
+	}
+
 	default IGTag getSlurryTagWith(BlockCategoryFlags flag, MaterialInterface<?>... materials)
 	{
 		return getFluidTag(flag, materials);

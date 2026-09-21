@@ -8,6 +8,7 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
+
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.IETags;
 
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.FluidTagInput;

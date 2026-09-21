@@ -1,5 +1,7 @@
 package com.igteam.immersivegeology.core.material.data.stone.vanilla;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Blocks;
+
 import com.igteam.immersivegeology.core.material.helper.material.IGBlockProperties;
 
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
@@ -9,7 +11,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;

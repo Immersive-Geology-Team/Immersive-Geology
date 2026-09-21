@@ -185,6 +185,12 @@ public abstract class IGMultiblockTile<S extends IMultiblockState> extends TileE
 	}
 
 	@Override
+	public float[] getBlockBounds()
+	{
+		return null;
+	}
+
+	@Override
 	protected IFluidTank[] getAccessibleFluidTanks(EnumFacing side)
 	{
 		return new IFluidTank[0];

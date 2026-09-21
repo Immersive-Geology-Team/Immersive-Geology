@@ -8,10 +8,27 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
+import com.igteam.immersivegeology.core.lib.shim.MCShims.Ingredients;
+
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGAlternatorMultiblock;
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGBallmillMultiblock;
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGBloomeryMultiblock;
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGCentrifugeMultiblock;
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGChemicalReactorMultiblock;
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGCoreDrillMultiblock;
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGCrystalizerMultiblock;
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGFoundryMultiblock;
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGGeothermalExchangerMultiblock;
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGGravitySeparatorMultiblock;
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGPelletizerMultiblock;
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGReverberationFurnaceMultiblock;
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGRotaryKilnMultiblock;
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGSmallChemicalReactorMultiblock;
+import com.igteam.immersivegeology.core.lib.shim.IGMultiblockRefs.IGSteamTurbineMultiblock;
+
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IngredientWithSize;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IEPlaceholders.IEMultiblocks;
 
-import com.igteam.immersivegeology.common.block.multiblocks.*;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetalAlloy;
