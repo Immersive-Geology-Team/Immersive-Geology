@@ -70,10 +70,11 @@ public class MaterialSilicon extends MaterialMisc
 	@Override
 	public void setupRecipeStages()
 	{
-		IGMethodBuilder.crushing(this, IGStageDesignation.EXTRACTION)
-				.create("crush_quartz_to_oxide", new IngredientWithSize(Items.GEMS_QUARTZ, 1),
-						getStack(ItemCategoryFlags.METAL_OXIDE, 1),
-						6000, 100);
+//		IGMethodBuilder.crushing(this, IGStageDesignation.EXTRACTION)
+//				.create("crush_quartz_to_oxide", new IngredientWithSize(Items.GEMS_QUARTZ, 1),
+//						getStack(ItemCategoryFlags.METAL_OXIDE, 1),
+//						6000, 100);
+
 		IGMethodBuilder.arcSmelting(this, IGStageDesignation.SYNTHESIS)
 				.create(ItemCategoryFlags.METAL_OXIDE,1, ItemCategoryFlags.SLAG, 1,
 				0, new IngredientWithSize(IETags.coalCokeDust));

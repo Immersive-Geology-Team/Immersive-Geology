@@ -9,7 +9,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 1
-map_Kd immersivegeology:block/multiblock/ballmill/axle
+map_Kd immersivegeology:blocks/multiblock/ballmill/axle
 
 newmtl gear
 Ns 0.000000
@@ -19,4 +19,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 1
-map_Kd immersivegeology:block/multiblock/ballmill/gear
+map_Kd immersivegeology:blocks/multiblock/ballmill/gear

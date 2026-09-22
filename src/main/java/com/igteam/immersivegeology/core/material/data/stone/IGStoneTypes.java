@@ -31,19 +31,14 @@ public final class IGStoneTypes
 	{
 	}
 
-	/**
-	 * Declaration order matters: it decides the order ore blocks are registered in, and therefore the order they
-	 * appear in generated resources. The built-ins come first and keep the enum's own order, so these new declared
-	 * rock types never disturbs the existing block ids.
-	 */
 	private static final List<IStoneType> REGISTERED;
 
 	static
 	{
 		List<IStoneType> registered = new ArrayList<>(List.of(StoneEnum.values()));
 
-		// Config-declared stone types are deferred to Phase 4 with world generation;
-		// see deferred/phase4/stone-config. Built-in rock types are unaffected.
+		// Config-declared stone types are deferred to Phase 4 (world generation);
+		// see deferred/phase4/stone-config.
 		REGISTERED = List.copyOf(registered);
 
 		int declared = REGISTERED.size()-StoneEnum.values().length;
@@ -60,9 +55,6 @@ public final class IGStoneTypes
 		return REGISTERED.size();
 	}
 
-	/**
-	 * Reports, for every declared rock type, how many minerals will actually generate in it.
-	 */
 	public static void logDeclaredStoneSummary()
 	{
 		for(IStoneType stone : REGISTERED)
@@ -98,12 +90,8 @@ public final class IGStoneTypes
 		}
 	}
 
-	/**
-	 * Resolved rock type per block, If it's empty, it's not a rock type Immersive Geology knows.
-	 */
 	private static final Map<Block, Optional<IStoneType>> worldStateCache = new ConcurrentHashMap<>();
 
-	/** The rock type this world block is, or null when it is not one Immersive Geology knows. */
 	public static IStoneType fromWorldState(IBlockState state)
 	{
 		Block block = state.getBlock();

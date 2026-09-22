@@ -47,6 +47,15 @@ public final class IGAssetBuilder
 				blocks++;
 			}
 
+		int genericBlocks = 0;
+		for(Map.Entry<String, Block> entry : blockEntries().entrySet())
+			if(entry.getValue() instanceof com.igteam.immersivegeology.common.block.IGGenericBlock generic)
+				if(buildGenericBlock(pack, entry.getKey(), generic)) genericBlocks++;
+
+		for(Map.Entry<String, Block> entry : blockEntries().entrySet())
+			if(entry.getValue() instanceof com.igteam.immersivegeology.common.block.IGSlabBlock slab)
+				if(buildSlabBlock(pack, entry.getKey(), slab)) genericBlocks++;
+
 		for(Map.Entry<String, Item> entry : itemEntries().entrySet())
 			if(entry.getValue() instanceof IGGenericItem generic)
 			{
@@ -57,8 +66,100 @@ public final class IGAssetBuilder
 		buildMultiblocks(pack);
 		buildLang(pack);
 
-		IGLib.IG_LOGGER.info("- Generated assets for {} ore blocks and {} items ({} resources)",
-				blocks, items, pack.size());
+		IGLib.IG_LOGGER.info("- Generated assets for {} ore blocks, {} generic blocks and {} items ({} resources)",
+				blocks, genericBlocks, items, pack.size());
+	}
+
+	private static boolean buildGenericBlock(IGGeneratedPack pack, String name,
+											 com.igteam.immersivegeology.common.block.IGGenericBlock block)
+	{
+		String texture = genericBlockTexture(block);
+		if(texture==null) return false;
+
+		pack.put(blockstatePath(name),
+				"{\n  \"variants\": {\n"
+						+"    \"normal\": { \"model\": \""+IGLib.MODID+":"+name+"\" },\n"
+						+"    \"inventory\": { \"model\": \""+IGLib.MODID+":"+name+"\" }\n"
+						+"  }\n}\n");
+
+		pack.put(modelPath("block/"+name),
+				"{\n  \"parent\": \"block/cube_all\",\n"
+						+"  \"textures\": { \"all\": \""+texture+"\" }\n}\n");
+
+		pack.put(modelPath("item/"+name),
+				"{ \"parent\": \""+IGLib.MODID+":block/"+name+"\" }\n");
+		return true;
+	}
+
+	private static String genericBlockTexture(com.igteam.immersivegeology.common.block.IGGenericBlock block)
+	{
+		MaterialInterface<?> material = block.getMaterial();
+		com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags category = block.getCategory();
+
+		net.minecraft.util.ResourceLocation declared = material.instance().getTextureLocation(category);
+		if(declared!=null&&exists(declared.getPath()+".png"))
+			return declared.getNamespace()+":"+declared.getPath();
+
+		String greyscale = switch(category)
+		{
+			case STORAGE_BLOCK -> "block/greyscale/metal/storage";
+			case SHEETMETAL_BLOCK -> "block/greyscale/metal/sheetmetal";
+			case DUST_BLOCK -> "block/greyscale/metal/dust_block";
+			case SCAFFOLDING -> "block/greyscale/scaffolding/scaffolding";
+			default -> null;
+		};
+		if(greyscale!=null&&exists(greyscale+".png")) return IGLib.MODID+":"+greyscale;
+		return null;
+	}
+
+	private static boolean buildSlabBlock(IGGeneratedPack pack, String name,
+										  com.igteam.immersivegeology.common.block.IGSlabBlock slab)
+	{
+		String texture = slabTexture(slab);
+		if(texture==null) return false;
+
+		String modelBase = name;
+		if(slab.isDouble())
+		{
+			pack.put(blockstatePath(name),
+					"{\n  \"variants\": {\n    \"variant=default\": { \"model\": \""+IGLib.MODID+":"+modelBase+"\" }\n  }\n}\n");
+			pack.put(modelPath("block/"+modelBase),
+					"{\n  \"parent\": \"block/cube_all\",\n  \"textures\": { \"all\": \""+texture+"\" }\n}\n");
+			return true;
+		}
+
+		pack.put(blockstatePath(name),
+				"{\n  \"variants\": {\n"
+						+"    \"half=bottom,variant=default\": { \"model\": \""+IGLib.MODID+":"+modelBase+"\" },\n"
+						+"    \"half=top,variant=default\": { \"model\": \""+IGLib.MODID+":"+modelBase+"_top\" },\n"
+						+"    \"inventory\": { \"model\": \""+IGLib.MODID+":"+modelBase+"\" }\n"
+						+"  }\n}\n");
+
+		pack.put(modelPath("block/"+modelBase), slabModel("block/half_slab", texture));
+		pack.put(modelPath("block/"+modelBase+"_top"), slabModel("block/upper_slab", texture));
+		pack.put(modelPath("item/"+name), "{ \"parent\": \""+IGLib.MODID+":block/"+modelBase+"\" }\n");
+		return true;
+	}
+
+	private static String slabModel(String parent, String texture)
+	{
+		return "{\n  \"parent\": \""+parent+"\",\n"
+				+"  \"textures\": { \"bottom\": \""+texture+"\", \"top\": \""+texture+"\", \"side\": \""+texture+"\" }\n}\n";
+	}
+
+	private static String slabTexture(com.igteam.immersivegeology.common.block.IGSlabBlock slab)
+	{
+		MaterialInterface<?> material = slab.getMaterial();
+		net.minecraft.util.ResourceLocation declared =
+				material.instance().getTextureLocation(slab.getCategory());
+		if(declared!=null&&exists(declared.getPath()+".png"))
+			return declared.getNamespace()+":"+declared.getPath();
+
+		String greyscale = slab.getCategory()==com.igteam.immersivegeology.core.material.helper.flags
+				.BlockCategoryFlags.SHEETMETAL_SLAB
+				?"block/greyscale/metal/sheetmetal": "block/greyscale/metal/storage";
+		if(exists(greyscale+".png")) return IGLib.MODID+":"+greyscale;
+		return null;
 	}
 
 	private static void buildMultiblocks(IGGeneratedPack pack)
@@ -69,6 +170,9 @@ public final class IGAssetBuilder
 			if(block.getRegistryName()==null) continue;
 
 			String name = block.getRegistryName().getPath();
+
+			if(IGAssetBuilder.class.getResource("/assets/"+IGLib.MODID+"/blockstates/"+name+".json")!=null)
+				continue;
 
 			StringBuilder variants = new StringBuilder();
 			for(net.minecraft.util.EnumFacing facing : net.minecraft.util.EnumFacing.Plane.HORIZONTAL)
@@ -137,6 +241,15 @@ public final class IGAssetBuilder
 					&&block.getRegistryName()!=null)
 				lang.append("tile.").append(IGLib.MODID).append(".").append(block.getRegistryName().getPath())
 						.append(".name=").append(titleCase(block.getRegistryName().getPath())).append("\n");
+
+		int genericBlocks = 0;
+		for(Map.Entry<String, Block> entry : blockEntries().entrySet())
+			if(entry.getValue() instanceof com.igteam.immersivegeology.common.block.IGGenericBlock generic)
+				if(buildGenericBlock(pack, entry.getKey(), generic)) genericBlocks++;
+
+		for(Map.Entry<String, Block> entry : blockEntries().entrySet())
+			if(entry.getValue() instanceof com.igteam.immersivegeology.common.block.IGSlabBlock slab)
+				if(buildSlabBlock(pack, entry.getKey(), slab)) genericBlocks++;
 
 		for(Map.Entry<String, Item> entry : itemEntries().entrySet())
 			if(entry.getValue() instanceof IGGenericItem generic)

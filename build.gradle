@@ -64,6 +64,7 @@ dependencies {
     modImplementation "curse.maven:immersive-engineering-${curse_ie_project}:${curse_ie_file}"
     modImplementation "curse.maven:engineered-schematics-1207780:8799257"
     modImplementation "curse.maven:immersive-intelligence-344344:8933879"
+    modImplementation "curse.maven:jei-238222:8752694"
 }
 
 processResources {

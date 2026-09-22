@@ -72,7 +72,7 @@ public class IGMultiblockContext<State> implements IMultiblockContext<State>
 		if(mbLevel==null) return defaultValue;
 
 		BlockPos absolute = mbLevel.toAbsolute(posInMultiblock);
-		if(face==null) return mbLevel.getRawLevel().getStrongPower(absolute);
+		if(face==null) return mbLevel.getRawLevel().getRedstonePowerFromNeighbors(absolute);
 
 		EnumFacing side = mbLevel.toAbsolute(face);
 		return mbLevel.getRawLevel().getRedstonePower(absolute.offset(side), side);

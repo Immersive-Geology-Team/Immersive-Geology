@@ -13,8 +13,18 @@ import com.igteam.immersivegeology.common.block.multiblocks.shim.logic.IMultiblo
 import com.igteam.immersivegeology.common.block.multiblocks.shim.util.CapabilityPosition;
 import com.igteam.immersivegeology.common.block.multiblocks.shim.util.MultiblockOrientation;
 import com.igteam.immersivegeology.common.block.multiblocks.shim.util.RelativeBlockFace;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import blusunrize.immersiveengineering.api.energy.immersiveflux.IFluxReceiver;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.block.state.IBlockState;
+import com.igteam.immersivegeology.common.block.multiblocks.structure.IGStructureFormer;
+import blusunrize.immersiveengineering.common.util.Utils;
+import java.util.ArrayList;
+import java.util.List;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -25,7 +35,7 @@ import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public abstract class IGMultiblockTile<S extends IMultiblockState> extends TileEntityMultiblockPart<IGMultiblockTile<S>>
-		implements ITickable
+		implements ITickable, IFluxReceiver
 {
 	private final IMultiblockLogic<S> logic;
 
@@ -42,6 +52,41 @@ public abstract class IGMultiblockTile<S extends IMultiblockState> extends TileE
 	public IMultiblockLogic<S> getLogic()
 	{
 		return logic;
+	}
+
+	@Nullable
+	private IEnergyStorage energyFor(@Nullable EnumFacing side)
+	{
+		if(!formed) return null;
+		return getCapability(CapabilityEnergy.ENERGY, side);
+	}
+
+	@Override
+	public int receiveEnergy(@Nullable EnumFacing from, int energy, boolean simulate)
+	{
+		if(world!=null&&world.isRemote) return 0;
+		IEnergyStorage storage = energyFor(from);
+		return storage==null?0: storage.receiveEnergy(energy, simulate);
+	}
+
+	@Override
+	public int getEnergyStored(@Nullable EnumFacing from)
+	{
+		IEnergyStorage storage = energyFor(null);
+		return storage==null?0: storage.getEnergyStored();
+	}
+
+	@Override
+	public int getMaxEnergyStored(@Nullable EnumFacing from)
+	{
+		IEnergyStorage storage = energyFor(null);
+		return storage==null?0: storage.getMaxEnergyStored();
+	}
+
+	@Override
+	public boolean canConnectEnergy(@Nullable EnumFacing from)
+	{
+		return energyFor(from)!=null;
 	}
 
 	public S getState()
@@ -102,6 +147,97 @@ public abstract class IGMultiblockTile<S extends IMultiblockState> extends TileE
 		return new IGMultiblockLevel(world, getOrigin(), new MultiblockOrientation(getFacing(), getIsMirrored()));
 	}
 
+	private ItemStack originalBlock = ItemStack.EMPTY;
+
+	private boolean master = false;
+	private BlockPos masterPos;
+
+	public void setFormedAt(int[] posInMB, ItemStack original, boolean isMaster, EnumFacing structureFacing,
+							BlockPos masterPosition)
+	{
+		this.formed = true;
+		this.offset = posInMB;
+		this.mirrored = false;
+		this.master = isMaster;
+		this.facing = structureFacing;
+		this.masterPos = masterPosition;
+		this.originalBlock = original==null?ItemStack.EMPTY: original.copy();
+		markDirty();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public IGMultiblockTile<S> master()
+	{
+		if(master) return this;
+		if(world==null||masterPos==null) return null;
+		TileEntity te = world.getTileEntity(masterPos);
+		return getClass().isInstance(te)?(IGMultiblockTile<S>)te: null;
+	}
+
+	@Override
+	public void disassemble()
+	{
+		if(world==null||world.isRemote||!formed) return;
+
+		BlockPos origin = getOrigin();
+		EnumFacing structureFacing = getFacing();
+		int height = structureDimensions[0];
+		int length = structureDimensions[1];
+		int width = structureDimensions[2];
+
+		List<BlockPos> positions = new ArrayList<>();
+		List<ItemStack> originals = new ArrayList<>();
+
+		for(int y = 0; y < height; y++)
+			for(int z = 0; z < length; z++)
+				for(int x = 0; x < width; x++)
+				{
+					BlockPos target = origin.add(
+							IGStructureFormer.rotateOffset(new BlockPos(x, y, z), structureFacing));
+					TileEntity te = world.getTileEntity(target);
+					if(!(te instanceof IGMultiblockTile<?> part)||!part.formed) continue;
+
+					part.formed = false;
+					positions.add(target);
+					originals.add(part.getOriginalBlock());
+				}
+
+		for(int i = 0; i < positions.size(); i++)
+		{
+			BlockPos target = positions.get(i);
+			ItemStack original = originals.get(i);
+			IBlockState restored = original.isEmpty()?null: Utils.getStateFromItemStack(original);
+			if(restored!=null) world.setBlockState(target, restored, 3);
+			else world.setBlockToAir(target);
+		}
+	}
+
+	@Override
+	public boolean isDummy()
+	{
+		return !master;
+	}
+
+	@Override
+	public ItemStack getOriginalBlock()
+	{
+		return originalBlock;
+	}
+
+	@Override
+	public BlockPos getOrigin()
+	{
+		EnumFacing facing = getFacing();
+		EnumFacing width = facing.rotateY();
+		int along = -offset[2];
+		int across = offset[0];
+		return getPos().add(
+				-(facing.getXOffset()*along+width.getXOffset()*across),
+				-offset[1],
+				-(facing.getZOffset()*along+width.getZOffset()*across));
+	}
+
 	protected boolean getIsMirrored()
 	{
 		return mirrored;
@@ -160,6 +296,13 @@ public abstract class IGMultiblockTile<S extends IMultiblockState> extends TileE
 	public void readCustomNBT(NBTTagCompound nbt, boolean descPacket)
 	{
 		super.readCustomNBT(nbt, descPacket);
+		master = nbt.getBoolean("mbMaster");
+		masterPos = nbt.hasKey("mbMasterPos")
+				?net.minecraft.nbt.NBTUtil.getPosFromTag(nbt.getCompoundTag("mbMasterPos"))
+				: null;
+		originalBlock = nbt.hasKey("originalBlock")
+				?new ItemStack(nbt.getCompoundTag("originalBlock"))
+				: ItemStack.EMPTY;
 		if(!nbt.hasKey("logicState")) return;
 
 		NBTTagCompound stateTag = nbt.getCompoundTag("logicState");
@@ -176,6 +319,10 @@ public abstract class IGMultiblockTile<S extends IMultiblockState> extends TileE
 	public void writeCustomNBT(NBTTagCompound nbt, boolean descPacket)
 	{
 		super.writeCustomNBT(nbt, descPacket);
+		nbt.setBoolean("mbMaster", master);
+		if(masterPos!=null) nbt.setTag("mbMasterPos", net.minecraft.nbt.NBTUtil.createPosTag(masterPos));
+		if(!originalBlock.isEmpty())
+			nbt.setTag("originalBlock", originalBlock.writeToNBT(new NBTTagCompound()));
 		if(isDummy()||state==null) return;
 
 		NBTTagCompound stateTag = new NBTTagCompound();

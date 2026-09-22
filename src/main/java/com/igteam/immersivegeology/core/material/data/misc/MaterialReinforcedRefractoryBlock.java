@@ -30,8 +30,7 @@ public class MaterialReinforcedRefractoryBlock extends MaterialMisc
 	@Override
 	public IGBlockProperties getProperties(IFlagType<?> flag)
 	{
-		return IGLib.STONE_DECO_PROPS.sound(SoundType.NETHER_BRICKS)
-				.strength(8, 30);
+		return IGLib.STONE_DECO_PROPS.sound(SoundType.NETHER_BRICKS).strength(8, 30);
 	}
 
 	@Override

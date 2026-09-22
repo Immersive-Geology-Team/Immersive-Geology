@@ -6,6 +6,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
+import com.igteam.immersivegeology.common.block.multiblocks.structure.IGStructureFormer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
@@ -81,43 +82,10 @@ public class IGMultiblockLevel implements IMultiblockLevel
 	@Override
 	public BlockPos toAbsolute(BlockPos posInMultiblock)
 	{
-		int x = posInMultiblock.getX();
-		int y = posInMultiblock.getY();
-		int z = posInMultiblock.getZ();
-
-		if(orientation.mirrored()) x = -x;
-
-		int dx;
-		int dz;
-		switch(orientation.front())
-		{
-			case NORTH ->
-			{
-				dx = x;
-				dz = -z;
-			}
-			case SOUTH ->
-			{
-				dx = -x;
-				dz = z;
-			}
-			case WEST ->
-			{
-				dx = -z;
-				dz = -x;
-			}
-			case EAST ->
-			{
-				dx = z;
-				dz = x;
-			}
-			default ->
-			{
-				dx = x;
-				dz = z;
-			}
-		}
-		return origin.add(dx, y, dz);
+		BlockPos local = orientation.mirrored()
+				?new BlockPos(-posInMultiblock.getX(), posInMultiblock.getY(), posInMultiblock.getZ())
+				: posInMultiblock;
+		return origin.add(IGStructureFormer.rotateOffset(local, orientation.front()));
 	}
 
 	@Override

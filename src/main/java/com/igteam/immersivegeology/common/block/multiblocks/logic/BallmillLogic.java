@@ -33,12 +33,12 @@ import java.util.Set;
 public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>,
 		IServerTickableComponent<BallmillLogic.State>, IClientTickableComponent<BallmillLogic.State>
 {
-	public static final MultiblockFace REDSTONE_IN = new MultiblockFace(4, 1, 3, RelativeBlockFace.UP);
+	public static final BlockPos REDSTONE_IN = new BlockPos(4, 1, 3);
 	private static final int ENERGY_CAPACITY = 64000;
-	private static final Set<CapabilityPosition> ENERGY_INPUTS =
+	public static final Set<CapabilityPosition> ENERGY_INPUTS =
 			Set.of(new CapabilityPosition(0, 1, 3, RelativeBlockFace.UP));
-	private static final MultiblockFace OUTPUT_POS = new MultiblockFace(2, 0, 4, RelativeBlockFace.FRONT);
-	private static final CapabilityPosition ITEM_INPUT_CAP = new CapabilityPosition(0, 0, 1, RelativeBlockFace.RIGHT);
+	public static final MultiblockFace OUTPUT_POS = new MultiblockFace(2, 0, 4, RelativeBlockFace.FRONT);
+	public static final CapabilityPosition ITEM_INPUT_CAP = new CapabilityPosition(0, 0, 1, RelativeBlockFace.RIGHT);
 
 	public static final int ENERGY_CONSUMPTION_RATE = 80;
 

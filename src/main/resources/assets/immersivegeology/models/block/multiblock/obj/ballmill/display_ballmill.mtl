@@ -9,7 +9,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 1
-map_Kd immersivegeology:block/multiblock/ballmill/axle
+map_Kd immersivegeology:blocks/multiblock/ballmill/axle
 
 newmtl gear.001
 Ns 0.000000
@@ -19,7 +19,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 1
-map_Kd immersivegeology:block/multiblock/ballmill/gear
+map_Kd immersivegeology:blocks/multiblock/ballmill/gear
 
 newmtl m_179a1da9-5b8a-1d17-b625-5c252dc26d72.002
 Ns 0.000000
@@ -29,7 +29,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 1
-map_Kd immersivegeology:block/multiblock/ballmill/base
+map_Kd immersivegeology:blocks/multiblock/ballmill/base
 
 newmtl m_a5736c04-ae9e-ecd1-e2f5-2454776d30ef.001
 Ns 0.000000
@@ -39,4 +39,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 1
-map_Kd C:/Users/Casper Areskoug/Documents/GitHub/Immersive-Geology/src/main/resources/assets/immersivegeology/textures/block/multiblock/ballmill/drum.png
+map_Kd immersivegeology:blocks/multiblock/ballmill/drum

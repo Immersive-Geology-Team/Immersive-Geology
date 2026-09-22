@@ -2,6 +2,7 @@ package com.igteam.immersivegeology.core.lib;
 
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import org.apache.logging.log4j.LogManager;
@@ -59,6 +60,7 @@ public class IGLib
 		Collections.addAll(list, MetalEnum.values());
 		Collections.addAll(list, MineralEnum.values());
 		Collections.addAll(list, StoneEnum.values());
+		Collections.addAll(list, MiscEnum.values());
 		return Collections.unmodifiableList(list);
 	}
 

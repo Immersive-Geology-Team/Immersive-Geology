@@ -25,9 +25,6 @@ public class MaterialStone extends GeologyMaterial {
 
     protected StoneFormation STONE_FORMATION = StoneFormation.IGNEOUS_INTRUSIVE;
 
-    /**
-     * The dimensions this stone makes can spawn in. Overworld unless a subclass says otherwise.
-     */
     protected String textureName = null;
 
     public net.minecraft.block.state.IBlockState getHostState()

@@ -5,6 +5,8 @@ import com.igteam.immersivegeology.common.block.IGGenericBlock;
 import com.igteam.immersivegeology.common.block.multiblocks.IGMultiblockBlock;
 import com.igteam.immersivegeology.common.block.multiblocks.entity.TileEntityBallmill;
 import com.igteam.immersivegeology.common.block.multiblocks.structure.IGBallmillStructure;
+import com.igteam.immersivegeology.common.block.multiblocks.structure.IGBloomeryStructure;
+import com.igteam.immersivegeology.common.block.multiblocks.entity.TileEntityBloomery;
 import com.igteam.immersivegeology.common.block.helper.OreBlockMeta;
 import com.igteam.immersivegeology.common.block.ore.IGOreBlock;
 import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
@@ -103,6 +105,11 @@ public class IGContent
 					switch(blockCategory)
 					{
 						case ORE_BLOCK -> blockCount += registerOreBlocks(material);
+						case SLAB, SHEETMETAL_SLAB ->
+						{
+							if(existing) continue;
+							blockCount += registerSlab(blockCategory, material);
+						}
 						case DEFAULT_BLOCK, STORAGE_BLOCK, SHEETMETAL_BLOCK, DUST_BLOCK, GEODE_BLOCK,
 							 ENGINEERING_BLOCK, ADVANCED_ENGINEERING_BLOCK, SCAFFOLDING ->
 						{
@@ -136,16 +143,65 @@ public class IGContent
 
 	private static void registerMultiblocks()
 	{
-		IGMultiblockBlock ballmill = new IGMultiblockBlock(IGBallmillStructure.INSTANCE, TileEntityBallmill::new);
-		registerBlock(IGBallmillStructure.NAME, ballmill);
-		registerItem(IGBallmillStructure.NAME, new net.minecraft.item.ItemBlock(ballmill));
+		registerMultiblock(IGBallmillStructure.INSTANCE, IGBallmillStructure.NAME,
+				TileEntityBallmill::new, TileEntityBallmill.class);
+		registerMultiblock(IGBloomeryStructure.INSTANCE, IGBloomeryStructure.NAME,
+				TileEntityBloomery::new, TileEntityBloomery.class,
+				com.igteam.immersivegeology.common.gui.IGGuiHandler.BLOOMERY);
+		registerMultiblock(
+				com.igteam.immersivegeology.common.block.multiblocks.structure.IGRevFurnaceStructure.INSTANCE,
+				com.igteam.immersivegeology.common.block.multiblocks.structure.IGRevFurnaceStructure.NAME,
+				com.igteam.immersivegeology.common.block.multiblocks.entity.TileEntityRevFurnace::new,
+				com.igteam.immersivegeology.common.block.multiblocks.entity.TileEntityRevFurnace.class,
+				com.igteam.immersivegeology.common.gui.IGGuiHandler.REVERBERATION_FURNACE);
+	}
+
+	private static void registerMultiblock(
+			com.igteam.immersivegeology.common.block.multiblocks.structure.IGMultiblockStructure structure,
+			String name,
+			java.util.function.Supplier<net.minecraft.tileentity.TileEntity> tileFactory,
+			Class<? extends net.minecraft.tileentity.TileEntity> tileClass)
+	{
+		registerMultiblock(structure, name, tileFactory, tileClass, -1);
+	}
+
+	private static void registerMultiblock(
+			com.igteam.immersivegeology.common.block.multiblocks.structure.IGMultiblockStructure structure,
+			String name,
+			java.util.function.Supplier<net.minecraft.tileentity.TileEntity> tileFactory,
+			Class<? extends net.minecraft.tileentity.TileEntity> tileClass,
+			int guiId)
+	{
+		IGMultiblockBlock block = new IGMultiblockBlock(structure, tileFactory, guiId);
+		registerBlock(name, block);
+		registerItem(name, new net.minecraft.item.ItemBlock(block));
 
 		net.minecraftforge.fml.common.registry.GameRegistry.registerTileEntity(
-				TileEntityBallmill.class, new ResourceLocation(IGLib.MODID, "ballmill"));
+				tileClass, new ResourceLocation(IGLib.MODID, name));
 
-		MultiblockHandler.registerMultiblock(IGBallmillStructure.INSTANCE);
+		MultiblockHandler.registerMultiblock(structure);
 
-		IGLib.IG_LOGGER.info("- Registered multiblock: {}", IGBallmillStructure.NAME);
+		IGLib.IG_LOGGER.info("- Registered multiblock: {}", name);
+	}
+
+	private static int registerSlab(BlockCategoryFlags category, MaterialInterface<?> material)
+	{
+		String key = category.getRegistryKey(material);
+		String doubleKey = "double_"+key;
+
+		com.igteam.immersivegeology.common.block.IGSlabBlock single =
+				new com.igteam.immersivegeology.common.block.IGSlabBlock(category, material, false);
+		com.igteam.immersivegeology.common.block.IGSlabBlock doubled =
+				new com.igteam.immersivegeology.common.block.IGSlabBlock(category, material, true);
+
+		single.setSingleSlab(single);
+		doubled.setSingleSlab(single);
+
+		registerBlock(key, single);
+		registerBlock(doubleKey, doubled);
+		registerItem(key, new net.minecraft.item.ItemSlab(single, single, doubled));
+
+		return 2;
 	}
 
 	private static boolean isOreItem(ItemCategoryFlags category)
@@ -200,35 +256,64 @@ public class IGContent
 
 	public static void verifyMultiblocks()
 	{
-		com.igteam.immersivegeology.common.block.multiblocks.structure.IGMultiblockStructure structure =
-				IGBallmillStructure.INSTANCE;
-		net.minecraft.block.state.IBlockState trigger = structure.getTriggerState();
-		IGLib.IG_LOGGER.info("- Multiblock {} trigger at {} resolves to {}",
-				structure.getUniqueName(), structure.getTriggerOffset(), trigger);
+		boolean rotationsOk = com.igteam.immersivegeology.common.block.multiblocks.structure
+				.IGStructureFormer.transformsAreProperRotations();
+		if(!rotationsOk)
+			IGLib.IG_LOGGER.error("- Multiblock transforms are not a proper rotation group with identity; no template can form");
+		else
+			IGLib.IG_LOGGER.info("- Multiblock transforms verified: 4 proper rotations, identity present");
 
-		int unresolved = 0;
-		net.minecraft.item.ItemStack[][][] manual = structure.getStructureManual();
-		for(net.minecraft.item.ItemStack[][] layer : manual)
-			for(net.minecraft.item.ItemStack[] row : layer)
-				for(net.minecraft.item.ItemStack stack : row)
-					if(stack==null||stack.isEmpty()) unresolved++;
-		IGLib.IG_LOGGER.info("- Multiblock {} manual: {} layers, {} empty/air slots",
-				structure.getUniqueName(), manual.length, unresolved);
+		boolean facesOk = com.igteam.immersivegeology.common.block.multiblocks.shim.util
+				.RelativeBlockFace.selfTest();
+		if(!facesOk)
+			IGLib.IG_LOGGER.error("- RelativeBlockFace mapping is not self-consistent; capabilities will face the wrong way");
 
-		// Prove the hammer path: IE passes the clicked block's state straight to isBlockTrigger
-		if(trigger!=null)
+		boolean levelOk = true;
+		for(net.minecraft.util.EnumFacing f : net.minecraft.util.EnumFacing.HORIZONTALS)
 		{
-			boolean accepts = structure.isBlockTrigger(trigger);
-			IGLib.IG_LOGGER.info("- Multiblock {} isBlockTrigger(trigger state) = {}",
-					structure.getUniqueName(), accepts);
-			if(!accepts)
-				IGLib.IG_LOGGER.error("- Multiblock {} will NOT form: trigger state rejected by its own check",
-						structure.getUniqueName());
+			com.igteam.immersivegeology.common.block.multiblocks.shim.env.IGMultiblockLevel probe =
+					new com.igteam.immersivegeology.common.block.multiblocks.shim.env.IGMultiblockLevel(
+							null, net.minecraft.util.math.BlockPos.ORIGIN,
+							new com.igteam.immersivegeology.common.block.multiblocks.shim.util
+									.MultiblockOrientation(f, false));
+			for(int x = 0; x <= 6; x++)
+				for(int z = 0; z <= 6; z++)
+				{
+					net.minecraft.util.math.BlockPos cell = new net.minecraft.util.math.BlockPos(x, 0, z);
+					if(!probe.toAbsolute(cell).equals(
+							com.igteam.immersivegeology.common.block.multiblocks.structure
+									.IGStructureFormer.rotateOffset(cell, f)))
+						levelOk = false;
+				}
+		}
+		if(!levelOk)
+			IGLib.IG_LOGGER.error("- IGMultiblockLevel.toAbsolute disagrees with the structure former; outputs and capability lookups will target the wrong blocks");
 
+		for(com.igteam.immersivegeology.common.block.multiblocks.structure.IGMultiblockStructure structure :
+				java.util.List.of(IGBallmillStructure.INSTANCE, IGBloomeryStructure.INSTANCE,
+						com.igteam.immersivegeology.common.block.multiblocks.structure.IGRevFurnaceStructure.INSTANCE))
+		{
+			net.minecraft.block.state.IBlockState trigger = structure.getTriggerState();
+			net.minecraft.item.ItemStack[][][] manual = structure.getStructureManual();
+			int empty = 0;
+			for(net.minecraft.item.ItemStack[][] layer : manual)
+				for(net.minecraft.item.ItemStack[] row : layer)
+					for(net.minecraft.item.ItemStack stack : row)
+						if(stack==null||stack.isEmpty()) empty++;
+
+			boolean accepts = trigger!=null&&structure.isBlockTrigger(trigger);
 			boolean registered = blusunrize.immersiveengineering.api.MultiblockHandler.getMultiblocks()
 					.contains(structure);
-			IGLib.IG_LOGGER.info("- Multiblock {} present in IE registry = {}",
-					structure.getUniqueName(), registered);
+
+			IGLib.IG_LOGGER.info("- {}: trigger {} at {} accepted={} registered={} dims=[{}][{}][{}] air={}",
+					structure.getUniqueName(), trigger, structure.getTriggerOffset(), accepts, registered,
+					manual.length,
+					manual.length > 0?manual[0].length: 0,
+					manual.length > 0&&manual[0].length > 0?manual[0][0].length: 0,
+					empty);
+
+			if(trigger==null||!accepts||!registered)
+				IGLib.IG_LOGGER.error("- {} will NOT form", structure.getUniqueName());
 		}
 	}
 

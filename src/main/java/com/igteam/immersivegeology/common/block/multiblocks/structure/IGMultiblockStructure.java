@@ -88,7 +88,7 @@ public abstract class IGMultiblockStructure implements IMultiblock
 		if(loaded==null) return null;
 
 		String triggerId = loaded.getBlockId(triggerOffset.getX(), triggerOffset.getY(), triggerOffset.getZ());
-		triggerState = IGBlockMapping.toState(triggerId);
+		triggerState = loaded.getBlockState(triggerOffset.getX(), triggerOffset.getY(), triggerOffset.getZ());
 
 		if(triggerState==null)
 			IGLib.IG_LOGGER.error("Multiblock {} has no resolvable trigger block at {} (template says {})",
@@ -109,7 +109,7 @@ public abstract class IGMultiblockStructure implements IMultiblock
 		for(int y = 0; y < loaded.sizeY(); y++)
 			for(int z = 0; z < loaded.sizeZ(); z++)
 				for(int x = 0; x < loaded.sizeX(); x++)
-					structureManual[y][z][x] = IGBlockMapping.toStack(loaded.getBlockId(x, y, z));
+					structureManual[y][z][x] = IGBlockMapping.toStack(loaded.getBlockState(x, y, z));
 		return structureManual;
 	}
 

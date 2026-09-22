@@ -2,6 +2,8 @@ package com.igteam.immersivegeology.common.block.multiblocks.structure;
 
 import blusunrize.immersiveengineering.common.blocks.TileEntityMultiblockPart;
 import net.minecraft.block.Block;
+import com.igteam.immersivegeology.common.block.multiblocks.IGMultiblockBlock;
+import com.igteam.immersivegeology.common.block.multiblocks.shim.IGMultiblockTile;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -40,7 +42,8 @@ public final class IGStructureFormer
 	}
 
 	private static final boolean DEBUG_FORMATION = Boolean.getBoolean("ig.debugMultiblockFormation");
-    // I think I have this backwards... I might be reading things backwards...
+    // 1.12.2 reads things in reverse for .nbt data -_-, had to retake my data and scrap my translation layer;
+	// wasn't a good idea anyways would have just caused issues down the line.
 	private static void reportMismatch(IGMultiblockStructure structure, IGStructureTemplate template, World world,
 									   BlockPos origin, EnumFacing facing)
 	{
@@ -50,7 +53,7 @@ public final class IGStructureFormer
 				for(int x = 0; x < template.sizeX()&&mismatches < 4; x++)
 				{
 					String id = template.getBlockId(x, y, z);
-					IBlockState expected = IGBlockMapping.toState(id);
+					IBlockState expected = template.getBlockState(x, y, z);
 					BlockPos target = origin.add(rotate(new BlockPos(x, y, z), facing));
 					IBlockState actual = world.getBlockState(target);
 
@@ -76,7 +79,6 @@ public final class IGStructureFormer
 		return clicked.subtract(rotate(trigger, facing));
 	}
 
-	// I'll need to recheck this once I've had full sleep.
 	private static boolean matches(IGMultiblockStructure structure, IGStructureTemplate template, World world,
 								   BlockPos origin, EnumFacing facing)
 	{
@@ -84,7 +86,7 @@ public final class IGStructureFormer
 			for(int z = 0; z < template.sizeZ(); z++)
 				for(int x = 0; x < template.sizeX(); x++)
 				{
-					IBlockState expected = IGBlockMapping.toState(template.getBlockId(x, y, z));
+					IBlockState expected = template.getBlockState(x, y, z);
 					BlockPos target = origin.add(rotate(new BlockPos(x, y, z), facing));
 					IBlockState actual = world.getBlockState(target);
 
@@ -104,35 +106,64 @@ public final class IGStructureFormer
 	private static void place(IGMultiblockStructure structure, IGStructureTemplate template, World world,
 							  BlockPos origin, EnumFacing facing)
 	{
-		IBlockState partState = structure.getPartState();
+		IBlockState base = structure.getPartState();
+		if(base.getPropertyKeys().contains(IGMultiblockBlock.FACING))
+			base = base.withProperty(IGMultiblockBlock.FACING, facing);
+		BlockPos master = structure.getMasterOffset();
+		BlockPos masterPos = origin.add(rotate(master, facing));
 
 		for(int y = 0; y < template.sizeY(); y++)
 			for(int z = 0; z < template.sizeZ(); z++)
 				for(int x = 0; x < template.sizeX(); x++)
 				{
+					IBlockState templateState = template.getBlockState(x, y, z);
+					if(templateState==null) continue;
+
 					BlockPos target = origin.add(rotate(new BlockPos(x, y, z), facing));
 					IBlockState previous = world.getBlockState(target);
-					ItemStack original = IGBlockMapping.toStack(template.getBlockId(x, y, z));
-					if(IGBlockMapping.toState(template.getBlockId(x, y, z))==null) continue;
+					boolean isMaster = master.getX()==x&&master.getY()==y&&master.getZ()==z;
+
+					IBlockState partState = base.getPropertyKeys().contains(IGMultiblockBlock.DUMMY)
+							?base.withProperty(IGMultiblockBlock.DUMMY, !isMaster)
+							: base;
 
 					world.setBlockState(target, partState, 3);
 
 					TileEntity te = world.getTileEntity(target);
-					if(te instanceof TileEntityMultiblockPart<?> part)
-						part.replaceStructureBlock(target, previous, original, y, z, x);
+					if(te instanceof IGMultiblockTile<?> part)
+						part.setFormedAt(new int[]{x, y, z},
+								IGBlockMapping.toStack(templateState), isMaster, facing, masterPos);
 
 					world.notifyBlockUpdate(target, previous, partState, 3);
 				}
 	}
 
+	public static BlockPos rotateOffset(BlockPos offset, EnumFacing facing)
+	{
+		return rotate(offset, facing);
+	}
+
+	public static boolean transformsAreProperRotations()
+	{
+		boolean hasIdentity = false;
+		for(EnumFacing facing : EnumFacing.HORIZONTALS)
+		{
+			BlockPos ux = rotate(new BlockPos(1, 0, 0), facing);
+			BlockPos uz = rotate(new BlockPos(0, 0, 1), facing);
+			if(ux.getX()*uz.getZ()-uz.getX()*ux.getZ()!=1) return false;
+			if(ux.getX()==1&&ux.getZ()==0&&uz.getX()==0&&uz.getZ()==1) hasIdentity = true;
+		}
+		return hasIdentity;
+	}
+
 	private static BlockPos rotate(BlockPos offset, EnumFacing facing)
 	{
-		return switch(facing)
-		{
-			case SOUTH -> new BlockPos(-offset.getX(), offset.getY(), offset.getZ());
-			case WEST -> new BlockPos(-offset.getZ(), offset.getY(), -offset.getX());
-			case EAST -> new BlockPos(offset.getZ(), offset.getY(), offset.getX());
-			default -> new BlockPos(offset.getX(), offset.getY(), -offset.getZ());
-		};
+		EnumFacing width = facing.rotateY();
+		int along = -offset.getZ();
+		int across = offset.getX();
+		return new BlockPos(
+				facing.getXOffset()*along+width.getXOffset()*across,
+				offset.getY(),
+				facing.getZOffset()*along+width.getZOffset()*across);
 	}
 }

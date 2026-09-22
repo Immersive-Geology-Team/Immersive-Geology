@@ -16,6 +16,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -29,11 +30,19 @@ public class IGMultiblockBlock extends Block
 	private final IGMultiblockStructure structure;
 	private final Supplier<TileEntity> tileFactory;
 
+	private final int guiId;
+
 	public IGMultiblockBlock(IGMultiblockStructure structure, Supplier<TileEntity> tileFactory)
+	{
+		this(structure, tileFactory, -1);
+	}
+
+	public IGMultiblockBlock(IGMultiblockStructure structure, Supplier<TileEntity> tileFactory, int guiId)
 	{
 		super(Material.IRON);
 		this.structure = structure;
 		this.tileFactory = tileFactory;
+		this.guiId = guiId;
 
 		setHardness(3.0F);
 		setResistance(15.0F);
@@ -93,6 +102,18 @@ public class IGMultiblockBlock extends Block
 	}
 
 	@Override
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
+	{
+		TileEntity te = world.getTileEntity(pos);
+		if(te instanceof TileEntityMultiblockPart<?> part)
+		{
+			ItemStack original = part.getOriginalBlock();
+			if(!original.isEmpty()) return original.copy();
+		}
+		return super.getPickBlock(state, target, world, pos, player);
+	}
+
+	@Override
 	public void breakBlock(World world, BlockPos pos, IBlockState state)
 	{
 		TileEntity te = world.getTileEntity(pos);
@@ -105,9 +126,13 @@ public class IGMultiblockBlock extends Block
 									EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		TileEntity te = world.getTileEntity(pos);
-		if(te instanceof TileEntityMultiblockPart<?> part&&part.formed)
-			return true;
-		return false;
+		if(!(te instanceof TileEntityMultiblockPart<?> part)||!part.formed) return false;
+		if(player.isSneaking()) return false;
+
+		if(guiId >= 0&&!world.isRemote)
+			player.openGui(com.igteam.immersivegeology.ImmersiveGeology.instance, guiId,
+					world, pos.getX(), pos.getY(), pos.getZ());
+		return true;
 	}
 
 	@Override

@@ -77,6 +77,7 @@ public final class IEPlaceholders
 	 * IE 1.12.2 has no IEItems class and no per-metal item fields; it uses one metadata-subtyped
 	 * itemMetal. These resolve through the OreDictionary instead, which is how 1.12.2 mods share
 	 * metal items and stays correct whether IE, vanilla or another mod supplies them.
+	 * My 1.20.1 code uses their new system really heavily so I'll just make a shim for it here as of now.
 	 */
 	public static final class Metals
 	{

@@ -416,13 +416,17 @@ public abstract class GeologyMaterial implements MaterialHelper
 	@Override
 	public MaterialInterface<?> getPrimaryProduct()
 	{
-		return null;
+		java.util.LinkedHashSet<MaterialInterface<?>> set = getDerivedMaterials();
+		if(set.isEmpty()) return null;
+		return set.stream().toList().get(0);
 	}
 
 	@Override
 	public MaterialInterface<?> getSecondaryProduct()
 	{
-		return null;
+		java.util.LinkedHashSet<MaterialInterface<?>> set = getDerivedMaterials();
+		if(set.size() < 2) return null;
+		return set.stream().toList().get(1);
 	}
 
 	@Override

@@ -70,14 +70,9 @@ public enum StoneEnum implements IStoneType {
 
     //===== Minecraft Stones =====\\
     MCStone(new MaterialVanilla()),
-    MCDeepslate(new MaterialMCDeepslate()),
-    MCAndesite(new MaterialMCAndesite()),
-    MCDiorite(new MaterialMCDiorite()),
     MCGranite(new MaterialMCGranite()),
-    MCBasalt(new MaterialMCBasalt()),
     MCEndStone(new MaterialMCEndStone()),
     MCNetherrack(new MaterialMCNetherrack()),
-    MCDripstone(new MaterialMCDripstone()),
     MCSandstone(new MaterialMCSandstone());
 
     //===== Minecraft Sands =====\\
@@ -102,13 +97,7 @@ public enum StoneEnum implements IStoneType {
     StoneEnum(MaterialStone m){
         this.material = m;
     }
-    /**
-     * Resolved stone type per block, so the name matching below runs once for each block the world contains
-     * rather than once for every block world generation samples.
-     * <p>
-     * Blocks are registry singletons and the match depends only on the block's description id, so a result is
-     * good for the lifetime of the game. Empty means the block is not a stone type Immersive Geology knows.
-     */
+
     private static final Map<Block, Optional<StoneEnum>> worldStateCache = new ConcurrentHashMap<>();
 
     public static StoneEnum selectWorldState(IBlockState stoneState) {
@@ -198,10 +187,6 @@ public enum StoneEnum implements IStoneType {
         return getFlags().contains(ModFlags.MINECRAFT);
     }
 
-    /**
-     * Derived from the mod flags, exactly as the registry key builder used to derive it inline. Last flag wins,
-     * which is the behaviour the existing block ids were generated with.
-     */
     @Override
     public String getRegistryPrefix()
     {
@@ -219,10 +204,6 @@ public enum StoneEnum implements IStoneType {
         return instance().getDimensions();
     }
 
-    /**
-     * Only Minecraft's own stone. TerraFirmaCraft's rock is present in a TFC world and absent from a vanilla one
-     * even when the mod is loaded, so it goes through the world-type check in IGTFCWorld instead.
-     */
     @Override
     public boolean declaresPresence()
     {

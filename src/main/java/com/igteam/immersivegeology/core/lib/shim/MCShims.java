@@ -58,7 +58,6 @@ public final class MCShims
 		{
 			public static final Object STONE_ORE_REPLACEABLES = new Object();
 			public static final Object STONE = new Object();
-			public static final Object DEEPSLATE_ORE_REPLACEABLES = new Object();
 			public static final Object NETHERRACK = new Object();
 			public static final Object END_STONES = new Object();
 		}
@@ -83,6 +82,7 @@ public final class MCShims
 
 	public static final class NoteBlockInstrument
 	{
+		// 1.13+ sound types with no 1.12.2 equivalent, shimming for quick compat, I used these a lot.
 		public static final Object BASEDRUM = new Object();
 		public static final Object HAT = new Object();
 		public static final Object SNARE = new Object();
@@ -109,7 +109,7 @@ public final class MCShims
 		public static final Object GROUND = net.minecraft.block.SoundType.GROUND;
 		public static final Object WOOD = net.minecraft.block.SoundType.WOOD;
 
-		// 1.13+ sound types with no 1.12.2 equivalent
+		// 1.13+ sound types with no 1.12.2 equivalent, shimming for quick compat, I used these a lot.
 		public static final Object GILDED_BLACKSTONE = net.minecraft.block.SoundType.STONE;
 		public static final Object DEEPSLATE = net.minecraft.block.SoundType.STONE;
 		public static final Object CALCITE = net.minecraft.block.SoundType.STONE;

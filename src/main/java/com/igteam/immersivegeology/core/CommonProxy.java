@@ -13,6 +13,12 @@ public class CommonProxy
 
 	public void init(FMLInitializationEvent event)
 	{
+		net.minecraftforge.fml.common.network.NetworkRegistry.INSTANCE.registerGuiHandler(
+				com.igteam.immersivegeology.ImmersiveGeology.instance,
+				new com.igteam.immersivegeology.common.gui.IGGuiHandler());
+		com.igteam.immersivegeology.common.block.multiblocks.recipe.IGBallmillRecipes.register();
+		com.igteam.immersivegeology.common.block.multiblocks.recipe.IGBloomeryRecipes.register();
+		com.igteam.immersivegeology.common.block.multiblocks.recipe.IGRevFurnaceRecipes.register();
 	}
 
 	public void postInit(FMLPostInitializationEvent event)

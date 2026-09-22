@@ -1,7 +1,7 @@
 package com.igteam.immersivegeology.common.block.multiblocks.shim.component;
 
 import com.igteam.immersivegeology.common.block.multiblocks.shim.env.IMultiblockContext;
-import com.igteam.immersivegeology.common.block.multiblocks.shim.util.MultiblockFace;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.nbt.NBTTagCompound;
 
 public final class RedstoneControl
@@ -13,9 +13,9 @@ public final class RedstoneControl
 	public static class RSState
 	{
 		private boolean inverted;
-		private final MultiblockFace inputPosition;
+		private final BlockPos inputPosition;
 
-		private RSState(boolean inverted, MultiblockFace inputPosition)
+		private RSState(boolean inverted, BlockPos inputPosition)
 		{
 			this.inverted = inverted;
 			this.inputPosition = inputPosition;
@@ -31,7 +31,7 @@ public final class RedstoneControl
 			return new RSState(false, null);
 		}
 
-		public static RSState enabledByDefault(MultiblockFace inputPosition)
+		public static RSState enabledByDefault(BlockPos inputPosition)
 		{
 			return new RSState(true, inputPosition);
 		}

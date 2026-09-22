@@ -1,6 +1,11 @@
 package com.igteam.immersivegeology.core;
 
 import com.igteam.immersivegeology.client.manual.IGManualEntries;
+import com.igteam.immersivegeology.client.renderer.multiblocks.BallmillRenderer;
+import com.igteam.immersivegeology.common.block.multiblocks.entity.TileEntityBallmill;
+import com.igteam.immersivegeology.core.lib.IGLib;
+import net.minecraftforge.client.model.obj.OBJLoader;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import com.igteam.immersivegeology.client.pack.IGPackInjector;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -14,6 +19,8 @@ public class ClientProxy extends CommonProxy
 	{
 		super.preInit(event);
 		IGPackInjector.inject();
+		OBJLoader.INSTANCE.addDomain(IGLib.MODID);
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBallmill.class, new BallmillRenderer());
 	}
 
 	@Override

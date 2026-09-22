@@ -2,7 +2,6 @@ package com.igteam.immersivegeology.common.block.multiblocks.entity;
 
 import com.igteam.immersivegeology.common.block.multiblocks.logic.BallmillLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.shim.IGMultiblockTile;
-import net.minecraft.item.ItemStack;
 
 public class TileEntityBallmill extends IGMultiblockTile<BallmillLogic.State>
 {
@@ -12,11 +11,5 @@ public class TileEntityBallmill extends IGMultiblockTile<BallmillLogic.State>
 	public TileEntityBallmill()
 	{
 		super(new int[]{4, 4, 5}, LOGIC);
-	}
-
-	@Override
-	public ItemStack getOriginalBlock()
-	{
-		return ItemStack.EMPTY;
 	}
 }

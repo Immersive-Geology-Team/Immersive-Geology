@@ -18,6 +18,6 @@ public final class IGManualEntries
 				new ManualPages.Text(ManualHelper.getManual(), "ballmill0"),
 				new ManualPageMultiblock(ManualHelper.getManual(), "ballmill1", IGBallmillStructure.INSTANCE));
 
-		IGLib.IG_LOGGER.info("- Registered IE manual entry: ballmill");
+		IGLib.IG_LOGGER.info("- Registered test IE manual entry: ballmill");
 	}
 }
