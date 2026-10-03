@@ -1,8 +1,8 @@
-# @file mods.toml
+# @file neoforge.mods.toml
 # @spec TOML v0.5.0 (https://github.com/toml-lang/toml)
 #
 modLoader="javafml"
-loaderVersion="[25,)"
+loaderVersion="[1,)"
 license="LGPL-3.0"
 
 [[mods]]
@@ -23,29 +23,29 @@ displayURL = "https://minecraft.curseforge.com/projects/immersive-geology/"
 logoFile = "logo.png"
 credits = "Crimson Twilight, Peter, RGBoid"
 [[dependencies.immersivegeology]]
-modId="forge"
-mandatory=true
-versionRange="[47.1.54,)"
+modId="neoforge"
+type="required"
+versionRange="[21.1.164,)"
 ordering="AFTER"
 side="BOTH"
 
 [[dependencies.immersivegeology]]
 modId="minecraft"
-mandatory=true
+type="required"
 versionRange="[${mc_version}]"
 ordering="NONE"
 side="BOTH"
 
 [[dependencies.immersivegeology]]
 modId="immersiveengineering"
-mandatory=true
-versionRange="[${version_ie},]"
+type="required"
+versionRange="[12.4.2-194,)"
 ordering="AFTER"
 side="BOTH"
 
 [[dependencies.immersivegeology]]
 modId="jei"
-mandatory=false
+type="optional"
 versionRange="[${jei_version},)"
 ordering="NONE"
 side="BOTH"
