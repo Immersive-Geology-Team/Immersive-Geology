@@ -33,7 +33,7 @@ public class IGCrystallizerCategory extends IGRecipeCategory<CrystallizerRecipe>
 	public IGCrystallizerCategory(IGuiHelper helper)
 	{
 		super(helper, JEIRecipeTypes.CRYSTALLIZER, "block.immersivegeology.crystallizer");
-		ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/crystalizer.png");
+		ResourceLocation background = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/gui/jei/crystalizer.png");
 		IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 101, 101).setTextureSize(101,101).build();
 		setBackground(back);
 		setIcon(IGMultiblockProvider.CRYSTALLIZER.iconStack());

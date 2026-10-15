@@ -17,6 +17,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.Lazy;
@@ -69,9 +70,9 @@ public class PelletizerRecipe extends MultiblockRecipe
 
 	public static PelletizerRecipe findRecipe(Level level, ItemStack input)
 	{
-		for(PelletizerRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.itemIn.test(input))
-				return recipe;
+		for(RecipeHolder<PelletizerRecipe> recipe : RECIPES.getRecipes(level))
+			if(recipe.value().itemIn.test(input))
+				return recipe.value();
 		return null;
 	}
 

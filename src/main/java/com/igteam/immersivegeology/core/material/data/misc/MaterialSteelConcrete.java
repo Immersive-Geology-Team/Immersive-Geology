@@ -36,6 +36,6 @@ public class MaterialSteelConcrete extends MaterialMisc
 	@Override
 	public ResourceLocation getTextureLocation(IFlagType<?> flag)
 	{
-		return new ResourceLocation(IGLib.MODID, "block/static_block/concrete_normal");
+		return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/static_block/concrete_normal");
 	}
 }

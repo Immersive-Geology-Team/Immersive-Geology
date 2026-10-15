@@ -42,7 +42,7 @@ public class IGTags
 	public static LinkedHashMap<GeologyMaterial, TagKey<Item>> ITEM_MATERIAL_HOLDER = new LinkedHashMap<>();
 	public static LinkedHashMap<GeologyMaterial, TagKey<Block>> BLOCK_MATERIAL_HOLDER = new LinkedHashMap<>();
 	public static LinkedHashMap<BlockCategoryFlags, TagKey<Block>> BLOCK_CATEGORY_FLAGS = new LinkedHashMap<>();
-	public static TagKey<Item> SILICON_TAG = ItemTags.create(new ResourceLocation("forge","silicon"));
+	public static TagKey<Item> SILICON_TAG = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge","silicon"));
 
 	public static TagKey<Item> getStorageBlockItemTag(MaterialHelper material)
 	{
@@ -56,7 +56,7 @@ public class IGTags
 
 	private static ResourceLocation storageBlockTag(MaterialHelper material)
 	{
-		return new ResourceLocation("forge", "storage_blocks/"+material.getName().toLowerCase(Locale.ROOT));
+		return ResourceLocation.fromNamespaceAndPath("forge", "storage_blocks/"+material.getName().toLowerCase(Locale.ROOT));
 	}
 
 	private static boolean initialized = false;
@@ -74,21 +74,21 @@ public class IGTags
 					createWrapperForCategory(itemFlag, materialInterface.instance());
 				}
 			}
-			TagKey<Item> key = ItemTags.create(new ResourceLocation("forge",itemFlag.getName().toLowerCase(Locale.ROOT) + itemFlag.getTagPrefix()));
+			TagKey<Item> key = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge",itemFlag.getName().toLowerCase(Locale.ROOT) + itemFlag.getTagPrefix()));
 			ITEM_CATEGORY_FLAGS.put(itemFlag, key);
 		}
 
 		for(MaterialInterface<?> materialInterface : IGLib.getGeologyMaterials())
 		{
-			TagKey<Item> key = ItemTags.create(new ResourceLocation("forge","material/"+materialInterface.getName().toLowerCase(Locale.ROOT)));
+			TagKey<Item> key = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge","material/"+materialInterface.getName().toLowerCase(Locale.ROOT)));
 			ITEM_MATERIAL_HOLDER.put(materialInterface.instance(), key);
-			TagKey<Block> blockKey = BlockTags.create(new ResourceLocation("forge", "material/"+materialInterface.getName().toLowerCase(Locale.ROOT)));
+			TagKey<Block> blockKey = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "material/"+materialInterface.getName().toLowerCase(Locale.ROOT)));
 			BLOCK_MATERIAL_HOLDER.put(materialInterface.instance(), blockKey);
 		}
 
 		for(BlockCategoryFlags blockFlag : BlockCategoryFlags.values())
 		{
-			TagKey<Block> key = BlockTags.create(new ResourceLocation("forge",blockFlag.getName().toLowerCase(Locale.ROOT) + blockFlag.getTagPrefix()));
+			TagKey<Block> key = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge",blockFlag.getName().toLowerCase(Locale.ROOT) + blockFlag.getTagPrefix()));
 			BLOCK_CATEGORY_FLAGS.put(blockFlag, key);
 		}
 
@@ -114,7 +114,7 @@ public class IGTags
 				}
 
 				MaterialHelper base = materialInterface.instance();
-				TagKey<Fluid> tag = FluidTags.create( new ResourceLocation("forge", base.getName().toLowerCase(Locale.ROOT)));
+				TagKey<Fluid> tag = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", base.getName().toLowerCase(Locale.ROOT)));
 
 				LinkedHashSet<MaterialHelper> base_set = new LinkedHashSet<>();
 				base_set.add(base);
@@ -136,7 +136,7 @@ public class IGTags
 						}
 
 						MaterialHelper base = materialInterface.instance();
-						TagKey<Fluid> tag = FluidTags.create( new ResourceLocation("forge", "clean_"+base.getName().toLowerCase(Locale.ROOT) + "_" + slurry_material.getName().toLowerCase(Locale.ROOT)));
+						TagKey<Fluid> tag = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "clean_"+base.getName().toLowerCase(Locale.ROOT) + "_" + slurry_material.getName().toLowerCase(Locale.ROOT)));
 						LinkedHashSet<MaterialHelper> base_set = new LinkedHashSet<>();
 						base_set.add(base);
 						base_set.add(slurry_material.instance());
@@ -159,7 +159,7 @@ public class IGTags
 						}
 
 						MaterialHelper base = materialInterface.instance();
-						TagKey<Fluid> tag = FluidTags.create( new ResourceLocation("forge", "cloudy_"+base.getName().toLowerCase(Locale.ROOT) + "_" + slurry_material.getName().toLowerCase(Locale.ROOT)));
+						TagKey<Fluid> tag = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "cloudy_"+base.getName().toLowerCase(Locale.ROOT) + "_" + slurry_material.getName().toLowerCase(Locale.ROOT)));
 						LinkedHashSet<MaterialHelper> base_set = new LinkedHashSet<>();
 						base_set.add(base);
 						base_set.add(slurry_material.instance());
@@ -190,7 +190,7 @@ public class IGTags
 		StringJoiner material_set_name = new StringJoiner("_");
 		materialSet.forEach((m -> material_set_name.add(m.getName())));
 
-		return new ResourceLocation("forge", category.getName() + category.getTagPrefix() + "/" + material_set_name);
+		return ResourceLocation.fromNamespaceAndPath("forge", category.getName() + category.getTagPrefix() + "/" + material_set_name);
 	}
 
 	public static boolean isInitialized()

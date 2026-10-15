@@ -12,10 +12,12 @@ import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IESerializableRecipe;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
@@ -39,8 +41,8 @@ public class BulkBlastFluxRecipe extends IESerializableRecipe
 	public static int getFluxValue(@Nullable Level level, ItemStack stack)
 	{
 		if(stack.isEmpty()) return 0;
-		for(BulkBlastFluxRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.input.test(stack)) return recipe.fluxValue;
+		for(RecipeHolder<BulkBlastFluxRecipe> recipe : RECIPES.getRecipes(level))
+			if(recipe.value().input.test(stack)) return recipe.value().fluxValue;
 		return 0;
 	}
 
@@ -56,7 +58,7 @@ public class BulkBlastFluxRecipe extends IESerializableRecipe
 	}
 
 	@Override
-	public @NotNull ItemStack getResultItem(@NotNull RegistryAccess access)
+	public @NotNull ItemStack getResultItem(HolderLookup.@NotNull Provider access)
 	{
 		return ItemStack.EMPTY;
 	}

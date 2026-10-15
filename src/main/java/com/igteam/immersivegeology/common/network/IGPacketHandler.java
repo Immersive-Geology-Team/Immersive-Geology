@@ -25,7 +25,7 @@ public class IGPacketHandler
 {
 	public static final String NET_VERSION = "1";
 	public static final SimpleChannel INSTANCE = NetworkRegistry.ChannelBuilder
-			.named(new ResourceLocation(IGLib.MODID, "main"))
+			.named(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "main"))
 			.networkProtocolVersion(() -> NET_VERSION)
 			.serverAcceptedVersions(NET_VERSION::equals)
 			.clientAcceptedVersions(NET_VERSION::equals)

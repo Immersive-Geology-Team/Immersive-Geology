@@ -110,8 +110,8 @@ public class SpawnChunkCapture {
 		try {
 			BufferedImage image = generateMapImage(level, spawnPos);
 			String label = worldLabel();
-			saveImage(image, helper, server.getServerDirectory(), "World Map "+label);
-			writeCensus(server.getServerDirectory(), label);
+			saveImage(image, helper, server.getServerDirectory().toFile(), "World Map "+label);
+			writeCensus(server.getServerDirectory().toFile(), label);
 			helper.succeed();
 		} catch (Exception e) {
 			helper.fail("Error generating map: " + e.getMessage());
@@ -182,7 +182,7 @@ public class SpawnChunkCapture {
 				BlockPos blockPos = new BlockPos(x, surfaceY, z);
 				BlockState blockState = chunk.getBlockState(blockPos);
 				Holder<Biome> biomeHolder = chunk.getNoiseBiome(x, surfaceY, z);
-				Biome biome = biomeHolder.get();
+				Biome biome = biomeHolder.value();
 
 				// Calculate color
 				int col = blockState.is(Blocks.WATER)
@@ -393,11 +393,11 @@ public class SpawnChunkCapture {
 	 * Checks if a custom ore feature is present in the given biome at the position
 	 */
 	private static void isCustomOreFeaturePresent(Holder<Biome> biomeHolder, ChunkPos pos, Graphics2D g2d) {
-		Biome biome = biomeHolder.get();
+		Biome biome = biomeHolder.value();
 		List<HolderSet<PlacedFeature>> features = biome.getGenerationSettings().features();
 		for (HolderSet<PlacedFeature> featureSet : features) {
 			for (Holder<PlacedFeature> featureHolder : featureSet) {
-				ConfiguredFeature<?, ?> feature = featureHolder.value().feature().get();
+				ConfiguredFeature<?, ?> feature = featureHolder.value().feature().value();
 				if (feature.config() instanceof IGOreFeatureConfig igConfig) {
 					IGDefaultPlacement t = new IGDefaultPlacement(igConfig.entry());
 					if(t.exposedPlace(seed, server.overworld(), pos, g2d))

@@ -30,6 +30,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.recipe.GravitySepara
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.GravitySeparatorShape;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -41,6 +42,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -196,7 +198,7 @@ public class GravitySeparatorLogic implements ISkinnableMultiblockLogic<GravityS
 
     @Nullable
     @Override
-    public List<Component> getOverlayText(State state, Player player, boolean b)
+    public List<Component> getOverlayText(State state, BlockPos posInMultiblock, BlockHitResult absoluteHit, Player player, boolean b)
     {
         if(state == null) return List.of();
         if(!state.separatorProcessesQueue.isEmpty() && state.tank.getFluidAmount() < 20)
@@ -253,47 +255,47 @@ public class GravitySeparatorLogic implements ISkinnableMultiblockLogic<GravityS
         }
 
         @Override
-        public void writeSaveNBT(CompoundTag nbt){
-            writeSyncNBT(nbt);
+        public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            writeSyncNBT(nbt, provider);
         }
 
         @Override
-        public void readSaveNBT(CompoundTag nbt){
-            readSyncNBT(nbt);
+        public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            readSyncNBT(nbt, provider);
         }
 
         @Override
-        public void writeSyncNBT(CompoundTag nbt)
+        public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            writeCommonNBT(nbt);
-            nbt.put("tank", this.tank.writeToNBT(new CompoundTag()));
+            writeCommonNBT(nbt, provider);
+            nbt.put("tank", this.tank.writeToNBT(provider, new CompoundTag()));
             nbt.putBoolean("renderActive", renderAsActive);
             nbt.putInt("insert_cooldown", insert_cooldown);
         }
 
         @Override
-        public void readSyncNBT(CompoundTag nbt)
+        public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            readCommonNBT(nbt);
-            tank.readFromNBT(nbt.getCompound("tank"));
+            readCommonNBT(nbt, provider);
+            tank.readFromNBT(provider, nbt.getCompound("tank"));
             renderAsActive = nbt.getBoolean("renderActive");
             insert_cooldown = nbt.getInt("insert_cooldown");
         }
 
-        private void writeCommonNBT(CompoundTag nbt)
+        private void writeCommonNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
             ListTag processes = new ListTag();
             for(final SeparatorProcess process : separatorProcessesQueue)
-                processes.add(process.writeToNBT());
+                processes.add(process.writeToNBT(provider));
             nbt.put("processes", processes);
         }
 
-        private void readCommonNBT(CompoundTag nbt)
+        private void readCommonNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
             ListTag processes = nbt.getList("processes", Tag.TAG_COMPOUND);
             separatorProcessesQueue.clear();
             for(int i = 0; i < processes.size(); ++i)
-                separatorProcessesQueue.add(SeparatorProcess.readFromNBT(processes.getCompound(i)));
+                separatorProcessesQueue.add(SeparatorProcess.readFromNBT(provider, processes.getCompound(i)));
         }
 
         @Override

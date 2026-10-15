@@ -37,6 +37,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.recipe.CrystallizerR
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.CrystallizerShape;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -44,6 +45,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -181,7 +183,7 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
 
     @Nullable
     @Override
-    public List<Component> getOverlayText(State state, Player player, boolean b)
+    public List<Component> getOverlayText(State state, BlockPos posInMultiblock, BlockHitResult absoluteHit, Player player, boolean b)
     {
         if(Utils.isFluidRelatedItemStack(player.getItemInHand(InteractionHand.MAIN_HAND)))
             return List.of(TextUtils.formatFluidStack(state.tank.getFluid()), TextUtils.formatFluidStack(state.output_tank.getFluid()));
@@ -229,33 +231,33 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
         }
 
         @Override
-        public void writeSaveNBT(CompoundTag nbt){
-            nbt.put("energy", energy.serializeNBT());
-            nbt.put("processor", processor.toNBT());
-            nbt.put("tank", tank.writeToNBT(new CompoundTag()));
-            nbt.put("output_tank", output_tank.writeToNBT(new CompoundTag()));
-            nbt.put("inventory", inventory.serializeNBT());
+        public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            nbt.put("energy", energy.serializeNBT(provider));
+            nbt.put("processor", processor.toNBT(provider));
+            nbt.put("tank", tank.writeToNBT(provider, new CompoundTag()));
+            nbt.put("output_tank", output_tank.writeToNBT(provider, new CompoundTag()));
+            nbt.put("inventory", inventory.serializeNBT(provider));
         }
 
         @Override
-        public void readSaveNBT(CompoundTag nbt){
-            energy.deserializeNBT(nbt.get("energy"));
-            tank.readFromNBT(nbt.getCompound("tank"));
-            output_tank.readFromNBT(nbt.getCompound("output_tank"));
-            inventory.deserializeNBT(nbt.getCompound("inventory"));
-            processor.fromNBT(nbt.get("processor"), MultiblockProcessInMachine::new);
+        public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            energy.deserializeNBT(provider, nbt.get("energy"));
+            tank.readFromNBT(provider, nbt.getCompound("tank"));
+            output_tank.readFromNBT(provider, nbt.getCompound("output_tank"));
+            inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
+            processor.fromNBT(nbt.get("processor"), (getRecipe, data, p) -> new MultiblockProcessInMachine<>(getRecipe, data), provider);
         }
 
         @Override
-        public void writeSyncNBT(CompoundTag nbt)
+        public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            writeSaveNBT(nbt);
+            writeSaveNBT(nbt, provider);
         }
 
         @Override
-        public void readSyncNBT(CompoundTag nbt)
+        public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            readSaveNBT(nbt);
+            readSaveNBT(nbt, provider);
         }
 
         public void invalidate(@NotNull IMultiblockContext<?> ctx)

@@ -12,10 +12,12 @@ import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IESerializableRecipe;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -35,7 +37,7 @@ public class BloomeryFuel extends IESerializableRecipe
 	}
 
 	public static int getBloomeryFuelTime(Level level, ItemStack stack) {
-		Iterator var2 = RECIPES.getRecipes(level).iterator();
+		Iterator<RecipeHolder<BloomeryFuel>> var2 = RECIPES.getRecipes(level).iterator();
 
 		BloomeryFuel e;
 		do {
@@ -43,7 +45,7 @@ public class BloomeryFuel extends IESerializableRecipe
 				return 0;
 			}
 
-			e = (BloomeryFuel)var2.next();
+			e = var2.next().value();
 		} while(!e.input.test(stack));
 
 		return e.burnTime;
@@ -57,7 +59,7 @@ public class BloomeryFuel extends IESerializableRecipe
 		return (IERecipeSerializer)SERIALIZER.get();
 	}
 
-	public ItemStack getResultItem(RegistryAccess access) {
+	public ItemStack getResultItem(HolderLookup.Provider access) {
 		return ItemStack.EMPTY;
 	}
 

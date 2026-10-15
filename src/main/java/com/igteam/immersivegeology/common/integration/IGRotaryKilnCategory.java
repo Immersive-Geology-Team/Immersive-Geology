@@ -30,7 +30,7 @@ public class IGRotaryKilnCategory extends IGRecipeCategory<RotaryKilnRecipe>
 	public IGRotaryKilnCategory(IGuiHelper helper)
 	{
 		super(helper, JEIRecipeTypes.ROTARYKILN, "block.immersivegeology.rotary_kiln");
-		ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/rotary_kiln.png");
+		ResourceLocation background = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/gui/jei/rotary_kiln.png");
 		IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 101, 101).setTextureSize(101,101).build();
 		setBackground(back);
 		setIcon(IGMultiblockProvider.ROTARYKILN.iconStack());

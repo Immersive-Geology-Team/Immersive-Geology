@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.igteam.immersivegeology.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ItemStackComponentizationFixMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

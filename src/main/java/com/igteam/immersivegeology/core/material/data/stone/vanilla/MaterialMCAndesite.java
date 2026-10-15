@@ -30,6 +30,6 @@ public class MaterialMCAndesite extends MaterialStone {
     @Override
     public Properties getProperties(IFlagType<?> flag)
     {
-        return BlockBehaviour.Properties.copy(Blocks.ANDESITE);
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.ANDESITE);
     }
 }

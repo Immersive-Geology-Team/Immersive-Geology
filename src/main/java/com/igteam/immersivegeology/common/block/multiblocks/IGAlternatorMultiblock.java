@@ -21,7 +21,7 @@ public class IGAlternatorMultiblock extends IGTemplateMultiblock
 	public static final IGAlternatorMultiblock INSTANCE = new IGAlternatorMultiblock();
 
 	public IGAlternatorMultiblock() {
-		super(new ResourceLocation(IGLib.MODID, "multiblocks/alternator"),
+		super(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "multiblocks/alternator"),
 				new BlockPos(3,2,3),
 				new BlockPos(3,4,4),
 				new BlockPos(7, 7, 5), IGMultiblockProvider.ALTERNATOR);

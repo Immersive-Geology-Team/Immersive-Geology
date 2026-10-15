@@ -26,6 +26,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
@@ -80,7 +81,7 @@ public class IGMineralTestingItem extends IGGenericItem implements IGFlagItem
 		BlockPos usedPos = context.getClickedPos();
 		ChunkPos centreChunkPos = new ChunkPos(usedPos);
 
-		stack.hurtAndBreak(1, player, (p) -> {});
+		stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(context.getHand()));
 
 		MineralCacheEntry cachedEntry = cached_test.get(centreChunkPos);
 		if (cachedEntry != null) {

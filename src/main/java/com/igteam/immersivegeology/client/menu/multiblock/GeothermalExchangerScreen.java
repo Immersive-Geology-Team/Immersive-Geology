@@ -147,9 +147,9 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 	}
 
 	@Override
-	public void renderBackground(@NotNull GuiGraphics graphics)
+	public void renderBackground(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float partialTicks)
 	{
-		super.renderBackground(graphics);
+		super.renderBackground(graphics, mouseX, mouseY, partialTicks);
 	}
 
 	private Transformation createRenderTransform() {

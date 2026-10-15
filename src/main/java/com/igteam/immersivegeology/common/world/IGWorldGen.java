@@ -57,7 +57,7 @@ public class IGWorldGen
 
 	public static final TagKey<Biome> SALT_FLATS_BIOMES = TagKey.create(
 			Registries.BIOME,
-			new ResourceLocation(IGLib.MODID, "salt_flats")
+			ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "salt_flats")
 	);
 
 	public static final DeferredRegister<Codec<? extends BiomeModifier>> BIOME_MODIFIER_SERIALIZERS;

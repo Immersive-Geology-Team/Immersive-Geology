@@ -28,14 +28,18 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -64,7 +68,7 @@ public class IGMBFormationItem extends IGGenericItem
 	BiPredicate<IMultiblock, MaterialInterface<?>> validPredicate = (multiblock, material) -> material.canFormMB(multiblock);
 	public IGMBFormationItem(ItemCategoryFlags flag, MaterialInterface<?> material, int max_durability)
 	{
-		super(flag, material, new Properties().defaultDurability(max_durability));
+		super(flag, material, new Properties().durability(max_durability));
 	}
 
 	@Override
@@ -93,16 +97,17 @@ public class IGMBFormationItem extends IGGenericItem
 		Direction side = context.getClickedFace();
 		List<ResourceLocation> permittedMultiblocks = null;
 		List<ResourceLocation> interdictedMultiblocks = null;
-		if(ItemNBTHelper.hasKey(stack, "multiblockPermission"))
+		CustomData customData = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+		if(customData.contains("multiblockPermission"))
 		{
-			ListTag list = stack.getOrCreateTag().getList("multiblockPermission", Tag.TAG_STRING);
+			ListTag list = customData.copyTag().getList("multiblockPermission", Tag.TAG_STRING);
 			permittedMultiblocks = parseMultiblockNames(list, player, "permission");
 			if(permittedMultiblocks==null)
 				return InteractionResult.FAIL;
 		}
-		if(ItemNBTHelper.hasKey(stack, "multiblockInterdiction"))
+		if(customData.contains("multiblockInterdiction"))
 		{
-			ListTag list = stack.getOrCreateTag().getList("multiblockInterdiction", Tag.TAG_STRING);
+			ListTag list = customData.copyTag().getList("multiblockInterdiction", Tag.TAG_STRING);
 			interdictedMultiblocks = parseMultiblockNames(list, player, "interdiction");
 			if(interdictedMultiblocks==null)
 				return InteractionResult.FAIL;
@@ -138,8 +143,8 @@ public class IGMBFormationItem extends IGGenericItem
 							IEAdvancements.TRIGGER_MULTIBLOCK.trigger(sPlayer, mb, stack);
 
 
-						stack.hurtAndBreak(1, player, (p) -> {
-						});
+						if(player!=null)
+							stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(context.getHand()));
 						return InteractionResult.SUCCESS;
 					}
 				} else if(player!=null)
@@ -214,8 +219,9 @@ public class IGMBFormationItem extends IGGenericItem
 		return true;
 	}
 
-	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-		return enchantment == Enchantments.UNBREAKING || enchantment == Enchantments.MENDING;
+	@Override
+	public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+		return enchantment.is(Enchantments.UNBREAKING) || enchantment.is(Enchantments.MENDING);
 	}
 
 	@Override

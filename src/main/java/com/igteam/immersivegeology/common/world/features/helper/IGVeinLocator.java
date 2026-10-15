@@ -247,7 +247,7 @@ public final class IGVeinLocator
 			// Sampling it is the expensive, so it is done once and reused across every material.
 			Holder<Biome> biome = level.getUncachedNoiseBiome(
 					QuartPos.fromBlock(chunk.getMinBlockX()), 0, QuartPos.fromBlock(chunk.getMinBlockZ()));
-			boolean isEnd = biome.containsTag(BiomeTags.IS_END);
+			boolean isEnd = biome.is(BiomeTags.IS_END);
 
 			for(MaterialRoll material : materials)
 			{
@@ -276,7 +276,7 @@ public final class IGVeinLocator
 
 		ResourceLocation dimension = level.dimension().location();
 		boolean whitelisted = config.dimension_whitelist.get().stream()
-				.map(ResourceLocation::new)
+				.map(ResourceLocation::parse)
 				.anyMatch(dimension::equals);
 		if(whitelisted) return true;
 

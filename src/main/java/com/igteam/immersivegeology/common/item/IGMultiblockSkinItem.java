@@ -72,9 +72,9 @@ public class IGMultiblockSkinItem<T extends Enum<T> & IIGMultiSkinHelper & Strin
 	}
 
 	@Override
-	public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced)
+	public void appendHoverText(ItemStack pStack, TooltipContext context, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced)
 	{
-		super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+		super.appendHoverText(pStack, context, pTooltipComponents, pIsAdvanced);
 
 		Component skin_name = Component.translatable("skin.immersivegeology."+skin.getSerializedName()).withStyle(skin.getColor());
 		Component skin_type = Component.translatable("skin.immersivegeology.credit."+skin.getType().name().toLowerCase(Locale.ROOT)).withStyle(skin.getType().getColor());

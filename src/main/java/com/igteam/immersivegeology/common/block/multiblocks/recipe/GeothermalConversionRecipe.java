@@ -13,10 +13,12 @@ import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -72,19 +74,19 @@ public class GeothermalConversionRecipe extends IESerializableRecipe implements 
 
 	public static GeothermalConversionRecipe findRecipe(Level level, Block block)
 	{
-		for(GeothermalConversionRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.transitionBlock.get().equals(block))
+		for(RecipeHolder<GeothermalConversionRecipe> recipe : RECIPES.getRecipes(level))
+			if(recipe.value().transitionBlock.get().equals(block))
 			{
 				FluidState fluidState = block.defaultBlockState().getFluidState();
 				if(!fluidState.isEmpty())
 				{
 					if(fluidState.isSource())
 					{
-						return recipe;
+						return recipe.value();
 					}
 					return null;
 				}
-				return recipe;
+				return recipe.value();
 			}
 		return null;
 	}
@@ -93,9 +95,9 @@ public class GeothermalConversionRecipe extends IESerializableRecipe implements 
 	{
 		if(blockIndex == -1) return null;
 		int i = 0;
-		for(GeothermalConversionRecipe recipe : RECIPES.getRecipes(level))
+		for(RecipeHolder<GeothermalConversionRecipe> recipe : RECIPES.getRecipes(level))
 		{
-			if(i == blockIndex) return recipe;
+			if(i == blockIndex) return recipe.value();
 			i++;
 		}
 		return null;
@@ -115,7 +117,7 @@ public class GeothermalConversionRecipe extends IESerializableRecipe implements 
 	}
 
 	@Override
-	public @NotNull ItemStack getResultItem(@NotNull RegistryAccess registryAccess)
+	public @NotNull ItemStack getResultItem(HolderLookup.@NotNull Provider registryAccess)
 	{
 		return ItemStack.EMPTY;
 	}

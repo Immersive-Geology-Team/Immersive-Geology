@@ -182,8 +182,8 @@ public class EnergyPipeCallback implements BlockCallback<EnergyPipeCallback.Key>
 
 	public Vector4f getRenderColor(EnergyPipeCallback.Key key, String group, String material, ShaderCase shaderCase, Vector4f original) {
 		if (key.color() != null) {
-			float[] rgb = key.color().getTextureDiffuseColors();
-			return new Vector4f(rgb[0], rgb[1], rgb[2], 1.0F).mul(original);
+			int rgb = key.color().getTextureDiffuseColor();
+			return new Vector4f((rgb >> 16 & 0xff) / 255f, (rgb >> 8 & 0xff) / 255f, (rgb & 0xff) / 255f, 1f).mul(original);
 		} else {
 			return original;
 		}

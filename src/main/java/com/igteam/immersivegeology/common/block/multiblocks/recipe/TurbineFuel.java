@@ -15,12 +15,14 @@ import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import blusunrize.immersiveengineering.api.utils.FastEither;
 import blusunrize.immersiveengineering.api.utils.TagUtils;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.registries.RegistryObject;
@@ -81,7 +83,7 @@ public class TurbineFuel extends IESerializableRecipe
 	}
 
 	@Nonnull
-	public ItemStack getResultItem(@NotNull RegistryAccess access) {
+	public ItemStack getResultItem(HolderLookup.@NotNull Provider access) {
 		return ItemStack.EMPTY;
 	}
 
@@ -93,7 +95,7 @@ public class TurbineFuel extends IESerializableRecipe
 		if (hint != null && hint.matches(in)) {
 			return hint;
 		} else {
-			Iterator<TurbineFuel> var3 = RECIPES.getRecipes(level).iterator();
+			Iterator<RecipeHolder<TurbineFuel>> var3 = RECIPES.getRecipes(level).iterator();
 
 			TurbineFuel fuel;
 			do {
@@ -101,7 +103,7 @@ public class TurbineFuel extends IESerializableRecipe
 					return null;
 				}
 
-				fuel = (TurbineFuel)var3.next();
+				fuel = var3.next().value();
 			} while(!fuel.matches(in));
 
 			return fuel;
@@ -111,11 +113,11 @@ public class TurbineFuel extends IESerializableRecipe
 	public static SortedMap<Component, Integer> getManualFuelList(Level level) {
 		SortedMap<Component, Integer> map = new TreeMap<>(Comparator.comparing(Component::getString, Comparator.naturalOrder()));
 
-		for(TurbineFuel recipe : RECIPES.getRecipes(level))
+		for(RecipeHolder<TurbineFuel> recipe : RECIPES.getRecipes(level))
 		{
-			for(Fluid f : recipe.getFluids())
+			for(Fluid f : recipe.value().getFluids())
 			{
-				map.put(f.getFluidType().getDescription(), recipe.getBurnTime());
+				map.put(f.getFluidType().getDescription(), recipe.value().getBurnTime());
 			}
 		}
 

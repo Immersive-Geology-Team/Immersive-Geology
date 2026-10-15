@@ -17,6 +17,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.Lazy;
@@ -64,9 +65,9 @@ public class CrystallizerRecipe extends MultiblockRecipe
 
 	public static CrystallizerRecipe findRecipe(Level level, FluidStack input)
 	{
-		for(CrystallizerRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.fluidIn.test(input))
-				return recipe;
+		for(RecipeHolder<CrystallizerRecipe> recipe : RECIPES.getRecipes(level))
+			if(recipe.value().fluidIn.test(input))
+				return recipe.value();
 		return null;
 	}
 

@@ -57,7 +57,7 @@ public class MaterialHighSpeedSteel extends MaterialMetalAlloy
     @Override
     public DrillHeadProps drillHeadInstance()
     {
-        return new DrillHeadProps(getName(), getItemTag(ItemCategoryFlags.INGOT), 3, 1, Tiers.NETHERITE, 21.0f, 10, 10000, () -> new ResourceLocation(IGLib.MODID, "item/colored/" + getName() + "/drill"));
+        return new DrillHeadProps(getName(), getItemTag(ItemCategoryFlags.INGOT), 3, 1, Tiers.NETHERITE, 21.0f, 10, 10000, () -> ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/colored/" + getName() + "/drill"));
     }
 
     @Override

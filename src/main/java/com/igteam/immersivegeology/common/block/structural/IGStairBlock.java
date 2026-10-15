@@ -30,7 +30,7 @@ public class IGStairBlock extends StairBlock implements IGBlockType {
     private final BlockCategoryFlags category;
 
     public IGStairBlock(Supplier<BlockState> supplier, MaterialInterface<?> material, BlockCategoryFlags stairType) {
-        super(supplier, BlockBehaviour.Properties.copy(supplier.get().getBlock()));
+        super(supplier.get(), BlockBehaviour.Properties.ofFullCopy(supplier.get().getBlock()));
         this.materialMap.put(MaterialTexture.base, material);
         this.category = stairType;
     }

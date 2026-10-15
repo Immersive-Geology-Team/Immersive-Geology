@@ -113,18 +113,18 @@ public class IGBlockTags extends BlockTagsProvider
 				if(useOptionalTag) {
 					String name = oreBlock.getIGDescriptionId().toLowerCase(Locale.ROOT);
 					String id = name.substring(name.lastIndexOf('.') +1);
-					tag(BlockTags.MINEABLE_WITH_PICKAXE).addOptional(new ResourceLocation(IGLib.MODID, id));
-					tag(BlockTags.NEEDS_STONE_TOOL).addOptional(new ResourceLocation(IGLib.MODID, id));
-					tag(Tags.Blocks.ORES).addOptional(new ResourceLocation(IGLib.MODID, id));
-					tag(ore_material_tag).addOptional(new ResourceLocation(IGLib.MODID, id));
-					tag(ore_block).addOptional(new ResourceLocation(IGLib.MODID, id));
+					tag(BlockTags.MINEABLE_WITH_PICKAXE).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
+					tag(BlockTags.NEEDS_STONE_TOOL).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
+					tag(Tags.Blocks.ORES).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
+					tag(ore_material_tag).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
+					tag(ore_block).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
 					if(ModFlags.TFC.isStrictlyLoaded())
 					{
-						tag(getTFCBlockTag("CAN_COLLAPSE")).addOptional(new ResourceLocation(IGLib.MODID, id));
-						tag(getTFCBlockTag("CAN_START_COLLAPSE")).addOptional(new ResourceLocation(IGLib.MODID, id));
-						tag(getTFCBlockTag("CAN_TRIGGER_COLLAPSE")).addOptional(new ResourceLocation(IGLib.MODID, id));
-						tag(getTFCBlockTag("POWDERKEG_BREAKING_BLOCKS")).addOptional(new ResourceLocation(IGLib.MODID, id));
-						tag(getTFCBlockTag("PROSPECTABLE")).addOptional(new ResourceLocation(IGLib.MODID, id));
+						tag(getTFCBlockTag("CAN_COLLAPSE")).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
+						tag(getTFCBlockTag("CAN_START_COLLAPSE")).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
+						tag(getTFCBlockTag("CAN_TRIGGER_COLLAPSE")).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
+						tag(getTFCBlockTag("POWDERKEG_BREAKING_BLOCKS")).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
+						tag(getTFCBlockTag("PROSPECTABLE")).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
 					}
 					continue;
 				}
@@ -139,11 +139,11 @@ public class IGBlockTags extends BlockTagsProvider
 				{
 					String name = oreBlock.getIGDescriptionId().toLowerCase(Locale.ROOT);
 					String id = name.substring(name.lastIndexOf('.') +1);
-					tag(getTFCBlockTag("CAN_COLLAPSE")).addOptional(new ResourceLocation(IGLib.MODID, id));
-					tag(getTFCBlockTag("CAN_START_COLLAPSE")).addOptional(new ResourceLocation(IGLib.MODID, id));
-					tag(getTFCBlockTag("CAN_TRIGGER_COLLAPSE")).addOptional(new ResourceLocation(IGLib.MODID, id));
-					tag(getTFCBlockTag("POWDERKEG_BREAKING_BLOCKS")).addOptional(new ResourceLocation(IGLib.MODID, id));
-					tag(getTFCBlockTag("PROSPECTABLE")).addOptional(new ResourceLocation(IGLib.MODID, id));
+					tag(getTFCBlockTag("CAN_COLLAPSE")).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
+					tag(getTFCBlockTag("CAN_START_COLLAPSE")).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
+					tag(getTFCBlockTag("CAN_TRIGGER_COLLAPSE")).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
+					tag(getTFCBlockTag("POWDERKEG_BREAKING_BLOCKS")).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
+					tag(getTFCBlockTag("PROSPECTABLE")).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
 				}
 			} else if(block.get() instanceof IGGenericBlock genericBlock)
 			{
@@ -177,7 +177,7 @@ public class IGBlockTags extends BlockTagsProvider
 				{
 					String name = genericBlock.getIGBlock().getDescriptionId().toLowerCase(Locale.ROOT);
 					String id = name.substring(name.lastIndexOf('.')+1);
-					tag(BlockTags.MINEABLE_WITH_PICKAXE).addOptional(new ResourceLocation(IGLib.MODID, id));
+					tag(BlockTags.MINEABLE_WITH_PICKAXE).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
 				}
 				else
 				{
@@ -205,7 +205,7 @@ public class IGBlockTags extends BlockTagsProvider
 				{
 					String name = slab.getIGBlock().getDescriptionId().toLowerCase(Locale.ROOT);
 					String id = name.substring(name.lastIndexOf('.')+1);
-					tag(BlockTags.MINEABLE_WITH_PICKAXE).addOptional(new ResourceLocation(IGLib.MODID, id));
+					tag(BlockTags.MINEABLE_WITH_PICKAXE).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
 				}
 				else
 				{

@@ -119,10 +119,10 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
     public int getColor(BlockState state, @Nullable BlockAndTintGetter getter, @Nullable BlockPos pos, int index) {
         if(state.getBlock() instanceof IGBlockType type)
         {
-            if(type.getFlag().equals(BlockCategoryFlags.ORE_BLOCK)) return 0xffffff;
+            if(type.getFlag().equals(BlockCategoryFlags.ORE_BLOCK)) return 0xffffffff;
             return type.getColor(index, state);
         }
-        return 0xffffff;
+        return 0xffffffff;
     }
 
     // Color Function for IG Items
@@ -132,11 +132,12 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
         {
             if(stack.getItem() instanceof IGGenericBlockItem b)
             {
-                if(b.getFlag().equals(BlockCategoryFlags.ORE_BLOCK)) return 0xffffff;
+                if(b.getFlag().equals(BlockCategoryFlags.ORE_BLOCK)) return 0xffffffff;
             }
-            return type.getColor(tintIndex);
+            int color = type.getColor(tintIndex);
+            return (color & 0xff000000) == 0 ? color | 0xff000000 : color;
         }
-        return 0xffffff;
+        return 0xffffffff;
     }
 
     @OnlyIn(Dist.CLIENT)

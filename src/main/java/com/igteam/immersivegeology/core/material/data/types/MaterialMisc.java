@@ -15,7 +15,7 @@ public class MaterialMisc extends GeologyMaterial {
     public ResourceLocation getTextureLocation(IFlagType<?> flag) {
         // As this should always be a default stone we use the id minecraft and default it to whatever it is.
         // If we want to add support for other mods this will need to change
-        return new ResourceLocation("minecraft", "block/"+getName());
+        return ResourceLocation.withDefaultNamespace("block/"+getName());
     }
 
     @Override

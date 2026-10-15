@@ -18,6 +18,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockCon
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
 import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcess;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessInMachine;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor.InMachineProcessor;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext.ProcessContextInMachine;
@@ -36,6 +37,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.shapes.RotaryKilnSha
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -359,10 +361,10 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
         }
 
         @Override
-        public void writeSaveNBT(CompoundTag nbt){
-            nbt.put("energy", total_energy.serializeNBT());
-            nbt.put("processor", processor.toNBT());
-            nbt.put("inventory", inventory.serializeNBT());
+        public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            nbt.put("energy", total_energy.serializeNBT(provider));
+            nbt.put("processor", processor.toNBT(provider));
+            nbt.put("inventory", inventory.serializeNBT(provider));
 
             nbt.putFloat("target_heat", targetHeat);
             nbt.putFloat("heat", heatLevel);
@@ -378,10 +380,10 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
         }
 
         @Override
-        public void readSaveNBT(CompoundTag nbt){
-            total_energy.deserializeNBT(nbt.get("energy"));
-            this.inventory.deserializeNBT(nbt.getCompound("inventory"));
-            this.processor.fromNBT(nbt.get("processor"), RotaryKilnProcess::new);
+        public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            total_energy.deserializeNBT(provider, nbt.get("energy"));
+            this.inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
+            this.processor.fromNBT(nbt.get("processor"), (getRecipe, data, p) -> new RotaryKilnProcess(getRecipe, data), provider);
             this.targetHeat = nbt.getFloat("target_heat");
             this.heatLevel = nbt.getFloat("heat");
 
@@ -400,18 +402,18 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
         }
 
         @Override
-        public void writeSyncNBT(CompoundTag nbt)
+        public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            writeSaveNBT(nbt);
+            writeSaveNBT(nbt, provider);
             // All the client needs is whether to spin the tube; the GUI gets heat, energy and
             // process progress through the menu's own synced data
             nbt.putBoolean("is_active", isActive);
         }
 
         @Override
-        public void readSyncNBT(CompoundTag nbt)
+        public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            readSaveNBT(nbt);
+            readSaveNBT(nbt, provider);
             this.isActive = nbt.getBoolean("is_active");
         }
 

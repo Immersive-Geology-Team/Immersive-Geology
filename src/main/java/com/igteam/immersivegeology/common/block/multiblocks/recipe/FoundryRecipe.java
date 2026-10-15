@@ -20,6 +20,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.Lazy;
@@ -79,9 +80,9 @@ public class FoundryRecipe extends MultiblockRecipe
 	public static FoundryRecipe findRecipe(Level level, FluidStack input, ItemStack mold)
 	{
 		if(mold.isEmpty()) return null;
-		for(FoundryRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.mold==mold.getItem()&&recipe.fluidIn.test(input))
-				return recipe;
+		for(RecipeHolder<FoundryRecipe> recipe : RECIPES.getRecipes(level))
+			if(recipe.value().mold==mold.getItem()&&recipe.value().fluidIn.test(input))
+				return recipe.value();
 		return null;
 	}
 

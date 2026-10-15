@@ -18,6 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.Lazy;
@@ -75,9 +76,9 @@ public class IndustrialSluiceRecipe extends MultiblockRecipe
 
 	public static IndustrialSluiceRecipe findRecipe(Level level, ItemStack item)
 	{
-		for(IndustrialSluiceRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.itemIn.test(item))
-				return recipe;
+		for(RecipeHolder<IndustrialSluiceRecipe> recipe : RECIPES.getRecipes(level))
+			if(recipe.value().itemIn.test(item))
+				return recipe.value();
 		return null;
 	}
 

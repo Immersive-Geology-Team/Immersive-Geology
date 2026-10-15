@@ -41,6 +41,7 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.client.gui.screens.worldselection.CreateWorldScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -48,6 +49,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.Capability;
@@ -371,7 +373,7 @@ public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServer
 
     @Nullable
     @Override
-    public List<Component> getOverlayText(State state, Player player, boolean b)
+    public List<Component> getOverlayText(State state, BlockPos posInMultiblock, BlockHitResult absoluteHit, Player player, boolean b)
     {
         if(Utils.isFluidRelatedItemStack(player.getItemInHand(InteractionHand.MAIN_HAND)))
             return List.of(TextUtils.formatFluidStack(state.acid_tank.getFluid()), TextUtils.formatFluidStack(state.output_tank.getFluid()));
@@ -419,26 +421,26 @@ public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServer
         }
 
         @Override
-        public void writeSaveNBT(CompoundTag nbt){
-            nbt.put("energy", energy.serializeNBT());
-            nbt.put("acid_tank", acid_tank.writeToNBT(new CompoundTag()));
-            nbt.put("output_tank", output_tank.writeToNBT(new CompoundTag()));
-            nbt.put("processor", this.processor.toNBT());
+        public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            nbt.put("energy", energy.serializeNBT(provider));
+            nbt.put("acid_tank", acid_tank.writeToNBT(provider, new CompoundTag()));
+            nbt.put("output_tank", output_tank.writeToNBT(provider, new CompoundTag()));
+            nbt.put("processor", this.processor.toNBT(provider));
         }
 
 
         @Override
-        public void readSaveNBT(CompoundTag nbt){
-            energy.deserializeNBT(nbt.get("energy"));
-            acid_tank.readFromNBT(nbt.getCompound("acid_tank"));
-            output_tank.readFromNBT(nbt.getCompound("output_tank"));
-            processor.fromNBT(nbt.get("processor"), MultiblockProcessInWorld::new);
+        public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            energy.deserializeNBT(provider, nbt.get("energy"));
+            acid_tank.readFromNBT(provider, nbt.getCompound("acid_tank"));
+            output_tank.readFromNBT(provider, nbt.getCompound("output_tank"));
+            processor.fromNBT(nbt.get("processor"), MultiblockProcessInWorld::new, provider);
         }
 
         @Override
-        public void writeSyncNBT(CompoundTag nbt)
+        public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            writeSaveNBT(nbt);
+            writeSaveNBT(nbt, provider);
             // Animation Data
             nbt.putBoolean("renderActive", renderAsActive);
             nbt.putBoolean("drillDirection", drill_direction);
@@ -454,9 +456,9 @@ public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServer
         }
 
         @Override
-        public void readSyncNBT(CompoundTag nbt)
+        public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            readSaveNBT(nbt);
+            readSaveNBT(nbt, provider);
             renderAsActive = nbt.getBoolean("renderActive");
             drill_direction = nbt.getBoolean("drillDirection");
             spinDown = nbt.getBoolean("spinDown");

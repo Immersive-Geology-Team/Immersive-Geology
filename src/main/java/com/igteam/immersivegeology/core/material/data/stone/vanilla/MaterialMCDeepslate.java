@@ -31,6 +31,6 @@ public class MaterialMCDeepslate extends MaterialStone {
     @Override
     public Properties getProperties(IFlagType<?> flag)
     {
-        return BlockBehaviour.Properties.copy(Blocks.DEEPSLATE);
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE);
     }
 }

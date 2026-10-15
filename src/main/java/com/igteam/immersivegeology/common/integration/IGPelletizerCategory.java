@@ -35,7 +35,7 @@ public class IGPelletizerCategory extends IGRecipeCategory<PelletizerRecipe>
 	public IGPelletizerCategory(IGuiHelper helper)
 	{
 		super(helper, JEIRecipeTypes.PELLETIZER, "block.immersivegeology.pelletizer");
-		ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/pelletizer.png");
+		ResourceLocation background = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/gui/jei/pelletizer.png");
 		IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 101, 101).setTextureSize(101,101).build();
 		setBackground(back);
 		setIcon(IGMultiblockProvider.PELLETIZER.iconStack());

@@ -92,6 +92,6 @@ public class MaterialTitanium extends MaterialMetal {
     @Override
     public DrillHeadProps drillHeadInstance()
     {
-        return new DrillHeadProps(getName(), getItemTag(ItemCategoryFlags.INGOT), 5, 1, Tiers.NETHERITE, 9f, 10, 24000, () -> new ResourceLocation(IGLib.MODID, "item/colored/" + getName() + "/drill"));
+        return new DrillHeadProps(getName(), getItemTag(ItemCategoryFlags.INGOT), 5, 1, Tiers.NETHERITE, 9f, 10, 24000, () -> ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/colored/" + getName() + "/drill"));
     }
 }

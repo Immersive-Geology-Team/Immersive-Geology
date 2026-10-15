@@ -10,16 +10,27 @@ package com.igteam.immersivegeology.common.block;
 
 import blusunrize.immersiveengineering.api.IEProperties;
 import blusunrize.immersiveengineering.common.blocks.IEBaseBlock;
+import com.igteam.immersivegeology.ImmersiveGeology;
+import com.igteam.immersivegeology.common.block.entity.crate.IGCrateEntity;
+import com.igteam.immersivegeology.common.block.entity.crate.IGCrateEntityType;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
+import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.nbt.Tag;
+import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.BundleTooltip;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.BundleContents;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -44,6 +55,40 @@ public class IGBlockContainerItem extends IGGenericBlockItem
 		{
 			if(!ieBlock.canIEBlockBePlaced(newState, context))
 				return false;
+			ItemStack itemStack = context.getItemInHand();
+			if(b instanceof IGCrateEntityType && !itemStack.has(DataComponents.CONTAINER))
+			{
+				Tag itemsTag = itemStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().get("Items");
+				if(itemsTag != null)
+				{
+					if(!(itemsTag instanceof ListTag legacyItems))
+					{
+						IGLib.IG_LOGGER.warn("Invalid crate inventory at {}", context.getClickedPos());
+						return false;
+					}
+					ListTag slots = new ListTag();
+					for(Tag tag : legacyItems)
+					{
+						if(!(tag instanceof CompoundTag item) || item.contains("Count") || (item.getByte("Slot") & 255) >= IGCrateEntity.CONTAINER_SIZE)
+						{
+							IGLib.IG_LOGGER.warn("Invalid crate inventory at {}", context.getClickedPos());
+							return false;
+						}
+						CompoundTag entry = new CompoundTag();
+						entry.putInt("slot", item.getByte("Slot") & 255);
+						entry.put("item", item);
+						slots.add(entry);
+					}
+					ItemContainerContents contents = ItemContainerContents.CODEC
+							.parse(context.getLevel().registryAccess().createSerializationContext(NbtOps.INSTANCE), slots)
+							.ifError(error -> IGLib.IG_LOGGER.warn("Tried to load invalid crate inventory at {}: {}", context.getClickedPos(), error.message()))
+							.result().orElse(null);
+					if(contents==null) return false;
+					if(!contents.equals(ItemContainerContents.EMPTY))
+						itemStack.set(DataComponents.CONTAINER, contents);
+					CustomData.update(DataComponents.CUSTOM_DATA, itemStack, tag -> tag.remove("Items"));
+				}
+			}
 			boolean ret = super.placeBlock(context, newState);
 			if(ret)
 				ieBlock.onIEBlockPlacedBy(context, newState);
@@ -67,20 +112,19 @@ public class IGBlockContainerItem extends IGGenericBlockItem
 	@Override
 	public Optional<TooltipComponent> getTooltipImage(@Nonnull ItemStack stack)
 	{
-		if(stack.hasTag())
+		ItemContainerContents items = stack.get(DataComponents.CONTAINER);
+		if(items != null)
+			return Optional.of(new BundleTooltip(new BundleContents(items.nonEmptyStream().toList())));
+		else
 		{
-			CompoundTag tag = stack.getOrCreateTag();
-			if(tag.contains("Items"))
+			CustomData data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+			Level level = ImmersiveGeology.proxy.getClientWorld();
+			if(level != null && data.contains("Items"))
 			{
-				// manual readout, skipping empty slots
-				ListTag list = tag.getList("Items", 10);
-				NonNullList<ItemStack> items = NonNullList.create();
-				list.forEach(e -> {
-					ItemStack s = ItemStack.of((CompoundTag)e);
-					if(!s.isEmpty())
-						items.add(s);
-				});
-				return Optional.of(new BundleTooltip(items, 0));
+				NonNullList<ItemStack> legacyItems = NonNullList.withSize(IGCrateEntity.CONTAINER_SIZE, ItemStack.EMPTY);
+				ContainerHelper.loadAllItems(data.copyTag(), legacyItems, level.registryAccess());
+				items = ItemContainerContents.fromItems(legacyItems);
+				return Optional.of(new BundleTooltip(new BundleContents(items.nonEmptyStream().toList())));
 			}
 		}
 		return super.getTooltipImage(stack);

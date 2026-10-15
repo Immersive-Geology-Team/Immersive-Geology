@@ -29,6 +29,7 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -53,7 +54,8 @@ import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
-import net.minecraft.world.level.saveddata.maps.MapDecoration.Type;
+import net.minecraft.world.level.saveddata.maps.MapDecorationTypes;
+import net.minecraft.world.level.saveddata.maps.MapId;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import net.minecraftforge.client.event.RecipesUpdatedEvent;
 import net.minecraftforge.common.data.ForgeRecipeProvider;
@@ -122,7 +124,7 @@ public class IGCommonForgeEvents
 	 * Maps whose deposit labels have already been put back this session, so the pass below runs once per map
 	 * rather than once per tick. Cleared when a server starts, since map ids only mean anything within one save.
 	 */
-	private static final Set<Integer> relabelledMaps = new HashSet<>();
+	private static final Set<MapId> relabelledMaps = new HashSet<>();
 
 	@SubscribeEvent
 	public void clearMapLabelCache(ServerStartingEvent event)
@@ -133,8 +135,8 @@ public class IGCommonForgeEvents
 	/**
 	 * Restores the labels on deposit maps.
 	 * <p>
-	 * The markers themselves come back on their own - vanilla replays an item's {@code Decorations} list into the
-	 * saved data every tick a player carries it - but it replays them unnamed. This puts the material and grade
+	 * The markers themselves come back on their own - vanilla replays an item's {@code MAP_DECORATIONS} component into the
+	 * saved data when a player carries it - but it replays them unnamed. This puts the material and grade
 	 * back, once per map, by adding the decoration again under the same id.
 	 */
 	@SubscribeEvent
@@ -157,7 +159,7 @@ public class IGCommonForgeEvents
 		// Checked off the item first so an ordinary map never reaches the level's saved data over this.
 		if(!IGDepositMapMarks.hasMarks(stack)) return;
 
-		Integer mapId = MapItem.getMapId(stack);
+		MapId mapId = stack.get(DataComponents.MAP_ID);
 		if(mapId==null||relabelledMaps.contains(mapId)) return;
 
 		MapItemSavedData data = MapItem.getSavedData(mapId, level);
@@ -172,7 +174,8 @@ public class IGCommonForgeEvents
 		{
 			if(stack.getItem() instanceof MapItem)
 			{
-				Integer mapId = MapItem.getMapId(stack);
+				MapId mapId = stack.get(DataComponents.MAP_ID);
+				if(mapId==null) return;
 				MapItemSavedData data = MapItem.getSavedData(mapId, level);
 				if(data!=null)
 				{
@@ -195,18 +198,18 @@ public class IGCommonForgeEvents
 								ArrayList<MapDecoration> decorations = new ArrayList<>();
 								data.getDecorations().forEach(d ->
 								{
-									if(d.getX()==bx&&d.getY()==bz&&d.getRot()==br&&d.getType()==Type.RED_X)
+									if(d.x()==bx&&d.y()==bz&&d.rot()==br&&d.type()==MapDecorationTypes.RED_X)
 									{
 										hasInstance.set(true);
 									}
-									if(!d.getType().equals(Type.PLAYER)) decorations.add(d);
+									if(!d.type().equals(MapDecorationTypes.PLAYER)) decorations.add(d);
 								});
 
 								if(!hasInstance.get())
 								{
-									decorations.add(new MapDecoration(Type.RED_X, bx, bz, br, Component.empty()));
+									decorations.add(new MapDecoration(MapDecorationTypes.RED_X, bx, bz, br, Optional.of(Component.empty())));
 									data.addClientSideDecorations(decorations);
-									level.setMapData(MapItem.makeKey(mapId), data);
+									level.setMapData(mapId, data);
 									data.tickCarriedBy(player, stack);
 								}
 							}
@@ -218,7 +221,7 @@ public class IGCommonForgeEvents
 	}
 
 	private static boolean isCustomOreFeaturePresent(Holder<Biome> biomeHolder, ChunkPos pos, long seed) {
-		Biome biome = biomeHolder.get();
+		Biome biome = biomeHolder.value();
 		List<HolderSet<PlacedFeature>> features = biome.getGenerationSettings().features();
 
 		for (HolderSet<PlacedFeature> featureSet : features) {
@@ -232,7 +235,7 @@ public class IGCommonForgeEvents
 	}
 
 	private static boolean isCustomOreFeature(PlacedFeature placedFeature, ChunkPos pos, Holder<Biome> biome, long seed) {
-		ConfiguredFeature<?, ?> feature = placedFeature.feature().get();
+		ConfiguredFeature<?, ?> feature = placedFeature.feature().value();
 		return feature.config() instanceof IGOreFeatureConfig;
 	}
 }

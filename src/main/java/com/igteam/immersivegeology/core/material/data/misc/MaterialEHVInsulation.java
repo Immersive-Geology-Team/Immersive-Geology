@@ -48,6 +48,6 @@ public class MaterialEHVInsulation extends MaterialMisc
 	@Override
 	public ResourceLocation getTextureLocation(IFlagType<?> flag)
 	{
-		return flag == ItemCategoryFlags.PLATE ? new ResourceLocation(IGLib.MODID, "item/greyscale/metal/plate") : super.getTextureLocation(flag);
+		return flag == ItemCategoryFlags.PLATE ? ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/greyscale/metal/plate") : super.getTextureLocation(flag);
 	}
 }

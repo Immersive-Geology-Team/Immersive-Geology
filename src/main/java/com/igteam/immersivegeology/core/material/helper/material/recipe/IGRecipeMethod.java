@@ -18,7 +18,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.Rect2i;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
@@ -82,10 +82,10 @@ public abstract class IGRecipeMethod
 		{
 			int count = PATH_COUNT.get(s)+1;
 			PATH_COUNT.put(s, count);
-			return new ResourceLocation(IGLib.MODID, s+count);
+			return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, s+count);
 		}
 		PATH_COUNT.put(s, 1);
-		return new ResourceLocation(IGLib.MODID, s);
+		return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, s);
 	}
 
 	public void clearRecipePath(){
@@ -94,7 +94,7 @@ public abstract class IGRecipeMethod
 
 	public abstract String getName();
 
-	public abstract boolean build(Consumer<FinishedRecipe> consumer);
+	public abstract boolean build(RecipeOutput consumer);
 
 	public ItemStack getIconStack()
 	{

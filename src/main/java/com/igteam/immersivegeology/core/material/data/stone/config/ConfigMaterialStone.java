@@ -68,7 +68,7 @@ public class ConfigMaterialStone extends MaterialStone
 		Block source = ForgeRegistries.BLOCKS.getValue(entry.resolvedProperties);
 		// Null when the declaring mod is absent or renamed the block. Ore in this rock will not generate either
 		// way, so plain stone is a mostly harmless stand-in and keeps registration from failing.
-		return BlockBehaviour.Properties.copy(source!=null?source: Blocks.STONE);
+		return BlockBehaviour.Properties.ofFullCopy(source!=null?source: Blocks.STONE);
 	}
 
 	public ConfigStoneEntry getEntry()

@@ -12,6 +12,7 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.SharedConstants;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackLocationInfo;
 import net.minecraft.server.packs.PackResources;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.metadata.MetadataSectionSerializer;
@@ -36,12 +37,14 @@ public class IGDeclaredStonePack implements PackResources
 {
 	public static final String PACK_ID = IGLib.MODID+":declared_stone_types";
 
+	private final PackLocationInfo location;
 	private final PackType packType;
 	private Map<ResourceLocation, byte[]> resources;
 	private Set<String> namespaces;
 
-	public IGDeclaredStonePack(PackType packType)
+	public IGDeclaredStonePack(PackLocationInfo location, PackType packType)
 	{
+		this.location = location;
 		this.packType = packType;
 	}
 
@@ -114,15 +117,9 @@ public class IGDeclaredStonePack implements PackResources
 	}
 
 	@Override
-	public String packId()
+	public PackLocationInfo location()
 	{
-		return PACK_ID;
-	}
-
-	@Override
-	public boolean isBuiltin()
-	{
-		return true;
+		return location;
 	}
 
 	@Override

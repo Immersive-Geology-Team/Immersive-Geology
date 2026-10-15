@@ -34,7 +34,7 @@ public class MaterialTungstenCarbide extends MaterialMetalAlloy
     @Override
     public DrillHeadProps drillHeadInstance()
     {
-        return new DrillHeadProps(getName(), getItemTag(ItemCategoryFlags.INGOT), 3, 1, Tiers.NETHERITE, 9.0f, 11, 96000, () -> new ResourceLocation(IGLib.MODID, "item/colored/" + getName() + "/drill"));
+        return new DrillHeadProps(getName(), getItemTag(ItemCategoryFlags.INGOT), 3, 1, Tiers.NETHERITE, 9.0f, 11, 96000, () -> ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/colored/" + getName() + "/drill"));
     }
 
     @Override

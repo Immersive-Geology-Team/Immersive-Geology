@@ -37,6 +37,6 @@ public class MaterialRefractoryBlock extends MaterialMisc
 	@Override
 	public ResourceLocation getTextureLocation(IFlagType<?> flag)
 	{
-		return flag == ItemCategoryFlags.INGOT ? new ResourceLocation(IGLib.MODID, "item/greyscale/metal/ingot") : new ResourceLocation(IGLib.MODID, "block/static_block/refractory_brick");
+		return flag == ItemCategoryFlags.INGOT ? ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/greyscale/metal/ingot") : ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/static_block/refractory_brick");
 	}
 }

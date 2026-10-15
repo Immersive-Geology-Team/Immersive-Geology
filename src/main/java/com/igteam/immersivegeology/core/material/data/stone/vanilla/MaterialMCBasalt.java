@@ -39,6 +39,6 @@ public class MaterialMCBasalt extends MaterialStone {
     @Override
     public Properties getProperties(IFlagType<?> flag)
     {
-        return BlockBehaviour.Properties.copy(Blocks.BASALT);
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT);
     }
 }

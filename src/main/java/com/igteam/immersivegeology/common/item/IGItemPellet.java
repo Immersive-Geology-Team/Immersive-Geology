@@ -29,11 +29,11 @@ public class IGItemPellet extends IGGenericItem
 	}
 
 	@Override
-	public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced)
+	public void appendHoverText(ItemStack pStack, TooltipContext context, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced)
 	{
 		MaterialInterface<?> material = getMaterial(MaterialTexture.base).getPrimaryProduct();
 		pTooltipComponents.add(Component.translatable("material.immersivegeology." + material.getName()).withStyle(ChatFormatting.GOLD));
 
-		super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+		super.appendHoverText(pStack, context, pTooltipComponents, pIsAdvanced);
 	}
 }

@@ -34,6 +34,6 @@ public class MaterialMCEndStone extends MaterialStone {
     @Override
     public Properties getProperties(IFlagType<?> flag)
     {
-        return BlockBehaviour.Properties.copy(Blocks.END_STONE);
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.END_STONE);
     }
 }

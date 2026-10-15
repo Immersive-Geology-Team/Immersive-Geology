@@ -10,6 +10,9 @@ package com.igteam.immersivegeology.common.pack;
 
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.packs.PackLocationInfo;
+import net.minecraft.server.packs.PackResources;
+import net.minecraft.server.packs.PackSelectionConfig;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
@@ -17,6 +20,8 @@ import com.igteam.immersivegeology.core.material.data.stone.IGStoneTypes;
 import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.Optional;
 
 /**
  * Puts {@link IGDeclaredStonePack} in front of the resource and data pack stacks.
@@ -34,14 +39,29 @@ public class IGPackFinder
 
 		PackType type = event.getPackType();
 		event.addRepositorySource(consumer -> {
+			Pack.ResourcesSupplier resources = new Pack.ResourcesSupplier()
+			{
+				@Override
+				public PackResources openPrimary(PackLocationInfo location)
+				{
+					return new IGDeclaredStonePack(location, type);
+				}
+
+				@Override
+				public PackResources openFull(PackLocationInfo location, Pack.Metadata metadata)
+				{
+					return openPrimary(location);
+				}
+			};
 			Pack pack = Pack.readMetaAndCreate(
-					IGDeclaredStonePack.PACK_ID,
-					Component.literal("Immersive Geology declared stone types"),
-					true,
-					id -> new IGDeclaredStonePack(type),
+					new PackLocationInfo(
+							IGDeclaredStonePack.PACK_ID,
+							Component.literal("Immersive Geology declared stone types"),
+							PackSource.BUILT_IN,
+							Optional.empty()),
+					resources,
 					type,
-					Pack.Position.BOTTOM,
-					PackSource.BUILT_IN);
+					new PackSelectionConfig(true, Pack.Position.BOTTOM, false));
 			if(pack!=null) consumer.accept(pack);
 		});
 	}

@@ -36,7 +36,7 @@ public class IGBloomeryCategory extends IGRecipeCategory<BloomeryRecipe>
 	public IGBloomeryCategory(IGuiHelper helper)
 	{
 		super(helper, JEIRecipeTypes.BLOOMERY, "block.immersivegeology.bloomery");
-		ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/bloomery.png");
+		ResourceLocation background = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/gui/jei/bloomery.png");
 		IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 101, 101).setTextureSize(101,101).build();
 		setBackground(back);
 		setIcon(IGMultiblockProvider.BLOOMERY.iconStack());

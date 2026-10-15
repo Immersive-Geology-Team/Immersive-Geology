@@ -23,6 +23,7 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -30,7 +31,7 @@ import java.util.function.Predicate;
 @JeiPlugin
 public class JEIIntegration implements IModPlugin
 {
-	private static final ResourceLocation ID = new ResourceLocation(IGLib.MODID, "main");
+	private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "main");
 	@Override
 	public ResourceLocation getPluginUid()
 	{
@@ -113,6 +114,7 @@ public class JEIIntegration implements IModPlugin
 	private <T extends Recipe<?>> List<T> getFiltered(CachedRecipeList<T> cachedList, Predicate<T> include)
 	{
 		return cachedList.getRecipes(Minecraft.getInstance().level).stream()
+				.map(RecipeHolder::value)
 				.filter(include)
 				.toList();
 	}

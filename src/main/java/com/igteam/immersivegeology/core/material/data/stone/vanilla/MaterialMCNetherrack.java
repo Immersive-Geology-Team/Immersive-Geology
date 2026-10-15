@@ -34,6 +34,6 @@ public class MaterialMCNetherrack extends MaterialStone {
     @Override
     public Properties getProperties(IFlagType<?> flag)
     {
-        return BlockBehaviour.Properties.copy(Blocks.NETHERRACK);
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERRACK);
     }
 }

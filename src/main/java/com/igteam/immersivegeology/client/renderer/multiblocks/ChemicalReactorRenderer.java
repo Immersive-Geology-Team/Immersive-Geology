@@ -43,6 +43,7 @@ import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
 
 import javax.xml.crypto.dsig.spec.HMACParameterSpec;
 import java.util.Iterator;
@@ -200,30 +201,27 @@ public class ChemicalReactorRenderer extends IGBlockEntityRenderer<MultiblockBlo
         float width = 11 / 16f;
         float height = 16 / 16f;
 
-        float minU = sprite.getU(3);
-        float maxU = sprite.getU(13);
-        float minV = sprite.getV(3);
-        float maxV = sprite.getV(13);
+        float minU = sprite.getU(3 / 16f);
+        float maxU = sprite.getU(13 / 16f);
+        float minV = sprite.getV(3 / 16f);
+        float maxV = sprite.getV(13 / 16f);
 
-        builder.vertex(matrix4f, -width / 2, -height / 2 + percent * height, -width / 2).color(r, g, b, a)
-                .uv(minU, minV)
-                .overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(normalMatrix, 0, 1, 0)
-                .endVertex();
+        Vector3f normal = normalMatrix.transform(new Vector3f(0, 1, 0));
+        builder.addVertex(matrix4f, -width / 2, -height / 2 + percent * height, -width / 2).setColor(r, g, b, a)
+                .setUv(minU, minV)
+                .setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(normal.x(), normal.y(), normal.z());
 
-        builder.vertex(matrix4f, -width / 2, -height / 2 + percent * height, width / 2).color(r, g, b, a)
-                .uv(minU, maxV)
-                .overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(normalMatrix, 0, 1, 0)
-                .endVertex();
+        builder.addVertex(matrix4f, -width / 2, -height / 2 + percent * height, width / 2).setColor(r, g, b, a)
+                .setUv(minU, maxV)
+                .setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(normal.x(), normal.y(), normal.z());
 
-        builder.vertex(matrix4f, width / 2, -height / 2 + percent * height, width / 2).color(r, g, b, a)
-                .uv(maxU, maxV)
-                .overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(normalMatrix, 0, 1, 0)
-                .endVertex();
+        builder.addVertex(matrix4f, width / 2, -height / 2 + percent * height, width / 2).setColor(r, g, b, a)
+                .setUv(maxU, maxV)
+                .setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(normal.x(), normal.y(), normal.z());
 
-        builder.vertex(matrix4f, width / 2, -height / 2 + percent * height, -width / 2).color(r, g, b, a)
-                .uv(maxU, minV)
-                .overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(normalMatrix, 0, 1, 0)
-                .endVertex();
+        builder.addVertex(matrix4f, width / 2, -height / 2 + percent * height, -width / 2).setColor(r, g, b, a)
+                .setUv(maxU, minV)
+                .setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(normal.x(), normal.y(), normal.z());
     }
 
     private void renderNorthFluidFace(TextureAtlasSprite sprite, Matrix4f matrix4f, Matrix3f normalMatrix, VertexConsumer builder, int color, float percent) {
@@ -235,30 +233,27 @@ public class ChemicalReactorRenderer extends IGBlockEntityRenderer<MultiblockBlo
         float width = 11 / 16f;
         float height = 16 / 16f;
 
-        float minU = sprite.getU(3);
-        float maxU = sprite.getU(13);
-        float minV = sprite.getV(1);
-        float maxV = sprite.getV(15 * percent);
+        float minU = sprite.getU(3 / 16f);
+        float maxU = sprite.getU(13 / 16f);
+        float minV = sprite.getV(1 / 16f);
+        float maxV = sprite.getV(15 * percent / 16f);
 
-        builder.vertex(matrix4f, -width / 2, -height / 2 + height * percent, (-width / 2) + 0.001f).color(r, g, b, a)
-                .uv(minU, minV)
-                .overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(normalMatrix, 0, 0, 1)
-                .endVertex();
+        Vector3f normal = normalMatrix.transform(new Vector3f(0, 0, 1));
+        builder.addVertex(matrix4f, -width / 2, -height / 2 + height * percent, (-width / 2) + 0.001f).setColor(r, g, b, a)
+                .setUv(minU, minV)
+                .setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(normal.x(), normal.y(), normal.z());
 
-        builder.vertex(matrix4f, width / 2, -height / 2 + height * percent, (-width / 2) + 0.001f).color(r, g, b, a)
-                .uv(maxU, minV)
-                .overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(normalMatrix, 0, 0, 1)
-                .endVertex();
+        builder.addVertex(matrix4f, width / 2, -height / 2 + height * percent, (-width / 2) + 0.001f).setColor(r, g, b, a)
+                .setUv(maxU, minV)
+                .setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(normal.x(), normal.y(), normal.z());
 
-        builder.vertex(matrix4f, width / 2, -height / 2, (-width / 2) + 0.001f).color(r, g, b, a)
-                .uv(maxU, maxV)
-                .overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(normalMatrix, 0, 0, 1)
-                .endVertex();
+        builder.addVertex(matrix4f, width / 2, -height / 2, (-width / 2) + 0.001f).setColor(r, g, b, a)
+                .setUv(maxU, maxV)
+                .setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(normal.x(), normal.y(), normal.z());
 
-        builder.vertex(matrix4f, -width / 2, -height / 2, (-width / 2) + 0.001f).color(r, g, b, a)
-                .uv(minU, maxV)
-                .overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(normalMatrix, 0, 0, 1)
-                .endVertex();
+        builder.addVertex(matrix4f, -width / 2, -height / 2, (-width / 2) + 0.001f).setColor(r, g, b, a)
+                .setUv(minU, maxV)
+                .setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(normal.x(), normal.y(), normal.z());
     }
 
     private TextureAtlasSprite getFluidStillSprite(IClientFluidTypeExtensions properties, FluidStack fluidStack) {

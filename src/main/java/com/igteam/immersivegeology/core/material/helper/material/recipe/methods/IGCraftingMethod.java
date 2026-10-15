@@ -12,7 +12,7 @@ import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
@@ -71,7 +71,7 @@ public class IGCraftingMethod extends IGRecipeMethod
 	}
 
 	@Override
-	public boolean build(Consumer<FinishedRecipe> consumer)
+	public boolean build(RecipeOutput consumer)
 	{
 		return false;
 	}

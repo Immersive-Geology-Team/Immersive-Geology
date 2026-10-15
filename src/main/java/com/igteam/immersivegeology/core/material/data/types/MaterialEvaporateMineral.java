@@ -55,7 +55,7 @@ public class MaterialEvaporateMineral extends MaterialMineral
 			{
 				case EVAPORATE ->
 				{
-					return new ResourceLocation(IGLib.MODID, "block/colored/"+ name +"/sediment");
+					return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/colored/"+ name +"/sediment");
 				}
 			}
 		}

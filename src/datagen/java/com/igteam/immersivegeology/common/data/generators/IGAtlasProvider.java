@@ -83,7 +83,7 @@ public class IGAtlasProvider implements DataProvider {
 		scaffolding_textures.add("block/greyscale/scaffolding/scaffolding_top_grate_top");
 		scaffolding_textures.add("block/greyscale/scaffolding/scaffolding_top_wooden_top");
 
-		IGPaletteKey key = new IGPaletteKey(new ResourceLocation(IGLib.MODID, "palette/palette_key"), new ResourceLocation(IGLib.MODID, "palette/palettes"));
+		IGPaletteKey key = new IGPaletteKey(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "palette/palette_key"), ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "palette/palettes"));
 		addDirectorySource(sourcesArray,"item", "item/");
 		addDirectorySource(sourcesArray,"block", "block/");
 		key.addTextureData(textures);
@@ -98,7 +98,7 @@ public class IGAtlasProvider implements DataProvider {
 
 	private IGPaletteKey buildStoneBackdropKey()
 	{
-		IGPaletteKey key = new IGPaletteKey(new ResourceLocation(IGLib.MODID, "palette/palette_key"), new ResourceLocation(IGLib.MODID, "palette/palettes"));
+		IGPaletteKey key = new IGPaletteKey(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "palette/palette_key"), ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "palette/palettes"));
 
 		List<String> textures = new ArrayList<>();
 		for(IGVeinTextureType vein : IGVeinTextureType.values())
@@ -122,12 +122,12 @@ public class IGAtlasProvider implements DataProvider {
 
 	private String palettePathFor(String stoneKey)
 	{
-		ResourceLocation authored = new ResourceLocation(IGLib.MODID, "palette/palettes/"+stoneKey+"/"+STONE_BACKDROP_VARIANT);
+		ResourceLocation authored = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "palette/palettes/"+stoneKey+"/"+STONE_BACKDROP_VARIANT);
 		boolean exists = EXISTING_HELPER!=null&&EXISTING_HELPER.exists(
-				new ResourceLocation(IGLib.MODID, "textures/"+authored.getPath()+".png"), CLIENT_RESOURCES);
+				ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/"+authored.getPath()+".png"), CLIENT_RESOURCES);
 		return exists
 				?authored.toString()
-				:new ResourceLocation(IGLib.MODID, "palette/palettes/"+STONE_BACKDROP_FALLBACK+"/"+STONE_BACKDROP_VARIANT).toString();
+				:ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "palette/palettes/"+STONE_BACKDROP_FALLBACK+"/"+STONE_BACKDROP_VARIANT).toString();
 	}
 
 	private void addDirectorySource(JsonArray sourcesArray, String source, String prefix) {

@@ -258,7 +258,7 @@ public final class IGStoneTypeConfig
 
 		entry.resolvedTexture = entry.texture!=null&&!entry.texture.isBlank()
 				?parseId(entry.texture, label, "texture")
-				: new ResourceLocation(entry.resolvedBlock.getNamespace(), "block/"+entry.resolvedBlock.getPath());
+				: ResourceLocation.fromNamespaceAndPath(entry.resolvedBlock.getNamespace(), "block/"+entry.resolvedBlock.getPath());
 		if(entry.resolvedTexture==null) return false;
 
 		entry.resolvedProperties = entry.properties_from!=null&&!entry.properties_from.isBlank()

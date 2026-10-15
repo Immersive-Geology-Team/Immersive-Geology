@@ -66,10 +66,10 @@ public class IGCrateScreen<C extends IGCrateMenu> extends IEContainerScreen<C>
 				String contentString = title.getContents().toString();
 				String formatString = contentString.substring(contentString.lastIndexOf("args=[")+6, contentString.lastIndexOf("]}"));
 				String sanitized = formatString.replace(" ", "").toLowerCase(Locale.ROOT);
-				return new ResourceLocation(IGLib.MODID, "textures/gui/block/crate_"+sanitized+".png");
+				return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/gui/block/crate_"+sanitized+".png");
 			}catch(Exception ignored)
 			{
-				return new ResourceLocation(IGLib.MODID, "textures/gui/block/crate.png");
+				return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/gui/block/crate.png");
 			}
 		}
 

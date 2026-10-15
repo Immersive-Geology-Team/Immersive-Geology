@@ -43,7 +43,7 @@ public class GeothermalConversionRecipeSerializer extends IERecipeSerializer<Geo
 	public GeothermalConversionRecipe readFromJson(ResourceLocation resourceLocation, JsonObject json, IContext iContext)
 	{
 
-		ResourceLocation transitionBlockName = new ResourceLocation(json.get("transitionBlock").getAsString());
+		ResourceLocation transitionBlockName = ResourceLocation.parse(json.get("transitionBlock").getAsString());
 		Block transitionBlock = (Block)Preconditions.checkNotNull((Block)ForgeRegistries.BLOCKS.getValue(transitionBlockName));
 		int transitionBlockHeat = json.get("blockHeat").getAsInt();
 
@@ -54,7 +54,7 @@ public class GeothermalConversionRecipeSerializer extends IERecipeSerializer<Geo
 
 		if(hasUpper)
 		{
-			ResourceLocation upperBoundBlockName = new ResourceLocation(json.get("upperBoundBlock").getAsString());
+			ResourceLocation upperBoundBlockName = ResourceLocation.parse(json.get("upperBoundBlock").getAsString());
 			Block upperBlock = (Block)Preconditions.checkNotNull((Block)ForgeRegistries.BLOCKS.getValue(upperBoundBlockName));
 			int upperHeat = json.get("upperHeat").getAsInt();
 			upperBound = Pair.of(upperBlock, upperHeat);
@@ -62,7 +62,7 @@ public class GeothermalConversionRecipeSerializer extends IERecipeSerializer<Geo
 
 		if(hasLower)
 		{
-			ResourceLocation lowerBoundBlockName = new ResourceLocation(json.get("lowerBoundBlock").getAsString());
+			ResourceLocation lowerBoundBlockName = ResourceLocation.parse(json.get("lowerBoundBlock").getAsString());
 			Block lowerBoundBlock = (Block)Preconditions.checkNotNull((Block)ForgeRegistries.BLOCKS.getValue(lowerBoundBlockName));
 			int upperHeat = json.get("lowerHeat").getAsInt();
 			lowerBound = Pair.of(lowerBoundBlock, upperHeat);

@@ -67,7 +67,7 @@ public class IGGenericItem extends Item implements IGFlagItem {
     public @NotNull Component getName(ItemStack stack) {
         if(hasCustomLang)
         {
-            return Component.translatable("item.immersivegeology." + customLang).withStyle(getMaterial(MaterialTexture.base).getRarity().color);
+            return Component.translatable("item.immersivegeology." + customLang).withStyle(getMaterial(MaterialTexture.base).getRarity().getStyleModifier());
         }
 
         List<String> materialList = new ArrayList<>();
@@ -77,7 +77,7 @@ public class IGGenericItem extends Item implements IGFlagItem {
             }
         }
 
-        return Component.translatable("item.immersivegeology." + category.getName(), materialList.toArray()).withStyle(getMaterial(MaterialTexture.base).getRarity().color);
+        return Component.translatable("item.immersivegeology." + category.getName(), materialList.toArray()).withStyle(getMaterial(MaterialTexture.base).getRarity().getStyleModifier());
     }
 
     /**
@@ -91,9 +91,9 @@ public class IGGenericItem extends Item implements IGFlagItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced)
+    public void appendHoverText(ItemStack pStack, TooltipContext context, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced)
     {
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+        super.appendHoverText(pStack, context, pTooltipComponents, pIsAdvanced);
         if(getFlag().equals(ItemCategoryFlags.INGOT) && (getMaterial(MaterialTexture.base) instanceof MetalEnum metal))
         {
             pTooltipComponents.add(Component.translatable("immersivegeology.item.text.sources"));

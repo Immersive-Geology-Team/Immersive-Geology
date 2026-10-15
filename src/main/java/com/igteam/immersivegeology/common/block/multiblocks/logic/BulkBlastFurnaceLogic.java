@@ -43,6 +43,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -54,6 +55,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.Capability;
@@ -482,7 +484,7 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 
 	@Nullable
 	@Override
-	public List<Component> getOverlayText(State state, Player player, boolean hammer)
+	public List<Component> getOverlayText(State state, BlockPos posInMultiblock, BlockHitResult absoluteHit, Player player, boolean hammer)
 	{
 		if(Utils.isFluidRelatedItemStack(player.getItemInHand(InteractionHand.MAIN_HAND)))
 			return List.of(
@@ -730,13 +732,13 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 		}
 
 		@Override
-		public void writeSaveNBT(CompoundTag nbt)
+		public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider)
 		{
-			nbt.put("inventory", inventory.serializeNBT());
-			nbt.put("metal_tank", metalTank.writeToNBT(new CompoundTag()));
-			nbt.put("slag_tank", slagTank.writeToNBT(new CompoundTag()));
-			nbt.put("pending_metal", pendingMetal.writeToNBT(new CompoundTag()));
-			nbt.put("pending_slag", pendingSlag.writeToNBT(new CompoundTag()));
+			nbt.put("inventory", inventory.serializeNBT(provider));
+			nbt.put("metal_tank", metalTank.writeToNBT(provider, new CompoundTag()));
+			nbt.put("slag_tank", slagTank.writeToNBT(provider, new CompoundTag()));
+			nbt.put("pending_metal", pendingMetal.saveOptional(provider));
+			nbt.put("pending_slag", pendingSlag.saveOptional(provider));
 			nbt.putBoolean("active", active);
 			nbt.putFloat("heat", heat);
 			nbt.putFloat("charge_heat_target", chargeHeatTarget);
@@ -762,13 +764,13 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 		}
 
 		@Override
-		public void readSaveNBT(CompoundTag nbt)
+		public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider)
 		{
-			inventory.deserializeNBT(nbt.getCompound("inventory"));
-			metalTank.readFromNBT(nbt.getCompound("metal_tank"));
-			slagTank.readFromNBT(nbt.getCompound("slag_tank"));
-			pendingMetal = FluidStack.loadFluidStackFromNBT(nbt.getCompound("pending_metal"));
-			pendingSlag = FluidStack.loadFluidStackFromNBT(nbt.getCompound("pending_slag"));
+			inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
+			metalTank.readFromNBT(provider, nbt.getCompound("metal_tank"));
+			slagTank.readFromNBT(provider, nbt.getCompound("slag_tank"));
+			pendingMetal = FluidStack.parseOptional(provider, nbt.getCompound("pending_metal"));
+			pendingSlag = FluidStack.parseOptional(provider, nbt.getCompound("pending_slag"));
 			active = nbt.getBoolean("active");
 			heat = nbt.getFloat("heat");
 			chargeHeatTarget = nbt.getFloat("charge_heat_target");
@@ -796,15 +798,15 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 		}
 
 		@Override
-		public void writeSyncNBT(CompoundTag nbt)
+		public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
 		{
-			writeSaveNBT(nbt);
+			writeSaveNBT(nbt, provider);
 		}
 
 		@Override
-		public void readSyncNBT(CompoundTag nbt)
+		public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
 		{
-			readSaveNBT(nbt);
+			readSaveNBT(nbt, provider);
 		}
 
 		@Override

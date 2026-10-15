@@ -19,6 +19,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.Lazy;
@@ -59,9 +60,9 @@ public class BasicChemicalRecipe extends MultiblockRecipe
 
 	public static boolean acceptableCatalyst(Level level, ItemStack stack)
 	{
-		for(BasicChemicalRecipe recipe : RECIPES.getRecipes(level))
+		for(RecipeHolder<BasicChemicalRecipe> recipe : RECIPES.getRecipes(level))
 		{
-			if(recipe.itemInput.testIgnoringSize(stack)){
+			if(recipe.value().itemInput.testIgnoringSize(stack)){
 				return true;
 			}
 		}
@@ -111,11 +112,11 @@ public class BasicChemicalRecipe extends MultiblockRecipe
 	{
 		List<FluidStack> tankedFluids = List.of(inputA, inputB);
 		BasicChemicalRecipe bestMatch = null;
-		for(BasicChemicalRecipe recipe : RECIPES.getRecipes(level))
+		for(RecipeHolder<BasicChemicalRecipe> recipe : RECIPES.getRecipes(level))
 		{
-			if(!recipe.itemInput.test(itemInput)) continue;
+			if(!recipe.value().itemInput.test(itemInput)) continue;
 
-			Set<FluidTagInput> recipeFluids = recipe.fluidIn;
+			Set<FluidTagInput> recipeFluids = recipe.value().fluidIn;
 
 			boolean allFluidsAvailable = recipeFluids.stream().allMatch(rf -> tankedFluids.stream().anyMatch(rf));
 
@@ -123,7 +124,7 @@ public class BasicChemicalRecipe extends MultiblockRecipe
 			{
 				if(bestMatch == null || recipeFluids.size() > bestMatch.fluidIn.size())
 				{
-					bestMatch = recipe;
+					bestMatch = recipe.value();
 				}
 			}
 		}

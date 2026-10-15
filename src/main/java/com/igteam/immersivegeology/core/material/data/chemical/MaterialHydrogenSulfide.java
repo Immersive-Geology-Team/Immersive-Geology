@@ -46,7 +46,7 @@ public class MaterialHydrogenSulfide extends MaterialChemical
 	@Override
 	public ResourceLocation getTextureLocation(IFlagType<?> flag)
 	{
-		if(flag.equals(BlockCategoryFlags.HYDROVENT)) return new ResourceLocation(IGLib.MODID, "block/greyscale/stone/cobble");
+		if(flag.equals(BlockCategoryFlags.HYDROVENT)) return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/greyscale/stone/cobble");
 		return super.getTextureLocation(flag);
 	}
 

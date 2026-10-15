@@ -97,7 +97,7 @@ public class IGContent {
                 {
                     level.setBlock(loc, Blocks.DIRT.defaultBlockState(), 3);
                 }
-                if(state.is(Blocks.TALL_GRASS) || state.is(Blocks.GRASS) || state.is(Blocks.FERN) || state.is(Blocks.LARGE_FERN))
+                if(state.is(Blocks.TALL_GRASS) || state.is(Blocks.SHORT_GRASS) || state.is(Blocks.FERN) || state.is(Blocks.LARGE_FERN))
                 {
                     level.setBlock(loc, Blocks.AIR.defaultBlockState(), 0);
                 }
@@ -124,9 +124,9 @@ public class IGContent {
             {
                 if(!(livingEntity instanceof Skeleton))
                 {
-                    livingEntity.setSecondsOnFire(5);
+                    livingEntity.igniteForSeconds(5);
                     livingEntity.addEffect(new MobEffectInstance(MobEffects.WITHER, 10, 0));
-                    livingEntity.addEffect(new MobEffectInstance(IEPotions.FLAMMABLE.get(), 20 * 5,0));
+                    livingEntity.addEffect(new MobEffectInstance(IEPotions.FLAMMABLE, 20 * 5,0));
                 }
             }
 
@@ -160,7 +160,7 @@ public class IGContent {
     {
         ManualInstance instance = ManualHelper.getManual();
 
-        instance.registerSpecialElement(new ResourceLocation(IGLib.MODID, "recipe_overview"), s ->
+        instance.registerSpecialElement(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "recipe_overview"), s ->
         {
             String mineral_name = GsonHelper.getAsString(s, "mineral");
             GeologyMaterial material = MineralEnum.valueOf(mineral_name).instance();
@@ -168,13 +168,13 @@ public class IGContent {
             return new IGRecipeOverview(instance, material, priority);
         });
 
-        InnerNode<ResourceLocation, ManualEntry> parent_category = instance.getRoot().getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "main"), 99);
+        InnerNode<ResourceLocation, ManualEntry> parent_category = instance.getRoot().getOrCreateSubnode(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "main"), 99);
 
         ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(ManualHelper.getManual());
-        builder.readFromFile(new ResourceLocation(IGLib.MODID, "intro"));
+        builder.readFromFile(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "intro"));
         instance.addEntry(parent_category, builder.create());
 
-        InnerNode<ResourceLocation, ManualEntry> multiblock_category = parent_category.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_multiblocks"), 0);
+        InnerNode<ResourceLocation, ManualEntry> multiblock_category = parent_category.getOrCreateSubnode(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "ig_multiblocks"), 0);
         multiblockEntry(instance, multiblock_category, "crystallizer");
         multiblockEntry(instance, multiblock_category, "coredrill");
         multiblockEntry(instance, multiblock_category, "gravity_separator");
@@ -193,16 +193,16 @@ public class IGContent {
         multiblockEntry(instance, multiblock_category, "small_chemical_reactor");
 
         // Build the manual entry for the contributors
-        builder.readFromFile(new ResourceLocation(IGLib.MODID, "getting_started"));
+        builder.readFromFile(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "getting_started"));
         instance.addEntry(parent_category, builder.create());
 
-        builder.readFromFile(new ResourceLocation(IGLib.MODID, "bug_bounty_contributors"));
+        builder.readFromFile(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "bug_bounty_contributors"));
         instance.addEntry(parent_category, builder.create());
-        InnerNode<ResourceLocation, ManualEntry> geology = parent_category.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_geology"), 2);
+        InnerNode<ResourceLocation, ManualEntry> geology = parent_category.getOrCreateSubnode(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "ig_geology"), 2);
 
-        InnerNode<ResourceLocation, ManualEntry> overworld = geology.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "overworld"), 0);
-        InnerNode<ResourceLocation, ManualEntry> nether = geology.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "nether"), 1);
-        InnerNode<ResourceLocation, ManualEntry> the_end = geology.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "the_end"), 2);
+        InnerNode<ResourceLocation, ManualEntry> overworld = geology.getOrCreateSubnode(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "overworld"), 0);
+        InnerNode<ResourceLocation, ManualEntry> nether = geology.getOrCreateSubnode(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "nether"), 1);
+        InnerNode<ResourceLocation, ManualEntry> the_end = geology.getOrCreateSubnode(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "the_end"), 2);
 
         Map<MaterialInterface<?>, ManualEntry> materialEntries = new LinkedHashMap<>();
         List<MaterialInterface<?>> materials = IGLib.getGeneratedMaterials();
@@ -218,14 +218,14 @@ public class IGContent {
             for(InnerNode<ResourceLocation, ManualEntry> host : hosts) instance.addEntry(host, entry);
         }
 
-        InnerNode<ResourceLocation, ManualEntry> metal_category = parent_category.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "metals"), 3);
+        InnerNode<ResourceLocation, ManualEntry> metal_category = parent_category.getOrCreateSubnode(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "metals"), 3);
         for(MaterialInterface<?> metal : metals)
         {
             if(itemForms(metal).isEmpty()) continue;
             instance.addEntry(metal_category, materialEntries.computeIfAbsent(metal, IGContent::materialEntry));
         }
 
-//        InnerNode<ResourceLocation, ManualEntry> chemical_entries = processing_chains.getOrCreateSubnode(new ResourceLocation(IGLib.MODID, "ig_chemical_chains"), 3);
+//        InnerNode<ResourceLocation, ManualEntry> chemical_entries = processing_chains.getOrCreateSubnode(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "ig_chemical_chains"), 3);
     }
 
     private static final Set<String> LINKABLE_ENTRIES = new HashSet<>();
@@ -234,7 +234,7 @@ public class IGContent {
     {
         LINKABLE_ENTRIES.add(material.getName());
         ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(ManualHelper.getManual());
-        builder.setLocation(new ResourceLocation(IGLib.MODID, material.getName()));
+        builder.setLocation(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, material.getName()));
         builder.setContent(() -> createMineralContent(material));
         return builder.create();
     }
@@ -575,13 +575,13 @@ public class IGContent {
 
     private static void multiblockEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, String id){
         ManualEntry.ManualEntryBuilder multiblock = new ManualEntry.ManualEntryBuilder(ManualHelper.getManual());
-        multiblock.readFromFile(new ResourceLocation(IGLib.MODID, id));
+        multiblock.readFromFile(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
         instance.addEntry(category, multiblock.create());
     }
 
     private static void multiblockRotaryKilnEntry(ManualInstance instance, InnerNode<ResourceLocation, ManualEntry> category, String id){
         ManualEntry.ManualEntryBuilder multiblock = new ManualEntry.ManualEntryBuilder(ManualHelper.getManual());
-        multiblock.readFromFile(new ResourceLocation(IGLib.MODID, id));
+        multiblock.readFromFile(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
         multiblock.addSpecialElement(new SpecialElementData("list", 0, new ManualElementTable(instance, formatBasicTable(getEnergyRates(), "fe/t"), true)));
         instance.addEntry(category, multiblock.create());
     }
@@ -606,7 +606,7 @@ public class IGContent {
                 level.setBlock(loc, Blocks.DIRT.defaultBlockState(), 0);
             }
 
-            if(state.is(Blocks.TALL_GRASS) || state.is(Blocks.GRASS) || state.is(Blocks.FERN) || state.is(Blocks.LARGE_FERN))
+            if(state.is(Blocks.TALL_GRASS) || state.is(Blocks.SHORT_GRASS) || state.is(Blocks.FERN) || state.is(Blocks.LARGE_FERN))
             {
                 level.setBlock(loc, Blocks.AIR.defaultBlockState(), 0);
             }

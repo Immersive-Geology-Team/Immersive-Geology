@@ -31,7 +31,7 @@ public class IGSlabBlock extends SlabBlock implements IGBlockType
     protected final BlockCategoryFlags category;
 
     public IGSlabBlock(BlockCategoryFlags flag, MaterialInterface<?> material) {
-        super(BlockBehaviour.Properties.copy(Blocks.IRON_ORE));
+        super(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE));
         this.materialMap.put(MaterialTexture.base, material);
         this.category = flag;
     }

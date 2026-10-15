@@ -34,6 +34,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.shapes.FoundryShape;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -41,7 +42,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -201,8 +204,8 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
         if(!state.alloyResult.isEmpty()) return;
         List<FluidStack> stored = new ArrayList<>(state.tanks.length);
         for(FluidTank tank : state.tanks) stored.add(tank.getFluid());
-        for(FoundryAlloyRecipe recipe : FoundryAlloyRecipe.RECIPES.getRecipes(level))
-            if(startAlloyFrom(state, recipe, stored)) return;
+        for(RecipeHolder<FoundryAlloyRecipe> recipe : FoundryAlloyRecipe.RECIPES.getRecipes(level))
+            if(startAlloyFrom(state, recipe.value(), stored)) return;
     }
 
     private boolean startAlloyFrom(State state, FoundryAlloyRecipe recipe, List<FluidStack> stored)
@@ -276,7 +279,7 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
         {
             ItemStack present = inventory.getStackInSlot(slot);
             if(present.isEmpty()) space += stack.getMaxStackSize();
-            else if(ItemStack.isSameItemSameTags(present, stack)) space += present.getMaxStackSize()-present.getCount();
+            else if(ItemStack.isSameItemSameComponents(present, stack)) space += present.getMaxStackSize()-present.getCount();
         }
         return space;
     }
@@ -297,7 +300,7 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
             ItemStack present = inventory.getStackInSlot(slot);
             int moved;
             if(present.isEmpty()) moved = Math.min(remaining.getCount(), remaining.getMaxStackSize());
-            else if(ItemStack.isSameItemSameTags(present, remaining))
+            else if(ItemStack.isSameItemSameComponents(present, remaining))
                 moved = Math.min(remaining.getCount(), present.getMaxStackSize()-present.getCount());
             else continue;
             if(moved <= 0) continue;
@@ -353,7 +356,7 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
 
     @Nullable
     @Override
-    public List<Component> getOverlayText(FoundryLogic.State state, Player player, boolean b)
+    public List<Component> getOverlayText(FoundryLogic.State state, BlockPos posInMultiblock, BlockHitResult absoluteHit, Player player, boolean b)
     {
         if(!Utils.isFluidRelatedItemStack(player.getItemInHand(InteractionHand.MAIN_HAND))) return null;
         List<Component> lines = new ArrayList<>();
@@ -468,52 +471,52 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
         }
 
         @Override
-        public void writeSaveNBT(CompoundTag nbt)
+        public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            nbt.put("energy", energy.serializeNBT());
+            nbt.put("energy", energy.serializeNBT(provider));
             ListTag tankList = new ListTag();
-            for(FluidTank tank : tanks) tankList.add(tank.writeToNBT(new CompoundTag()));
+            for(FluidTank tank : tanks) tankList.add(tank.writeToNBT(provider, new CompoundTag()));
             nbt.put("tanks", tankList);
-            nbt.put("inventory", inventory.serializeNBT());
-            nbt.put("castResult", castResult.save(new CompoundTag()));
+            nbt.put("inventory", inventory.serializeNBT(provider));
+            nbt.put("castResult", castResult.saveOptional(provider));
             nbt.putInt("castTicks", castTicks);
             nbt.putInt("castTotalTicks", castTotalTicks);
             nbt.putInt("castEnergyPerTick", castEnergyPerTick);
-            nbt.put("alloyResult", alloyResult.writeToNBT(new CompoundTag()));
+            nbt.put("alloyResult", alloyResult.saveOptional(provider));
             nbt.putInt("alloyTicks", alloyTicks);
             nbt.putInt("alloyTotalTicks", alloyTotalTicks);
             nbt.putInt("alloyEnergyPerTick", alloyEnergyPerTick);
         }
 
         @Override
-        public void readSaveNBT(CompoundTag nbt)
+        public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            energy.deserializeNBT(nbt.get("energy"));
-            readTanks(nbt);
-            readInventory(nbt.getCompound("inventory"));
-            castResult = ItemStack.of(nbt.getCompound("castResult"));
+            energy.deserializeNBT(provider, nbt.get("energy"));
+            readTanks(nbt, provider);
+            readInventory(nbt.getCompound("inventory"), provider);
+            castResult = ItemStack.parseOptional(provider, nbt.getCompound("castResult"));
             castTicks = nbt.getInt("castTicks");
             castTotalTicks = nbt.getInt("castTotalTicks");
             castEnergyPerTick = nbt.getInt("castEnergyPerTick");
-            alloyResult = FluidStack.loadFluidStackFromNBT(nbt.getCompound("alloyResult"));
+            alloyResult = FluidStack.parseOptional(provider, nbt.getCompound("alloyResult"));
             alloyTicks = nbt.getInt("alloyTicks");
             alloyTotalTicks = nbt.getInt("alloyTotalTicks");
             alloyEnergyPerTick = nbt.getInt("alloyEnergyPerTick");
         }
 
         @Override
-        public void writeSyncNBT(CompoundTag nbt)
+        public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            writeSaveNBT(nbt);
+            writeSaveNBT(nbt, provider);
         }
 
         @Override
-        public void readSyncNBT(CompoundTag nbt)
+        public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            readSaveNBT(nbt);
+            readSaveNBT(nbt, provider);
         }
 
-        private void readInventory(CompoundTag nbt)
+        private void readInventory(CompoundTag nbt, HolderLookup.Provider provider)
         {
             IItemHandlerModifiable handler = inventory.getRawHandler();
             for(int slot = 0; slot < handler.getSlots(); slot++) handler.setStackInSlot(slot, ItemStack.EMPTY);
@@ -522,7 +525,7 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
             {
                 CompoundTag entry = items.getCompound(i);
                 int slot = entry.getInt("Slot");
-                if(slot >= 0&&slot < handler.getSlots()) handler.setStackInSlot(slot, ItemStack.of(entry));
+                if(slot >= 0&&slot < handler.getSlots()) handler.setStackInSlot(slot, ItemStack.parseOptional(provider, entry));
             }
         }
 
@@ -541,17 +544,17 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
             return alloyTotalTicks > 0?Math.min(1f, alloyTicks/(float)alloyTotalTicks): 0f;
         }
 
-        private void readTanks(CompoundTag nbt)
+        private void readTanks(CompoundTag nbt, HolderLookup.Provider provider)
         {
             for(FluidTank tank : tanks) tank.setFluid(FluidStack.EMPTY);
             if(nbt.contains("tank"))
             {
-                tanks[0].readFromNBT(nbt.getCompound("tank"));
+                tanks[0].readFromNBT(provider, nbt.getCompound("tank"));
                 return;
             }
             ListTag tankList = nbt.getList("tanks", Tag.TAG_COMPOUND);
             for(int i = 0; i < Math.min(tankList.size(), tanks.length); i++)
-                tanks[i].readFromNBT(tankList.getCompound(i));
+                tanks[i].readFromNBT(provider, tankList.getCompound(i));
             mergeDuplicateTanks();
         }
 

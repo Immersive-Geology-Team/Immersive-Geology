@@ -16,6 +16,7 @@ import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.Lazy;
@@ -47,8 +48,8 @@ public class GeothermalExchangerRecipe extends MultiblockRecipe
 	public static List<GeothermalExchangerRecipe> findAllValidRecipes(Level level, FluidStack input)
 	{
 		List<GeothermalExchangerRecipe> valid = new ArrayList<>();
-		for(GeothermalExchangerRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.fluidIn.test(input)) valid.add(recipe);
+		for(RecipeHolder<GeothermalExchangerRecipe> recipe : RECIPES.getRecipes(level))
+			if(recipe.value().fluidIn.test(input)) valid.add(recipe.value());
 		return valid;
 	}
 
@@ -72,9 +73,9 @@ public class GeothermalExchangerRecipe extends MultiblockRecipe
 
 	public static GeothermalExchangerRecipe findRecipe(Level level, FluidStack input)
 	{
-		for(GeothermalExchangerRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.fluidIn.test(input))
-				return recipe;
+		for(RecipeHolder<GeothermalExchangerRecipe> recipe : RECIPES.getRecipes(level))
+			if(recipe.value().fluidIn.test(input))
+				return recipe.value();
 		return null;
 	}
 
@@ -84,9 +85,9 @@ public class GeothermalExchangerRecipe extends MultiblockRecipe
 			return null;
 		if (hint != null && hint.matches(input))
 			return hint;
-		for(GeothermalExchangerRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.fluidIn.test(input))
-				return recipe;
+		for(RecipeHolder<GeothermalExchangerRecipe> recipe : RECIPES.getRecipes(level))
+			if(recipe.value().fluidIn.test(input))
+				return recipe.value();
 		return null;
 	}
 

@@ -36,7 +36,7 @@ public record IGOreRemovalModifier() implements BiomeModifier
 
 	private Set<ResourceLocation> getBlacklistedBiomes()
 	{
-		return IGServerConfig.REMOVAL.biome_blacklist.get().stream().map(ResourceLocation::new).collect(Collectors.toSet());
+		return IGServerConfig.REMOVAL.biome_blacklist.get().stream().map(ResourceLocation::parse).collect(Collectors.toSet());
 	}
 
 	private static final BooleanValue isDebugLogEnabled = IGServerConfig.REMOVAL.logProcess;
@@ -46,7 +46,7 @@ public record IGOreRemovalModifier() implements BiomeModifier
 		if (phase == Phase.REMOVE)
 		{
 			boolean canLog = isDebugLogEnabled.get();
-			if(holder.getTagKeys().anyMatch(((b) ->
+			if(holder.tags().anyMatch(((b) ->
 			{
 				if(getBlacklistedBiomes().contains(b.location()))
 				{

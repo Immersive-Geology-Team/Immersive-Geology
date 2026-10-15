@@ -27,6 +27,6 @@ public class MaterialAdAstraStone extends MaterialStone {
     @Override
     public ResourceLocation getTextureLocation(IFlagType<?> flag)
     {
-        return new ResourceLocation("ad_astra", "block/"+getName());
+        return ResourceLocation.fromNamespaceAndPath("ad_astra", "block/"+getName());
     }
 }

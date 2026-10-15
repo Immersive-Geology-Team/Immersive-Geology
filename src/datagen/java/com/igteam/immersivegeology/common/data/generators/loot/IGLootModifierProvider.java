@@ -34,7 +34,7 @@ public class IGLootModifierProvider extends GlobalLootModifierProvider
 	protected void start()
 	{
 		add("shipwreck_treasure_loot", new IGLootModifier(new LootItemCondition[]{
-				LootTableIdCondition.builder(new ResourceLocation("chests/shipwreck_treasure")).build(),
+				LootTableIdCondition.builder(ResourceLocation.withDefaultNamespace("chests/shipwreck_treasure")).build(),
 				LootItemRandomChanceCondition.randomChance(0.5f).build()
 		}, List.of(
 				IGChemicalReactorSkins.RUSTED.getItem(),
@@ -42,7 +42,7 @@ public class IGLootModifierProvider extends GlobalLootModifierProvider
 		)));
 
 		add("simple_dungeon_loot", new IGLootModifier(new LootItemCondition[]{
-				LootTableIdCondition.builder(new ResourceLocation("chests/simple_dungeon")).build(),
+				LootTableIdCondition.builder(ResourceLocation.withDefaultNamespace("chests/simple_dungeon")).build(),
 				LootItemRandomChanceCondition.randomChance(0.5f).build()
 		}, List.of(
 				IGChemicalReactorSkins.LEGACY.getItem(),
@@ -56,7 +56,7 @@ public class IGLootModifierProvider extends GlobalLootModifierProvider
 		)));
 
 		add("desert_pyramid_loot", new IGLootModifier(new LootItemCondition[]{
-				LootTableIdCondition.builder(new ResourceLocation("chests/desert_pyramid")).build(),
+				LootTableIdCondition.builder(ResourceLocation.withDefaultNamespace("chests/desert_pyramid")).build(),
 				LootItemRandomChanceCondition.randomChance(0.5f).build()
 		}, List.of(
 				IGChemicalReactorSkins.HAZARD.getItem(),
@@ -64,7 +64,7 @@ public class IGLootModifierProvider extends GlobalLootModifierProvider
 		)));
 
 		add("woodland_mansion_loot", new IGLootModifier(new LootItemCondition[]{
-				LootTableIdCondition.builder(new ResourceLocation("chests/woodland_mansion")).build(),
+				LootTableIdCondition.builder(ResourceLocation.withDefaultNamespace("chests/woodland_mansion")).build(),
 				LootItemRandomChanceCondition.randomChance(0.5f).build()
 		}, List.of(
 				IGGravitySeparatorSkins.GREEN.getItem()

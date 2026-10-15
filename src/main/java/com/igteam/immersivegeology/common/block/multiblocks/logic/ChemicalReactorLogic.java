@@ -58,6 +58,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.skins.IGGravitySepar
 import com.igteam.immersivegeology.common.item.IGMultiblockSkinItem;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -390,12 +391,12 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 		}
 
 		@Override
-		public void readSaveNBT(CompoundTag nbt)
+		public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider)
 		{
-			this.energy.deserializeNBT(nbt.get("energy"));
-			this.tanks.readNBT(nbt.getCompound("tanks"));
-			this.inventory.deserializeNBT(nbt.getCompound("inventory"));
-			this.processor.fromNBT(nbt.get("processor"), MultiblockProcessInMachine::new);
+			this.energy.deserializeNBT(provider, nbt.get("energy"));
+			this.tanks.readNBT(nbt.getCompound("tanks"), provider);
+			this.inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
+			this.processor.fromNBT(nbt.get("processor"), (getRecipe, data, p) -> new MultiblockProcessInMachine<>(getRecipe, data), provider);
 		}
 
 		public void clearProcessor()
@@ -404,24 +405,24 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 		}
 
 		@Override
-		public void writeSaveNBT(CompoundTag nbt)
+		public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider)
 		{
-			nbt.put("energy", this.energy.serializeNBT());
-			nbt.put("tanks", this.tanks.toNBT());
-			nbt.put("processor", this.processor.toNBT());
-			nbt.put("inventory", this.inventory.serializeNBT());
+			nbt.put("energy", this.energy.serializeNBT(provider));
+			nbt.put("tanks", this.tanks.toNBT(provider));
+			nbt.put("processor", this.processor.toNBT(provider));
+			nbt.put("inventory", this.inventory.serializeNBT(provider));
 		}
 
 		@Override
-		public void writeSyncNBT(CompoundTag nbt)
+		public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
 		{
-			writeSaveNBT(nbt);
+			writeSaveNBT(nbt, provider);
 		}
 
 		@Override
-		public void readSyncNBT(CompoundTag nbt)
+		public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
 		{
-			readSaveNBT(nbt);
+			readSaveNBT(nbt, provider);
 		}
 
 		@Override
@@ -518,22 +519,22 @@ public class ChemicalReactorLogic implements IMultiblockLogic<ChemicalReactorLog
 			this.output = output;
 		}
 
-		public Tag toNBT()
+		public Tag toNBT(HolderLookup.Provider provider)
 		{
 			CompoundTag tag = new CompoundTag();
-			tag.put("leftIn", this.leftInput.writeToNBT(new CompoundTag()));
-			tag.put("rightIn", this.rightInput.writeToNBT(new CompoundTag()));
-			tag.put("backIn", this.backInput.writeToNBT(new CompoundTag()));
-			tag.put("out", this.output.writeToNBT(new CompoundTag()));
+			tag.put("leftIn", this.leftInput.writeToNBT(provider, new CompoundTag()));
+			tag.put("rightIn", this.rightInput.writeToNBT(provider, new CompoundTag()));
+			tag.put("backIn", this.backInput.writeToNBT(provider, new CompoundTag()));
+			tag.put("out", this.output.writeToNBT(provider, new CompoundTag()));
 			return tag;
 		}
 
-		public void readNBT(CompoundTag tag)
+		public void readNBT(CompoundTag tag, HolderLookup.Provider provider)
 		{
-			this.leftInput.readFromNBT(tag.getCompound("leftIn"));
-			this.rightInput.readFromNBT(tag.getCompound("rightIn"));
-			this.backInput.readFromNBT(tag.getCompound("backIn"));
-			this.output.readFromNBT(tag.getCompound("out"));
+			this.leftInput.readFromNBT(provider, tag.getCompound("leftIn"));
+			this.rightInput.readFromNBT(provider, tag.getCompound("rightIn"));
+			this.backInput.readFromNBT(provider, tag.getCompound("backIn"));
+			this.output.readFromNBT(provider, tag.getCompound("out"));
 		}
 
 		public FluidTank leftInput()

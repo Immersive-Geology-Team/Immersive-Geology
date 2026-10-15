@@ -30,7 +30,7 @@ public class IGGeothermalExchangerCategory extends IGRecipeCategory<GeothermalEx
 	public IGGeothermalExchangerCategory(IGuiHelper helper)
 	{
 		super(helper, JEIRecipeTypes.GEOTHERMAL_EXCHANGER, "block.immersivegeology.geothermal_exchanger");
-		ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/geothermal_exchanger.png");
+		ResourceLocation background = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/gui/jei/geothermal_exchanger.png");
 		IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 101, 101).setTextureSize(128,128).build();
 		setBackground(back);
 		setIcon(IGMultiblockProvider.GEOTHERMAL_EXCHANGER.iconStack());

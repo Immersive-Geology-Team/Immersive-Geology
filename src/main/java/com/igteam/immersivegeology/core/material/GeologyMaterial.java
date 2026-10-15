@@ -105,10 +105,10 @@ public abstract class GeologyMaterial implements MaterialHelper {
                 case STORAGE_BLOCK, ENGINEERING_BLOCK, ADVANCED_ENGINEERING_BLOCK -> IGLib.DEFAULT_METAL_PROPERTIES;
                 case SCAFFOLDING -> IGLib.METAL_PROPERTIES_NO_OCCLUSION;
                 case EVAPORATE, EVAPORATE_CRYSTAL -> IGLib.STONE_DECO_PROPS.mapColor(DyeColor.WHITE);
-                default -> BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK);
+                default -> BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK);
             };
         }
-        return BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK);
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK);
     }
 
     public Set<IGRecipeChain> getRecipeChains()
@@ -171,7 +171,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
     }
 
     public ResourceLocation getTextureLocation(IFlagType<?> flag) {
-        ResourceLocation texture = new ResourceLocation(IGLib.MODID, (flag instanceof ItemCategoryFlags ? "item" : "block") + "/colored/" + getName() + "/" + flag.toString().toLowerCase(Locale.ROOT));
+        ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, (flag instanceof ItemCategoryFlags ? "item" : "block") + "/colored/" + getName() + "/" + flag.toString().toLowerCase(Locale.ROOT));
 
         // This function, is normally ONLY called during data generation
         // And the Existing File Helper is only available during it, hence we default to greyscale textures during runtime
@@ -181,7 +181,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
             return greyScaleTextures(flag);
         }
 
-        boolean exists = EXISTING_HELPER.exists(new ResourceLocation(IGLib.MODID, "textures/" + texture.getPath() + ".png"), CLIENT_RESOURCES);
+        boolean exists = EXISTING_HELPER.exists(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/" + texture.getPath() + ".png"), CLIENT_RESOURCES);
         return exists ? texture : greyScaleTextures(flag);
     }
 
@@ -191,20 +191,20 @@ public abstract class GeologyMaterial implements MaterialHelper {
         {
             return switch(b)
             {
-                case STORAGE_BLOCK -> new ResourceLocation(IGLib.MODID, "palette/block/"+b.getName()+"/type_"+getPaletteVariation(b)+"_pristine_"+getName().toLowerCase(Locale.ROOT));
+                case STORAGE_BLOCK -> ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "palette/block/"+b.getName()+"/type_"+getPaletteVariation(b)+"_pristine_"+getName().toLowerCase(Locale.ROOT));
                 case ORE_BLOCK ->
                 {
                     String ore_overlay = getCrystalFamily()!=null?getCrystalFamily().getName(): "vanilla_normal";
-                    yield new ResourceLocation(IGLib.MODID, "block/greyscale/rock/ore_bearing/vanilla/"+ore_overlay);
+                    yield ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/greyscale/rock/ore_bearing/vanilla/"+ore_overlay);
                 }
                 case STAIRS, SLAB, ENGINEERING_BLOCK, ADVANCED_ENGINEERING_BLOCK, FENCE ->
-                        new ResourceLocation(IGLib.MODID, "block/greyscale/metal/storage");
-                case EVAPORATE -> new ResourceLocation(IGLib.MODID, "block/greyscale/evaporate/type_1");
+                        ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/greyscale/metal/storage");
+                case EVAPORATE -> ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/greyscale/evaporate/type_1");
                 case SHEETMETAL_SLAB, SHEETMETAL_STAIRS, SHEETMETAL_BLOCK ->
-                        new ResourceLocation(IGLib.MODID, "block/greyscale/metal/sheetmetal");
-                case DUST_BLOCK -> new ResourceLocation(IGLib.MODID, "block/greyscale/metal/dust_block");
-                case GEODE_BLOCK -> new ResourceLocation(IGLib.MODID, "block/greyscale/stone/geode");
-                default -> new ResourceLocation(IGLib.MODID, "block/greyscale/stone/cobble");
+                        ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/greyscale/metal/sheetmetal");
+                case DUST_BLOCK -> ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/greyscale/metal/dust_block");
+                case GEODE_BLOCK -> ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/greyscale/stone/geode");
+                default -> ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/greyscale/stone/cobble");
             };
         }
 
@@ -214,40 +214,40 @@ public abstract class GeologyMaterial implements MaterialHelper {
             {
                 case CLAY ->
                 {
-                    return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/"+i.getName());
+                    return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/greyscale/rock/"+i.getName());
                 }
                 case GEAR, INGOT, NUGGET, PLATE, SLAG, COMPOUND_DUST, TOOL_HOE, CRUSHED_ORE ->
                 {
-                    return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_pristine_"+getName().toLowerCase(Locale.ROOT));
+                    return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_pristine_"+getName().toLowerCase(Locale.ROOT));
                 }
                 case POOR_ORE, NORMAL_ORE, RICH_ORE, GRIT, POWDER, POWDERED_SLAG, DIRTY_CRUSHED_ORE ->
                 {
                     String weathering = canTarnish() ? "corroded" : "pristine";
-                    return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_"+weathering+"_"+getName().toLowerCase(Locale.ROOT));
+                    return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_"+weathering+"_"+getName().toLowerCase(Locale.ROOT));
                 }
                 case METAL_OXIDE ->
                 {
-                    return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_corroded_"+getName().toLowerCase(Locale.ROOT));
+                    return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "palette/item/"+i.getName()+"/type_"+getPaletteVariation(i)+"_corroded_"+getName().toLowerCase(Locale.ROOT));
                 }
                 case DRILL_HEAD ->
                 {
-                    return new ResourceLocation(IGLib.MODID, "palette/item/"+i.getName()+"/drill_pristine_"+getName().toLowerCase(Locale.ROOT));
+                    return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "palette/item/"+i.getName()+"/drill_pristine_"+getName().toLowerCase(Locale.ROOT));
                 }
                 case ROD, WIRE ->
                 {
-                    return new ResourceLocation(IGLib.MODID, "item/greyscale/metal/"+i.getName());
+                    return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/greyscale/metal/"+i.getName());
                 }
                 case CRYSTAL ->
                 {
-                    return new ResourceLocation(IGLib.MODID, "item/greyscale/crystal/"+getCrystalFamily().getName());
+                    return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/greyscale/crystal/"+getCrystalFamily().getName());
                 }
 //                case POOR_ORE, NORMAL_ORE, RICH_ORE ->
 //                {
-//                    return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/"+i.getName()+"_"+getCrystalFamily().getName());
+//                    return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/greyscale/rock/"+i.getName()+"_"+getCrystalFamily().getName());
 //                }
                 default ->
                 {
-                    return new ResourceLocation(IGLib.MODID, "item/greyscale/"+i.getName());
+                    return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/greyscale/"+i.getName());
                 }
             }
         }
@@ -536,7 +536,7 @@ public abstract class GeologyMaterial implements MaterialHelper {
     {
         if(hasFlag(MaterialFlags.IS_MOLTEN_METAL))
         {
-            if(!entity.fireImmune()) entity.setSecondsOnFire(2);
+            if(!entity.fireImmune()) entity.igniteForSeconds(2);
         }
     }
 

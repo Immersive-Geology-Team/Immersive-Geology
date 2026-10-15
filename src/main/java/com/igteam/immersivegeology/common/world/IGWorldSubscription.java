@@ -92,7 +92,7 @@ public class IGWorldSubscription
 
 	private Set<ResourceLocation> getBlacklistedBiomes()
 	{
-		return IGServerConfig.REMOVAL.biome_blacklist.get().stream().map(ResourceLocation::new).collect(Collectors.toSet());
+		return IGServerConfig.REMOVAL.biome_blacklist.get().stream().map(ResourceLocation::parse).collect(Collectors.toSet());
 	}
 
 	// Okay, so, this event NEEDS to be optimized, as extra over head here, means slower chunk generation
@@ -125,7 +125,7 @@ public class IGWorldSubscription
 			replaceState = isNether ? netherStone : null;
 		}
 		Holder<Biome> holder = level.getBiome(chunk.getPos().getWorldPosition());
-		if(holder.getTagKeys().anyMatch(((b) ->
+		if(holder.tags().anyMatch(((b) ->
 		{
 			if(getBlacklistedBiomes().contains(b.location()))
 			{

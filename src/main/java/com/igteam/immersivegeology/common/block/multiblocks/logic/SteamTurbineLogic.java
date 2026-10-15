@@ -33,6 +33,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.recipe.TurbineFuel;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.SteamTurbineShape;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -41,6 +42,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -187,7 +189,7 @@ public class SteamTurbineLogic implements ISkinnableMultiblockLogic<State>, MBOv
 
     @Nullable
     @Override
-    public List<Component> getOverlayText(State state, Player player, boolean b)
+    public List<Component> getOverlayText(State state, BlockPos posInMultiblock, BlockHitResult absoluteHit, Player player, boolean b)
     {
         if(state != null && state.water_tank.getSpace() < 50) return List.of(Component.translatable("immersivegeology.steam_turbine.water_warning").withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.RED));
         if(Utils.isFluidRelatedItemStack(player.getItemInHand(InteractionHand.MAIN_HAND)))
@@ -255,32 +257,32 @@ public class SteamTurbineLogic implements ISkinnableMultiblockLogic<State>, MBOv
         }
 
         @Override
-        public void readSaveNBT(CompoundTag nbt){
-            readSyncNBT(nbt);
+        public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            readSyncNBT(nbt, provider);
             this.active = nbt.getBoolean("active");
             this.consumeTick = nbt.getInt("consumeTick");
             this.rotation = nbt.getFloat("rotation");
         }
 
         @Override
-        public void writeSaveNBT(CompoundTag nbt){
-            writeSyncNBT(nbt);
+        public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            writeSyncNBT(nbt, provider);
             nbt.putBoolean("active", this.active);
             nbt.putInt("consumeTick", this.consumeTick);
             nbt.putFloat("rotation", this.rotation);
         }
 
-        public void writeSyncNBT(CompoundTag nbt) {
-            nbt.put("steam_tank", this.steam_tank.writeToNBT(new CompoundTag()));
-            nbt.put("water_tank", this.water_tank.writeToNBT(new CompoundTag()));
+        public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider) {
+            nbt.put("steam_tank", this.steam_tank.writeToNBT(provider, new CompoundTag()));
+            nbt.put("water_tank", this.water_tank.writeToNBT(provider, new CompoundTag()));
             nbt.putBoolean("active", this.active);
             nbt.putFloat("target_rotation", this.target_rotation);
             nbt.putFloat("rotation_speed", this.rotation_speed);
         }
 
-        public void readSyncNBT(CompoundTag nbt) {
-            this.steam_tank.readFromNBT(nbt.getCompound("steam_tank"));
-            this.water_tank.readFromNBT(nbt.getCompound("water_tank"));
+        public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider) {
+            this.steam_tank.readFromNBT(provider, nbt.getCompound("steam_tank"));
+            this.water_tank.readFromNBT(provider, nbt.getCompound("water_tank"));
             this.active = nbt.getBoolean("active");
             this.target_rotation = nbt.getFloat("target_rotation");
             this.rotation_speed = nbt.getFloat("rotation_speed");

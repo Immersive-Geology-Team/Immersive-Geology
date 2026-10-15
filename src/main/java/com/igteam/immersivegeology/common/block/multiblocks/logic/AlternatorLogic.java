@@ -29,10 +29,12 @@ import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.ISkinna
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.AlternatorShape;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -140,7 +142,7 @@ public class AlternatorLogic implements ISkinnableMultiblockLogic<AlternatorLogi
 
     @Nullable
     @Override
-    public List<Component> getOverlayText(State state, Player player, boolean b)
+    public List<Component> getOverlayText(State state, BlockPos posInMultiblock, BlockHitResult absoluteHit, Player player, boolean b)
     {
         if(state == null) return List.of();
         int rpm = Math.round(state.rotation_speed * 1200.0f);
@@ -200,19 +202,19 @@ public class AlternatorLogic implements ISkinnableMultiblockLogic<AlternatorLogi
         }
 
         @Override
-        public void readSaveNBT(CompoundTag nbt){
-            readSyncNBT(nbt);
+        public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            readSyncNBT(nbt, provider);
             render_rotation = nbt.getFloat("rotation");
         }
 
         @Override
-        public void writeSaveNBT(CompoundTag nbt){
-            writeSyncNBT(nbt);
+        public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            writeSyncNBT(nbt, provider);
             nbt.putFloat("rotation", render_rotation);
         }
 
         @Override
-        public void writeSyncNBT(CompoundTag nbt)
+        public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
             nbt.putFloat("target_rotation", target_rotation);
             nbt.putFloat("rotation_speed", rotation_speed);
@@ -220,7 +222,7 @@ public class AlternatorLogic implements ISkinnableMultiblockLogic<AlternatorLogi
         }
 
         @Override
-        public void readSyncNBT(CompoundTag nbt)
+        public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
             target_rotation = nbt.getFloat("target_rotation");
             rotation_speed = nbt.getFloat("rotation_speed");

@@ -36,6 +36,6 @@ public class MaterialTitaniumConcreteRuined extends MaterialMisc
 	@Override
 	public ResourceLocation getTextureLocation(IFlagType<?> flag)
 	{
-		return new ResourceLocation(IGLib.MODID, "block/static_block/reinforced_concrete_ruined");
+		return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/static_block/reinforced_concrete_ruined");
 	}
 }

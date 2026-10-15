@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.common.item;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
@@ -35,81 +36,22 @@ public class IGUshankaItem extends ArmorItem
 
 	public IGUshankaItem()
 	{
-		super(Material.INSTANCE, Type.HELMET, new Properties());
+		super(USHANKA_MATERIAL, Type.HELMET, new Properties().durability(77));
 	}
 
 	@Override
-	public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltip,
+	public void appendHoverText(@NotNull ItemStack stack, TooltipContext context, @NotNull List<Component> tooltip,
 								@NotNull TooltipFlag flag)
 	{
-		super.appendHoverText(stack, level, tooltip, flag);
+		super.appendHoverText(stack, context, tooltip, flag);
 		tooltip.add(Component.translatable("item.immersivegeology.armor_russian_helmet.lore")
 				.withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
 	}
 
 	@Nullable
 	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type)
+	public ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel)
 	{
-		return TEXTURE;
-	}
-
-	private enum Material implements ArmorMaterial
-	{
-		INSTANCE;
-
-		private static final int DURABILITY = 77;
-		private static final int DEFENCE = 2;
-
-		@Override
-		public int getDurabilityForType(@NotNull Type type)
-		{
-			return type==Type.HELMET?DURABILITY: 0;
-		}
-
-		@Override
-		public int getDefenseForType(@NotNull Type type)
-		{
-			return type==Type.HELMET?DEFENCE: 0;
-		}
-
-		@Override
-		public int getEnchantmentValue()
-		{
-			return ArmorMaterials.LEATHER.getEnchantmentValue();
-		}
-
-		@NotNull
-		@Override
-		public SoundEvent getEquipSound()
-		{
-			return SoundEvents.ARMOR_EQUIP_LEATHER;
-		}
-
-		@NotNull
-		@Override
-		public Ingredient getRepairIngredient()
-		{
-			return Ingredient.of(Items.LEATHER);
-		}
-
-		@NotNull
-		@Override
-		public String getName()
-		{
-			return IGLib.MODID+":ushanka";
-		}
-
-		@Override
-		public float getToughness()
-		{
-			return 0;
-		}
-
-		@Override
-		public float getKnockbackResistance()
-		{
-			return 0;
-		}
+		return ResourceLocation.parse(TEXTURE);
 	}
 }

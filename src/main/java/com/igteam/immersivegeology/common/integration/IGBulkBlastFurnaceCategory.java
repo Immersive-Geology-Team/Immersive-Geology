@@ -25,6 +25,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraftforge.fluids.FluidStack;
 
 import blusunrize.immersiveengineering.api.crafting.BlastFurnaceFuel;
@@ -56,7 +57,7 @@ public class IGBulkBlastFurnaceCategory extends IGRecipeCategory<BulkBlastFurnac
 		super(helper, JEIRecipeTypes.BULK_BLAST_FURNACE, "block.immersivegeology.bulk_blast_furnace");
 		setBackground(helper.createBlankDrawable(156, 54));
 		setIcon(IGMultiblockProvider.BULK_BLAST_FURNACE.iconStack());
-		IDrawableStatic full = helper.drawableBuilder(new ResourceLocation(IGLib.MODID, "textures/gui/jei/arrow.png"), 0, 0, ARROW_WIDTH, ARROW_HEIGHT)
+		IDrawableStatic full = helper.drawableBuilder(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/gui/jei/arrow.png"), 0, 0, ARROW_WIDTH, ARROW_HEIGHT)
 				.setTextureSize(32, 32).build();
 		this.arrow = helper.createAnimatedDrawable(full, 60, IDrawableAnimated.StartDirection.LEFT, false);
 	}
@@ -91,8 +92,8 @@ public class IGBulkBlastFurnaceCategory extends IGRecipeCategory<BulkBlastFurnac
 	{
 		Level level = Minecraft.getInstance().level;
 		List<ItemStack> stacks = new ArrayList<>();
-		for(BlastFurnaceFuel fuel : BlastFurnaceFuel.RECIPES.getRecipes(level))
-			stacks.addAll(Arrays.asList(fuel.input.getItems()));
+		for(RecipeHolder<BlastFurnaceFuel> fuel : BlastFurnaceFuel.RECIPES.getRecipes(level))
+			stacks.addAll(Arrays.asList(fuel.value().input.getItems()));
 		return stacks;
 	}
 
@@ -100,8 +101,8 @@ public class IGBulkBlastFurnaceCategory extends IGRecipeCategory<BulkBlastFurnac
 	{
 		Level level = Minecraft.getInstance().level;
 		List<ItemStack> stacks = new ArrayList<>();
-		for(BulkBlastFluxRecipe flux : BulkBlastFluxRecipe.RECIPES.getRecipes(level))
-			stacks.addAll(Arrays.asList(flux.input.getItems()));
+		for(RecipeHolder<BulkBlastFluxRecipe> flux : BulkBlastFluxRecipe.RECIPES.getRecipes(level))
+			stacks.addAll(Arrays.asList(flux.value().input.getItems()));
 		return stacks;
 	}
 

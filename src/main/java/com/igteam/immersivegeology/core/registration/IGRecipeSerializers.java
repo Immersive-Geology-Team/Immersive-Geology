@@ -71,7 +71,7 @@ public class IGRecipeSerializers
 		EMPTY_SERIALIZER = RECIPE_SERIALIZERS.register("empty", EmptySerializer::new);
 	}
 
-	private static <T extends Recipe<?>> Supplier<SimpleRecipeSerializer<T>> special(Function<ResourceLocation, T> create)
+	private static <T extends Recipe<?>> Supplier<SimpleRecipeSerializer<T>> special(Supplier<T> create)
 	{
 		return () -> new SimpleRecipeSerializer<>(create);
 	}

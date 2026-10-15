@@ -128,7 +128,7 @@ public class IGServerConfig
 			builder.comment("Specify biomes where ore removal should be disabled. Useful for preserving ore generation in specific areas without disabling the system entirely.");
 			this.biome_blacklist = builder.comment("List of biome tags (e.g., 'minecraft:is_overworld', 'forge:is_sandy', 'forge:is_dry/overworld', 'minecraft:spawns_warm_variant_frogs', or 'minecraft:has_structure/mineshaft_mesa') where ore removal will be skipped. Applies to all ore types defined above.").defineListAllowEmpty("biome_blacklist",
 					List.of(),
-					obj -> obj instanceof String && ResourceLocation.isValidResourceLocation((String) obj)
+					obj -> obj instanceof String && ResourceLocation.tryParse((String) obj) != null
 			);
 			builder.pop();
 		}
@@ -242,7 +242,7 @@ public class IGServerConfig
 				this.useSparsePlacement = builder.comment("If enabled, mineral vein will only have a chance to spawn once every [16] chunks on average, inplace of every chunk.").define("useSparsePlacement", mineral.useSparsePlacement());
 				this.dimension_whitelist = builder.comment("A List of dimensions that this evaporate can generate in.").defineListAllowEmpty("dimension_whitelist",
 						mineral.getDefaultDimensions(),
-						obj -> obj instanceof String && ResourceLocation.isValidResourceLocation((String) obj)
+						obj -> obj instanceof String && ResourceLocation.tryParse((String) obj) != null
 				);
 				builder.pop();
 			}
@@ -324,7 +324,7 @@ public class IGServerConfig
 
 				this.dimension_whitelist = builder.comment("A List of dimensions that this ore can generate in.").defineListAllowEmpty("dimension_whitelist",
 						mineral.getDefaultDimensions(),
-						obj -> obj instanceof String && ResourceLocation.isValidResourceLocation((String) obj)
+						obj -> obj instanceof String && ResourceLocation.tryParse((String) obj) != null
 				);
 
 				builder.pop();

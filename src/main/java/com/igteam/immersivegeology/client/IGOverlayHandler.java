@@ -31,7 +31,6 @@ import net.minecraft.world.item.MapItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
-import net.minecraft.world.level.saveddata.maps.MapDecoration.Type;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -55,7 +54,6 @@ public class IGOverlayHandler
 		{
 			Player player = ClientUtils.mc().player;
 			GuiGraphics graphics = event.getGuiGraphics();
-			PoseStack transform = graphics.pose();
 
 			for(InteractionHand hand : InteractionHand.values())
 			{
@@ -72,7 +70,7 @@ public class IGOverlayHandler
 						BlockEntity tileEntity = player.level().getBlockEntity(pos);
 						if((tileEntity instanceof IMultiblockBE<?> multiblock))
 						{
-							renderMultiblockOverlay(multiblock, hammer, transform, scaledWidth, scaledHeight);
+							renderMultiblockOverlay(multiblock, hammer, graphics, scaledWidth, scaledHeight);
 						}
 					}
 				}
@@ -81,7 +79,7 @@ public class IGOverlayHandler
 	}
 
 	private <S extends IMultiblockState> void renderMultiblockOverlay(
-			IMultiblockBE<S> be, boolean hammer, PoseStack transform, int scaledWidth, int scaledHeight
+			IMultiblockBE<S> be, boolean hammer, GuiGraphics graphics, int scaledWidth, int scaledHeight
 	)
 	{
 		final IMultiblockBEHelper<S> helper = be.getHelper();
@@ -90,6 +88,6 @@ public class IGOverlayHandler
 		final List<Component> overlayText = overlayHandler.getOverlayText(helper.getState(), ClientUtils.mc().player, be.getHelper());
 		if(overlayText==null)
 			return;
-		BlockOverlayUtils.drawBlockOverlayText(transform, overlayText, scaledWidth, scaledHeight);
+		BlockOverlayUtils.drawBlockOverlayText(graphics, overlayText, scaledWidth, scaledHeight);
 	}
 }

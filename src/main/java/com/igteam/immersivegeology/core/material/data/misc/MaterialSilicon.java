@@ -48,15 +48,15 @@ public class MaterialSilicon extends MaterialMisc
 			{
 				case INGOT,GRIT,SLAG ->
 				{
-					return new ResourceLocation(IGLib.MODID, "item/colored/silicon/"+i.getName());
+					return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/colored/silicon/"+i.getName());
 				}
 				case POWDERED_SLAG ->
 				{
-					return new ResourceLocation(IGLib.MODID, "item/greyscale/rock/"+i.getName());
+					return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/greyscale/rock/"+i.getName());
 				}
 				default ->
 				{
-					return new ResourceLocation(IGLib.MODID, "item/greyscale/metal/"+i.getName());
+					return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/greyscale/metal/"+i.getName());
 				}
 			}
 		}

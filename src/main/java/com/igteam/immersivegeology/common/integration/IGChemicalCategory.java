@@ -33,7 +33,7 @@ public class IGChemicalCategory extends IGRecipeCategory<ChemicalRecipe>
 	public IGChemicalCategory(IGuiHelper helper)
 	{
 		super(helper, JEIRecipeTypes.CHEMICAL, "block.immersivegeology.chemical_reactor");
-		ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/vat.png");
+		ResourceLocation background = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/gui/jei/vat.png");
 		IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 101, 101).setTextureSize(101,101).build();
 		setBackground(back);
 		setIcon(IGMultiblockProvider.CHEMICAL_REACTOR.iconStack());

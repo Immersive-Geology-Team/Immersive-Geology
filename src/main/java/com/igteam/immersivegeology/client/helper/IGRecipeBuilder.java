@@ -15,14 +15,17 @@ import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.mojang.serialization.JsonOps;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
@@ -36,7 +39,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class IGRecipeBuilder<R extends IGRecipeBuilder<R>> implements FinishedRecipe {
+public class IGRecipeBuilder<R extends IGRecipeBuilder<R>> {
+	private final HolderLookup.Provider provider;
 	private final RecipeSerializer<?> serializer;
 	private final List<Consumer<JsonObject>> writerFunctions;
 	private ResourceLocation id;
@@ -46,9 +50,10 @@ public class IGRecipeBuilder<R extends IGRecipeBuilder<R>> implements FinishedRe
 	protected JsonArray resultArray = null;
 	protected int resultCount = 0;
 	protected int maxResultCount = 1;
-	protected JsonArray conditions = null;
+	protected final List<ICondition> conditions = new ArrayList<>();
 
-	protected IGRecipeBuilder(RecipeSerializer<?> serializer) {
+	protected IGRecipeBuilder(RecipeSerializer<?> serializer, HolderLookup.Provider provider) {
+		this.provider = provider;
 		this.serializer = serializer;
 		this.writerFunctions = new ArrayList<>();
 	}
@@ -57,10 +62,13 @@ public class IGRecipeBuilder<R extends IGRecipeBuilder<R>> implements FinishedRe
 		return true;
 	}
 
-	public void build(Consumer<FinishedRecipe> out, ResourceLocation id) {
+	public void build(RecipeOutput out, ResourceLocation id) {
 		Preconditions.checkArgument(this.isComplete(), "This recipe is incomplete");
 		this.id = id;
-		out.accept(this);
+		JsonObject json = new JsonObject();
+		this.serializeRecipeData(json);
+		Recipe<?> recipe = serializer.codec().codec().parse(provider.createSerializationContext(JsonOps.INSTANCE), json).getOrThrow();
+		out.accept(id, recipe, null, conditions.toArray(ICondition[]::new));
 	}
 
 	public IGRecipeBuilder<R> addWriter(Consumer<JsonObject> writer) {
@@ -70,14 +78,8 @@ public class IGRecipeBuilder<R extends IGRecipeBuilder<R>> implements FinishedRe
 	}
 
 	public IGRecipeBuilder<R> addCondition(ICondition condition) {
-		if (this.conditions == null) {
-			this.conditions = new JsonArray();
-			this.addWriter((jsonObject) -> {
-				jsonObject.add("conditions", this.conditions);
-			});
-		}
-
-		this.conditions.add(CraftingHelper.serialize(condition));
+		Preconditions.checkArgument(this.id == null, "This recipe has already been finalized");
+		this.conditions.add(condition);
 		return this;
 	}
 
@@ -118,8 +120,8 @@ public class IGRecipeBuilder<R extends IGRecipeBuilder<R>> implements FinishedRe
 	}
 
 	public IGRecipeBuilder<R>  addResult(Ingredient ingredient) {
-		return this.resultArray != null ? this.addMultiResult(ingredient.toJson()) : this.addWriter((jsonObject) -> {
-			jsonObject.add("result", ingredient.toJson());
+		return this.resultArray != null ? this.addMultiResult(serializeIngredient(ingredient)) : this.addWriter((jsonObject) -> {
+			jsonObject.add("result", serializeIngredient(ingredient));
 		});
 	}
 
@@ -150,7 +152,7 @@ public class IGRecipeBuilder<R extends IGRecipeBuilder<R>> implements FinishedRe
 	}
 
 	public IGRecipeBuilder<R>  addMultiInput(Ingredient ingredient) {
-		return this.addMultiInput(ingredient.toJson());
+		return this.addMultiInput(serializeIngredient(ingredient));
 	}
 
 	public IGRecipeBuilder<R>  addMultiInput(IngredientWithSize ingredient) {
@@ -185,17 +187,7 @@ public class IGRecipeBuilder<R extends IGRecipeBuilder<R>> implements FinishedRe
 	}
 
 	public JsonObject serializeItemStack(ItemStack stack) {
-		JsonObject obj = new JsonObject();
-		obj.addProperty("item", BuiltInRegistries.ITEM.getKey(stack.getItem()).toString());
-		if (stack.getCount() > 1) {
-			obj.addProperty("count", stack.getCount());
-		}
-
-		if (stack.hasTag()) {
-			obj.addProperty("nbt", stack.getTag().toString());
-		}
-
-		return obj;
+		return ItemStack.OPTIONAL_CODEC.encodeStart(provider.createSerializationContext(JsonOps.INSTANCE), stack).getOrThrow().getAsJsonObject();
 	}
 
 	protected IGRecipeBuilder<R>  addSimpleItem(String key, ItemLike item) {
@@ -229,7 +221,7 @@ public class IGRecipeBuilder<R extends IGRecipeBuilder<R>> implements FinishedRe
 
 	public IGRecipeBuilder<R>  addIngredient(String key, Ingredient ingredient) {
 		return this.addWriter((jsonObject) -> {
-			jsonObject.add(key, ingredient.toJson());
+			jsonObject.add(key, serializeIngredient(ingredient));
 		});
 	}
 
@@ -299,19 +291,12 @@ public class IGRecipeBuilder<R extends IGRecipeBuilder<R>> implements FinishedRe
 		JsonObject jsonObject = new JsonObject();
 		jsonObject.addProperty("chance", chance);
 		jsonObject.add("output", ingredient.serialize());
-		if (conditions.length > 0) {
-			JsonArray conditionArray = new JsonArray();
-			ICondition[] var5 = conditions;
-			int var6 = conditions.length;
-
-			for(int var7 = 0; var7 < var6; ++var7) {
-				ICondition condition = var5[var7];
-				conditionArray.add(CraftingHelper.serialize(condition));
-			}
-
-			jsonObject.add("conditions", conditionArray);
-		}
-
+		if (conditions.length > 0)
+			jsonObject.add("conditions", ICondition.LIST_CODEC.encodeStart(JsonOps.INSTANCE, List.of(conditions)).getOrThrow());
 		return jsonObject;
+	}
+
+	private static JsonElement serializeIngredient(Ingredient ingredient) {
+		return Ingredient.CODEC.encodeStart(JsonOps.INSTANCE, ingredient).getOrThrow();
 	}
 }

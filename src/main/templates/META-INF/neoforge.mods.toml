@@ -49,3 +49,6 @@ type="optional"
 versionRange="[${jei_version},)"
 ordering="NONE"
 side="BOTH"
+
+[[mixins]]
+config="immersivegeology.mixins.json"

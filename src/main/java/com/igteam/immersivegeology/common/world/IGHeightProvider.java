@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.WorldGenerationContext;
@@ -28,7 +29,7 @@ import java.util.Objects;
 
 public class IGHeightProvider extends HeightProvider
 {
-	public static final Codec<IGHeightProvider> CODEC = IWorldGenConfig.CODEC.xmap(IGHeightProvider::new, p -> p.entry);
+	public static final MapCodec<IGHeightProvider> CODEC = IWorldGenConfig.CODEC.fieldOf("value").xmap(IGHeightProvider::new, p -> p.entry);
 
 	private final IWorldGenConfig entry;
 	private final Lazy<HeightProvider> internalProvider;

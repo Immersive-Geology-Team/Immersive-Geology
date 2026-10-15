@@ -36,6 +36,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.shapes.BloomeryShape
 import com.igteam.immersivegeology.common.block.multiblocks.skins.IGBloomerySkins;
 import com.igteam.immersivegeology.common.block.multiblocks.skins.IGRevFurnaceSkins;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.inventory.ContainerData;
@@ -140,27 +141,27 @@ public class BloomeryLogic implements IMultiblockLogic<BloomeryLogic.State>, ISe
         }
 
         @Override
-        public void readSaveNBT(CompoundTag nbt){
-            inventory.deserializeNBT(nbt.getCompound("inventory"));
+        public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
             furnace.readNBT(nbt.getCompound("furnace"), 0);
         }
 
         @Override
-        public void writeSaveNBT(CompoundTag nbt){
-            nbt.put("inventory", inventory.serializeNBT());
+        public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            nbt.put("inventory", inventory.serializeNBT(provider));
             nbt.put("furnace", furnace.toNBT(0));
         }
 
         @Override
-        public void readSyncNBT(CompoundTag nbt)
+        public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            readSaveNBT(nbt);
+            readSaveNBT(nbt, provider);
         }
 
         @Override
-        public void writeSyncNBT(CompoundTag nbt)
+        public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            writeSaveNBT(nbt);
+            writeSaveNBT(nbt, provider);
         }
 
         @Override

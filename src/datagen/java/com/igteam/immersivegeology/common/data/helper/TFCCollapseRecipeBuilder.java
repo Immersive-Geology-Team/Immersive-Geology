@@ -11,18 +11,19 @@ package com.igteam.immersivegeology.common.data.helper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.igteam.immersivegeology.client.helper.IGRecipeBuilder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.crafting.Ingredient;
 
 public class TFCCollapseRecipeBuilder extends IGRecipeBuilder<TFCCollapseRecipeBuilder>
 {
-	protected TFCCollapseRecipeBuilder()
+	protected TFCCollapseRecipeBuilder(HolderLookup.Provider provider)
 	{
-		super(TFCDatagenCompat.invokeCollapseRecipe());
+		super(TFCDatagenCompat.invokeCollapseRecipe(), provider);
 	}
 
-	public static TFCCollapseRecipeBuilder builder(Ingredient result)
+	public static TFCCollapseRecipeBuilder builder(Ingredient result, HolderLookup.Provider provider)
 	{
-		return (TFCCollapseRecipeBuilder) new TFCCollapseRecipeBuilder().addWriter((jsonObject) -> {
+		return (TFCCollapseRecipeBuilder) new TFCCollapseRecipeBuilder(provider).addWriter((jsonObject) -> {
 			// Create the root object for the "forge:conditional" type
 			jsonObject.addProperty("type", "forge:conditional");
 			// Create the recipes array

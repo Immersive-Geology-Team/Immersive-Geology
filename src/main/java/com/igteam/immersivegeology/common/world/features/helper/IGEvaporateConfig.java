@@ -79,7 +79,7 @@ public record IGEvaporateConfig(IWorldGenConfig entry, long seed, double temp_ra
 	public boolean canSpawnInDimension(ResourceLocation dimension)
 	{
 		return getConfig().dimension_whitelist.get().stream()
-				.map(ResourceLocation::new)
+				.map(ResourceLocation::parse)
 				.anyMatch(dimension::equals);
 	}
 

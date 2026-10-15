@@ -43,12 +43,14 @@ import com.igteam.immersivegeology.common.block.multiblocks.shapes.CentrifugeSha
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -205,7 +207,7 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
 
     @Nullable
     @Override
-    public List<Component> getOverlayText(State state, Player player, boolean b)
+    public List<Component> getOverlayText(State state, BlockPos posInMultiblock, BlockHitResult absoluteHit, Player player, boolean b)
     {
         if(Utils.isFluidRelatedItemStack(player.getItemInHand(InteractionHand.MAIN_HAND)))
             return List.of(TextUtils.formatFluidStack(state.tank.getFluid()), TextUtils.formatFluidStack(state.primary_output_tank.getFluid()), TextUtils.formatFluidStack(state.secondary_output_tank.getFluid()), Component.literal("Processes: " + state.processor.getQueueSize()));
@@ -275,37 +277,37 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
         }
 
         @Override
-        public void writeSaveNBT(CompoundTag nbt) {
-            nbt.put("energy", energy.serializeNBT());
-            nbt.put("processor", processor.toNBT());
-            nbt.put("tank", tank.writeToNBT(new CompoundTag()));
-            nbt.put("primary_output_tank", primary_output_tank.writeToNBT(new CompoundTag()));
-            nbt.put("secondary_output_tank", secondary_output_tank.writeToNBT(new CompoundTag()));
-            nbt.put("inventory", inventory.serializeNBT());
+        public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider) {
+            nbt.put("energy", energy.serializeNBT(provider));
+            nbt.put("processor", processor.toNBT(provider));
+            nbt.put("tank", tank.writeToNBT(provider, new CompoundTag()));
+            nbt.put("primary_output_tank", primary_output_tank.writeToNBT(provider, new CompoundTag()));
+            nbt.put("secondary_output_tank", secondary_output_tank.writeToNBT(provider, new CompoundTag()));
+            nbt.put("inventory", inventory.serializeNBT(provider));
             nbt.putBoolean("isActive", isActive);
         }
 
         @Override
-        public void readSaveNBT(CompoundTag nbt){
-            energy.deserializeNBT(nbt.get("energy"));
-            processor.fromNBT(nbt.get("processor"), MultiblockProcessInMachine::new);
-            tank.readFromNBT(nbt.getCompound("tank"));
-            primary_output_tank.readFromNBT(nbt.getCompound("primary_output_tank"));
-            secondary_output_tank.readFromNBT(nbt.getCompound("secondary_output_tank"));
-            inventory.deserializeNBT(nbt.getCompound("inventory"));
+        public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            energy.deserializeNBT(provider, nbt.get("energy"));
+            processor.fromNBT(nbt.get("processor"), (getRecipe, data, p) -> new MultiblockProcessInMachine<>(getRecipe, data), provider);
+            tank.readFromNBT(provider, nbt.getCompound("tank"));
+            primary_output_tank.readFromNBT(provider, nbt.getCompound("primary_output_tank"));
+            secondary_output_tank.readFromNBT(provider, nbt.getCompound("secondary_output_tank"));
+            inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
             isActive = nbt.getBoolean("isActive");
         }
 
         @Override
-        public void writeSyncNBT(CompoundTag nbt)
+        public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            writeSaveNBT(nbt);
+            writeSaveNBT(nbt, provider);
         }
 
         @Override
-        public void readSyncNBT(CompoundTag nbt)
+        public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            readSaveNBT(nbt);
+            readSaveNBT(nbt, provider);
         }
 
         @Override

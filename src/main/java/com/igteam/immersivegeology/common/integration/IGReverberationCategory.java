@@ -38,7 +38,7 @@ public class IGReverberationCategory extends IGRecipeCategory<RevFurnaceRecipe>
 	public IGReverberationCategory(IGuiHelper helper)
 	{
 		super(helper, JEIRecipeTypes.REVERBERATION, "block.immersivegeology.reverberation_furnace");
-		ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/reverberation_furnace.png");
+		ResourceLocation background = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/gui/jei/reverberation_furnace.png");
 		IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 101, 101).setTextureSize(101,101).build();
 		setBackground(back);
 		setIcon(IGMultiblockProvider.REVERBERATION_FURNACE.iconStack());

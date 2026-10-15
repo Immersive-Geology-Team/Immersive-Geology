@@ -93,7 +93,7 @@ public class MaterialHydrofluoricAcid extends MaterialChemical
 				);
 
 			if (rand.nextInt(60) == 0) {
-				item.setSecondsOnFire(3);
+				item.igniteForSeconds(3);
 			}
 		}
 	}

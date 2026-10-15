@@ -19,6 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.Lazy;
@@ -73,9 +74,9 @@ public class RotaryKilnRecipe extends MultiblockRecipe
 
 	public static RotaryKilnRecipe findRecipe(Level level, ItemStack input)
 	{
-		for(RotaryKilnRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.itemIn.testIgnoringSize(input))
-				return recipe;
+		for(RecipeHolder<RotaryKilnRecipe> recipe : RECIPES.getRecipes(level))
+			if(recipe.value().itemIn.testIgnoringSize(input))
+				return recipe.value();
 		return null;
 	}
 

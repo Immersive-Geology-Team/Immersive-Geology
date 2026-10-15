@@ -32,6 +32,6 @@ public class MaterialMCDripstone extends MaterialStone {
     @Override
     public Properties getProperties(IFlagType<?> flag)
     {
-        return BlockBehaviour.Properties.copy(Blocks.DRIPSTONE_BLOCK);
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.DRIPSTONE_BLOCK);
     }
 }

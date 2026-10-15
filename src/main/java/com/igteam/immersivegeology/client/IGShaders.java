@@ -35,7 +35,7 @@ public class IGShaders
 	@SubscribeEvent
 	public static void registerShaders(RegisterShadersEvent event) throws IOException
 	{
-		ShaderInstance instance = new ShaderInstance(event.getResourceProvider(), new ResourceLocation(IGLib.MODID, "rendertype_gui_display"), DefaultVertexFormat.POSITION_COLOR_TEX);
+		ShaderInstance instance = new ShaderInstance(event.getResourceProvider(), ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "rendertype_gui_display"), DefaultVertexFormat.BLOCK);
 
 		event.registerShader(instance, s ->
 		{

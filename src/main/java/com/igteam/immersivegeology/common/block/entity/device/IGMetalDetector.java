@@ -16,6 +16,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -121,7 +122,7 @@ public class IGMetalDetector extends Block implements EntityBlock
 	}
 
 	@Override
-	public void playerWillDestroy(Level level, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull Player player)
+	public BlockState playerWillDestroy(Level level, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull Player player)
 	{
 		// Mirrors vanilla's double block behaviour
 		if(!level.isClientSide&&player.isCreative())
@@ -137,7 +138,7 @@ public class IGMetalDetector extends Block implements EntityBlock
 				}
 			}
 		}
-		super.playerWillDestroy(level, pos, state, player);
+		return super.playerWillDestroy(level, pos, state, player);
 	}
 
 	@Override
@@ -188,20 +189,20 @@ public class IGMetalDetector extends Block implements EntityBlock
 	@Override
 	public @NotNull BlockState mirror(BlockState state, Mirror mirror)
 	{
-		return state.rotate(mirror.getRotation(state.getValue(FACING)));
+		return this.rotate(state, mirror.getRotation(state.getValue(FACING)));
 	}
 
 	@Override
-	public @NotNull InteractionResult use(BlockState state, Level level, BlockPos pos, Player player,
-										  @NotNull InteractionHand hand, @NotNull BlockHitResult hit)
+	public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player,
+													@NotNull InteractionHand hand, @NotNull BlockHitResult hit)
 	{
-		if(level.isClientSide) return InteractionResult.SUCCESS;
+		if(level.isClientSide) return ItemInteractionResult.SUCCESS;
 
 		IGMetalDetectorEntity detector = getDetector(level, pos, state);
-		if(detector==null||!(player instanceof ServerPlayer serverPlayer)) return InteractionResult.PASS;
+		if(detector==null||!(player instanceof ServerPlayer serverPlayer)) return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
 
 		NetworkHooks.openScreen(serverPlayer, detector, detector.getBlockPos());
-		return InteractionResult.CONSUME;
+		return ItemInteractionResult.CONSUME;
 	}
 
 	@Nullable

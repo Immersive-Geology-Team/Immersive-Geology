@@ -17,6 +17,7 @@ import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.util.Lazy;
@@ -44,11 +45,11 @@ public class CoreDrillRecipe extends MultiblockRecipe
 	@Nullable
 	public static CoreDrillRecipe get(Level level, FluidStack fluid)
 	{
-		for(CoreDrillRecipe r : RECIPES.getRecipes(level))
+		for(RecipeHolder<CoreDrillRecipe> r : RECIPES.getRecipes(level))
 		{
-			if(r.input.test(fluid))
+			if(r.value().input.test(fluid))
 			{
-				return r;
+				return r.value();
 			}
 		}
 		return null;

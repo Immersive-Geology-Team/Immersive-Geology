@@ -31,6 +31,6 @@ public class MaterialMCSandstone extends MaterialStone {
     @Override
     public Properties getProperties(IFlagType<?> flag)
     {
-        return BlockBehaviour.Properties.copy(Blocks.SANDSTONE);
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.SANDSTONE);
     }
 }

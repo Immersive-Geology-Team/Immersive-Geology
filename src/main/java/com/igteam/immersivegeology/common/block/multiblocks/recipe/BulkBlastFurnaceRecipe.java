@@ -16,6 +16,7 @@ import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidStack;
@@ -100,9 +101,9 @@ public class BulkBlastFurnaceRecipe extends MultiblockRecipe
 	public static BulkBlastFurnaceRecipe findRecipe(@Nullable Level level, ItemStack ore)
 	{
 		if(level==null||ore.isEmpty()) return null;
-		for(BulkBlastFurnaceRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.oreInput!=null&&recipe.oreInput.testIgnoringSize(ore))
-				return recipe;
+		for(RecipeHolder<BulkBlastFurnaceRecipe> recipe : RECIPES.getRecipes(level))
+			if(recipe.value().oreInput!=null&&recipe.value().oreInput.testIgnoringSize(ore))
+				return recipe.value();
 		return null;
 	}
 
@@ -110,9 +111,9 @@ public class BulkBlastFurnaceRecipe extends MultiblockRecipe
 	public static BulkBlastFurnaceRecipe findRefiningRecipe(@Nullable Level level, FluidStack melt)
 	{
 		if(level==null||melt.isEmpty()) return null;
-		for(BulkBlastFurnaceRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.meltInput!=null&&recipe.meltInput.testIgnoringAmount(melt))
-				return recipe;
+		for(RecipeHolder<BulkBlastFurnaceRecipe> recipe : RECIPES.getRecipes(level))
+			if(recipe.value().meltInput!=null&&recipe.value().meltInput.testIgnoringAmount(melt))
+				return recipe.value();
 		return null;
 	}
 

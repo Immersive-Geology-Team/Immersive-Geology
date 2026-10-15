@@ -16,6 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.RegistryObject;
@@ -44,9 +45,9 @@ public class RevFurnaceRecipe extends MultiblockRecipe
 
 	public static RevFurnaceRecipe findRecipe(Level level, ItemStack input)
 	{
-		for(RevFurnaceRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.input.test(input))
-				return recipe;
+		for(RecipeHolder<RevFurnaceRecipe> recipe : RECIPES.getRecipes(level))
+			if(recipe.value().input.test(input))
+				return recipe.value();
 		return null;
 	}
 
@@ -56,9 +57,9 @@ public class RevFurnaceRecipe extends MultiblockRecipe
 			return null;
 		if (hint != null && hint.matches(input))
 			return hint;
-		for(RevFurnaceRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.input.test(input))
-				return recipe;
+		for(RecipeHolder<RevFurnaceRecipe> recipe : RECIPES.getRecipes(level))
+			if(recipe.value().input.test(input))
+				return recipe.value();
 		return null;
 	}
 

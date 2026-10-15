@@ -19,6 +19,7 @@ import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -54,7 +55,7 @@ public class GeothermalHeatHelper
 		if (cachedRecipes == null) {
 			Level currentLevel = level.get();
 			if (currentLevel != null) {
-				cachedRecipes = new ArrayList<>(GeothermalConversionRecipe.RECIPES.getRecipes(currentLevel));
+				cachedRecipes = new ArrayList<>(GeothermalConversionRecipe.RECIPES.getRecipes(currentLevel).stream().map(RecipeHolder::value).toList());
 			}
 		}
 	}

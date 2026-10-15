@@ -39,7 +39,7 @@ public class FoundryRecipeSerializer extends IERecipeSerializer<FoundryRecipe>
 		FluidTagInput input = FluidTagInput.deserialize(GsonHelper.getAsJsonObject(json, "input"));
 		int energy = GsonHelper.getAsInt(json, "energy");
 		int time = GsonHelper.getAsInt(json, "time");
-		Item mold = ForgeRegistries.ITEMS.getValue(new ResourceLocation(GsonHelper.getAsString(json, "mold")));
+		Item mold = ForgeRegistries.ITEMS.getValue(ResourceLocation.parse(GsonHelper.getAsString(json, "mold")));
 		return new FoundryRecipe(resourceLocation, input, output, mold==null?Items.AIR: mold, energy, time);
 	}
 

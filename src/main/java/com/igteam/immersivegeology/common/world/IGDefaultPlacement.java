@@ -24,6 +24,7 @@ import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
@@ -63,7 +64,7 @@ import java.util.stream.Stream;
 
 public class IGDefaultPlacement extends PlacementFilter
 {
-	public static final Codec<IGDefaultPlacement> PLACEMENT_CODEC;
+	public static final MapCodec<IGDefaultPlacement> PLACEMENT_CODEC;
 
 	private final IWorldGenConfig entry;
 	public IGDefaultPlacement(IWorldGenConfig entry) {
@@ -105,7 +106,7 @@ public class IGDefaultPlacement extends PlacementFilter
 	}
 
 	static {
-		PLACEMENT_CODEC = IWorldGenConfig.CODEC.xmap(IGDefaultPlacement::new, (p) -> {
+		PLACEMENT_CODEC = IWorldGenConfig.CODEC.fieldOf("value").xmap(IGDefaultPlacement::new, (p) -> {
 			return p.entry;
 		});
 	}
@@ -120,9 +121,9 @@ public class IGDefaultPlacement extends PlacementFilter
 		}
 
 		Holder<Biome> biome = level.getBiome(worldPos);
-		boolean isOverworld = biome.containsTag(BiomeTags.IS_OVERWORLD);
-		boolean isEnd = biome.containsTag(BiomeTags.IS_END);
-		boolean isNether = biome.containsTag(BiomeTags.IS_NETHER);
+		boolean isOverworld = biome.is(BiomeTags.IS_OVERWORLD);
+		boolean isEnd = biome.is(BiomeTags.IS_END);
+		boolean isNether = biome.is(BiomeTags.IS_NETHER);
 		if(isOverworld || isNether || isEnd)
 		{
 			boolean possiblePlace = (isEnd ? canPlaceVeinEnd(chunkPos, seed, config) : canPlaceVein(chunkPos, seed, config)) && canSpawnAt(biome);
@@ -220,6 +221,6 @@ public class IGDefaultPlacement extends PlacementFilter
 	private Set<ResourceLocation> getWhitelistedDimensions()
 	{
 		OreConfig config = IGServerConfig.ORES.ores.get(entry);
-		return config.dimension_whitelist.get().stream().map(ResourceLocation::new).collect(Collectors.toSet());
+		return config.dimension_whitelist.get().stream().map(ResourceLocation::parse).collect(Collectors.toSet());
 	}
 }

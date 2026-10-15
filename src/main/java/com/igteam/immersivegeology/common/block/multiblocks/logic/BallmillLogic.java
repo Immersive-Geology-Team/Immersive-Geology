@@ -39,6 +39,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.shapes.RotaryKilnSha
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
@@ -181,9 +182,9 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
         }
 
         @Override
-        public void writeSaveNBT(CompoundTag nbt){
-            nbt.put("energy", energy.serializeNBT());
-            nbt.put("processor", processor.toNBT());
+        public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            nbt.put("energy", energy.serializeNBT(provider));
+            nbt.put("processor", processor.toNBT(provider));
         }
 
         public boolean shouldRenderActive()
@@ -192,22 +193,22 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
         }
 
         @Override
-        public void readSaveNBT(CompoundTag nbt){
-            this.energy.deserializeNBT(nbt.get("energy"));
-            this.processor.fromNBT(nbt.get("processor"), MultiblockProcessInWorld::new);
+        public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            this.energy.deserializeNBT(provider, nbt.get("energy"));
+            this.processor.fromNBT(nbt.get("processor"), MultiblockProcessInWorld::new, provider);
         }
 
         @Override
-        public void writeSyncNBT(CompoundTag nbt)
+        public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            writeSaveNBT(nbt);
+            writeSaveNBT(nbt, provider);
             nbt.putBoolean("renderActive", renderAsActive);
         }
 
         @Override
-        public void readSyncNBT(CompoundTag nbt)
+        public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            readSaveNBT(nbt);
+            readSaveNBT(nbt, provider);
             renderAsActive = nbt.getBoolean("renderActive");
         }
 

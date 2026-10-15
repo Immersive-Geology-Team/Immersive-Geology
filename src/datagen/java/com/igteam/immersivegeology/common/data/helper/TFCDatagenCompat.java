@@ -10,7 +10,8 @@ package com.igteam.immersivegeology.common.data.helper;
 
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -28,9 +29,9 @@ import java.util.function.Consumer;
 
 public class TFCDatagenCompat
 {
-	public static void runRecipeDatagen(IOreBlock oreBlock, Consumer<FinishedRecipe> consumer, RegistryObject<Block> block)
+	public static void runRecipeDatagen(IOreBlock oreBlock, RecipeOutput consumer, RegistryObject<Block> block, HolderLookup.Provider provider)
 	{
-		TFCCollapseRecipeBuilder.builder(Ingredient.of(oreBlock.asIGItem())).build(consumer, new ResourceLocation(IGLib.MODID, "collapse/" + block.getId().getPath()));
+		TFCCollapseRecipeBuilder.builder(Ingredient.of(oreBlock.asIGItem()), provider).build(consumer, ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "collapse/" + block.getId().getPath()));
 	}
 
 	public static TagKey<Block> getTFCBlockTag(String name)

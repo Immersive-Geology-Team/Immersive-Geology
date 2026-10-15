@@ -112,7 +112,7 @@ public class IGDynamicModelProvider extends ModelProvider<SimpleModelBuilder>
 	}
 
 	public static ResourceLocation rl(String path) {
-		return new ResourceLocation(IGLib.MODID, path);
+		return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, path);
 	}
 
 	@Nonnull

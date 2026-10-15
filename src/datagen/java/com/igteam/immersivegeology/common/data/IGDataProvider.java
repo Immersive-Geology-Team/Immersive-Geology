@@ -46,9 +46,9 @@ public class IGDataProvider {
         generator.addProvider(runServer, new IGFluidTags(out, lookup, helper));
         generator.addProvider(runServer, new IGItemTags(out, lookup, blockTags.contentsGetter(), helper));
         generator.addProvider(runServer, new IGDynamicModelProvider(blockStateProvider, out, helper));
-        generator.addProvider(runServer, new IGLootProvider(out));
+        generator.addProvider(runServer, new IGLootProvider(out, lookup));
         generator.addProvider(runServer, new IGLootModifierProvider(out));
-        generator.addProvider(runServer, new IGRecipes(out));
+        generator.addProvider(runServer, new IGRecipes(out, lookup));
 
         if(ModFlags.TFC.isStrictlyLoaded()) {
             generator.addProvider(runServer, new TFCCompatOreProvider(out));

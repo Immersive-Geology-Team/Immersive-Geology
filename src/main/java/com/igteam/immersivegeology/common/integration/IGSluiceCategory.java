@@ -34,7 +34,7 @@ public class IGSluiceCategory extends IGRecipeCategory<IndustrialSluiceRecipe>
 	public IGSluiceCategory(IGuiHelper helper)
 	{
 		super(helper, JEIRecipeTypes.SLUICE, "block.immersivegeology.industrialsluice");
-		ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/temp_sluice_jei.png");
+		ResourceLocation background = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/gui/jei/temp_sluice_jei.png");
 		IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 128, 128).setTextureSize(128,128).build();
 		setBackground(back);
 		setIcon(new ItemStack(Items.APPLE));

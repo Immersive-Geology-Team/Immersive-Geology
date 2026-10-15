@@ -9,12 +9,16 @@
 package com.igteam.immersivegeology.common.item;
 
 import com.igteam.immersivegeology.common.block.entity.device.IGMetalDetectorEntity;
+import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.capabilities.Capability;
@@ -31,7 +35,6 @@ import java.util.List;
 public class IGMetalDetectorItem extends BlockItem
 {
 	public static final String ENERGY_TAG = "energy";
-	private static final String BLOCK_ENTITY_TAG = "BlockEntityTag";
 
 	public IGMetalDetectorItem(Block block)
 	{
@@ -40,23 +43,23 @@ public class IGMetalDetectorItem extends BlockItem
 
 	public static int getEnergyStored(ItemStack stack)
 	{
-		CompoundTag tag = stack.getTag();
-		if(tag==null||!tag.contains(BLOCK_ENTITY_TAG, Tag.TAG_COMPOUND)) return 0;
-		return Math.min(IGMetalDetectorEntity.ENERGY_CAPACITY, tag.getCompound(BLOCK_ENTITY_TAG).getInt(ENERGY_TAG));
+		CustomData data = stack.get(DataComponents.BLOCK_ENTITY_DATA);
+		if(data==null) return 0;
+		return Math.min(IGMetalDetectorEntity.ENERGY_CAPACITY, data.copyTag().getInt(ENERGY_TAG));
 	}
 
 	private static void setEnergyStored(ItemStack stack, int energy)
 	{
-		CompoundTag tag = stack.getOrCreateTag();
-		if(!tag.contains(BLOCK_ENTITY_TAG, Tag.TAG_COMPOUND)) tag.put(BLOCK_ENTITY_TAG, new CompoundTag());
-		tag.getCompound(BLOCK_ENTITY_TAG).putInt(ENERGY_TAG, energy);
+		CompoundTag tag = stack.getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY).copyTag();
+		tag.putInt(ENERGY_TAG, energy);
+		BlockItem.setBlockEntityData(stack, IGRegistrationHolder.METAL_DETECTOR.get(), tag);
 	}
 
 	@Override
-	public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltip,
+	public void appendHoverText(@NotNull ItemStack stack, TooltipContext context, @NotNull List<Component> tooltip,
 								@NotNull TooltipFlag flag)
 	{
-		super.appendHoverText(stack, level, tooltip, flag);
+		super.appendHoverText(stack, context, tooltip, flag);
 		tooltip.add(Component.translatable("gui.immersivegeology.metal_detector.energy",
 				getEnergyStored(stack), IGMetalDetectorEntity.ENERGY_CAPACITY));
 	}

@@ -14,6 +14,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelEvent;
@@ -43,14 +44,14 @@ public class IGDynamicModel
 	{
 		// References a generated json file
 		raw_name = desc;
-		this.name = new ResourceLocation(IGLib.MODID, "dynamic/"+desc);
+		this.name = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "dynamic/"+desc);
 		MODELS.add(this.name);
 	}
 
 	public BakedModel get()
 	{
 		final BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
-		return blockRenderer.getBlockModelShaper().getModelManager().getModel(name);
+		return blockRenderer.getBlockModelShaper().getModelManager().getModel(ModelResourceLocation.standalone(name));
 	}
 
 	public List<BakedQuad> getNullQuads()

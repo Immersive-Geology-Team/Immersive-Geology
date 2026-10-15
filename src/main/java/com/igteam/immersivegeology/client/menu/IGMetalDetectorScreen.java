@@ -28,7 +28,7 @@ import java.util.List;
 public class IGMetalDetectorScreen extends AbstractContainerScreen<IGMetalDetectorMenu>
 {
 	public static final ResourceLocation TEXTURE =
-			new ResourceLocation(IGLib.MODID, "textures/gui/multiblocks/metal_detector.png");
+			ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/gui/multiblocks/metal_detector.png");
 
 	private static final int CELL_PITCH = 4;
 	private static final int CELL_SIZE = 3;
@@ -374,7 +374,6 @@ public class IGMetalDetectorScreen extends AbstractContainerScreen<IGMetalDetect
 	@Override
 	public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float partialTick)
 	{
-		renderBackground(graphics);
 		super.render(graphics, mouseX, mouseY, partialTick);
 		renderTooltips(graphics, mouseX, mouseY);
 		renderTooltip(graphics, mouseX, mouseY);

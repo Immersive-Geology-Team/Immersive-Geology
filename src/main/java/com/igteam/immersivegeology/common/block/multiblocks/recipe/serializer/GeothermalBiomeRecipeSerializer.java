@@ -43,7 +43,7 @@ public class GeothermalBiomeRecipeSerializer extends IERecipeSerializer<Geotherm
 		}
 
 		if (json.has("biome")) {
-			ResourceLocation biomeId = new ResourceLocation(json.get("biome").getAsString());
+			ResourceLocation biomeId = ResourceLocation.parse(json.get("biome").getAsString());
 			Biome biome = ForgeRegistries.BIOMES.getValue(biomeId);
 			Preconditions.checkNotNull(biome, "Biome '%s' not found", biomeId);
 			int min_heat = json.get("min_heat").getAsInt();
@@ -55,7 +55,7 @@ public class GeothermalBiomeRecipeSerializer extends IERecipeSerializer<Geotherm
 			JsonArray tagArray = json.getAsJsonArray("biome_tags");
 			List<TagKey<Biome>> tags = new ArrayList<>();
 			for (JsonElement el : tagArray) {
-				ResourceLocation tagId = new ResourceLocation(el.getAsString());
+				ResourceLocation tagId = ResourceLocation.parse(el.getAsString());
 				tags.add(TagKey.create(Registries.BIOME, tagId));
 			}
 			int min_heat = json.get("min_heat").getAsInt();

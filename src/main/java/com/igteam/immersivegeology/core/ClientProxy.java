@@ -38,7 +38,7 @@ public class ClientProxy extends CommonProxy
 	public void modConstruction()
 	{
 		super.modConstruction();
-		IEOBJCallbacks.register(new ResourceLocation(IGLib.MODID, "energy_pipe"), EnergyPipeCallback.INSTANCE);
+		IEOBJCallbacks.register(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "energy_pipe"), EnergyPipeCallback.INSTANCE);
 	}
 
 	@Override

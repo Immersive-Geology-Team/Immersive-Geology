@@ -77,7 +77,7 @@ public class MaterialSulfuricAcid extends MaterialChemical
 					);
 				}
 			}
-			if(!(living instanceof Skeleton)) living.setSecondsOnFire(40);
+			if(!(living instanceof Skeleton)) living.igniteForSeconds(40);
 		}
 
 		// Logic for items
@@ -89,7 +89,7 @@ public class MaterialSulfuricAcid extends MaterialChemical
 			);
 
 			if (rand.nextInt(60) == 0) {
-				item.setSecondsOnFire(3);
+				item.igniteForSeconds(3);
 			}
 		}
 	}

@@ -40,7 +40,7 @@ public class TurbineFuelSerializer extends IERecipeSerializer<TurbineFuel>
 	@Override
 	public TurbineFuel readFromJson(ResourceLocation recipeId, JsonObject json, IContext context)
 	{
-		ResourceLocation tagName = new ResourceLocation(json.get(FLUID_TAG_KEY).getAsString());
+		ResourceLocation tagName = ResourceLocation.parse(json.get(FLUID_TAG_KEY).getAsString());
 		TagKey<Fluid> tag = TagKey.create(Registries.FLUID, tagName);
 		int amount = json.get(CONSUME_AMOUNT_KEY).getAsInt();
 		int burn_time = json.get(BURN_TIME_KEY).getAsInt();

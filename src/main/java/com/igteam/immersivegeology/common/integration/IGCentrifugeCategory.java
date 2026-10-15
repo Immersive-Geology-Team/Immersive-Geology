@@ -31,7 +31,7 @@ public class IGCentrifugeCategory extends IGRecipeCategory<CentrifugeRecipe>
 	public IGCentrifugeCategory(IGuiHelper helper)
 	{
 		super(helper, JEIRecipeTypes.CENTRIFUGE, "block.immersivegeology.centrifuge");
-		ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/centrifuge.png");
+		ResourceLocation background = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/gui/jei/centrifuge.png");
 		IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 101, 101).setTextureSize(101,101).build();
 		setBackground(back);
 		setIcon(IGMultiblockProvider.CENTRIFUGE.iconStack());

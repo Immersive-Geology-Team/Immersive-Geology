@@ -171,8 +171,8 @@ public class IGItemTags extends ItemTagsProvider
 					useOptionalTag = false;
 					String name = oreBlock.getIGDescriptionId().toLowerCase(Locale.ROOT);
 					String id = name.substring(name.lastIndexOf('.')+1);
-					tag(Tags.Items.ORES).addOptional(new ResourceLocation(IGLib.MODID, id));
-					tag(material.getItemMaterialTag()).addOptional(new ResourceLocation(IGLib.MODID, id));
+					tag(Tags.Items.ORES).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
+					tag(material.getItemMaterialTag()).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
 					continue;
 				}
 				tag(Tags.Items.ORES).add(oreBlock.asIGItem());

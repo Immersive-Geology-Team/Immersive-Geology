@@ -24,17 +24,17 @@ import java.util.*;
 import java.util.function.Supplier;
 
 public class IGItemGroup extends CreativeModeTab {
-    private static final ResourceLocation GEOLOGIC_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/backgrounds/geologic.png");
-    private static final ResourceLocation PRODUCT_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/backgrounds/product.png");
-    private static final ResourceLocation PYROMETALLURGY_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/backgrounds/pyrometallurgy.png");
-    private static final ResourceLocation HYDROMETALLURGY_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/backgrounds/hydrometallurgy.png");
-    private static final ResourceLocation STRUCTURAL_BACKGROUND_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/backgrounds/structural.png");
+    private static final ResourceLocation GEOLOGIC_BACKGROUND_TEXTURES = ResourceLocation.fromNamespaceAndPath("immersivegeology", "textures/gui/creative_tabs/backgrounds/geologic.png");
+    private static final ResourceLocation PRODUCT_BACKGROUND_TEXTURES = ResourceLocation.fromNamespaceAndPath("immersivegeology", "textures/gui/creative_tabs/backgrounds/product.png");
+    private static final ResourceLocation PYROMETALLURGY_BACKGROUND_TEXTURES = ResourceLocation.fromNamespaceAndPath("immersivegeology", "textures/gui/creative_tabs/backgrounds/pyrometallurgy.png");
+    private static final ResourceLocation HYDROMETALLURGY_BACKGROUND_TEXTURES = ResourceLocation.fromNamespaceAndPath("immersivegeology", "textures/gui/creative_tabs/backgrounds/hydrometallurgy.png");
+    private static final ResourceLocation STRUCTURAL_BACKGROUND_TEXTURES = ResourceLocation.fromNamespaceAndPath("immersivegeology", "textures/gui/creative_tabs/backgrounds/structural.png");
 
-    private static final ResourceLocation GEOLOGIC_TAB_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/tabs/geologic.png");
-    private static final ResourceLocation COMPONENT_TAB_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/tabs/component.png");
-    private static final ResourceLocation PYRO_TAB_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/tabs/pyro.png");
-    private static final ResourceLocation HYDRO_TAB_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/tabs/hydro.png");
-    private static final ResourceLocation STRUCTURAL_TAB_TEXTURES = new ResourceLocation("immersivegeology", "textures/gui/creative_tabs/tabs/structural.png");
+    private static final ResourceLocation GEOLOGIC_TAB_TEXTURES = ResourceLocation.fromNamespaceAndPath("immersivegeology", "textures/gui/creative_tabs/tabs/geologic.png");
+    private static final ResourceLocation COMPONENT_TAB_TEXTURES = ResourceLocation.fromNamespaceAndPath("immersivegeology", "textures/gui/creative_tabs/tabs/component.png");
+    private static final ResourceLocation PYRO_TAB_TEXTURES = ResourceLocation.fromNamespaceAndPath("immersivegeology", "textures/gui/creative_tabs/tabs/pyro.png");
+    private static final ResourceLocation HYDRO_TAB_TEXTURES = ResourceLocation.fromNamespaceAndPath("immersivegeology", "textures/gui/creative_tabs/tabs/hydro.png");
+    private static final ResourceLocation STRUCTURAL_TAB_TEXTURES = ResourceLocation.fromNamespaceAndPath("immersivegeology", "textures/gui/creative_tabs/tabs/structural.png");
 
     public static ItemSubGroup selectedGroup = ItemSubGroup.geologic;
 
@@ -60,7 +60,7 @@ public class IGItemGroup extends CreativeModeTab {
     }
 
     @Override
-    public @NotNull ResourceLocation getBackgroundLocation() {
+    public @NotNull ResourceLocation getBackgroundTexture() {
         switch(selectedGroup)
         {
             case geologic: return GEOLOGIC_BACKGROUND_TEXTURES;
@@ -98,8 +98,8 @@ public class IGItemGroup extends CreativeModeTab {
         ret.clear();
     }
 
-    static Collection<ItemStack> ret = ItemStackLinkedSet.createTypeAndTagSet();
-    static Collection<ItemStack> dis = ItemStackLinkedSet.createTypeAndTagSet();
+    static Collection<ItemStack> ret = ItemStackLinkedSet.createTypeAndComponentsSet();
+    static Collection<ItemStack> dis = ItemStackLinkedSet.createTypeAndComponentsSet();
     private static boolean updateRet = true;
     @Override
     public @NotNull Collection<ItemStack> getDisplayItems()

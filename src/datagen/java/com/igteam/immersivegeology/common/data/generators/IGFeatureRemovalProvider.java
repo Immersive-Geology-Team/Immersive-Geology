@@ -50,12 +50,12 @@ public class IGFeatureRemovalProvider implements DataProvider {
 		{
 			removeFeature(feature.location());
 		}
-		removeFeature(new ResourceLocation("immersiveengineering", "bauxite"));
-		removeFeature(new ResourceLocation("immersiveengineering", "deep_nickel"));
-		removeFeature(new ResourceLocation("immersiveengineering", "lead"));
-		removeFeature(new ResourceLocation("immersiveengineering", "nickel"));
-		removeFeature(new ResourceLocation("immersiveengineering", "silver"));
-		removeFeature(new ResourceLocation("immersiveengineering", "uranium"));
+		removeFeature(ResourceLocation.fromNamespaceAndPath("immersiveengineering", "bauxite"));
+		removeFeature(ResourceLocation.fromNamespaceAndPath("immersiveengineering", "deep_nickel"));
+		removeFeature(ResourceLocation.fromNamespaceAndPath("immersiveengineering", "lead"));
+		removeFeature(ResourceLocation.fromNamespaceAndPath("immersiveengineering", "nickel"));
+		removeFeature(ResourceLocation.fromNamespaceAndPath("immersiveengineering", "silver"));
+		removeFeature(ResourceLocation.fromNamespaceAndPath("immersiveengineering", "uranium"));
 
 	}
 

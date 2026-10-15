@@ -14,10 +14,12 @@ import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import blusunrize.immersiveengineering.api.utils.FastEither;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -55,7 +57,7 @@ public class GeothermalBiomeRecipe extends IESerializableRecipe
 		return this.biomes.map(
 				biome -> {
 					Optional<Holder<Biome>> holderOpt = ForgeRegistries.BIOMES.getHolder(biome);
-					return holderOpt.map(biomeHolder -> biomeHolder.getTagKeys()
+					return holderOpt.map(biomeHolder -> biomeHolder.tags()
 							.collect(Collectors.toList())).orElse(Collections.emptyList());
 				},
 				Function.identity()
@@ -64,9 +66,9 @@ public class GeothermalBiomeRecipe extends IESerializableRecipe
 
 	public static GeothermalBiomeRecipe findRecipe(Level level, TagKey<Biome> biome)
 	{
-		for(GeothermalBiomeRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.getBiomes().contains(biome))
-				return recipe;
+		for(RecipeHolder<GeothermalBiomeRecipe> recipe : RECIPES.getRecipes(level))
+			if(recipe.value().getBiomes().contains(biome))
+				return recipe.value();
 		return null;
 	}
 
@@ -83,7 +85,7 @@ public class GeothermalBiomeRecipe extends IESerializableRecipe
 	}
 
 	@Nonnull
-	public ItemStack getResultItem(@NotNull RegistryAccess access) {
+	public ItemStack getResultItem(HolderLookup.@NotNull Provider access) {
 		return ItemStack.EMPTY;
 	}
 

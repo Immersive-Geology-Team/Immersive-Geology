@@ -24,6 +24,7 @@ import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -36,7 +37,7 @@ public record IGMultiblockGUI<S extends IMultiblockState>(IGMenuTypes.Multiblock
 		this.menu = menu;
 	}
 
-	public InteractionResult click(IMultiblockContext<S> ctx, BlockPos posInMultiblock, Player player, InteractionHand hand, BlockHitResult absoluteHit, boolean isClient) {
+	public ItemInteractionResult click(IMultiblockContext<S> ctx, BlockPos posInMultiblock, Player player, InteractionHand hand, BlockHitResult absoluteHit, boolean isClient) {
 		ItemStack stack = player.getItemInHand(hand);
 		Level level = ctx.getLevel().getRawLevel();
 		BlockState state = ctx.getLevel().getBlockState(posInMultiblock);
@@ -49,7 +50,7 @@ public record IGMultiblockGUI<S extends IMultiblockState>(IGMenuTypes.Multiblock
 				boolean success = SkinableMultiblockPart.setSkin(ctx.getLevel(), (IGTemplateMultiblock) IGRegistrationHolder.getMBTemplate.apply(((IIGMultiSkinHelper)skin.getSkin()).multiblockName()), skin.getSkin());
 				if(success)
 				{
-					return InteractionResult.SUCCESS;
+					return ItemInteractionResult.SUCCESS;
 				}
 			}
 		}
@@ -58,7 +59,7 @@ public record IGMultiblockGUI<S extends IMultiblockState>(IGMenuTypes.Multiblock
 			player.openMenu(this.menu.provide(ctx, posInMultiblock));
 		}
 
-		return InteractionResult.SUCCESS;
+		return ItemInteractionResult.SUCCESS;
 	}
 
 	public IGMenuTypes.MultiblockContainer<S, ?> getMenu() {

@@ -45,7 +45,7 @@ public class IGFoundryAlloyCategory extends IGRecipeCategory<FoundryAlloyRecipe>
 		super(helper, JEIRecipeTypes.FOUNDRY_ALLOYING, "gui.immersivegeology.foundry.alloying");
 		setBackground(helper.createBlankDrawable(128, 46));
 		setIcon(IGMultiblockProvider.FOUNDRY.iconStack());
-		IDrawableStatic full = helper.drawableBuilder(new ResourceLocation(IGLib.MODID, "textures/gui/jei/arrow.png"), 0, 0, ARROW_WIDTH, ARROW_HEIGHT)
+		IDrawableStatic full = helper.drawableBuilder(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/gui/jei/arrow.png"), 0, 0, ARROW_WIDTH, ARROW_HEIGHT)
 				.setTextureSize(32, 32).build();
 		this.arrow = helper.createAnimatedDrawable(full, 40, IDrawableAnimated.StartDirection.LEFT, false);
 	}

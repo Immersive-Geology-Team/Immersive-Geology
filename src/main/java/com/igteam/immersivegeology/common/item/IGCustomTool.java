@@ -29,7 +29,7 @@ public class IGCustomTool extends HoeItem implements IGFlagItem
 	protected final Map<MaterialTexture, MaterialInterface<?>> materialMap = new HashMap<>();
 	protected final ItemCategoryFlags category;
 	public IGCustomTool(Tier tier, int damage, int speed, ItemCategoryFlags flag, MaterialInterface<?> material) {
-		super(tier, damage, speed, new Item.Properties().fireResistant().stacksTo(1));
+		super(tier, new Item.Properties().fireResistant().stacksTo(1).attributes(HoeItem.createAttributes(tier, damage, speed)));
 		this.materialMap.put(MaterialTexture.base, material);
 		this.category = flag;
 	}
@@ -41,9 +41,9 @@ public class IGCustomTool extends HoeItem implements IGFlagItem
 	}
 
 	@Override
-	public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced)
+	public void appendHoverText(ItemStack pStack, TooltipContext context, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced)
 	{
-		super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+		super.appendHoverText(pStack, context, pTooltipComponents, pIsAdvanced);
 		//TODO change this to be more dynamic, for now as only the unobtanium hoe uses this class we have it set manually.
 		pTooltipComponents.add(Component.translatable("immersivegeology.bug_bounty.ktos").withStyle(ChatFormatting.DARK_GRAY).withStyle(ChatFormatting.ITALIC));
 	}

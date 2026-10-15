@@ -21,6 +21,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
@@ -79,13 +80,13 @@ public class IGHydroVentEntity extends IEBaseBlockEntity implements ICapabilityP
 	}
 
 	@Override
-	public void readCustomNBT(CompoundTag compoundTag, boolean b)
+	public void readCustomNBT(CompoundTag compoundTag, boolean b, HolderLookup.Provider provider)
 	{
 
 	}
 
 	@Override
-	public void writeCustomNBT(CompoundTag compoundTag, boolean b)
+	public void writeCustomNBT(CompoundTag compoundTag, boolean b, HolderLookup.Provider provider)
 	{
 
 	}

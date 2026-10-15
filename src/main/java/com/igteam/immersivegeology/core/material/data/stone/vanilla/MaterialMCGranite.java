@@ -32,6 +32,6 @@ public class MaterialMCGranite extends MaterialStone {
     @Override
     public Properties getProperties(IFlagType<?> flag)
     {
-        return BlockBehaviour.Properties.copy(Blocks.GRANITE);
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE);
     }
 }

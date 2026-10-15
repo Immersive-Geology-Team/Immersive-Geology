@@ -123,7 +123,7 @@ public class IGLib {
 
     public static ResourceLocation rl(String name)
     {
-        return new ResourceLocation(IGLib.MODID, name);
+        return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, name);
     }
 
     public static ResourceLocation makeTextureLocation(String name) {

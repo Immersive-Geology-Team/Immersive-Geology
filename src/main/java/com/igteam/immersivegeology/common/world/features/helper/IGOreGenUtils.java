@@ -75,7 +75,7 @@ public class IGOreGenUtils
 	public static BlockState oxidizeExposed(LevelAccessor level, BlockPos cursor, BlockState oreState)
 	{
 		// Check if the ore block is randomly ticking
-		if(oreState.getBlock().isRandomlyTicking(oreState))
+		if(oreState.isRandomlyTicking())
 		{
 			// Iterate over directions and corresponding oxidation properties
 			for(int i = 0; i < DIRECTIONS.length; i++)
