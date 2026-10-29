@@ -45,8 +45,7 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.network.NetworkHooks;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -201,7 +200,7 @@ public class IGMetalDetector extends Block implements EntityBlock
 		IGMetalDetectorEntity detector = getDetector(level, pos, state);
 		if(detector==null||!(player instanceof ServerPlayer serverPlayer)) return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
 
-		NetworkHooks.openScreen(serverPlayer, detector, detector.getBlockPos());
+		serverPlayer.openMenu(detector, detector.getBlockPos());
 		return ItemInteractionResult.CONSUME;
 	}
 

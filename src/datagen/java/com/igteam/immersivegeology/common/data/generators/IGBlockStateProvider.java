@@ -24,6 +24,7 @@ import com.igteam.immersivegeology.common.block.structural.IGScaffoldingBlock;
 import com.igteam.immersivegeology.common.block.structural.IGSlabBlock;
 import com.igteam.immersivegeology.common.block.structural.IGStairBlock;
 import com.igteam.immersivegeology.common.fluid.IGFluid;
+import com.igteam.immersivegeology.common.fluid.IGFluidType;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.data.stone.vanilla.MaterialMCBasalt;
@@ -58,14 +59,13 @@ import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
-import net.minecraftforge.client.model.generators.*;
-import net.minecraftforge.client.model.generators.ConfiguredModel.Builder;
-import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder.PartBuilder;
-import net.minecraftforge.client.model.generators.VariantBlockStateBuilder.PartialBlockstate;
-import net.minecraftforge.client.model.generators.loaders.ObjModelBuilder;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.client.model.generators.*;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel.Builder;
+import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder.PartBuilder;
+import net.neoforged.neoforge.client.model.generators.VariantBlockStateBuilder.PartialBlockstate;
+import net.neoforged.neoforge.client.model.generators.loaders.ObjModelBuilder;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.apache.commons.lang3.mutable.Mutable;
 import org.apache.commons.lang3.mutable.MutableObject;
 import org.slf4j.Logger;
@@ -577,8 +577,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
     }
 
     private void igFenceBlock(FenceBlock block, ResourceLocation texture) {
-        ResourceLocation key =  ForgeRegistries.BLOCKS.getKey(block);
-		assert key!=null;
+        ResourceLocation key = BuiltInRegistries.BLOCK.getKey(block);
 		String baseName = key.getNamespace() + ":block/fence/" + key.getPath();
         this.fourWayBlock(block, igFencePost(baseName + "_post", texture), igFenceSide(baseName + "_side", texture));
     }
@@ -858,9 +857,7 @@ public class IGBlockStateProvider extends BlockStateProvider {
         {
             if(still != still.getSource()) return;
             IFlagType<?> flag = still.getFlag();
-            Mutable<IClientFluidTypeExtensions> box = new MutableObject<>();
-            still.getFluidType().initializeClient(box::setValue);
-            ResourceLocation stillTexture = box.getValue().getStillTexture();
+            ResourceLocation stillTexture = ((IGFluidType)still.getFluidType()).getClientExtensions().getStillTexture();
             String registryName = (still.getMaterials().size() > 1) ? flag.getRegistryKey(still.getMaterial(MaterialTexture.base), still.getMaterial(MaterialTexture.overlay)) : flag.getRegistryKey(still.getMaterial(MaterialTexture.base));
             String path = "block/fluid/"+ registryName;
             ModelFile model = models().getBuilder(path)

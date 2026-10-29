@@ -18,14 +18,15 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class BulkBlastFluxRecipe extends IESerializableRecipe
 {
-	public static RegistryObject<IERecipeSerializer<BulkBlastFluxRecipe>> SERIALIZER;
+	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<BulkBlastFluxRecipe>> SERIALIZER;
 	public static final CachedRecipeList<BulkBlastFluxRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.BULK_BLAST_FLUX);
 
 	public final Ingredient input;

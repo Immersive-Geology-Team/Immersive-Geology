@@ -52,18 +52,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.IFluidTank;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -270,8 +268,8 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
             this.fPrimaryOutput = new StoredCapability<>(new ArrayFluidHandler(primary_output_tank, true, false, changedAndSync));
             this.fSecondaryOutput = new StoredCapability<>(new ArrayFluidHandler(secondary_output_tank, true, false, changedAndSync));
 
-            this.fluidOutputPrimary = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(FLUID_PRIMARY_OUTPUT_CAP.side(), FLUID_PRIMARY_OUTPUT_CAP.posInMultiblock().above()));
-            this.fluidOutputSecondary = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(FLUID_SECONDARY_OUTPUT_CAP.side(), FLUID_SECONDARY_OUTPUT_CAP.posInMultiblock().above()));
+            this.fluidOutputPrimary = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, new MultiblockFace(FLUID_PRIMARY_OUTPUT_CAP.side(), FLUID_PRIMARY_OUTPUT_CAP.posInMultiblock().above()));
+            this.fluidOutputSecondary = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, new MultiblockFace(FLUID_SECONDARY_OUTPUT_CAP.side(), FLUID_SECONDARY_OUTPUT_CAP.posInMultiblock().above()));
 
             this.isActive = false;
         }

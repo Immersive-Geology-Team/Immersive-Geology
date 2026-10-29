@@ -22,16 +22,16 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.util.Lazy;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.List;
 import java.util.Set;
 
 public class BasicChemicalRecipe extends MultiblockRecipe
 {
-	public static RegistryObject<IERecipeSerializer<BasicChemicalRecipe>> SERIALIZER;
+	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<BasicChemicalRecipe>> SERIALIZER;
 	public static final CachedRecipeList<BasicChemicalRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.BASIC_CHEMICAL_REACTOR);
 	public final ItemStack itemOutput;
 	public final FluidStack fluidOutput;

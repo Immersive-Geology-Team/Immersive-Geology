@@ -19,7 +19,6 @@ import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidStack;
 
 import java.util.List;
 import java.util.function.BiFunction;

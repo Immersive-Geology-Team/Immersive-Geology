@@ -12,7 +12,6 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.tags.ITag;
 
 import java.util.ArrayList;
 import java.util.HashSet;

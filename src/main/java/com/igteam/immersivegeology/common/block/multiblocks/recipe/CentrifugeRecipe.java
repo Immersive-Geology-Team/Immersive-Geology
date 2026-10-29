@@ -20,13 +20,13 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.util.Lazy;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 public class CentrifugeRecipe extends MultiblockRecipe
 {
-	public static RegistryObject<IERecipeSerializer<CentrifugeRecipe>> SERIALIZER;
+	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<CentrifugeRecipe>> SERIALIZER;
 	public static final CachedRecipeList<CentrifugeRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.CENTRIFUGE);
 	public final Lazy<ItemStack> itemOutput;
 	public final FluidTagInput fluidIn;

@@ -59,7 +59,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.data.ForgeRecipeProvider;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.text.DecimalFormat;
@@ -141,19 +141,20 @@ public class IGContent {
         IGLib.IG_LOGGER.info("Finished");
     }
 
-    public static void registerContainersAndScreens()
+    public static void registerContainersAndScreens(RegisterMenuScreensEvent event)
     {
-        MenuScreens.register(IGMenuTypes.BLOOMERY.getType(), BloomeryScreen::new);
-        MenuScreens.register(IGMenuTypes.REVERBERATION_FURNACE.getType(), ReverberationScreen::new);
-        MenuScreens.register(IGMenuTypes.GEOTHERMAL_EXCHANGER.getType(), GeothermalExchangerScreen::new);
-        MenuScreens.register(IGMenuTypes.CRYSTALLIZER.getType(), CrystallizerScreen::new);
-        MenuScreens.register(IGMenuTypes.CHEMICAL_REACTOR.getType(), ChemicalReactorScreen::new);
-        MenuScreens.register(IGMenuTypes.SMALL_CHEMICAL_REACTOR.getType(), SmallChemicalReactorScreen::new);
-        MenuScreens.register(IGMenuTypes.ROTARY_KILN.getType(), RotaryKilnScreen::new);
-        MenuScreens.register(IGMenuTypes.BULK_BLAST_FURNACE.getType(), BulkBlastFurnaceScreen::new);
-        MenuScreens.register(IGMenuTypes.FOUNDRY.getType(), FoundryScreen::new);
-        MenuScreens.register(IGMenuTypes.CRATE.get(), IGCrateScreen.StandardIGCrate::new);
-        MenuScreens.register(IGMenuTypes.METAL_DETECTOR.get(), IGMetalDetectorScreen::new);
+        IGLib.IG_LOGGER.info("- Container And Screen Registration");
+        event.register(IGMenuTypes.BLOOMERY.getType(), BloomeryScreen::new);
+        event.register(IGMenuTypes.REVERBERATION_FURNACE.getType(), ReverberationScreen::new);
+        event.register(IGMenuTypes.GEOTHERMAL_EXCHANGER.getType(), GeothermalExchangerScreen::new);
+        event.register(IGMenuTypes.CRYSTALLIZER.getType(), CrystallizerScreen::new);
+        event.register(IGMenuTypes.CHEMICAL_REACTOR.getType(), ChemicalReactorScreen::new);
+        event.register(IGMenuTypes.SMALL_CHEMICAL_REACTOR.getType(), SmallChemicalReactorScreen::new);
+        event.register(IGMenuTypes.ROTARY_KILN.getType(), RotaryKilnScreen::new);
+        event.register(IGMenuTypes.BULK_BLAST_FURNACE.getType(), BulkBlastFurnaceScreen::new);
+        event.register(IGMenuTypes.FOUNDRY.getType(), FoundryScreen::new);
+        event.register(IGMenuTypes.CRATE.get(), IGCrateScreen.StandardIGCrate::new);
+        event.register(IGMenuTypes.METAL_DETECTOR.get(), IGMetalDetectorScreen::new);
     }
 
     public static void initializeManualEntries()

@@ -29,10 +29,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.data.BlockTagsProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.List;
 import java.util.Locale;
@@ -55,7 +55,7 @@ public class IGBlockTags extends BlockTagsProvider
 	{
 
 		IGLib.IG_LOGGER.info("Started Registration of Immersive Geology Block Tags");
-		for(RegistryObject<Block> block : IGRegistrationHolder.getBlockRegistryMap().values())
+		for(DeferredHolder<Block, Block> block : IGRegistrationHolder.getBlockRegistryMap().values())
 		{
 			if(block.get() instanceof IGFluidBlock fluidBlock)
 			{

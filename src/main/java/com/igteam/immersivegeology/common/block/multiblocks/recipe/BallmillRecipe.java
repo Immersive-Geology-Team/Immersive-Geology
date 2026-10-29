@@ -21,12 +21,12 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.util.Lazy;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 public class BallmillRecipe extends MultiblockRecipe
 {
-	public static RegistryObject<IERecipeSerializer<BallmillRecipe>> SERIALIZER;
+	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<BallmillRecipe>> SERIALIZER;
 	public static final CachedRecipeList<BallmillRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.BALLMILL);
 	public final IngredientWithSize itemOutput;
 	public final IngredientWithSize itemIn;

@@ -21,12 +21,10 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraft.core.Direction;
-import net.minecraftforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -82,28 +80,18 @@ public class IGMetalDetectorItem extends BlockItem
 		return 0xD54B18;
 	}
 
-	@Nullable
-	@Override
-	public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable CompoundTag nbt)
+	public static void registerCapabilities(RegisterCapabilitiesEvent event, Item item)
 	{
-		return new EnergyProvider(stack);
+		event.registerItem(Capabilities.EnergyStorage.ITEM, (stack, context) -> new EnergyProvider(stack), item);
 	}
 
-	private static class EnergyProvider implements ICapabilityProvider, IEnergyStorage
+	private static class EnergyProvider implements IEnergyStorage
 	{
 		private final ItemStack stack;
-		private final LazyOptional<IEnergyStorage> capability = LazyOptional.of(() -> this);
 
 		private EnergyProvider(ItemStack stack)
 		{
 			this.stack = stack;
-		}
-
-		@NotNull
-		@Override
-		public <T> LazyOptional<T> getCapability(@NotNull Capability<T> capability, @Nullable Direction side)
-		{
-			return ForgeCapabilities.ENERGY.orEmpty(capability, this.capability);
 		}
 
 		@Override

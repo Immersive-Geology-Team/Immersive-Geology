@@ -22,8 +22,8 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
@@ -122,7 +122,7 @@ public abstract class IGRecipeMethod
 		fluid.draw(graphics);
 		if(mx > x && (x+w) > mx && my > y && (y+h) > my)
 		{
-			graphics.renderTooltip(Minecraft.getInstance().font, tank.getFluid().getDisplayName(), mx,my);
+			graphics.renderTooltip(Minecraft.getInstance().font, tank.getFluid().getHoverName(), mx,my);
 		}
 	}
 
@@ -136,7 +136,7 @@ public abstract class IGRecipeMethod
 		fluid.draw(graphics);
 		if(mx > x && (x+w) > mx && my > y && (y+h) > my)
 		{
-			graphics.renderTooltip(Minecraft.getInstance().font, tank.getFluid().getDisplayName(), mx,my);
+			graphics.renderTooltip(Minecraft.getInstance().font, tank.getFluid().getHoverName(), mx,my);
 		}
 	}
 
@@ -148,7 +148,7 @@ public abstract class IGRecipeMethod
 		fluid.draw(graphics);
 		if(mx > x && (x+w) > mx && my > y && (y+h) > my)
 		{
-			graphics.renderTooltip(Minecraft.getInstance().font, tank.getFluid().getDisplayName(), mx,my);
+			graphics.renderTooltip(Minecraft.getInstance().font, tank.getFluid().getHoverName(), mx,my);
 		}
 	}
 

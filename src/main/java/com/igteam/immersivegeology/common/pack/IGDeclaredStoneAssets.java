@@ -24,11 +24,11 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
@@ -92,14 +92,14 @@ public final class IGDeclaredStoneAssets
 		Map<String, String> lang = new TreeMap<>();
 		Set<String> stoneNames = new LinkedHashSet<>();
 
-		for(RegistryObject<Block> holder : IGRegistrationHolder.getBlockRegistryMap().values())
+		for(DeferredHolder<Block, Block> holder : IGRegistrationHolder.getBlockRegistryMap().values())
 		{
-			if(!holder.isPresent()) continue;
+			if(!holder.isBound()) continue;
 			Block block = holder.get();
 			if(!(block instanceof IOreBlock ore)) continue;
 			if(!(ore.getStoneMaterial().instance() instanceof ConfigMaterialStone)) continue;
 
-			ResourceLocation blockId = ForgeRegistries.BLOCKS.getKey(block);
+			ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(block);
 			if(blockId==null) continue;
 
 			assets.oreBlocks++;
@@ -267,7 +267,7 @@ public final class IGDeclaredStoneAssets
 
 	private static void writeLootTable(Assets assets, IOreBlock ore, ResourceLocation blockId)
 	{
-		String drop = ForgeRegistries.ITEMS.getKey(ore.getItemDrop().getItem())+"";
+		String drop = BuiltInRegistries.ITEM.getKey(ore.getItemDrop().getItem())+"";
 		int count = ore.getItemDrop().getCount();
 
 		JsonObject silkTouched = itemEntry(drop);
@@ -341,7 +341,7 @@ public final class IGDeclaredStoneAssets
 		String id = blockId.toString();
 		add(tags, ore.getOreMaterial().getBlockMaterialTag().location(), id);
 		add(tags, BlockCategoryFlags.ORE_BLOCK.getCategoryTag().location(), id);
-		add(tags, ResourceLocation.fromNamespaceAndPath("forge", "ores"), id);
+		add(tags, ResourceLocation.fromNamespaceAndPath("c", "ores"), id);
 		add(tags, ResourceLocation.fromNamespaceAndPath("minecraft", "mineable/pickaxe"), id);
 		add(tags, ResourceLocation.fromNamespaceAndPath("minecraft", "needs_stone_tool"), id);
 	}

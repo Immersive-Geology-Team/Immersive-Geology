@@ -19,7 +19,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -29,7 +29,7 @@ import java.util.function.Consumer;
 
 public class TFCDatagenCompat
 {
-	public static void runRecipeDatagen(IOreBlock oreBlock, RecipeOutput consumer, RegistryObject<Block> block, HolderLookup.Provider provider)
+	public static void runRecipeDatagen(IOreBlock oreBlock, RecipeOutput consumer, DeferredHolder<Block, Block> block, HolderLookup.Provider provider)
 	{
 		TFCCollapseRecipeBuilder.builder(Ingredient.of(oreBlock.asIGItem()), provider).build(consumer, ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "collapse/" + block.getId().getPath()));
 	}

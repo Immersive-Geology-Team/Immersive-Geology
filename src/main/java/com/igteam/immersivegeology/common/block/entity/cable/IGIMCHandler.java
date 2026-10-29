@@ -9,7 +9,7 @@
 package com.igteam.immersivegeology.common.block.entity.cable;
 
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.fml.InterModComms.IMCMessage;
+import net.neoforged.fml.InterModComms.IMCMessage;
 
 import java.util.HashMap;
 import java.util.function.Consumer;

@@ -15,7 +15,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.recipe.BasicChemical
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRecipe;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 public class BasicChemicalRecipeBuilder extends IEFinishedRecipe<BasicChemicalRecipeBuilder>
 {

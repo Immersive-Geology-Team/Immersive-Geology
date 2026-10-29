@@ -57,15 +57,13 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import java.util.*;
@@ -250,8 +248,8 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
                                           Level rawLevel, MutableBlockPos localPos, GeothermalExchangerRecipe exchangerRecipe) {
         GeothermalConversionRecipe recipe = helper.getRandomCellPosition(state, localPos);
         if(recipe == null) return false;
-        if(!exchangerRecipe.isCooling() && recipe.blockHeat >= exchangerRecipe.fluidOutput.get().getRawFluid().getFluidType().getTemperature()) return processConversionCell(helper, multiblockLevel, rawLevel, localPos, exchangerRecipe);
-        if(exchangerRecipe.isCooling() && recipe.blockHeat <= exchangerRecipe.fluidOutput.get().getRawFluid().getFluidType().getTemperature()) return processConversionCell(helper, multiblockLevel, rawLevel, localPos, exchangerRecipe);
+        if(!exchangerRecipe.isCooling() && recipe.blockHeat >= exchangerRecipe.fluidOutput.get().getFluid().getFluidType().getTemperature()) return processConversionCell(helper, multiblockLevel, rawLevel, localPos, exchangerRecipe);
+        if(exchangerRecipe.isCooling() && recipe.blockHeat <= exchangerRecipe.fluidOutput.get().getFluid().getFluidType().getTemperature()) return processConversionCell(helper, multiblockLevel, rawLevel, localPos, exchangerRecipe);
         return false;
 	}
 
@@ -444,7 +442,7 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
             );
 
 			assert FLUID_OUTPUT_CAP.side()!=null;
-			this.fluidOutput = context.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(FLUID_OUTPUT_CAP.side().getOpposite(), FLUID_OUTPUT_CAP.posInMultiblock().north()));
+			this.fluidOutput = context.getCapabilityAt(Capabilities.FluidHandler.BLOCK, new MultiblockFace(FLUID_OUTPUT_CAP.side().getOpposite(), FLUID_OUTPUT_CAP.posInMultiblock().north()));
             this.dummy = new InMachineProcessor<>(1, 0, 1, context.getMarkDirtyRunnable(), GeothermalExchangerRecipe.RECIPES::getById);
         }
 
@@ -461,7 +459,7 @@ public class GeothermalExchangerLogic implements IMultiblockLogic<GeothermalExch
             if(recipe == null) return false;
             int outputTemp = recipe.fluidOutput.get().getFluid().getFluidType().getTemperature();
             boolean isGoodTemperature = (recipe.isCooling() ? heat <= outputTemp: heat >= outputTemp);
-			return (output_tank.getFluid().isFluidEqual(recipe.fluidOutput.get()) || output_tank.isEmpty()) && output_tank.getSpace() >= recipe.fluidOutput.get().getAmount() && isGoodTemperature;
+			return (FluidStack.isSameFluidSameComponents(output_tank.getFluid(), recipe.fluidOutput.get()) || output_tank.isEmpty()) && output_tank.getSpace() >= recipe.fluidOutput.get().getAmount() && isGoodTemperature;
         }
 
         @Override

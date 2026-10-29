@@ -14,7 +14,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraftforge.fluids.FluidType.Properties;
+import net.neoforged.neoforge.fluids.FluidType.Properties;
 
 import java.util.function.BiFunction;
 

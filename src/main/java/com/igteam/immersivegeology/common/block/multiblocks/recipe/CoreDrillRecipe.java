@@ -18,18 +18,18 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.common.util.Lazy;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
 public class CoreDrillRecipe extends MultiblockRecipe
 {
-	public static RegistryObject<IERecipeSerializer<CoreDrillRecipe>> SERIALIZER;
+	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<CoreDrillRecipe>> SERIALIZER;
 	public static final CachedRecipeList<CoreDrillRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.COREDRILL);
 
 	FluidTagInput input;

@@ -12,12 +12,12 @@ import blusunrize.immersiveengineering.common.util.compat.jei.JEIHelper;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.FoundryRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
-import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.gui.GuiGraphics;
@@ -52,9 +52,9 @@ public class IGFoundryCategory extends IGRecipeCategory<FoundryRecipe>
 	{
 		builder.addSlot(RecipeIngredientRole.INPUT, FLUID_X, SLOT_Y)
 				.setFluidRenderer(recipe.fluidIn.getAmount(), false, 16, 16)
-				.addIngredients(ForgeTypes.FLUID_STACK, recipe.fluidIn.getMatchingFluidStacks())
+				.addIngredients(NeoForgeTypes.FLUID_STACK, recipe.fluidIn.getMatchingFluidStacks())
 				.setBackground(JEIHelper.slotDrawable, -1, -1)
-				.addTooltipCallback(JEIHelper.fluidTooltipCallback);
+				.addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
 
 		builder.addSlot(RecipeIngredientRole.CATALYST, MOLD_X, SLOT_Y)
 				.addItemStack(new ItemStack(recipe.mold))

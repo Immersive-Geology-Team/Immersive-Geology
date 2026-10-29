@@ -19,14 +19,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class BulkBlastFurnaceRecipe extends MultiblockRecipe
 {
-	public static RegistryObject<IERecipeSerializer<BulkBlastFurnaceRecipe>> SERIALIZER;
+	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<BulkBlastFurnaceRecipe>> SERIALIZER;
 	public static final CachedRecipeList<BulkBlastFurnaceRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.BULK_BLAST_FURNACE);
 
 	@Nullable

@@ -21,7 +21,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraftforge.common.Tags.Biomes;
+import net.neoforged.neoforge.common.Tags.Biomes;
 
 import java.util.Optional;
 

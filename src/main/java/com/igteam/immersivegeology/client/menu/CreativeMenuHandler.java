@@ -26,8 +26,9 @@ import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
-import net.minecraftforge.client.event.ScreenEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.client.event.ContainerScreenEvent;
+import net.neoforged.neoforge.client.event.ScreenEvent;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -42,8 +43,8 @@ public class CreativeMenuHandler {
     boolean jeiCompatUpdate = false;
 
     @SubscribeEvent
-    public void drawScreen(ScreenEvent.BackgroundRendered event) {
-        Screen screen = event.getScreen();
+    public void drawScreen(ContainerScreenEvent.Render.Background event) {
+        Screen screen = event.getContainerScreen();
         if(screen instanceof CreativeModeInventoryScreen) {
             CreativeModeInventoryScreen gui = (CreativeModeInventoryScreen) screen;
             int i = (int) (gui.getGuiLeft() - Math.floor(136*1.425));
@@ -51,7 +52,7 @@ public class CreativeMenuHandler {
 
             CreativeModeTab igTab = IGRegistrationHolder.IG_BASE_TAB.get();
             if(selectedTab.equals(igTab)) {
-                if(reset) screen.resize(event.getScreen().getMinecraft(), screen.width, screen.height);
+                if(reset) screen.resize(event.getContainerScreen().getMinecraft(), screen.width, screen.height);
                 if(!jeiCompatUpdate) {
                     // When JEI loads it takes the display items available by default.
                     // We need all items for this cause, by the time it gets to here however we don't want to display

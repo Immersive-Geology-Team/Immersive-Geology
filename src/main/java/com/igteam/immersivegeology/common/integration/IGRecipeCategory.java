@@ -11,11 +11,13 @@ package com.igteam.immersivegeology.common.integration;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
@@ -39,9 +41,21 @@ public abstract class IGRecipeCategory<T> implements IRecipeCategory<T>
 	}
 
 	@Override
-	public IDrawable getBackground()
+	public int getWidth()
 	{
-		return this.background;
+		return this.background.getWidth();
+	}
+
+	@Override
+	public int getHeight()
+	{
+		return this.background.getHeight();
+	}
+
+	@Override
+	public void draw(T recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY)
+	{
+		this.background.draw(guiGraphics);
 	}
 
 	protected void setBackground(IDrawableStatic background)

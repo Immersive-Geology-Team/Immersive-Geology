@@ -11,8 +11,8 @@ package com.igteam.immersivegeology.common.data.generators;
 import com.igteam.immersivegeology.common.data.TRSRModelBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.client.model.generators.ModelProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.client.model.generators.ModelProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public abstract class IGTRSRItemModelProvider extends ModelProvider<TRSRModelBuilder>
 {

@@ -10,23 +10,24 @@ package com.igteam.immersivegeology.common.loot;
 
 import com.igteam.immersivegeology.common.block.multiblocks.skins.IGChemicalReactorSkins;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraftforge.common.loot.IGlobalLootModifier;
-import net.minecraftforge.common.loot.LootModifier;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
+import net.neoforged.neoforge.common.loot.LootModifier;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class IGLootModifier extends LootModifier
 {
-	public static final Codec<IGLootModifier> CODEC = RecordCodecBuilder.create(inst -> codecStart(inst).and(
-			ForgeRegistries.ITEMS.getCodec().listOf().fieldOf("items").forGetter(m -> m.item_pool)
+	public static final MapCodec<IGLootModifier> CODEC = RecordCodecBuilder.mapCodec(inst -> codecStart(inst).and(
+			BuiltInRegistries.ITEM.byNameCodec().listOf().fieldOf("items").forGetter(m -> m.item_pool)
 	).apply(inst, IGLootModifier::new));
 
 	private final List<Item> item_pool;
@@ -51,7 +52,7 @@ public class IGLootModifier extends LootModifier
 	}
 
 	@Override
-	public Codec<? extends IGlobalLootModifier> codec()
+	public MapCodec<? extends IGlobalLootModifier> codec()
 	{
 		return CODEC;
 	}

@@ -78,18 +78,16 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.ItemHandlerHelper;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.IFluidTank;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -156,7 +154,7 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
                 final ItemStack nextStack = state.inventory.getStackInSlot(j);
                 if(nextStack.isEmpty())
                     continue;
-                ItemStack stack = ItemHandlerHelper.copyStackWithSize(nextStack, 1);
+                ItemStack stack = nextStack.copyWithCount(1);
                 stack = ItemHandlerHelper.insertItem(outputHandlerLeft, stack, false);
                 if(stack.isEmpty())
                     nextStack.shrink(1);
@@ -169,7 +167,7 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
                 final ItemStack nextStack = state.inventory.getStackInSlot(j);
                 if(nextStack.isEmpty())
                     continue;
-                ItemStack stack = ItemHandlerHelper.copyStackWithSize(nextStack, 1);
+                ItemStack stack = nextStack.copyWithCount(1);
                 stack = ItemHandlerHelper.insertItem(outputHandlerRight, stack, false);
                 if(stack.isEmpty())
                     nextStack.shrink(1);
@@ -316,11 +314,11 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
                     IOConstraint.OUTPUT
             ), ctx.getMarkDirtyRunnable());
 
-            this.outputLeft = ctx.getCapabilityAt(ForgeCapabilities.ITEM_HANDLER, SLOT_1_OUTPUT_POSITION);
-            this.outputRight = ctx.getCapabilityAt(ForgeCapabilities.ITEM_HANDLER, SLOT_2_OUTPUT_POSITION);
+            this.outputLeft = ctx.getCapabilityAt(Capabilities.ItemHandler.BLOCK, SLOT_1_OUTPUT_POSITION);
+            this.outputRight = ctx.getCapabilityAt(Capabilities.ItemHandler.BLOCK, SLOT_2_OUTPUT_POSITION);
 
-            this.fluidOutput1 = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(SLOT_1_OUTPUT_FLUID.side(), SLOT_1_OUTPUT_FLUID.posInMultiblock().above()));
-            this.fluidOutput2 = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(SLOT_2_OUTPUT_FLUID.side(), SLOT_2_OUTPUT_FLUID.posInMultiblock().above()));
+            this.fluidOutput1 = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, new MultiblockFace(SLOT_1_OUTPUT_FLUID.side(), SLOT_1_OUTPUT_FLUID.posInMultiblock().above()));
+            this.fluidOutput2 = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, new MultiblockFace(SLOT_2_OUTPUT_FLUID.side(), SLOT_2_OUTPUT_FLUID.posInMultiblock().above()));
 
             this.outputHandlerLeft = new StoredCapability<>(new WrappingItemHandler(
                     inventory, false, true, new IntRange(2,3)

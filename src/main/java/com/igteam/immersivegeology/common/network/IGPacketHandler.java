@@ -4,16 +4,20 @@ import blusunrize.immersiveengineering.common.network.IMessage;
 import blusunrize.immersiveengineering.common.network.MessageMagnetEquip;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.PacketFlow;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.NetworkEvent;
-import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.network.simple.SimpleChannel;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 import javax.annotation.Nonnull;
 import java.util.HashSet;
@@ -24,38 +28,48 @@ import java.util.function.Function;
 public class IGPacketHandler
 {
 	public static final String NET_VERSION = "1";
-	public static final SimpleChannel INSTANCE = NetworkRegistry.ChannelBuilder
-			.named(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "main"))
-			.networkProtocolVersion(() -> NET_VERSION)
-			.serverAcceptedVersions(NET_VERSION::equals)
-			.clientAcceptedVersions(NET_VERSION::equals)
-			.simpleChannel();
+	private record ProtocolMarker() implements INetMessage {
+		private static final Type<ProtocolMarker> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "main"));
+		private static final StreamCodec<RegistryFriendlyByteBuf, ProtocolMarker> CODEC = StreamCodec.unit(new ProtocolMarker());
 
-	private final Set<Class<?>> knownPacketTypes = new HashSet();
-	private int messageId = 0;
+		@Override
+		public Type<ProtocolMarker> type() {
+			return TYPE;
+		}
+
+		@Override
+		public void process(IPayloadContext context) {
+		}
+	}
+
+	private final Set<CustomPacketPayload.Type<?>> knownPacketTypes = new HashSet<>();
 
 	private static final IGPacketHandler handler = new IGPacketHandler();
 
-	public static void initialize()
+	public static void initialize(RegisterPayloadHandlersEvent event)
 	{
+		PayloadRegistrar registrar = event.registrar(NET_VERSION);
+		handler.registerMessage(registrar, ProtocolMarker.TYPE, ProtocolMarker.CODEC);
 	}
 
-	private <T extends IMessage> void registerMessage(Class<T> packetType, Function<FriendlyByteBuf, T> decoder) {
-		this.registerMessage(packetType, decoder, Optional.empty());
+	private <T extends INetMessage> void registerMessage(PayloadRegistrar registrar, CustomPacketPayload.Type<T> packetType, StreamCodec<? super RegistryFriendlyByteBuf, T> codec) {
+		this.registerMessage(registrar, packetType, codec, Optional.empty());
 	}
 
-	private <T extends IMessage> void registerMessage(Class<T> packetType, Function<FriendlyByteBuf, T> decoder, NetworkDirection direction) {
-		this.registerMessage(packetType, decoder, Optional.of(direction));
+	private <T extends INetMessage> void registerMessage(PayloadRegistrar registrar, CustomPacketPayload.Type<T> packetType, StreamCodec<? super RegistryFriendlyByteBuf, T> codec, PacketFlow direction) {
+		this.registerMessage(registrar, packetType, codec, Optional.of(direction));
 	}
 
-	private <T extends IMessage> void registerMessage(Class<T> packetType, Function<FriendlyByteBuf, T> decoder, Optional<NetworkDirection> direction) {
+	private <T extends INetMessage> void registerMessage(PayloadRegistrar registrar, CustomPacketPayload.Type<T> packetType, StreamCodec<? super RegistryFriendlyByteBuf, T> codec, Optional<PacketFlow> direction) {
 		if (!this.knownPacketTypes.add(packetType)) {
-			throw new IllegalStateException("Duplicate packet type: " + packetType.getName());
+			throw new IllegalStateException("Duplicate packet type: " + packetType.id());
 		} else {
-			INSTANCE.registerMessage(this.messageId++, packetType, IMessage::toBytes, decoder, (t, ctx) -> {
-				t.process(ctx);
-				((NetworkEvent.Context)ctx.get()).setPacketHandled(true);
-			}, direction);
+			if(direction.isEmpty())
+				registrar.playBidirectional(packetType, codec, T::process);
+			else if(direction.get()==PacketFlow.CLIENTBOUND)
+				registrar.playToClient(packetType, codec, T::process);
+			else if(direction.get()==PacketFlow.SERVERBOUND)
+				registrar.playToServer(packetType, codec, T::process);
 		}
 	}
 
@@ -65,18 +79,18 @@ public class IGPacketHandler
 	 * @param player  The {@link Player} to send to
 	 * @param message The message to send
 	 */
-	public static <MSG> void sendToPlayer(Player player, @Nonnull MSG message){
+	public static <MSG extends CustomPacketPayload> void sendToPlayer(Player player, @Nonnull MSG message){
 		if(message != null && player instanceof ServerPlayer serverPlayer){
-			INSTANCE.send(PacketDistributor.PLAYER.with(() -> serverPlayer), message);
+			PacketDistributor.sendToPlayer(serverPlayer, message);
 		}
 	}
 
 	/** Client -> Server */
-	public static <MSG> void sendToServer(MSG message){
+	public static <MSG extends CustomPacketPayload> void sendToServer(MSG message){
 		if(message == null)
 			return;
 
-		INSTANCE.send(PacketDistributor.SERVER.noArg(), message);
+		PacketDistributor.sendToServer(message);
 	}
 
 	/**
@@ -86,17 +100,17 @@ public class IGPacketHandler
 	 * Server -> Client
 	 * </pre>
 	 */
-	public static <MSG> void sendToDimension(ResourceKey<Level> dim, MSG message){
+	public static <MSG extends CustomPacketPayload> void sendToDimension(ServerLevel dim, MSG message){
 		if(message == null)
 			return;
 
-		INSTANCE.send(PacketDistributor.DIMENSION.with(() -> dim), message);
+		PacketDistributor.sendToPlayersInDimension(dim, message);
 	}
 
-	public static <MSG> void sendAll(MSG message){
+	public static <MSG extends CustomPacketPayload> void sendAll(MSG message){
 		if(message == null)
 			return;
 
-		INSTANCE.send(PacketDistributor.ALL.noArg(), message);
+		PacketDistributor.sendToAllPlayers(message);
 	}
 }

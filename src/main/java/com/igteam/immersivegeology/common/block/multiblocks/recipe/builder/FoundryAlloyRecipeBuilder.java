@@ -13,8 +13,8 @@ import blusunrize.immersiveengineering.api.crafting.builders.IEFinishedRecipe;
 import com.google.gson.JsonArray;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.FoundryAlloyRecipe;
 import net.minecraft.tags.TagKey;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraft.world.level.material.Fluid;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 public class FoundryAlloyRecipeBuilder extends IEFinishedRecipe<FoundryAlloyRecipeBuilder>
 {

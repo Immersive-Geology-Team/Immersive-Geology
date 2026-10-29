@@ -46,17 +46,15 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -222,7 +220,7 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
         if(units <= 0||!hasAlloySpace(state, recipe.alloyOutput)) return false;
 
         for(FluidTagInput input : recipe.alloyInputs) drainInput(state, input, input.getAmount()*units);
-        state.alloyResult = new FluidStack(recipe.alloyOutput, perUnit*units);
+        state.alloyResult = recipe.alloyOutput.copyWithAmount(perUnit*units);
         state.alloyTicks = 0;
         state.alloyTotalTicks = Math.max(1, recipe.getTotalProcessTime());
         state.alloyEnergyPerTick = Math.max(1, energyPerTick(recipe.getTotalProcessEnergy()*units, recipe.getTotalProcessTime()));
@@ -232,7 +230,7 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
     private boolean hasAlloySpace(State state, FluidStack alloy)
     {
         for(FluidTank tank : state.tanks)
-            if(tank.getFluid().isEmpty()||tank.getFluid().isFluidEqual(alloy)) return true;
+            if(tank.getFluid().isEmpty()||FluidStack.isSameFluidSameComponents(tank.getFluid(), alloy)) return true;
         return false;
     }
 
@@ -260,8 +258,8 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
         {
             if(filled >= fluid.getAmount()) break;
             FluidStack present = tank.getFluid();
-            if(present.isEmpty()?!useEmpty: !present.isFluidEqual(fluid)) continue;
-            filled += tank.fill(new FluidStack(fluid, fluid.getAmount()-filled), FluidAction.EXECUTE);
+            if(present.isEmpty()?!useEmpty: !FluidStack.isSameFluidSameComponents(present, fluid)) continue;
+            filled += tank.fill(fluid.copyWithAmount(fluid.getAmount()-filled), FluidAction.EXECUTE);
         }
         return filled;
     }
@@ -450,7 +448,7 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
         public State(IInitialMultiblockContext<State> ctx)
         {
             this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.energy));
-            this.output = ctx.getCapabilityAt(ForgeCapabilities.ITEM_HANDLER, OUTPUT_POS);
+            this.output = ctx.getCapabilityAt(Capabilities.ItemHandler.BLOCK, OUTPUT_POS);
             this.inventory = SlotwiseItemHandler.makeWithGroups(
                     List.of(
                             new SlotwiseItemHandler.IOConstraintGroup(new IOConstraint(true, FoundryLogic::isMold), 1),
@@ -567,7 +565,7 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
                 for(int j = i+1; j < tanks.length; j++)
                 {
                     FluidStack other = tanks[j].getFluid();
-                    if(other.isEmpty()||!other.isFluidEqual(kept)) continue;
+                    if(other.isEmpty()||!FluidStack.isSameFluidSameComponents(other, kept)) continue;
                     kept.grow(other.getAmount());
                     tanks[j].setFluid(FluidStack.EMPTY);
                 }

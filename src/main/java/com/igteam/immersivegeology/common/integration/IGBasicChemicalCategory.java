@@ -14,18 +14,19 @@ import com.igteam.immersivegeology.common.block.multiblocks.recipe.BasicChemical
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
-import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.FluidType;
 
 import java.util.List;
 
@@ -67,8 +68,8 @@ public class IGBasicChemicalCategory extends IGRecipeCategory<BasicChemicalRecip
 		{
 			builder.addSlot(RecipeIngredientRole.INPUT, tank_pos_list.get(i), tank_pos_list.get(i+1))
 					.setFluidRenderer(FluidType.BUCKET_VOLUME * 2, false, 10, 28)
-					.addIngredients(ForgeTypes.FLUID_STACK, fluid_tag.getMatchingFluidStacks())
-					.addTooltipCallback(JEIHelper.fluidTooltipCallback);
+					.addIngredients(NeoForgeTypes.FLUID_STACK, fluid_tag.getMatchingFluidStacks())
+					.addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
 			i = i + 2;
 		}
 
@@ -77,7 +78,7 @@ public class IGBasicChemicalCategory extends IGRecipeCategory<BasicChemicalRecip
 			builder.addSlot(RecipeIngredientRole.OUTPUT, 35, 66)
 					.setFluidRenderer(FluidType.BUCKET_VOLUME*2, false, 10, 28)
 					.addFluidStack(recipe.fluidOutput.getFluid(), recipe.fluidOutput.getAmount())
-					.addTooltipCallback(JEIHelper.fluidTooltipCallback);
+					.addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
 		}
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 55, 77)
 				.addItemStack(recipe.itemOutput);
@@ -101,25 +102,25 @@ public class IGBasicChemicalCategory extends IGRecipeCategory<BasicChemicalRecip
 	}
 
 	@Override
-	public List<Component> getTooltipStrings(BasicChemicalRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY)
+	public void getTooltip(ITooltipBuilder tooltip, BasicChemicalRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY)
 	{
 		int rate = recipe.getDamagePerTick();
 		if(rate <= 0)
-			return List.of();
+			return;
 
 		int width = badgeWidth();
 		boolean overBadge = mouseX >= BADGE_X&&mouseX < BADGE_X+width
 				&&mouseY >= BADGE_Y&&mouseY < BADGE_Y+BADGE_HEIGHT;
 		if(!overBadge)
-			return List.of();
+			return;
 
 		ChatFormatting accent = rate >= SEVERE_RATE?ChatFormatting.RED: ChatFormatting.GOLD;
-		return List.of(
+		tooltip.addAll(List.of(
 				Component.translatable("jei.immersivegeology.caustic.title").withStyle(accent, ChatFormatting.BOLD),
 				Component.translatable("jei.immersivegeology.caustic.rate", rate).withStyle(ChatFormatting.GRAY),
 				Component.translatable("jei.immersivegeology.caustic.seize", secondsUntilSeized(rate)).withStyle(ChatFormatting.GRAY),
 				Component.translatable("jei.immersivegeology.caustic.repair").withStyle(ChatFormatting.DARK_GRAY)
-		);
+		));
 	}
 
 	private int badgeWidth()

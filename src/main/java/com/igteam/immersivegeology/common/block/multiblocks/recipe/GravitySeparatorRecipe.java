@@ -20,12 +20,12 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.util.Lazy;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 public class GravitySeparatorRecipe extends MultiblockRecipe
 {
-	public static RegistryObject<IERecipeSerializer<GravitySeparatorRecipe>> SERIALIZER;
+	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<GravitySeparatorRecipe>> SERIALIZER;
 	public static final CachedRecipeList<GravitySeparatorRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.GRAVITYSEPARATOR);
 	public final Lazy<ItemStack> itemOutput;
 	public final Lazy<ItemStack> itemByproduct;

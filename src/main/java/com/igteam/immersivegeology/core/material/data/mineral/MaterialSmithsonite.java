@@ -15,7 +15,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.Tags.Biomes;
+import net.neoforged.neoforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
 import java.util.List;

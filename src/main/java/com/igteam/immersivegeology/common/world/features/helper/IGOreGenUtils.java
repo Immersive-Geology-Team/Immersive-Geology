@@ -35,7 +35,6 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
-import net.minecraftforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 
 public class IGOreGenUtils

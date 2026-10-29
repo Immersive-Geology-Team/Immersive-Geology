@@ -61,7 +61,7 @@ configurations { atCli }
 def atFile = file('src/main/resources/META-INF/accesstransformer.cfg')
 def neoForgeVersionForAt = project.version_neo.toString()
 def neoForgeInputJar = configurations.compileClasspath.filter {
-    it.name == "neoforge-${neoForgeVersionForAt}.jar"
+    it.name == "neoforge-${neoForgeVersionForAt}.jar" || it.name == "neoforge-${neoForgeVersionForAt}-merged.jar"
 }
 def patchedNeoForgeJar = layout.buildDirectory.file('atCompileJar/neoforge-at.jar')
 
@@ -140,6 +140,7 @@ neoForge {
         minecraftVersion = project.version_minecraft
     }
     ideSyncTask generateModMetadata
+    ideSyncTask patchNeoForgeJar
     // Default is false; do not set to true since MDG cannot validate AT targets in NeoForge classes.
     // validateAccessTransformers = false
     runs {
@@ -192,6 +193,7 @@ repositories {
 }
 
 dependencies {
+    datagenCompileOnly files(patchNeoForgeJar)
     atCli                 "net.neoforged.accesstransformers:at-cli:13.0.1:fatjar"
     compileOnly           "mezz.jei:jei-${version_minecraft}-neoforge-api:${version_jei}"
     compileOnly           "mezz.jei:jei-${version_minecraft}-common-api:${version_jei}"

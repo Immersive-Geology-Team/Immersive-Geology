@@ -9,15 +9,13 @@
 package com.igteam.immersivegeology.common.config;
 
 import com.igteam.immersivegeology.core.lib.IGLib;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
-import net.minecraftforge.common.ForgeConfigSpec.Builder;
-import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec.BooleanValue;
+import net.neoforged.neoforge.common.ModConfigSpec.DoubleValue;
 
-@EventBusSubscriber(value = Dist.CLIENT, modid = IGLib.MODID, bus = Bus.MOD)
+@EventBusSubscriber(value = Dist.CLIENT, modid = IGLib.MODID)
 public class IGClientConfig
 {
 	public final static DoubleValue multiblockSpecialRenderDistanceModifier;
@@ -31,11 +29,11 @@ public class IGClientConfig
 	public final static BooleanValue doSpecialRenderCentrifuge;
 	public final static BooleanValue doSpecialRenderBallmill;
 
-	public static final ForgeConfigSpec CONFIG_SPEC;
+	public static final ModConfigSpec CONFIG_SPEC;
 
 	static
 	{
-		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+		ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
 		multiblockSpecialRenderDistanceModifier = builder.comment("This modifies the distance a special multiblock renderer is visible from Default is 2.5").defineInRange("multiblockSpecialRenderDistanceModifier", 2.5, 0, Double.MAX_VALUE);
 
 		doSpecialRenderGravitySeparator = builder

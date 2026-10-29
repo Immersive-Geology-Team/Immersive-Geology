@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -35,7 +35,7 @@ public class IGCrateEntityType extends IEEntityBlock<IGCrateEntity> implements I
 	protected final Map<MaterialTexture, MaterialInterface<?>> materialMap = new HashMap<>();
 	protected final BlockCategoryFlags category;
 
-	public IGCrateEntityType(BlockCategoryFlags flag, MaterialInterface<?> material, RegistryObject<BlockEntityType<IGCrateEntity>> type)
+	public IGCrateEntityType(BlockCategoryFlags flag, MaterialInterface<?> material, DeferredHolder<BlockEntityType<?>, BlockEntityType<IGCrateEntity>> type)
 	{
 		super(type, Properties.of().sound(SoundType.NETHERITE_BLOCK).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(5,2000), false);
 		this.materialMap.put(MaterialTexture.base, material);

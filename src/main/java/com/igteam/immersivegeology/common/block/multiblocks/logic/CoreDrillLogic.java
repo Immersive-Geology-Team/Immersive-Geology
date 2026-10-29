@@ -52,18 +52,15 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.stringtemplate.v4.ST;
 
 import java.util.List;
 import java.util.Random;
@@ -409,7 +406,7 @@ public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServer
         public State(IInitialMultiblockContext<State> ctx){
             // This is selected the Block connected to the output side
             // Allows us to 'fill' it
-            this.fluidOutput = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, FLUID_OUTPUT.face().offsetRelative(FLUID_OUTPUT.posInMultiblock(), 1), FLUID_OUTPUT.face());
+            this.fluidOutput = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, FLUID_OUTPUT.face().offsetRelative(FLUID_OUTPUT.posInMultiblock(), 1), FLUID_OUTPUT.face());
             this.processor = new MultiblockProcessor<>(2048, 0, 1, ctx.getMarkDirtyRunnable(), CoreDrillRecipe.RECIPES::getById);
             this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.energy));
             Runnable changedAndSync = () -> {

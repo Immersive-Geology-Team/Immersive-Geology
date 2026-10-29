@@ -17,16 +17,16 @@ import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
 import com.igteam.immersivegeology.core.material.data.stone.IGStoneTypes;
-import net.minecraftforge.event.AddPackFindersEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.AddPackFindersEvent;
 
 import java.util.Optional;
 
 /**
  * Puts {@link IGDeclaredStonePack} in front of the resource and data pack stacks.
  */
-@Mod.EventBusSubscriber(modid = IGLib.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = IGLib.MODID)
 public class IGPackFinder
 {
 	@SubscribeEvent

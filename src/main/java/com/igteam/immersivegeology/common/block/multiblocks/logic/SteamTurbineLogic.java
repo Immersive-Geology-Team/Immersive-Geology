@@ -44,15 +44,11 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -246,8 +242,8 @@ public class SteamTurbineLogic implements ISkinnableMultiblockLogic<State>, MBOv
             this.steamFluidCap = new StoredCapability<>(new ArrayFluidHandler(steam_tank, true, true, changedAndSync));
             this.waterFluidCap = new StoredCapability<>(new ArrayFluidHandler(water_tank, true, false, changedAndSync));
             ImmutableList.Builder<CapabilityReference<IFluidHandler>> outputs = ImmutableList.builder();
-            outputs.add(ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, FLUID_OUTPUT_A.posInMultiblock().east(), FLUID_OUTPUT_A.side()));
-            outputs.add(ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, FLUID_OUTPUT_B.posInMultiblock().west(), FLUID_OUTPUT_B.side()));
+            outputs.add(ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, FLUID_OUTPUT_A.posInMultiblock().east(), FLUID_OUTPUT_A.side()));
+            outputs.add(ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, FLUID_OUTPUT_B.posInMultiblock().west(), FLUID_OUTPUT_B.side()));
 
             this.outputCap = ctx.getCapabilityAt(IRotationAcceptor.CAPABILITY, ROTATION_OUTPUT.posInMultiblock().offset(0,0,-1), ROTATION_OUTPUT.side());
 

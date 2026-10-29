@@ -51,10 +51,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
+import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -66,12 +63,12 @@ public class IGCrateEntity extends RandomizableContainerBlockEntity implements I
 	public static final int CONTAINER_SIZE = 36;
 	private NonNullList<ItemStack> inventory;
 	private ItemEnchantments enchantments = ItemEnchantments.EMPTY;
-	private final LazyOptional<IItemHandler> inventoryCap;
+	private final IItemHandler inventoryCap;
 
 	public IGCrateEntity(BlockPos pos, BlockState state) {
 		super(resolveEntityType(state), pos, state);
 		this.inventory = NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY);
-		this.inventoryCap = CapabilityUtils.constantOptional(new IEInventoryHandler(CONTAINER_SIZE, this));
+		this.inventoryCap = new IEInventoryHandler(CONTAINER_SIZE, this);
 	}
 
 	private static BlockEntityType<?> resolveEntityType(BlockState state) {
@@ -220,14 +217,8 @@ public class IGCrateEntity extends RandomizableContainerBlockEntity implements I
 		this.enchantments = stack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
 	}
 
-	@Nonnull
-	public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-		return cap == ForgeCapabilities.ITEM_HANDLER ? this.inventoryCap.cast() : super.getCapability(cap, side);
-	}
-
-	public void invalidateCaps() {
-		super.invalidateCaps();
-		this.inventoryCap.invalidate();
+	public IItemHandler getInventoryCap() {
+		return this.inventoryCap;
 	}
 
 	public boolean canPlaceItem(int index, ItemStack stack) {

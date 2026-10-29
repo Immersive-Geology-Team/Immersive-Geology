@@ -27,9 +27,9 @@ import net.minecraft.gametest.framework.TestFunction;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
+import net.neoforged.neoforge.capabilities.BlockCapability;
+import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.LogEvent;
@@ -42,13 +42,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CapabilityLifecycleTests
 {
 	private static final String LEAK_MESSAGE = "is still marked as valid";
 
-	private static final List<Capability<?>> WATCHED = List.of(
-			ForgeCapabilities.FLUID_HANDLER, ForgeCapabilities.ITEM_HANDLER, ForgeCapabilities.ENERGY
+	private static final List<BlockCapability<?, Direction>> WATCHED = List.of(
+			Capabilities.FluidHandler.BLOCK, Capabilities.ItemHandler.BLOCK, Capabilities.EnergyStorage.BLOCK
 	);
 
 	public static List<TestFunction> all()
@@ -97,13 +98,13 @@ public class CapabilityLifecycleTests
 							if(anchor!=null) poll(helper, anchor);
 
 							for(Held h : held)
-								if(h.provider().isRemoved()&&h.optional().isPresent())
-									helper.fail(h.describe()+" outlived its block entity - a capability "
-											+"was re-registered during teardown");
+								if(h.provider().isRemoved()&&!h.invalidated().get())
+									helper.fail(h.describe()+" outlived its block entity - a capability cache "
+											+"was not invalidated during teardown");
 
 							List<String> leaks = watcher.captured();
 							if(!leaks.isEmpty())
-								helper.fail("Leaked capability reported: "+leaks.get(0));
+								helper.fail("Leaked capability reported: "+leaks.getFirst());
 
 							helper.succeed();
 						}
@@ -129,7 +130,7 @@ public class CapabilityLifecycleTests
 
 	private static void poll(GameTestHelper helper, Anchor anchor)
 	{
-		if(helper.getBlockEntity(anchor.pipePos()) instanceof IGEnergyPipeEntity pipe)
+		if(helper.getLevel().getBlockEntity(helper.absolutePos(anchor.pipePos())) instanceof IGEnergyPipeEntity pipe)
 			pipe.updateConnectionByte(anchor.towardsReactor());
 	}
 
@@ -142,13 +143,13 @@ public class CapabilityLifecycleTests
 
 		for(BlockPos pos : BlockPos.betweenClosed(BlockPos.ZERO, new BlockPos(size).offset(1, 1, 1)))
 		{
-			BlockEntity be = helper.getBlockEntity(pos);
+			BlockEntity be = helper.getLevel().getBlockEntity(helper.absolutePos(pos));
 			if(be == null)
 				continue;
 
 			for(Direction side : Direction.values())
 			{
-				if(!be.getCapability(ForgeCapabilities.ENERGY, side).isPresent())
+				if(helper.getLevel().getCapability(Capabilities.EnergyStorage.BLOCK, be.getBlockPos(), side) == null)
 					continue;
 
 				BlockPos pipePos = pos.relative(side);
@@ -183,16 +184,24 @@ public class CapabilityLifecycleTests
 		List<Held> held = new ArrayList<>();
 		for(BlockPos pos : BlockPos.betweenClosed(BlockPos.ZERO, new BlockPos(size).offset(1, 1, 1)))
 		{
-			BlockEntity be = helper.getBlockEntity(pos);
+			BlockEntity be = helper.getLevel().getBlockEntity(helper.absolutePos(pos));
 			if(be == null||be instanceof IGEnergyPipeEntity)
 				continue;
 
-			for(Capability<?> cap : WATCHED)
+			for(BlockCapability<?, Direction> cap : WATCHED)
 				for(Direction side : Direction.values())
 				{
-					LazyOptional<?> opt = be.getCapability(cap, side);
-					if(opt.isPresent())
-						held.add(new Held(be, cap, side, opt));
+					AtomicBoolean invalidated = new AtomicBoolean();
+					BlockCapabilityCache<?, Direction> cache = BlockCapabilityCache.create(
+							cap,
+							helper.getLevel(),
+							be.getBlockPos(),
+							side,
+							() -> true,
+							() -> invalidated.set(true)
+					);
+					if(cache.getCapability()!=null)
+						held.add(new Held(be, cap, side, cache, invalidated));
 				}
 		}
 		return held;
@@ -200,11 +209,11 @@ public class CapabilityLifecycleTests
 
 	private record Anchor(BlockPos pipePos, Direction towardsReactor) {}
 
-	private record Held(BlockEntity provider, Capability<?> capability, Direction side, LazyOptional<?> optional)
+	private record Held(BlockEntity provider, BlockCapability<?, Direction> capability, Direction side, BlockCapabilityCache<?, Direction> cache, AtomicBoolean invalidated)
 	{
 		String describe()
 		{
-			return capability.getName()+" on "+provider.getClass().getSimpleName()
+			return capability.name()+" on "+provider.getClass().getSimpleName()
 					+" at "+provider.getBlockPos()+" side "+side;
 		}
 	}

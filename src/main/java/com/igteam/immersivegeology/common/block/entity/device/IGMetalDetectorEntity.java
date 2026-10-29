@@ -47,11 +47,7 @@ import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -87,7 +83,6 @@ public class IGMetalDetectorEntity extends IEBaseBlockEntity implements IEServer
 	private static volatile List<MaterialInterface<?>> knownMaterials;
 
 	public final MutableEnergyStorage energyStorage = new MutableEnergyStorage(ENERGY_CAPACITY, ENERGY_MAX_INPUT, 0);
-	private final ResettableCapability<IEnergyStorage> energyCap = registerCapability(energyStorage);
 
 	private byte[] radar = new byte[RADAR_SIZE*RADAR_SIZE];
 
@@ -508,14 +503,6 @@ public class IGMetalDetectorEntity extends IEBaseBlockEntity implements IEServer
 	private boolean isDormant()
 	{
 		return idle&&burstRemaining <= 0;
-	}
-
-	@NotNull
-	@Override
-	public <T> LazyOptional<T> getCapability(@NotNull Capability<T> capability, @Nullable Direction side)
-	{
-		if(capability==ForgeCapabilities.ENERGY&&acceptsEnergyOn(side)) return energyCap.cast();
-		return super.getCapability(capability, side);
 	}
 
 	public boolean acceptsEnergyOn(@Nullable Direction side)

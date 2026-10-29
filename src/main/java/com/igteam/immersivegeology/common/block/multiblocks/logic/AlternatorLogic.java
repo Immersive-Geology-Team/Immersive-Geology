@@ -36,10 +36,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -164,7 +162,7 @@ public class AlternatorLogic implements ISkinnableMultiblockLogic<AlternatorLogi
             ImmutableList.Builder<CapabilityReference<IEnergyStorage>> outputs = ImmutableList.builder();
             for(BlockPos pos : AlternatorLogic.ENERGY_OUTPUTS)
             {
-                outputs.add(ctx.getCapabilityAt(ForgeCapabilities.ENERGY, pos, RelativeBlockFace.RIGHT));
+                outputs.add(ctx.getCapabilityAt(Capabilities.EnergyStorage.BLOCK, pos, RelativeBlockFace.RIGHT));
             }
 
             this.energyOutputs = outputs.build();

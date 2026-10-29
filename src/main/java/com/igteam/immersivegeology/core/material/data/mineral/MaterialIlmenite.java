@@ -12,7 +12,7 @@ import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
-import net.minecraftforge.common.Tags.Biomes;
+import net.neoforged.neoforge.common.Tags.Biomes;
 
 import java.util.LinkedHashSet;
 import java.util.List;

@@ -8,7 +8,7 @@
 
 package com.igteam.immersivegeology.common.block.helper;
 
-import net.minecraftforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.energy.IEnergyStorage;
 
 public class IGReceiveOnlyEnergy implements IEnergyStorage
 {

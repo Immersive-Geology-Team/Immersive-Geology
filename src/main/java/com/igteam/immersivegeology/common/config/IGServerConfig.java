@@ -20,29 +20,28 @@ import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialEvaporateMineral;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.IntValue;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.config.ModConfigEvent;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec.IntValue;
 
 import java.util.*;
 
-@EventBusSubscriber(modid = IGLib.MODID, bus = Bus.MOD)
+@EventBusSubscriber(modid = IGLib.MODID)
 public class IGServerConfig
 {
-	public static final ForgeConfigSpec CONFIG_SPEC;
+	public static final ModConfigSpec CONFIG_SPEC;
 	public static final Ores ORES;
 	public static final Evaporates EVAPORITES;
 	public static final Machines MACHINES;
 	public static final VanillaOreRemoval REMOVAL;
 	public static final TerraFirmaCraft TFC;
 
-	public static final ForgeConfigSpec.BooleanValue disable_mineral_generation;
+	public static final ModConfigSpec.BooleanValue disable_mineral_generation;
 
 	static {
-		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+		ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
 		builder.push("global_settings").comment("Configure global server settings.");
 		disable_mineral_generation = builder.comment("Remove IG's Ore Generation in full.").define("disable_mineral_generation", false);
 		builder.pop();
@@ -67,7 +66,8 @@ public class IGServerConfig
 	{
 		if(CONFIG_SPEC==ev.getConfig().getSpec())
 		{
-			rawConfig = ev.getConfig().getConfigData();
+			var loadedConfig = ev.getConfig().getLoadedConfig();
+			rawConfig = loadedConfig != null ? loadedConfig.config():null;
 		}
 	}
 
@@ -76,16 +76,16 @@ public class IGServerConfig
 		return CONFIG_SPEC.isLoaded()?value.get(): value.getDefault();
 	}
 
-	public static <T> T getOrDefault(ForgeConfigSpec.ConfigValue<T> value)
+	public static <T> T getOrDefault(ModConfigSpec.ConfigValue<T> value)
 	{
 		return CONFIG_SPEC.isLoaded()?value.get(): value.getDefault();
 	}
 
 	public static class TerraFirmaCraft
 	{
-		public final ForgeConfigSpec.BooleanValue allow_all_in_overworld;
+		public final ModConfigSpec.BooleanValue allow_all_in_overworld;
 
-		TerraFirmaCraft(ForgeConfigSpec.Builder builder)
+		TerraFirmaCraft(ModConfigSpec.Builder builder)
 		{
 			builder.comment("Configure generation in TerraFirmaCraft worlds. These settings have no effect in any other world type, including a vanilla world in a pack that has TerraFirmaCraft installed.")
 					.push("terrafirmacraft");
@@ -100,18 +100,18 @@ public class IGServerConfig
 
 	public static class VanillaOreRemoval
 	{
-		public final ForgeConfigSpec.BooleanValue shouldRemoveIron;
-		public final ForgeConfigSpec.BooleanValue shouldRemoveCopper;
-		public final ForgeConfigSpec.BooleanValue shouldRemoveGold;
-		public final ForgeConfigSpec.BooleanValue shouldRemoveIEBauxite;
-		public final ForgeConfigSpec.BooleanValue shouldRemoveIELead;
-		public final ForgeConfigSpec.BooleanValue shouldRemoveIESilver;
-		public final ForgeConfigSpec.BooleanValue shouldRemoveIEUranium;
-		public final ForgeConfigSpec.BooleanValue shouldRemoveIENickel;
-		public final ForgeConfigSpec.BooleanValue logProcess;
-		public final ForgeConfigSpec.ConfigValue<List<? extends String>> biome_blacklist;
+		public final ModConfigSpec.BooleanValue shouldRemoveIron;
+		public final ModConfigSpec.BooleanValue shouldRemoveCopper;
+		public final ModConfigSpec.BooleanValue shouldRemoveGold;
+		public final ModConfigSpec.BooleanValue shouldRemoveIEBauxite;
+		public final ModConfigSpec.BooleanValue shouldRemoveIELead;
+		public final ModConfigSpec.BooleanValue shouldRemoveIESilver;
+		public final ModConfigSpec.BooleanValue shouldRemoveIEUranium;
+		public final ModConfigSpec.BooleanValue shouldRemoveIENickel;
+		public final ModConfigSpec.BooleanValue logProcess;
+		public final ModConfigSpec.ConfigValue<List<? extends String>> biome_blacklist;
 
-		VanillaOreRemoval(ForgeConfigSpec.Builder builder)
+		VanillaOreRemoval(ModConfigSpec.Builder builder)
 		{
 			builder.push("remove_non_ig_ore_types").comment("Configure which default ores (from Minecraft and Immersive Engineering) should be removed during world generation. Changes require a world reload.");
 			shouldRemoveIron = builder.comment("Remove Minecraft's Iron Ore during world generation.").define("remove_iron", true);
@@ -126,7 +126,7 @@ public class IGServerConfig
 			logProcess = builder.comment("Enable logging of the ore removal process for debugging or performance analysis.").define("log_process", false);
 
 			builder.comment("Specify biomes where ore removal should be disabled. Useful for preserving ore generation in specific areas without disabling the system entirely.");
-			this.biome_blacklist = builder.comment("List of biome tags (e.g., 'minecraft:is_overworld', 'forge:is_sandy', 'forge:is_dry/overworld', 'minecraft:spawns_warm_variant_frogs', or 'minecraft:has_structure/mineshaft_mesa') where ore removal will be skipped. Applies to all ore types defined above.").defineListAllowEmpty("biome_blacklist",
+			this.biome_blacklist = builder.comment("List of biome tags (e.g., 'minecraft:is_overworld', 'c:is_sandy', 'c:is_dry/overworld', 'minecraft:spawns_warm_variant_frogs', or 'minecraft:has_structure/mineshaft_mesa') where ore removal will be skipped. Applies to all ore types defined above.").defineListAllowEmpty("biome_blacklist",
 					List.of(),
 					obj -> obj instanceof String && ResourceLocation.tryParse((String) obj) != null
 			);
@@ -138,7 +138,7 @@ public class IGServerConfig
 	{
 		public final Map<String, MachineConfig> machines = new HashMap<>();
 
-		Machines(ForgeConfigSpec.Builder builder)
+		Machines(ModConfigSpec.Builder builder)
 		{
 			builder.push("machines").comment("=== IG Machine Config Start ===");
 				// Keyed on the registry name, which is what IIGMultiSkinHelper#multiblockName and
@@ -170,9 +170,9 @@ public class IGServerConfig
 
 		public static class MachineConfig
 		{
-			public final ForgeConfigSpec.IntValue default_skin_ordinal;
+			public final ModConfigSpec.IntValue default_skin_ordinal;
 
-			public MachineConfig(ForgeConfigSpec.Builder builder, IGConfigurableMachine machine)
+			public MachineConfig(ModConfigSpec.Builder builder, IGConfigurableMachine machine)
 			{
 				this.default_skin_ordinal = builder.comment("The index number for the default skin an IG multiblock will use").defineInRange("default_skin_ordinal", machine.getDefaultSkin(), 0, 99);
 			}
@@ -182,7 +182,7 @@ public class IGServerConfig
 	public static class Evaporates
 	{
 		public final Map<IWorldGenConfig, EvaporateConfig> evaporates = new HashMap<>();
-		Evaporates(ForgeConfigSpec.Builder builder)
+		Evaporates(ModConfigSpec.Builder builder)
 		{
 			builder.push("evaporates");
 
@@ -217,18 +217,18 @@ public class IGServerConfig
 
 		public static class EvaporateConfig
 		{
-			public final ForgeConfigSpec.DoubleValue density;
-			public final ForgeConfigSpec.IntValue veinSize;
-			public final ForgeConfigSpec.IntValue minY;
-			public final ForgeConfigSpec.IntValue maxY;
-			public final ForgeConfigSpec.IntValue veinsPerChunk;
-			public final ForgeConfigSpec.IntValue generationChance;
-			public final ForgeConfigSpec.IntValue rarity;
-			public final ForgeConfigSpec.BooleanValue useSparsePlacement;
-			public final ForgeConfigSpec.BooleanValue disabled;
-			public final ForgeConfigSpec.ConfigValue<List<? extends String>> dimension_whitelist;
+			public final ModConfigSpec.DoubleValue density;
+			public final ModConfigSpec.IntValue veinSize;
+			public final ModConfigSpec.IntValue minY;
+			public final ModConfigSpec.IntValue maxY;
+			public final ModConfigSpec.IntValue veinsPerChunk;
+			public final ModConfigSpec.IntValue generationChance;
+			public final ModConfigSpec.IntValue rarity;
+			public final ModConfigSpec.BooleanValue useSparsePlacement;
+			public final ModConfigSpec.BooleanValue disabled;
+			public final ModConfigSpec.ConfigValue<List<? extends String>> dimension_whitelist;
 
-			private EvaporateConfig(ForgeConfigSpec.Builder builder, IWorldGenConfig mineral)
+			private EvaporateConfig(ModConfigSpec.Builder builder, IWorldGenConfig mineral)
 			{
 				builder.comment("Ore Generation Config - "+mineral.name()).push(mineral.name());
 				this.disabled = builder.comment("Enable or Disable this Mineral").define("disabled", false);
@@ -252,7 +252,7 @@ public class IGServerConfig
 	public static class Ores
 	{
 		public final Map<IWorldGenConfig, OreConfig> ores = new HashMap<>();
-		Ores(ForgeConfigSpec.Builder builder)
+		Ores(ModConfigSpec.Builder builder)
 		{
 			builder.push("ores");
 
@@ -288,21 +288,21 @@ public class IGServerConfig
 
 		public static class OreConfig
 		{
-			public final ForgeConfigSpec.BooleanValue canSpawn;
-			public final ForgeConfigSpec.DoubleValue density;
-			public final ForgeConfigSpec.DoubleValue associateChance;
-			public final ForgeConfigSpec.IntValue veinSize;
-			public final ForgeConfigSpec.IntValue minY;
-			public final ForgeConfigSpec.IntValue maxY;
-			public final ForgeConfigSpec.IntValue veinsPerChunk;
-			public final ForgeConfigSpec.IntValue generationChance;
-			public final ForgeConfigSpec.IntValue rarity;
-			public final ForgeConfigSpec.EnumValue<IGGenerationType> generationPattern;
-			public final ForgeConfigSpec.BooleanValue useSparsePlacement;
-			public final ForgeConfigSpec.DoubleValue min_temp, max_temp, min_downfall, max_downfall;
-			public final ForgeConfigSpec.ConfigValue<List<? extends String>> dimension_whitelist;
+			public final ModConfigSpec.BooleanValue canSpawn;
+			public final ModConfigSpec.DoubleValue density;
+			public final ModConfigSpec.DoubleValue associateChance;
+			public final ModConfigSpec.IntValue veinSize;
+			public final ModConfigSpec.IntValue minY;
+			public final ModConfigSpec.IntValue maxY;
+			public final ModConfigSpec.IntValue veinsPerChunk;
+			public final ModConfigSpec.IntValue generationChance;
+			public final ModConfigSpec.IntValue rarity;
+			public final ModConfigSpec.EnumValue<IGGenerationType> generationPattern;
+			public final ModConfigSpec.BooleanValue useSparsePlacement;
+			public final ModConfigSpec.DoubleValue min_temp, max_temp, min_downfall, max_downfall;
+			public final ModConfigSpec.ConfigValue<List<? extends String>> dimension_whitelist;
 
-			private OreConfig(ForgeConfigSpec.Builder builder, IWorldGenConfig mineral)
+			private OreConfig(ModConfigSpec.Builder builder, IWorldGenConfig mineral)
 			{
 				builder.comment("Ore Generation Config - "+mineral.name()).push(mineral.name());
 				this.canSpawn = builder.comment("Can this Mineral / Ore generate in world, if set to false this mineral will not spawn in world, unless a secondary mineral happens to include it as an associate mineral for spawning.").define("canSpawn", true);

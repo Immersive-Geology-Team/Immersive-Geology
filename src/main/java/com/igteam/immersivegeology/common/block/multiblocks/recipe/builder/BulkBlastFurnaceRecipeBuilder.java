@@ -14,7 +14,7 @@ import blusunrize.immersiveengineering.api.crafting.builders.IEFinishedRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BulkBlastFurnaceRecipe;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 public class BulkBlastFurnaceRecipeBuilder extends IEFinishedRecipe<BulkBlastFurnaceRecipeBuilder>
 {

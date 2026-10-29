@@ -26,7 +26,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.client.extensions.common.IClientBlockExtensions;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -52,13 +51,6 @@ public class IGOreBlock extends IGGenericBlock implements IOreBlock
         } else {
             return materialMap.get(MaterialTexture.values()[0]).getColor(category, 0);
         }
-    }
-
-    @Override
-    public void initializeClient(Consumer<IClientBlockExtensions> consumer)
-    {
-
-        super.initializeClient(consumer);
     }
 
     @Override

@@ -14,7 +14,7 @@ import com.igteam.immersivegeology.gametest.tests.CommonTests;
 import com.igteam.immersivegeology.gametest.tests.MultiblockDisassemblyTests;
 import com.igteam.immersivegeology.gametest.tests.ServerTests;
 import net.minecraft.gametest.framework.*;
-import net.minecraftforge.gametest.GameTestHolder;
+import net.neoforged.neoforge.gametest.GameTestHolder;
 
 import java.util.ArrayList;
 import java.util.List;

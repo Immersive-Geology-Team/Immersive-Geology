@@ -29,6 +29,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.mojang.datafixers.util.Pair;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -183,7 +184,7 @@ public class IGGeologyCategory extends IGRecipeCategory<IGGeoRecipe>
 			builder.addSlot(RecipeIngredientRole.OUTPUT, GRADE_SLOT_X+i*GRADE_PITCH, ASSOCIATE_SLOT_Y)
 					.addItemStacks(associate.icons())
 					.setBackground(JEIHelper.slotDrawable, -1, -1)
-					.addTooltipCallback((view, tooltip) -> tooltip.add(
+					.addRichTooltipCallback((view, tooltip) -> tooltip.add(
 							Component.translatable(KEY+"associate_share",
 											percent(associate.share()*associateChance(facts)))
 									.withStyle(ChatFormatting.GRAY)));
@@ -221,6 +222,7 @@ public class IGGeologyCategory extends IGRecipeCategory<IGGeoRecipe>
 	@Override
 	public void draw(IGGeoRecipe recipe, IRecipeSlotsView slotsView, GuiGraphics graphics, double mouseX, double mouseY)
 	{
+		super.draw(recipe, slotsView, graphics, mouseX, mouseY);
 		Facts facts = facts(recipe.material);
 		OreConfig config = facts.config();
 
@@ -426,11 +428,11 @@ public class IGGeologyCategory extends IGRecipeCategory<IGGeoRecipe>
 	}
 
 	@Override
-	public List<Component> getTooltipStrings(IGGeoRecipe recipe, IRecipeSlotsView slotsView, double mouseX, double mouseY)
+	public void getTooltip(ITooltipBuilder tooltip, IGGeoRecipe recipe, IRecipeSlotsView slotsView, double mouseX, double mouseY)
 	{
 		Facts facts = facts(recipe.material);
 		OreConfig config = facts.config();
-		if(config==null) return List.of();
+		if(config==null) return;
 
 		if(over(mouseX, mouseY, CONTENT_RIGHT-70, HEADER_Y-2, CONTENT_RIGHT+1, HEADER_Y+9))
 		{
@@ -452,36 +454,56 @@ public class IGGeologyCategory extends IGRecipeCategory<IGGeoRecipe>
 						.withStyle(ChatFormatting.GRAY): name);
 			}
 			if(!anywhere) lines.add(Component.translatable(KEY+"nowhere_tip").withStyle(ChatFormatting.GRAY));
-			return lines;
+			tooltip.addAll(lines);
+			return;
 		}
 		if(overRow(mouseX, mouseY, ROW_CHANCE))
 		{
-			return List.of(
+			tooltip.addAll(List.of(
 					Component.translatable(KEY+"chance_tip", percent(chunkChance(facts, config))),
 					Component.translatable(KEY+"chance_roll", percent(seedRoll(config)))
 							.withStyle(ChatFormatting.GRAY),
 					Component.translatable(KEY+"chance_ground", percent(facts.viability()))
 							.withStyle(ChatFormatting.GRAY),
-					Component.translatable(KEY+"chance_climate").withStyle(ChatFormatting.DARK_GRAY));
+					Component.translatable(KEY+"chance_climate").withStyle(ChatFormatting.DARK_GRAY)));
+			return;
 		}
-		if(overRow(mouseX, mouseY, ROW_VEIN)) return List.of(Component.translatable(KEY+"vein_size_tip"));
-		if(overRow(mouseX, mouseY, ROW_DENSITY)) return List.of(Component.translatable(KEY+"density_tip"));
+		if(overRow(mouseX, mouseY, ROW_VEIN))
+		{
+			tooltip.add(Component.translatable(KEY+"vein_size_tip"));
+			return;
+		}
+		if(overRow(mouseX, mouseY, ROW_DENSITY))
+		{
+			tooltip.add(Component.translatable(KEY+"density_tip"));
+			return;
+		}
 		if(overRow(mouseX, mouseY, ROW_TEMPERATURE))
-			return List.of(range(IGServerConfig.getOrDefault(config.min_temp),
+		{
+			tooltip.add(range(IGServerConfig.getOrDefault(config.min_temp),
 					IGServerConfig.getOrDefault(config.max_temp)));
+			return;
+		}
 		if(overRow(mouseX, mouseY, ROW_RAINFALL))
-			return List.of(range(IGServerConfig.getOrDefault(config.min_downfall),
+		{
+			tooltip.add(range(IGServerConfig.getOrDefault(config.min_downfall),
 					IGServerConfig.getOrDefault(config.max_downfall)));
+			return;
+		}
 		if(over(mouseX, mouseY, CONTENT_LEFT, HOST_LABEL_Y, STAT_VALUE_RIGHT, HOST_BOTTOM))
 		{
 			List<Component> lines = new ArrayList<>();
 			lines.add(Component.translatable(KEY+"host_rock_tip"));
 			lines.addAll(facts.stones());
-			return lines;
+			tooltip.addAll(lines);
+			return;
 		}
 		if(over(mouseX, mouseY, CONTENT_LEFT, ASSOCIATE_LABEL_Y, STAT_VALUE_RIGHT, ASSOCIATE_SLOT_Y)
 				&&!facts.associates().isEmpty())
-			return List.of(Component.translatable(KEY+"found_with_tip"));
+		{
+			tooltip.add(Component.translatable(KEY+"found_with_tip"));
+			return;
+		}
 		if(over(mouseX, mouseY, CHART_LEFT, CHART_LABEL_Y, BAR_RIGHT+2, BAR_BOTTOM))
 		{
 			int[] world = chartRange(facts, config);
@@ -496,9 +518,8 @@ public class IGGeologyCategory extends IGRecipeCategory<IGGeoRecipe>
 			}
 			else lines.add(Component.translatable(KEY+"depth_world_named", dimensionName(chartDimension(facts, config)),
 					world[0], world[1]).withStyle(ChatFormatting.GRAY));
-			return lines;
+			tooltip.addAll(lines);
 		}
-		return List.of();
 	}
 
 	private static boolean overRow(double mouseX, double mouseY, int row)

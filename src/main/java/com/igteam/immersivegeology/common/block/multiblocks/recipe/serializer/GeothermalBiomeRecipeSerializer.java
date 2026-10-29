@@ -22,8 +22,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraftforge.common.crafting.conditions.ICondition.IContext;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.conditions.ICondition.IContext;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;

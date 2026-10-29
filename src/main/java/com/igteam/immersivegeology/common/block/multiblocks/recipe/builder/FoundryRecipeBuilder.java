@@ -12,12 +12,12 @@ import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.builders.IEFinishedRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.FoundryRecipe;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class FoundryRecipeBuilder extends IEFinishedRecipe<FoundryRecipeBuilder>
 {
@@ -53,6 +53,6 @@ public class FoundryRecipeBuilder extends IEFinishedRecipe<FoundryRecipeBuilder>
 
 	public FoundryRecipeBuilder setMold(ItemLike mold)
 	{
-		return addWriter(json -> json.addProperty("mold", ForgeRegistries.ITEMS.getKey(mold.asItem()).toString()));
+		return addWriter(json -> json.addProperty("mold", BuiltInRegistries.ITEM.getKey(mold.asItem()).toString()));
 	}
 }

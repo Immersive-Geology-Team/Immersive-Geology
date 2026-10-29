@@ -8,18 +8,18 @@ import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.BlockTagsProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 
 import static com.igteam.immersivegeology.core.material.GeologyMaterial.EXISTING_HELPER;
 
-@Mod.EventBusSubscriber(modid = IGLib.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = IGLib.MODID)
 public class IGDataProvider {
     public static Logger log = LogManager.getLogger(IGLib.MODID + "/DataGenerator");
 
@@ -47,7 +47,7 @@ public class IGDataProvider {
         generator.addProvider(runServer, new IGItemTags(out, lookup, blockTags.contentsGetter(), helper));
         generator.addProvider(runServer, new IGDynamicModelProvider(blockStateProvider, out, helper));
         generator.addProvider(runServer, new IGLootProvider(out, lookup));
-        generator.addProvider(runServer, new IGLootModifierProvider(out));
+        generator.addProvider(runServer, new IGLootModifierProvider(out, lookup));
         generator.addProvider(runServer, new IGRecipes(out, lookup));
 
         if(ModFlags.TFC.isStrictlyLoaded()) {

@@ -12,16 +12,16 @@ import blusunrize.immersiveengineering.common.util.compat.jei.JEIHelper;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GeothermalExchangerRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
-import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.FluidType;
 
 public class IGGeothermalExchangerCategory extends IGRecipeCategory<GeothermalExchangerRecipe>
 {
@@ -44,15 +44,15 @@ public class IGGeothermalExchangerCategory extends IGRecipeCategory<GeothermalEx
 		int tankSize = Math.max(2*FluidType.BUCKET_VOLUME,  Math.max(recipe.fluidIn.getAmount(),recipe.fluidIn.getAmount()));
 		builder.addSlot(RecipeIngredientRole.INPUT, 11, 23)
 				.setFluidRenderer(tankSize, false, 16, 55)
-				.addIngredients(ForgeTypes.FLUID_STACK, recipe.fluidIn.getMatchingFluidStacks())
-				.addTooltipCallback(JEIHelper.fluidTooltipCallback);
+				.addIngredients(NeoForgeTypes.FLUID_STACK, recipe.fluidIn.getMatchingFluidStacks())
+				.addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
 
 		if(!recipe.fluidOutput.get().isEmpty())
 		{
 			builder.addSlot(RecipeIngredientRole.OUTPUT, 74, 23)
 					.setFluidRenderer(432, false, 16, 55)
 					.addFluidStack(recipe.fluidOutput.get().getFluid(), recipe.fluidOutput.get().getAmount())
-					.addTooltipCallback(JEIHelper.fluidTooltipCallback);
+					.addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
 		}
 	}
 

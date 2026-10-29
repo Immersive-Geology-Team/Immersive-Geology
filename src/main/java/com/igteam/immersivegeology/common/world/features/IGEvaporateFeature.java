@@ -37,7 +37,7 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.common.Tags;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.Map;
 import java.util.Objects;
@@ -88,7 +88,7 @@ public class IGEvaporateFeature extends Feature<IGEvaporateConfig>
 		height = radius / 2 + 1; // Semi-dome height
 
 		// Ensure we place only on sand
-		if (!world.getBlockState(origin.below()).is(Tags.Blocks.SAND) || isWet) {
+		if (!world.getBlockState(origin.below()).is(Tags.Blocks.SANDS) || isWet) {
 			return false;
 		}
 
@@ -98,7 +98,7 @@ public class IGEvaporateFeature extends Feature<IGEvaporateConfig>
 				if (distance <= radius * radius) {
 					for (int y = 0; y <= height; y++) {
 						BlockPos pos = origin.offset(x, -y, z);
-						if (world.getBlockState(pos).is(Tags.Blocks.SAND)) {
+						if (world.getBlockState(pos).is(Tags.Blocks.SANDS)) {
 							world.setBlock(pos, evaporiteBlock, 2);
 						}
 					}

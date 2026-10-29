@@ -11,15 +11,15 @@ package com.igteam.immersivegeology.common.data.generators;
 import com.igteam.immersivegeology.common.data.TRSRModelBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.client.model.generators.ModelBuilder;
-import net.minecraftforge.client.model.generators.ModelProvider;
-import net.minecraftforge.client.model.generators.loaders.ObjModelBuilder;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.client.model.generators.ModelBuilder;
+import net.neoforged.neoforge.client.model.generators.ModelProvider;
+import net.neoforged.neoforge.client.model.generators.loaders.ObjModelBuilder;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
@@ -90,7 +90,7 @@ public class IGComplexItemModelProvider extends ModelProvider<TRSRModelBuilder>
 
 	private String name(ItemLike item)
 	{
-		return ForgeRegistries.ITEMS.getKey(item.asItem()).getPath();
+		return BuiltInRegistries.ITEM.getKey(item.asItem()).getPath();
 	}
 
 	private void generateCentrifugeMultiblock(String id, Supplier<? extends ItemLike> block)

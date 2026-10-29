@@ -14,25 +14,26 @@ import com.igteam.immersivegeology.common.block.multiblocks.logic.BulkBlastFurna
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BulkBlastFurnaceRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
-import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraftforge.fluids.FluidStack;
 
 import blusunrize.immersiveengineering.api.crafting.BlastFurnaceFuel;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BulkBlastFluxRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.fluids.FluidStack;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
@@ -72,9 +73,9 @@ public class IGBulkBlastFurnaceCategory extends IGRecipeCategory<BulkBlastFurnac
 		else if(recipe.meltInput!=null)
 			builder.addSlot(RecipeIngredientRole.INPUT, ORE_X, SLOT_Y)
 					.setFluidRenderer(recipe.meltInput.getAmount(), false, 16, 16)
-					.addIngredients(ForgeTypes.FLUID_STACK, recipe.meltInput.getMatchingFluidStacks())
+					.addIngredients(NeoForgeTypes.FLUID_STACK, recipe.meltInput.getMatchingFluidStacks())
 					.setBackground(JEIHelper.slotDrawable, -1, -1)
-					.addTooltipCallback(JEIHelper.fluidTooltipCallback);
+					.addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
 
 		builder.addSlot(RecipeIngredientRole.INPUT, COKE_X, SLOT_Y)
 				.addItemStacks(fuelStacks())
@@ -112,7 +113,7 @@ public class IGBulkBlastFurnaceCategory extends IGRecipeCategory<BulkBlastFurnac
 				.setFluidRenderer(melt.getAmount(), false, 16, 16)
 				.addFluidStack(melt.getFluid(), melt.getAmount())
 				.setBackground(JEIHelper.slotDrawable, -1, -1)
-				.addTooltipCallback(JEIHelper.fluidTooltipCallback);
+				.addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
 	}
 
 	@Override

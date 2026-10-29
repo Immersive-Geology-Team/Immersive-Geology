@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration.TargetBlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
-import net.minecraftforge.common.Tags;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.List;
 import java.util.function.BiFunction;
@@ -49,7 +49,7 @@ public class MaterialVanilla extends MaterialStone {
         BlockState poor = mineral.getOreBlock(this, OreRichness.POOR).getIGDefaultBlockState();
         BlockState normal = mineral.getOreBlock(this, OreRichness.NORMAL).getIGDefaultBlockState();
         BlockState rich = mineral.getOreBlock(this, OreRichness.RICH).getIGDefaultBlockState();
-        return List.of(OreConfiguration.target(new TagMatchTest(Tags.Blocks.STONE), normal));
+        return List.of(OreConfiguration.target(new TagMatchTest(Tags.Blocks.STONES), normal));
     }
 
     @Override

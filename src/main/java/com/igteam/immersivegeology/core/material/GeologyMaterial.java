@@ -47,10 +47,10 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.SoundActions;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.data.loading.DatagenModLoader;
-import net.minecraftforge.fluids.FluidType;
+import net.neoforged.neoforge.common.SoundActions;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.loading.DatagenModLoader;
+import net.neoforged.neoforge.fluids.FluidType;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 

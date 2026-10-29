@@ -58,7 +58,7 @@ public class IGSeparatorCategory extends IGRecipeCategory<GravitySeparatorRecipe
 		String chance = (Math.round(recipe.getChance() * 100)) + "%" + " Output Chance";
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 67, 62)
 				.addItemStack(recipe.itemByproduct.get())
-				.addTooltipCallback((a,b) -> b.add(Component.literal(chance)));
+				.addRichTooltipCallback((a,b) -> b.add(Component.literal(chance)));
 	}
 
 	@Override

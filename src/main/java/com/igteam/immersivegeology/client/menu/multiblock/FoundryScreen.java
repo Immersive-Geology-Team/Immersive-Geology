@@ -25,8 +25,8 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 
@@ -232,7 +232,7 @@ public class FoundryScreen extends IEContainerScreen<FoundryMenu>
 		nineSlice(graphics, BORDER_U, BORDER_V, x, y, POPUP_WIDTH, POPUP_HEIGHT);
 
 		Component title = Component.translatable("gui.immersivegeology.foundry.purge");
-		Component detail = fluid.getDisplayName().copy().append(Component.literal(" "+fluid.getAmount()+" mB"));
+		Component detail = fluid.getHoverName().copy().append(Component.literal(" "+fluid.getAmount()+" mB"));
 		graphics.drawString(font, title, x+(POPUP_WIDTH-font.width(title))/2, y+9, 0xffffffff, true);
 		graphics.drawString(font, detail, x+(POPUP_WIDTH-font.width(detail))/2, y+21, 0xffffd24a, true);
 
@@ -373,7 +373,7 @@ public class FoundryScreen extends IEContainerScreen<FoundryMenu>
 				if(height <= 0) continue;
 				total += fluid.getAmount();
 				boolean hovered = mouseY >= bottom-offset-height&&mouseY < bottom-offset;
-				MutableComponent name = fluid.getDisplayName().copy();
+				MutableComponent name = fluid.getHoverName().copy();
 				lines.add(0, hovered?name.withStyle(ChatFormatting.YELLOW): name);
 				lines.add(1, Component.literal(fluid.getAmount()+" mB").withStyle(ChatFormatting.GRAY));
 				offset += height;

@@ -58,16 +58,14 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.IItemHandler;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.IFluidTank;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -591,8 +589,8 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 			));
 			this.metalCap = new StoredCapability<>(new ArrayFluidHandler(new IFluidTank[]{metalTank}, true, false, markDirty));
 			this.slagCap = new StoredCapability<>(new ArrayFluidHandler(new IFluidTank[]{slagTank}, true, false, markDirty));
-			this.metalOutput = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, neighbourOf(METAL_OUTPUT));
-			this.slagOutput = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, neighbourOf(SLAG_OUTPUT));
+			this.metalOutput = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, neighbourOf(METAL_OUTPUT));
+			this.slagOutput = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, neighbourOf(SLAG_OUTPUT));
 		}
 
 		public int tickPreheaters(IMultiblockLevel level)

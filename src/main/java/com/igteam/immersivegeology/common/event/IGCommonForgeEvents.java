@@ -57,19 +57,12 @@ import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraft.world.level.saveddata.maps.MapDecorationTypes;
 import net.minecraft.world.level.saveddata.maps.MapId;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
-import net.minecraftforge.client.event.RecipesUpdatedEvent;
-import net.minecraftforge.common.data.ForgeRecipeProvider;
-import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.event.LootTableLoadEvent;
-import net.minecraftforge.event.RegisterCommandsEvent;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.server.ServerStartedEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.registries.DataPackRegistryEvent;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.ForgeRegistries.Keys;
-import net.minecraftforge.registries.RegisterEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.LootTableLoadEvent;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.neoforged.neoforge.event.tick.LevelTickEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
@@ -107,16 +100,16 @@ public class IGCommonForgeEvents
 	public static final List<VeinScanTask> activeVeinScans = Collections.synchronizedList(new ArrayList<>());
 
 	@SubscribeEvent
-	public void updateVeinScans(TickEvent.LevelTickEvent event)
+	public void updateVeinScans(LevelTickEvent.Post event)
 	{
-		// LevelTickEvent fires once per phase and once per dimension; only advance a scan on its own level,
+		// LevelTickEvent.Post fires once per phase and once per dimension; only advance a scan on its own level,
 		// at the end of the tick, so a task is not stepped several times per tick.
-		if(event.side.isClient()||event.phase!=TickEvent.Phase.END) return;
+		if(event.getLevel().isClientSide()) return;
 		if(activeVeinScans.isEmpty()) return;
 
 		synchronized(activeVeinScans)
 		{
-			activeVeinScans.removeIf(task -> task.level==event.level&&task.tick());
+			activeVeinScans.removeIf(task -> task.level==event.getLevel()&&task.tick());
 		}
 	}
 
@@ -140,16 +133,16 @@ public class IGCommonForgeEvents
 	 * back, once per map, by adding the decoration again under the same id.
 	 */
 	@SubscribeEvent
-	public void restoreDepositMapLabels(TickEvent.PlayerTickEvent event)
+	public void restoreDepositMapLabels(PlayerTickEvent.Post event)
 	{
-		if(event.side.isClient()||event.phase!=TickEvent.Phase.END) return;
+		if(event.getEntity().level().isClientSide()) return;
 		// The markers are already correct without this; the labels can wait a second for a cheaper sweep.
-		if(event.player.tickCount%20!=0) return;
+		if(event.getEntity().tickCount%20!=0) return;
 
-		Inventory inventory = event.player.getInventory();
+		Inventory inventory = event.getEntity().getInventory();
 		for(int slot = 0; slot < inventory.getContainerSize(); slot++)
 		{
-			relabelDepositMap(inventory.getItem(slot), event.player.level());
+			relabelDepositMap(inventory.getItem(slot), event.getEntity().level());
 		}
 	}
 

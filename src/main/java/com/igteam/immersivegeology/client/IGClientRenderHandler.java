@@ -40,11 +40,10 @@ import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.model.data.ModelData;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -70,7 +69,7 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
             }
         }
 
-        for(RegistryObject<Block> holder : IGRegistrationHolder.getBlockRegistryMap().values()){
+        for(DeferredHolder<Block, Block> holder : IGRegistrationHolder.getBlockRegistryMap().values()){
             Block b = holder.get();
             if(b instanceof IGBlockType igBlock){
                 Minecraft.getInstance().getBlockColors().register(INSTANCE, b);
@@ -80,12 +79,12 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
             if(b instanceof IGFluidBlock fluidBlock)
             {
                 if(fluidBlock.isTranslucent()){
-                    ItemBlockRenderTypes.setRenderLayer(fluidBlock.getFluid().getSource(), RenderType.translucent());
-                    ItemBlockRenderTypes.setRenderLayer(fluidBlock.getFluid().getFlowing(), RenderType.translucent());
+                    ItemBlockRenderTypes.setRenderLayer(fluidBlock.fluid.getSource(), RenderType.translucent());
+                    ItemBlockRenderTypes.setRenderLayer(fluidBlock.fluid.getFlowing(), RenderType.translucent());
                     continue;
                 }
-                ItemBlockRenderTypes.setRenderLayer(fluidBlock.getFluid().getSource(), RenderType.solid());
-                ItemBlockRenderTypes.setRenderLayer(fluidBlock.getFluid().getFlowing(), RenderType.solid());
+                ItemBlockRenderTypes.setRenderLayer(fluidBlock.fluid.getSource(), RenderType.solid());
+                ItemBlockRenderTypes.setRenderLayer(fluidBlock.fluid.getFlowing(), RenderType.solid());
             }
         }
 

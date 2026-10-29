@@ -15,15 +15,15 @@ import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class FoundryAlloyRecipe extends MultiblockRecipe
 {
-	public static RegistryObject<IERecipeSerializer<FoundryAlloyRecipe>> SERIALIZER;
+	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<FoundryAlloyRecipe>> SERIALIZER;
 	public static final CachedRecipeList<FoundryAlloyRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.FOUNDRY_ALLOYING);
 
 	public final List<FluidTagInput> alloyInputs;

@@ -21,23 +21,23 @@ import com.igteam.immersivegeology.common.recipe.IGRepairItemRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.helper.EmptyRecipe;
 import com.igteam.immersivegeology.core.registration.helper.EmptySerializer;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class IGRecipeSerializers
 {
-	public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, IGLib.MODID);
+	public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, IGLib.MODID);
 
-	public static final RegistryObject<IERecipeSerializer<EmptyRecipe>> EMPTY_SERIALIZER;
-	public static final RegistryObject<SimpleRecipeSerializer<IGRepairItemRecipe>> IG_REPAIR_SERIALIZER;
-	public static final RegistryObject<IGMoldShapingSerializer> MOLD_SHAPING_SERIALIZER;
+	public static final DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<EmptyRecipe>> EMPTY_SERIALIZER;
+	public static final DeferredHolder<RecipeSerializer<?>, SimpleRecipeSerializer<IGRepairItemRecipe>> IG_REPAIR_SERIALIZER;
+	public static final DeferredHolder<RecipeSerializer<?>, IGMoldShapingSerializer> MOLD_SHAPING_SERIALIZER;
 
 
 	static {

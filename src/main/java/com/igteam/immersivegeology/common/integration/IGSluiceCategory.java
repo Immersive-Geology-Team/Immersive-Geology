@@ -65,6 +65,7 @@ public class IGSluiceCategory extends IGRecipeCategory<IndustrialSluiceRecipe>
 	@Override
 	public void draw(IndustrialSluiceRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY)
 	{
+		super.draw(recipe, recipeSlotsView, graphics, mouseX, mouseY);
 		List<StackWithChance> validSecondaries = recipe.getByproducts();
 		int yBase = 38;
 		for(int i = 0; i < validSecondaries.size(); i++)

@@ -10,7 +10,6 @@ package com.igteam.immersivegeology.common.block.multiblocks.shapes;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.client.model.generators.VariantBlockStateBuilder.PartialBlockstate;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

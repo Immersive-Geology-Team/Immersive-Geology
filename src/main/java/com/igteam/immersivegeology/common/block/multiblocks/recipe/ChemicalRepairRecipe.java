@@ -18,14 +18,15 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.Iterator;
 
 public class ChemicalRepairRecipe extends IESerializableRecipe
 {
-	public static RegistryObject<IERecipeSerializer<ChemicalRepairRecipe>> SERIALIZER;
+	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<ChemicalRepairRecipe>> SERIALIZER;
 	public static final CachedRecipeList<ChemicalRepairRecipe> RECIPES;
 	public final Ingredient input;
 	public final int burnTime;
