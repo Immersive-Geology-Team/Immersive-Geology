@@ -8,14 +8,10 @@
 
 package com.igteam.immersivegeology.common.config;
 
-import com.igteam.immersivegeology.core.lib.IGLib;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.common.ModConfigSpec.BooleanValue;
 import net.neoforged.neoforge.common.ModConfigSpec.DoubleValue;
 
-@EventBusSubscriber(value = Dist.CLIENT, modid = IGLib.MODID)
 public class IGClientConfig
 {
 	public final static DoubleValue multiblockSpecialRenderDistanceModifier;

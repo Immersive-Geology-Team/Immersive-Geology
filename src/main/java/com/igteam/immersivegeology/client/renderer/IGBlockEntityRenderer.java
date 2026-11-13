@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.client.renderer;
 
 import blusunrize.immersiveengineering.api.ApiUtils;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityMaster;
 import blusunrize.immersiveengineering.api.utils.DirectionUtils;
 import blusunrize.immersiveengineering.client.utils.RenderUtils;
 import com.igteam.immersivegeology.client.models.IGDynamicModel;
@@ -38,6 +39,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import org.joml.Quaternionf;
 
@@ -66,6 +68,14 @@ public abstract class IGBlockEntityRenderer<T extends BlockEntity> implements Bl
 
 		double distanceMod = IGClientConfig.multiblockSpecialRenderDistanceModifier.get();
 		return (int)(BlockEntityRenderer.super.getViewDistance() * distanceMod);
+	}
+
+	@Override
+	public AABB getRenderBoundingBox(T blockEntity)
+	{
+		if(blockEntity instanceof MultiblockBlockEntityMaster<?> master)
+			return master.getHelper().getRenderBoundingBox();
+		return BlockEntityRenderer.super.getRenderBoundingBox(blockEntity);
 	}
 
 	protected static void rotateForFacing(PoseStack stack, Direction facing)
@@ -134,7 +144,7 @@ public abstract class IGBlockEntityRenderer<T extends BlockEntity> implements Bl
 		});
 
 		rotateForFacing(matrix, facing);
-		RenderUtils.renderModelTESRFancy(outQuads, buffer.getBuffer(RenderType.cutout()), matrix, level, pos, false, 0xffffff, light);
+		RenderUtils.renderModelTESRFancy(outQuads, buffer.getBuffer(RenderType.cutout()), matrix, level, pos, false, 0xffffffff, light);
 		matrix.popPose();
 	}
 

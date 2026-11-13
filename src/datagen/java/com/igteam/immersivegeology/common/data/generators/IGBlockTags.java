@@ -123,7 +123,7 @@ public class IGBlockTags extends BlockTagsProvider
 						tag(getTFCBlockTag("CAN_COLLAPSE")).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
 						tag(getTFCBlockTag("CAN_START_COLLAPSE")).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
 						tag(getTFCBlockTag("CAN_TRIGGER_COLLAPSE")).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
-						tag(getTFCBlockTag("POWDERKEG_BREAKING_BLOCKS")).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
+						tag(getTFCBlockTag("POWDERKEG_CAN_BREAK")).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
 						tag(getTFCBlockTag("PROSPECTABLE")).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
 					}
 					continue;
@@ -142,7 +142,7 @@ public class IGBlockTags extends BlockTagsProvider
 					tag(getTFCBlockTag("CAN_COLLAPSE")).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
 					tag(getTFCBlockTag("CAN_START_COLLAPSE")).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
 					tag(getTFCBlockTag("CAN_TRIGGER_COLLAPSE")).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
-					tag(getTFCBlockTag("POWDERKEG_BREAKING_BLOCKS")).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
+					tag(getTFCBlockTag("POWDERKEG_CAN_BREAK")).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
 					tag(getTFCBlockTag("PROSPECTABLE")).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
 				}
 			} else if(block.get() instanceof IGGenericBlock genericBlock)

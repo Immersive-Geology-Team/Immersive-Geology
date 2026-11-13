@@ -277,12 +277,14 @@ public final class IGDeclaredStoneAssets
 		JsonObject predicate = new JsonObject();
 		JsonArray enchantments = new JsonArray();
 		JsonObject silk = new JsonObject();
-		silk.addProperty("enchantment", "minecraft:silk_touch");
+		silk.addProperty("enchantments", "minecraft:silk_touch");
 		JsonObject levels = new JsonObject();
 		levels.addProperty("min", 1);
 		silk.add("levels", levels);
 		enchantments.add(silk);
-		predicate.add("enchantments", enchantments);
+		JsonObject predicates = new JsonObject();
+		predicates.add("minecraft:enchantments", enchantments);
+		predicate.add("predicates", predicates);
 		match.add("predicate", predicate);
 		conditions.add(match);
 		silkTouched.add("conditions", conditions);
@@ -325,7 +327,7 @@ public final class IGDeclaredStoneAssets
 		root.add("pools", pools);
 		root.addProperty("random_sequence", IGLib.MODID+":blocks/"+blockId.getPath());
 
-		assets.server.put(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "loot_tables/blocks/"+blockId.getPath()+".json"), bytes(root));
+		assets.server.put(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "loot_table/blocks/"+blockId.getPath()+".json"), bytes(root));
 	}
 
 	private static JsonObject itemEntry(String item)

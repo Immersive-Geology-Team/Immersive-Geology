@@ -110,8 +110,8 @@ public class SpawnChunkCapture {
 		try {
 			BufferedImage image = generateMapImage(level, spawnPos);
 			String label = worldLabel();
-			saveImage(image, helper, server.getServerDirectory().toFile(), "World Map "+label);
-			writeCensus(server.getServerDirectory().toFile(), label);
+			saveImage(image, helper, server.getServerDirectory().toAbsolutePath().toFile(), "World Map "+label);
+			writeCensus(server.getServerDirectory().toAbsolutePath().toFile(), label);
 			helper.succeed();
 		} catch (Exception e) {
 			helper.fail("Error generating map: " + e.getMessage());

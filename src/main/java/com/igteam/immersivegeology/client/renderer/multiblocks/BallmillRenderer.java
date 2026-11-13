@@ -95,7 +95,7 @@ public class BallmillRenderer extends IGBlockEntityRenderer<MultiblockBlockEntit
         matrix.pushPose();
         List<BakedQuad> quads = model.get().getQuads(null, null, ApiUtils.RANDOM_SOURCE, ModelData.EMPTY, (RenderType)null);
         rotateForFacing(matrix, facing);
-        RenderUtils.renderModelTESRFancy(quads,  buffer.getBuffer(RenderType.solid()), matrix, level, pos, false, 0xffffff, light);
+        RenderUtils.renderModelTESRFancy(quads,  buffer.getBuffer(RenderType.solid()), matrix, level, pos, false, 0xffffffff, light);
 
         matrix.popPose();
     }

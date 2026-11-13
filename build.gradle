@@ -183,6 +183,10 @@ neoForge {
             sourceSet sourceSets.gametest
         }
     }
+    unitTest {
+        enable()
+        testedMod = mods.immersivegeology
+    }
 }
 
 repositories {
@@ -204,8 +208,8 @@ dependencies {
     implementation        "curse.maven:terrafirmacraft-302973:8995321"
     implementation        "curse.maven:patchouli-306770:7730942"
     implementation        "curse.maven:engineered-schematics-1207780:8308767"
-    implementation        "curse.maven:chisels-bits-231095:7441123"
-    implementation        "curse.maven:distant-horizons-508933:9004764"
+    implementation        "curse.maven:chisels-bits-231095:9455199"
+    // implementation     "curse.maven:distant-horizons-508933:9004764" // Disabled for runGameTestServer
     implementation        "curse.maven:lithostitched-936015:8944659"
     implementation        "curse.maven:tectonic-686836:8855043"
     implementation        "curse.maven:glitchcore-955399:8109792"
@@ -218,6 +222,7 @@ dependencies {
     implementation        "curse.maven:journeymap-32274:8923668"
     testImplementation    "org.junit.jupiter:junit-jupiter-api:5.10.2"
     testRuntimeOnly       "org.junit.jupiter:junit-jupiter-engine:5.10.2"
+    testRuntimeOnly       "org.junit.platform:junit-platform-launcher:1.10.2"
 }
 
 // ----------------------------------------------------------------------------
@@ -226,6 +231,7 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+    maxHeapSize = '1G'
     outputs.upToDateWhen { false }
     testLogging.events 'passed', 'skipped', 'failed'
 }

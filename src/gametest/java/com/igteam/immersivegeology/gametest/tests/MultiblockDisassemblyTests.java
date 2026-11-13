@@ -66,7 +66,7 @@ public class MultiblockDisassemblyTests
 
 	private static SmallChemicalReactorLogic.State reactorStateAt(GameTestHelper helper, BlockPos relativePos)
 	{
-		if(helper.getBlockEntity(relativePos) instanceof IMultiblockBE<?> be
+		if(helper.getLevel().getBlockEntity(helper.absolutePos(relativePos)) instanceof IMultiblockBE<?> be
 				&&be.getHelper().getState() instanceof SmallChemicalReactorLogic.State state)
 			return state;
 		return null;

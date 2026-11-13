@@ -1,3 +1,13 @@
+/*
+ * Muddykat
+ * Copyright (c) 2026
+ *
+ * This code is licensed under "GNU LESSER GENERAL PUBLIC LICENSE"
+ * Details can be found in the license file in the root folder of this project
+ */
+
+package com.igteam.immersivegeology.test;
+
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGenerationPattern;
 import com.igteam.immersivegeology.common.world.noise.INoise3D;

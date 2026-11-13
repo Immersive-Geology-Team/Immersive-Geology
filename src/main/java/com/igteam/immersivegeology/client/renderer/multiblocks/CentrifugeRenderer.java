@@ -81,7 +81,7 @@ public class CentrifugeRenderer extends IGBlockEntityRenderer<MultiblockBlockEnt
     {
         matrix.pushPose();
         List<BakedQuad> quads = model.get().getQuads(null, null, ApiUtils.RANDOM_SOURCE, ModelData.EMPTY, null);
-        RenderUtils.renderModelTESRFancy(quads, buffer.getBuffer(RenderType.cutout()), matrix, level, pos, false, 0xffffff, light);
+        RenderUtils.renderModelTESRFancy(quads, buffer.getBuffer(RenderType.cutout()), matrix, level, pos, false, 0xffffffff, light);
         matrix.popPose();
     }
 
