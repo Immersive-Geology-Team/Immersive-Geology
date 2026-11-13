@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -21,6 +20,7 @@ import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.function.BiFunction;
 
@@ -61,8 +61,8 @@ public class MaterialTungsten extends MaterialMetal {
                 getStack(ItemCategoryFlags.COMPOUND_DUST, IGLib.COMPOUND_FROM_ACID_AMOUNT),
                 ChemicalEnum.ChemicalWaste.getFluidStack(IGLib.ACID_RECOVERED_FROM_SLURRY),
                 IngredientWithSize.of (ItemStack.EMPTY),
-                new FluidTagInput(ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Tungsten), IGLib.SLURRY_TO_CRYSTAL_MB),
-                new FluidTagInput(ChemicalEnum.Ammonia.getFluidTag(BlockCategoryFlags.FLUID), IGLib.SLURRY_TO_CRYSTAL_MB),
+                SizedFluidIngredient.of(ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Tungsten), IGLib.SLURRY_TO_CRYSTAL_MB),
+                SizedFluidIngredient.of(ChemicalEnum.Ammonia.getFluidTag(BlockCategoryFlags.FLUID), IGLib.SLURRY_TO_CRYSTAL_MB),
                 null,200, 51200);
 
         // Ammonium paratungstate decomposes at ~600°C to yield WO₃ see https://en.wikipedia.org/wiki/Ammonium_paratungstate

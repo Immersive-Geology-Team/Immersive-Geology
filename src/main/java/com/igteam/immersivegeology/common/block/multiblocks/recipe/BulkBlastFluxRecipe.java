@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.common.block.multiblocks.recipe;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IESerializableRecipe;
+import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import net.minecraft.core.HolderLookup;
@@ -32,9 +33,9 @@ public class BulkBlastFluxRecipe extends IESerializableRecipe
 	public final Ingredient input;
 	public final int fluxValue;
 
-	public BulkBlastFluxRecipe(ResourceLocation id, Ingredient input, int fluxValue)
+	public BulkBlastFluxRecipe(Ingredient input, int fluxValue)
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.BULK_BLAST_FLUX, id);
+		super(TagOutput.EMPTY, IGRecipeTypes.BULK_BLAST_FLUX);
 		this.input = input;
 		this.fluxValue = fluxValue;
 	}

@@ -10,15 +10,24 @@ package com.igteam.immersivegeology.common.block.multiblocks.recipe.serializer;
 
 import blusunrize.immersiveengineering.api.ApiUtils;
 import blusunrize.immersiveengineering.api.IEApi;
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import blusunrize.immersiveengineering.api.crafting.TagOutput;
+import blusunrize.immersiveengineering.api.utils.codec.IEDualCodecs;
 import com.google.gson.JsonObject;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import malte0811.dualcodecs.DualCodec;
+import malte0811.dualcodecs.DualCodecs;
+import malte0811.dualcodecs.DualCompositeMapCodecs;
+import malte0811.dualcodecs.DualMapCodec;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
@@ -26,77 +35,70 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.conditions.ICondition.IContext;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.Nullable;
 
 import javax.print.attribute.SetOfIntegerSyntax;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class ChemicalRecipeSerializer extends IERecipeSerializer<ChemicalRecipe>
 {
+	private static final DualCodec<RegistryFriendlyByteBuf, TagOutput> OUTPUT_CODECS = new DualCodec<>(
+			TagOutput.CODECS.codec().xmap(ChemicalRecipeSerializer::resolveOutput, output -> output),
+			TagOutput.CODECS.streamCodec()
+	);
+
+	private static final MapCodec<Set<SizedFluidIngredient>> FLUID_INPUT_CODEC = RecordCodecBuilder.<Set<SizedFluidIngredient>>mapCodec(inst -> inst.group(
+			SizedFluidIngredient.FLAT_CODEC.optionalFieldOf("fluidInputA").forGetter(inputs -> inputs.stream().skip(0).findFirst()),
+			SizedFluidIngredient.FLAT_CODEC.optionalFieldOf("fluidInputB").forGetter(inputs -> inputs.stream().skip(1).findFirst()),
+			SizedFluidIngredient.FLAT_CODEC.optionalFieldOf("fluidInputC").forGetter(inputs -> inputs.stream().skip(2).findFirst())
+	).apply(inst, (inputA, inputB, inputC) -> toFluidSet(Stream.of(inputA, inputB, inputC).flatMap(Optional::stream).toList())));
+
+	private static final DualMapCodec<RegistryFriendlyByteBuf, Set<SizedFluidIngredient>> FLUID_INPUT_CODECS = new DualMapCodec<>(
+			FLUID_INPUT_CODEC,
+			SizedFluidIngredient.STREAM_CODEC.apply(ByteBufCodecs.list()).map(ChemicalRecipeSerializer::toFluidSet, ArrayList::new)
+	);
+
+	public static final DualMapCodec<RegistryFriendlyByteBuf, ChemicalRecipe> CODECS = DualCompositeMapCodecs.composite(
+			IngredientWithSize.CODECS.fieldOf("itemInput"), r -> r.itemInput,
+			FLUID_INPUT_CODECS, r -> r.fluidIn,
+			OUTPUT_CODECS.fieldOf("result"), r -> r.itemOutput,
+			IEDualCodecs.FLUID_STACK.fieldOf("fluidResult"), r -> r.fluidOutput,
+			DualCodecs.INT.fieldOf("energy"), ChemicalRecipe::getTotalProcessEnergy,
+			DualCodecs.INT.fieldOf("time"), ChemicalRecipe::getTotalProcessTime,
+			ChemicalRecipe::new
+	);
+
+	private static TagOutput resolveOutput(TagOutput output)
+	{
+		try
+		{
+			return new TagOutput(output.get());
+		}
+		catch(RuntimeException ignore)
+		{
+			return TagOutput.EMPTY;
+		}
+	}
+
+	private static Set<SizedFluidIngredient> toFluidSet(List<SizedFluidIngredient> inputs)
+	{
+		// FluidTagInput used identity equality; keep distinct input entries distinct.
+		Set<SizedFluidIngredient> fluidSet = Collections.newSetFromMap(new IdentityHashMap<>());
+		fluidSet.addAll(inputs);
+		return fluidSet;
+	}
+
+	@Override
+	protected DualMapCodec<RegistryFriendlyByteBuf, ChemicalRecipe> codecs()
+	{
+		return CODECS;
+	}
+
 	@Override
 	public ItemStack getIcon()
 	{
 		return IGMultiblockProvider.CHEMICAL_REACTOR.iconStack();
-	}
-
-	@Override
-	public ChemicalRecipe readFromJson(ResourceLocation resourceLocation, JsonObject json, IContext iContext)
-	{
-		Lazy<ItemStack> output = readOutput(json.get("result"));
-		FluidStack fluidOut = ApiUtils.jsonDeserializeFluidStack(GsonHelper.getAsJsonObject(json, "fluidResult"));
-		IngredientWithSize itemInput = IngredientWithSize.deserialize(json.get("itemInput"));
-		Set<FluidTagInput> fluidSet = new HashSet<>();
-
-		if(GsonHelper.isValidNode(json, "fluidInputA"))
-			fluidSet.add(FluidTagInput.deserialize(GsonHelper.getAsJsonObject(json, "fluidInputA")));
-		if(GsonHelper.isValidNode(json, "fluidInputB"))
-			fluidSet.add(FluidTagInput.deserialize(GsonHelper.getAsJsonObject(json, "fluidInputB")));
-		if(GsonHelper.isValidNode(json, "fluidInputC"))
-			fluidSet.add(FluidTagInput.deserialize(GsonHelper.getAsJsonObject(json, "fluidInputC")));
-
-		int energy = GsonHelper.getAsInt(json, "energy");
-		int time = GsonHelper.getAsInt(json, "time");
-
-		ItemStack outputStack = ItemStack.EMPTY;
-		try
-		{
-			outputStack = output.get();
-		} catch(RuntimeException ignore) {}
-
-		return new ChemicalRecipe(resourceLocation, itemInput, fluidSet, outputStack, fluidOut, energy, time);
-	}
-
-	@Override
-	public @Nullable ChemicalRecipe fromNetwork(ResourceLocation resourceLocation, FriendlyByteBuf buffer)
-	{
-		ItemStack output = buffer.readItem();
-		FluidStack fluidOut = FluidStack.readFromPacket(buffer);
-		IngredientWithSize itemInput = IngredientWithSize.read(buffer);
-		HashSet<FluidTagInput> fluidSet = new HashSet<>();
-		int fluid_input_size = buffer.readInt();
-		for(int i = 0; i < fluid_input_size; i++) {
-			FluidTagInput fluid = FluidTagInput.read(buffer);
-			fluidSet.add(fluid);
-		}
-
-		int energy = buffer.readInt();
-		int time = buffer.readInt();
-		return new ChemicalRecipe(resourceLocation, itemInput, fluidSet, output, fluidOut, energy, time);
-	}
-
-	@Override
-	public void toNetwork(FriendlyByteBuf buffer, ChemicalRecipe recipe)
-	{
-		
-		buffer.writeItemStack(recipe.itemOutput, false);
-		recipe.fluidOutput.writeToPacket(buffer);
-		recipe.itemInput.write(buffer);
-		buffer.writeInt(recipe.fluidIn.size());
-		recipe.fluidIn.forEach(f -> f.write(buffer));
-		buffer.writeInt(recipe.getTotalProcessEnergy());
-		int time = recipe.getTotalProcessTime();
-		buffer.writeInt(time);
 	}
 }

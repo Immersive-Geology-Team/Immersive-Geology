@@ -8,10 +8,10 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.recipe;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IERecipeTypes.TypeWithClass;
 import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
+import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import net.minecraft.resources.ResourceLocation;
@@ -22,6 +22,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,12 +33,12 @@ public class CoreDrillRecipe extends MultiblockRecipe
 	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<CoreDrillRecipe>> SERIALIZER;
 	public static final CachedRecipeList<CoreDrillRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.COREDRILL);
 
-	FluidTagInput input;
+	SizedFluidIngredient input;
 	Fluid output;
 
-	public <T extends Recipe<?>> CoreDrillRecipe(ResourceLocation id, FluidTagInput input, Fluid output)
+	public <T extends Recipe<?>> CoreDrillRecipe(SizedFluidIngredient input, Fluid output)
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.COREDRILL, id);
+		super(TagOutput.EMPTY, IGRecipeTypes.COREDRILL, 1, 0, () -> new RecipeMultiplier(() -> 1, () -> 1));
 		this.input = input;
 		this.output = output;
 	}
@@ -55,7 +56,7 @@ public class CoreDrillRecipe extends MultiblockRecipe
 		return null;
 	}
 
-	public FluidTagInput getInput()
+	public SizedFluidIngredient getInput()
 	{
 		return input;
 	}

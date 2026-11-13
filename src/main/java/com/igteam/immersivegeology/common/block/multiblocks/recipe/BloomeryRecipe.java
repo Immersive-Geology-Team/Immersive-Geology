@@ -8,11 +8,8 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.recipe;
 
-import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
+import blusunrize.immersiveengineering.api.crafting.*;
 import blusunrize.immersiveengineering.api.crafting.IERecipeTypes.TypeWithClass;
-import blusunrize.immersiveengineering.api.crafting.IESerializableRecipe;
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import net.minecraft.resources.ResourceLocation;
@@ -32,12 +29,12 @@ public class BloomeryRecipe extends MultiblockRecipe
 	public static final CachedRecipeList<BloomeryRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.BLOOMERY);
 	public int time;
 	public IngredientWithSize input;
-	public Lazy<ItemStack> result;
+	public TagOutput result;
 	Lazy<Integer> totalProcessTime;
 
-	public <T extends Recipe<?>> BloomeryRecipe(ResourceLocation id, IngredientWithSize input, Lazy<ItemStack> result, int time)
+	public <T extends Recipe<?>> BloomeryRecipe(IngredientWithSize input, TagOutput result, int time)
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.BLOOMERY, id);
+		super(TagOutput.EMPTY, IGRecipeTypes.BLOOMERY, time, 0, () -> new RecipeMultiplier(() -> 1, () -> 1));
 		this.input = input;
 		this.result = result;
 		this.time = time;

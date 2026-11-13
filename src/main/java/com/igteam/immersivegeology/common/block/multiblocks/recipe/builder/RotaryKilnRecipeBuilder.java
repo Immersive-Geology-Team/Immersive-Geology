@@ -8,53 +8,74 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.recipe.builder;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import blusunrize.immersiveengineering.api.crafting.builders.IEFinishedRecipe;
+import blusunrize.immersiveengineering.api.crafting.TagOutput;
+import com.google.common.base.Preconditions;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.CrystallizerRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 
-public class RotaryKilnRecipeBuilder extends IEFinishedRecipe<RotaryKilnRecipeBuilder>
+public class RotaryKilnRecipeBuilder extends IGMultiblockRecipeBuilder<RotaryKilnRecipeBuilder>
 {
-	protected RotaryKilnRecipeBuilder()
+	private IngredientWithSize input;
+	private final TagOutput output;
+	private Integer time;
+	private Integer heat;
+
+	private RotaryKilnRecipeBuilder(TagOutput output)
 	{
-		super(RotaryKilnRecipe.SERIALIZER.get());
+		this.output = output;
 	}
 
 	public static RotaryKilnRecipeBuilder builder(Item result)
 	{
-		return new RotaryKilnRecipeBuilder().addResult(result);
+		return new RotaryKilnRecipeBuilder(new TagOutput(result));
 	}
 
 	public static RotaryKilnRecipeBuilder builder(ItemStack result)
 	{
-		return new RotaryKilnRecipeBuilder().addResult(result);
-	}
-
-	public RotaryKilnRecipeBuilder setHeat(int heat)
-	{
-		return this.addWriter((jsonObject) -> {
-			jsonObject.addProperty("heat", heat);
-		});
+		return new RotaryKilnRecipeBuilder(new TagOutput(result));
 	}
 
 	public static RotaryKilnRecipeBuilder builder(TagKey<Item> result, int count)
 	{
-		return new RotaryKilnRecipeBuilder().addResult(new IngredientWithSize(result, count));
+		return new RotaryKilnRecipeBuilder(new TagOutput(result, count));
 	}
 
 	public RotaryKilnRecipeBuilder addInput(IngredientWithSize ingredient)
 	{
-		return addIngredient(generateSafeInputKey(), ingredient);
+		Preconditions.checkArgument(input==null, "Recipe can only have 1 input");
+		this.input = ingredient;
+		return this;
 	}
 
 	public RotaryKilnRecipeBuilder addInput(TagKey<Item> itemTag)
 	{
-		return addIngredient(generateSafeInputKey(), itemTag);
+		return addInput(new IngredientWithSize(itemTag));
+	}
+
+	public RotaryKilnRecipeBuilder setTime(int time)
+	{
+		this.time = time;
+		return this;
+	}
+
+	public RotaryKilnRecipeBuilder setHeat(int heat)
+	{
+		this.heat = heat;
+		return this;
+	}
+
+	public void build(RecipeOutput out, ResourceLocation name)
+	{
+		Preconditions.checkArgument(input!=null&&time!=null&&heat!=null, "This recipe is incomplete");
+		RotaryKilnRecipe recipe = new RotaryKilnRecipe(input, output, time, heat);
+		out.accept(name, recipe, null, getConditions());
 	}
 
 }

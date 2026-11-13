@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.logic;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.energy.AveragingEnergyStorage;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IServerTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.RedstoneControl;
@@ -17,7 +16,6 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockCon
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
-import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.client.utils.TextUtils;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.interfaces.MBOverlayText;
 import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
@@ -47,12 +45,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage;
+import net.neoforged.neoforge.capabilities.Capabilities.FluidHandler;
+import net.neoforged.neoforge.capabilities.Capabilities.ItemHandler;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.Nullable;
@@ -61,6 +63,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServerTickableComponent<FoundryLogic.State>, MBOverlayText<FoundryLogic.State>
 {
@@ -158,7 +161,7 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
 
         final ItemStack single = recipe.itemOutput.get();
         final int perCast = single.getCount();
-        final int perCastFluid = recipe.fluidIn.getAmount();
+        final int perCastFluid = recipe.fluidIn.amount();
         if(single.isEmpty()||perCast <= 0||perCastFluid <= 0) return false;
 
         if(input.getAmount() < perCastFluid) return false;
@@ -219,7 +222,7 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
         if(surplus > 0) units = Math.min(units, (TANK_VOLUME-state.storedFluid())/surplus);
         if(units <= 0||!hasAlloySpace(state, recipe.alloyOutput)) return false;
 
-        for(FluidTagInput input : recipe.alloyInputs) drainInput(state, input, input.getAmount()*units);
+        for(SizedFluidIngredient input : recipe.alloyInputs) drainInput(state, input, input.amount()*units);
         state.alloyResult = recipe.alloyOutput.copyWithAmount(perUnit*units);
         state.alloyTicks = 0;
         state.alloyTotalTicks = Math.max(1, recipe.getTotalProcessTime());
@@ -234,13 +237,13 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
         return false;
     }
 
-    private void drainInput(State state, FluidTagInput input, int amount)
+    private void drainInput(State state, SizedFluidIngredient input, int amount)
     {
         for(FluidTank tank : state.tanks)
         {
             if(amount <= 0) return;
             FluidStack fluid = tank.getFluid();
-            if(fluid.isEmpty()||!input.testIgnoringAmount(fluid)) continue;
+            if(fluid.isEmpty()||!input.ingredient().test(fluid)) continue;
             amount -= tank.drain(Math.min(amount, fluid.getAmount()), FluidAction.EXECUTE).getAmount();
         }
     }
@@ -310,7 +313,7 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
 
     private void ejectOutput(State state)
     {
-        if(state.output.getNullable()==null) return;
+        if(state.output.get()==null) return;
         IItemHandlerModifiable inventory = state.getInventory();
         for(int slot = FIRST_OUTPUT_SLOT; slot < SLOT_COUNT; slot++)
         {
@@ -334,22 +337,16 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
     }
 
     @Override
-    public <T> LazyOptional<T> getCapability(IMultiblockContext<State> ctx, CapabilityPosition position, Capability<T> cap)
+    public void registerCapabilities(CapabilityRegistrar<State> register)
     {
-        final State state = ctx.getState();
-        if(cap==ForgeCapabilities.ENERGY&&(position.side()==null||ENERGY_INPUT.equals(position)))
-            return state.energyCap.cast(ctx);
-
-        if(cap==ForgeCapabilities.FLUID_HANDLER&&FLUID_INPUT_CAP.equals(position))
-            return state.fInputCap.cast(ctx);
-
-        if(cap==ForgeCapabilities.ITEM_HANDLER)
-        {
-            if(MOLD_INPUT_CAP.equals(position)) return state.moldInputCap.cast(ctx);
-            if(ITEM_OUTPUT_CAP.equals(position)) return state.itemOutputCap.cast(ctx);
-        }
-
-        return LazyOptional.empty();
+        register.register(EnergyStorage.BLOCK, (state, position) ->
+                position.side()==null||ENERGY_INPUT.equals(position)?state.energyCap:null);
+        register.registerAt(FluidHandler.BLOCK, FLUID_INPUT_CAP, state -> state.fInputCap);
+        register.register(ItemHandler.BLOCK, (state, position) -> {
+            if(MOLD_INPUT_CAP.equals(position)) return state.moldInputCap;
+            if(ITEM_OUTPUT_CAP.equals(position)) return state.itemOutputCap;
+            return null;
+        });
     }
 
     @Nullable
@@ -429,11 +426,11 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
         public final SlotwiseItemHandler inventory;
         public final SharedTank[] tanks = SharedTank.group(TANK_COUNT);
 
-        private final StoredCapability<IFluidHandler> fInputCap;
-        private final StoredCapability<IItemHandler> moldInputCap;
-        private final StoredCapability<IItemHandler> itemOutputCap;
-        private final StoredCapability<IEnergyStorage> energyCap;
-        private final CapabilityReference<IItemHandler> output;
+        private final IFluidHandler fInputCap;
+        private final IItemHandler moldInputCap;
+        private final IItemHandler itemOutputCap;
+        private final IEnergyStorage energyCap;
+        private final Supplier<@Nullable IItemHandler> output;
 
         private final Runnable changedAndSync;
         private ItemStack castResult = ItemStack.EMPTY;
@@ -447,7 +444,7 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
 
         public State(IInitialMultiblockContext<State> ctx)
         {
-            this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.energy));
+            this.energyCap = IGReceiveOnlyEnergy.of(this.energy);
             this.output = ctx.getCapabilityAt(Capabilities.ItemHandler.BLOCK, OUTPUT_POS);
             this.inventory = SlotwiseItemHandler.makeWithGroups(
                     List.of(
@@ -459,13 +456,13 @@ public class FoundryLogic implements IMultiblockLogic<FoundryLogic.State>, IServ
                 ctx.getSyncRunnable().run();
                 ctx.getMarkDirtyRunnable().run();
             };
-            this.moldInputCap = new StoredCapability<>(new WrappingItemHandler(
+            this.moldInputCap = new WrappingItemHandler(
                     inventory, true, true, new IntRange(MOLD_SLOT, FIRST_OUTPUT_SLOT)
-            ));
-            this.itemOutputCap = new StoredCapability<>(new WrappingItemHandler(
+            );
+            this.itemOutputCap = new WrappingItemHandler(
                     inventory, false, true, new IntRange(FIRST_OUTPUT_SLOT, SLOT_COUNT)
-            ));
-            this.fInputCap = new StoredCapability<>(new ArrayFluidHandler(tanks, true, true, changedAndSync));
+            );
+            this.fInputCap = new ArrayFluidHandler(tanks, true, true, changedAndSync);
         }
 
         @Override

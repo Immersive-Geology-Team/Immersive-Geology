@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -23,6 +22,7 @@ import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -53,8 +53,8 @@ public class MaterialNeodymium extends MaterialMetal
                 getStack(ItemCategoryFlags.COMPOUND_DUST, 1),
                 ChemicalEnum.ChemicalWaste.getFluidStack(3*IGLib.SLURRY_FROM_ACID_AMOUNT),
                 IngredientWithSize.of(ItemStack.EMPTY),
-                new FluidTagInput(ChemicalEnum.Ammonia.getFluidTag(BlockCategoryFlags.FLUID), 3*IGLib.ACID_TO_SLURRY_AMOUNT),
-                new FluidTagInput(ChemicalEnum.SulfuricAcid.getSlurryTagWith(MetalEnum.Neodymium), 3*IGLib.SLURRY_FROM_ACID_AMOUNT),
+                SizedFluidIngredient.of(ChemicalEnum.Ammonia.getFluidTag(BlockCategoryFlags.FLUID), 3*IGLib.ACID_TO_SLURRY_AMOUNT),
+                SizedFluidIngredient.of(ChemicalEnum.SulfuricAcid.getSlurryTagWith(MetalEnum.Neodymium), 3*IGLib.SLURRY_FROM_ACID_AMOUNT),
                 null,200, 51200);
 
         IGMethodBuilder.decompose(this, IGStageDesignation.ROASTING).create(ItemCategoryFlags.METAL_OXIDE,
@@ -64,7 +64,7 @@ public class MaterialNeodymium extends MaterialMetal
                 ItemStack.EMPTY,
                 ChemicalEnum.HydrofluoricAcid.getSlurryWith(MetalEnum.Neodymium, IGLib.SLURRY_FROM_ACID_AMOUNT),
                 IngredientWithSize.of(getStack(ItemCategoryFlags.METAL_OXIDE, 1)),
-                new FluidTagInput(ChemicalEnum.HydrofluoricAcid.getFluidTag(BlockCategoryFlags.FLUID), 3*IGLib.ACID_TO_SLURRY_AMOUNT),
+                SizedFluidIngredient.of(ChemicalEnum.HydrofluoricAcid.getFluidTag(BlockCategoryFlags.FLUID), 3*IGLib.ACID_TO_SLURRY_AMOUNT),
                 null,null,200, 51200);
 
         IGMethodBuilder.crystallize(this, IGStageDesignation.CRYSTALLIZATION).create(

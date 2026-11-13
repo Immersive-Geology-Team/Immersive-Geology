@@ -19,8 +19,6 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockS
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.CapabilityPosition;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.RelativeBlockFace;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.ShapeType;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.util.StoredCapability;
-import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.interfaces.MBOverlayText;
 import blusunrize.immersiveengineering.common.util.EnergyHelper;
 import com.google.common.collect.ImmutableList;
@@ -37,6 +35,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -44,6 +43,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -95,7 +95,7 @@ public class AlternatorLogic implements ISkinnableMultiblockLogic<AlternatorLogi
 
     public boolean provideFlux(AlternatorLogic.State state)
     {
-        List<IEnergyStorage> presentOutputs = state.energyOutputs.stream().map(CapabilityReference::getNullable).filter(Objects::nonNull).collect(Collectors.toList());
+        List<IEnergyStorage> presentOutputs = state.energyOutputs.stream().map(Supplier::get).filter(Objects::nonNull).collect(Collectors.toList());
         if(!presentOutputs.isEmpty())
         {
             int output = Math.round(MAX_ENERGY_OUTPUT*(state.rotation_speed/(MAX_TURBINE_SPEED - 0.05f)));
@@ -118,24 +118,12 @@ public class AlternatorLogic implements ISkinnableMultiblockLogic<AlternatorLogi
     }
 
     @Override
-    public <T> LazyOptional<T> getCapability(IMultiblockContext<State> ctx, CapabilityPosition position, Capability<T> cap)
+    public void registerCapabilities(CapabilityRegistrar<State> register)
     {
-        if (cap != ForgeCapabilities.FLUID_HANDLER && cap != IRotationAcceptor.CAPABILITY) {
-            if(cap != ForgeCapabilities.ENERGY) return LazyOptional.empty();
-            if(position.side()!=null && (position.side()!=RelativeBlockFace.RIGHT || !ENERGY_OUTPUTS.contains(position.posInMultiblock())))
-            {
-                return LazyOptional.empty();
-            }
-            return ctx.getState().energyView.cast(ctx);
-        }
-        if(cap == IRotationAcceptor.CAPABILITY)
-        {
-            if(ROTATION_IN.equals(position.posInMultiblock()))
-            {
-                return ctx.getState().rotationCap.cast(ctx);
-            }
-        }
-        return LazyOptional.empty();
+        register.register(EnergyStorage.BLOCK, (state, position) ->
+                position.side()==null||position.side()==RelativeBlockFace.RIGHT&&ENERGY_OUTPUTS.contains(position.posInMultiblock())
+                        ?state.energyView:null);
+        register.registerAtBlockPos(IRotationAcceptor.CAPABILITY, ROTATION_IN, state -> state.rotationCap);
     }
 
     @Nullable
@@ -149,32 +137,30 @@ public class AlternatorLogic implements ISkinnableMultiblockLogic<AlternatorLogi
 
     public static class State implements IGMultiblockState
     {
-        private final StoredCapability<IEnergyStorage> energyView;
-        private final StoredCapability<IRotationAcceptor> rotationCap;
+        private final IEnergyStorage energyView;
+        private final IRotationAcceptor rotationCap;
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
-        private final List<CapabilityReference<IEnergyStorage>> energyOutputs;
+        private final List<Supplier<@Nullable IEnergyStorage>> energyOutputs;
         public float render_rotation = 0f;
         public float target_rotation = 0f;
         public float rotation_speed = 0f;
         private boolean request_sync = false;
 
         public State(IInitialMultiblockContext<State> ctx){
-            ImmutableList.Builder<CapabilityReference<IEnergyStorage>> outputs = ImmutableList.builder();
+            ImmutableList.Builder<Supplier<@Nullable IEnergyStorage>> outputs = ImmutableList.builder();
             for(BlockPos pos : AlternatorLogic.ENERGY_OUTPUTS)
             {
                 outputs.add(ctx.getCapabilityAt(Capabilities.EnergyStorage.BLOCK, pos, RelativeBlockFace.RIGHT));
             }
 
             this.energyOutputs = outputs.build();
-            this.rotationCap = new StoredCapability<>(new RotationAcceptor());
-            this.energyView = new StoredCapability<>(NullEnergyStorage.INSTANCE);
+            this.rotationCap = new RotationAcceptor();
+            this.energyView = NullEnergyStorage.INSTANCE;
         }
 
         @Override
         public void invalidate(@NotNull IMultiblockContext<?> context)
         {
-            this.energyView.get(context).invalidate();
-            this.rotationCap.get(context).invalidate();
         }
 
         private class RotationAcceptor implements IRotationAcceptor

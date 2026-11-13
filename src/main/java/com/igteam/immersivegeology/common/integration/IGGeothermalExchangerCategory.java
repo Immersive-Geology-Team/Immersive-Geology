@@ -23,6 +23,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.fluids.FluidType;
 
+import java.util.Arrays;
+
 public class IGGeothermalExchangerCategory extends IGRecipeCategory<GeothermalExchangerRecipe>
 {
 	private static IDrawableStatic flame_icon;
@@ -41,10 +43,10 @@ public class IGGeothermalExchangerCategory extends IGRecipeCategory<GeothermalEx
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, GeothermalExchangerRecipe recipe, IFocusGroup focuses)
 	{
-		int tankSize = Math.max(2*FluidType.BUCKET_VOLUME,  Math.max(recipe.fluidIn.getAmount(),recipe.fluidIn.getAmount()));
+		int tankSize = Math.max(2*FluidType.BUCKET_VOLUME,  Math.max(recipe.fluidIn.amount(),recipe.fluidIn.amount()));
 		builder.addSlot(RecipeIngredientRole.INPUT, 11, 23)
 				.setFluidRenderer(tankSize, false, 16, 55)
-				.addIngredients(NeoForgeTypes.FLUID_STACK, recipe.fluidIn.getMatchingFluidStacks())
+				.addIngredients(NeoForgeTypes.FLUID_STACK, Arrays.asList(recipe.fluidIn.getFluids()))
 				.addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
 
 		if(!recipe.fluidOutput.get().isEmpty())

@@ -8,9 +8,9 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.recipe;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
+import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import net.minecraft.resources.ResourceLocation;
@@ -21,6 +21,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 import javax.annotation.Nullable;
@@ -32,13 +33,13 @@ public class GeothermalExchangerRecipe extends MultiblockRecipe
 	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<GeothermalExchangerRecipe>> SERIALIZER;
 	public static final CachedRecipeList<GeothermalExchangerRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.GEOTHERMAL_EXCHANGER);
 	public final Lazy<FluidStack> fluidOutput;
-	public final FluidTagInput fluidIn;
+	public final SizedFluidIngredient fluidIn;
 	Lazy<Integer> totalProcessEnergy;
 	Lazy<Integer> totalProcessTime;
 
-	public <T extends Recipe<?>> GeothermalExchangerRecipe(ResourceLocation id, FluidTagInput fluidInput, Lazy<FluidStack> fluid_output, int energy, int time)
+	public <T extends Recipe<?>> GeothermalExchangerRecipe(SizedFluidIngredient fluidInput, Lazy<FluidStack> fluid_output, int energy, int time)
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.GEOTHERMAL_EXCHANGER, id);
+		super(TagOutput.EMPTY, IGRecipeTypes.GEOTHERMAL_EXCHANGER, time, energy, () -> new RecipeMultiplier(() -> 1, () -> 1));
 		this.fluidIn = fluidInput;
 		totalProcessEnergy = Lazy.of(() -> energy);
 		totalProcessTime = Lazy.of(() -> time);
@@ -71,11 +72,11 @@ public class GeothermalExchangerRecipe extends MultiblockRecipe
 		return totalProcessTime.get();
 	}
 
-	public static GeothermalExchangerRecipe findRecipe(Level level, FluidStack input)
+	public static RecipeHolder<GeothermalExchangerRecipe> findRecipe(Level level, FluidStack input)
 	{
 		for(RecipeHolder<GeothermalExchangerRecipe> recipe : RECIPES.getRecipes(level))
 			if(recipe.value().fluidIn.test(input))
-				return recipe.value();
+				return recipe;
 		return null;
 	}
 
@@ -110,6 +111,6 @@ public class GeothermalExchangerRecipe extends MultiblockRecipe
 
 	public boolean isCooling()
 	{
-		return fluidIn.getRandomizedExampleStack(0).getFluid().getFluidType().getTemperature() > fluidOutput.get().getFluid().getFluidType().getTemperature();
+		return fluidIn.getFluids()[0].getFluid().getFluidType().getTemperature() > fluidOutput.get().getFluid().getFluidType().getTemperature();
 	}
 }

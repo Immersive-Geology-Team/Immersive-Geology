@@ -1,6 +1,5 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
-            
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
+
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.common.register.IEItems;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
@@ -14,6 +13,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.Tags.Biomes;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -49,8 +49,8 @@ public class MaterialCarnallite extends MaterialEvaporateMineral
                 new ItemStack(IEItems.Misc.FERTILIZER.get()),
                 ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Magnesium, 125),
                 IngredientWithSize.of(ItemStack.EMPTY),
-                new FluidTagInput(ChemicalEnum.Brine.getSlurryTagWith(BlockCategoryFlags.SLURRY, this), 125),
-                new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), 125),
+                SizedFluidIngredient.of(ChemicalEnum.Brine.getSlurryTagWith(BlockCategoryFlags.SLURRY, this), 125),
+                SizedFluidIngredient.of(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), 125),
                 null,
                 200, 51200);
 
@@ -58,8 +58,8 @@ public class MaterialCarnallite extends MaterialEvaporateMineral
                 new ItemStack(IEItems.Misc.FERTILIZER.get()),
                 ChemicalEnum.HydrochloricAcid.getFluidStack(125),
                 IngredientWithSize.of(ItemStack.EMPTY),
-                new FluidTagInput(ChemicalEnum.Brine.getSlurryTagWith(BlockCategoryFlags.SLURRY, this), 125),
-                new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), 125),
+                SizedFluidIngredient.of(ChemicalEnum.Brine.getSlurryTagWith(BlockCategoryFlags.SLURRY, this), 125),
+                SizedFluidIngredient.of(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), 125),
                 null,
                 200, 51200);
     }

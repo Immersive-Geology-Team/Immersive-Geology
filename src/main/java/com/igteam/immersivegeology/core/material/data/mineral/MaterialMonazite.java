@@ -1,6 +1,5 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -17,6 +16,7 @@ import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.neoforged.neoforge.common.Tags.Biomes;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -68,14 +68,14 @@ public class MaterialMonazite extends MaterialMineral {
                 getStack(ItemCategoryFlags.SEDIMENT, 3),
                 ChemicalEnum.SulfuricAcid.getSlurryWith(MetalEnum.Neodymium, 3*IGLib.SLURRY_FROM_ACID_AMOUNT),
                 IngredientWithSize.of(getStack(ItemCategoryFlags.POWDER, 3)),
-                new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), 3*IGLib.ACID_TO_SLURRY_AMOUNT),
+                SizedFluidIngredient.of(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), 3*IGLib.ACID_TO_SLURRY_AMOUNT),
                 null, null,200, 51200);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create(getName()+"ore_to_slurry",
                 MetalEnum.Thorium.getStack(ItemCategoryFlags.METAL_OXIDE, 1),
                 ChemicalEnum.ChemicalWaste.getSlurryWith(MineralEnum.Monazite, IGLib.SLURRY_FROM_ACID_AMOUNT),
                 IngredientWithSize.of(getStack(ItemCategoryFlags.SEDIMENT, 1)),
-                new FluidTagInput(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
+                SizedFluidIngredient.of(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
                 null, null,200, 51200);
     }
 

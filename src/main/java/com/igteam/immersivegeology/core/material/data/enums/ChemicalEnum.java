@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.core.material.data.enums;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import com.igteam.immersivegeology.core.material.data.chemical.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -17,6 +16,7 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.HashSet;
 import java.util.List;
@@ -42,13 +42,13 @@ public enum ChemicalEnum implements MaterialInterface<MaterialChemical>
         this.material = m;
     }
 
-    public static int getChemicalDamage(FluidTagInput fluidTagInput)
+    public static int getChemicalDamage(SizedFluidIngredient fluidTagInput)
     {
-        FluidTagInput base = new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(), fluidTagInput.getAmount());
+        SizedFluidIngredient base = SizedFluidIngredient.of(ChemicalEnum.HydrochloricAcid.getFluidTag(), fluidTagInput.amount());
         // I'm only fine with this code as it's run once on my end and isn't really used on the end users.
         // Leaving this open for expanding incase I'd like to have different levels of acid damage.
         // Checking Fluid Tags is really annoying in Data Generation, so we have to do this work around.
-        boolean isBase = base.serialize().toString().equals(fluidTagInput.serialize().toString());
+        boolean isBase = base.equals(fluidTagInput);
         if(isBase) return 1;
         return 0;
     }

@@ -8,9 +8,10 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.recipe;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
+import blusunrize.immersiveengineering.api.crafting.TagOutput;
+import blusunrize.immersiveengineering.api.crafting.TagOutputList;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import net.minecraft.core.NonNullList;
@@ -22,14 +23,15 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 public class CentrifugeRecipe extends MultiblockRecipe
 {
 	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<CentrifugeRecipe>> SERIALIZER;
 	public static final CachedRecipeList<CentrifugeRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.CENTRIFUGE);
-	public final Lazy<ItemStack> itemOutput;
-	public final FluidTagInput fluidIn;
+	public final TagOutput itemOutput;
+	public final SizedFluidIngredient fluidIn;
 
 	public final Lazy<FluidStack> primaryFluidOutput;
 	public final Lazy<FluidStack> secondaryFluidOutput;
@@ -37,9 +39,9 @@ public class CentrifugeRecipe extends MultiblockRecipe
 	Lazy<Integer> totalProcessEnergy;
 	Lazy<Integer> totalProcessTime;
 
-	public <T extends Recipe<?>> CentrifugeRecipe(ResourceLocation id, FluidTagInput fluidInput, Lazy<ItemStack> output, Lazy<FluidStack> primaryFluidOutput, Lazy<FluidStack> secondaryFluidOutput, int energy, int time)
+	public <T extends Recipe<?>> CentrifugeRecipe(SizedFluidIngredient fluidInput, TagOutput output, Lazy<FluidStack> primaryFluidOutput, Lazy<FluidStack> secondaryFluidOutput, int energy, int time)
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.CENTRIFUGE, id);
+		super(TagOutput.EMPTY, IGRecipeTypes.CENTRIFUGE, time, energy, () -> new RecipeMultiplier(() -> 1, () -> 1));
 		this.itemOutput = output;
 		this.fluidIn = fluidInput;
 		totalProcessEnergy = Lazy.of(() -> energy);
@@ -47,7 +49,7 @@ public class CentrifugeRecipe extends MultiblockRecipe
 		this.primaryFluidOutput = primaryFluidOutput;
 		this.secondaryFluidOutput = secondaryFluidOutput;
 
-		this.outputList = Lazy.of(() -> NonNullList.of(ItemStack.EMPTY, this.itemOutput.get()));
+		this.outputList = new TagOutputList(this.itemOutput);
 	}
 
 	@Override
@@ -68,11 +70,11 @@ public class CentrifugeRecipe extends MultiblockRecipe
 		return totalProcessTime.get();
 	}
 
-	public static CentrifugeRecipe findRecipe(Level level, FluidStack input)
+	public static RecipeHolder<CentrifugeRecipe> findRecipe(Level level, FluidStack input)
 	{
 		for(RecipeHolder<CentrifugeRecipe> recipe : RECIPES.getRecipes(level))
 			if(recipe.value().fluidIn.test(input))
-				return recipe.value();
+				return recipe;
 		return null;
 	}
 

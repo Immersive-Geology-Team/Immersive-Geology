@@ -1,6 +1,5 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
-import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
 import blusunrize.immersiveengineering.common.register.IEItems;
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;

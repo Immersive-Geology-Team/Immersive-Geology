@@ -53,9 +53,9 @@ public class GeothermalConversionRecipe extends IESerializableRecipe implements 
 	@Nullable
 	public Integer lowerHeat;
 
-	public <T extends Recipe<?>> GeothermalConversionRecipe(ResourceLocation id, Supplier<Block> transitionaryBlock, int blockHeat, @Nullable Pair<Block, Integer> upperBound, @Nullable Pair<Block, Integer> lowerBound)
+	public <T extends Recipe<?>> GeothermalConversionRecipe(Supplier<Block> transitionaryBlock, int blockHeat, @Nullable Pair<Block, Integer> upperBound, @Nullable Pair<Block, Integer> lowerBound)
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.GEOTHERMAL_EXCHANGER_CONVERTION, id);
+		super(TagOutput.EMPTY, IGRecipeTypes.GEOTHERMAL_EXCHANGER_CONVERTION);
 		this.transitionBlock = transitionaryBlock;
 		this.blockHeat = blockHeat;
 

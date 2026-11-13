@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.common.integration;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.common.util.compat.jei.JEIHelper;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.FoundryAlloyRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -23,7 +22,9 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class IGFoundryAlloyCategory extends IGRecipeCategory<FoundryAlloyRecipe>
@@ -53,13 +54,13 @@ public class IGFoundryAlloyCategory extends IGRecipeCategory<FoundryAlloyRecipe>
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, FoundryAlloyRecipe recipe, IFocusGroup focuses)
 	{
-		List<FluidTagInput> inputs = recipe.alloyInputs;
+		List<SizedFluidIngredient> inputs = recipe.alloyInputs;
 		for(int i = 0; i < inputs.size(); i++)
 		{
-			FluidTagInput input = inputs.get(i);
+			SizedFluidIngredient input = inputs.get(i);
 			builder.addSlot(RecipeIngredientRole.INPUT, INPUT_X+(i%INPUT_COLUMNS)*INPUT_PITCH, INPUT_Y+(i/INPUT_COLUMNS)*INPUT_PITCH)
-					.setFluidRenderer(input.getAmount(), false, 16, 16)
-					.addIngredients(NeoForgeTypes.FLUID_STACK, input.getMatchingFluidStacks())
+					.setFluidRenderer(input.amount(), false, 16, 16)
+					.addIngredients(NeoForgeTypes.FLUID_STACK, Arrays.asList(input.getFluids()))
 					.setBackground(JEIHelper.slotDrawable, -1, -1)
 					.addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
 		}

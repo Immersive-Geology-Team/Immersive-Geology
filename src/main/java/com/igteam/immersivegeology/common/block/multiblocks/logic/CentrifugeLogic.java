@@ -18,7 +18,6 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLev
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
-import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.client.utils.TextUtils;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.blockimpl.MultiblockLevel;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.interfaces.MBOverlayText;
@@ -49,10 +48,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage;
+import net.neoforged.neoforge.capabilities.Capabilities.FluidHandler;
+import net.neoforged.neoforge.capabilities.Capabilities.ItemHandler;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
@@ -127,23 +130,23 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
 
         final FluidStack input = state.tank.getFluid();
         if(input.isEmpty()) return;
-        CentrifugeRecipe recipe = CentrifugeRecipe.findRecipe(level, input);
+        RecipeHolder<CentrifugeRecipe> recipe = CentrifugeRecipe.findRecipe(level, input);
         if(recipe == null) return;
         MultiblockProcessInMachine<CentrifugeRecipe> process = new MultiblockProcessInMachine<>(recipe);
         if(input.isEmpty()) process.setInputTanks(0);
 
         if(state.processor.addProcessToQueue(process, level, true))
         {
-            state.tank.drain(recipe.fluidIn.getAmount(), FluidAction.EXECUTE);
+            state.tank.drain(recipe.value().fluidIn.amount(), FluidAction.EXECUTE);
             state.processor.addProcessToQueue(process, level, false);
         }
     }
 
-    private void drainOutputTank(IMultiblockContext<CentrifugeLogic.State> context, CapabilityReference<IFluidHandler> outputRef, FluidTank tank)
+    private void drainOutputTank(IMultiblockContext<CentrifugeLogic.State> context, Supplier<@Nullable IFluidHandler> outputRef, FluidTank tank)
     {
         int outSize = Math.min(FluidType.BUCKET_VOLUME, tank.getFluidAmount());
         FluidStack out = Utils.copyFluidStackWithAmount(tank.getFluid(), outSize, false);
-        IFluidHandler output = outputRef.getNullable();
+        IFluidHandler output = outputRef.get();
 
         if(output==null)
             return;
@@ -164,38 +167,17 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
     }
 
     @Override
-    public <T> LazyOptional<T> getCapability(IMultiblockContext<CentrifugeLogic.State> ctx, CapabilityPosition position, Capability<T> cap)
+    public void registerCapabilities(CapabilityRegistrar<State> register)
     {
-        final CentrifugeLogic.State state = ctx.getState();
-        if(cap == ForgeCapabilities.ENERGY && (position.side()==null || ENERGY_INPUTS.contains(position)))
-        {
-            return state.energyCap.cast(ctx);
-        }
-
-        if(cap == ForgeCapabilities.FLUID_HANDLER)
-        {
-            if(FLUID_INPUT_CAP.equals(position))
-            {
-                return state.fInputCap.cast(ctx);
-            }
-
-            if(FLUID_PRIMARY_OUTPUT_CAP.equals(position))
-            {
-                return state.fPrimaryOutput.cast(ctx);
-            }
-            if(FLUID_SECONDARY_OUTPUT_CAP.equals(position))
-            {
-                return state.fSecondaryOutput.cast(ctx);
-            }
-        }
-
-        if(cap==ForgeCapabilities.ITEM_HANDLER)
-        {
-            if(ITEM_OUTPUT_CAP.equals(position))
-                return state.itemOutputCap.cast(ctx);
-        }
-
-        return LazyOptional.empty();
+        register.register(EnergyStorage.BLOCK, (state, position) ->
+                position.side()==null||ENERGY_INPUTS.contains(position)?state.energyCap:null);
+        register.register(FluidHandler.BLOCK, (state, position) -> {
+            if(FLUID_INPUT_CAP.equals(position)) return state.fInputCap;
+            if(FLUID_PRIMARY_OUTPUT_CAP.equals(position)) return state.fPrimaryOutput;
+            if(FLUID_SECONDARY_OUTPUT_CAP.equals(position)) return state.fSecondaryOutput;
+            return null;
+        });
+        register.registerAt(ItemHandler.BLOCK, ITEM_OUTPUT_CAP, state -> state.itemOutputCap);
     }
 
     @Override
@@ -229,13 +211,13 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
 
         public final FluidTank tank = new FluidTank(TANK_VOLUME);
-        private final StoredCapability<IFluidHandler> fInputCap;
-        private final StoredCapability<IEnergyStorage> energyCap;
+        private final IFluidHandler fInputCap;
+        private final IEnergyStorage energyCap;
         private final DroppingMultiblockOutput output;
-        private final StoredCapability<IItemHandler> itemOutputCap;
+        private final IItemHandler itemOutputCap;
 
-        private final CapabilityReference<IFluidHandler> fluidOutputPrimary, fluidOutputSecondary;
-        private final StoredCapability<IFluidHandler> fPrimaryOutput, fSecondaryOutput;
+        private final Supplier<@Nullable IFluidHandler> fluidOutputPrimary, fluidOutputSecondary;
+        private final IFluidHandler fPrimaryOutput, fSecondaryOutput;
 
         public final FluidTank primary_output_tank = new FluidTank(TANK_VOLUME);
         public final FluidTank secondary_output_tank = new FluidTank(TANK_VOLUME);
@@ -248,7 +230,7 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
         {
             final Supplier<@Nullable Level> getLevel = ctx.levelSupplier();
             this.rotation = 0;
-            this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.energy));
+            this.energyCap = IGReceiveOnlyEnergy.of(this.energy);
             this.output = new DroppingMultiblockOutput(OUTPUT_POS, ctx);
             this.processor = new MultiblockProcessor<>(
                 16, 0, 8, ctx.getMarkDirtyRunnable(), CentrifugeRecipe.RECIPES::getById
@@ -260,13 +242,13 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
                 ctx.getSyncRunnable().run();
                 ctx.getMarkDirtyRunnable().run();
             };
-            this.itemOutputCap = new StoredCapability<>(new WrappingItemHandler(
+            this.itemOutputCap = new WrappingItemHandler(
                     inventory, false, true, new IntRange(0, 1)
-            ));
-            this.fInputCap = new StoredCapability<>(new ArrayFluidHandler(tank, true, true, changedAndSync));
+            );
+            this.fInputCap = new ArrayFluidHandler(tank, true, true, changedAndSync);
 
-            this.fPrimaryOutput = new StoredCapability<>(new ArrayFluidHandler(primary_output_tank, true, false, changedAndSync));
-            this.fSecondaryOutput = new StoredCapability<>(new ArrayFluidHandler(secondary_output_tank, true, false, changedAndSync));
+            this.fPrimaryOutput = new ArrayFluidHandler(primary_output_tank, true, false, changedAndSync);
+            this.fSecondaryOutput = new ArrayFluidHandler(secondary_output_tank, true, false, changedAndSync);
 
             this.fluidOutputPrimary = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, new MultiblockFace(FLUID_PRIMARY_OUTPUT_CAP.side(), FLUID_PRIMARY_OUTPUT_CAP.posInMultiblock().above()));
             this.fluidOutputSecondary = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, new MultiblockFace(FLUID_SECONDARY_OUTPUT_CAP.side(), FLUID_SECONDARY_OUTPUT_CAP.posInMultiblock().above()));
@@ -364,12 +346,6 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
         @Override
         public void invalidate(@NotNull IMultiblockContext<?> context)
         {
-            this.fPrimaryOutput.get(context).invalidate();
-            this.fSecondaryOutput.get(context).invalidate();
-            this.itemOutputCap.get(context).invalidate();
-            this.fInputCap.get(context).invalidate();
-            this.energyCap.get(context).invalidate();
-            this.itemOutputCap.get(context).invalidate();
         }
     }
 

@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.common.recipe;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import com.google.gson.JsonObject;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
@@ -20,7 +19,14 @@ import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import malte0811.dualcodecs.DualMapCodec;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.Item;
@@ -34,17 +40,10 @@ import java.util.Locale;
 
 public class IGGeoSerializer extends IERecipeSerializer<IGGeoRecipe>
 {
-	@Override
-	public ItemStack getIcon()
-	{
-		return new ItemStack(MineralEnum.Unobtania.getOreBlock(StoneEnum.MCStone, OreRichness.NORMAL).asIGBlock());
-	}
-
-	@Override
-	public IGGeoRecipe readFromJson (ResourceLocation resourceLocation, JsonObject json, IContext iContext)
-	{
-		int material_index = GsonHelper.getAsInt(json, "material_index");
-		int material_type = GsonHelper.getAsInt(json, "material_type");
+	public static final MapCodec<IGGeoRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
+			Codec.INT.fieldOf("material_index").forGetter(IGGeoSerializer::getMaterialIndex),
+			Codec.INT.fieldOf("material_type").forGetter(IGGeoSerializer::getMaterialType)
+	).apply(inst, (material_index, material_type) -> {
 		GeologyMaterial material = switch(material_type)
 		{
 			case 0 -> MineralEnum.values()[material_index].instance();
@@ -52,30 +51,41 @@ public class IGGeoSerializer extends IERecipeSerializer<IGGeoRecipe>
 			default -> null;
 		};
 		if(material == null) throw new IllegalArgumentException();
-		return new IGGeoRecipe(resourceLocation, material);
+		return new IGGeoRecipe(material);
+	}));
+
+	public static final StreamCodec<RegistryFriendlyByteBuf, IGGeoRecipe> STREAM_CODEC = StreamCodec.composite(
+			ByteBufCodecs.INT, IGGeoSerializer::getMaterialType,
+			ByteBufCodecs.INT, IGGeoSerializer::getMaterialIndex,
+			(type, index) -> {
+				GeologyMaterial material = type == 1 ? MetalEnum.values()[index].instance() : MineralEnum.values()[index].instance();
+				return new IGGeoRecipe(material);
+			}
+	);
+
+	public static final DualMapCodec<RegistryFriendlyByteBuf, IGGeoRecipe> CODECS = new DualMapCodec<>(CODEC, STREAM_CODEC);
+
+	private static int getMaterialType(IGGeoRecipe recipe)
+	{
+		return recipe.material instanceof MaterialMineral?0: 1;
 	}
 
-	@Override
-	public @Nullable IGGeoRecipe fromNetwork (ResourceLocation resourceLocation, FriendlyByteBuf buffer)
+	private static int getMaterialIndex(IGGeoRecipe recipe)
 	{
-		int type = buffer.readInt();
-		int index = buffer.readInt();
-		GeologyMaterial material = type == 1 ? MetalEnum.values()[index].instance() : MineralEnum.values()[index].instance();
- 		return new IGGeoRecipe(resourceLocation, material);
-	}
-
-	@Override
-	public void toNetwork (FriendlyByteBuf buffer, IGGeoRecipe recipe)
-	{
-		GeologyMaterial material = recipe.material;
-		int type = material instanceof MaterialMineral ? 0 : 1;
-
-		String input = material.getName();
+		String input = recipe.material.getName();
 		input = input.substring(0,1).toUpperCase(Locale.ROOT) + input.substring(1);
+		return getMaterialType(recipe)==1?MetalEnum.valueOf(input).ordinal(): MineralEnum.valueOf(input).ordinal();
+	}
 
-		int index = type == 1 ? MetalEnum.valueOf(input).ordinal() : MineralEnum.valueOf(input).ordinal();
+	@Override
+	protected DualMapCodec<RegistryFriendlyByteBuf, IGGeoRecipe> codecs()
+	{
+		return CODECS;
+	}
 
-		buffer.writeInt(type);
-		buffer.writeInt(index);
+	@Override
+	public ItemStack getIcon()
+	{
+		return new ItemStack(MineralEnum.Unobtania.getOreBlock(StoneEnum.MCStone, OreRichness.NORMAL).asIGBlock());
 	}
 }

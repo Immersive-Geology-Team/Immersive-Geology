@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -27,6 +26,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -60,8 +60,8 @@ public class MaterialSodium extends MaterialMetal
 				"solution_" + getName() + "_to_compound_dust",
 				getStack(ItemCategoryFlags.COMPOUND_DUST, 3), //STACK
 				new FluidStack(Fluids.EMPTY, 0), IngredientWithSize.of(ItemStack.EMPTY),
-				new FluidTagInput(ChemicalEnum.ChemicalWaste.getCloudySlurryTagWith(MetalEnum.Sodium), IGLib.ACID_RECOVERED_FROM_SLURRY),
-				new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(), IGLib.ACID_RECOVERED_FROM_SLURRY),
+				SizedFluidIngredient.of(ChemicalEnum.ChemicalWaste.getCloudySlurryTagWith(MetalEnum.Sodium), IGLib.ACID_RECOVERED_FROM_SLURRY),
+				SizedFluidIngredient.of(ChemicalEnum.SulfuricAcid.getFluidTag(), IGLib.ACID_RECOVERED_FROM_SLURRY),
 				null, 200, 51200);
 
 		IGMethodBuilder.mixing(this, IGStageDesignation.SYNTHESIS).create(ItemCategoryFlags.METAL_OXIDE,

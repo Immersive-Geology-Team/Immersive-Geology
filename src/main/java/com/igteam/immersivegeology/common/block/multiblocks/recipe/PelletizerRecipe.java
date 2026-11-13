@@ -8,9 +8,7 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.recipe;
 
-import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
+import blusunrize.immersiveengineering.api.crafting.*;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import net.minecraft.core.NonNullList;
@@ -29,19 +27,19 @@ public class PelletizerRecipe extends MultiblockRecipe
 {
 	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<PelletizerRecipe>> SERIALIZER;
 	public static final CachedRecipeList<PelletizerRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.PELLETIZER);
-	public final Lazy<ItemStack> itemOutput;
+	public final TagOutput itemOutput;
 	public final IngredientWithSize itemIn;
 	Lazy<Integer> totalProcessEnergy;
 	Lazy<Integer> totalProcessTime;
 
-	public <T extends Recipe<?>> PelletizerRecipe(ResourceLocation id, IngredientWithSize input, Lazy<ItemStack> output, int energy, int time)
+	public <T extends Recipe<?>> PelletizerRecipe(IngredientWithSize input, TagOutput output, int energy, int time)
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.PELLETIZER, id);
+		super(TagOutput.EMPTY, IGRecipeTypes.PELLETIZER, time, energy, () -> new RecipeMultiplier(() -> 1, () -> 1));
 		this.itemOutput = output;
 		this.itemIn = input;
 		totalProcessEnergy = Lazy.of(() -> energy);
 		totalProcessTime = Lazy.of(() -> time);
-		this.outputList = Lazy.of(() -> NonNullList.of(ItemStack.EMPTY, this.itemOutput.get()));
+		this.outputList = new TagOutputList(this.itemOutput);
 	}
 
 	@Override
@@ -68,11 +66,11 @@ public class PelletizerRecipe extends MultiblockRecipe
 		return totalProcessTime.get();
 	}
 
-	public static PelletizerRecipe findRecipe(Level level, ItemStack input)
+	public static RecipeHolder<PelletizerRecipe> findRecipe(Level level, ItemStack input)
 	{
 		for(RecipeHolder<PelletizerRecipe> recipe : RECIPES.getRecipes(level))
 			if(recipe.value().itemIn.test(input))
-				return recipe.value();
+				return recipe;
 		return null;
 	}
 

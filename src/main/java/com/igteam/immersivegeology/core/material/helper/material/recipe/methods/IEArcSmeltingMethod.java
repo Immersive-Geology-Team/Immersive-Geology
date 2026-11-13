@@ -8,8 +8,7 @@
 
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import blusunrize.immersiveengineering.api.crafting.builders.ArcFurnaceRecipeBuilder;
+import blusunrize.immersiveengineering.api.crafting.*;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import blusunrize.lib.manual.gui.ManualScreen;
@@ -184,19 +183,13 @@ public class IEArcSmeltingMethod extends IGRecipeMethod
 	{
 		try
 		{
-			ArcFurnaceRecipeBuilder builder = ArcFurnaceRecipeBuilder.builder(output);
-			if(!slag.isEmpty()) builder.addSlag(slag);
-			builder.setEnergy(energy);
-			builder.setTime(time);
-			builder.addIngredient("input", input);
-			additives.forEach(builder::addMultiInput);
-
+			List<StackWithChance> secondaryOutputs = new ArrayList<>();
 			for(Pair<TagKey<Item>, Float> entry : secondaries)
-			{
-				builder.addSecondary(entry.getFirst(), entry.getSecond());
-			}
-
-			builder.build(consumer, getLocation());
+				secondaryOutputs.add(new StackWithChance(new TagOutput(entry.getFirst()), entry.getSecond()));
+			ArcFurnaceRecipe recipe = new ArcFurnaceRecipe(
+					new TagOutputList(output.isEmpty()?TagOutput.EMPTY:new TagOutput(output)),
+					slag.isEmpty()?TagOutput.EMPTY:new TagOutput(slag), secondaryOutputs, time, energy, input, additives);
+			consumer.accept(getLocation(), recipe, null);
 			return true;
 		} catch(Exception e)
 		{

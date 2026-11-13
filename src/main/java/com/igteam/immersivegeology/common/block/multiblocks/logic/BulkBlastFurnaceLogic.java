@@ -20,7 +20,6 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockCon
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
-import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.client.utils.TextUtils;
 import blusunrize.immersiveengineering.common.blocks.metal.BlastFurnacePreheaterBlockEntity;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.NonMirrorableWithActiveBlock;
@@ -59,6 +58,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.Capabilities.FluidHandler;
+import net.neoforged.neoforge.capabilities.Capabilities.ItemHandler;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.IFluidTank;
@@ -246,8 +247,8 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 		if(refining)
 		{
 			drained = state.metalTank.getFluidAmount();
-			if(drained < recipe.meltInput.getAmount()) return null;
-			units = drained/(float)recipe.meltInput.getAmount();
+			if(drained < recipe.meltInput.amount()) return null;
+			units = drained/(float)recipe.meltInput.amount();
 		}
 		else
 		{
@@ -417,9 +418,9 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 		context.requestMasterBESync();
 	}
 
-	private void pushFluid(IMultiblockContext<State> context, FluidTank tank, CapabilityReference<IFluidHandler> outputRef)
+	private void pushFluid(IMultiblockContext<State> context, FluidTank tank, Supplier<@Nullable IFluidHandler> outputRef)
 	{
-		IFluidHandler output = outputRef.getNullable();
+		IFluidHandler output = outputRef.get();
 		if(output==null) return;
 
 		int outSize = Math.min(FluidType.BUCKET_VOLUME, tank.getFluidAmount());
@@ -455,17 +456,14 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 	}
 
 	@Override
-	public <T> LazyOptional<T> getCapability(IMultiblockContext<State> ctx, CapabilityPosition position, Capability<T> cap)
+	public void registerCapabilities(CapabilityRegistrar<State> register)
 	{
-		final State state = ctx.getState();
-		if(cap==ForgeCapabilities.ITEM_HANDLER&&ITEM_INPUT_CAP.equalsOrNullFace(position))
-			return state.itemInputCap.cast(ctx);
-		if(cap==ForgeCapabilities.FLUID_HANDLER)
-		{
-			if(METAL_OUTPUT_CAP.equals(position)) return state.metalCap.cast(ctx);
-			if(SLAG_OUTPUT_CAP.equals(position)) return state.slagCap.cast(ctx);
-		}
-		return LazyOptional.empty();
+		register.registerAtOrNull(ItemHandler.BLOCK, ITEM_INPUT_CAP, state -> state.itemInputCap);
+		register.register(FluidHandler.BLOCK, (state, position) -> {
+			if(METAL_OUTPUT_CAP.equals(position)) return state.metalCap;
+			if(SLAG_OUTPUT_CAP.equals(position)) return state.slagCap;
+			return null;
+		});
 	}
 
 	@Override
@@ -544,11 +542,11 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 		private final SharedTank metalTank = new SharedTank();
 		private final SharedTank slagTank = new SharedTank();
 
-		private final StoredCapability<IItemHandler> itemInputCap;
-		private final StoredCapability<IFluidHandler> metalCap;
-		private final StoredCapability<IFluidHandler> slagCap;
-		private final CapabilityReference<IFluidHandler> metalOutput;
-		private final CapabilityReference<IFluidHandler> slagOutput;
+		private final IItemHandler itemInputCap;
+		private final IFluidHandler metalCap;
+		private final IFluidHandler slagCap;
+		private final Supplier<@Nullable IFluidHandler> metalOutput;
+		private final Supplier<@Nullable IFluidHandler> slagOutput;
 
 		private boolean active = false;
 		private float heat = 0;
@@ -584,11 +582,11 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 			this.inventory = new SlotwiseItemHandler(
 					Collections.nCopies(NUM_INPUT_SLOTS, new IOConstraint(true, i -> isChargeComponent(levelGetter.get(), i))), markDirty
 			);
-			this.itemInputCap = new StoredCapability<>(new WrappingItemHandler(
+			this.itemInputCap = new WrappingItemHandler(
 					inventory, true, false, new IntRange(0, NUM_INPUT_SLOTS)
-			));
-			this.metalCap = new StoredCapability<>(new ArrayFluidHandler(new IFluidTank[]{metalTank}, true, false, markDirty));
-			this.slagCap = new StoredCapability<>(new ArrayFluidHandler(new IFluidTank[]{slagTank}, true, false, markDirty));
+			);
+			this.metalCap = new ArrayFluidHandler(new IFluidTank[]{metalTank}, true, false, markDirty);
+			this.slagCap = new ArrayFluidHandler(new IFluidTank[]{slagTank}, true, false, markDirty);
 			this.metalOutput = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, neighbourOf(METAL_OUTPUT));
 			this.slagOutput = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, neighbourOf(SLAG_OUTPUT));
 		}
@@ -810,9 +808,6 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 		@Override
 		public void invalidate(@NotNull IMultiblockContext<?> ctx)
 		{
-			this.itemInputCap.get(ctx).invalidate();
-			this.metalCap.get(ctx).invalidate();
-			this.slagCap.get(ctx).invalidate();
 		}
 	}
 }

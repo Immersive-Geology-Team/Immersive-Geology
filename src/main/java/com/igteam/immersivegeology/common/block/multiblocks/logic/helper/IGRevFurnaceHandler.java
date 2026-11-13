@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.common.block.multiblocks.logic.helper;
 
 import blusunrize.immersiveengineering.api.crafting.IESerializableRecipe;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RevFurnaceLogic;
@@ -551,10 +552,10 @@ public class IGRevFurnaceHandler<R extends IESerializableRecipe>
 
 	public static class RevOutputSlot<R>
 	{
-		private final Function<R, Lazy<ItemStack>> getFromRecipe;
+		private final Function<R, TagOutput> getFromRecipe;
 		private final int slotIndex;
 
-		public RevOutputSlot(Function<R, Lazy<ItemStack>> getFromRecipe, int slotIndex)
+		public RevOutputSlot(Function<R, TagOutput> getFromRecipe, int slotIndex)
 		{
 			this.getFromRecipe = getFromRecipe;
 			this.slotIndex = slotIndex;

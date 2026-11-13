@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.CentrifugeRecipeBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -29,6 +28,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
@@ -38,7 +38,7 @@ public class IGCentrifugeMethod extends IGRecipeMethod
 {
 	private int energy, time;
 
-	private FluidTagInput input;
+	private SizedFluidIngredient input;
 	private ItemStack output;
 	private FluidStack primary_out, secondary_out;
 	private String name;
@@ -63,7 +63,7 @@ public class IGCentrifugeMethod extends IGRecipeMethod
 		String serialized_tag_name = tag_name.substring(tag_name.lastIndexOf(":") + 1, tag_name.lastIndexOf("]"));
 
 		this.name = serialized_tag_name + "_to_" + output_material.getPrimaryProduct().getName() + "_centrifuge";
-		this.input = new FluidTagInput(input_fluid_tag, input_amount);
+		this.input = SizedFluidIngredient.of(input_fluid_tag, input_amount);
 		this.output = new ItemStack(output_item, item_output_amount);
 		if (primary_fluid_output == null)
 		{
@@ -115,7 +115,7 @@ public class IGCentrifugeMethod extends IGRecipeMethod
 	@Override
 	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
-		renderFluidStack(graphics, input.getRandomizedExampleStack(0), x + 25,y + 23,16,16,mx,my);
+		renderFluidStack(graphics, input.getFluids()[0], x + 25,y + 23,16,16,mx,my);
 		if(primary_out!=null && !primary_out.isEmpty())renderFluidStack(graphics, primary_out, x + 61, y + 3, 16,16, mx, my);
 		if(output != null && !output.isEmpty()) renderItemStack(graphics, output, x + 61, y + 23, mx, my);
 		if(secondary_out!=null && !secondary_out.isEmpty()) renderFluidStack(graphics, secondary_out, x + 61, y + 43, 16,16, mx, my);

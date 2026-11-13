@@ -68,6 +68,7 @@ import java.util.function.Predicate;
 public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExchangerMenu>
 {
 	private static final ResourceLocation TEXTURE = IGLib.makeTextureLocation("multiblocks/geothermal_exchanger");
+	private static final ResourceLocation TANK = IGLib.rl("multiblocks/tank_overlay");
 	public static double lastPrintedErrorTimeMs;
 	private final TemplateWorld structureWorld;
 	private final MultiblockRenderInfo renderInfo;
@@ -307,8 +308,8 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 	protected List<InfoArea> makeInfoAreas()
 	{
 		return ImmutableList.of(
-				new FluidInfoArea(this.menu.tanks[0], new Rect2i(this.leftPos + 157, this.topPos + 23, 16, 47), 101, 187, 20, 51, TEXTURE),
-				new FluidInfoArea(this.menu.tanks[1], new Rect2i(this.leftPos + 61, this.topPos + 23, 16, 47), 101, 187, 20, 51, TEXTURE),
+				new FluidInfoArea(this.menu.tanks[0], new Rect2i(this.leftPos + 157, this.topPos + 23, 16, 47), 20, 51, TANK),
+				new FluidInfoArea(this.menu.tanks[1], new Rect2i(this.leftPos + 61, this.topPos + 23, 16, 47), 20, 51, TANK),
 				new EnergyInfoArea(this.leftPos + 206,this.topPos + 98, this.menu.energy_storage));
 	}
 

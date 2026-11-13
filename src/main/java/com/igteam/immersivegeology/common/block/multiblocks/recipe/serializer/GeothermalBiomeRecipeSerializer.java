@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.common.block.multiblocks.recipe.serializer;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
+import blusunrize.immersiveengineering.api.utils.codec.IEStreamCodecs;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -16,8 +17,16 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GeothermalBiomeRecipe;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import malte0811.dualcodecs.DualMapCodec;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.RegistryFixedCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
@@ -29,82 +38,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GeothermalBiomeRecipeSerializer extends IERecipeSerializer<GeothermalBiomeRecipe> {
+	public static final MapCodec<GeothermalBiomeRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
+			RegistryFixedCodec.create(Registries.BIOME).optionalFieldOf("biome").forGetter(r -> r.biomes.leftOptional()),
+			TagKey.codec(Registries.BIOME).listOf().optionalFieldOf("biome_tags").forGetter(r -> r.biomes.rightOptional()),
+			Codec.INT.fieldOf("min_heat").forGetter(GeothermalBiomeRecipe::getMinHeat),
+			Codec.INT.fieldOf("max_heat").forGetter(GeothermalBiomeRecipe::getMaxHeat)
+	).apply(inst, (biome, tags, min_heat, max_heat) -> {
+		Preconditions.checkArgument(biome.isPresent()!=tags.isPresent(),
+				"GeothermalBiomeRecipe must have exactly one of 'biome' or 'biome_tags'.");
+		if(biome.isPresent())
+			return new GeothermalBiomeRecipe(biome.get(), min_heat, max_heat);
+		return new GeothermalBiomeRecipe(tags.orElseThrow(), min_heat, max_heat);
+	}));
+
+	public static final StreamCodec<RegistryFriendlyByteBuf, GeothermalBiomeRecipe> STREAM_CODEC = StreamCodec.composite(
+			ByteBufCodecs.either(
+					ByteBufCodecs.holderRegistry(Registries.BIOME),
+					IEStreamCodecs.tagCodec(Registries.BIOME).apply(ByteBufCodecs.list())
+			), r -> r.biomes.toDFU(),
+			ByteBufCodecs.INT, GeothermalBiomeRecipe::getMinHeat,
+			ByteBufCodecs.INT, GeothermalBiomeRecipe::getMaxHeat,
+			(biomes, min_heat, max_heat) -> biomes.map(
+					biome -> new GeothermalBiomeRecipe(biome, min_heat, max_heat),
+					tags -> new GeothermalBiomeRecipe(tags, min_heat, max_heat)
+			)
+	);
+
+	public static final DualMapCodec<RegistryFriendlyByteBuf, GeothermalBiomeRecipe> CODECS = new DualMapCodec<>(CODEC, STREAM_CODEC);
 
 	@Override
-	public ItemStack getIcon() {
+	protected DualMapCodec<RegistryFriendlyByteBuf, GeothermalBiomeRecipe> codecs()
+	{
+		return CODECS;
+	}
+
+	@Override
+	public ItemStack getIcon()
+	{
 		return IGMultiblockProvider.GEOTHERMAL_EXCHANGER.iconStack();
-	}
-
-	@Override
-	public GeothermalBiomeRecipe readFromJson(ResourceLocation id, JsonObject json, IContext context) {
-		if (json.has("biome") && json.has("biome_tags")) {
-			throw new JsonParseException("GeothermalBiomeRecipe must have either 'biome' or 'biome_tags', not both.");
-		}
-
-		if (json.has("biome")) {
-			ResourceLocation biomeId = ResourceLocation.parse(json.get("biome").getAsString());
-			Biome biome = ForgeRegistries.BIOMES.getValue(biomeId);
-			Preconditions.checkNotNull(biome, "Biome '%s' not found", biomeId);
-			int min_heat = json.get("min_heat").getAsInt();
-			int max_heat = json.get("max_heat").getAsInt();
-			return new GeothermalBiomeRecipe(id, biome, min_heat, max_heat);
-		}
-
-		if (json.has("biome_tags")) {
-			JsonArray tagArray = json.getAsJsonArray("biome_tags");
-			List<TagKey<Biome>> tags = new ArrayList<>();
-			for (JsonElement el : tagArray) {
-				ResourceLocation tagId = ResourceLocation.parse(el.getAsString());
-				tags.add(TagKey.create(Registries.BIOME, tagId));
-			}
-			int min_heat = json.get("min_heat").getAsInt();
-			int max_heat = json.get("max_heat").getAsInt();
-			return new GeothermalBiomeRecipe(id, tags,  min_heat, max_heat);
-		}
-
-		throw new JsonParseException("Missing required field 'biome' or 'biome_tags' in GeothermalBiomeRecipe.");
-	}
-
-	@Override
-	public @Nullable GeothermalBiomeRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buffer) {
-		boolean isSingleBiome = buffer.readBoolean();
-
-		if (isSingleBiome) {
-			Biome biome = buffer.readRegistryIdUnsafe(ForgeRegistries.BIOMES);
-			int min_heat = buffer.readInt();
-			int max_heat = buffer.readInt();
-			return new GeothermalBiomeRecipe(id, biome, min_heat, max_heat);
-		} else {
-			int count = buffer.readVarInt();
-			List<TagKey<Biome>> tags = new ArrayList<>();
-			for (int i = 0; i < count; i++) {
-				ResourceLocation tagId = buffer.readResourceLocation();
-				tags.add(TagKey.create(Registries.BIOME, tagId));
-			}
-			int min_heat = buffer.readInt();
-			int max_heat = buffer.readInt();
-			return new GeothermalBiomeRecipe(id, tags, min_heat, max_heat);
-		}
-	}
-
-	@Override
-	public void toNetwork(FriendlyByteBuf buffer, GeothermalBiomeRecipe recipe) {
-		List<TagKey<Biome>> tags = recipe.getBiomes();
-
-		if (recipe.biomes.isLeft()) {
-			buffer.writeBoolean(true); // indicates single biome
-			Biome biome = recipe.biomes.leftNonnull();
-			buffer.writeRegistryIdUnsafe(ForgeRegistries.BIOMES, biome);
-			buffer.writeInt(recipe.getMinHeat());
-			buffer.writeInt(recipe.getMaxHeat());
-		} else {
-			buffer.writeBoolean(false); // indicates list of tags
-			buffer.writeVarInt(tags.size());
-			for (TagKey<Biome> tag : tags) {
-				buffer.writeResourceLocation(tag.location());
-			}
-			buffer.writeInt(recipe.getMinHeat());
-			buffer.writeInt(recipe.getMaxHeat());
-		}
 	}
 }

@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.common.block.multiblocks.recipe;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
+import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import net.minecraft.resources.ResourceLocation;
@@ -31,12 +32,12 @@ public class RevFurnaceRecipe extends MultiblockRecipe
 	public static final CachedRecipeList<RevFurnaceRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.REVFURNACE);
 	public int waste, time;
 	public IngredientWithSize input;
-	public Lazy<ItemStack> result;
+	public TagOutput result;
 	Lazy<Integer> totalProcessTime;
 
-	public <T extends Recipe<?>> RevFurnaceRecipe(ResourceLocation id, IngredientWithSize input, Lazy<ItemStack> result, int waste_amount, int time)
+	public <T extends Recipe<?>> RevFurnaceRecipe(IngredientWithSize input, TagOutput result, int waste_amount, int time)
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.REVFURNACE, id);
+		super(TagOutput.EMPTY, IGRecipeTypes.REVFURNACE, time, 0, () -> new RecipeMultiplier(() -> 1, () -> 1));
 		this.input = input;
 		this.result = result;
 		this.waste = waste_amount;

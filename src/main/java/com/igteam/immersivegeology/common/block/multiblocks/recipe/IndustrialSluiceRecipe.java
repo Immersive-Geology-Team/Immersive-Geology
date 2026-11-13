@@ -8,9 +8,7 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.recipe;
 
-import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
-import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
-import blusunrize.immersiveengineering.api.crafting.StackWithChance;
+import blusunrize.immersiveengineering.api.crafting.*;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import net.minecraft.core.NonNullList;
@@ -31,16 +29,16 @@ public class IndustrialSluiceRecipe extends MultiblockRecipe
 {
 	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<IndustrialSluiceRecipe>> SERIALIZER;
 	public static final CachedRecipeList<IndustrialSluiceRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.SLUICE);
-	public final Lazy<ItemStack> itemOutput;
+	public final TagOutput itemOutput;
 	public final Ingredient itemIn;
 	Lazy<Integer> totalProcessWater;
 	Lazy<Integer> totalProcessTime;
 	Lazy<Integer> totalProcessEnergy;
 	Lazy<NonNullList<StackWithChance>> byproducts;
 
-	public <T extends Recipe<?>> IndustrialSluiceRecipe(ResourceLocation id, Ingredient itemIn, Lazy<ItemStack> output, NonNullList<StackWithChance> byproducts, int water, int time, int energy)
+	public <T extends Recipe<?>> IndustrialSluiceRecipe(Ingredient itemIn, TagOutput output, NonNullList<StackWithChance> byproducts, int water, int time, int energy)
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.SLUICE, id);
+		super(TagOutput.EMPTY, IGRecipeTypes.SLUICE, time, 0, () -> new RecipeMultiplier(() -> 1, () -> 1));
 		this.itemOutput = output;
 		this.itemIn = itemIn;
 		this.byproducts = Lazy.of(() -> byproducts);
@@ -48,18 +46,23 @@ public class IndustrialSluiceRecipe extends MultiblockRecipe
 		this.totalProcessTime = Lazy.of(() -> time);;
 		this.totalProcessEnergy = Lazy.of(() -> energy);
 
-		NonNullList<ItemStack> outputs = NonNullList.createWithCapacity(byproducts.size() + 1);
-		List<ItemStack> stacks = byproducts.stream().map((s) -> s.stack().get()).toList();
-		outputs.add(output.get());
+		NonNullList<TagOutput> outputs = NonNullList.createWithCapacity(byproducts.size() + 1);
+		List<TagOutput> stacks = byproducts.stream().map((s) -> s.stack()).toList();
+		outputs.add(output);
 		outputs.addAll(stacks);
 
-		this.outputList = Lazy.of(() -> outputs);
+		this.outputList = new TagOutputList(outputs);
 	}
 
 	@Override
 	public RecipeSerializer<?> getSerializer()
 	{
 		return SERIALIZER.get();
+	}
+
+	public int getConfiguredEnergy()
+	{
+		return totalProcessEnergy.get();
 	}
 
 	@Override

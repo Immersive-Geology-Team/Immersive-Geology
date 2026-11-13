@@ -13,7 +13,11 @@ import com.google.gson.JsonObject;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BulkBlastFluxRecipe;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import malte0811.dualcodecs.DualCodecs;
+import malte0811.dualcodecs.DualCompositeMapCodecs;
+import malte0811.dualcodecs.DualMapCodec;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
@@ -24,33 +28,21 @@ import javax.annotation.Nullable;
 
 public class BulkBlastFluxSerializer extends IERecipeSerializer<BulkBlastFluxRecipe>
 {
+	public static final DualMapCodec<RegistryFriendlyByteBuf, BulkBlastFluxRecipe> CODECS = DualCompositeMapCodecs.composite(
+			DualCodecs.INGREDIENT.fieldOf("input"), r -> r.input,
+			DualCodecs.INT.optionalFieldOf("flux_value", 1), r -> r.fluxValue,
+			BulkBlastFluxRecipe::new
+	);
+
+	@Override
+	protected DualMapCodec<RegistryFriendlyByteBuf, BulkBlastFluxRecipe> codecs()
+	{
+		return CODECS;
+	}
+
 	@Override
 	public ItemStack getIcon()
 	{
 		return MetalEnum.Calcium.getStack(ItemCategoryFlags.METAL_OXIDE);
-	}
-
-	@Override
-	public BulkBlastFluxRecipe readFromJson(ResourceLocation recipeId, JsonObject json, ICondition.IContext context)
-	{
-		Ingredient input = Ingredient.fromJson(json.get("input"));
-		int fluxValue = GsonHelper.getAsInt(json, "flux_value", 1);
-		return new BulkBlastFluxRecipe(recipeId, input, fluxValue);
-	}
-
-	@Nullable
-	@Override
-	public BulkBlastFluxRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer)
-	{
-		Ingredient input = Ingredient.fromNetwork(buffer);
-		int fluxValue = buffer.readVarInt();
-		return new BulkBlastFluxRecipe(recipeId, input, fluxValue);
-	}
-
-	@Override
-	public void toNetwork(FriendlyByteBuf buffer, BulkBlastFluxRecipe recipe)
-	{
-		recipe.input.toNetwork(buffer);
-		buffer.writeVarInt(recipe.fluxValue);
 	}
 }

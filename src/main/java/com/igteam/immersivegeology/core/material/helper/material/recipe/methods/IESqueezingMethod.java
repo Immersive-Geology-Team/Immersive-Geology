@@ -9,8 +9,8 @@
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import blusunrize.immersiveengineering.api.crafting.builders.CrusherRecipeBuilder;
-import blusunrize.immersiveengineering.api.crafting.builders.SqueezerRecipeBuilder;
+import blusunrize.immersiveengineering.api.crafting.SqueezerRecipe;
+import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
 import blusunrize.lib.manual.ManualUtils;
 import blusunrize.lib.manual.gui.ManualScreen;
@@ -170,13 +170,8 @@ public class IESqueezingMethod extends IGRecipeMethod
 	{
 		try
 		{
-			SqueezerRecipeBuilder.builder()
-					.addResult(output)
-					.addFluid(fluidResult)
-					.setTime(time)
-					.setEnergy(energy)
-					.addInput(input)
-					.build(consumer, getLocation());
+			SqueezerRecipe recipe = new SqueezerRecipe(fluidResult, output.isEmpty()?TagOutput.EMPTY:new TagOutput(output), input, energy);
+			consumer.accept(getLocation(), recipe, null);
 
 			return true;
 		}

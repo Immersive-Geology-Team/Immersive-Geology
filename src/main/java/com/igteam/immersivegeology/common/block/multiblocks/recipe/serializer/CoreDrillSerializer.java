@@ -9,13 +9,16 @@
 package com.igteam.immersivegeology.common.block.multiblocks.recipe.serializer;
 
 import blusunrize.immersiveengineering.api.ApiUtils;
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
+import blusunrize.immersiveengineering.api.utils.codec.IEDualCodecs;
 import com.google.gson.JsonObject;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.CoreDrillRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.CrystallizerRecipe;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
+import malte0811.dualcodecs.DualCompositeMapCodecs;
+import malte0811.dualcodecs.DualMapCodec;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
@@ -25,32 +28,21 @@ import org.jetbrains.annotations.Nullable;
 
 public class CoreDrillSerializer extends IERecipeSerializer<CoreDrillRecipe>
 {
+	public static final DualMapCodec<RegistryFriendlyByteBuf, CoreDrillRecipe> CODECS = DualCompositeMapCodecs.composite(
+			IEDualCodecs.SIZED_FLUID_INGREDIENT.fieldOf("input"), CoreDrillRecipe::getInput,
+			IEDualCodecs.FLUID_STACK.map(FluidStack::getFluid, fluid -> new FluidStack(fluid, 1)).fieldOf("fluidResult"), CoreDrillRecipe::getOutput,
+			CoreDrillRecipe::new
+	);
+
+	@Override
+	protected DualMapCodec<RegistryFriendlyByteBuf, CoreDrillRecipe> codecs()
+	{
+		return CODECS;
+	}
+
 	@Override
 	public ItemStack getIcon()
 	{
 		return IGMultiblockProvider.CRYSTALLIZER.iconStack();
-	}
-
-	@Override
-	public CoreDrillRecipe readFromJson(ResourceLocation resourceLocation, JsonObject json, IContext iContext)
-	{
-		FluidStack fluid_output = ApiUtils.jsonDeserializeFluidStack(GsonHelper.getAsJsonObject(json, "fluidResult"));
-		FluidTagInput input = FluidTagInput.deserialize(GsonHelper.getAsJsonObject(json, "input"));
-		return new CoreDrillRecipe(resourceLocation, input, fluid_output.getFluid());
-	}
-
-	@Override
-	public @Nullable CoreDrillRecipe fromNetwork(ResourceLocation resourceLocation, FriendlyByteBuf buffer)
-	{
-		FluidStack fluid_output = buffer.readFluidStack();
-		FluidTagInput input = FluidTagInput.read(buffer);
-		return new CoreDrillRecipe(resourceLocation, input, fluid_output.getFluid());
-	}
-
-	@Override
-	public void toNetwork(FriendlyByteBuf buffer, CoreDrillRecipe recipe)
-	{
-		buffer.writeFluidStack(new FluidStack(recipe.getOutput(), 1));
-		recipe.getInput().write(buffer);
 	}
 }

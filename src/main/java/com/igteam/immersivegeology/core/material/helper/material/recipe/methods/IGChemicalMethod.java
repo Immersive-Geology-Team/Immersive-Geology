@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.BasicChemicalRecipeBuilder;
@@ -30,6 +29,7 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class IGChemicalMethod extends IGRecipeMethod
 	private ItemStack itemOutput;
 	private FluidStack fluidOutput;
 	private IngredientWithSize itemIn;
-	private FluidTagInput fluidInA, fluidInB, fluidInC;
+	private SizedFluidIngredient fluidInA, fluidInB, fluidInC;
 	private int energy, time;
 	private String name;
 
@@ -57,7 +57,7 @@ public class IGChemicalMethod extends IGRecipeMethod
 		return RecipeMethod.CHEMICAL;
 	}
 
-	public IGChemicalMethod create(String name, ItemStack itemOutput, FluidStack fluidOutput, IngredientWithSize itemIn, FluidTagInput fluidInA, FluidTagInput fluidInB, FluidTagInput fluidInC, int time, int energy){
+	public IGChemicalMethod create(String name, ItemStack itemOutput, FluidStack fluidOutput, IngredientWithSize itemIn, SizedFluidIngredient fluidInA, SizedFluidIngredient fluidInB, SizedFluidIngredient fluidInC, int time, int energy){
 		this.name = name;
 		this.itemOutput = itemOutput;
 		this.fluidOutput = fluidOutput;
@@ -70,7 +70,7 @@ public class IGChemicalMethod extends IGRecipeMethod
 		return this;
 	}
 
-	public IGChemicalMethod create(IFlagType<?> inputFlag, IFlagType<?> outputFlag, ItemStack itemOutput, FluidStack fluidOutput, IngredientWithSize itemIn, FluidTagInput fluidInA, FluidTagInput fluidInB, FluidTagInput fluidInC, int time, int energy){
+	public IGChemicalMethod create(IFlagType<?> inputFlag, IFlagType<?> outputFlag, ItemStack itemOutput, FluidStack fluidOutput, IngredientWithSize itemIn, SizedFluidIngredient fluidInA, SizedFluidIngredient fluidInB, SizedFluidIngredient fluidInC, int time, int energy){
 		this.name = create_basic_method_name(inputFlag, outputFlag);
 		this.itemOutput = itemOutput;
 		this.fluidOutput = fluidOutput;
@@ -98,9 +98,9 @@ public class IGChemicalMethod extends IGRecipeMethod
 	@Override
 	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
-		if(fluidInA != null && (fluidInA.getRandomizedExampleStack(0) != null)) renderFluidStack(graphics, fluidInA.getRandomizedExampleStack(0), x + 15,y + 3,16,16,mx,my);
-		if(fluidInB != null && (fluidInB.getRandomizedExampleStack(0) != null)) renderFluidStack(graphics, fluidInB.getRandomizedExampleStack(0), x + 15,y + 23,16,16,mx,my);
-		if(fluidInC != null && (fluidInC.getRandomizedExampleStack(0) != null)) renderFluidStack(graphics, fluidInC.getRandomizedExampleStack(0), x + 15,y + 43,16,16,mx,my);
+		if(fluidInA != null) renderFluidStack(graphics, fluidInA.getFluids()[0], x + 15,y + 3,16,16,mx,my);
+		if(fluidInB != null) renderFluidStack(graphics, fluidInB.getFluids()[0], x + 15,y + 23,16,16,mx,my);
+		if(fluidInC != null) renderFluidStack(graphics, fluidInC.getFluids()[0], x + 15,y + 43,16,16,mx,my);
 
 		if(itemIn != null && !itemIn.hasNoMatchingItems()) renderItemStack(graphics, itemIn.getRandomizedExampleStack(0), x + 34, y + 23, mx, my);
 
@@ -147,7 +147,7 @@ public class IGChemicalMethod extends IGRecipeMethod
 			// If at least one fluid is null
 			if (nullCount >= 1)
 			{
-				List<FluidTagInput> tempFluids = new ArrayList<>(2);
+				List<SizedFluidIngredient> tempFluids = new ArrayList<>(2);
 
 				if(fluidInA!=null) tempFluids.add(fluidInA);
 				if(fluidInB!=null) tempFluids.add(fluidInB);

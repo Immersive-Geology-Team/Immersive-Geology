@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.core.material.data.metal;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.common.item.IGGenericDrillHead.DrillHeadProps;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -29,6 +28,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -62,7 +62,7 @@ public class MaterialTitanium extends MaterialMetal {
                 ItemStack.EMPTY,
                 ChemicalEnum.HydrochloricAcid.getSlurryWith(MetalEnum.Titanium, IGLib.SLURRY_FROM_ACID_AMOUNT),
                 IngredientWithSize.of(getStack(ItemCategoryFlags.METAL_OXIDE, 1)),
-                new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), 3*IGLib.ACID_TO_SLURRY_AMOUNT),
+                SizedFluidIngredient.of(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), 3*IGLib.ACID_TO_SLURRY_AMOUNT),
                 null, null, 200, 51200).addToTree(hunter_process);
 
         //water is only to dissolve concentrated brine for future electrolysis
@@ -70,16 +70,16 @@ public class MaterialTitanium extends MaterialMetal {
                 getStack(ItemCategoryFlags.GRIT, 1),
                 ChemicalEnum.Brine.getSlurryWith(MineralEnum.Rocksalt,3*IGLib.ACID_RECOVERED_FROM_SLURRY),
                 IngredientWithSize.of(MetalEnum.Sodium.getStack(ItemCategoryFlags.GRIT, 4)),
-                new FluidTagInput( ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Titanium),  IGLib.SLURRY_FROM_ACID_AMOUNT),
-                new FluidTagInput(FluidTags.WATER, IGLib.SLURRY_FROM_ACID_AMOUNT),
+                SizedFluidIngredient.of( ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Titanium),  IGLib.SLURRY_FROM_ACID_AMOUNT),
+                SizedFluidIngredient.of(FluidTags.WATER, IGLib.SLURRY_FROM_ACID_AMOUNT),
                 null, 200, 51200).addToTree(hunter_process, ticl);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.EXTRACTION).create(getName()+"_slury_to_powder_and_brine",
                 getStack(ItemCategoryFlags.GRIT, 1),
                 ChemicalEnum.Brine.getSlurryWith(MineralEnum.Carnallite,3*IGLib.ACID_RECOVERED_FROM_SLURRY),
                 IngredientWithSize.of(MetalEnum.Magnesium.getStack(ItemCategoryFlags.GRIT, 3)),
-                new FluidTagInput( ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Titanium),  IGLib.SLURRY_FROM_ACID_AMOUNT),
-                new FluidTagInput(FluidTags.WATER, IGLib.SLURRY_FROM_ACID_AMOUNT),
+                SizedFluidIngredient.of( ChemicalEnum.HydrochloricAcid.getSlurryTagWith(MetalEnum.Titanium),  IGLib.SLURRY_FROM_ACID_AMOUNT),
+                SizedFluidIngredient.of(FluidTags.WATER, IGLib.SLURRY_FROM_ACID_AMOUNT),
                 null, 200, 51200).addToTree(hunter_process, ticl);
     }
 

@@ -1,6 +1,5 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
@@ -14,6 +13,7 @@ import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.neoforged.neoforge.common.Tags.Biomes;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -52,7 +52,7 @@ public class MaterialFluorite extends MaterialMineral {
                 MetalEnum.Calcium.getStack(ItemCategoryFlags.COMPOUND_DUST),
                 ChemicalEnum.HydrofluoricAcid.getFluidStack(125),
                 IngredientWithSize.of(getStack(ItemCategoryFlags.POWDER, 1)),
-                new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), 125),
+                SizedFluidIngredient.of(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), 125),
                 null, null,
                 200, 51200);
     }

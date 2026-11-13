@@ -11,7 +11,6 @@ package com.igteam.immersivegeology.common.block.entity.device;
 import blusunrize.immersiveengineering.api.energy.MutableEnergyStorage;
 import blusunrize.immersiveengineering.common.blocks.IEBaseBlockEntity;
 import blusunrize.immersiveengineering.common.blocks.ticking.IEServerTickableBE;
-import blusunrize.immersiveengineering.common.util.ResettableCapability;
 import com.igteam.immersivegeology.common.menu.IGMetalDetectorMenu;
 import com.igteam.immersivegeology.common.world.features.helper.IGVeinLocator;
 import com.igteam.immersivegeology.common.world.features.helper.IGVeinLocator.ChunkDeposit;

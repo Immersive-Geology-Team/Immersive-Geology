@@ -8,10 +8,10 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.recipe;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
+import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import net.minecraft.resources.ResourceLocation;
@@ -20,6 +20,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -32,7 +33,7 @@ public class BulkBlastFurnaceRecipe extends MultiblockRecipe
 	@Nullable
 	public final IngredientWithSize oreInput;
 	@Nullable
-	public final FluidTagInput meltInput;
+	public final SizedFluidIngredient meltInput;
 	public final FluidStack meltPerUnit;
 	public final FluidStack richMelt;
 	public final float cokeRatio;
@@ -44,12 +45,12 @@ public class BulkBlastFurnaceRecipe extends MultiblockRecipe
 	private final int totalProcessTime;
 
 	public BulkBlastFurnaceRecipe(
-			ResourceLocation id, @Nullable IngredientWithSize oreInput, @Nullable FluidTagInput meltInput,
+			@Nullable IngredientWithSize oreInput, @Nullable SizedFluidIngredient meltInput,
 			FluidStack meltPerUnit, FluidStack richMelt, float cokeRatio, float richCokeRatio, float fluxRatio,
 			float minYield, float maxYield, int heatRequired, int time
 	)
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.BULK_BLAST_FURNACE, id);
+		super(TagOutput.EMPTY, IGRecipeTypes.BULK_BLAST_FURNACE, time, 0, () -> new RecipeMultiplier(() -> 1, () -> 1));
 		this.oreInput = oreInput;
 		this.meltInput = meltInput;
 		this.meltPerUnit = meltPerUnit;
@@ -112,7 +113,7 @@ public class BulkBlastFurnaceRecipe extends MultiblockRecipe
 	{
 		if(level==null||melt.isEmpty()) return null;
 		for(RecipeHolder<BulkBlastFurnaceRecipe> recipe : RECIPES.getRecipes(level))
-			if(recipe.value().meltInput!=null&&recipe.value().meltInput.testIgnoringAmount(melt))
+			if(recipe.value().meltInput!=null&&recipe.value().meltInput.ingredient().test(melt))
 				return recipe.value();
 		return null;
 	}

@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.common.block.multiblocks.recipe;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IERecipeTypes;
 import blusunrize.immersiveengineering.api.crafting.IESerializableRecipe;
+import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import blusunrize.immersiveengineering.api.utils.FastEither;
 import blusunrize.immersiveengineering.api.utils.TagUtils;
@@ -43,16 +44,16 @@ public class TurbineFuel extends IESerializableRecipe
 	private final int consume_amount;
 	private final float outputRatio;
 
-	public TurbineFuel(ResourceLocation id, TagKey<Fluid> fluids, float outputRatio, int consume_amount, int burnTime) {
-		super(LAZY_EMPTY, IGRecipeTypes.TURBINE_FUEL, id);
+	public TurbineFuel(TagKey<Fluid> fluids, float outputRatio, int consume_amount, int burnTime) {
+		super(TagOutput.EMPTY, IGRecipeTypes.TURBINE_FUEL);
 		this.fluids = FastEither.left(fluids);
 		this.burnTime = burnTime;
 		this.outputRatio = outputRatio;
 		this.consume_amount = consume_amount;
 	}
 
-	public TurbineFuel(ResourceLocation id, List<Fluid> fluids, float outputRatio, int consume_amount, int burnTime) {
-		super(LAZY_EMPTY, IGRecipeTypes.TURBINE_FUEL, id);
+	public TurbineFuel(List<Fluid> fluids, float outputRatio, int consume_amount, int burnTime) {
+		super(TagOutput.EMPTY, IGRecipeTypes.TURBINE_FUEL);
 		this.fluids = FastEither.right(fluids);
 		this.burnTime = burnTime;
 		this.consume_amount = consume_amount;
@@ -63,6 +64,11 @@ public class TurbineFuel extends IESerializableRecipe
 		return this.fluids.map((t) -> {
 			return TagUtils.elementStream(BuiltInRegistries.FLUID, t).toList();
 		}, Function.identity());
+	}
+
+	public FastEither<TagKey<Fluid>, List<Fluid>> getFluidsRaw()
+	{
+		return this.fluids;
 	}
 
 	public int getBurnTime() {

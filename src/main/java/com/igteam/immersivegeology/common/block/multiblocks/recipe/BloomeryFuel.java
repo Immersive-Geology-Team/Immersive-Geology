@@ -10,6 +10,7 @@ package com.igteam.immersivegeology.common.block.multiblocks.recipe;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IESerializableRecipe;
+import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import net.minecraft.core.HolderLookup;
@@ -31,8 +32,8 @@ public class BloomeryFuel extends IESerializableRecipe
 	public final Ingredient input;
 	public final int burnTime;
 
-    public BloomeryFuel(ResourceLocation id, Ingredient input, int burnTime) {
-		super(LAZY_EMPTY, IGRecipeTypes.BLOOMERY_FUEL, id);
+    public BloomeryFuel(Ingredient input, int burnTime) {
+		super(TagOutput.EMPTY, IGRecipeTypes.BLOOMERY_FUEL);
 		this.input = input;
 		this.burnTime = burnTime;
 	}

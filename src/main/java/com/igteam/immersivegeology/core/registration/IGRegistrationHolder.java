@@ -196,6 +196,11 @@ public class IGRegistrationHolder {
 
     private static final List<Consumer<IEventBus>> MOD_BUS_CALLBACKS = new ArrayList<>();
 
+    public static void addModBusCallback(Consumer<IEventBus> callback)
+    {
+        MOD_BUS_CALLBACKS.add(callback);
+    }
+
     private static boolean checkModMaterialsForOverlap(IStoneType stoneType, GeologyMaterial ore, IFlagType<?> flag)
     {
         Map<ModFlags, Map<IFlagType<?>, MaterialHelper>> ore_map = ore.getExistingImplementationMap();

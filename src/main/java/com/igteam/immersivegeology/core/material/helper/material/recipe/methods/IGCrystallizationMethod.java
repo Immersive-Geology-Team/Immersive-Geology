@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.CrystallizerRecipeBuilder;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -28,16 +27,17 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
-import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class IGCrystallizationMethod extends IGRecipeMethod
 {
 	private ItemStack itemResult;
-	private Lazy<FluidTagInput> fluidInput;
+	private Supplier<SizedFluidIngredient> fluidInput;
 	private TagKey<Fluid> fluid_tag;
 	private int time;
 	private int energy;
@@ -55,7 +55,7 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 		if(slurry_base.instance() instanceof MaterialChemical chemical){
 			this.itemResult = parentMaterial.getPrimaryProduct().getStack(output_form, 1);
 			this.fluid_tag = chemical.getFluidTag(BlockCategoryFlags.SLURRY, parentMaterial.getPrimaryProduct());
-			this.fluidInput = () -> new FluidTagInput(fluid_tag, IGLib.SLURRY_TO_CRYSTAL_MB);
+			this.fluidInput = () -> SizedFluidIngredient.of(fluid_tag, IGLib.SLURRY_TO_CRYSTAL_MB);
 			this.time = 300;
 			this.fluid_out = new FluidStack(chemical.getFluid(BlockCategoryFlags.FLUID), IGLib.ACID_RECOVERED_FROM_SLURRY);
 			this.energy = 38400;
@@ -73,7 +73,7 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 		if(slurry_base.instance() instanceof MaterialChemical chemical){
 			this.itemResult = slurry_product.getStack(ItemCategoryFlags.CRYSTAL, 1);
 			this.fluid_tag = chemical.getFluidTag(BlockCategoryFlags.SLURRY, slurry_product);
-			this.fluidInput = () -> new FluidTagInput(fluid_tag, IGLib.SLURRY_TO_CRYSTAL_MB);
+			this.fluidInput = () -> SizedFluidIngredient.of(fluid_tag, IGLib.SLURRY_TO_CRYSTAL_MB);
 			this.time = 300;
 			this.fluid_out = new FluidStack(chemical.getFluid(BlockCategoryFlags.FLUID), IGLib.ACID_RECOVERED_FROM_SLURRY);
 			this.energy = 38400;
@@ -90,7 +90,7 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 		if(slurry_base.instance() instanceof MaterialChemical chemical){
 			this.itemResult = output;
 			this.fluid_tag = chemical.getFluidTag(BlockCategoryFlags.SLURRY, slurry_product);
-			this.fluidInput = () -> new FluidTagInput(fluid_tag, fluidAmount);
+			this.fluidInput = () -> SizedFluidIngredient.of(fluid_tag, fluidAmount);
 			this.time = time;
 			this.fluid_out = new FluidStack(chemical.getFluid(BlockCategoryFlags.FLUID), IGLib.ACID_RECOVERED_FROM_SLURRY);
 			this.energy = energy;
@@ -108,7 +108,7 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 
 		this.itemResult = output;
 		this.fluid_tag = fluidTag;
-		this.fluidInput = () -> new FluidTagInput(fluidTag, fluidAmount);
+		this.fluidInput = () -> SizedFluidIngredient.of(fluidTag, fluidAmount);
 		this.fluid_out = fluid_out;
 		this.time = time;
 		this.energy = energy;
@@ -121,7 +121,7 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 		if(slurry_base.instance() instanceof MaterialChemical chemical){
 			this.itemResult = output;
 			this.fluid_tag = chemical.getFluidTag(BlockCategoryFlags.SLURRY, slurry_product);
-			this.fluidInput = () -> new FluidTagInput(fluid_tag, fluidAmount);
+			this.fluidInput = () -> SizedFluidIngredient.of(fluid_tag, fluidAmount);
 			this.fluid_out = fluid_out;
 			this.time = time;
 			this.energy = energy;
@@ -160,7 +160,7 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 	@Override
 	public void render(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
-		renderFluidStack(graphics, fluidInput.get().getRandomizedExampleStack(0).getFluid(), x+24, y+11, 16, 16, mx, my);
+		renderFluidStack(graphics, fluidInput.get().getFluids()[0].getFluid(), x+24, y+11, 16, 16, mx, my);
 		if(fluid_out!=null&&!fluid_out.isEmpty())
 		{
 			renderFluidStack(graphics, fluid_out.getFluid(), x+61, y+21, 16, 16, mx, my);
@@ -171,7 +171,7 @@ public class IGCrystallizationMethod extends IGRecipeMethod
 	@Override
 	public void renderDisplayStack(GuiGraphics graphics, ManualScreen screen, int x, int y, int mx, int my)
 	{
-		renderFluidStack(graphics, fluidInput.get().getRandomizedExampleStack(0).getFluid(), x, y, 16, 16, mx, my);
+		renderFluidStack(graphics, fluidInput.get().getFluids()[0].getFluid(), x, y, 16, 16, mx, my);
 	}
 
 	@Override

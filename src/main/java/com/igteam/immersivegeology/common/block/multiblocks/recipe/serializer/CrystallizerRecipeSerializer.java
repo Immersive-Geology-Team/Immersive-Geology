@@ -11,13 +11,18 @@ package com.igteam.immersivegeology.common.block.multiblocks.recipe.serializer;
 import blusunrize.immersiveengineering.api.ApiUtils;
 import blusunrize.immersiveengineering.api.IEApi;
 import blusunrize.immersiveengineering.api.crafting.*;
+import blusunrize.immersiveengineering.api.utils.codec.IEDualCodecs;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.CrystallizerRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
+import malte0811.dualcodecs.DualCodecs;
+import malte0811.dualcodecs.DualCompositeMapCodecs;
+import malte0811.dualcodecs.DualMapCodec;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.Item;
@@ -31,41 +36,25 @@ import org.jetbrains.annotations.Nullable;
 
 public class CrystallizerRecipeSerializer extends IERecipeSerializer<CrystallizerRecipe>
 {
+	public static final DualMapCodec<RegistryFriendlyByteBuf, CrystallizerRecipe> CODECS = DualCompositeMapCodecs.composite(
+			IEDualCodecs.SIZED_FLUID_INGREDIENT.fieldOf("input"), r -> r.fluidIn,
+			TagOutput.CODECS.fieldOf("result"), r -> r.itemOutput,
+			IEDualCodecs.FLUID_STACK.fieldOf("fluidResult"), r -> r.fluidOutput.get(),
+			DualCodecs.INT.fieldOf("energy"), CrystallizerRecipe::getTotalProcessEnergy,
+			DualCodecs.INT.fieldOf("time"), CrystallizerRecipe::getTotalProcessTime,
+			(input, output, fluidOutput, energy, time) ->
+					new CrystallizerRecipe(input, output, Lazy.of(() -> fluidOutput), energy, time)
+	);
+
+	@Override
+	protected DualMapCodec<RegistryFriendlyByteBuf, CrystallizerRecipe> codecs()
+	{
+		return CODECS;
+	}
+
 	@Override
 	public ItemStack getIcon()
 	{
 		return IGMultiblockProvider.CRYSTALLIZER.iconStack();
-	}
-
-	@Override
-	public CrystallizerRecipe readFromJson(ResourceLocation resourceLocation, JsonObject json, IContext iContext)
-	{
-		Lazy<ItemStack> output = readOutput(json.get("result"));
-		FluidStack fluid_output = ApiUtils.jsonDeserializeFluidStack(GsonHelper.getAsJsonObject(json, "fluidResult"));
-		FluidTagInput input = FluidTagInput.deserialize(GsonHelper.getAsJsonObject(json, "input"));
-		int energy = GsonHelper.getAsInt(json, "energy");
-		int time = GsonHelper.getAsInt(json, "time");
-		return new CrystallizerRecipe(resourceLocation, input, output, ()->fluid_output, energy, time);
-	}
-
-	@Override
-	public @Nullable CrystallizerRecipe fromNetwork(ResourceLocation resourceLocation, FriendlyByteBuf buffer)
-	{
-		Lazy<ItemStack> output = readLazyStack(buffer);
-		FluidStack fluid_output = buffer.readFluidStack();
-		FluidTagInput input = FluidTagInput.read(buffer);
-		int energy = buffer.readInt();
-		int time = buffer.readInt();
-		return new CrystallizerRecipe(resourceLocation, input, output, ()->fluid_output, energy, time);
-	}
-
-	@Override
-	public void toNetwork(FriendlyByteBuf buffer, CrystallizerRecipe recipe)
-	{
-		writeLazyStack(buffer, recipe.itemOutput);
-		buffer.writeFluidStack(recipe.fluidOutput.get());
-		recipe.fluidIn.write(buffer);
-		buffer.writeInt(recipe.getTotalProcessEnergy());
-		buffer.writeInt(recipe.getTotalProcessTime());
 	}
 }

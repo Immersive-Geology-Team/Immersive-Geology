@@ -44,7 +44,7 @@ public class IGBallmillCategory extends IGRecipeCategory<BallmillRecipe>
 				.addItemStacks(Arrays.asList(recipe.itemIn.getMatchingStacks()));
 
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 67, 42)
-				.addItemStacks(Arrays.asList(recipe.itemOutput.getMatchingStacks()));
+				.addItemStack(recipe.itemOutput.get());
 	}
 
 	@Override

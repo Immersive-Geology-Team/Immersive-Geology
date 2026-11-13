@@ -22,6 +22,7 @@ import com.google.common.base.Preconditions;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.helper.IGMultiblockGUI;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMenuTypes.MultiblockContainer;
+import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.BlockPos;
 
 import java.util.ArrayList;
@@ -36,10 +37,9 @@ public class IGMultiblockBuilder<S extends IMultiblockState>
 		super(logic, IGLib.rl(name));
 	}
 
-	@Override
 	public MultiblockRegistration<S> build()
 	{
-		MultiblockRegistration<S> b = super.build();
+		MultiblockRegistration<S> b = super.build(IGRegistrationHolder::addModBusCallback);
 		ALL_IG_MULTIBLOCKS.add(b);
 		return b;
 	}

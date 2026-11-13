@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.common.integration;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.common.util.compat.jei.JEIHelper;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BasicChemicalRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRecipe;
@@ -27,7 +26,9 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class IGBasicChemicalCategory extends IGRecipeCategory<BasicChemicalRecipe>
@@ -64,11 +65,11 @@ public class IGBasicChemicalCategory extends IGRecipeCategory<BasicChemicalRecip
 
 		List<Integer> tank_pos_list = List.of(29, 8, 61, 8);
 		int i = 0;
-		for(FluidTagInput fluid_tag : recipe.fluidIn)
+		for(SizedFluidIngredient fluid_tag : recipe.fluidIn)
 		{
 			builder.addSlot(RecipeIngredientRole.INPUT, tank_pos_list.get(i), tank_pos_list.get(i+1))
 					.setFluidRenderer(FluidType.BUCKET_VOLUME * 2, false, 10, 28)
-					.addIngredients(NeoForgeTypes.FLUID_STACK, fluid_tag.getMatchingFluidStacks())
+					.addIngredients(NeoForgeTypes.FLUID_STACK, Arrays.asList(fluid_tag.getFluids()))
 					.addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
 			i = i + 2;
 		}
@@ -81,7 +82,7 @@ public class IGBasicChemicalCategory extends IGRecipeCategory<BasicChemicalRecip
 					.addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
 		}
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 55, 77)
-				.addItemStack(recipe.itemOutput);
+				.addItemStack(recipe.itemOutput.get());
 	}
 
 	@Override

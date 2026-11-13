@@ -72,8 +72,8 @@ public class IGBulkBlastFurnaceCategory extends IGRecipeCategory<BulkBlastFurnac
 					.setBackground(JEIHelper.slotDrawable, -1, -1);
 		else if(recipe.meltInput!=null)
 			builder.addSlot(RecipeIngredientRole.INPUT, ORE_X, SLOT_Y)
-					.setFluidRenderer(recipe.meltInput.getAmount(), false, 16, 16)
-					.addIngredients(NeoForgeTypes.FLUID_STACK, recipe.meltInput.getMatchingFluidStacks())
+					.setFluidRenderer(recipe.meltInput.amount(), false, 16, 16)
+					.addIngredients(NeoForgeTypes.FLUID_STACK, Arrays.asList(recipe.meltInput.getFluids()))
 					.setBackground(JEIHelper.slotDrawable, -1, -1)
 					.addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
 

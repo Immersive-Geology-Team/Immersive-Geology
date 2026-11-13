@@ -16,7 +16,6 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockCon
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
-import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.client.utils.TextUtils;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.interfaces.MBOverlayText;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcess;
@@ -44,10 +43,14 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage;
+import net.neoforged.neoforge.capabilities.Capabilities.FluidHandler;
+import net.neoforged.neoforge.capabilities.Capabilities.ItemHandler;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
@@ -62,6 +65,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.State>, IServerTickableComponent<CrystallizerLogic.State>, MBOverlayText<State> {
     public static final BlockPos REDSTONE_IN = new BlockPos(0, 0, 1);
@@ -100,11 +104,11 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
         MBInventoryUtils.dropItems(state.getInventory(), drop);
     }
 
-    private void drainOutputTank(State state, IMultiblockContext<State> context, CapabilityReference<IFluidHandler> output_reference)
+    private void drainOutputTank(State state, IMultiblockContext<State> context, Supplier<@Nullable IFluidHandler> output_reference)
     {
         int outSize = Math.min(FluidType.BUCKET_VOLUME, state.output_tank.getFluidAmount());
         FluidStack out = Utils.copyFluidStackWithAmount(state.output_tank.getFluid(), outSize, false);
-        IFluidHandler output = output_reference.getNullable();
+        IFluidHandler output = output_reference.get();
 
         if(output==null)
             return;
@@ -125,16 +129,16 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
 
         final FluidStack input = state.tank.getFluid();
         if(input.isEmpty()) return;
-        CrystallizerRecipe recipe = CrystallizerRecipe.findRecipe(level, input);
+        RecipeHolder<CrystallizerRecipe> recipe = CrystallizerRecipe.findRecipe(level, input);
         if(recipe == null) return;
         MultiblockProcessInMachine<CrystallizerRecipe> process = new MultiblockProcessInMachine<>(recipe);
         if(input.isEmpty()) process.setInputTanks(1);
-        int drainSimulation = state.tank.drain(recipe.fluidIn.getAmount(), FluidAction.SIMULATE).getAmount();
-        int drainAmount = recipe.fluidIn.getAmount();
+        int drainSimulation = state.tank.drain(recipe.value().fluidIn.amount(), FluidAction.SIMULATE).getAmount();
+        int drainAmount = recipe.value().fluidIn.amount();
         if(state.processor.addProcessToQueue(process, level, true) && drainSimulation == drainAmount)
         {
             state.processor.addProcessToQueue(process, level, false);
-            state.tank.drain(recipe.fluidIn.getAmount(), FluidAction.EXECUTE).getAmount();
+            state.tank.drain(recipe.value().fluidIn.amount(), FluidAction.EXECUTE).getAmount();
         }
     }
 
@@ -144,33 +148,16 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
     }
 
     @Override
-    public <T> LazyOptional<T> getCapability(IMultiblockContext<CrystallizerLogic.State> ctx, CapabilityPosition position, Capability<T> cap)
+    public void registerCapabilities(CapabilityRegistrar<State> register)
     {
-        final CrystallizerLogic.State state = ctx.getState();
-        if(cap == ForgeCapabilities.ENERGY && (position.side()==null || ENERGY_INPUT.equals(position)))
-        {
-            return state.energyCap.cast(ctx);
-        }
-
-        if(cap == ForgeCapabilities.FLUID_HANDLER)
-        {
-            if(FLUID_INPUT_CAP.equals(position))
-            {
-                return state.fInputCap.cast(ctx);
-            }
-            if(FLUID_OUTPUT_CAP.equals(position))
-            {
-                return state.fOutputCap.cast(ctx);
-            }
-        }
-
-        if(cap==ForgeCapabilities.ITEM_HANDLER)
-        {
-            if(ITEM_OUTPUT_CAP.equals(position))
-                return state.itemOutputCap.cast(ctx);
-        }
-
-        return LazyOptional.empty();
+        register.register(EnergyStorage.BLOCK, (state, position) ->
+                position.side()==null||ENERGY_INPUT.equals(position)?state.energyCap:null);
+        register.register(FluidHandler.BLOCK, (state, position) -> {
+            if(FLUID_INPUT_CAP.equals(position)) return state.fInputCap;
+            if(FLUID_OUTPUT_CAP.equals(position)) return state.fOutputCap;
+            return null;
+        });
+        register.registerAt(ItemHandler.BLOCK, ITEM_OUTPUT_CAP, state -> state.itemOutputCap);
     }
 
     @Override
@@ -197,16 +184,16 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
 
         public final FluidTank tank = new FluidTank(TANK_VOLUME);
         public final FluidTank output_tank = new FluidTank(TANK_VOLUME);
-        private final StoredCapability<IFluidHandler> fInputCap;
-        private final StoredCapability<IFluidHandler> fOutputCap;
-        private final StoredCapability<IEnergyStorage> energyCap;
-        private final CapabilityReference<IItemHandler> output;
-        private final StoredCapability<IItemHandler> itemOutputCap;
-        private final CapabilityReference<IFluidHandler> fluidOutput;
+        private final IFluidHandler fInputCap;
+        private final IFluidHandler fOutputCap;
+        private final IEnergyStorage energyCap;
+        private final Supplier<@Nullable IItemHandler> output;
+        private final IItemHandler itemOutputCap;
+        private final Supplier<@Nullable IFluidHandler> fluidOutput;
 
         public State(IInitialMultiblockContext<State> ctx)
         {
-            this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.energy));
+            this.energyCap = IGReceiveOnlyEnergy.of(this.energy);
             this.output = ctx.getCapabilityAt(Capabilities.ItemHandler.BLOCK, OUTPUT_POS);
             this.processor = new MultiblockProcessor<>(
                 1, 0, 1, ctx.getMarkDirtyRunnable(), CrystallizerRecipe.RECIPES::getById
@@ -218,11 +205,11 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
                 ctx.getSyncRunnable().run();
                 ctx.getMarkDirtyRunnable().run();
             };
-            this.itemOutputCap = new StoredCapability<>(new WrappingItemHandler(
+            this.itemOutputCap = new WrappingItemHandler(
                     inventory, false, true, new IntRange(0, 1)
-            ));
-            this.fInputCap = new StoredCapability<>(new ArrayFluidHandler(tank, true, true, changedAndSync));
-            this.fOutputCap = new StoredCapability<>(new ArrayFluidHandler(output_tank, true, false, changedAndSync));
+            );
+            this.fInputCap = new ArrayFluidHandler(tank, true, true, changedAndSync);
+            this.fOutputCap = new ArrayFluidHandler(output_tank, true, false, changedAndSync);
 
             this.fluidOutput = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, new MultiblockFace(FLUID_OUTPUT_CAP.side().getOpposite(), FLUID_OUTPUT_CAP.posInMultiblock().below()));
         }
@@ -259,8 +246,6 @@ public class CrystallizerLogic implements IMultiblockLogic<CrystallizerLogic.Sta
 
         public void invalidate(@NotNull IMultiblockContext<?> ctx)
         {
-            this.fOutputCap.get(ctx).invalidate();
-            this.fInputCap.get(ctx).invalidate();
         }
 
         @Override

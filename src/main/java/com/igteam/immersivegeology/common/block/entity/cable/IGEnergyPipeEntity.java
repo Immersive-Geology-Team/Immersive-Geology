@@ -10,7 +10,6 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockS
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityDummy;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.CapabilityPosition;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.RelativeBlockFace;
-import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.api.utils.DirectionUtils;
 import blusunrize.immersiveengineering.api.utils.SafeChunkUtils;
 import blusunrize.immersiveengineering.api.utils.shapes.CachedVoxelShapes;
@@ -20,7 +19,6 @@ import blusunrize.immersiveengineering.common.blocks.IEBaseBlockEntity;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.register.IEBlocks.WoodenDecoration;
 import blusunrize.immersiveengineering.common.register.IEItems.Tools;
-import blusunrize.immersiveengineering.common.util.ResettableCapability;
 import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.WorldMap;
 import com.google.common.collect.ImmutableSet;
@@ -102,7 +100,7 @@ public class IGEnergyPipeEntity extends IEBaseBlockEntity implements IEnergyPipe
 		this.connections = 0;
 		this.color = null;
 		this.sidedHandlers = new EnumMap<>(Direction.class);
-		this.neighbors = MultiblockCapabilityReference.forAllNeighbors(this, ForgeCapabilities.ENERGY);
+		this.neighbors = MultiblockCapabilityReference.forAllNeighbors(this, Capabilities.EnergyStorage.BLOCK);
 
 		for(var5 = 0; var5 < var4; ++var5) {
 			f = var3[var5];

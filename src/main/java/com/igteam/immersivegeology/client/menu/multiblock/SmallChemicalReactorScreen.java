@@ -107,9 +107,9 @@ public class SmallChemicalReactorScreen extends IEContainerScreen<SmallChemicalR
 	protected List<InfoArea> makeInfoAreas()
 	{
 		return ImmutableList.of(
-				new FluidInfoArea(this.menu.tanks.rightInput(), new Rect2i(this.leftPos + 196, this.topPos + 28, 6, 14), 0, 0, 0, 0, TEXTURE),
-				new FluidInfoArea(this.menu.tanks.leftInput(), new Rect2i(this.leftPos + 196, this.topPos + 45, 6, 15), 0, 0, 0, 0, TEXTURE),
-				new FluidInfoArea(this.menu.tanks.output(), new Rect2i(this.leftPos + 196, this.topPos + 76, 6, 11), 0, 0, 0, 0, TEXTURE),
+				new FluidInfoArea(this.menu.tanks.rightInput(), new Rect2i(this.leftPos + 196, this.topPos + 28, 6, 14), 0, 0, TEXTURE),
+				new FluidInfoArea(this.menu.tanks.leftInput(), new Rect2i(this.leftPos + 196, this.topPos + 45, 6, 15), 0, 0, TEXTURE),
+				new FluidInfoArea(this.menu.tanks.output(), new Rect2i(this.leftPos + 196, this.topPos + 76, 6, 11), 0, 0, TEXTURE),
 				new EnergyInfoArea(this.leftPos + 174,this.topPos + 40, this.menu.energy));
 	}
 }

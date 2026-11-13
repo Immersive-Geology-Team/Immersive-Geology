@@ -26,6 +26,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.fluids.FluidType;
 
+import java.util.Arrays;
+
 public class IGCentrifugeCategory extends IGRecipeCategory<CentrifugeRecipe>
 {
 	public IGCentrifugeCategory(IGuiHelper helper)
@@ -40,10 +42,10 @@ public class IGCentrifugeCategory extends IGRecipeCategory<CentrifugeRecipe>
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, CentrifugeRecipe recipe, IFocusGroup focuses)
 	{
-		int tankSize = Math.max(2*FluidType.BUCKET_VOLUME,  Math.max(recipe.fluidIn.getAmount(),recipe.fluidIn.getAmount()));
+		int tankSize = Math.max(2*FluidType.BUCKET_VOLUME,  Math.max(recipe.fluidIn.amount(),recipe.fluidIn.amount()));
 		builder.addSlot(RecipeIngredientRole.INPUT, 43, 9)
 				.setFluidRenderer(tankSize, false, 15, 51)
-				.addIngredients(NeoForgeTypes.FLUID_STACK, recipe.fluidIn.getMatchingFluidStacks())
+				.addIngredients(NeoForgeTypes.FLUID_STACK, Arrays.asList(recipe.fluidIn.getFluids()))
 				.addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
 
 		if(!recipe.primaryFluidOutput.get().isEmpty())

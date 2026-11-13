@@ -43,8 +43,11 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage;
+import net.neoforged.neoforge.capabilities.Capabilities.ItemHandler;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
@@ -102,20 +105,11 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
     }
 
     @Override
-    public <T> LazyOptional<T> getCapability(IMultiblockContext<State> ctx, CapabilityPosition position, Capability<T> cap)
+    public void registerCapabilities(CapabilityRegistrar<State> register)
     {
-        final BallmillLogic.State state = ctx.getState();
-        if(cap == ForgeCapabilities.ENERGY)
-        {
-            if((position.side()==null || ENERGY_INPUTS.contains(position))) return state.energyCap.cast(ctx);
-        }
-
-        if(cap == ForgeCapabilities.ITEM_HANDLER && ITEM_INPUT_CAP.equals(position))
-        {
-            return state.insertionHandler.cast(ctx);
-        }
-
-        return LazyOptional.empty();
+        register.register(EnergyStorage.BLOCK, (state, position) ->
+                position.side()==null||ENERGY_INPUTS.contains(position)?state.energyCap:null);
+        register.registerAt(ItemHandler.BLOCK, ITEM_INPUT_CAP, state -> state.insertionHandler);
     }
 
     @Override
@@ -129,15 +123,15 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
 
         private final DroppingMultiblockOutput output;
-        private final StoredCapability<IItemHandler> insertionHandler;
+        private final IItemHandler insertionHandler;
         private float rotation;
         private boolean renderAsActive;
-        private final StoredCapability<IEnergyStorage> energyCap;
+        private final IEnergyStorage energyCap;
         private final MultiblockProcessor<BallmillRecipe, ProcessContextInWorld<BallmillRecipe>> processor;
         Supplier<@Nullable Level> levelGetter;
         public State(IInitialMultiblockContext<State> ctx){
             this.rotation = 0;
-            this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.energy));
+            this.energyCap = IGReceiveOnlyEnergy.of(this.energy);
             this.output = new DroppingMultiblockOutput(OUTPUT_POS, ctx);
             this.processor = new MultiblockProcessor<>(64, 0, 8, ctx.getMarkDirtyRunnable(), BallmillRecipe.RECIPES::getById);
             final Supplier<@Nullable Level> levelGetter = ctx.levelSupplier();
@@ -148,26 +142,26 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
                 sync.run();
             };
 
-            this.insertionHandler = new StoredCapability<>(new InsertOnlyInventory()
+            this.insertionHandler = new InsertOnlyInventory()
             {
                 @Override
                 protected ItemStack insert(ItemStack toInsert, boolean simulate)
                 {
                     ItemStack stack = toInsert.copy();
-                    BallmillRecipe recipe = BallmillRecipe.findRecipe(levelGetter.get(), stack);
+                    RecipeHolder<BallmillRecipe> recipe = BallmillRecipe.findRecipe(levelGetter.get(), stack);
                     if (recipe == null) {
                         return stack;
                     } else {
-                        MultiblockProcessInWorld<BallmillRecipe> process = new MultiblockProcessInWorld<>(recipe, stack);
+                        MultiblockProcessInWorld<BallmillRecipe> process = new MultiblockProcessInWorld<>(recipe, stack.copyWithCount(recipe.value().itemIn.getCount()));
 
                         if (processor.addProcessToQueue(process, levelGetter.get(), simulate)) {
-                            stack.shrink(recipe.itemIn.getCount());
+                            stack.shrink(recipe.value().itemIn.getCount());
                         }
 
                         return stack;
                     }
                 }
-            });
+            };
         }
 
 
@@ -222,8 +216,6 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
         @Override
         public void invalidate(@NotNull IMultiblockContext<?> context)
         {
-            this.energyCap.get(context).invalidate();
-            this.insertionHandler.get(context).invalidate();
         }
     }
 

@@ -31,7 +31,7 @@ public class TFCDatagenCompat
 {
 	public static void runRecipeDatagen(IOreBlock oreBlock, RecipeOutput consumer, DeferredHolder<Block, Block> block, HolderLookup.Provider provider)
 	{
-		TFCCollapseRecipeBuilder.builder(Ingredient.of(oreBlock.asIGItem()), provider).build(consumer, ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "collapse/" + block.getId().getPath()));
+		TFCCollapseRecipeBuilder.builder(block.get(), provider).build(consumer, ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "collapse/" + block.getId().getPath()));
 	}
 
 	public static TagKey<Block> getTFCBlockTag(String name)

@@ -9,7 +9,6 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
 import blusunrize.immersiveengineering.api.IETags;
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -30,6 +29,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -84,7 +84,7 @@ public class MaterialAlumina extends MaterialMineral {
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING)
                 .create("alumina_dust_to_compound_aluminum_dust", MetalEnum.Aluminum.getStack(ItemCategoryFlags.COMPOUND_DUST),
                         FluidStack.EMPTY, new IngredientWithSize(getItemTag(ItemCategoryFlags.POWDER), IGLib.COMPOUND_FROM_ACID_AMOUNT),
-                        new FluidTagInput(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_COMPOUND_AMOUNT),
+                        SizedFluidIngredient.of(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_COMPOUND_AMOUNT),
                         null, null, 200, 51200).joinBranches(bayer_process, powder_a, powder_b);
 
         IGMethodBuilder.arcSmelting(this, IGStageDesignation.PURIFICATION).create(

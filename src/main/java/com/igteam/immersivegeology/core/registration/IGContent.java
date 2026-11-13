@@ -48,6 +48,7 @@ import net.minecraft.util.GsonHelper;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.player.Player;
@@ -76,7 +77,7 @@ public class IGContent {
         ChemthrowerHandler.registerEffect(ChemicalEnum.ChemicalWaste.getFluidTag(), new ChemthrowerEffect()
         {
             @Override
-            public void applyToEntity(LivingEntity livingEntity, @Nullable Player player, ItemStack itemStack, Fluid fluid)
+            public void applyToEntity(LivingEntity livingEntity, @Nullable Player player, @Nullable Entity projectile, ItemStack itemStack, Fluid fluid)
             {
                 livingEntity.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 50));
                 livingEntity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 140));
@@ -87,7 +88,7 @@ public class IGContent {
             }
 
             @Override
-            public void applyToBlock(Level level, HitResult hitResult, @Nullable Player player, ItemStack itemStack, Fluid fluid)
+            public void applyToBlock(Level level, HitResult hitResult, @Nullable Player player, @Nullable Entity projectile, ItemStack itemStack, Fluid fluid)
             {
                 Vec3 vec = hitResult.getLocation();
                 BlockPos loc = new BlockPos((int)vec.x(), (int)vec.y(), (int)vec.z()).below();
@@ -120,7 +121,7 @@ public class IGContent {
         ChemthrowerHandler.registerEffect(ChemicalEnum.SulfuricAcid.getFluidTag(), new ChemthrowerEffect()
         {
             @Override
-            public void applyToEntity(LivingEntity livingEntity, @Nullable Player player, ItemStack itemStack, Fluid fluid)
+            public void applyToEntity(LivingEntity livingEntity, @Nullable Player player, @Nullable Entity projectile, ItemStack itemStack, Fluid fluid)
             {
                 if(!(livingEntity instanceof Skeleton))
                 {
@@ -131,7 +132,7 @@ public class IGContent {
             }
 
             @Override
-            public void applyToBlock(Level level, HitResult hitResult, @Nullable Player player, ItemStack itemStack, Fluid fluid)
+            public void applyToBlock(Level level, HitResult hitResult, @Nullable Player player, @Nullable Entity projectile, ItemStack itemStack, Fluid fluid)
             {
 
             }
@@ -590,14 +591,14 @@ public class IGContent {
     ChemthrowerEffect acidic = new ChemthrowerEffect()
     {
         @Override
-        public void applyToEntity(LivingEntity livingEntity, @Nullable Player player, ItemStack itemStack, Fluid fluid)
+        public void applyToEntity(LivingEntity livingEntity, @Nullable Player player, @Nullable Entity projectile, ItemStack itemStack, Fluid fluid)
         {
             livingEntity.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40));
             livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, 40, 1));
         }
 
         @Override
-        public void applyToBlock(Level level, HitResult hitResult, @Nullable Player player, ItemStack itemStack, Fluid fluid)
+        public void applyToBlock(Level level, HitResult hitResult, @Nullable Player player, @Nullable Entity projectile, ItemStack itemStack, Fluid fluid)
         {
             Vec3 vec = hitResult.getLocation();
             BlockPos loc = new BlockPos((int)vec.x(), (int)vec.y(), (int)vec.z());

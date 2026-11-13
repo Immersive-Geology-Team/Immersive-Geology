@@ -10,6 +10,8 @@ package com.igteam.immersivegeology.common.block.multiblocks.recipe;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
+import blusunrize.immersiveengineering.api.crafting.TagOutput;
+import blusunrize.immersiveengineering.api.crafting.TagOutputList;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import net.minecraft.core.NonNullList;
@@ -27,23 +29,23 @@ public class GravitySeparatorRecipe extends MultiblockRecipe
 {
 	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<GravitySeparatorRecipe>> SERIALIZER;
 	public static final CachedRecipeList<GravitySeparatorRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.GRAVITYSEPARATOR);
-	public final Lazy<ItemStack> itemOutput;
-	public final Lazy<ItemStack> itemByproduct;
+	public final TagOutput itemOutput;
+	public final TagOutput itemByproduct;
 	public final Ingredient itemIn;
 	Lazy<Integer> totalProcessWater;
 	Lazy<Integer> totalProcessTime;
 	Lazy<Float> byproductChance;
 
-	public <T extends Recipe<?>> GravitySeparatorRecipe(ResourceLocation id, Ingredient itemIn, Lazy<ItemStack> output, Lazy<ItemStack> byproduct, float chance, int water, int time)
+	public <T extends Recipe<?>> GravitySeparatorRecipe(Ingredient itemIn, TagOutput output, TagOutput byproduct, float chance, int water, int time)
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.GRAVITYSEPARATOR, id);
+		super(TagOutput.EMPTY, IGRecipeTypes.GRAVITYSEPARATOR, time, 0, () -> new RecipeMultiplier(() -> 1, () -> 1));
 		this.itemOutput = output;
 		this.itemByproduct = byproduct;
 		this.itemIn = itemIn;
 		byproductChance = Lazy.of(() -> chance);
 		totalProcessWater = Lazy.of(() -> water);
 		totalProcessTime = Lazy.of(() -> time);
-		this.outputList = Lazy.of(() -> NonNullList.of(ItemStack.EMPTY, this.itemOutput.get()));
+		this.outputList = new TagOutputList(this.itemOutput);
 	}
 
 	@Override

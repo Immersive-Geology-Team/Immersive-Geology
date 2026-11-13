@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.core.material.data.mineral;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
@@ -22,6 +21,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.LinkedHashSet;
 import java.util.function.BiFunction;
@@ -46,8 +46,8 @@ public class MaterialRocksalt extends MaterialEvaporateMineral
 				MetalEnum.Sodium.getStack(ItemCategoryFlags.COMPOUND_DUST),
 				ChemicalEnum.HydrochloricAcid.getFluidStack(125),
 				IngredientWithSize.of(ItemStack.EMPTY),
-				new FluidTagInput(ChemicalEnum.Brine.getSlurryTagWith(BlockCategoryFlags.SLURRY, this), 125),
-				new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), 125),
+				SizedFluidIngredient.of(ChemicalEnum.Brine.getSlurryTagWith(BlockCategoryFlags.SLURRY, this), 125),
+				SizedFluidIngredient.of(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), 125),
 				null,
 				200, 51200);
 	}

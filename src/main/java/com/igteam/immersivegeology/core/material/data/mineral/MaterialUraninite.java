@@ -2,7 +2,6 @@ package com.igteam.immersivegeology.core.material.data.mineral;
 
 import blusunrize.immersiveengineering.api.IEEnums;
 import blusunrize.immersiveengineering.api.IETags;
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -20,6 +19,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.Tags.Biomes;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -66,9 +66,9 @@ public class MaterialUraninite extends MaterialMineral {
                 ItemStack.EMPTY,
                 ChemicalEnum.PhosphoricAcid.getCloudySlurryWith(MineralEnum.Uraninite, 3*IGLib.SLURRY_FROM_ACID_AMOUNT),
                 IngredientWithSize.of(getStack(ItemCategoryFlags.POWDER, 1)),
-                new FluidTagInput(ChemicalEnum.PhosphoricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
-                new FluidTagInput(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
-                new FluidTagInput(IETags.fluidEthanol, IGLib.ACID_TO_SLURRY_AMOUNT),
+                SizedFluidIngredient.of(ChemicalEnum.PhosphoricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
+                SizedFluidIngredient.of(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
+                SizedFluidIngredient.of(IETags.fluidEthanol, IGLib.ACID_TO_SLURRY_AMOUNT),
                 200, 51200);
 
         //Separation of U and Th
@@ -76,9 +76,9 @@ public class MaterialUraninite extends MaterialMineral {
                 ItemStack.EMPTY,
                 ChemicalEnum.NitricAcid.getCloudySlurryWith(MineralEnum.Uraninite, 3*IGLib.SLURRY_FROM_ACID_AMOUNT),
                 IngredientWithSize.of(ItemStack.EMPTY),
-                new FluidTagInput(ChemicalEnum.PhosphoricAcid.getCloudySlurryTagWith(MineralEnum.Uraninite), IGLib.SLURRY_FROM_ACID_AMOUNT),
-                new FluidTagInput(ChemicalEnum.Ammonia.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
-                new FluidTagInput(ChemicalEnum.NitricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
+                SizedFluidIngredient.of(ChemicalEnum.PhosphoricAcid.getCloudySlurryTagWith(MineralEnum.Uraninite), IGLib.SLURRY_FROM_ACID_AMOUNT),
+                SizedFluidIngredient.of(ChemicalEnum.Ammonia.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
+                SizedFluidIngredient.of(ChemicalEnum.NitricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
                 200, 51200);
 
         IGMethodBuilder.centrifuge(this, IGStageDesignation.REFINEMENT).create(

@@ -118,7 +118,7 @@ public abstract class IGRecipeMethod
 	{
 		FluidTank tank = new FluidTank(128);
 		tank.setFluid(new FluidStack(stack, 128));
-		FluidInfoArea fluid = new FluidInfoArea(tank, new Rect2i(x, y, w, h), 0,0, 0,0, getMethod().getGuiLocation());
+		FluidInfoArea fluid = new FluidInfoArea(tank, new Rect2i(x, y, w, h), 0,0, getMethod().getGuiLocation());
 		fluid.draw(graphics);
 		if(mx > x && (x+w) > mx && my > y && (y+h) > my)
 		{
@@ -132,7 +132,7 @@ public abstract class IGRecipeMethod
 		FluidTank tank = new FluidTank(128);
 		stack.setAmount(128);
 		tank.setFluid(stack);
-		FluidInfoArea fluid = new FluidInfoArea(tank, new Rect2i(x, y, w, h), 0,0, 0,0, getMethod().getGuiLocation());
+		FluidInfoArea fluid = new FluidInfoArea(tank, new Rect2i(x, y, w, h), 0,0, getMethod().getGuiLocation());
 		fluid.draw(graphics);
 		if(mx > x && (x+w) > mx && my > y && (y+h) > my)
 		{
@@ -144,7 +144,7 @@ public abstract class IGRecipeMethod
 	{
 		FluidTank tank = new FluidTank(amount);
 		tank.setFluid(new FluidStack(stack, amount));
-		FluidInfoArea fluid = new FluidInfoArea(tank, new Rect2i(x, y, w, h), 0,0, 0,0, getMethod().getGuiLocation());
+		FluidInfoArea fluid = new FluidInfoArea(tank, new Rect2i(x, y, w, h), 0,0, getMethod().getGuiLocation());
 		fluid.draw(graphics);
 		if(mx > x && (x+w) > mx && my > y && (y+h) > my)
 		{

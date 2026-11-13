@@ -24,6 +24,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.Arrays;
+
 public class IGFoundryCategory extends IGRecipeCategory<FoundryRecipe>
 {
 	private static final int FLUID_X = 7;
@@ -51,8 +53,8 @@ public class IGFoundryCategory extends IGRecipeCategory<FoundryRecipe>
 	public void setRecipe(IRecipeLayoutBuilder builder, FoundryRecipe recipe, IFocusGroup focuses)
 	{
 		builder.addSlot(RecipeIngredientRole.INPUT, FLUID_X, SLOT_Y)
-				.setFluidRenderer(recipe.fluidIn.getAmount(), false, 16, 16)
-				.addIngredients(NeoForgeTypes.FLUID_STACK, recipe.fluidIn.getMatchingFluidStacks())
+				.setFluidRenderer(recipe.fluidIn.amount(), false, 16, 16)
+				.addIngredients(NeoForgeTypes.FLUID_STACK, Arrays.asList(recipe.fluidIn.getFluids()))
 				.setBackground(JEIHelper.slotDrawable, -1, -1)
 				.addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
 

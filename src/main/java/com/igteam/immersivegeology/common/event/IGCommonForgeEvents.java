@@ -10,7 +10,6 @@ package com.igteam.immersivegeology.common.event;
 
 import blusunrize.immersiveengineering.ImmersiveEngineering;
 import blusunrize.immersiveengineering.api.excavator.MineralMix;
-import blusunrize.immersiveengineering.common.util.compat.crafttweaker.managers.MineralMixManager;
 import com.igteam.immersivegeology.common.commands.IGFindMineralVeinCommand;
 import com.igteam.immersivegeology.common.loot.IGLootModifier;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;

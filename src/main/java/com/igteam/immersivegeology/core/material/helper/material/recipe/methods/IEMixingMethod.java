@@ -8,7 +8,8 @@
 
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
-import blusunrize.immersiveengineering.api.crafting.builders.MixerRecipeBuilder;
+import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
+import blusunrize.immersiveengineering.api.crafting.MixerRecipe;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
 import blusunrize.lib.manual.gui.ManualScreen;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -26,8 +27,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 public class IEMixingMethod extends IGRecipeMethod
@@ -115,11 +118,8 @@ public class IEMixingMethod extends IGRecipeMethod
 	{
 		try
 		{
-			MixerRecipeBuilder builder = MixerRecipeBuilder.builder(fluid_result);
-			builder.addFluidTag(input_fluid, input_fluid_amount);
-			builder.addInput(input);
-			builder.setEnergy(energy);
-			builder.build(consumer, getLocation());
+			MixerRecipe recipe = new MixerRecipe(fluid_result, SizedFluidIngredient.of(input_fluid, input_fluid_amount), List.of(new IngredientWithSize(input)), energy);
+			consumer.accept(getLocation(), recipe, null);
 			return true;
 		}
 		catch(Exception e)

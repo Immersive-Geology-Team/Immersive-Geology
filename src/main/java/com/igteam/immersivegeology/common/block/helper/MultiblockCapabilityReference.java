@@ -8,17 +8,24 @@
 
 package com.igteam.immersivegeology.common.block.helper;
 
+import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IMultiblockComponent.CapabilityGetter;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IMultiblockComponent.CapabilityRegistrar;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockBEHelper;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockBE;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.CapabilityPosition;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.RelativeBlockFace;
 import blusunrize.immersiveengineering.api.utils.SafeChunkUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.neoforged.neoforge.capabilities.BlockCapability;
+import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,15 +34,14 @@ import javax.annotation.Nullable;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
 
 public class MultiblockCapabilityReference<T>
 {
-	private static final Logger LOGGER = LoggerFactory.getLogger(MultiblockCapabilityReference.class);
+	protected final BlockCapability<T, Direction> cap;
 
-	protected final Capability<T> cap;
-
-	protected MultiblockCapabilityReference(Capability<T> cap)
+	protected MultiblockCapabilityReference(BlockCapability<T, Direction> cap)
 	{
 		this.cap = cap;
 	}
@@ -51,58 +57,48 @@ public class MultiblockCapabilityReference<T>
 		return getNullable()!=null;
 	}
 
-	// Factory methods
-	public static <T> Map<Direction, MultiblockCapabilityReference<T>> forAllNeighbors(BlockEntity local, Capability<T> cap)
+	public static <T> Map<Direction, MultiblockCapabilityReference<T>> forAllNeighbors(BlockEntity local, BlockCapability<T, Direction> cap)
 	{
 		Map<Direction, MultiblockCapabilityReference<T>> neighbors = new EnumMap<>(Direction.class);
 		for(Direction side : Direction.values())
-		{
 			neighbors.put(side, forNeighbor(local, cap, side));
-		}
 		return neighbors;
 	}
 
-	public static <T> MultiblockCapabilityReference<T> forNeighbor(BlockEntity local, Capability<T> cap, @Nonnull Direction side)
+	public static <T> MultiblockCapabilityReference<T> forNeighbor(BlockEntity local, BlockCapability<T, Direction> cap, @Nonnull Direction side)
 	{
 		return forRelative(local, cap, BlockPos.ZERO.relative(side), side);
 	}
 
-	public static <T> MultiblockCapabilityReference<T> forRelative(BlockEntity local, Capability<T> cap, BlockPos offset, Direction side)
+	public static <T> MultiblockCapabilityReference<T> forRelative(BlockEntity local, BlockCapability<T, Direction> cap, BlockPos offset, Direction side)
 	{
-		return forBlockEntityAt(local, () -> {
-			return new DirectionalBlockPos(local.getBlockPos().offset(offset), side.getOpposite());
-		}, () -> {
-			return new DirectionalBlockPos(local.getBlockPos(), side);
-		}, cap);
+		return forBlockEntityAt(local,
+				() -> new DirectionalBlockPos(local.getBlockPos().offset(offset), side.getOpposite()),
+				() -> new DirectionalBlockPos(local.getBlockPos(), side), cap);
 	}
 
-	public static <T> MultiblockCapabilityReference<T> forBlockEntityAt(BlockEntity local,
-																		Supplier<DirectionalBlockPos> targetPos,
-																		Supplier<DirectionalBlockPos> requesterPos,
-																		Capability<T> cap)
+	public static <T> MultiblockCapabilityReference<T> forBlockEntityAt(
+			BlockEntity local, Supplier<DirectionalBlockPos> targetPos,
+			Supplier<DirectionalBlockPos> requesterPos, BlockCapability<T, Direction> cap)
 	{
 		Objects.requireNonNull(local);
 		return new MBCapReference<>(local::getLevel, targetPos, requesterPos, cap);
 	}
 
-	// Internal implementation class
 	private static class MBCapReference<T> extends MultiblockCapabilityReference<T>
 	{
 		private final Supplier<Level> getLevel;
 		private final Supplier<DirectionalBlockPos> getTargetPos;
 		private final Supplier<DirectionalBlockPos> getRequesterPos;
-		@Nonnull
-		private LazyOptional<T> currentCap = LazyOptional.empty();
+		private BlockCapabilityCache<T, Direction> cache;
 		private DirectionalBlockPos lastTargetPos;
-		private DirectionalBlockPos lastRequesterPos;
 		private Level lastWorld;
-		private BlockEntity lastBE;
-		private boolean usingRequesterContext = false;
+		private boolean usingRequesterContext;
 
 		public MBCapReference(Supplier<Level> getLevel,
 							  Supplier<DirectionalBlockPos> getTargetPos,
 							  Supplier<DirectionalBlockPos> getRequesterPos,
-							  Capability<T> cap)
+							  BlockCapability<T, Direction> cap)
 		{
 			super(cap);
 			this.getLevel = getLevel;
@@ -114,88 +110,77 @@ public class MultiblockCapabilityReference<T>
 		@Override
 		public T getNullable()
 		{
-			this.updateLazyOptional();
-			return this.currentCap.orElse(null);
-		}
-
-		@Override
-		public boolean isPresent()
-		{
-			this.updateLazyOptional();
-			return this.currentCap.isPresent();
-		}
-
-		private void updateLazyOptional()
-		{
-			Level currWorld = this.getLevel.get();
-			DirectionalBlockPos currTargetPos = this.getTargetPos.get();
-			DirectionalBlockPos currRequesterPos = this.getRequesterPos.get();
-
-			if(currWorld!=null&&currTargetPos!=null&&currRequesterPos!=null)
+			Level currWorld = getLevel.get();
+			DirectionalBlockPos currTargetPos = getTargetPos.get();
+			DirectionalBlockPos currRequesterPos = getRequesterPos.get();
+			usingRequesterContext = false;
+			if(currWorld==null||currTargetPos==null||currRequesterPos==null
+					||!SafeChunkUtils.isChunkSafe(currWorld, currTargetPos.position()))
 			{
-				if(currWorld!=this.lastWorld||
-						!currTargetPos.equals(this.lastTargetPos)||
-						!currRequesterPos.equals(this.lastRequesterPos)||
-						!this.currentCap.isPresent()||
-						(this.lastBE!=null&&this.lastBE.isRemoved()))
-				{
+				cache = null;
+				lastWorld = null;
+				lastTargetPos = null;
+				return null;
+			}
 
-					if(this.currentCap.isPresent()&&this.lastBE!=null&&this.lastBE.isRemoved())
-					{
-						LOGGER.warn("The tile entity {} (class {}) was removed, but the value {} provided by it for the capability {} is still marked as valid. This is likely a bug in the mod(s) adding the tile entity/the capability",
-								this.lastBE, this.lastBE.getClass(), this.currentCap.orElseThrow(RuntimeException::new), this.cap.getName());
-					}
+			if(currWorld!=lastWorld||!currTargetPos.equals(lastTargetPos))
+			{
+				cache = null;
+				lastWorld = currWorld;
+				lastTargetPos = currTargetPos;
+			}
 
-					this.lastBE = SafeChunkUtils.getSafeBE(currWorld, currTargetPos.position());
-					if(this.lastBE!=null)
-					{
-						// First try the standard approach (neighbor's perspective)
-						this.currentCap = this.lastBE.getCapability(this.cap, currTargetPos.side());
-						this.usingRequesterContext = false;
-
-						// If that doesn't work, try with requester context (for generators)
-						Direction side = currRequesterPos.side();
-						if(!this.currentCap.isPresent())
-						{
-							if(lastBE instanceof IMultiblockBE<?> mbe)
-							{
-								IMultiblockBEHelper<?> helper = mbe.getHelper();
-								IMultiblockContext<?> context = helper.getContext();
-								if(context!=null)
-								{
-									CapabilityPosition capPos = new CapabilityPosition(helper.getPositionInMB().relative(side.getOpposite()), RelativeBlockFace.from(context.getLevel().getOrientation(),side.getAxis().equals(Axis.Y) ? side.getOpposite() : side));
-									// Check if this is a generator-type multiblock
-									this.currentCap = helper.getMultiblock().logic().getCapability((IMultiblockContext)context, capPos, ForgeCapabilities.ENERGY);
-									this.usingRequesterContext = true;
-								}
-							}
-						}
-					}
-					else
-					{
-						this.currentCap = LazyOptional.empty();
-						this.usingRequesterContext = false;
-					}
-
-					this.lastWorld = currWorld;
-					this.lastTargetPos = currTargetPos;
-					this.lastRequesterPos = currRequesterPos;
-				}
+			T value;
+			if(currWorld instanceof ServerLevel serverLevel)
+			{
+				if(cache==null)
+					cache = BlockCapabilityCache.create(cap, serverLevel, currTargetPos.position(), currTargetPos.side());
+				value = cache.getCapability();
 			}
 			else
+				value = currWorld.getCapability(cap, currTargetPos.position(), currTargetPos.side());
+			if(value!=null) return value;
+
+			// Keep IG's requester-context fallback for generator connections.
+			BlockEntity lastBE = SafeChunkUtils.getSafeBE(currWorld, currTargetPos.position());
+			if(cap==Capabilities.EnergyStorage.BLOCK&&lastBE instanceof IMultiblockBE<?> mbe)
 			{
-				this.currentCap = LazyOptional.empty();
-				this.lastWorld = null;
-				this.lastTargetPos = null;
-				this.lastRequesterPos = null;
-				this.lastBE = null;
-				this.usingRequesterContext = false;
+				IMultiblockBEHelper<?> helper = mbe.getHelper();
+				IMultiblockContext<?> context = helper.getContext();
+				if(context!=null)
+				{
+					Direction side = currRequesterPos.side();
+					CapabilityPosition capPos = new CapabilityPosition(
+							helper.getPositionInMB().relative(side.getOpposite()),
+							RelativeBlockFace.from(context.getLevel().getOrientation(), side.getAxis()==Axis.Y?side.getOpposite():side));
+					usingRequesterContext = true;
+					return getFromMultiblock(helper, capPos);
+				}
 			}
+			return null;
+		}
+
+		@Nullable
+		private <S extends IMultiblockState> T getFromMultiblock(IMultiblockBEHelper<S> helper, CapabilityPosition position)
+		{
+			S state = helper.getState();
+			if(state==null) return null;
+			AtomicReference<T> result = new AtomicReference<>();
+			helper.getMultiblock().logic().registerCapabilities(new CapabilityRegistrar<>()
+			{
+				@Override
+				public <C> void register(BlockCapability<C, Direction> capability, CapabilityGetter<C, S> getter)
+				{
+					if(capability==cap)
+						result.set(cap.typeClass().cast(getter.getCapability(state, position)));
+				}
+			});
+			return result.get();
 		}
 
 		public boolean isUsingRequesterContext()
 		{
-			return this.usingRequesterContext;
+			return usingRequesterContext;
 		}
 	}
 

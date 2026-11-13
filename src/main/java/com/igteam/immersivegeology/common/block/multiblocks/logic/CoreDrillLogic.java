@@ -19,7 +19,6 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockCon
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
-import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.client.utils.TextUtils;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.interfaces.MBOverlayText;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessInWorld;
@@ -53,6 +52,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage;
+import net.neoforged.neoforge.capabilities.Capabilities.FluidHandler;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
@@ -67,6 +68,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServerTickableComponent<CoreDrillLogic.State>, IClientTickableComponent<CoreDrillLogic.State>, MBOverlayText<CoreDrillLogic.State>
 {
@@ -238,7 +240,7 @@ public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServer
 
                     if(recipe != null && !state.drill_direction && state.spinDown)
                     {
-                        int amount = recipe.getInput().getAmount();
+                        int amount = recipe.getInput().amount();
                         if(!state.acid_tank.drain(amount, FluidAction.SIMULATE).isEmpty())
                         {
                             FluidStack toFill = new FluidStack(recipe.getOutput(), 1);
@@ -296,9 +298,9 @@ public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServer
     private void drainOutputTank(State state, IMultiblockContext<State> context)
     {
         int outSize = Math.min(FluidType.BUCKET_VOLUME, state.output_tank.getFluidAmount());
-        CapabilityReference<IFluidHandler> outputRef = state.fluidOutput;
+        Supplier<@Nullable IFluidHandler> outputRef = state.fluidOutput;
         FluidStack out = Utils.copyFluidStackWithAmount(state.output_tank.getFluid(), outSize, false);
-        IFluidHandler output = outputRef.getNullable();
+        IFluidHandler output = outputRef.get();
 
         if(output==null)
             return;
@@ -316,9 +318,9 @@ public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServer
     private void drainInputTank(State state, IMultiblockContext<State> context)
     {
         int outSize = Math.min(FluidType.BUCKET_VOLUME, state.acid_tank.getFluidAmount());
-        CapabilityReference<IFluidHandler> outputRef = state.fluidOutput;
+        Supplier<@Nullable IFluidHandler> outputRef = state.fluidOutput;
         FluidStack out = Utils.copyFluidStackWithAmount(state.acid_tank.getFluid(), outSize, false);
-        IFluidHandler output = outputRef.getNullable();
+        IFluidHandler output = outputRef.get();
 
         if(output==null)
             return;
@@ -339,28 +341,15 @@ public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServer
     }
 
     @Override
-    public <T> LazyOptional<T> getCapability(IMultiblockContext<State> ctx, CapabilityPosition position, Capability<T> cap)
+    public void registerCapabilities(CapabilityRegistrar<State> register)
     {
-        final State state = ctx.getState();
-        if(cap == ForgeCapabilities.ENERGY && (position.side()==null || ENERGY_INPUTS.contains(position)))
-        {
-            return state.energyCap.cast(ctx);
-        }
-
-        if(cap == ForgeCapabilities.FLUID_HANDLER)
-        {
-            if(FLUID_OUTPUT_CAP.equals(position))
-            {
-                return state.fOutputCap.cast(ctx);
-            }
-
-            if(FLUID_INPUT_CAP.equals(position))
-            {
-                return state.fInputCap.cast(ctx);
-            }
-        }
-
-        return LazyOptional.empty();
+        register.register(EnergyStorage.BLOCK, (state, position) ->
+                position.side()==null||ENERGY_INPUTS.contains(position)?state.energyCap:null);
+        register.register(FluidHandler.BLOCK, (state, position) -> {
+            if(FLUID_OUTPUT_CAP.equals(position)) return state.fOutputCap;
+            if(FLUID_INPUT_CAP.equals(position)) return state.fInputCap;
+            return null;
+        });
     }
 
     @Override
@@ -385,11 +374,11 @@ public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServer
 
         private final MultiblockProcessor<CoreDrillRecipe, ProcessContextInWorld<CoreDrillRecipe>> processor;
 
-        private final CapabilityReference<IFluidHandler> fluidOutput;
-        private final StoredCapability<IFluidHandler> fInputCap;
-        private final StoredCapability<IFluidHandler> fOutputCap;
+        private final Supplier<@Nullable IFluidHandler> fluidOutput;
+        private final IFluidHandler fInputCap;
+        private final IFluidHandler fOutputCap;
 
-        private final StoredCapability<IEnergyStorage> energyCap;
+        private final IEnergyStorage energyCap;
 
         private float drill_angle;
         private float gear_clockwise_angle;
@@ -408,13 +397,13 @@ public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServer
             // Allows us to 'fill' it
             this.fluidOutput = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, FLUID_OUTPUT.face().offsetRelative(FLUID_OUTPUT.posInMultiblock(), 1), FLUID_OUTPUT.face());
             this.processor = new MultiblockProcessor<>(2048, 0, 1, ctx.getMarkDirtyRunnable(), CoreDrillRecipe.RECIPES::getById);
-            this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.energy));
+            this.energyCap = IGReceiveOnlyEnergy.of(this.energy);
             Runnable changedAndSync = () -> {
                 ctx.getSyncRunnable().run();
                 ctx.getMarkDirtyRunnable().run();
             };
-            this.fInputCap = new StoredCapability<>(new ArrayFluidHandler(acid_tank, true, true, changedAndSync));
-            this.fOutputCap = new StoredCapability<>(new ArrayFluidHandler(output_tank, true, true, changedAndSync));
+            this.fInputCap = new ArrayFluidHandler(acid_tank, true, true, changedAndSync);
+            this.fOutputCap = new ArrayFluidHandler(output_tank, true, true, changedAndSync);
         }
 
         @Override
@@ -518,9 +507,6 @@ public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServer
         @Override
         public void invalidate(@NotNull IMultiblockContext<?> context)
         {
-            this.energyCap.get(context).invalidate();
-            this.fOutputCap.get(context).invalidate();
-            this.fInputCap.get(context).invalidate();
         }
     }
 

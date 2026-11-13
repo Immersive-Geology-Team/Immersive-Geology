@@ -8,8 +8,7 @@
 
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
-import blusunrize.immersiveengineering.api.crafting.builders.RefineryRecipeBuilder;
+import blusunrize.immersiveengineering.api.crafting.RefineryRecipe;
 import blusunrize.immersiveengineering.client.gui.info.FluidInfoArea;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
 import blusunrize.lib.manual.gui.ManualScreen;
@@ -25,9 +24,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
@@ -96,7 +97,7 @@ public class IGRefineryMethod extends IGRecipeMethod
 		FluidTank tank = new FluidTank(1000);
 		tank.setFluid(output);
 
-		FluidInfoArea fluid = new FluidInfoArea(tank, new Rect2i(x, y, 16, 16), 0,0,0,0,  IGLib.makeTextureLocation("reverberation_furnace"));
+		FluidInfoArea fluid = new FluidInfoArea(tank, new Rect2i(x, y, 16, 16), 0,0, IGLib.makeTextureLocation("reverberation_furnace"));
 		fluid.draw(graphics);
 		render_x_space = 48;
 	}
@@ -118,13 +119,10 @@ public class IGRefineryMethod extends IGRecipeMethod
 	{
 		try
 		{
-			RefineryRecipeBuilder builder = RefineryRecipeBuilder.builder(output);
-			builder.addCatalyst(catalyst);
-			builder.addInput(new FluidTagInput(fluid_input_a, input_fluid_a_amount));
-			builder.addInput(new FluidTagInput(fluid_input_b, input_fluid_b_amount));
-			builder.setEnergy(80);
-			builder.setTime(1);
-			builder.build(consumer, getLocation());
+			RefineryRecipe recipe = new RefineryRecipe(output,
+					SizedFluidIngredient.of(fluid_input_a, input_fluid_a_amount),
+					SizedFluidIngredient.of(fluid_input_b, input_fluid_b_amount), Ingredient.of(catalyst), 80);
+			consumer.accept(getLocation(), recipe, null);
 			return true;
 		} catch(Exception e)
 		{

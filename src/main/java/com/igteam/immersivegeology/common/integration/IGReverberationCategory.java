@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.common.integration;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.common.util.compat.jei.JEIHelper;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GravitySeparatorRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RevFurnaceRecipe;
@@ -30,6 +29,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
 import java.util.Arrays;
 
@@ -54,11 +54,11 @@ public class IGReverberationCategory extends IGRecipeCategory<RevFurnaceRecipe>
 				.addItemStack(recipe.result.get());
 
 		TagKey<Fluid> fluid = ChemicalEnum.SulfurDioxde.getFluidTag(BlockCategoryFlags.FLUID);
-		FluidTagInput taggedFluid = new FluidTagInput(fluid, recipe.getWasteAmount());
+		FluidIngredient taggedFluid = FluidIngredient.tag(fluid);
 		int tankSize = Math.max(FluidType.BUCKET_VOLUME,  recipe.getWasteAmount());
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 81, 27)
 				.setFluidRenderer(tankSize, false, 16, 47)
-				.addIngredients(NeoForgeTypes.FLUID_STACK, taggedFluid.getMatchingFluidStacks())
+				.addIngredients(NeoForgeTypes.FLUID_STACK, Arrays.stream(taggedFluid.getStacks()).map(stack -> stack.copyWithAmount(recipe.getWasteAmount())).toList())
 				.addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
 	}
 

@@ -17,7 +17,6 @@ import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
-import mezz.jei.api.gui.ingredient.IRecipeSlotTooltipCallback;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.recipe.IFocusGroup;
@@ -42,10 +41,10 @@ public class IGCrystallizerCategory extends IGRecipeCategory<CrystallizerRecipe>
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, CrystallizerRecipe recipe, IFocusGroup focuses)
 	{
-		int tankSize = Math.max(2*FluidType.BUCKET_VOLUME,  Math.max(recipe.fluidIn.getAmount(),recipe.fluidIn.getAmount()));
+		int tankSize = Math.max(2*FluidType.BUCKET_VOLUME,  Math.max(recipe.fluidIn.amount(),recipe.fluidIn.amount()));
 		builder.addSlot(RecipeIngredientRole.INPUT, 15, 27)
 				.setFluidRenderer(tankSize, false, 16, 47)
-				.addIngredients(NeoForgeTypes.FLUID_STACK, recipe.fluidIn.getMatchingFluidStacks())
+				.addIngredients(NeoForgeTypes.FLUID_STACK, Arrays.asList(recipe.fluidIn.getFluids()))
 				.addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
 
 		if(!recipe.fluidOutput.get().isEmpty())

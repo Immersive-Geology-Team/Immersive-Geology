@@ -8,6 +8,8 @@
 
 package com.igteam.immersivegeology.common.item;
 
+import blusunrize.immersiveengineering.api.multiblocks.MultiblockAdvancementTrigger;
+import blusunrize.immersiveengineering.api.utils.ItemUtils;
 import com.igteam.immersivegeology.core.material.helper.material.IStoneType;
 import blusunrize.immersiveengineering.api.ApiUtils;
 import blusunrize.immersiveengineering.api.multiblocks.BlockMatcher;
@@ -16,8 +18,6 @@ import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler.IMultib
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.api.utils.DirectionUtils;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.blockimpl.MultiblockLevel;
-import blusunrize.immersiveengineering.common.util.ItemNBTHelper;
-import blusunrize.immersiveengineering.common.util.advancements.IEAdvancements;
 import com.google.common.collect.ImmutableList;
 import com.igteam.immersivegeology.common.block.multiblocks.IGTemplateMultiblock;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -140,7 +140,7 @@ public class IGMBFormationItem extends IGGenericItem
 					if(mb.createStructure(world, pos, multiblockSide, player))
 					{
 						if(player instanceof ServerPlayer sPlayer)
-							IEAdvancements.TRIGGER_MULTIBLOCK.trigger(sPlayer, mb, stack);
+							MultiblockAdvancementTrigger.INSTANCE.get().trigger(sPlayer, mb, stack);
 
 
 						if(player!=null)
@@ -233,8 +233,7 @@ public class IGMBFormationItem extends IGGenericItem
 	@Nonnull
 	@Override
 	public ItemStack getCraftingRemainingItem(@Nonnull ItemStack stack) {
-		ItemStack container = stack.copy();
-		return container.hurt(1, ApiUtils.RANDOM_SOURCE, (ServerPlayer)null) ? ItemStack.EMPTY : container;
+		return ItemUtils.damageCopy(stack, 1);
 	}
 
 	public boolean isValidRepairItem(ItemStack stack, ItemStack repairCandidate) {

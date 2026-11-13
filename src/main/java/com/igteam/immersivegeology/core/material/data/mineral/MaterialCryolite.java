@@ -1,6 +1,5 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -20,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.List;
 import java.util.Optional;
@@ -65,13 +65,13 @@ public class MaterialCryolite extends MaterialMineral {
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create("metal_oxide_"+getName()+"_to_compound_dust",
                 MetalEnum.Aluminum.getStack(ItemCategoryFlags.COMPOUND_DUST, IGLib.COMPOUND_FROM_ACID_AMOUNT), new FluidStack(Fluids.EMPTY, 0),
                 new IngredientWithSize(MetalEnum.Aluminum.getItemTag(ItemCategoryFlags.METAL_OXIDE)),
-                new FluidTagInput(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_COMPOUND_AMOUNT),
+                SizedFluidIngredient.of(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_COMPOUND_AMOUNT),
                 null, null, 200, 51200).addToTree(al_synthesis);
 
         IGMethodBuilder.chemical(this, IGStageDesignation.LEECHING).create("compound_dust_"+MetalEnum.Aluminum.getName()+"_to_cryolite",
                 MineralEnum.Cryolite.getStack(ItemCategoryFlags.POWDER, IGLib.DUST_FROM_COMPOUND_ACID_AMOUNT), new FluidStack(Fluids.EMPTY, 0),
                 new IngredientWithSize(MetalEnum.Aluminum.getItemTag(ItemCategoryFlags.COMPOUND_DUST), IGLib.COMPOUND_ACID_TO_DUST_AMOUNT),
-                new FluidTagInput(ChemicalEnum.HydrofluoricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_DUST_AMOUNT),
+                SizedFluidIngredient.of(ChemicalEnum.HydrofluoricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_DUST_AMOUNT),
                 null, null, 200, 51200).addToTree(al_synthesis);
     }
 

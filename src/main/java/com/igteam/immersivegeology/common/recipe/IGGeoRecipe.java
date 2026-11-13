@@ -8,11 +8,8 @@
 
 package com.igteam.immersivegeology.common.recipe;
 
-import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
+import blusunrize.immersiveengineering.api.crafting.*;
 import blusunrize.immersiveengineering.api.crafting.IERecipeTypes.TypeWithClass;
-import blusunrize.immersiveengineering.api.crafting.IESerializableRecipe;
-import blusunrize.immersiveengineering.api.crafting.IJEIRecipe;
-import blusunrize.immersiveengineering.api.crafting.IMultiblockRecipe;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.IndustrialSluiceRecipe;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
@@ -34,9 +31,9 @@ public class IGGeoRecipe extends IESerializableRecipe implements IJEIRecipe
 	public final GeologyMaterial material;
 	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<IGGeoRecipe>> SERIALIZER;
 	public static final CachedRecipeList<IGGeoRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.GEOHINT);
-	protected <T extends Recipe<?>> IGGeoRecipe(ResourceLocation id, GeologyMaterial material)
+	public <T extends Recipe<?>> IGGeoRecipe(GeologyMaterial material)
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.GEOHINT, id);
+		super(TagOutput.EMPTY, IGRecipeTypes.GEOHINT);
 		this.material = material;
 	}
 

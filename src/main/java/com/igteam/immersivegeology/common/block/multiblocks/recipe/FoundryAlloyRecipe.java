@@ -8,14 +8,15 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.recipe;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
+import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,14 +27,14 @@ public class FoundryAlloyRecipe extends MultiblockRecipe
 	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<FoundryAlloyRecipe>> SERIALIZER;
 	public static final CachedRecipeList<FoundryAlloyRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.FOUNDRY_ALLOYING);
 
-	public final List<FluidTagInput> alloyInputs;
+	public final List<SizedFluidIngredient> alloyInputs;
 	public final FluidStack alloyOutput;
 	private final int energyPerUnit;
 	private final int time;
 
-	public FoundryAlloyRecipe(ResourceLocation id, List<FluidTagInput> inputs, FluidStack output, int energyPerUnit, int time)
+	public FoundryAlloyRecipe(List<SizedFluidIngredient> inputs, FluidStack output, int energyPerUnit, int time)
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.FOUNDRY_ALLOYING, id);
+		super(TagOutput.EMPTY, IGRecipeTypes.FOUNDRY_ALLOYING, time, energyPerUnit, () -> new RecipeMultiplier(() -> 1, () -> 1));
 		this.alloyInputs = List.copyOf(inputs);
 		this.alloyOutput = output;
 		this.energyPerUnit = energyPerUnit;
@@ -45,7 +46,7 @@ public class FoundryAlloyRecipe extends MultiblockRecipe
 	public int getInputVolumePerUnit()
 	{
 		int volume = 0;
-		for(FluidTagInput input : alloyInputs) volume += input.getAmount();
+		for(SizedFluidIngredient input : alloyInputs) volume += input.amount();
 		return volume;
 	}
 
@@ -57,13 +58,13 @@ public class FoundryAlloyRecipe extends MultiblockRecipe
 	public int unitsFrom(List<FluidStack> available, int limit)
 	{
 		int units = limit;
-		for(FluidTagInput input : alloyInputs)
+		for(SizedFluidIngredient input : alloyInputs)
 		{
-			if(input.getAmount() <= 0) return 0;
+			if(input.amount() <= 0) return 0;
 			int stored = 0;
 			for(FluidStack fluid : available)
-				if(!fluid.isEmpty()&&input.testIgnoringAmount(fluid)) stored += fluid.getAmount();
-			units = Math.min(units, stored/input.getAmount());
+				if(!fluid.isEmpty()&&input.ingredient().test(fluid)) stored += fluid.getAmount();
+			units = Math.min(units, stored/input.amount());
 			if(units <= 0) return 0;
 		}
 		return units;
