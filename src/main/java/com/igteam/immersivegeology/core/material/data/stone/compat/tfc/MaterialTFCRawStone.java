@@ -16,7 +16,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialTFCRawStone extends MaterialStone
 {

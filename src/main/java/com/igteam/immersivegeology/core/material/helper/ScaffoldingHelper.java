@@ -16,8 +16,9 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 
-import static com.igteam.immersivegeology.core.registration.IGRegistrationHolder.getBlockRegistryMap;
 import java.util.Locale;
+
+import static com.igteam.immersivegeology.core.registration.IGRegistrationHolder.getBlockRegistryMap;
 
 public class ScaffoldingHelper
 {

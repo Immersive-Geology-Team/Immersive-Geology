@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.core.material.data.types;
 
-import com.igteam.immersivegeology.common.world.IGWorldGen;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;

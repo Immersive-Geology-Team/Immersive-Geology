@@ -9,11 +9,9 @@
 package com.igteam.immersivegeology.common.data.helper;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.igteam.immersivegeology.client.helper.IGRecipeBuilder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 

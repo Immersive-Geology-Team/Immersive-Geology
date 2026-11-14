@@ -11,7 +11,6 @@ package com.igteam.immersivegeology.client.renderer;
 import com.igteam.immersivegeology.client.IGShaders;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat.Mode;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;

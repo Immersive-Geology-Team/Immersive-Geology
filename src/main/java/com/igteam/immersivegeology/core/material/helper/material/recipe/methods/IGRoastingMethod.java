@@ -28,8 +28,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.Consumer;
-
 public class IGRoastingMethod extends IGRecipeMethod
 {
 	public IGRoastingMethod(MaterialHelper parentMaterial, IGStageDesignation stage)

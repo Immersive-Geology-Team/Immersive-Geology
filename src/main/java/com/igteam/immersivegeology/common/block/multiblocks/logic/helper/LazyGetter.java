@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.logic.helper;
 
-import java.util.List;
 import java.util.function.Function;
 
 public class LazyGetter<B,T> {

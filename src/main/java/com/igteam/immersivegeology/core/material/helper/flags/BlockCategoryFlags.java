@@ -4,7 +4,6 @@ import com.igteam.immersivegeology.client.IGClientRenderHandler.RenderTypeSkelet
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
 import com.igteam.immersivegeology.common.tag.IGTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
 public enum BlockCategoryFlags implements IFlagType<BlockCategoryFlags> {

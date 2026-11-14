@@ -8,21 +8,19 @@
 
 package com.igteam.immersivegeology.common.data.generators;
 
-import blusunrize.immersiveengineering.common.world.IEOreFeature;
-import blusunrize.immersiveengineering.common.world.IEOreFeature.IEOreFeatureConfig;
-import blusunrize.immersiveengineering.common.world.IEWorldGen;
-import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
-import com.igteam.immersivegeology.common.world.*;
+import com.igteam.immersivegeology.common.world.IGDefaultPlacement;
+import com.igteam.immersivegeology.common.world.IGHeightProvider;
+import com.igteam.immersivegeology.common.world.IGWorldGen;
+import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.common.world.features.helper.IGEvaporateConfig;
-import com.igteam.immersivegeology.common.world.modifiers.IGOreRemovalModifier;
 import com.igteam.immersivegeology.common.world.placements.IGCountPlacement;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.mojang.serialization.Lifecycle;
-import net.minecraft.core.*;
 import net.minecraft.core.Holder.Reference;
+import net.minecraft.core.*;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.HolderLookup.RegistryLookup;
 import net.minecraft.core.HolderSet.Named;
@@ -36,8 +34,10 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
-import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
+import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.world.BiomeModifier;
@@ -50,7 +50,6 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 
 public class IGWorldGenerationProvider

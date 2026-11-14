@@ -16,9 +16,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.util.MultiblockOri
 import blusunrize.immersiveengineering.client.utils.RenderUtils;
 import com.igteam.immersivegeology.client.models.IGDynamicModel;
 import com.igteam.immersivegeology.client.renderer.IGBlockEntityRenderer;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.BallmillLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.CentrifugeLogic;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.PelletizerLogic;
 import com.igteam.immersivegeology.common.config.IGClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;

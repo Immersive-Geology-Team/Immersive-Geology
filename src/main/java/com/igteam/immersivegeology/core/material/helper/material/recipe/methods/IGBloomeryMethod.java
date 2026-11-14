@@ -26,7 +26,6 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
-import java.util.function.Consumer;
 
 public class IGBloomeryMethod extends IGRecipeMethod
 {

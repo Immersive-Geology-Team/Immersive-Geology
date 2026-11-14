@@ -9,7 +9,6 @@
 package com.igteam.immersivegeology.core.material.data.chemical;
 
 import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
@@ -21,7 +20,6 @@ import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialSodiumHydroxide extends MaterialChemical
 {

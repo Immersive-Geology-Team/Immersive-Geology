@@ -15,7 +15,6 @@ import com.igteam.immersivegeology.common.block.multiblocks.gui.helper.IGSlot;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RevFurnaceLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFurnaceHandler.RevStateView;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RevFurnaceRecipe;
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.MenuType;

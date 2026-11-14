@@ -11,7 +11,6 @@ package com.igteam.immersivegeology.common.block.multiblocks.recipe.serializer;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import blusunrize.immersiveengineering.api.utils.codec.IEDualCodecs;
-import com.google.gson.JsonObject;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.FoundryRecipe;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import malte0811.dualcodecs.DualCodec;
@@ -20,17 +19,11 @@ import malte0811.dualcodecs.DualCompositeMapCodecs;
 import malte0811.dualcodecs.DualMapCodec;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.neoforged.neoforge.common.conditions.ICondition.IContext;
-import net.neoforged.neoforge.common.util.Lazy;
-import org.jetbrains.annotations.Nullable;
 
 public class FoundryRecipeSerializer extends IERecipeSerializer<FoundryRecipe>
 {

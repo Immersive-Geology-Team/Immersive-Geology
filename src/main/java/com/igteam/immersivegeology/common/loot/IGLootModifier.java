@@ -8,8 +8,6 @@
 
 package com.igteam.immersivegeology.common.loot;
 
-import com.igteam.immersivegeology.common.block.multiblocks.skins.IGChemicalReactorSkins;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;

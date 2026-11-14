@@ -28,7 +28,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
-import org.joml.Vector3f;
 
 @LinkedMultiSkin(multiblock = IGAlternatorMultiblock.class)
 public class AlternatorRenderer extends IGBlockEntityRenderer<MultiblockBlockEntityMaster<AlternatorLogic.State>>

@@ -25,12 +25,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.Consumer;
-
-import static com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic.LV_HEAT_CAP;
-import static com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic.MV_HEAT_CAP;
-import static com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic.HV_HEAT_CAP;
-import static com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic.EHV_HEAT_CAP;
+import static com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic.*;
 
 public class IGCalcinationMethod extends IGRecipeMethod
 {

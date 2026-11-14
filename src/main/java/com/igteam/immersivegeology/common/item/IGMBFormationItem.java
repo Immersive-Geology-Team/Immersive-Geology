@@ -8,21 +8,17 @@
 
 package com.igteam.immersivegeology.common.item;
 
-import blusunrize.immersiveengineering.api.multiblocks.MultiblockAdvancementTrigger;
-import blusunrize.immersiveengineering.api.utils.ItemUtils;
-import com.igteam.immersivegeology.core.material.helper.material.IStoneType;
-import blusunrize.immersiveengineering.api.ApiUtils;
 import blusunrize.immersiveengineering.api.multiblocks.BlockMatcher;
+import blusunrize.immersiveengineering.api.multiblocks.MultiblockAdvancementTrigger;
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler.IMultiblock;
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.api.utils.DirectionUtils;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.blockimpl.MultiblockLevel;
+import blusunrize.immersiveengineering.api.utils.ItemUtils;
 import com.google.common.collect.ImmutableList;
 import com.igteam.immersivegeology.common.block.multiblocks.IGTemplateMultiblock;
-import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.material.IStoneType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import net.minecraft.core.BlockPos;
@@ -58,10 +54,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import java.util.function.BiPredicate;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 public class IGMBFormationItem extends IGGenericItem
 {

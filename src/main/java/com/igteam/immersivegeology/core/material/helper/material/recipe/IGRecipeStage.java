@@ -8,16 +8,10 @@
 
 package com.igteam.immersivegeology.core.material.helper.material.recipe;
 
-import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.ItemStack;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.function.Function;
 
 public abstract class IGRecipeStage
 {

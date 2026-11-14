@@ -15,10 +15,11 @@ import com.igteam.immersivegeology.common.world.noise.INoise3D;
 import javax.imageio.*;
 import javax.imageio.stream.ImageOutputStream;
 import java.awt.image.*;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class NoiseTester {

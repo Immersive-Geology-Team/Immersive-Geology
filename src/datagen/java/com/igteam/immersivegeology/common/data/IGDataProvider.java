@@ -16,7 +16,6 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
 import static com.igteam.immersivegeology.core.material.GeologyMaterial.EXISTING_HELPER;
 
 @EventBusSubscriber(modid = IGLib.MODID)

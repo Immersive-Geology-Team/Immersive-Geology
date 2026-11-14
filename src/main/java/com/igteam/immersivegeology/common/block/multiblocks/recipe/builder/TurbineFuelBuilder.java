@@ -8,8 +8,6 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.recipe.builder;
 
-import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
-import blusunrize.immersiveengineering.api.energy.GeneratorFuel;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.TurbineFuel;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;

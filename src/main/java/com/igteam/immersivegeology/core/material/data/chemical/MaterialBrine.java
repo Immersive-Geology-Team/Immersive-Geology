@@ -14,7 +14,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialBrine extends MaterialChemical
 {

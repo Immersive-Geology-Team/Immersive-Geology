@@ -9,8 +9,6 @@
 package com.igteam.immersivegeology.common.block.multiblocks.recipe.serializer;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
-import blusunrize.immersiveengineering.common.network.PacketUtils;
-import com.google.gson.JsonObject;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.TurbineFuel;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import com.mojang.datafixers.util.Either;
@@ -20,20 +18,11 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import malte0811.dualcodecs.DualMapCodec;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.material.Fluid;
-import net.neoforged.neoforge.common.conditions.ICondition.IContext;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import java.util.List;
 
 import static com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.TurbineFuelBuilder.*;
 

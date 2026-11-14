@@ -10,7 +10,6 @@ package com.igteam.immersivegeology.common.integration;
 
 import blusunrize.immersiveengineering.common.util.compat.jei.JEIHelper;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRecipe;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.CrystallizerRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -25,7 +24,6 @@ import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 public class IGChemicalCategory extends IGRecipeCategory<ChemicalRecipe>
 {

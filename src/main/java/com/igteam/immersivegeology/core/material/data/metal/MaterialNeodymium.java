@@ -9,12 +9,10 @@
 package com.igteam.immersivegeology.core.material.data.metal;
 
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
-import com.igteam.immersivegeology.core.material.data.types.MaterialNativeMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
@@ -25,7 +23,6 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialNeodymium extends MaterialMetal
 {

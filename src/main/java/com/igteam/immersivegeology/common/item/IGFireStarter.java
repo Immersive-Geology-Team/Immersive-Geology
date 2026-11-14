@@ -16,7 +16,6 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialInterfa
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import net.minecraft.world.item.FlintAndSteelItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 
 import java.util.Collection;
 import java.util.List;

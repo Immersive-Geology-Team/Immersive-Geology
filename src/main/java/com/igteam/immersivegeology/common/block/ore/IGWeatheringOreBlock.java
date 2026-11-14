@@ -37,7 +37,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Consumer;
 
 public class IGWeatheringOreBlock extends IGGenericBlock implements IOreBlock
 {

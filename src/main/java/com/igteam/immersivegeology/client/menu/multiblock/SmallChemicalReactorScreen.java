@@ -13,7 +13,6 @@ import blusunrize.immersiveengineering.client.gui.info.EnergyInfoArea;
 import blusunrize.immersiveengineering.client.gui.info.FluidInfoArea;
 import blusunrize.immersiveengineering.client.gui.info.InfoArea;
 import com.google.common.collect.ImmutableList;
-import com.igteam.immersivegeology.common.block.multiblocks.gui.ChemicalReactorMenu;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.SmallChemicalReactorMenu;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.mojang.blaze3d.vertex.PoseStack;

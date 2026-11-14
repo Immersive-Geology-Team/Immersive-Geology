@@ -32,7 +32,6 @@ import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
-import java.util.function.Consumer;
 
 public class IGCentrifugeMethod extends IGRecipeMethod
 {

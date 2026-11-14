@@ -9,12 +9,9 @@
 package com.igteam.immersivegeology.common.block.multiblocks.recipe.builder;
 
 import blusunrize.immersiveengineering.api.utils.FastEither;
-import com.google.gson.JsonArray;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GeothermalBiomeRecipe;
-import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.Holder;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;

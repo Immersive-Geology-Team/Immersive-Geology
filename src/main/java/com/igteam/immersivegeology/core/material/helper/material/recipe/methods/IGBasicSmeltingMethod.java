@@ -26,8 +26,6 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.Consumer;
-
 public class IGBasicSmeltingMethod extends IGRecipeMethod
 {
 	public IGBasicSmeltingMethod(IGRecipeStage stage)

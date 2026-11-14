@@ -14,7 +14,6 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockB
 import com.igteam.immersivegeology.common.block.multiblocks.logic.AlternatorLogic;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
-import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;

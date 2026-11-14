@@ -9,13 +9,11 @@
 package com.igteam.immersivegeology.common.block.multiblocks.shapes;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.ParticleUtils;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 public class GeothermalExchangerShape extends GenericShape {

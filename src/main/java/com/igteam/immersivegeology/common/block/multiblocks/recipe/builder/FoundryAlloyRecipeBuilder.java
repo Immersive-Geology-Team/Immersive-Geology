@@ -9,7 +9,6 @@
 package com.igteam.immersivegeology.common.block.multiblocks.recipe.builder;
 
 import com.google.common.base.Preconditions;
-import com.google.gson.JsonArray;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.FoundryAlloyRecipe;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;

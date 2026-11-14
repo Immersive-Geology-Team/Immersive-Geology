@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.recipe.builder;
 
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import com.google.common.base.Preconditions;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.CrystallizerRecipe;

@@ -12,7 +12,6 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraft.tags.BiomeTags;
 
-import java.util.List;
 import java.util.Optional;
 
 public class MaterialAnthracite extends MaterialMineral

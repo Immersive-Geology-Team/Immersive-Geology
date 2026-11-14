@@ -11,6 +11,7 @@ package com.igteam.immersivegeology.client.helper;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Plane;
 import net.minecraft.util.RandomSource;
+
 import java.util.Locale;
 
 public enum IGVeinTextureType

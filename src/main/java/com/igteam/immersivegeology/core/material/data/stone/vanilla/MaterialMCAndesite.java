@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialMCAndesite extends MaterialStone {
 

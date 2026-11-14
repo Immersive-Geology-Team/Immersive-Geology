@@ -19,7 +19,6 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialCobalt extends MaterialMetal {
 

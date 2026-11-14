@@ -14,7 +14,6 @@ import blusunrize.immersiveengineering.client.gui.info.FluidInfoArea;
 import blusunrize.immersiveengineering.client.gui.info.InfoArea;
 import com.google.common.collect.ImmutableList;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.ChemicalReactorMenu;
-import com.igteam.immersivegeology.common.block.multiblocks.gui.CrystallizerMenu;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.Rect2i;

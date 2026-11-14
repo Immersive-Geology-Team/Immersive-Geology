@@ -8,17 +8,12 @@
 
 package com.igteam.immersivegeology.common.recipe;
 
-import com.google.gson.JsonObject;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
-
-import javax.annotation.Nullable;
 
 public class IGMoldShapingSerializer implements RecipeSerializer<IGMoldShapingRecipe>
 {

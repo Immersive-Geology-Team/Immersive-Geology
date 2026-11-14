@@ -9,38 +9,19 @@
 package com.igteam.immersivegeology.core.material.data.enums;
 
 import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.material.data.stone.compat.adastra.*;
 import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.*;
-import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.MaterialAndesite;
-import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.MaterialDiorite;
-import com.igteam.immersivegeology.core.material.data.stone.compat.tfc.MaterialGranite;
 import com.igteam.immersivegeology.core.material.data.stone.vanilla.*;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
-import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.IStoneType;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.mojang.serialization.Codec;
-import net.minecraft.locale.Language;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration.TargetBlockState;
-import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
 public enum StoneEnum implements IStoneType {
     //===== Terra Firma Craft =====\\

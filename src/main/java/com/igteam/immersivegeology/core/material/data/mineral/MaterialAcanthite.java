@@ -29,7 +29,6 @@ import net.neoforged.neoforge.common.Tags.Biomes;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;

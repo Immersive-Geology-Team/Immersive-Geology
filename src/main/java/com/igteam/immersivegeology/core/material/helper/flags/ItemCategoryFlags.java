@@ -2,11 +2,8 @@ package com.igteam.immersivegeology.core.material.helper.flags;
 
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
 import com.igteam.immersivegeology.common.tag.IGTags;
-import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-
-import javax.print.DocFlavor.READER;
 
 public enum ItemCategoryFlags implements IFlagType<ItemCategoryFlags> {
     INGOT(1),

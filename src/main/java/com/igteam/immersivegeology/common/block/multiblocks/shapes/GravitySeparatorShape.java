@@ -9,7 +9,6 @@
 package com.igteam.immersivegeology.common.block.multiblocks.shapes;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 

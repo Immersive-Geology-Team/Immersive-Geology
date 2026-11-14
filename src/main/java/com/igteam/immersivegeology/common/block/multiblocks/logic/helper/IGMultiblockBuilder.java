@@ -17,15 +17,12 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.component.Redstone
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.RedstoneControl.RSState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.component.MultiblockGui;
 import com.google.common.base.Preconditions;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.helper.IGMultiblockGUI;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMenuTypes.MultiblockContainer;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.BlockPos;
-
-import java.util.ArrayList;
 
 import static com.igteam.immersivegeology.core.registration.IGMultiblockProvider.ALL_IG_MULTIBLOCKS;
 

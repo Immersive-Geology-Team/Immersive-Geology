@@ -14,15 +14,12 @@ import blusunrize.immersiveengineering.client.gui.info.FluidInfoArea;
 import blusunrize.immersiveengineering.client.gui.info.InfoArea;
 import com.google.common.collect.ImmutableList;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.CrystallizerMenu;
-import com.igteam.immersivegeology.common.block.multiblocks.gui.ReverberationFurnaceMenu;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFurnaceHandler.RevStateView;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.ContainerData;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;

@@ -11,7 +11,6 @@ package com.igteam.immersivegeology.common.block.multiblocks.recipe.builder;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import com.google.common.base.Preconditions;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.CrystallizerRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RevFurnaceRecipe;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -20,7 +19,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.material.Fluid;
 
 public class RevFurnaceRecipeBuilder extends IGMultiblockRecipeBuilder<RevFurnaceRecipeBuilder>
 {

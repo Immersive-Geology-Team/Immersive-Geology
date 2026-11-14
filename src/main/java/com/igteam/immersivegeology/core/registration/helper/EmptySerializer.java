@@ -9,16 +9,11 @@
 package com.igteam.immersivegeology.core.registration.helper;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
-import com.google.gson.JsonObject;
 import com.mojang.serialization.MapCodec;
 import malte0811.dualcodecs.DualMapCodec;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.common.conditions.ICondition.IContext;
-import org.jetbrains.annotations.Nullable;
 
 public class EmptySerializer extends IERecipeSerializer<EmptyRecipe>
 {

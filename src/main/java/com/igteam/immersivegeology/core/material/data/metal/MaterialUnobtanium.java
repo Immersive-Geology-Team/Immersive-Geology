@@ -15,7 +15,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import net.minecraft.world.item.Tier;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialUnobtanium extends MaterialMetal {
 

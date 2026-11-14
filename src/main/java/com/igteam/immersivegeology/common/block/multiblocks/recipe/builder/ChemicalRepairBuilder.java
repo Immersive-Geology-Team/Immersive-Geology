@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.recipe.builder;
 
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.BloomeryFuel;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRepairRecipe;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;

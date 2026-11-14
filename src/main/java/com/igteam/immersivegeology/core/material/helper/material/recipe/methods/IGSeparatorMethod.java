@@ -29,7 +29,6 @@ import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class IGSeparatorMethod extends IGRecipeMethod
 {

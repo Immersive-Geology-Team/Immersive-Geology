@@ -15,7 +15,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.function.BiFunction;

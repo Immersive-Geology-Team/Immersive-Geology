@@ -20,7 +20,6 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.component.MapDecorations;
 import net.minecraft.world.item.component.MapDecorations.Entry;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraft.world.level.saveddata.maps.MapDecorationType;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 

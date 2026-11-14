@@ -10,7 +10,6 @@ package com.igteam.immersivegeology.common.integration;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeTypes;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.*;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.IndustrialSluiceRecipeBuilder;
 import com.igteam.immersivegeology.common.recipe.IGGeoRecipe;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
 import mezz.jei.api.recipe.RecipeType;

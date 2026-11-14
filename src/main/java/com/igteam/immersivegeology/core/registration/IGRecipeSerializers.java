@@ -11,8 +11,6 @@ package com.igteam.immersivegeology.core.registration;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.common.crafting.serializers.SimpleRecipeSerializer;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.*;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.GeothermalBiomeRecipeBuilder;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.TurbineFuelBuilder;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.serializer.*;
 import com.igteam.immersivegeology.common.recipe.IGGeoRecipe;
 import com.igteam.immersivegeology.common.recipe.IGGeoSerializer;
@@ -22,13 +20,11 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.helper.EmptyRecipe;
 import com.igteam.immersivegeology.core.registration.helper.EmptySerializer;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class IGRecipeSerializers

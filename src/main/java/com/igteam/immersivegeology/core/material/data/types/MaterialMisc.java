@@ -2,7 +2,6 @@ package com.igteam.immersivegeology.core.material.data.types;
 
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
-import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import net.minecraft.resources.ResourceLocation;
 
 public class MaterialMisc extends GeologyMaterial {

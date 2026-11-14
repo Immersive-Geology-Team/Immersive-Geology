@@ -13,7 +13,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.CrystalFamily;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialZirconium extends MaterialMetal {
 

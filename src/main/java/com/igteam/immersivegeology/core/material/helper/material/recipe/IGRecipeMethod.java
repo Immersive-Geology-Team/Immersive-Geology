@@ -28,7 +28,6 @@ import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.function.Consumer;
 
 public abstract class IGRecipeMethod
 {

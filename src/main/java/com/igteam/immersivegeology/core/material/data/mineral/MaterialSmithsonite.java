@@ -1,7 +1,6 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;

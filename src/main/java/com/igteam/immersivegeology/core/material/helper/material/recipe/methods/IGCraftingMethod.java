@@ -18,8 +18,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.Consumer;
-
 public class IGCraftingMethod extends IGRecipeMethod
 {
 	public IGCraftingMethod(IGRecipeStage stage)

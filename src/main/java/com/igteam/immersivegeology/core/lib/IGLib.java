@@ -8,8 +8,11 @@
 
 package com.igteam.immersivegeology.core.lib;
 
+import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.data.stone.IGStoneTypes;
-import com.igteam.immersivegeology.core.material.data.enums.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
@@ -21,7 +24,9 @@ import net.neoforged.neoforge.energy.IEnergyStorage;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class IGLib {
     public static final String MODID = "immersivegeology";

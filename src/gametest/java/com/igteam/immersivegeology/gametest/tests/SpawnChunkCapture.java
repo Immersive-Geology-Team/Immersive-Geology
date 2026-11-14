@@ -8,8 +8,8 @@
 
 package com.igteam.immersivegeology.gametest.tests;
 
-import com.igteam.immersivegeology.common.block.ore.IGOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
+import com.igteam.immersivegeology.common.block.ore.IGOreBlock;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
 import com.igteam.immersivegeology.common.world.IGDefaultPlacement;
@@ -41,11 +41,11 @@ import net.minecraft.world.level.material.MapColor.Brightness;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 

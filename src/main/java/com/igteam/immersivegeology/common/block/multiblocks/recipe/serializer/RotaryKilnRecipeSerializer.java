@@ -11,24 +11,15 @@ package com.igteam.immersivegeology.common.block.multiblocks.recipe.serializer;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.TagOutput;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
-import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import com.mojang.serialization.DataResult;
 import malte0811.dualcodecs.DualCodecs;
 import malte0811.dualcodecs.DualCompositeMapCodecs;
 import malte0811.dualcodecs.DualMapCodec;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.common.conditions.ICondition.IContext;
-import net.neoforged.neoforge.common.util.Lazy;
-import org.jetbrains.annotations.Nullable;
 
 public class RotaryKilnRecipeSerializer extends IERecipeSerializer<RotaryKilnRecipe>
 {

@@ -8,12 +8,8 @@
 
 package com.igteam.immersivegeology.common.data.generators;
 
-import blusunrize.immersiveengineering.api.IEApi;
-import blusunrize.immersiveengineering.common.world.IEOreFeature;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
@@ -28,7 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class IGFeatureRemovalProvider implements DataProvider {

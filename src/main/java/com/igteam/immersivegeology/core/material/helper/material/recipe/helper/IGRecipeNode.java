@@ -11,9 +11,7 @@ package com.igteam.immersivegeology.core.material.helper.material.recipe.helper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class IGRecipeNode
 {

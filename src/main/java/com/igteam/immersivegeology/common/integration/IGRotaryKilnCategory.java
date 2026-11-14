@@ -9,7 +9,6 @@
 package com.igteam.immersivegeology.common.integration;
 
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.GravitySeparatorRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;

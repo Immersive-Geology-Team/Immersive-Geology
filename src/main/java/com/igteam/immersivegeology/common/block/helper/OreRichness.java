@@ -9,6 +9,7 @@
 package com.igteam.immersivegeology.common.block.helper;
 
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+
 import java.util.Locale;
 
 public enum OreRichness

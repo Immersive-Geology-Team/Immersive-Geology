@@ -12,27 +12,26 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
-
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
-import com.igteam.immersivegeology.core.material.helper.material.IStoneType;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.material.IStoneType;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 
-import static com.igteam.immersivegeology.core.material.GeologyMaterial.EXISTING_HELPER;
-import static net.minecraft.server.packs.PackType.CLIENT_RESOURCES;
-
 import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
+
+import static com.igteam.immersivegeology.core.material.GeologyMaterial.EXISTING_HELPER;
+import static net.minecraft.server.packs.PackType.CLIENT_RESOURCES;
 
 public class IGAtlasProvider implements DataProvider {
 	private static final String STONE_BACKDROP_PATH = "palette/block/stone_backdrop/";

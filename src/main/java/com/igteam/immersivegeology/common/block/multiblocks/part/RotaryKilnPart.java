@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.part;
 
-import blusunrize.immersiveengineering.api.IEProperties;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.skins.IGRotaryKilnSkins;

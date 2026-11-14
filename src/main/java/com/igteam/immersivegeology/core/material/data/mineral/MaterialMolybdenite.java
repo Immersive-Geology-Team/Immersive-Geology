@@ -19,8 +19,8 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import net.minecraft.tags.BiomeTags;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
-import java.util.List;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;

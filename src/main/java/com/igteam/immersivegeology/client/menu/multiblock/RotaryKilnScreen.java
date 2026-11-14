@@ -13,7 +13,6 @@ import blusunrize.immersiveengineering.client.ClientUtils;
 import blusunrize.immersiveengineering.client.gui.IEContainerScreen;
 import blusunrize.immersiveengineering.client.gui.info.EnergyInfoArea;
 import blusunrize.immersiveengineering.client.gui.info.InfoArea;
-import blusunrize.immersiveengineering.common.gui.sync.GetterAndSetter;
 import com.google.common.collect.ImmutableList;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.RotaryKilnMenu;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -30,7 +29,6 @@ import org.joml.Vector3f;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class RotaryKilnScreen extends IEContainerScreen<RotaryKilnMenu>
 {

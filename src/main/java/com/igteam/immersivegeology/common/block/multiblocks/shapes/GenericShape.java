@@ -8,14 +8,14 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.shapes;
 
-import java.util.function.Function;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.shapes.Shapes;
+import java.util.function.Function;
 
 public abstract class GenericShape implements Function<BlockPos, VoxelShape> {
     private static VoxelShape toVoxelShape(AABB aabb){
