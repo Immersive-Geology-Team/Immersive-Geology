@@ -1,0 +1,17 @@
+{
+  "type": "immersiveengineering:mixer",
+  "energy": 1600,
+  "fluid": {
+    "amount": 64,
+    "tag": "minecraft:water"
+  },
+  "inputs": [
+    {
+      "tag": "c:sediment/saltpeter"
+    }
+  ],
+  "result": {
+    "amount": 64,
+    "id": "immersivegeology:cloudy_slurry_brine_saltpeter"
+  }
+}

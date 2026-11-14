@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "immersivegeology:storage_block_titanium"
+    },
+    "I": {
+      "tag": "c:ingots/titanium"
+    }
+  },
+  "pattern": [
+    "  I",
+    "II ",
+    "BI "
+  ],
+  "result": {
+    "count": 1,
+    "id": "immersivegeology:drill_head_titanium"
+  }
+}

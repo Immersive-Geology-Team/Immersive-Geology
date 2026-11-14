@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "immersivegeology:scaffolding_tungsten_wooden_top"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "immersivegeology:scaffolding_tungsten_standard"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "ig_engineering",
+  "key": {
+    "A": {
+      "tag": "c:ingots/aluminum"
+    },
+    "B": {
+      "item": "immersiveengineering:component_electronic"
+    },
+    "C": {
+      "item": "immersiveengineering:component_electronic_adv"
+    },
+    "P": {
+      "item": "immersiveengineering:circuit_board"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "CPC",
+    "ABA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "immersivegeology:engineering_block_stainless_steel"
+  }
+}

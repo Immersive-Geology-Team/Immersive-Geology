@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 204800,
+  "input": {
+    "tag": "c:grits/hastelloy"
+  },
+  "results": [
+    {
+      "id": "immersivegeology:ingot_hastelloy"
+    }
+  ],
+  "time": 400
+}

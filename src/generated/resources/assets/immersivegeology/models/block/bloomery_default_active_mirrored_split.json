@@ -5,7 +5,7 @@
     "parent": "minecraft:block/block",
     "automatic_culling": false,
     "flip_v": true,
-    "loader": "forge:obj",
+    "loader": "neoforge:obj",
     "model": "immersivegeology:models/block/multiblock/obj/bloomery/bloomery.obj",
     "textures": {
       "bloomery": "immersivegeology:block/multiblock/bloomery/default_active",

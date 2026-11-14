@@ -1,0 +1,27 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 0,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 216,
+    "tag": "c:clean_hydrochloric_acid_titanium"
+  },
+  "fluidInputB": {
+    "amount": 216,
+    "tag": "minecraft:water"
+  },
+  "fluidResult": {
+    "amount": 360,
+    "id": "immersivegeology:slurry_brine_carnallite"
+  },
+  "itemInput": {
+    "basePredicate": {
+      "item": "immersivegeology:grit_magnesium"
+    },
+    "count": 3
+  },
+  "result": {
+    "id": "immersivegeology:grit_titanium"
+  },
+  "time": 200
+}

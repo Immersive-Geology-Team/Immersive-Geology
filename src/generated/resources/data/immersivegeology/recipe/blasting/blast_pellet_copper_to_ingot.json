@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "input": {
+    "tag": "c:oxide_pellet/copper"
+  },
+  "result": {
+    "id": "minecraft:copper_ingot"
+  },
+  "slag": {
+    "id": "immersiveengineering:slag"
+  }
+}

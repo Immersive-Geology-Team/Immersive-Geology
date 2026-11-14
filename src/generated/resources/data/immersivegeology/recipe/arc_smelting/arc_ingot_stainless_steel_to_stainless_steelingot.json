@@ -1,0 +1,31 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [
+    {
+      "basePredicate": {
+        "item": "minecraft:iron_ingot"
+      },
+      "count": 6
+    },
+    {
+      "item": "immersiveengineering:dust_coke"
+    }
+  ],
+  "energy": 204800,
+  "input": {
+    "basePredicate": {
+      "tag": "c:ingots/chromium"
+    },
+    "count": 2
+  },
+  "results": [
+    {
+      "count": 8,
+      "id": "immersivegeology:ingot_stainless_steel"
+    }
+  ],
+  "slag": {
+    "id": "immersiveengineering:slag"
+  },
+  "time": 400
+}

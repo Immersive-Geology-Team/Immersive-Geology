@@ -1,0 +1,19 @@
+{
+  "type": "immersiveengineering:refinery",
+  "catalyst": {
+    "item": "immersivegeology:plate_vanadium"
+  },
+  "energy": 80,
+  "input0": {
+    "amount": 2,
+    "tag": "minecraft:water"
+  },
+  "input1": {
+    "amount": 25,
+    "tag": "c:sulfur_dioxide"
+  },
+  "result": {
+    "amount": 8,
+    "id": "immersivegeology:fluid_sulfuric_acid"
+  }
+}

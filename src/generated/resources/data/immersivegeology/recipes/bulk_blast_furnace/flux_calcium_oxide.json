@@ -1,7 +1,0 @@
-{
-  "type": "immersivegeology:bulk_blast_flux",
-  "flux_value": 1,
-  "input": {
-    "tag": "forge:metal_oxide/calcium"
-  }
-}

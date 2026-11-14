@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "input": {
+    "tag": "c:crushed_ore/lead"
+  },
+  "result": {
+    "id": "immersiveengineering:ingot_lead"
+  },
+  "slag": {
+    "id": "immersiveengineering:slag"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 500,
+    "tag": "c:hydrochloric_acid"
+  },
+  "fluidResult": {
+    "amount": 432,
+    "id": "immersivegeology:slurry_hydrochloric_acid_tungsten"
+  },
+  "itemInput": {
+    "item": "immersivegeology:powder_wolframite"
+  },
+  "result": {
+    "id": "immersivegeology:compound_dust_manganese"
+  },
+  "time": 200
+}

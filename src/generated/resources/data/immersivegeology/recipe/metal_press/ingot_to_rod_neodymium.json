@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:metal_press",
+  "energy": 2400,
+  "input": {
+    "tag": "c:ingots/neodymium"
+  },
+  "mold": "immersiveengineering:mold_rod",
+  "result": {
+    "basePredicate": {
+      "tag": "c:rods/neodymium"
+    },
+    "count": 2
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "type": "immersiveengineering:mineral_mix",
+  "biome_predicates": [
+    [
+      "minecraft:is_nether"
+    ]
+  ],
+  "fail_chance": 0.15,
+  "ores": [
+    {
+      "chance": 0.4,
+      "output": {
+        "tag": "c:poor_ore/millerite"
+      }
+    },
+    {
+      "chance": 0.3,
+      "output": {
+        "tag": "c:poor_ore/chalcocite"
+      }
+    },
+    {
+      "chance": 0.2,
+      "output": {
+        "tag": "c:poor_ore/cobaltite"
+      }
+    },
+    {
+      "chance": 0.2,
+      "output": {
+        "tag": "c:dusts/sulfur"
+      }
+    }
+  ],
+  "sample_background": "minecraft:netherrack",
+  "spoils": [
+    {
+      "chance": 0.5,
+      "output": {
+        "id": "minecraft:netherrack"
+      }
+    },
+    {
+      "chance": 0.3,
+      "output": {
+        "id": "minecraft:basalt"
+      }
+    },
+    {
+      "chance": 0.2,
+      "output": {
+        "id": "minecraft:gravel"
+      }
+    }
+  ],
+  "weight": 14
+}

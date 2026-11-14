@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 204800,
+  "input": {
+    "tag": "c:grits/platinum"
+  },
+  "results": [
+    {
+      "id": "immersivegeology:ingot_platinum"
+    }
+  ],
+  "time": 400
+}

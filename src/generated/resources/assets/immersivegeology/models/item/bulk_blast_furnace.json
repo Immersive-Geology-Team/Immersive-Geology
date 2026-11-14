@@ -123,7 +123,7 @@
     }
   },
   "flip_v": true,
-  "loader": "forge:obj",
+  "loader": "neoforge:obj",
   "model": "immersivegeology:models/block/multiblock/obj/bulk_blast_furnace/bulk_blast_furnace.obj",
   "textures": {
     "bulk_blast_furnace": "immersivegeology:block/multiblock/bulk_blast_furnace/default"

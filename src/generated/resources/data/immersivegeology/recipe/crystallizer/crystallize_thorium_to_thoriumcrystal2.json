@@ -1,0 +1,16 @@
+{
+  "type": "immersivegeology:crystallizer",
+  "energy": 38400,
+  "fluidResult": {
+    "amount": 120,
+    "id": "immersivegeology:fluid_nitric_acid"
+  },
+  "input": {
+    "amount": 144,
+    "tag": "c:clean_nitric_acid_thorium"
+  },
+  "result": {
+    "id": "immersivegeology:crystal_thorium"
+  },
+  "time": 300
+}

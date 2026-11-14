@@ -1,0 +1,17 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 250,
+    "tag": "c:sulfuric_acid"
+  },
+  "fluidResult": {
+    "amount": 216,
+    "id": "immersivegeology:slurry_sulfuric_acid_zinc"
+  },
+  "itemInput": {
+    "item": "immersivegeology:metal_oxide_zinc"
+  },
+  "result": [],
+  "time": 200
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "i": {
+      "tag": "c:ingots/hastelloy"
+    },
+    "r": {
+      "tag": "c:rods/hastelloy"
+    }
+  },
+  "pattern": [
+    "iri",
+    "iri"
+  ],
+  "result": {
+    "count": 3,
+    "id": "immersivegeology:fence_hastelloy"
+  }
+}

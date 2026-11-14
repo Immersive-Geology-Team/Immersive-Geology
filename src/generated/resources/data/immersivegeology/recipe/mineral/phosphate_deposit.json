@@ -1,0 +1,69 @@
+{
+  "type": "immersiveengineering:mineral_mix",
+  "biome_predicates": [
+    [
+      "minecraft:is_overworld"
+    ]
+  ],
+  "fail_chance": 0.25,
+  "ores": [
+    {
+      "chance": 0.25,
+      "output": {
+        "tag": "c:poor_ore/apatite"
+      }
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "tag": "c:poor_ore/fluorite"
+      }
+    },
+    {
+      "chance": 0.2,
+      "output": {
+        "id": "minecraft:calcite"
+      }
+    },
+    {
+      "chance": 0.02,
+      "output": {
+        "id": "minecraft:glowstone_dust"
+      }
+    },
+    {
+      "chance": 0.02,
+      "output": {
+        "id": "minecraft:redstone"
+      }
+    },
+    {
+      "chance": 0.075,
+      "output": {
+        "id": "minecraft:bone_meal"
+      }
+    }
+  ],
+  "sample_background": "minecraft:granite",
+  "spoils": [
+    {
+      "chance": 0.2,
+      "output": {
+        "id": "minecraft:gravel"
+      }
+    },
+    {
+      "chance": 0.5,
+      "output": {
+        "id": "minecraft:cobblestone"
+      }
+    },
+    {
+      "chance": 0.3,
+      "output": {
+        "id": "minecraft:cobbled_deepslate"
+      }
+    }
+  ],
+  "weight": 6
+}

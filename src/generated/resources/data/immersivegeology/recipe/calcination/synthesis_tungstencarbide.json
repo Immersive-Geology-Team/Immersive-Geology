@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:rotary_kiln",
+  "heat": 165,
+  "input": {
+    "tag": "c:powders/tungsten_carbide"
+  },
+  "result": {
+    "id": "immersivegeology:ingot_tungsten_carbide"
+  },
+  "time": 1200
+}

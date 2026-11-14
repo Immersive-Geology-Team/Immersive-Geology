@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:foundry",
+  "energy": 1152,
+  "input": {
+    "amount": 144,
+    "tag": "c:uranium"
+  },
+  "mold": "immersivegeology:mold_ingot_graphite",
+  "result": {
+    "id": "immersiveengineering:ingot_uranium"
+  },
+  "time": 3
+}

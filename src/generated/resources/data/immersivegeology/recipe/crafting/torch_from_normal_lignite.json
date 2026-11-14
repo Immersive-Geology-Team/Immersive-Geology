@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "item": "immersivegeology:normal_ore_lignite"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "c",
+    "s"
+  ],
+  "result": {
+    "count": 2,
+    "id": "minecraft:torch"
+  }
+}

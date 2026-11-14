@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:pelletizer",
+  "energy": 4800,
+  "input": {
+    "tag": "c:metal_oxide/cobalt"
+  },
+  "result": {
+    "id": "immersivegeology:oxide_pellet_cobalt"
+  },
+  "time": 600
+}

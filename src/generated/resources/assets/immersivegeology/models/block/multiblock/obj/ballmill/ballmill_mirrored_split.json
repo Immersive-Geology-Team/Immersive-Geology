@@ -6,7 +6,7 @@
       "parent": "minecraft:block/block",
       "automatic_culling": false,
       "flip_v": true,
-      "loader": "forge:obj",
+      "loader": "neoforge:obj",
       "model": "immersivegeology:models/block/multiblock/obj/ballmill/ballmill.obj",
       "textures": {
         "particle": "immersivegeology:block/multiblock/ballmill/base"

@@ -1,0 +1,17 @@
+{
+  "type": "immersiveengineering:squeezer",
+  "energy": 19200,
+  "fluid": {
+    "amount": 250,
+    "id": "minecraft:water"
+  },
+  "input": {
+    "basePredicate": {
+      "item": "immersivegeology:grit_lignite"
+    },
+    "count": 4
+  },
+  "result": {
+    "id": "immersivegeology:ingot_lignite"
+  }
+}

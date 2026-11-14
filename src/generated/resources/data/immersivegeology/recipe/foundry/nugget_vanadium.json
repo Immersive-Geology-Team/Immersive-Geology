@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:foundry",
+  "energy": 128,
+  "input": {
+    "amount": 16,
+    "tag": "c:vanadium"
+  },
+  "mold": "immersivegeology:mold_nugget_graphite",
+  "result": {
+    "id": "immersivegeology:nugget_vanadium"
+  },
+  "time": 2
+}

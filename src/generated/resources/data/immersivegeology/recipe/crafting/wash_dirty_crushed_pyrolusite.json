@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "immersivegeology:dirty_crushed_ore_pyrolusite"
+    },
+    {
+      "item": "immersivegeology:dirty_crushed_ore_pyrolusite"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "immersivegeology:crushed_ore_pyrolusite"
+  }
+}

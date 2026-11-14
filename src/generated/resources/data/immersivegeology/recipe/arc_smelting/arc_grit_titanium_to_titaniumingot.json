@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 204800,
+  "input": {
+    "tag": "c:grits/titanium"
+  },
+  "results": [
+    {
+      "id": "immersivegeology:ingot_titanium"
+    }
+  ],
+  "time": 400
+}

@@ -1,0 +1,16 @@
+{
+  "type": "immersivegeology:crystallizer",
+  "energy": 38400,
+  "fluidResult": {
+    "amount": 240,
+    "id": "immersivegeology:slurry_hydrochloric_acid_silver"
+  },
+  "input": {
+    "amount": 288,
+    "tag": "c:clean_hydrochloric_acid_acanthite"
+  },
+  "result": {
+    "id": "immersivegeology:crystal_lead"
+  },
+  "time": 300
+}

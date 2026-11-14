@@ -1,0 +1,24 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 125,
+    "tag": "c:clean_brine_carnallite"
+  },
+  "fluidInputB": {
+    "amount": 125,
+    "tag": "c:sulfuric_acid"
+  },
+  "fluidResult": {
+    "amount": 125,
+    "id": "immersivegeology:fluid_hydrochloric_acid"
+  },
+  "itemInput": {
+    "basePredicate": [],
+    "count": 0
+  },
+  "result": {
+    "id": "immersiveengineering:fertilizer"
+  },
+  "time": 200
+}

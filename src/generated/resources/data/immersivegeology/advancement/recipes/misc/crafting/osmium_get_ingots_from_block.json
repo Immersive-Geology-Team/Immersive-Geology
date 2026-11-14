@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "immersivegeology:crafting/osmium_get_ingots_from_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "osmiumhas_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "immersivegeology:storage_block_osmium"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "osmiumhas_ingot"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "immersivegeology:crafting/osmium_get_ingots_from_block"
+    ]
+  }
+}

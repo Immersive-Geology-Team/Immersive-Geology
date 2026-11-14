@@ -5,7 +5,7 @@
     "parent": "minecraft:block/block",
     "automatic_culling": false,
     "flip_v": true,
-    "loader": "forge:obj",
+    "loader": "neoforge:obj",
     "model": "immersivegeology:models/block/multiblock/obj/pelletizer/pelletizer_mirrored.obj",
     "textures": {
       "particle": "immersivegeology:block/multiblock/pelletizer/default",

@@ -1,0 +1,15 @@
+{
+  "type": "immersivegeology:gravity_separator",
+  "byproduct": {
+    "id": "immersivegeology:compound_dust_copper"
+  },
+  "byproduct_chance": 0.75,
+  "input": {
+    "tag": "c:powdered_slag/chalcopyrite"
+  },
+  "result": {
+    "id": "immersivegeology:metal_oxide_iron"
+  },
+  "time": 200,
+  "water": 250
+}

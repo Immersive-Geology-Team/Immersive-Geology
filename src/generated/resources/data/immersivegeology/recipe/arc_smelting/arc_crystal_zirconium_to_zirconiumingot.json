@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 204800,
+  "input": {
+    "tag": "c:crystal/zirconium"
+  },
+  "results": [
+    {
+      "id": "immersivegeology:ingot_zirconium"
+    }
+  ],
+  "time": 400
+}

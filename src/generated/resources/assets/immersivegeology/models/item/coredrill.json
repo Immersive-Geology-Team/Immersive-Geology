@@ -123,6 +123,6 @@
     }
   },
   "flip_v": true,
-  "loader": "forge:obj",
+  "loader": "neoforge:obj",
   "model": "immersivegeology:models/block/multiblock/obj/coredrill/coredrill_item.obj"
 }

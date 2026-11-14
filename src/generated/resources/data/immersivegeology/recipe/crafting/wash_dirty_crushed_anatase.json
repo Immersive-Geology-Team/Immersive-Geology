@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "immersivegeology:dirty_crushed_ore_anatase"
+    },
+    {
+      "item": "immersivegeology:dirty_crushed_ore_anatase"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "immersivegeology:crushed_ore_anatase"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "input": {
+    "tag": "c:crushed_ore/cassiterite"
+  },
+  "result": {
+    "id": "immersivegeology:ingot_tin"
+  },
+  "slag": {
+    "id": "immersiveengineering:slag"
+  },
+  "time": 900
+}

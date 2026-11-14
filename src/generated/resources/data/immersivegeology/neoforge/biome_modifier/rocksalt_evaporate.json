@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": {
+    "type": "neoforge:any"
+  },
+  "features": "immersivegeology:rocksalt_evaporate",
+  "step": "surface_structures"
+}

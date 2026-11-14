@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:pelletizer",
+  "energy": 4100,
+  "input": {
+    "tag": "c:powders/chalcocite"
+  },
+  "result": {
+    "id": "immersivegeology:pellet_chalcocite"
+  },
+  "time": 600
+}

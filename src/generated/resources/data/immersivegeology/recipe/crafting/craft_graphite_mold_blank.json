@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "ig_graphite_molds",
+  "ingredients": [
+    {
+      "tag": "c:dusts/hop_graphite"
+    },
+    {
+      "tag": "c:dusts/hop_graphite"
+    },
+    {
+      "tag": "c:dusts/hop_graphite"
+    },
+    {
+      "tag": "c:dusts/hop_graphite"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "immersivegeology:mold_blank_graphite"
+  }
+}

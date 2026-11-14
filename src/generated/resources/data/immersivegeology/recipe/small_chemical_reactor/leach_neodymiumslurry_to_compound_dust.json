@@ -1,0 +1,25 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 0,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 648,
+    "tag": "c:clean_sulfuric_acid_neodymium"
+  },
+  "fluidInputB": {
+    "amount": 750,
+    "tag": "c:ammonia_solution"
+  },
+  "fluidResult": {
+    "amount": 648,
+    "id": "immersivegeology:fluid_chemical_waste"
+  },
+  "itemInput": {
+    "basePredicate": [],
+    "count": 0
+  },
+  "result": {
+    "id": "immersivegeology:compound_dust_neodymium"
+  },
+  "time": 200
+}

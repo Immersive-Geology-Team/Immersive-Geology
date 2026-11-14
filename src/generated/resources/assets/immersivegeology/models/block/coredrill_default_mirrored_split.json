@@ -5,7 +5,7 @@
     "parent": "minecraft:block/block",
     "automatic_culling": false,
     "flip_v": true,
-    "loader": "forge:obj",
+    "loader": "neoforge:obj",
     "model": "immersivegeology:models/block/multiblock/obj/coredrill/coredrill_mirrored.obj",
     "textures": {
       "coredrill": "immersivegeology:block/multiblock/coredrill/default",

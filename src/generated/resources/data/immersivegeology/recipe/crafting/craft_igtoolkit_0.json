@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "ig_tools",
+  "key": {
+    "B": {
+      "item": "immersivegeology:ingot_bronze"
+    },
+    "S": {
+      "tag": "c:strings"
+    },
+    "W": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    " BS",
+    " WB",
+    "W  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "immersivegeology:hammer_bronze"
+  }
+}

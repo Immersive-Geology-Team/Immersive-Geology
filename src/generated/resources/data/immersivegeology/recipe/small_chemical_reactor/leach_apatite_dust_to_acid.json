@@ -1,0 +1,20 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 0,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 125,
+    "tag": "c:sulfuric_acid"
+  },
+  "fluidResult": {
+    "amount": 120,
+    "id": "immersivegeology:fluid_phosphoric_acid"
+  },
+  "itemInput": {
+    "tag": "c:powders/apatite"
+  },
+  "result": {
+    "id": "immersivegeology:compound_dust_calcium"
+  },
+  "time": 200
+}

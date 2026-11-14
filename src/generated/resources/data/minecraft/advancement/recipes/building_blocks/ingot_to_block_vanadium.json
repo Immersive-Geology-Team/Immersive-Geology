@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ingot_vanadium": {
+      "conditions": {
+        "items": [
+          {
+            "items": "immersivegeology:ingot_vanadium"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:ingot_to_block_vanadium"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_ingot_vanadium"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:ingot_to_block_vanadium"
+    ]
+  }
+}

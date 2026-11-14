@@ -123,7 +123,7 @@
     }
   },
   "flip_v": true,
-  "loader": "forge:obj",
+  "loader": "neoforge:obj",
   "model": "immersivegeology:models/block/multiblock/obj/rotary_kiln/rotary_kiln_item.obj",
   "textures": {
     "rotary_kiln": "immersivegeology:block/multiblock/rotary_kiln/default"

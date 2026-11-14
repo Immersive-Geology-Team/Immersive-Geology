@@ -1,0 +1,15 @@
+{
+  "type": "immersivegeology:gravity_separator",
+  "byproduct": {
+    "id": "immersivegeology:metal_oxide_tungsten"
+  },
+  "byproduct_chance": 0.075,
+  "input": {
+    "tag": "c:powders/cassiterite"
+  },
+  "result": {
+    "id": "immersivegeology:metal_oxide_tin"
+  },
+  "time": 200,
+  "water": 250
+}

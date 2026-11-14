@@ -1,0 +1,10 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "item": "minecraft:iron_ingot"
+  },
+  "result": {
+    "id": "immersiveengineering:dust_iron"
+  }
+}

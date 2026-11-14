@@ -1,0 +1,10 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "item": "immersivegeology:ingot_chromium"
+  },
+  "result": {
+    "id": "immersivegeology:grit_chromium"
+  }
+}

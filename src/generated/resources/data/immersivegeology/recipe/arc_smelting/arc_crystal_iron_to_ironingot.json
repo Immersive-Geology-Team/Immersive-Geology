@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 204800,
+  "input": {
+    "tag": "c:crystal/iron"
+  },
+  "results": [
+    {
+      "id": "minecraft:iron_ingot"
+    }
+  ],
+  "time": 400
+}

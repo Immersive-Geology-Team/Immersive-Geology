@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:foundry",
+  "energy": 1152,
+  "input": {
+    "amount": 144,
+    "tag": "c:hastelloy"
+  },
+  "mold": "immersivegeology:mold_ingot_graphite",
+  "result": {
+    "id": "immersivegeology:ingot_hastelloy"
+  },
+  "time": 3
+}

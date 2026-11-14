@@ -1,0 +1,25 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:wires/silver"
+      }
+    }
+  ],
+  "type": "immersivegeology:foundry",
+  "energy": 1152,
+  "input": {
+    "amount": 144,
+    "tag": "c:silver"
+  },
+  "mold": "immersivegeology:mold_wire_graphite",
+  "result": {
+    "basePredicate": {
+      "tag": "c:wires/silver"
+    },
+    "count": 3
+  },
+  "time": 3
+}

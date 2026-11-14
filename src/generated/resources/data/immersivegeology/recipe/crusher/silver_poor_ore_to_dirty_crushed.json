@@ -1,0 +1,18 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 6000,
+  "input": {
+    "tag": "c:poor_ore/silver"
+  },
+  "result": {
+    "id": "immersivegeology:dirty_crushed_ore_silver"
+  },
+  "secondaries": [
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_silver"
+      }
+    }
+  ]
+}

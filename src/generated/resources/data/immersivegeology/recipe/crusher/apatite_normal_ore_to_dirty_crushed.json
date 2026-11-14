@@ -1,0 +1,24 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 6000,
+  "input": {
+    "tag": "c:normal_ore/apatite"
+  },
+  "result": {
+    "id": "immersivegeology:dirty_crushed_ore_apatite"
+  },
+  "secondaries": [
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_apatite"
+      }
+    },
+    {
+      "chance": 0.165,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_apatite"
+      }
+    }
+  ]
+}

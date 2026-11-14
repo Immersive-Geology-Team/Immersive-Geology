@@ -1,0 +1,16 @@
+{
+  "type": "immersivegeology:crystallizer",
+  "energy": 38400,
+  "fluidResult": {
+    "amount": 120,
+    "id": "immersivegeology:fluid_sulfuric_acid"
+  },
+  "input": {
+    "amount": 144,
+    "tag": "c:clean_sulfuric_acid_zinc"
+  },
+  "result": {
+    "id": "immersivegeology:crystal_zinc"
+  },
+  "time": 300
+}

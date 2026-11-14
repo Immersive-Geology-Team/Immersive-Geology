@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 204800,
+  "input": {
+    "tag": "c:grits/copper"
+  },
+  "results": [
+    {
+      "id": "minecraft:copper_ingot"
+    }
+  ],
+  "time": 400
+}

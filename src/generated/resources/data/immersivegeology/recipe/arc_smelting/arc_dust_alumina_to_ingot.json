@@ -1,0 +1,29 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [
+    {
+      "tag": "c:dusts/coal_coke"
+    },
+    {
+      "tag": "c:powders/cryolite"
+    }
+  ],
+  "energy": 10240,
+  "input": {
+    "tag": "c:powders/alumina"
+  },
+  "results": [
+    {
+      "id": "immersiveengineering:ingot_aluminum"
+    }
+  ],
+  "secondaries": [
+    {
+      "chance": 0.4,
+      "output": {
+        "tag": "c:powders/cryolite"
+      }
+    }
+  ],
+  "time": 200
+}

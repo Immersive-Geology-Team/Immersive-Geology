@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "input": {
+    "tag": "c:oxide_pellet/chromium"
+  },
+  "result": {
+    "id": "immersivegeology:ingot_chromium"
+  },
+  "slag": {
+    "id": "immersiveengineering:slag"
+  }
+}

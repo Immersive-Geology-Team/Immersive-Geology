@@ -1,0 +1,15 @@
+{
+  "type": "immersivegeology:gravity_separator",
+  "byproduct": {
+    "id": "minecraft:gravel"
+  },
+  "byproduct_chance": 0.33,
+  "input": {
+    "tag": "c:dirty_crushed_ore/hematite"
+  },
+  "result": {
+    "id": "immersivegeology:crushed_ore_hematite"
+  },
+  "time": 100,
+  "water": 100
+}

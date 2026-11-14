@@ -1,0 +1,26 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [
+    {
+      "tag": "c:grits/magnesium"
+    }
+  ],
+  "energy": 10240,
+  "input": {
+    "tag": "c:metal_oxide/vanadium"
+  },
+  "results": [
+    {
+      "id": "immersivegeology:ingot_vanadium"
+    }
+  ],
+  "secondaries": [
+    {
+      "chance": 0.9,
+      "output": {
+        "tag": "c:metal_oxide/magnesium"
+      }
+    }
+  ],
+  "time": 200
+}

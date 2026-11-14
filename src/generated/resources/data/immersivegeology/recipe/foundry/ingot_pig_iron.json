@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:foundry",
+  "energy": 1152,
+  "input": {
+    "amount": 144,
+    "tag": "c:pig_iron"
+  },
+  "mold": "immersivegeology:mold_ingot_graphite",
+  "result": {
+    "id": "minecraft:iron_ingot"
+  },
+  "time": 3
+}

@@ -1,5 +1,5 @@
 {
-  "loader": "forge:obj",
+  "loader": "neoforge:obj",
   "render_type": "minecraft:cutout",
   "_comment": "28px tall, so the upper half is drawn by the lower block. Forge would cullface any quad lying on a unit-cube plane, and those get tested against the LOWER block's neighbours.",
   "automatic_culling": false,

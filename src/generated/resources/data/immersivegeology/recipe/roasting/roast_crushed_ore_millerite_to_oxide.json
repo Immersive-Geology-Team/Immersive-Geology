@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:reverberation_furnace",
+  "input": {
+    "tag": "c:crushed_ore/millerite"
+  },
+  "result": {
+    "id": "immersivegeology:slag_millerite"
+  },
+  "time": 800,
+  "waste": 25
+}

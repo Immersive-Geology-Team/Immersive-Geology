@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 64000,
+  "input": {
+    "tag": "c:slag/pyrite"
+  },
+  "result": {
+    "item": "immersivegeology:powdered_slag_pyrite"
+  },
+  "time": 800
+}

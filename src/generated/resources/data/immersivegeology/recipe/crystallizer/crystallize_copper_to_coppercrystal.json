@@ -1,0 +1,16 @@
+{
+  "type": "immersivegeology:crystallizer",
+  "energy": 38400,
+  "fluidResult": {
+    "amount": 120,
+    "id": "immersivegeology:fluid_hydrochloric_acid"
+  },
+  "input": {
+    "amount": 144,
+    "tag": "c:clean_hydrochloric_acid_copper"
+  },
+  "result": {
+    "id": "immersivegeology:crystal_copper"
+  },
+  "time": 300
+}

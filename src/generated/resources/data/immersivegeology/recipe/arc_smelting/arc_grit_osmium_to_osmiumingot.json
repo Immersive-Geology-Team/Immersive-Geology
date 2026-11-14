@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 204800,
+  "input": {
+    "tag": "c:grits/osmium"
+  },
+  "results": [
+    {
+      "id": "immersivegeology:ingot_osmium"
+    }
+  ],
+  "time": 400
+}

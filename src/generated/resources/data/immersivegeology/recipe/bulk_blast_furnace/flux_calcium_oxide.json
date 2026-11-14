@@ -1,0 +1,6 @@
+{
+  "type": "immersivegeology:bulk_blast_flux",
+  "input": {
+    "tag": "c:metal_oxide/calcium"
+  }
+}

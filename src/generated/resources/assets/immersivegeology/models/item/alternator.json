@@ -123,7 +123,7 @@
     }
   },
   "flip_v": true,
-  "loader": "forge:obj",
+  "loader": "neoforge:obj",
   "model": "immersivegeology:models/block/multiblock/obj/alternator/alternator_item.obj",
   "textures": {
     "alternator": "immersivegeology:block/multiblock/alternator/default"

@@ -1,0 +1,14 @@
+{
+  "type": "immersivegeology:foundry",
+  "energy": 1152,
+  "input": {
+    "amount": 144,
+    "tag": "c:chromium"
+  },
+  "mold": "immersivegeology:mold_rod_graphite",
+  "result": {
+    "count": 3,
+    "id": "immersivegeology:rod_chromium"
+  },
+  "time": 3
+}

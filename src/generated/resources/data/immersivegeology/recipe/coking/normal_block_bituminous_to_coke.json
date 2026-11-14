@@ -1,0 +1,11 @@
+{
+  "type": "immersiveengineering:coke_oven",
+  "creosote": 5000,
+  "input": {
+    "item": "immersivegeology:storage_block_bituminous"
+  },
+  "result": {
+    "tag": "c:storage_blocks/coal_coke"
+  },
+  "time": 16200
+}

@@ -1,5 +1,5 @@
 {
-  "loader": "forge:obj",
+  "loader": "neoforge:obj",
   "flip_v": true,
   "model": "immersivegeology:models/block/obj/metal_detector.obj",
   "textures": {

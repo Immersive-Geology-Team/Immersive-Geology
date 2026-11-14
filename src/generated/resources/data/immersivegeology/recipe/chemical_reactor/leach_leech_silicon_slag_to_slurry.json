@@ -1,0 +1,17 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 250,
+    "tag": "c:hydrochloric_acid"
+  },
+  "fluidResult": {
+    "amount": 216,
+    "id": "immersivegeology:slurry_hydrochloric_acid_silicon"
+  },
+  "itemInput": {
+    "tag": "c:powdered_slag/silicon"
+  },
+  "result": [],
+  "time": 200
+}

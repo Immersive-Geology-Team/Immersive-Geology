@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:reverberation_furnace",
+  "input": {
+    "tag": "c:crushed_ore/acanthite"
+  },
+  "result": {
+    "id": "immersivegeology:slag_acanthite"
+  },
+  "time": 1000,
+  "waste": 25
+}

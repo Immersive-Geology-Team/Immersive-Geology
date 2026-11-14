@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:ballmill",
+  "energy": 16000,
+  "input": {
+    "tag": "c:grits/scheelite"
+  },
+  "result": {
+    "item": "immersivegeology:powder_scheelite"
+  },
+  "time": 200
+}
