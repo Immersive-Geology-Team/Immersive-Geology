@@ -3,7 +3,8 @@
   "package": "com.igteam.immersivegeology.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "ItemStackComponentizationFixMixin"
+    "ItemStackComponentizationFixMixin",
+    "MultiblockBEHelperDummyMixin"
   ],
   "injectors": {
     "defaultRequire": 1
