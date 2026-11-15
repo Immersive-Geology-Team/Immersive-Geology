@@ -1,0 +1,26 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 250,
+    "tag": "c:nitric_acid"
+  },
+  "fluidInputB": {
+    "amount": 250,
+    "tag": "c:ammonia_solution"
+  },
+  "fluidInputC": {
+    "amount": 216,
+    "tag": "c:cloudy_phosphoric_acid_uraninite"
+  },
+  "fluidResult": {
+    "amount": 648,
+    "id": "immersivegeology:cloudy_slurry_nitric_acid_uraninite"
+  },
+  "itemInput": {
+    "basePredicate": [],
+    "count": 0
+  },
+  "result": [],
+  "time": 200
+}

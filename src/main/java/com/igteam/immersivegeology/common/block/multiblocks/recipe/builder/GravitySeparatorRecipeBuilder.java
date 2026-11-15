@@ -8,73 +8,90 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.recipe.builder;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import blusunrize.immersiveengineering.api.crafting.builders.IEFinishedRecipe;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.CrystallizerRecipe;
+import blusunrize.immersiveengineering.api.crafting.TagOutput;
+import com.google.common.base.Preconditions;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GravitySeparatorRecipe;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.material.Fluid;
 
-import java.util.Calendar;
-
-public class GravitySeparatorRecipeBuilder extends IEFinishedRecipe<GravitySeparatorRecipeBuilder>
+public class GravitySeparatorRecipeBuilder extends IGMultiblockRecipeBuilder<GravitySeparatorRecipeBuilder>
 {
-	protected GravitySeparatorRecipeBuilder()
+	private Ingredient input;
+	private final TagOutput output;
+	private TagOutput byproduct;
+	private Float chance;
+	private Integer water;
+	private Integer time;
+
+	private GravitySeparatorRecipeBuilder(TagOutput output)
 	{
-		super(GravitySeparatorRecipe.SERIALIZER.get());
+		this.output = output;
 	}
 
 	public static GravitySeparatorRecipeBuilder builder(Item result)
 	{
-		return new GravitySeparatorRecipeBuilder().addResult(result);
+		return builder(new ItemStack(result));
 	}
 
 	public static GravitySeparatorRecipeBuilder builder(ItemStack result)
 	{
-		return new GravitySeparatorRecipeBuilder().addResult(result);
+		return new GravitySeparatorRecipeBuilder(new TagOutput(result));
 	}
 
 	public static GravitySeparatorRecipeBuilder builder(TagKey<Item> result)
 	{
-		return new GravitySeparatorRecipeBuilder().addResult(Ingredient.of(result));
+		return new GravitySeparatorRecipeBuilder(new TagOutput(result));
 	}
 
 	public GravitySeparatorRecipeBuilder addInput(Ingredient ingredient)
 	{
-		return addIngredient(generateSafeInputKey(), ingredient);
+		Preconditions.checkArgument(input==null, "Recipe can only have 1 input");
+		this.input = ingredient;
+		return this;
 	}
 
 	public GravitySeparatorRecipeBuilder addInput(TagKey<Item> item)
 	{
-		return addIngredient(generateSafeInputKey(), Ingredient.of(item));
+		return addInput(Ingredient.of(item));
 	}
 
 	public GravitySeparatorRecipeBuilder setWater(int water)
 	{
-		return this.addWriter((jsonObject) -> {
-			jsonObject.addProperty("water", water);
-		});
+		this.water = water;
+		return this;
+	}
+
+	public GravitySeparatorRecipeBuilder setTime(int time)
+	{
+		this.time = time;
+		return this;
 	}
 
 	public GravitySeparatorRecipeBuilder setChance(float chance)
 	{
-		return this.addWriter((jsonObject) -> {
-			jsonObject.addProperty("byproduct_chance", chance);
-		});
+		this.chance = chance;
+		return this;
 	}
-
 
 	public GravitySeparatorRecipeBuilder setByproduct(ItemStack byproduct)
 	{
-		return this.addItem("byproduct", byproduct);
+		this.byproduct = new TagOutput(byproduct);
+		return this;
 	}
 
 	public GravitySeparatorRecipeBuilder setByproduct(Item byproduct)
 	{
-		return this.addItem("byproduct", new ItemStack(byproduct));
+		return setByproduct(new ItemStack(byproduct));
+	}
+
+	public void build(RecipeOutput out, ResourceLocation name)
+	{
+		Preconditions.checkArgument(input!=null&&byproduct!=null&&chance!=null&&water!=null&&time!=null, "This recipe is incomplete");
+		GravitySeparatorRecipe recipe = new GravitySeparatorRecipe(input, output, byproduct, chance, water, time);
+		out.accept(name, recipe, null, getConditions());
 	}
 }

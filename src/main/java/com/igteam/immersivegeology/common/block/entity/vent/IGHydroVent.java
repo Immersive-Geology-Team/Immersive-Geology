@@ -15,13 +15,10 @@ import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
-import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
@@ -29,10 +26,12 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import static blusunrize.immersiveengineering.common.register.IEBlocks.METAL_PROPERTIES_NO_OCCLUSION;
 
@@ -41,23 +40,12 @@ public class IGHydroVent extends IEEntityBlock<IGHydroVentEntity> implements IGB
 	protected final Map<MaterialTexture, MaterialInterface<?>> materialMap = new HashMap<>();
 	protected final BlockCategoryFlags category;
 
-	public IGHydroVent(BlockCategoryFlags flag, MaterialInterface<?> material, RegistryObject<BlockEntityType<IGHydroVentEntity>> TYPE)
+	public IGHydroVent(BlockCategoryFlags flag, MaterialInterface<?> material, DeferredHolder<BlockEntityType<?>, BlockEntityType<IGHydroVentEntity>> TYPE)
 	{
 		super(TYPE, METAL_PROPERTIES_NO_OCCLUSION.get());
 		this.registerDefaultState(this.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
 		this.materialMap.put(MaterialTexture.base, material);
 		this.category = flag;
-	}
-
-	@Override
-	public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean isMoving)
-	{
-		super.onRemove(state, world, pos, newState, isMoving);
-		BlockEntity entity = world.getBlockEntity(pos);
-		if(entity instanceof IGHydroVentEntity vent)
-		{
-			vent.invalidateCaps();
-		}
 	}
 
 	@Override

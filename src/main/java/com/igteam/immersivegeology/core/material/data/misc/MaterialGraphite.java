@@ -30,6 +30,6 @@ public class MaterialGraphite extends MaterialMisc
 	@Override
 	public ResourceLocation getTextureLocation(IFlagType<?> flag)
 	{
-		return new ResourceLocation(IGLib.MODID, "item/colored/"+getName()+"/"+flag.getName());
+		return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/colored/"+getName()+"/"+flag.getName());
 	}
 }

@@ -9,11 +9,9 @@
 package com.igteam.immersivegeology.core.material.data.metal;
 
 import blusunrize.immersiveengineering.api.IETags;
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
-import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
@@ -25,13 +23,11 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.Set;
 import java.util.function.BiFunction;
-
-import static com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic.MV_HEAT_CAP;
 
 public class MaterialCalcium extends MaterialMetal {
 
@@ -78,7 +74,7 @@ public class MaterialCalcium extends MaterialMetal {
                 getStack(ItemCategoryFlags.COMPOUND_DUST, 7),
                 ChemicalEnum.Ammonia.getFluidStack(IGLib.ACID_RECOVERED_FROM_SLURRY),
                 new IngredientWithSize(getItemTag(ItemCategoryFlags.POWDERED_SLAG), 8),
-                new FluidTagInput(FluidTags.WATER, IGLib.ACID_TO_COMPOUND_AMOUNT),
+                SizedFluidIngredient.of(FluidTags.WATER, IGLib.ACID_TO_COMPOUND_AMOUNT),
                 null,null,200, 51200).addToTree(ammonia_synthesis);
 
         IGRecipeNode decompose = IGMethodBuilder.decompose(this, IGStageDesignation.PREPARATION).create(

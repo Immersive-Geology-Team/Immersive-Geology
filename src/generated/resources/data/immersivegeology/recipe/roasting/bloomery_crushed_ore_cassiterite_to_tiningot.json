@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:bloomery",
+  "input": {
+    "basePredicate": {
+      "tag": "c:crushed_ore/cassiterite"
+    },
+    "count": 2
+  },
+  "result": {
+    "id": "immersivegeology:ingot_tin"
+  },
+  "time": 400
+}

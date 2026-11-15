@@ -8,37 +8,46 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.recipe.builder;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import blusunrize.immersiveengineering.api.crafting.builders.IEFinishedRecipe;
+import com.google.common.base.Preconditions;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.CoreDrillRecipe;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.CrystallizerRecipe;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
-public class CoreDrillRecipeBuilder extends IEFinishedRecipe<CoreDrillRecipeBuilder>
+public class CoreDrillRecipeBuilder extends IGMultiblockRecipeBuilder<CoreDrillRecipeBuilder>
 {
-	protected CoreDrillRecipeBuilder()
+	private SizedFluidIngredient input;
+	private final Fluid output;
+
+	private CoreDrillRecipeBuilder(Fluid output)
 	{
-		super(CoreDrillRecipe.SERIALIZER.get());
+		this.output = output;
 	}
 
 	public static CoreDrillRecipeBuilder builder(Fluid fluid_out)
 	{
-		return new CoreDrillRecipeBuilder().addFluid("fluidResult", new FluidStack(fluid_out, 1));
+		return new CoreDrillRecipeBuilder(fluid_out);
 	}
 
-	public CoreDrillRecipeBuilder addInput(FluidTagInput fluidTag)
+	public CoreDrillRecipeBuilder addInput(SizedFluidIngredient fluidTag)
 	{
-		return addFluidTag(generateSafeInputKey(), fluidTag);
+		Preconditions.checkArgument(input==null, "Recipe can only have 1 input");
+		this.input = fluidTag;
+		return this;
 	}
 
 	public CoreDrillRecipeBuilder addInput(TagKey<Fluid> fluidTag, int amount)
 	{
-		return addFluidTag(generateSafeInputKey(), fluidTag, amount);
+		return addInput(SizedFluidIngredient.of(fluidTag, amount));
+	}
+
+	public void build(RecipeOutput out, ResourceLocation name)
+	{
+		Preconditions.checkArgument(input!=null, "This recipe is incomplete");
+		CoreDrillRecipe recipe = new CoreDrillRecipe(input, output);
+		out.accept(name, recipe, null, getConditions());
 	}
 
 }

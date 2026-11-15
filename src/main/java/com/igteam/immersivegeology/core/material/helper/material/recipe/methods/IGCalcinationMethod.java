@@ -18,19 +18,14 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipe
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.Consumer;
-
-import static com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic.LV_HEAT_CAP;
-import static com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic.MV_HEAT_CAP;
-import static com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic.HV_HEAT_CAP;
-import static com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic.EHV_HEAT_CAP;
+import static com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic.*;
 
 public class IGCalcinationMethod extends IGRecipeMethod
 {
@@ -163,7 +158,7 @@ public class IGCalcinationMethod extends IGRecipeMethod
 	}
 
 	@Override
-	public boolean build(Consumer<FinishedRecipe> consumer)
+	public boolean build(RecipeOutput consumer)
 	{
 		try
 		{

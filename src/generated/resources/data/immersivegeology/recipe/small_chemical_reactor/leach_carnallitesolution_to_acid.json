@@ -1,0 +1,25 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 0,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 125,
+    "tag": "c:clean_brine_carnallite"
+  },
+  "fluidInputB": {
+    "amount": 125,
+    "tag": "c:hydrochloric_acid"
+  },
+  "fluidResult": {
+    "amount": 125,
+    "id": "immersivegeology:slurry_hydrochloric_acid_magnesium"
+  },
+  "itemInput": {
+    "basePredicate": [],
+    "count": 0
+  },
+  "result": {
+    "id": "immersiveengineering:fertilizer"
+  },
+  "time": 200
+}

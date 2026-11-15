@@ -9,7 +9,6 @@
 package com.igteam.immersivegeology.common.integration;
 
 import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.GravitySeparatorRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
@@ -30,7 +29,7 @@ public class IGRotaryKilnCategory extends IGRecipeCategory<RotaryKilnRecipe>
 	public IGRotaryKilnCategory(IGuiHelper helper)
 	{
 		super(helper, JEIRecipeTypes.ROTARYKILN, "block.immersivegeology.rotary_kiln");
-		ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/rotary_kiln.png");
+		ResourceLocation background = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/gui/jei/rotary_kiln.png");
 		IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 101, 101).setTextureSize(101,101).build();
 		setBackground(back);
 		setIcon(IGMultiblockProvider.ROTARYKILN.iconStack());

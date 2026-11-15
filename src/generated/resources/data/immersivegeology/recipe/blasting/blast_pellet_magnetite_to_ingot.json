@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "input": {
+    "tag": "c:pellets/magnetite"
+  },
+  "result": {
+    "id": "minecraft:iron_ingot"
+  },
+  "slag": {
+    "id": "immersiveengineering:slag"
+  }
+}

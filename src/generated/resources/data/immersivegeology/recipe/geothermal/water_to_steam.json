@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:geothermal_exchanger",
+  "energy": 2560,
+  "fluidResult": {
+    "amount": 50,
+    "id": "immersivegeology:fluid_steam"
+  },
+  "input": {
+    "amount": 25,
+    "tag": "minecraft:water"
+  },
+  "time": 20
+}

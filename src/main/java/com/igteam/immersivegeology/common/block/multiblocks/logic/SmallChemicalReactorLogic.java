@@ -16,14 +16,12 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.component.Redstone
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockBE;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
-import blusunrize.immersiveengineering.api.utils.CapabilityReference;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.util.CapabilityPosition;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.util.MultiblockFace;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.util.RelativeBlockFace;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.util.ShapeType;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcess;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessInMachine;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor.InMachineProcessor;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext.ProcessContextInMachine;
 import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
@@ -33,41 +31,38 @@ import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler.IntRange;
 import com.igteam.immersivegeology.common.block.helper.IGReceiveOnlyEnergy;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.ChemicalReactorLogic.ChemicalReactorTanks;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.SmallChemicalReactorLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.BasicChemicalProcessor;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.ISkinnableMultiblockLogic;
-import com.igteam.immersivegeology.common.block.multiblocks.part.SmallChemicalReactorPart;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BasicChemicalRecipe;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRepairRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.SmallChemicalReactorShape;
-import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.IItemHandler;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage;
+import net.neoforged.neoforge.capabilities.Capabilities.FluidHandler;
+import net.neoforged.neoforge.capabilities.Capabilities.ItemHandler;
+import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.IFluidTank;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -183,11 +178,11 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
         IMultiblockLevel mbLevel = ctx.getLevel();
         Level level = mbLevel.getRawLevel();
         SmallChemicalReactorTanks fluidTanks = state.tanks;
-        BasicChemicalRecipe recipe = state.getRecipeForInputs(level);
+        RecipeHolder<BasicChemicalRecipe> recipe = state.getRecipeForInputs(level);
         if(recipe!=null)
         {
             MultiblockProcessInMachine<BasicChemicalRecipe> process = new MultiblockProcessInMachine<>(recipe, 0);
-            process.setInputAmounts(recipe.itemInput.getCount());
+            process.setInputAmounts(recipe.value().itemInput.getCount());
             int size = (fluidTanks.leftInput().isEmpty()?0: 1)
                     +(fluidTanks.rightInput().isEmpty()?0: 1);
 
@@ -211,7 +206,7 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
                 }
             }
 
-            boolean hasInputForNewRecipe = inputStack.getCount() >= (recipeInputRequirements + recipe.itemInput.getCount());
+            boolean hasInputForNewRecipe = inputStack.getCount() >= (recipeInputRequirements + recipe.value().itemInput.getCount());
 
             if(hasInputForNewRecipe)
             {
@@ -233,11 +228,11 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
         }
     }
 
-    private void drainOutputTank(SmallChemicalReactorLogic.State state, IMultiblockContext<SmallChemicalReactorLogic.State> context, CapabilityReference<IFluidHandler> outputRef)
+    private void drainOutputTank(SmallChemicalReactorLogic.State state, IMultiblockContext<SmallChemicalReactorLogic.State> context, Supplier<@Nullable IFluidHandler> outputRef)
     {
         int outSize = Math.min(FluidType.BUCKET_VOLUME, state.tanks.output().getFluidAmount());
         FluidStack out = Utils.copyFluidStackWithAmount(state.tanks.output().getFluid(), outSize, false);
-        IFluidHandler output = outputRef.getNullable();
+        IFluidHandler output = outputRef.get();
 
         if(output==null)
             return;
@@ -253,43 +248,25 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
     }
 
     @Override
-    public <T> LazyOptional<T> getCapability(IMultiblockContext<State> ctx, CapabilityPosition position, Capability<T> cap)
+    public void registerCapabilities(CapabilityRegistrar<State> register)
     {
-        final State state = ctx.getState();
-        if(cap==ForgeCapabilities.ENERGY&&(position.side()==null||ENERGY_POS.contains(position)))
-        {
-            return state.energyCap.cast(ctx);
-        }
-
-        if(cap==ForgeCapabilities.FLUID_HANDLER)
-        {
-            if(FLUID_INPUT_CAPS.contains(position))
+        register.register(EnergyStorage.BLOCK, (state, position) ->
+                position.side()==null||ENERGY_POS.contains(position)?state.energyCap:null);
+        register.register(FluidHandler.BLOCK, (state, position) -> {
+            if(FLUID_INPUT_CAPS.contains(position)&&position.side()!=null)
             {
-                if(position.side()!=null)
-                {
-                    if(position.side().equals(RelativeBlockFace.LEFT)) return state.inputCapFront.cast(ctx);
-                    if(position.side().equals(RelativeBlockFace.RIGHT)) return state.inputCapBack.cast(ctx);
-                }
+                if(position.side()==RelativeBlockFace.LEFT) return state.inputCapFront;
+                if(position.side()==RelativeBlockFace.RIGHT) return state.inputCapBack;
             }
-
-            if(FLUID_OUTPUT_CAP.equals(position))
-            {
-                return state.outputCap.cast(ctx);
-            }
-        }
-
-        if(cap==ForgeCapabilities.ITEM_HANDLER)
-        {
-            if(position.posInMultiblock().equals(ITEM_INPUT))
-            {
-                return state.itemInputCap.cast(ctx);
-            }
-            if(position.posInMultiblock().equals(ITEM_OUTPUT.posInMultiblock()) && position.side() == ITEM_OUTPUT.face()){
-                return state.outputHandler.cast(ctx);
-            }
-        }
-
-        return LazyOptional.empty();
+            if(FLUID_OUTPUT_CAP.equals(position)) return state.outputCap;
+            return null;
+        });
+        register.register(ItemHandler.BLOCK, (state, position) -> {
+            if(position.posInMultiblock().equals(ITEM_INPUT)) return state.itemInputCap;
+            if(position.posInMultiblock().equals(ITEM_OUTPUT.posInMultiblock())&&position.side()==ITEM_OUTPUT.face())
+                return state.outputHandler;
+            return null;
+        });
     }
 
     @Override
@@ -310,17 +287,16 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
 
         public final SlotwiseItemHandler inventory;
         public final SmallChemicalReactorTanks tanks = new SmallChemicalReactorTanks();
-        private final StoredCapability<IFluidHandler> inputCapBack;
-        private final StoredCapability<IFluidHandler> inputCapFront;
-        private final StoredCapability<IItemHandler> itemInputCap;
-        private final StoredCapability<IItemHandler> outputHandler;
-        private final StoredCapability<IFluidHandler> outputCap;
-        private final StoredCapability<IEnergyStorage> energyCap;
-        private final CapabilityReference<IItemHandler> input_output;
-        private final CapabilityReference<IFluidHandler> fluidOutput;
+        private final IFluidHandler inputCapBack;
+        private final IFluidHandler inputCapFront;
+        private final IItemHandler itemInputCap;
+        private final IItemHandler outputHandler;
+        private final IFluidHandler outputCap;
+        private final IEnergyStorage energyCap;
+        private final Supplier<@Nullable IItemHandler> input_output;
+        private final Supplier<@Nullable IFluidHandler> fluidOutput;
 
         private final BasicChemicalProcessor processor;
-        private final MultiblockProcessor.InMachineProcessor<BasicChemicalRecipe> dummy;
 
 
         public State(IInitialMultiblockContext<State> ctx){
@@ -328,29 +304,28 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
             final Runnable markDirty = ctx.getMarkDirtyRunnable();
 
             this.damage = 0;
-            this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.energy));
+            this.energyCap = IGReceiveOnlyEnergy.of(this.energy);
             this.inventory = new SlotwiseItemHandler(List.of(
                     new IOConstraint(true, i -> BasicChemicalRecipe.acceptableCatalyst(getLevel.get(), i)),
                     IOConstraint.OUTPUT,
                     new IOConstraint(true, i -> ChemicalRepairRecipe.isValidRepairItem(getLevel.get(), i))
             ), ctx.getMarkDirtyRunnable());
-            this.input_output = ctx.getCapabilityAt(ForgeCapabilities.ITEM_HANDLER, ITEM_INPUT_OUTPUT);
+            this.input_output = ctx.getCapabilityAt(Capabilities.ItemHandler.BLOCK, ITEM_INPUT_OUTPUT);
 
-            this.outputHandler = new StoredCapability<>(new WrappingItemHandler(
+            this.outputHandler = new WrappingItemHandler(
                     inventory, false, true, new IntRange(1, 2)
-            ));
+            );
 
-            this.fluidOutput = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(FLUID_OUTPUT_CAP.side(), FLUID_OUTPUT_CAP.posInMultiblock().east()));
+            this.fluidOutput = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, new MultiblockFace(FLUID_OUTPUT_CAP.side(), FLUID_OUTPUT_CAP.posInMultiblock().east()));
             this.processor = new BasicChemicalProcessor(4, 0, 4, ctx.getMarkDirtyRunnable(), BasicChemicalRecipe.RECIPES::getById);
 
-            this.inputCapBack = new StoredCapability<>(new ArrayFluidHandler(true, true, markDirty, this.tanks.leftInput));
-            this.inputCapFront = new StoredCapability<>(new ArrayFluidHandler(true, true, markDirty, this.tanks.rightInput));
-            this.outputCap = new StoredCapability<>(ArrayFluidHandler.drainOnly(this.tanks.output, markDirty));
-            this.itemInputCap = new StoredCapability<>(this.inventory);
-            this.dummy = new BasicChemicalProcessor(4, 0, 4, ctx.getMarkDirtyRunnable(), BasicChemicalRecipe.RECIPES::getById);
+            this.inputCapBack = new ArrayFluidHandler(true, true, markDirty, this.tanks.leftInput);
+            this.inputCapFront = new ArrayFluidHandler(true, true, markDirty, this.tanks.rightInput);
+            this.outputCap = ArrayFluidHandler.drainOnly(this.tanks.output, markDirty);
+            this.itemInputCap = this.inventory;
         }
 
-        public @Nullable BasicChemicalRecipe getRecipeForInputs(Level level)
+        public @Nullable RecipeHolder<BasicChemicalRecipe> getRecipeForInputs(Level level)
         {
             return BasicChemicalRecipe.findRecipe(level, tanks.leftInput.getFluid(), tanks.rightInput.getFluid(), inventory.getStackInSlot(0));
         }
@@ -362,28 +337,28 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
         }
 
         @Override
-        public void readSaveNBT(CompoundTag nbt){
-            this.energy.deserializeNBT(nbt.get("energy"));
-            this.tanks.readNBT(nbt.getCompound("tanks"));
-            this.inventory.deserializeNBT(nbt.getCompound("inventory"));
-            this.processor.fromNBT(nbt.get("processor"), MultiblockProcessInMachine::new);
+        public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            this.energy.deserializeNBT(provider, nbt.get("energy"));
+            this.tanks.readNBT(nbt.getCompound("tanks"), provider);
+            this.inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
+            this.processor.fromNBT(nbt.get("processor"), (getRecipe, data, p) -> new MultiblockProcessInMachine<>(getRecipe, data), provider);
             this.damage = nbt.getFloat("damage");
             this.isInvalidated = nbt.getBoolean("invalid");
         }
 
         @Override
-        public void writeSaveNBT(CompoundTag nbt){
-            nbt.put("energy", this.energy.serializeNBT());
-            nbt.put("tanks", this.tanks.toNBT());
-            nbt.put("processor", this.processor.toNBT());
-            nbt.put("inventory", this.inventory.serializeNBT());
+        public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            nbt.put("energy", this.energy.serializeNBT(provider));
+            nbt.put("tanks", this.tanks.toNBT(provider));
+            nbt.put("processor", this.processor.toNBT(provider));
+            nbt.put("inventory", this.inventory.serializeNBT(provider));
             nbt.putFloat("damage", this.damage);
             nbt.putBoolean("invalid", this.isInvalidated);
         }
 
         public void clearProcessor()
         {
-            this.processor.fromNBT(dummy.toNBT(), MultiblockProcessInMachine::new);
+            this.processor.clear();
         }
 
         @Override
@@ -441,13 +416,6 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
                 }
                 isInvalidated = true;
             }
-
-            this.energyCap.get(ctx).invalidate();
-            this.inputCapBack.get(ctx).invalidate();
-            this.inputCapFront.get(ctx).invalidate();
-            this.outputHandler.get(ctx).invalidate();
-            this.itemInputCap.get(ctx).invalidate();
-            this.outputCap.get(ctx).invalidate();
         }
 
         public static void scatterFailureDebris(Level level, BlockPos origin, float damage)
@@ -484,20 +452,20 @@ public class SmallChemicalReactorLogic implements ISkinnableMultiblockLogic<Stat
             this.output = output;
         }
 
-        public Tag toNBT()
+        public Tag toNBT(HolderLookup.Provider provider)
         {
             CompoundTag tag = new CompoundTag();
-            tag.put("leftIn", this.leftInput.writeToNBT(new CompoundTag()));
-            tag.put("rightIn", this.rightInput.writeToNBT(new CompoundTag()));
-            tag.put("out", this.output.writeToNBT(new CompoundTag()));
+            tag.put("leftIn", this.leftInput.writeToNBT(provider, new CompoundTag()));
+            tag.put("rightIn", this.rightInput.writeToNBT(provider, new CompoundTag()));
+            tag.put("out", this.output.writeToNBT(provider, new CompoundTag()));
             return tag;
         }
 
-        public void readNBT(CompoundTag tag)
+        public void readNBT(CompoundTag tag, HolderLookup.Provider provider)
         {
-            this.leftInput.readFromNBT(tag.getCompound("leftIn"));
-            this.rightInput.readFromNBT(tag.getCompound("rightIn"));
-            this.output.readFromNBT(tag.getCompound("out"));
+            this.leftInput.readFromNBT(provider, tag.getCompound("leftIn"));
+            this.rightInput.readFromNBT(provider, tag.getCompound("rightIn"));
+            this.output.readFromNBT(provider, tag.getCompound("out"));
         }
 
         public FluidTank leftInput()

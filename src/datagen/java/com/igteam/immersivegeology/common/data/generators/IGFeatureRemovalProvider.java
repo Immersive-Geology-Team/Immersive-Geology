@@ -8,12 +8,8 @@
 
 package com.igteam.immersivegeology.common.data.generators;
 
-import blusunrize.immersiveengineering.api.IEApi;
-import blusunrize.immersiveengineering.common.world.IEOreFeature;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
@@ -28,7 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class IGFeatureRemovalProvider implements DataProvider {
@@ -50,12 +45,12 @@ public class IGFeatureRemovalProvider implements DataProvider {
 		{
 			removeFeature(feature.location());
 		}
-		removeFeature(new ResourceLocation("immersiveengineering", "bauxite"));
-		removeFeature(new ResourceLocation("immersiveengineering", "deep_nickel"));
-		removeFeature(new ResourceLocation("immersiveengineering", "lead"));
-		removeFeature(new ResourceLocation("immersiveengineering", "nickel"));
-		removeFeature(new ResourceLocation("immersiveengineering", "silver"));
-		removeFeature(new ResourceLocation("immersiveengineering", "uranium"));
+		removeFeature(ResourceLocation.fromNamespaceAndPath("immersiveengineering", "bauxite"));
+		removeFeature(ResourceLocation.fromNamespaceAndPath("immersiveengineering", "deep_nickel"));
+		removeFeature(ResourceLocation.fromNamespaceAndPath("immersiveengineering", "lead"));
+		removeFeature(ResourceLocation.fromNamespaceAndPath("immersiveengineering", "nickel"));
+		removeFeature(ResourceLocation.fromNamespaceAndPath("immersiveengineering", "silver"));
+		removeFeature(ResourceLocation.fromNamespaceAndPath("immersiveengineering", "uranium"));
 
 	}
 

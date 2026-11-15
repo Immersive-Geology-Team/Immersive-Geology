@@ -1,6 +1,6 @@
 {
   "type": "immersivegeology:ruined_factory",
-  "biomes": "#forge:is_swamp",
+  "biomes": "#c:is_swamp",
   "step": "surface_structures",
   "spawn_overrides": {},
   "terrain_adaptation": "beard_thin",

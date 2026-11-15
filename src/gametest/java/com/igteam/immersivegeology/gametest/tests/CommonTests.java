@@ -27,6 +27,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -67,7 +68,7 @@ public class CommonTests
 
 	private static void formAndDisassemble(GameTestHelper helper, IGTemplateMultiblock multiblock)
 	{
-		Player player = helper.makeMockPlayer();
+		Player player = helper.makeMockPlayer(GameType.SURVIVAL);
 		BlockPos triggerRelative = multiblock.getTriggerOffset().above();
 		BlockPos triggerAbsolute = helper.absolutePos(triggerRelative);
 		BlockPos testRelative = Util.make(() -> {
@@ -102,7 +103,7 @@ public class CommonTests
 
 	public static void formMultiblock(IMultiblock multiblock, GameTestHelper helper)
 	{
-		Player player = helper.makeMockPlayer();
+		Player player = helper.makeMockPlayer(GameType.SURVIVAL);
 		ItemStack ie_hammer = new ItemStack(Tools.HAMMER);
 		List<ItemStack> hammerTypes = List.of(ie_hammer,
 				MetalEnum.Bronze.getStack(ItemCategoryFlags.HAMMER),

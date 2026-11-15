@@ -47,29 +47,29 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.AirBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate.StructureBlockInfo;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
-import net.minecraftforge.client.model.data.ModelData;
-import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 import javax.annotation.Nonnull;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
 public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExchangerMenu>
 {
 	private static final ResourceLocation TEXTURE = IGLib.makeTextureLocation("multiblocks/geothermal_exchanger");
+	private static final ResourceLocation TANK = IGLib.rl("multiblocks/tank_overlay");
 	public static double lastPrintedErrorTimeMs;
 	private final TemplateWorld structureWorld;
 	private final MultiblockRenderInfo renderInfo;
@@ -147,9 +147,9 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 	}
 
 	@Override
-	public void renderBackground(@NotNull GuiGraphics graphics)
+	public void renderBackground(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float partialTicks)
 	{
-		super.renderBackground(graphics);
+		super.renderBackground(graphics, mouseX, mouseY, partialTicks);
 	}
 
 	private Transformation createRenderTransform() {
@@ -309,8 +309,8 @@ public class GeothermalExchangerScreen extends IEContainerScreen<GeothermalExcha
 	protected List<InfoArea> makeInfoAreas()
 	{
 		return ImmutableList.of(
-				new FluidInfoArea(this.menu.tanks[0], new Rect2i(this.leftPos + 157, this.topPos + 23, 16, 47), 101, 187, 20, 51, TEXTURE),
-				new FluidInfoArea(this.menu.tanks[1], new Rect2i(this.leftPos + 61, this.topPos + 23, 16, 47), 101, 187, 20, 51, TEXTURE),
+				new FluidInfoArea(this.menu.tanks[0], new Rect2i(this.leftPos + 157, this.topPos + 23, 16, 47), 20, 51, TANK),
+				new FluidInfoArea(this.menu.tanks[1], new Rect2i(this.leftPos + 61, this.topPos + 23, 16, 47), 20, 51, TANK),
 				new EnergyInfoArea(this.leftPos + 206,this.topPos + 98, this.menu.energy_storage));
 	}
 

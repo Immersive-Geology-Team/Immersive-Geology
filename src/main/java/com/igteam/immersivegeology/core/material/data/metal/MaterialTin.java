@@ -16,7 +16,6 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 
 import java.util.Set;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialTin extends MaterialMetal {
 

@@ -16,10 +16,9 @@ import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
-import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.NonNullList;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -28,7 +27,6 @@ import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
-import java.util.function.Consumer;
 
 public class IGTrommelMethod extends IGRecipeMethod
 {
@@ -99,7 +97,7 @@ public class IGTrommelMethod extends IGRecipeMethod
 	}
 
 	@Override
-	public boolean build(Consumer<FinishedRecipe> consumer)
+	public boolean build(RecipeOutput consumer)
 	{
 		try
 		{

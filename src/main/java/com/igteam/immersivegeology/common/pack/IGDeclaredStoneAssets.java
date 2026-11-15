@@ -20,23 +20,16 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.IStoneType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.nio.charset.StandardCharsets;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Builds, at runtime, every resource an ore block hosted in a configuration-declared rock type needs.
@@ -92,14 +85,14 @@ public final class IGDeclaredStoneAssets
 		Map<String, String> lang = new TreeMap<>();
 		Set<String> stoneNames = new LinkedHashSet<>();
 
-		for(RegistryObject<Block> holder : IGRegistrationHolder.getBlockRegistryMap().values())
+		for(DeferredHolder<Block, Block> holder : IGRegistrationHolder.getBlockRegistryMap().values())
 		{
-			if(!holder.isPresent()) continue;
+			if(!holder.isBound()) continue;
 			Block block = holder.get();
 			if(!(block instanceof IOreBlock ore)) continue;
 			if(!(ore.getStoneMaterial().instance() instanceof ConfigMaterialStone)) continue;
 
-			ResourceLocation blockId = ForgeRegistries.BLOCKS.getKey(block);
+			ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(block);
 			if(blockId==null) continue;
 
 			assets.oreBlocks++;
@@ -119,7 +112,7 @@ public final class IGDeclaredStoneAssets
 		}
 
 		for(String stone : stoneNames) lang.put("material."+IGLib.MODID+"."+stone, titleCase(stone));
-		assets.client.put(new ResourceLocation(IGLib.MODID, "lang/en_us.json"), langJson(lang));
+		assets.client.put(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "lang/en_us.json"), langJson(lang));
 		assets.stoneTypes = stoneNames.size();
 
 		return assets;
@@ -155,7 +148,7 @@ public final class IGDeclaredStoneAssets
 
 		JsonObject root = new JsonObject();
 		root.add("multipart", multipart);
-		assets.client.put(new ResourceLocation(IGLib.MODID, "blockstates/"+blockId.getPath()+".json"), bytes(root));
+		assets.client.put(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "blockstates/"+blockId.getPath()+".json"), bytes(root));
 	}
 
 	private static JsonArray modelVariants(IOreBlock ore, MineralWeathering stage, Direction face)
@@ -186,13 +179,13 @@ public final class IGDeclaredStoneAssets
 
 		// The held item always shows the unweathered first variant, as the built-in item models do.
 		JsonObject item = modelJson(ore, 1, MineralWeathering.PRISTINE, null);
-		assets.client.put(new ResourceLocation(IGLib.MODID, "models/item/"+blockId.getPath()+".json"), bytes(item));
+		assets.client.put(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "models/item/"+blockId.getPath()+".json"), bytes(item));
 	}
 
 	private static void putModel(Assets assets, IOreBlock ore, int variation, MineralWeathering stage, Direction face)
 	{
 		ResourceLocation id = modelId(ore, variation, stage, face);
-		assets.client.put(new ResourceLocation(id.getNamespace(), "models/"+id.getPath()+".json"),
+		assets.client.put(ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "models/"+id.getPath()+".json"),
 				bytes(modelJson(ore, variation, stage, face)));
 	}
 
@@ -211,7 +204,7 @@ public final class IGDeclaredStoneAssets
 				.append("_variation_").append(variation);
 		if(face!=null) path.append('_').append(face.getName().toLowerCase(Locale.ROOT));
 
-		return new ResourceLocation(IGLib.MODID, path.toString());
+		return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, path.toString());
 	}
 
 	private static JsonObject modelJson(IOreBlock ore, int variation, MineralWeathering stage, Direction face)
@@ -237,7 +230,7 @@ public final class IGDeclaredStoneAssets
 				oreTexture(ore, variation, stage==null?MineralWeathering.PRISTINE: stage).toString());
 
 		JsonObject model = new JsonObject();
-		model.addProperty("parent", new ResourceLocation(IGLib.MODID, parent).toString());
+		model.addProperty("parent", ResourceLocation.fromNamespaceAndPath(IGLib.MODID, parent).toString());
 		model.add("textures", textures);
 		return model;
 	}
@@ -251,7 +244,7 @@ public final class IGDeclaredStoneAssets
 		MaterialInterface<?> oreMaterial = ore.getOreMaterial();
 		if(oreMaterial.hasCustomTexture(BlockCategoryFlags.ORE_BLOCK))
 		{
-			return new ResourceLocation(IGLib.MODID, "block/colored/"+lower(oreMaterial.getName())
+			return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/colored/"+lower(oreMaterial.getName())
 					+"/ore/"+ore.getOreRichness().getSanitizedName()+"_"+variation);
 		}
 
@@ -260,14 +253,14 @@ public final class IGDeclaredStoneAssets
 				?IGVeinTextureType.LAYERED.getSanitizedName()
 				: oreMaterial.getVeinTextureType().getSanitizedName();
 
-		return new ResourceLocation(IGLib.MODID, "palette/block/ore_bearing/"+veinType+"/"
+		return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "palette/block/ore_bearing/"+veinType+"/"
 				+ore.getOreRichness().getSanitizedName()+"_"+variation+"_"
 				+stage.getSerializedName()+"_"+lower(oreMaterial.getName()));
 	}
 
 	private static void writeLootTable(Assets assets, IOreBlock ore, ResourceLocation blockId)
 	{
-		String drop = ForgeRegistries.ITEMS.getKey(ore.getItemDrop().getItem())+"";
+		String drop = BuiltInRegistries.ITEM.getKey(ore.getItemDrop().getItem())+"";
 		int count = ore.getItemDrop().getCount();
 
 		JsonObject silkTouched = itemEntry(drop);
@@ -277,12 +270,14 @@ public final class IGDeclaredStoneAssets
 		JsonObject predicate = new JsonObject();
 		JsonArray enchantments = new JsonArray();
 		JsonObject silk = new JsonObject();
-		silk.addProperty("enchantment", "minecraft:silk_touch");
+		silk.addProperty("enchantments", "minecraft:silk_touch");
 		JsonObject levels = new JsonObject();
 		levels.addProperty("min", 1);
 		silk.add("levels", levels);
 		enchantments.add(silk);
-		predicate.add("enchantments", enchantments);
+		JsonObject predicates = new JsonObject();
+		predicates.add("minecraft:enchantments", enchantments);
+		predicate.add("predicates", predicates);
 		match.add("predicate", predicate);
 		conditions.add(match);
 		silkTouched.add("conditions", conditions);
@@ -325,7 +320,7 @@ public final class IGDeclaredStoneAssets
 		root.add("pools", pools);
 		root.addProperty("random_sequence", IGLib.MODID+":blocks/"+blockId.getPath());
 
-		assets.server.put(new ResourceLocation(IGLib.MODID, "loot_tables/blocks/"+blockId.getPath()+".json"), bytes(root));
+		assets.server.put(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "loot_table/blocks/"+blockId.getPath()+".json"), bytes(root));
 	}
 
 	private static JsonObject itemEntry(String item)
@@ -341,9 +336,9 @@ public final class IGDeclaredStoneAssets
 		String id = blockId.toString();
 		add(tags, ore.getOreMaterial().getBlockMaterialTag().location(), id);
 		add(tags, BlockCategoryFlags.ORE_BLOCK.getCategoryTag().location(), id);
-		add(tags, new ResourceLocation("forge", "ores"), id);
-		add(tags, new ResourceLocation("minecraft", "mineable/pickaxe"), id);
-		add(tags, new ResourceLocation("minecraft", "needs_stone_tool"), id);
+		add(tags, ResourceLocation.fromNamespaceAndPath("c", "ores"), id);
+		add(tags, ResourceLocation.fromNamespaceAndPath("minecraft", "mineable/pickaxe"), id);
+		add(tags, ResourceLocation.fromNamespaceAndPath("minecraft", "needs_stone_tool"), id);
 	}
 
 	private static void add(Map<ResourceLocation, Set<String>> tags, ResourceLocation tag, String value)
@@ -370,7 +365,7 @@ public final class IGDeclaredStoneAssets
 
 	private static ResourceLocation dataPath(ResourceLocation tag, String folder)
 	{
-		return new ResourceLocation(tag.getNamespace(), folder+"/"+tag.getPath()+".json");
+		return ResourceLocation.fromNamespaceAndPath(tag.getNamespace(), folder+"/"+tag.getPath()+".json");
 	}
 
 	private static String titleCase(String raw)

@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "input": {
+    "tag": "c:crushed_ore/acanthite"
+  },
+  "result": {
+    "id": "immersiveengineering:ingot_silver"
+  },
+  "slag": {
+    "id": "immersiveengineering:slag"
+  },
+  "time": 900
+}

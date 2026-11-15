@@ -13,7 +13,6 @@ import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 
 /** Class representing a cube of fluid, which appears in many model types. */

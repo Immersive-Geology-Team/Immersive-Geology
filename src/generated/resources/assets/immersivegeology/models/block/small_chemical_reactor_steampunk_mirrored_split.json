@@ -5,7 +5,7 @@
     "parent": "minecraft:block/block",
     "automatic_culling": false,
     "flip_v": true,
-    "loader": "forge:obj",
+    "loader": "neoforge:obj",
     "model": "immersivegeology:models/block/multiblock/obj/small_chemical_reactor/small_chemical_reactor_mirrored.obj",
     "textures": {
       "particle": "immersivegeology:block/multiblock/small_chemical_reactor/steampunk",

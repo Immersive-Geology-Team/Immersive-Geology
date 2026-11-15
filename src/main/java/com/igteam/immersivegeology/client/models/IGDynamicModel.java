@@ -14,18 +14,18 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ModelEvent;
-import net.minecraftforge.client.model.data.ModelData;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.model.data.ModelData;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@EventBusSubscriber(modid = IGLib.MODID, bus = Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = IGLib.MODID, value = Dist.CLIENT)
 public class IGDynamicModel
 {
 	private static final List<ResourceLocation> MODELS = new ArrayList<>();
@@ -34,7 +34,7 @@ public class IGDynamicModel
 	public static void registerModels(ModelEvent.RegisterAdditional ev)
 	{
 		for(ResourceLocation model : MODELS)
-			ev.register(model);
+			ev.register(ModelResourceLocation.standalone(model));
 	}
 
 	private final ResourceLocation name;
@@ -43,14 +43,14 @@ public class IGDynamicModel
 	{
 		// References a generated json file
 		raw_name = desc;
-		this.name = new ResourceLocation(IGLib.MODID, "dynamic/"+desc);
+		this.name = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "dynamic/"+desc);
 		MODELS.add(this.name);
 	}
 
 	public BakedModel get()
 	{
 		final BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
-		return blockRenderer.getBlockModelShaper().getModelManager().getModel(name);
+		return blockRenderer.getBlockModelShaper().getModelManager().getModel(ModelResourceLocation.standalone(name));
 	}
 
 	public List<BakedQuad> getNullQuads()

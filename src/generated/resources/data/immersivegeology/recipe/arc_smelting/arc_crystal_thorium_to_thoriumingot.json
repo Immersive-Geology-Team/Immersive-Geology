@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 204800,
+  "input": {
+    "tag": "c:crystal/thorium"
+  },
+  "results": [
+    {
+      "id": "immersivegeology:ingot_thorium"
+    }
+  ],
+  "time": 400
+}

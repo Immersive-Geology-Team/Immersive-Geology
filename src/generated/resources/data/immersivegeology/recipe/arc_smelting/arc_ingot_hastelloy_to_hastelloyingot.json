@@ -1,0 +1,41 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [
+    {
+      "basePredicate": {
+        "item": "immersivegeology:ingot_chromium"
+      },
+      "count": 4
+    },
+    {
+      "basePredicate": {
+        "item": "immersivegeology:ingot_molybdenum"
+      },
+      "count": 2
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "immersivegeology:ingot_tungsten"
+    }
+  ],
+  "energy": 819200,
+  "input": {
+    "basePredicate": {
+      "tag": "c:ingots/nickel"
+    },
+    "count": 8
+  },
+  "results": [
+    {
+      "count": 12,
+      "id": "immersivegeology:ingot_hastelloy"
+    }
+  ],
+  "slag": {
+    "count": 4,
+    "id": "immersiveengineering:slag"
+  },
+  "time": 1600
+}

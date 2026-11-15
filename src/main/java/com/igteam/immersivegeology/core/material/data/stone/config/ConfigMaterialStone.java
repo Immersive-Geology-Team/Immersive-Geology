@@ -12,11 +12,10 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.BiFunction;
 
@@ -65,10 +64,8 @@ public class ConfigMaterialStone extends MaterialStone
 	@Override
 	public BlockBehaviour.Properties getProperties(IFlagType<?> flag)
 	{
-		Block source = ForgeRegistries.BLOCKS.getValue(entry.resolvedProperties);
-		// Null when the declaring mod is absent or renamed the block. Ore in this rock will not generate either
-		// way, so plain stone is a mostly harmless stand-in and keeps registration from failing.
-		return BlockBehaviour.Properties.copy(source!=null?source: Blocks.STONE);
+		Block source = BuiltInRegistries.BLOCK.get(entry.resolvedProperties);
+		return BlockBehaviour.Properties.ofFullCopy(source);
 	}
 
 	public ConfigStoneEntry getEntry()

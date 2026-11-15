@@ -5,7 +5,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialGlacioStone extends MaterialAdAstraStone
 {

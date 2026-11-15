@@ -14,19 +14,16 @@ import blusunrize.immersiveengineering.common.gui.IESlot;
 import blusunrize.immersiveengineering.common.gui.sync.GenericContainerData;
 import blusunrize.immersiveengineering.common.gui.sync.GenericDataSerializers;
 import blusunrize.immersiveengineering.common.gui.sync.GetterAndSetter;
-import com.igteam.immersivegeology.client.models.IGDynamicModel;
 import com.igteam.immersivegeology.common.block.multiblocks.gui.helper.IGSlot;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.ChemicalReactorLogic;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.ChemicalReactorLogic.ChemicalReactorTanks;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.SmallChemicalReactorLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.SmallChemicalReactorLogic.SmallChemicalReactorTanks;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 
 public class SmallChemicalReactorMenu extends IEContainerMenu
 {

@@ -10,8 +10,6 @@ package com.igteam.immersivegeology.core.material.helper.material.recipe.helper;
 
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeMethod;
-import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
-import com.mojang.datafixers.util.Pair;
 
 import java.util.*;
 

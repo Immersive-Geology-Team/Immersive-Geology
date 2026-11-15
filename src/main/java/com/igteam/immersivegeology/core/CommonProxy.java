@@ -21,20 +21,21 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.fml.InterModComms;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.InterModComms;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 
 public class CommonProxy
 {
 
-	public void modConstruction()
+	public void modConstruction(IEventBus modEventBus)
 	{
 		IGMultiblockProvider.forceClassLoad();
 		IGRegistrationHolder.initialize();
 		IGRegistrationHolder.initializeLootModifications();
 		IGTags.initialize();
-		IGWorldGen.init();
-		IGRecipeTypes.init();
+		IGWorldGen.init(modEventBus);
+		IGRecipeTypes.init(modEventBus);
 		IGContent.initializeIETweaks();
 		IGIMCHandler.init();
 		IGIMCHandler.handleIMCMessages(InterModComms.getMessages(IGLib.MODID));

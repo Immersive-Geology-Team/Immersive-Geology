@@ -10,7 +10,6 @@ package com.igteam.immersivegeology.common.block.multiblocks;
 
 import blusunrize.immersiveengineering.api.multiblocks.ClientMultiblocks;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 
@@ -21,7 +20,7 @@ public class IGTrommelMultiblock extends IGTemplateMultiblock
 	public static final IGTrommelMultiblock INSTANCE = new IGTrommelMultiblock();
 	public IGTrommelMultiblock()
 	{
-		super(new ResourceLocation(IGLib.MODID, "multiblocks/trommel"), new BlockPos(7,0,2), new BlockPos(6,1,4), new BlockPos(9,4,5), null);//_IGMultiblockProvider.TROMMEL);
+		super(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "multiblocks/trommel"), new BlockPos(7,0,2), new BlockPos(6,1,4), new BlockPos(9,4,5), null);//_IGMultiblockProvider.TROMMEL);
 	}
 
 	@Override

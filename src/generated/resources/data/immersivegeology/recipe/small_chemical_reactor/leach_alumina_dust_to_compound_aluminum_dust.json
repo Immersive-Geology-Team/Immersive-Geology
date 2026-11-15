@@ -1,0 +1,17 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 0,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 125,
+    "tag": "c:sodium_hydroxide"
+  },
+  "fluidResult": {},
+  "itemInput": {
+    "tag": "c:powders/alumina"
+  },
+  "result": {
+    "id": "immersivegeology:compound_dust_aluminum"
+  },
+  "time": 200
+}

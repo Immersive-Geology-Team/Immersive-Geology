@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "immersivegeology:crafting/high_speed_steel_get_ingots_from_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "high_speed_steelhas_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "immersivegeology:storage_block_high_speed_steel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "high_speed_steelhas_ingot"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "immersivegeology:crafting/high_speed_steel_get_ingots_from_block"
+    ]
+  }
+}

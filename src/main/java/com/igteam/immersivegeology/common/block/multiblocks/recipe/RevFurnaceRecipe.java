@@ -10,31 +10,32 @@ package com.igteam.immersivegeology.common.block.multiblocks.recipe;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
+import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.util.Lazy;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import javax.annotation.Nullable;
 
 public class RevFurnaceRecipe extends MultiblockRecipe
 {
 
-	public static RegistryObject<IERecipeSerializer<RevFurnaceRecipe>> SERIALIZER;
+	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<RevFurnaceRecipe>> SERIALIZER;
 	public static final CachedRecipeList<RevFurnaceRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.REVFURNACE);
 	public int waste, time;
 	public IngredientWithSize input;
-	public Lazy<ItemStack> result;
+	public TagOutput result;
 	Lazy<Integer> totalProcessTime;
 
-	public <T extends Recipe<?>> RevFurnaceRecipe(ResourceLocation id, IngredientWithSize input, Lazy<ItemStack> result, int waste_amount, int time)
+	public <T extends Recipe<?>> RevFurnaceRecipe(IngredientWithSize input, TagOutput result, int waste_amount, int time)
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.REVFURNACE, id);
+		super(TagOutput.EMPTY, IGRecipeTypes.REVFURNACE, time, 0, () -> new RecipeMultiplier(() -> 1, () -> 1));
 		this.input = input;
 		this.result = result;
 		this.waste = waste_amount;
@@ -44,9 +45,9 @@ public class RevFurnaceRecipe extends MultiblockRecipe
 
 	public static RevFurnaceRecipe findRecipe(Level level, ItemStack input)
 	{
-		for(RevFurnaceRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.input.test(input))
-				return recipe;
+		for(RecipeHolder<RevFurnaceRecipe> recipe : RECIPES.getRecipes(level))
+			if(recipe.value().input.test(input))
+				return recipe.value();
 		return null;
 	}
 
@@ -56,9 +57,9 @@ public class RevFurnaceRecipe extends MultiblockRecipe
 			return null;
 		if (hint != null && hint.matches(input))
 			return hint;
-		for(RevFurnaceRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.input.test(input))
-				return recipe;
+		for(RecipeHolder<RevFurnaceRecipe> recipe : RECIPES.getRecipes(level))
+			if(recipe.value().input.test(input))
+				return recipe.value();
 		return null;
 	}
 

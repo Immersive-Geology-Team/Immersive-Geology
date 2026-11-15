@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "ig_engineering",
+  "key": {
+    "C": {
+      "item": "immersiveengineering:concrete_bucket"
+    },
+    "P": {
+      "tag": "c:plates/steel"
+    },
+    "R": {
+      "tag": "c:rods/steel"
+    },
+    "W": {
+      "tag": "c:wires/steel"
+    }
+  },
+  "pattern": [
+    "PWP",
+    "RCR",
+    "PWP"
+  ],
+  "result": {
+    "count": 9,
+    "id": "immersivegeology:storage_block_srconcrete"
+  }
+}

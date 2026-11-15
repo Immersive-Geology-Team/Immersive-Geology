@@ -1,0 +1,12 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "tfc"
+    }
+  ],
+  "type": "tfc:collapse",
+  "ingredient": [
+    "immersivegeology:minecraft_rich_ore_block_anthracite_granite"
+  ]
+}

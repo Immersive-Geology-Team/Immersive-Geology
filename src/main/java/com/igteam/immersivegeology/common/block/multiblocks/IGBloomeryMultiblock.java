@@ -23,7 +23,7 @@ public class IGBloomeryMultiblock extends IGTemplateMultiblock
 	public static final IGBloomeryMultiblock INSTANCE = new IGBloomeryMultiblock();
 	public IGBloomeryMultiblock()
 	{
-		super(new ResourceLocation(IGLib.MODID, "multiblocks/bloomery"), new BlockPos(0,0,0), new BlockPos(0,1,1), new BlockPos(2,3,2), IGMultiblockProvider.BLOOMERY);
+		super(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "multiblocks/bloomery"), new BlockPos(0,0,0), new BlockPos(0,1,1), new BlockPos(2,3,2), IGMultiblockProvider.BLOOMERY);
 	}
 
 	@Override

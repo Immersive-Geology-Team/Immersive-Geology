@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_coal_anthracite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "immersivegeology:normal_ore_anthracite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:coal_to_block_anthracite"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_coal_anthracite"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:coal_to_block_anthracite"
+    ]
+  }
+}

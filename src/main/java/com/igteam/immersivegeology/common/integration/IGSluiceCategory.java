@@ -14,7 +14,6 @@ import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.compat.jei.JEIHelper;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.IndustrialSluiceRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -34,7 +33,7 @@ public class IGSluiceCategory extends IGRecipeCategory<IndustrialSluiceRecipe>
 	public IGSluiceCategory(IGuiHelper helper)
 	{
 		super(helper, JEIRecipeTypes.SLUICE, "block.immersivegeology.industrialsluice");
-		ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/temp_sluice_jei.png");
+		ResourceLocation background = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/gui/jei/temp_sluice_jei.png");
 		IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 128, 128).setTextureSize(128,128).build();
 		setBackground(back);
 		setIcon(new ItemStack(Items.APPLE));
@@ -65,6 +64,7 @@ public class IGSluiceCategory extends IGRecipeCategory<IndustrialSluiceRecipe>
 	@Override
 	public void draw(IndustrialSluiceRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY)
 	{
+		super.draw(recipe, recipeSlotsView, graphics, mouseX, mouseY);
 		List<StackWithChance> validSecondaries = recipe.getByproducts();
 		int yBase = 38;
 		for(int i = 0; i < validSecondaries.size(); i++)

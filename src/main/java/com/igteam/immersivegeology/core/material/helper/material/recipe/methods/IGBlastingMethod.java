@@ -8,8 +8,9 @@
 
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
+import blusunrize.immersiveengineering.api.crafting.BlastFurnaceRecipe;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import blusunrize.immersiveengineering.api.crafting.builders.BlastFurnaceRecipeBuilder;
+import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import blusunrize.lib.manual.gui.ManualScreen;
@@ -21,15 +22,13 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipe
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.function.Consumer;
 
 public class IGBlastingMethod extends IGRecipeMethod
 {
@@ -171,14 +170,11 @@ public class IGBlastingMethod extends IGRecipeMethod
 	}
 
 	@Override
-	public boolean build(Consumer<FinishedRecipe> consumer)
+	public boolean build(RecipeOutput consumer)
 	{
 		try {
-			BlastFurnaceRecipeBuilder builder = BlastFurnaceRecipeBuilder.builder(output);
-			builder.addInput(input);
-			builder.addSlag(slag);
-			builder.setTime(time);
-			builder.build(consumer, getLocation());
+			BlastFurnaceRecipe recipe = new BlastFurnaceRecipe(output.isEmpty()?TagOutput.EMPTY:new TagOutput(output), new IngredientWithSize(input), time, slag.isEmpty()?TagOutput.EMPTY:new TagOutput(slag));
+			consumer.accept(getLocation(), recipe, null);
 			return true;
 		}
 		catch(Exception e)

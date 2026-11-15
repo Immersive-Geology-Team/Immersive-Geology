@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 1.0,
+  "ingredient": {
+    "item": "immersivegeology:crystal_zinc"
+  },
+  "result": {
+    "count": 1,
+    "id": "immersivegeology:ingot_zinc"
+  }
+}

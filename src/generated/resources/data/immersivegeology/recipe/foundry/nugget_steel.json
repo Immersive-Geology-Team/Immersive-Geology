@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:foundry",
+  "energy": 128,
+  "input": {
+    "amount": 16,
+    "tag": "c:steel"
+  },
+  "mold": "immersivegeology:mold_nugget_graphite",
+  "result": {
+    "id": "immersiveengineering:nugget_steel"
+  },
+  "time": 2
+}

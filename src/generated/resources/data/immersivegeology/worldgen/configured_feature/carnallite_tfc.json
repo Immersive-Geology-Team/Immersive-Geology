@@ -6,15 +6,67 @@
     "min_radius": 3,
     "states": [
       {
-        "replace": "tfc:dirt/sandy_loam",
+        "replace": "tfc:dirt/entisol",
         "with": "immersivegeology:evaporate_carnallite"
       },
       {
-        "replace": "tfc:dirt/silty_loam",
+        "replace": "tfc:grass/entisol",
         "with": "immersivegeology:evaporate_carnallite"
       },
       {
-        "replace": "tfc:grass/sandy_loam",
+        "replace": "tfc:dirt/aridisol",
+        "with": "immersivegeology:evaporate_carnallite"
+      },
+      {
+        "replace": "tfc:grass/aridisol",
+        "with": "immersivegeology:evaporate_carnallite"
+      },
+      {
+        "replace": "tfc:dirt/oxisol",
+        "with": "immersivegeology:evaporate_carnallite"
+      },
+      {
+        "replace": "tfc:grass/oxisol",
+        "with": "immersivegeology:evaporate_carnallite"
+      },
+      {
+        "replace": "tfc:dirt/fluvisol",
+        "with": "immersivegeology:evaporate_carnallite"
+      },
+      {
+        "replace": "tfc:grass/fluvisol",
+        "with": "immersivegeology:evaporate_carnallite"
+      },
+      {
+        "replace": "tfc:dirt/andisol",
+        "with": "immersivegeology:evaporate_carnallite"
+      },
+      {
+        "replace": "tfc:grass/andisol",
+        "with": "immersivegeology:evaporate_carnallite"
+      },
+      {
+        "replace": "tfc:dirt/podzol",
+        "with": "immersivegeology:evaporate_carnallite"
+      },
+      {
+        "replace": "tfc:grass/podzol",
+        "with": "immersivegeology:evaporate_carnallite"
+      },
+      {
+        "replace": "tfc:dirt/alfisol",
+        "with": "immersivegeology:evaporate_carnallite"
+      },
+      {
+        "replace": "tfc:grass/alfisol",
+        "with": "immersivegeology:evaporate_carnallite"
+      },
+      {
+        "replace": "tfc:dirt/mollisol",
+        "with": "immersivegeology:evaporate_carnallite"
+      },
+      {
+        "replace": "tfc:grass/mollisol",
         "with": "immersivegeology:evaporate_carnallite"
       }
     ]

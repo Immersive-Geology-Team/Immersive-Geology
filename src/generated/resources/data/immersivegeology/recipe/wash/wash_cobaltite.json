@@ -1,0 +1,15 @@
+{
+  "type": "immersivegeology:gravity_separator",
+  "byproduct": {
+    "id": "minecraft:sand"
+  },
+  "byproduct_chance": 0.075,
+  "input": {
+    "tag": "c:powdered_slag/cobaltite"
+  },
+  "result": {
+    "id": "immersivegeology:metal_oxide_cobalt"
+  },
+  "time": 200,
+  "water": 250
+}

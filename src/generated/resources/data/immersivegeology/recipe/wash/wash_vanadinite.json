@@ -1,0 +1,15 @@
+{
+  "type": "immersivegeology:gravity_separator",
+  "byproduct": {
+    "id": "immersivegeology:metal_oxide_lead"
+  },
+  "byproduct_chance": 0.0075,
+  "input": {
+    "tag": "c:powdered_slag/vanadinite"
+  },
+  "result": {
+    "id": "immersivegeology:metal_oxide_vanadium"
+  },
+  "time": 200,
+  "water": 250
+}

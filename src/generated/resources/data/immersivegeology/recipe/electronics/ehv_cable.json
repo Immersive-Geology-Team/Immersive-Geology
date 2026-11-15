@@ -1,0 +1,25 @@
+{
+  "type": "immersiveengineering:blueprint",
+  "category": "electronics",
+  "inputs": [
+    {
+      "item": "immersiveengineering:storage_electrum"
+    },
+    {
+      "basePredicate": {
+        "item": "immersivegeology:plate_ehv_insulation"
+      },
+      "count": 4
+    },
+    {
+      "basePredicate": {
+        "item": "immersivegeology:wire_tungsten_carbide"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "immersivegeology:energy_pipe_high_voltage_cable"
+  }
+}

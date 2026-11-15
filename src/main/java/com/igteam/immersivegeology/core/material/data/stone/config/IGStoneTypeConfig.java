@@ -13,21 +13,16 @@ import com.electronwill.nightconfig.toml.TomlParser;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.data.loading.DatagenModLoader;
-import net.minecraftforge.fml.loading.FMLPaths;
+import net.neoforged.fml.loading.FMLPaths;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import net.neoforged.neoforge.data.loading.DatagenModLoader;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Class to handle rock types declared via Forge config.
@@ -41,18 +36,18 @@ public final class IGStoneTypeConfig
 	public static final String FILE_NAME = IGLib.MODID+"-stone-types.toml";
 	private static final String KEY = "stone";
 
-	public static final ForgeConfigSpec SPEC;
-	public static final ForgeConfigSpec.ConfigValue<List<? extends UnmodifiableConfig>> STONE_TYPES;
+	public static final ModConfigSpec SPEC;
+	public static final ModConfigSpec.ConfigValue<List<? extends UnmodifiableConfig>> STONE_TYPES;
 
 	static
 	{
-		Pair<ForgeConfigSpec.ConfigValue<List<? extends UnmodifiableConfig>>, ForgeConfigSpec> built =
-				new ForgeConfigSpec.Builder().configure(IGStoneTypeConfig::build);
+		Pair<ModConfigSpec.ConfigValue<List<? extends UnmodifiableConfig>>, ModConfigSpec> built =
+				new ModConfigSpec.Builder().configure(IGStoneTypeConfig::build);
 		STONE_TYPES = built.getLeft();
 		SPEC = built.getRight();
 	}
 
-	private static ForgeConfigSpec.ConfigValue<List<? extends UnmodifiableConfig>> build(ForgeConfigSpec.Builder builder)
+	private static ModConfigSpec.ConfigValue<List<? extends UnmodifiableConfig>> build(ModConfigSpec.Builder builder)
 	{
 		builder.comment(
 				"Rock types from other mods that Immersive Geology should generate ore in.",
@@ -88,7 +83,7 @@ public final class IGStoneTypeConfig
 				"Changing this file will only take effect on a restart, as this information needs to be provided at startup"
 		).push("declared_stone_types");
 
-		ForgeConfigSpec.ConfigValue<List<? extends UnmodifiableConfig>> value = builder.defineListAllowEmpty(
+		ModConfigSpec.ConfigValue<List<? extends UnmodifiableConfig>> value = builder.defineListAllowEmpty(
 				List.of(KEY), List::of, entry -> entry instanceof UnmodifiableConfig);
 
 		builder.pop();
@@ -258,7 +253,7 @@ public final class IGStoneTypeConfig
 
 		entry.resolvedTexture = entry.texture!=null&&!entry.texture.isBlank()
 				?parseId(entry.texture, label, "texture")
-				: new ResourceLocation(entry.resolvedBlock.getNamespace(), "block/"+entry.resolvedBlock.getPath());
+				: ResourceLocation.fromNamespaceAndPath(entry.resolvedBlock.getNamespace(), "block/"+entry.resolvedBlock.getPath());
 		if(entry.resolvedTexture==null) return false;
 
 		entry.resolvedProperties = entry.properties_from!=null&&!entry.properties_from.isBlank()

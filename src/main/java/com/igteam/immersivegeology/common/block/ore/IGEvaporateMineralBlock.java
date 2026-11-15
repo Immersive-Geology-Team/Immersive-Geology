@@ -37,7 +37,7 @@ public class IGEvaporateMineralBlock extends IGGenericBlock
 
 	public IGEvaporateMineralBlock(BlockCategoryFlags flag, MaterialInterface<?> material, Supplier<IGCrystalBlock> clusterType)
 	{
-		super(flag, material, BlockBehaviour.Properties.copy(Blocks.SAND).randomTicks().mapColor(MapColor.SAND));
+		super(flag, material, BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).randomTicks().mapColor(MapColor.SAND));
 		this.clusters = clusterType;
 	}
 

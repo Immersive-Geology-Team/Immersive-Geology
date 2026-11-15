@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "ig_tools",
+  "key": {
+    "B": {
+      "item": "immersivegeology:refractory_brick"
+    },
+    "M": {
+      "tag": "c:metal_oxide/magnesium"
+    },
+    "X": {
+      "tag": "c:metal_oxide/aluminum"
+    },
+    "Z": {
+      "tag": "c:metal_oxide/zirconium"
+    }
+  },
+  "pattern": [
+    "XBX",
+    "MZM",
+    "XBX"
+  ],
+  "result": {
+    "count": 4,
+    "id": "immersivegeology:storage_block_industrial_refractory_brick"
+  }
+}

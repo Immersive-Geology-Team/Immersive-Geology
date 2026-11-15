@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:metal_press",
+  "energy": 2400,
+  "input": {
+    "tag": "c:ingots/tungsten_carbide"
+  },
+  "mold": "immersiveengineering:mold_wire",
+  "result": {
+    "basePredicate": {
+      "tag": "c:wires/tungsten_carbide"
+    },
+    "count": 2
+  }
+}

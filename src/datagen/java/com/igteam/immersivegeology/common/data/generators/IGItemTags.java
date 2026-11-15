@@ -8,10 +8,7 @@
 
 package com.igteam.immersivegeology.common.data.generators;
 
-import com.igteam.immersivegeology.core.material.data.stone.IGStoneTypes;
-import com.igteam.immersivegeology.core.material.helper.material.IStoneType;
 import blusunrize.immersiveengineering.api.IETags;
-
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.tag.IGTags;
@@ -19,7 +16,9 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.data.stone.IGStoneTypes;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
+import com.igteam.immersivegeology.core.material.helper.material.IStoneType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.HolderLookup.Provider;
@@ -31,8 +30,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.Collection;
 import java.util.Locale;
@@ -171,8 +170,8 @@ public class IGItemTags extends ItemTagsProvider
 					useOptionalTag = false;
 					String name = oreBlock.getIGDescriptionId().toLowerCase(Locale.ROOT);
 					String id = name.substring(name.lastIndexOf('.')+1);
-					tag(Tags.Items.ORES).addOptional(new ResourceLocation(IGLib.MODID, id));
-					tag(material.getItemMaterialTag()).addOptional(new ResourceLocation(IGLib.MODID, id));
+					tag(Tags.Items.ORES).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
+					tag(material.getItemMaterialTag()).addOptional(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, id));
 					continue;
 				}
 				tag(Tags.Items.ORES).add(oreBlock.asIGItem());

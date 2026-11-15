@@ -12,17 +12,19 @@ import blusunrize.immersiveengineering.common.util.compat.jei.JEIHelper;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.FoundryRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
-import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.Arrays;
 
 public class IGFoundryCategory extends IGRecipeCategory<FoundryRecipe>
 {
@@ -42,7 +44,7 @@ public class IGFoundryCategory extends IGRecipeCategory<FoundryRecipe>
 		super(helper, JEIRecipeTypes.FOUNDRY, "block.immersivegeology.foundry");
 		setBackground(helper.createBlankDrawable(110, 54));
 		setIcon(IGMultiblockProvider.FOUNDRY.iconStack());
-		IDrawableStatic full = helper.drawableBuilder(new ResourceLocation(IGLib.MODID, "textures/gui/jei/arrow.png"), 0, 0, ARROW_WIDTH, ARROW_HEIGHT)
+		IDrawableStatic full = helper.drawableBuilder(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/gui/jei/arrow.png"), 0, 0, ARROW_WIDTH, ARROW_HEIGHT)
 				.setTextureSize(32, 32).build();
 		this.arrow = helper.createAnimatedDrawable(full, 40, IDrawableAnimated.StartDirection.LEFT, false);
 	}
@@ -51,10 +53,10 @@ public class IGFoundryCategory extends IGRecipeCategory<FoundryRecipe>
 	public void setRecipe(IRecipeLayoutBuilder builder, FoundryRecipe recipe, IFocusGroup focuses)
 	{
 		builder.addSlot(RecipeIngredientRole.INPUT, FLUID_X, SLOT_Y)
-				.setFluidRenderer(recipe.fluidIn.getAmount(), false, 16, 16)
-				.addIngredients(ForgeTypes.FLUID_STACK, recipe.fluidIn.getMatchingFluidStacks())
+				.setFluidRenderer(recipe.fluidIn.amount(), false, 16, 16)
+				.addIngredients(NeoForgeTypes.FLUID_STACK, Arrays.asList(recipe.fluidIn.getFluids()))
 				.setBackground(JEIHelper.slotDrawable, -1, -1)
-				.addTooltipCallback(JEIHelper.fluidTooltipCallback);
+				.addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
 
 		builder.addSlot(RecipeIngredientRole.CATALYST, MOLD_X, SLOT_Y)
 				.addItemStack(new ItemStack(recipe.mold))

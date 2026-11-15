@@ -200,6 +200,6 @@
     }
   },
   "flip_v": true,
-  "loader": "forge:obj",
+  "loader": "neoforge:obj",
   "model": "immersivegeology:models/block/drawing_table/drawing_table.obj"
 }

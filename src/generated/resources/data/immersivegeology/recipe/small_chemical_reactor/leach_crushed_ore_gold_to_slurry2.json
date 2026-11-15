@@ -1,0 +1,18 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 0,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 500,
+    "tag": "c:aqua_regia"
+  },
+  "fluidResult": {
+    "amount": 432,
+    "id": "immersivegeology:slurry_aqua_regia_gold"
+  },
+  "itemInput": {
+    "item": "immersivegeology:crushed_ore_gold"
+  },
+  "result": [],
+  "time": 200
+}

@@ -4,7 +4,6 @@ import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler.IMultib
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.common.block.multiblocks.IGBloomeryMultiblock;
-import com.igteam.immersivegeology.common.block.multiblocks.IGReverberationFurnaceMultiblock;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialStone;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
@@ -19,7 +18,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration.TargetBlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
-import net.minecraftforge.common.Tags;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.List;
 import java.util.function.BiFunction;
@@ -49,7 +48,7 @@ public class MaterialVanilla extends MaterialStone {
         BlockState poor = mineral.getOreBlock(this, OreRichness.POOR).getIGDefaultBlockState();
         BlockState normal = mineral.getOreBlock(this, OreRichness.NORMAL).getIGDefaultBlockState();
         BlockState rich = mineral.getOreBlock(this, OreRichness.RICH).getIGDefaultBlockState();
-        return List.of(OreConfiguration.target(new TagMatchTest(Tags.Blocks.STONE), normal));
+        return List.of(OreConfiguration.target(new TagMatchTest(Tags.Blocks.STONES), normal));
     }
 
     @Override
@@ -61,6 +60,6 @@ public class MaterialVanilla extends MaterialStone {
     @Override
     public Properties getProperties(IFlagType<?> flag)
     {
-        return BlockBehaviour.Properties.copy(Blocks.STONE);
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.STONE);
     }
 }

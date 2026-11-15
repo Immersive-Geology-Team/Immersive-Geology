@@ -8,7 +8,7 @@
 
 package com.igteam.immersivegeology.common.world;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.placement.PlacementContext;
@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 public class IGSparsePlacement extends PlacementModifier
 {
 	private static final IGSparsePlacement INSTANCE = new IGSparsePlacement();
-	public static final Codec<IGSparsePlacement> PLACEMENT_CODEC = Codec.unit(() -> {
+	public static final MapCodec<IGSparsePlacement> PLACEMENT_CODEC = MapCodec.unit(() -> {
 		return INSTANCE;
 	});
 

@@ -8,47 +8,44 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.recipe;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
-import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
+import blusunrize.immersiveengineering.api.crafting.*;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
-import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.util.Lazy;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.List;
 
 public class FoundryRecipe extends MultiblockRecipe
 {
-	public static RegistryObject<IERecipeSerializer<FoundryRecipe>> SERIALIZER;
+	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<FoundryRecipe>> SERIALIZER;
 	public static final CachedRecipeList<FoundryRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.FOUNDRY);
-	public final Lazy<ItemStack> itemOutput;
-	public final FluidTagInput fluidIn;
+	public final TagOutput itemOutput;
+	public final SizedFluidIngredient fluidIn;
 	Lazy<Integer> totalProcessEnergy;
 	Lazy<Integer> totalProcessTime;
 	public final Item mold;
 	private final Lazy<IngredientWithSize> moldInput;
 
-	public <T extends Recipe<?>> FoundryRecipe(ResourceLocation id, FluidTagInput fluidInput, Lazy<ItemStack> output, Item mold, int energy, int time)
+	public <T extends Recipe<?>> FoundryRecipe(SizedFluidIngredient fluidInput, TagOutput output, Item mold, int energy, int time)
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.FOUNDRY, id);
+		super(TagOutput.EMPTY, IGRecipeTypes.FOUNDRY, time, energy, () -> new RecipeMultiplier(() -> 1, () -> 1));
 		this.itemOutput = output;
 		this.fluidIn = fluidInput;
 		this.mold = mold;
 		this.moldInput = Lazy.of(() -> new IngredientWithSize(Ingredient.of(mold), 1));
 		totalProcessEnergy = Lazy.of(() -> energy);
 		totalProcessTime = Lazy.of(() -> time);
-		this.outputList = Lazy.of(() -> NonNullList.of(ItemStack.EMPTY, this.itemOutput.get()));
+		this.outputList = new TagOutputList(this.itemOutput);
 		this.fluidInputList = List.of(fluidInput);
 	}
 
@@ -79,9 +76,9 @@ public class FoundryRecipe extends MultiblockRecipe
 	public static FoundryRecipe findRecipe(Level level, FluidStack input, ItemStack mold)
 	{
 		if(mold.isEmpty()) return null;
-		for(FoundryRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.mold==mold.getItem()&&recipe.fluidIn.test(input))
-				return recipe;
+		for(RecipeHolder<FoundryRecipe> recipe : RECIPES.getRecipes(level))
+			if(recipe.value().mold==mold.getItem()&&recipe.value().fluidIn.test(input))
+				return recipe.value();
 		return null;
 	}
 

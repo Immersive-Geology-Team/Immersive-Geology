@@ -12,27 +12,26 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
-
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
-import com.igteam.immersivegeology.core.material.helper.material.IStoneType;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.material.IStoneType;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 
-import static com.igteam.immersivegeology.core.material.GeologyMaterial.EXISTING_HELPER;
-import static net.minecraft.server.packs.PackType.CLIENT_RESOURCES;
-
 import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
+
+import static com.igteam.immersivegeology.core.material.GeologyMaterial.EXISTING_HELPER;
+import static net.minecraft.server.packs.PackType.CLIENT_RESOURCES;
 
 public class IGAtlasProvider implements DataProvider {
 	private static final String STONE_BACKDROP_PATH = "palette/block/stone_backdrop/";
@@ -83,7 +82,7 @@ public class IGAtlasProvider implements DataProvider {
 		scaffolding_textures.add("block/greyscale/scaffolding/scaffolding_top_grate_top");
 		scaffolding_textures.add("block/greyscale/scaffolding/scaffolding_top_wooden_top");
 
-		IGPaletteKey key = new IGPaletteKey(new ResourceLocation(IGLib.MODID, "palette/palette_key"), new ResourceLocation(IGLib.MODID, "palette/palettes"));
+		IGPaletteKey key = new IGPaletteKey(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "palette/palette_key"), ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "palette/palettes"));
 		addDirectorySource(sourcesArray,"item", "item/");
 		addDirectorySource(sourcesArray,"block", "block/");
 		key.addTextureData(textures);
@@ -98,7 +97,7 @@ public class IGAtlasProvider implements DataProvider {
 
 	private IGPaletteKey buildStoneBackdropKey()
 	{
-		IGPaletteKey key = new IGPaletteKey(new ResourceLocation(IGLib.MODID, "palette/palette_key"), new ResourceLocation(IGLib.MODID, "palette/palettes"));
+		IGPaletteKey key = new IGPaletteKey(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "palette/palette_key"), ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "palette/palettes"));
 
 		List<String> textures = new ArrayList<>();
 		for(IGVeinTextureType vein : IGVeinTextureType.values())
@@ -122,12 +121,12 @@ public class IGAtlasProvider implements DataProvider {
 
 	private String palettePathFor(String stoneKey)
 	{
-		ResourceLocation authored = new ResourceLocation(IGLib.MODID, "palette/palettes/"+stoneKey+"/"+STONE_BACKDROP_VARIANT);
+		ResourceLocation authored = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "palette/palettes/"+stoneKey+"/"+STONE_BACKDROP_VARIANT);
 		boolean exists = EXISTING_HELPER!=null&&EXISTING_HELPER.exists(
-				new ResourceLocation(IGLib.MODID, "textures/"+authored.getPath()+".png"), CLIENT_RESOURCES);
+				ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/"+authored.getPath()+".png"), CLIENT_RESOURCES);
 		return exists
 				?authored.toString()
-				:new ResourceLocation(IGLib.MODID, "palette/palettes/"+STONE_BACKDROP_FALLBACK+"/"+STONE_BACKDROP_VARIANT).toString();
+				:ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "palette/palettes/"+STONE_BACKDROP_FALLBACK+"/"+STONE_BACKDROP_VARIANT).toString();
 	}
 
 	private void addDirectorySource(JsonArray sourcesArray, String source, String prefix) {

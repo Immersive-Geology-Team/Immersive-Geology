@@ -1,0 +1,20 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 0,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 125,
+    "tag": "c:sulfuric_acid"
+  },
+  "fluidResult": {
+    "amount": 125,
+    "id": "immersivegeology:fluid_hydrofluoric_acid"
+  },
+  "itemInput": {
+    "item": "immersivegeology:powder_fluorite"
+  },
+  "result": {
+    "id": "immersivegeology:compound_dust_calcium"
+  },
+  "time": 200
+}

@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.core.material.data.mineral;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -25,8 +24,8 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeNode;
-import net.minecraftforge.common.Tags.Biomes;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.common.Tags.Biomes;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -92,7 +91,7 @@ public class MaterialApatite extends MaterialSulphideMineral {
                 .create("apatite_dust_to_acid", MetalEnum.Calcium.getStack(ItemCategoryFlags.COMPOUND_DUST),
                         ChemicalEnum.PhosphoricAcid.getFluidStack(IGLib.ACID_RECOVERED_FROM_SLURRY),
                         new IngredientWithSize(getItemTag(ItemCategoryFlags.POWDER), IGLib.COMPOUND_FROM_ACID_AMOUNT),
-                        new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_COMPOUND_AMOUNT),
+                        SizedFluidIngredient.of(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_COMPOUND_AMOUNT),
                         null, null, 200, 51200).joinBranches(acid_production, powder_a, powder_b);
     }
 

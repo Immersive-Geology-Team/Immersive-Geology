@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "input": {
+    "tag": "c:crushed_ore/smithsonite"
+  },
+  "result": {
+    "count": 5,
+    "id": "immersivegeology:nugget_zinc"
+  },
+  "slag": {
+    "id": "immersiveengineering:slag"
+  }
+}

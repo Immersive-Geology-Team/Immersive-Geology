@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "input": {
+    "tag": "c:crushed_ore/pyrolusite"
+  },
+  "result": {
+    "id": "immersivegeology:ingot_manganese"
+  },
+  "slag": {
+    "id": "immersiveengineering:slag"
+  },
+  "time": 900
+}

@@ -1,0 +1,17 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 250,
+    "tag": "c:sodium_hydroxide"
+  },
+  "fluidResult": {
+    "amount": 216,
+    "id": "immersivegeology:cloudy_slurry_sodium_hydroxide_bauxite"
+  },
+  "itemInput": {
+    "tag": "c:powders/bauxite"
+  },
+  "result": [],
+  "time": 200
+}

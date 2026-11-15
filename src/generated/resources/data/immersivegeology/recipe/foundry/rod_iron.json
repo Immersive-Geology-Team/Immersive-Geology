@@ -1,0 +1,25 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:rods/iron"
+      }
+    }
+  ],
+  "type": "immersivegeology:foundry",
+  "energy": 1152,
+  "input": {
+    "amount": 144,
+    "tag": "c:iron"
+  },
+  "mold": "immersivegeology:mold_rod_graphite",
+  "result": {
+    "basePredicate": {
+      "tag": "c:rods/iron"
+    },
+    "count": 3
+  },
+  "time": 3
+}

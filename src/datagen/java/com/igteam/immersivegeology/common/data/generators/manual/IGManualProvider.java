@@ -8,8 +8,6 @@
 
 package com.igteam.immersivegeology.common.data.generators.manual;
 
-import com.igteam.immersivegeology.core.material.data.stone.IGStoneTypes;
-import com.igteam.immersivegeology.core.material.helper.material.IStoneType;
 import com.google.common.base.Preconditions;
 import com.google.common.hash.Hashing;
 import com.google.gson.Gson;
@@ -24,15 +22,16 @@ import com.igteam.immersivegeology.common.data.generators.manual.provider.Manual
 import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
-import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.data.stone.IGStoneTypes;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
+import com.igteam.immersivegeology.core.material.helper.material.IStoneType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.slf4j.Logger;
 
 import java.io.IOException;
@@ -94,7 +93,7 @@ public class IGManualProvider implements DataProvider
 					{
 						if(oreDisplay!=null)
 						{
-							intro_display_list.add(new ResourceLocation(IGLib.MODID, BlockCategoryFlags.ORE_BLOCK.getRegistryKey(material, stone.instance())));
+							intro_display_list.add(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, BlockCategoryFlags.ORE_BLOCK.getRegistryKey(material, stone.instance())));
 						}
 					}
 				}
@@ -145,14 +144,14 @@ public class IGManualProvider implements DataProvider
 
 	private ManualPageProvider attemptPageCreation(String path) {
 		Preconditions.checkNotNull(path, "Path must not be null");
-		ResourceLocation outputLoc = path.contains(":") ? new ResourceLocation(path) : new ResourceLocation(modid, path);
+		ResourceLocation outputLoc = path.contains(":") ? ResourceLocation.parse(path) : ResourceLocation.fromNamespaceAndPath(modid, path);
 		this.existingFileHelper.trackGenerated(outputLoc, PAGE);
 		return generatedPages.computeIfAbsent(outputLoc, pageFactory);
 	}
 
 	private ManualTextProvider attemptTextCreation(String path) {
 		Preconditions.checkNotNull(path, "Path must not be null");
-		ResourceLocation outputLoc = extendWithFolder(path.contains(":") ? new ResourceLocation(path) : new ResourceLocation(modid, path));
+		ResourceLocation outputLoc = extendWithFolder(path.contains(":") ? ResourceLocation.parse(path) : ResourceLocation.fromNamespaceAndPath(modid, path));
 		this.existingFileHelper.trackGenerated(outputLoc, TEXT);
 		return generatedTexts.computeIfAbsent(outputLoc, textFactory);
 	}
@@ -164,7 +163,7 @@ public class IGManualProvider implements DataProvider
 		if(folder.isEmpty()){
 			return rl;
 		}
-		return new ResourceLocation(rl.getNamespace(), folder + "/" + rl.getPath());
+		return ResourceLocation.fromNamespaceAndPath(rl.getNamespace(), folder + "/" + rl.getPath());
 	}
 
 	@Override

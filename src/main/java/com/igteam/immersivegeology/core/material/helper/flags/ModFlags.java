@@ -1,8 +1,8 @@
 package com.igteam.immersivegeology.core.material.helper.flags;
 
-import net.minecraftforge.data.loading.DatagenModLoader;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.loading.FMLLoader;
+import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.data.loading.DatagenModLoader;
+
 import java.util.Locale;
 
 public enum ModFlags implements IFlagType<ModFlags> {

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "ig_tools",
+  "key": {
+    "B": {
+      "tag": "c:ingots/stainless_steel"
+    },
+    "F": {
+      "tag": "c:plates/stainless_steel"
+    },
+    "S": {
+      "tag": "c:wires/steel"
+    },
+    "W": {
+      "tag": "c:rods/stainless_steel"
+    }
+  },
+  "pattern": [
+    "FBF",
+    "SWS",
+    " W "
+  ],
+  "result": {
+    "count": 1,
+    "id": "immersivegeology:prospector_kit_steel"
+  }
+}

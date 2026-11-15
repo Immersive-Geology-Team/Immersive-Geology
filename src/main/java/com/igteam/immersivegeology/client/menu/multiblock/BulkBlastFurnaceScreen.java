@@ -24,7 +24,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -327,7 +327,7 @@ public class BulkBlastFurnaceScreen extends IEContainerScreen<BulkBlastFurnaceMe
 
 		private void addFluidLines(List<Component> tooltip, FluidStack fluid, boolean hovered)
 		{
-			MutableComponent name = fluid.getDisplayName().copy();
+			MutableComponent name = fluid.getHoverName().copy();
 			tooltip.add(hovered?name.withStyle(ChatFormatting.YELLOW): name);
 			tooltip.add(Component.literal(fluid.getAmount()+" mB").withStyle(ChatFormatting.GRAY));
 		}

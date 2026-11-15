@@ -15,6 +15,7 @@ import com.igteam.immersivegeology.common.menu.IGCrateMenu;
 import com.igteam.immersivegeology.common.menu.IGMetalDetectorMenu;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
@@ -24,21 +25,19 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.extensions.IForgeMenuType;
-import net.minecraftforge.network.IContainerFactory;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
+import net.neoforged.neoforge.network.IContainerFactory;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import org.apache.commons.lang3.mutable.Mutable;
 import org.apache.commons.lang3.mutable.MutableObject;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.function.Supplier;
 
 public class IGMenuTypes
 {
-	public static final DeferredRegister<MenuType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.MENU_TYPES, IGLib.MODID);
+	public static final DeferredRegister<MenuType<?>> REGISTER = DeferredRegister.create(Registries.MENU, IGLib.MODID);
 	public static final MultiblockContainer<BloomeryLogic.State, BloomeryMenu> BLOOMERY = registerMultiblock(IGLib.GUIID_Bloomery, BloomeryMenu::makeServer, BloomeryMenu::makeClient);
 	public static final MultiblockContainer<RevFurnaceLogic.State, ReverberationFurnaceMenu> REVERBERATION_FURNACE = registerMultiblock(IGLib.GUIID_RevFurnace, ReverberationFurnaceMenu::makeServer, ReverberationFurnaceMenu::makeClient);
 	public static final MultiblockContainer<CrystallizerLogic.State, CrystallizerMenu> CRYSTALLIZER = registerMultiblock(IGLib.GUIID_Crystallizer, CrystallizerMenu::makeServer, CrystallizerMenu::makeClient);
@@ -49,21 +48,21 @@ public class IGMenuTypes
 	public static final MultiblockContainer<BulkBlastFurnaceLogic.State, BulkBlastFurnaceMenu> BULK_BLAST_FURNACE = registerMultiblock(IGLib.GUIID_BulkBlastFurnace, BulkBlastFurnaceMenu::makeServer, BulkBlastFurnaceMenu::makeClient);
 	public static final MultiblockContainer<FoundryLogic.State, FoundryMenu> FOUNDRY = registerMultiblock(IGLib.GUIID_Foundry, FoundryMenu::makeServer, FoundryMenu::makeClient);
 
-	public static final RegistryObject<MenuType<IGCrateMenu>> CRATE = registerSimple(IGLib.GUIID_Crate, IGCrateMenu::new);
-	public static final RegistryObject<MenuType<IGMetalDetectorMenu>> METAL_DETECTOR = registerWithData(IGLib.GUIID_MetalDetector, IGMetalDetectorMenu::new);
+	public static final DeferredHolder<MenuType<?>, MenuType<IGCrateMenu>> CRATE = registerSimple(IGLib.GUIID_Crate, IGCrateMenu::new);
+	public static final DeferredHolder<MenuType<?>, MenuType<IGMetalDetectorMenu>> METAL_DETECTOR = registerWithData(IGLib.GUIID_MetalDetector, IGMetalDetectorMenu::new);
 
 	/**
 	 * For menus that need something from the server at open time - here, which block entity the screen belongs to.
 	 * The vanilla factory used by {@link #registerSimple} gets no such buffer.
 	 */
 	public static <M extends AbstractContainerMenu>
-	RegistryObject<MenuType<M>> registerWithData(String name, IContainerFactory<M> factory)
+	DeferredHolder<MenuType<?>, MenuType<M>> registerWithData(String name, IContainerFactory<M> factory)
 	{
-		return REGISTER.register(name, () -> IForgeMenuType.create(factory));
+		return REGISTER.register(name, () -> IMenuTypeExtension.create(factory));
 	}
 
 	public static <M extends AbstractContainerMenu>
-	RegistryObject<MenuType<M>> registerSimple(String name, SimpleContainerConstructor<M> factory)
+	DeferredHolder<MenuType<?>, MenuType<M>> registerSimple(String name, SimpleContainerConstructor<M> factory)
 	{
 		return REGISTER.register(
 				name, () -> {
@@ -80,7 +79,7 @@ public class IGMenuTypes
 			String name, ArgContainerConstructor<T, C> container, ClientContainerConstructor<C> client
 	)
 	{
-		RegistryObject<MenuType<C>> typeRef = registerType(name, client);
+		DeferredHolder<MenuType<?>, MenuType<C>> typeRef = registerType(name, client);
 		return new ArgContainer<>(typeRef, container);
 	}
 
@@ -88,7 +87,7 @@ public class IGMenuTypes
 	public static <T extends BlockEntity, C extends IEBaseContainerOld<? super T>>
 	ArgContainer<T, C> register(String name, ArgContainerConstructor<T, C> container)
 	{
-		RegistryObject<MenuType<C>> typeRef = REGISTER.register(
+		DeferredHolder<MenuType<?>, MenuType<C>> typeRef = REGISTER.register(
 				name, () -> {
 					Mutable<MenuType<C>> typeBox = new MutableObject<>();
 					MenuType<C> type = new MenuType<>((IContainerFactory<C>)(windowId, inv, data) -> {
@@ -105,13 +104,13 @@ public class IGMenuTypes
 	}
 
 	public static <S extends IMultiblockState, C extends IEContainerMenu> MultiblockContainer<S, C> registerMultiblock(String name, ArgContainerConstructor<IEContainerMenu.MultiblockMenuContext<S>, C> container, ClientContainerConstructor<C> client) {
-		RegistryObject<MenuType<C>> typeRef = registerType(name, client);
+		DeferredHolder<MenuType<?>, MenuType<C>> typeRef = registerType(name, client);
 		return new MultiblockContainer<>(typeRef, container);
 	}
 
 	public static class MultiblockContainer<S extends IMultiblockState, C extends IEContainerMenu> extends ArgContainer<MultiblockMenuContext<S>, C>
 	{
-		private MultiblockContainer(RegistryObject<MenuType<C>> type, ArgContainerConstructor<IEContainerMenu.MultiblockMenuContext<S>, C> factory) {
+		private MultiblockContainer(DeferredHolder<MenuType<?>, MenuType<C>> type, ArgContainerConstructor<IEContainerMenu.MultiblockMenuContext<S>, C> factory) {
 			super(type, factory);
 		}
 
@@ -121,10 +120,10 @@ public class IGMenuTypes
 	}
 
 	public static class ArgContainer<T, C extends IEContainerMenu> {
-		private final RegistryObject<MenuType<C>> type;
+		private final DeferredHolder<MenuType<?>, MenuType<C>> type;
 		private final ArgContainerConstructor<T, C> factory;
 
-		private ArgContainer(RegistryObject<MenuType<C>> type, ArgContainerConstructor<T, C> factory) {
+		private ArgContainer(DeferredHolder<MenuType<?>, MenuType<C>> type, ArgContainerConstructor<T, C> factory) {
 			this.type = type;
 			this.factory = factory;
 		}
@@ -152,7 +151,7 @@ public class IGMenuTypes
 		}
 	}
 
-	private static <C extends IEContainerMenu> RegistryObject<MenuType<C>> registerType(String name, ClientContainerConstructor<C> client) {
+	private static <C extends IEContainerMenu> DeferredHolder<MenuType<?>, MenuType<C>> registerType(String name, ClientContainerConstructor<C> client) {
 		return REGISTER.register(name, () -> {
 			Mutable<MenuType<C>> typeBox = new MutableObject<>();
 			MenuType<C> type = new MenuType<>((id, inv) -> {

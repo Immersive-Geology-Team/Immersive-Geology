@@ -8,46 +8,32 @@
 
 package com.igteam.immersivegeology.client;
 
-import blusunrize.immersiveengineering.api.ApiUtils;
-import blusunrize.immersiveengineering.client.utils.RenderUtils;
-import com.igteam.immersivegeology.client.models.IGDynamicModel;
-import com.igteam.immersivegeology.common.block.multiblocks.IGAlternatorMultiblock;
-import com.igteam.immersivegeology.common.block.multiblocks.part.AlternatorPart;
-import com.igteam.immersivegeology.common.block.multiblocks.skins.IGAlternatorSkins;
-import com.igteam.immersivegeology.common.fluid.IGFluidBlock;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
+import com.igteam.immersivegeology.common.fluid.IGFluidBlock;
 import com.igteam.immersivegeology.common.item.IGGenericBlockItem;
 import com.igteam.immersivegeology.common.item.helper.IGFlagItem;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.BlockRenderDispatcher;
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.model.data.ModelData;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class IGClientRenderHandler implements ItemColor, BlockColor {
@@ -70,7 +56,7 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
             }
         }
 
-        for(RegistryObject<Block> holder : IGRegistrationHolder.getBlockRegistryMap().values()){
+        for(DeferredHolder<Block, Block> holder : IGRegistrationHolder.getBlockRegistryMap().values()){
             Block b = holder.get();
             if(b instanceof IGBlockType igBlock){
                 Minecraft.getInstance().getBlockColors().register(INSTANCE, b);
@@ -80,12 +66,12 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
             if(b instanceof IGFluidBlock fluidBlock)
             {
                 if(fluidBlock.isTranslucent()){
-                    ItemBlockRenderTypes.setRenderLayer(fluidBlock.getFluid().getSource(), RenderType.translucent());
-                    ItemBlockRenderTypes.setRenderLayer(fluidBlock.getFluid().getFlowing(), RenderType.translucent());
+                    ItemBlockRenderTypes.setRenderLayer(fluidBlock.fluid.getSource(), RenderType.translucent());
+                    ItemBlockRenderTypes.setRenderLayer(fluidBlock.fluid.getFlowing(), RenderType.translucent());
                     continue;
                 }
-                ItemBlockRenderTypes.setRenderLayer(fluidBlock.getFluid().getSource(), RenderType.solid());
-                ItemBlockRenderTypes.setRenderLayer(fluidBlock.getFluid().getFlowing(), RenderType.solid());
+                ItemBlockRenderTypes.setRenderLayer(fluidBlock.fluid.getSource(), RenderType.solid());
+                ItemBlockRenderTypes.setRenderLayer(fluidBlock.fluid.getFlowing(), RenderType.solid());
             }
         }
 
@@ -119,10 +105,10 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
     public int getColor(BlockState state, @Nullable BlockAndTintGetter getter, @Nullable BlockPos pos, int index) {
         if(state.getBlock() instanceof IGBlockType type)
         {
-            if(type.getFlag().equals(BlockCategoryFlags.ORE_BLOCK)) return 0xffffff;
+            if(type.getFlag().equals(BlockCategoryFlags.ORE_BLOCK)) return 0xffffffff;
             return type.getColor(index, state);
         }
-        return 0xffffff;
+        return 0xffffffff;
     }
 
     // Color Function for IG Items
@@ -132,11 +118,12 @@ public class IGClientRenderHandler implements ItemColor, BlockColor {
         {
             if(stack.getItem() instanceof IGGenericBlockItem b)
             {
-                if(b.getFlag().equals(BlockCategoryFlags.ORE_BLOCK)) return 0xffffff;
+                if(b.getFlag().equals(BlockCategoryFlags.ORE_BLOCK)) return 0xffffffff;
             }
-            return type.getColor(tintIndex);
+            int color = type.getColor(tintIndex);
+            return (color & 0xff000000) == 0 ? color | 0xff000000 : color;
         }
-        return 0xffffff;
+        return 0xffffffff;
     }
 
     @OnlyIn(Dist.CLIENT)

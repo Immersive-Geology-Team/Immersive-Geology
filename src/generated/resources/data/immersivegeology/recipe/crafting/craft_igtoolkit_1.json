@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "ig_tools",
+  "key": {
+    "B": {
+      "tag": "c:ingots/stainless_steel"
+    },
+    "S": {
+      "tag": "c:strings"
+    },
+    "W": {
+      "tag": "c:rods/stainless_steel"
+    }
+  },
+  "pattern": [
+    " BS",
+    " WB",
+    "W  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "immersivegeology:hammer_stainless_steel"
+  }
+}

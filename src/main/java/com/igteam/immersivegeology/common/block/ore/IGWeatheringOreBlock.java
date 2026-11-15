@@ -32,13 +32,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraftforge.client.extensions.common.IClientBlockExtensions;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Consumer;
 
 public class IGWeatheringOreBlock extends IGGenericBlock implements IOreBlock
 {
@@ -91,13 +89,6 @@ public class IGWeatheringOreBlock extends IGGenericBlock implements IOreBlock
         } else {
             return materialMap.get(MaterialTexture.values()[0]).getColor(category, 0);
         }
-    }
-
-    @Override
-    public void initializeClient(Consumer<IClientBlockExtensions> consumer)
-    {
-
-        super.initializeClient(consumer);
     }
 
     @Override

@@ -1,0 +1,10 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 3000,
+  "input": {
+    "item": "immersivegeology:ingot_osmium"
+  },
+  "result": {
+    "id": "immersivegeology:grit_osmium"
+  }
+}

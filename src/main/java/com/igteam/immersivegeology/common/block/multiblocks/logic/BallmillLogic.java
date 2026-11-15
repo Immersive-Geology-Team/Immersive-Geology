@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.logic;
 
-import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
 import blusunrize.immersiveengineering.api.energy.AveragingEnergyStorage;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IClientTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IServerTickableComponent;
@@ -17,39 +16,27 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultib
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.CrusherLogic;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.process.DirectProcessingItemHandler;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessInWorld;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext.ProcessContextInWorld;
 import blusunrize.immersiveengineering.common.util.DroppingMultiblockOutput;
-import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.inventory.InsertOnlyInventory;
 import com.igteam.immersivegeology.common.block.helper.IGReceiveOnlyEnergy;
-import com.igteam.immersivegeology.common.block.multiblocks.IGBallmillMultiblock;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.BloomeryLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BallmillRecipe;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.PelletizerRecipe;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.BallmillShape;
-import com.igteam.immersivegeology.common.block.multiblocks.shapes.RotaryKilnShape;
-import com.igteam.immersivegeology.common.config.IGServerConfig;
-import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
+import net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage;
+import net.neoforged.neoforge.capabilities.Capabilities.ItemHandler;
+import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -105,20 +92,11 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
     }
 
     @Override
-    public <T> LazyOptional<T> getCapability(IMultiblockContext<State> ctx, CapabilityPosition position, Capability<T> cap)
+    public void registerCapabilities(CapabilityRegistrar<State> register)
     {
-        final BallmillLogic.State state = ctx.getState();
-        if(cap == ForgeCapabilities.ENERGY)
-        {
-            if((position.side()==null || ENERGY_INPUTS.contains(position))) return state.energyCap.cast(ctx);
-        }
-
-        if(cap == ForgeCapabilities.ITEM_HANDLER && ITEM_INPUT_CAP.equals(position))
-        {
-            return state.insertionHandler.cast(ctx);
-        }
-
-        return LazyOptional.empty();
+        register.register(EnergyStorage.BLOCK, (state, position) ->
+                position.side()==null||ENERGY_INPUTS.contains(position)?state.energyCap:null);
+        register.registerAt(ItemHandler.BLOCK, ITEM_INPUT_CAP, state -> state.insertionHandler);
     }
 
     @Override
@@ -132,15 +110,15 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
 
         private final DroppingMultiblockOutput output;
-        private final StoredCapability<IItemHandler> insertionHandler;
+        private final IItemHandler insertionHandler;
         private float rotation;
         private boolean renderAsActive;
-        private final StoredCapability<IEnergyStorage> energyCap;
+        private final IEnergyStorage energyCap;
         private final MultiblockProcessor<BallmillRecipe, ProcessContextInWorld<BallmillRecipe>> processor;
         Supplier<@Nullable Level> levelGetter;
         public State(IInitialMultiblockContext<State> ctx){
             this.rotation = 0;
-            this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.energy));
+            this.energyCap = IGReceiveOnlyEnergy.of(this.energy);
             this.output = new DroppingMultiblockOutput(OUTPUT_POS, ctx);
             this.processor = new MultiblockProcessor<>(64, 0, 8, ctx.getMarkDirtyRunnable(), BallmillRecipe.RECIPES::getById);
             final Supplier<@Nullable Level> levelGetter = ctx.levelSupplier();
@@ -151,26 +129,26 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
                 sync.run();
             };
 
-            this.insertionHandler = new StoredCapability<>(new InsertOnlyInventory()
+            this.insertionHandler = new InsertOnlyInventory()
             {
                 @Override
                 protected ItemStack insert(ItemStack toInsert, boolean simulate)
                 {
                     ItemStack stack = toInsert.copy();
-                    BallmillRecipe recipe = BallmillRecipe.findRecipe(levelGetter.get(), stack);
+                    RecipeHolder<BallmillRecipe> recipe = BallmillRecipe.findRecipe(levelGetter.get(), stack);
                     if (recipe == null) {
                         return stack;
                     } else {
-                        MultiblockProcessInWorld<BallmillRecipe> process = new MultiblockProcessInWorld<>(recipe, stack);
+                        MultiblockProcessInWorld<BallmillRecipe> process = new MultiblockProcessInWorld<>(recipe, stack.copyWithCount(recipe.value().itemIn.getCount()));
 
                         if (processor.addProcessToQueue(process, levelGetter.get(), simulate)) {
-                            stack.shrink(recipe.itemIn.getCount());
+                            stack.shrink(recipe.value().itemIn.getCount());
                         }
 
                         return stack;
                     }
                 }
-            });
+            };
         }
 
 
@@ -181,9 +159,9 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
         }
 
         @Override
-        public void writeSaveNBT(CompoundTag nbt){
-            nbt.put("energy", energy.serializeNBT());
-            nbt.put("processor", processor.toNBT());
+        public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            nbt.put("energy", energy.serializeNBT(provider));
+            nbt.put("processor", processor.toNBT(provider));
         }
 
         public boolean shouldRenderActive()
@@ -192,22 +170,22 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
         }
 
         @Override
-        public void readSaveNBT(CompoundTag nbt){
-            this.energy.deserializeNBT(nbt.get("energy"));
-            this.processor.fromNBT(nbt.get("processor"), MultiblockProcessInWorld::new);
+        public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            this.energy.deserializeNBT(provider, nbt.get("energy"));
+            this.processor.fromNBT(nbt.get("processor"), MultiblockProcessInWorld::new, provider);
         }
 
         @Override
-        public void writeSyncNBT(CompoundTag nbt)
+        public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            writeSaveNBT(nbt);
+            writeSaveNBT(nbt, provider);
             nbt.putBoolean("renderActive", renderAsActive);
         }
 
         @Override
-        public void readSyncNBT(CompoundTag nbt)
+        public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            readSaveNBT(nbt);
+            readSaveNBT(nbt, provider);
             renderAsActive = nbt.getBoolean("renderActive");
         }
 
@@ -225,8 +203,6 @@ public class BallmillLogic implements IMultiblockLogic<BallmillLogic.State>, ISe
         @Override
         public void invalidate(@NotNull IMultiblockContext<?> context)
         {
-            this.energyCap.get(context).invalidate();
-            this.insertionHandler.get(context).invalidate();
         }
     }
 

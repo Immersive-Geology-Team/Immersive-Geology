@@ -17,17 +17,14 @@ import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
-
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.FluidTagsProvider;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.Tags.Fluids;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.Tags.Fluids;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -44,7 +41,7 @@ public class IGFluidTags extends FluidTagsProvider
 	protected void addTags(Provider provider)
 	{
 		IGLib.IG_LOGGER.info("Starting Registration of Immersive Geology Fluid Tags");
-		for(RegistryObject<Fluid> holder : IGRegistrationHolder.getFluidRegistryMap().values())
+		for(DeferredHolder<Fluid, Fluid> holder : IGRegistrationHolder.getFluidRegistryMap().values())
 		{
 			if(holder.get() instanceof IGFluid fluid)
 			{

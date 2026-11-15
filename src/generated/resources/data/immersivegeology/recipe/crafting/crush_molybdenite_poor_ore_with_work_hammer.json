@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:poor_ore/molybdenite"
+    },
+    {
+      "tag": "c:poor_ore/molybdenite"
+    },
+    {
+      "tag": "c:hammer"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "immersivegeology:dirty_crushed_ore_molybdenite"
+  }
+}

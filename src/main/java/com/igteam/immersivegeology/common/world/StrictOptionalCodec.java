@@ -6,14 +6,10 @@
 
 package com.igteam.immersivegeology.common.world;
 
+import com.mojang.serialization.*;
+
 import java.util.Optional;
 import java.util.stream.Stream;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.DataResult;
-import com.mojang.serialization.DynamicOps;
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.MapLike;
-import com.mojang.serialization.RecordBuilder;
 public final class StrictOptionalCodec<A> extends MapCodec<Optional<A>>
 {
 	private final String name;

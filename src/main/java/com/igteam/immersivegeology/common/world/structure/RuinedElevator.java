@@ -10,22 +10,24 @@ package com.igteam.immersivegeology.common.world.structure;
 
 import com.igteam.immersivegeology.common.world.IGStructureTypes;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pools.JigsawPlacement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
+import net.minecraft.world.level.levelgen.structure.pools.alias.PoolAliasLookup;
+import net.minecraft.world.level.levelgen.structure.structures.JigsawStructure;
 
 import java.util.Optional;
 import java.util.Random;
 
 public class RuinedElevator extends Structure
 {
-	public static final Codec<RuinedElevator> CODEC = RecordCodecBuilder.<RuinedElevator>mapCodec(instance ->
+	public static final MapCodec<RuinedElevator> CODEC = RecordCodecBuilder.<RuinedElevator>mapCodec(instance ->
 			instance.group(
 					RuinedElevator.settingsCodec(instance),
 					StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(structure -> structure.startPool),
@@ -34,7 +36,7 @@ public class RuinedElevator extends Structure
 					Codec.intRange(-31, 110).fieldOf("y_max").forGetter(structure -> structure.ymax),
 					Codec.intRange(1, 128).fieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter)
 			).apply(instance, RuinedElevator::new)
-	).codec();
+	);
 
 	private final Holder<StructureTemplatePool> startPool;
 	private final int size;
@@ -84,7 +86,10 @@ public class RuinedElevator extends Structure
 				structurePos,
 				false, // useExpansionHack
 				Optional.empty(), // No heightmap projection needed
-				this.maxDistanceFromCenter
+				this.maxDistanceFromCenter,
+				PoolAliasLookup.EMPTY,
+				JigsawStructure.DEFAULT_DIMENSION_PADDING,
+				JigsawStructure.DEFAULT_LIQUID_SETTINGS
 		);
 	}
 

@@ -16,7 +16,6 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.component.Redstone
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
-import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcess;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor.InMachineProcessor;
@@ -36,15 +35,17 @@ import com.igteam.immersivegeology.common.block.multiblocks.shapes.RotaryKilnSha
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.items.IItemHandler;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage;
+import net.neoforged.neoforge.capabilities.Capabilities.ItemHandler;
+import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -125,10 +126,10 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
         ItemStack inputSlot = state.inventory.getStackInSlot(0).copy();
         if(inputSlot.isEmpty()) return;
 
-        RotaryKilnRecipe recipe = RotaryKilnRecipe.findRecipe(level, inputSlot);
+        RecipeHolder<RotaryKilnRecipe> recipe = RotaryKilnRecipe.findRecipe(level, inputSlot);
         if(recipe==null) return;
 
-        int rCount = recipe.itemIn.getCount();
+        int rCount = recipe.value().itemIn.getCount();
         // Never hand a process more than the input slot actually holds, or the copy below
         // would mint the difference out of nothing
         if(inputSlot.getCount() < rCount) return;
@@ -239,24 +240,15 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
     }
 
     @Override
-    public <T> LazyOptional<T> getCapability(IMultiblockContext<State> ctx, CapabilityPosition position, Capability<T> cap)
+    public void registerCapabilities(CapabilityRegistrar<State> register)
     {
-        final RotaryKilnLogic.State state = ctx.getState();
-        if(cap == ForgeCapabilities.ENERGY)
-        {
-            if(ENERGY_LEFT.equals(position) || ENERGY_MID.equals(position) || ENERGY_RIGHT.equals(position))
-            {
-                return state.energyCap.cast(ctx);
-            }
-        }
-
-        if(cap == ForgeCapabilities.ITEM_HANDLER)
-        {
-            if(ITEM_INPUT_CAP.equals(position)) return state.itemInputCap.cast(ctx);
-            if(ITEM_OUTPUT_CAP.equals(position)) return state.outputHandler.cast(ctx);
-        }
-
-        return LazyOptional.empty();
+        register.register(EnergyStorage.BLOCK, (state, position) ->
+                ENERGY_LEFT.equals(position)||ENERGY_MID.equals(position)||ENERGY_RIGHT.equals(position)?state.energyCap:null);
+        register.register(ItemHandler.BLOCK, (state, position) -> {
+            if(ITEM_INPUT_CAP.equals(position)) return state.itemInputCap;
+            if(ITEM_OUTPUT_CAP.equals(position)) return state.outputHandler;
+            return null;
+        });
     }
 
     @Override
@@ -282,12 +274,12 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
         private int nextPacketIndex = 0;
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
         public final SlotwiseItemHandler inventory;
-        private final CapabilityReference<IItemHandler> output;
-        private final StoredCapability<IItemHandler> outputHandler;
-        private final StoredCapability<IItemHandler> itemInputCap;
+        private final Supplier<@Nullable IItemHandler> output;
+        private final IItemHandler outputHandler;
+        private final IItemHandler itemInputCap;
         private float tube_rotation;
         private boolean isActive;
-        private final StoredCapability<IEnergyStorage> energyCap;
+        private final IEnergyStorage energyCap;
         private float heatLevel = 0;
         private float targetHeat = 0;
         private RotaryKilnHeatState heatState;
@@ -295,7 +287,7 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
         private final MultiblockProcessor.InMachineProcessor<RotaryKilnRecipe> processor;
         Runnable markDirty;
         public State(IInitialMultiblockContext<State> ctx) {
-            this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.total_energy));
+            this.energyCap = IGReceiveOnlyEnergy.of(this.total_energy);
             this.processor = new InMachineProcessor<>(MAX_PROCESSES, 0, MAX_PROCESSES, ctx.getMarkDirtyRunnable(), RotaryKilnRecipe.RECIPES::getById);
             this.tube_rotation = 0.0f;
             this.isActive = false;
@@ -326,11 +318,11 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
                     IOConstraint.OUTPUT
             ), markDirty);
 
-            this.output = ctx.getCapabilityAt(ForgeCapabilities.ITEM_HANDLER, OUTPUT_POS);
-            this.outputHandler = new StoredCapability<>(new WrappingItemHandler(
+            this.output = ctx.getCapabilityAt(Capabilities.ItemHandler.BLOCK, OUTPUT_POS);
+            this.outputHandler = new WrappingItemHandler(
                     inventory, false, true, new IntRange(MAX_PROCESSES+1, NUM_SLOTS)
-            ));
-            this.itemInputCap = new StoredCapability<>(new WrappingItemHandler(inventory, true, false, new IntRange(0,1)));
+            );
+            this.itemInputCap = new WrappingItemHandler(inventory, true, false, new IntRange(0,1));
         }
 
         @Override
@@ -359,10 +351,10 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
         }
 
         @Override
-        public void writeSaveNBT(CompoundTag nbt){
-            nbt.put("energy", total_energy.serializeNBT());
-            nbt.put("processor", processor.toNBT());
-            nbt.put("inventory", inventory.serializeNBT());
+        public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            nbt.put("energy", total_energy.serializeNBT(provider));
+            nbt.put("processor", processor.toNBT(provider));
+            nbt.put("inventory", inventory.serializeNBT(provider));
 
             nbt.putFloat("target_heat", targetHeat);
             nbt.putFloat("heat", heatLevel);
@@ -378,10 +370,10 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
         }
 
         @Override
-        public void readSaveNBT(CompoundTag nbt){
-            total_energy.deserializeNBT(nbt.get("energy"));
-            this.inventory.deserializeNBT(nbt.getCompound("inventory"));
-            this.processor.fromNBT(nbt.get("processor"), RotaryKilnProcess::new);
+        public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            total_energy.deserializeNBT(provider, nbt.get("energy"));
+            this.inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
+            this.processor.fromNBT(nbt.get("processor"), (getRecipe, data, p) -> new RotaryKilnProcess(getRecipe, data), provider);
             this.targetHeat = nbt.getFloat("target_heat");
             this.heatLevel = nbt.getFloat("heat");
 
@@ -400,18 +392,18 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
         }
 
         @Override
-        public void writeSyncNBT(CompoundTag nbt)
+        public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            writeSaveNBT(nbt);
+            writeSaveNBT(nbt, provider);
             // All the client needs is whether to spin the tube; the GUI gets heat, energy and
             // process progress through the menu's own synced data
             nbt.putBoolean("is_active", isActive);
         }
 
         @Override
-        public void readSyncNBT(CompoundTag nbt)
+        public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            readSaveNBT(nbt);
+            readSaveNBT(nbt, provider);
             this.isActive = nbt.getBoolean("is_active");
         }
 
@@ -509,9 +501,6 @@ public class RotaryKilnLogic implements ISkinnableMultiblockLogic<State>, IServe
         @Override
         public void invalidate(@NotNull IMultiblockContext<?> ctx)
         {
-            this.energyCap.get(ctx).invalidate();
-            this.outputHandler.get(ctx).invalidate();
-            this.itemInputCap.get(ctx).invalidate();
         }
     }
 }

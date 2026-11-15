@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "input": {
+    "tag": "c:slag/millerite"
+  },
+  "result": {
+    "count": 8,
+    "id": "immersiveengineering:nugget_nickel"
+  },
+  "slag": {
+    "id": "immersiveengineering:slag"
+  }
+}

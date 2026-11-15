@@ -8,51 +8,22 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.gui;
 
-import blusunrize.immersiveengineering.api.energy.AveragingEnergyStorage;
 import blusunrize.immersiveengineering.api.energy.MutableEnergyStorage;
-import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler.IMultiblock;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.blockimpl.MultiblockContext;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.blockimpl.MultiblockLevel;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcess;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext.ProcessContextInMachine;
 import blusunrize.immersiveengineering.common.gui.IEContainerMenu;
-import blusunrize.immersiveengineering.common.gui.IESlot;
 import blusunrize.immersiveengineering.common.gui.sync.GenericContainerData;
 import blusunrize.immersiveengineering.common.gui.sync.GenericDataSerializers;
 import blusunrize.immersiveengineering.common.gui.sync.GetterAndSetter;
-import com.igteam.immersivegeology.client.models.IGDynamicModel;
-import com.igteam.immersivegeology.common.block.multiblocks.IGGeothermalExchangerMultiblock;
-import com.igteam.immersivegeology.common.block.multiblocks.gui.helper.IGSlot;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.CrystallizerLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.GeothermalExchangerLogic;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogic;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.GeothermalExchangerRecipe;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.process.RotaryKilnProcess;
-import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
-import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.SlotItemHandler;
-import org.jetbrains.annotations.NotNull;
+import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.fluids.IFluidTank;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class GeothermalExchangerMenu extends IEContainerMenu
 {

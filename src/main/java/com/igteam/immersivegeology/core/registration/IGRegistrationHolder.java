@@ -7,8 +7,6 @@
  */
 package com.igteam.immersivegeology.core.registration;
 
-import com.igteam.immersivegeology.core.material.data.stone.IGStoneTypes;
-import com.igteam.immersivegeology.core.material.helper.material.IStoneType;
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler.IMultiblock;
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
@@ -23,15 +21,14 @@ import blusunrize.immersiveengineering.common.blocks.metal.MetalScaffoldingType;
 import com.google.common.collect.ImmutableSet;
 import com.igteam.immersivegeology.client.menu.IGItemGroup;
 import com.igteam.immersivegeology.client.menu.ItemSubGroup;
-import com.igteam.immersivegeology.common.item.IGMetalDetectorItem;
-import com.igteam.immersivegeology.common.item.IGUshankaItem;
-import com.igteam.immersivegeology.common.block.*;
+import com.igteam.immersivegeology.common.block.IGBlockContainerItem;
+import com.igteam.immersivegeology.common.block.IGGenericBlock;
 import com.igteam.immersivegeology.common.block.entity.cable.IGEnergyPipe;
 import com.igteam.immersivegeology.common.block.entity.cable.IGEnergyPipeEntity;
 import com.igteam.immersivegeology.common.block.entity.crate.IGCrateEntity;
+import com.igteam.immersivegeology.common.block.entity.crate.IGCrateEntityType;
 import com.igteam.immersivegeology.common.block.entity.device.IGMetalDetector;
 import com.igteam.immersivegeology.common.block.entity.device.IGMetalDetectorEntity;
-import com.igteam.immersivegeology.common.block.entity.crate.IGCrateEntityType;
 import com.igteam.immersivegeology.common.block.entity.vent.IGHydroVent;
 import com.igteam.immersivegeology.common.block.entity.vent.IGHydroVentEntity;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
@@ -58,21 +55,24 @@ import com.igteam.immersivegeology.common.particle.IGParticles;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.lib.ResourceUtils;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
-import com.igteam.immersivegeology.core.material.data.chemical.MaterialHydrochloricAcid;
-import com.igteam.immersivegeology.core.material.data.enums.*;
-import com.igteam.immersivegeology.core.material.data.misc.MaterialSilicon;
+import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
+import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
+import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
+import com.igteam.immersivegeology.core.material.data.stone.IGStoneTypes;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
+import com.igteam.immersivegeology.core.material.helper.material.IStoneType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -87,14 +87,15 @@ import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraftforge.common.loot.IGlobalLootModifier;
-import net.minecraftforge.data.loading.DatagenModLoader;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.ForgeRegistries.Keys;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
+import net.neoforged.neoforge.data.loading.DatagenModLoader;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NeoForgeRegistries.Keys;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -107,18 +108,18 @@ import java.util.stream.Collectors;
 public class IGRegistrationHolder {
     private static final DeferredRegister<Block> BLOCK_REGISTER = DeferredRegister.create(Registries.BLOCK, IGLib.MODID);
     private static final DeferredRegister<Item> ITEM_REGISTER = DeferredRegister.create(Registries.ITEM, IGLib.MODID);
-    private static final DeferredRegister<Fluid> FLUID_REGISTER = DeferredRegister.create(ForgeRegistries.FLUIDS, IGLib.MODID);
-    private static final DeferredRegister<FluidType> FLUIDTYPE_REGISTER = DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, IGLib.MODID);
+    private static final DeferredRegister<Fluid> FLUID_REGISTER = DeferredRegister.create(Registries.FLUID, IGLib.MODID);
+    private static final DeferredRegister<FluidType> FLUIDTYPE_REGISTER = DeferredRegister.create(Keys.FLUID_TYPES, IGLib.MODID);
 
     private static final DeferredRegister<BlockEntityType<?>> TE_REGISTER = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, IGLib.MODID);
     public static final DeferredRegister<CreativeModeTab> TAB_REGISTER = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, IGLib.MODID);
-    public static final DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT_SERIALIZER_REGISTER = DeferredRegister.create(Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, IGLib.MODID);
+    public static final DeferredRegister<MapCodec<? extends IGlobalLootModifier>> LOOT_SERIALIZER_REGISTER = DeferredRegister.create(Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, IGLib.MODID);
 
-    private static final LinkedHashMap<String, RegistryObject<Block>> BLOCK_REGISTRY_MAP = new LinkedHashMap<>();
-    private static final LinkedHashMap<String, RegistryObject<BlockEntityType<?>>> TE_REGISTRY_MAP = new LinkedHashMap<>();
-    private static final LinkedHashMap<String, RegistryObject<Item>> ITEM_REGISTRY_MAP = new LinkedHashMap<>();
-    private static final LinkedHashMap<String, RegistryObject<Fluid>> FLUID_REGISTRY_MAP = new LinkedHashMap<>();
-    private static final LinkedHashMap<String, RegistryObject<FluidType>> FLUID_TYPE_REGISTRY_MAP = new LinkedHashMap<>();
+    private static final LinkedHashMap<String, DeferredHolder<Block, Block>> BLOCK_REGISTRY_MAP = new LinkedHashMap<>();
+    private static final LinkedHashMap<String, DeferredHolder<BlockEntityType<?>, ? extends BlockEntityType<?>>> TE_REGISTRY_MAP = new LinkedHashMap<>();
+    private static final LinkedHashMap<String, DeferredHolder<Item, Item>> ITEM_REGISTRY_MAP = new LinkedHashMap<>();
+    private static final LinkedHashMap<String, DeferredHolder<Fluid, Fluid>> FLUID_REGISTRY_MAP = new LinkedHashMap<>();
+    private static final LinkedHashMap<String, DeferredHolder<FluidType, FluidType>> FLUID_TYPE_REGISTRY_MAP = new LinkedHashMap<>();
 
     public static LinkedHashMap<String, MultiblockRegistration<?>> MB_REGISTRY_MAP = new LinkedHashMap<>();
     public static final LinkedHashMap<String, TemplateMultiblock> MB_TEMPLATE_MAP = new LinkedHashMap<>();
@@ -151,7 +152,7 @@ public class IGRegistrationHolder {
     public static Function<String, TemplateMultiblock> getMBTemplate = MB_TEMPLATE_MAP::get;
     public static Function<String, Fluid> getFluid = (key) -> FLUID_REGISTRY_MAP.get(key).get();
 
-    public static final RegistryObject<CreativeModeTab> IG_BASE_TAB = TAB_REGISTER.register("main", () -> new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 0)
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> IG_BASE_TAB = TAB_REGISTER.register("main", () -> new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 0)
             .icon(() -> IGRegistrationHolder.getItem.apply("prospector_kit").getDefaultInstance())
             .title(Component.translatable("itemGroup.immersivegeology"))
             .displayItems(IGRegistrationHolder::fillIGTab)
@@ -192,6 +193,11 @@ public class IGRegistrationHolder {
     }
 
     private static final List<Consumer<IEventBus>> MOD_BUS_CALLBACKS = new ArrayList<>();
+
+    public static void addModBusCallback(Consumer<IEventBus> callback)
+    {
+        MOD_BUS_CALLBACKS.add(callback);
+    }
 
     private static boolean checkModMaterialsForOverlap(IStoneType stoneType, GeologyMaterial ore, IFlagType<?> flag)
     {
@@ -258,11 +264,11 @@ public class IGRegistrationHolder {
         );
     }
 
-    public static RegistryObject<BlockEntityType<IGEnergyPipeEntity>> ENERGY_PIPE;
-    public static RegistryObject<BlockEntityType<IGMetalDetectorEntity>> METAL_DETECTOR;
+    public static DeferredHolder<BlockEntityType<?>, BlockEntityType<IGEnergyPipeEntity>> ENERGY_PIPE;
+    public static DeferredHolder<BlockEntityType<?>, BlockEntityType<IGMetalDetectorEntity>> METAL_DETECTOR;
     public static final String METAL_DETECTOR_KEY = "metal_detector";
     public static final String USHANKA_KEY = "armor_russian_helmet";
-    public static RegistryObject<BlockEntityType<IGHydroVentEntity>> IG_HYDROVENT;
+    public static DeferredHolder<BlockEntityType<?>, BlockEntityType<IGHydroVentEntity>> IG_HYDROVENT;
     public static void initialize()
     {
 
@@ -320,11 +326,8 @@ public class IGRegistrationHolder {
                         case HYDROVENT ->
                         {
                             String registryKey = blockCategory.getRegistryKey(material);
-                            RegistryObject<BlockEntityType<IGHydroVentEntity>> TYPE = TE_REGISTER.register(material.getName() + "_vent_entity_type", makeType(IGHydroVentEntity::new, ()-> getBlock.apply(registryKey)));
-
-                            @SuppressWarnings("unchecked")
-                            RegistryObject<BlockEntityType<?>> typeCast = (RegistryObject<BlockEntityType<?>>)(Object) TYPE;
-                            TE_REGISTRY_MAP.put(registryKey, typeCast);
+                            DeferredHolder<BlockEntityType<?>, BlockEntityType<IGHydroVentEntity>> TYPE = TE_REGISTER.register(material.getName() + "_vent_entity_type", makeType(IGHydroVentEntity::new, ()-> getBlock.apply(registryKey)));
+                            TE_REGISTRY_MAP.put(registryKey, TYPE);
 
                             registerBlock(registryKey, () -> new IGHydroVent(blockCategory, material, TYPE));
                             registerItem(registryKey, () -> new IGGenericBlockItem((IGBlockType) getBlock.apply(registryKey)));
@@ -333,12 +336,8 @@ public class IGRegistrationHolder {
                         {
                             String registryKey = blockCategory.getRegistryKey(material);
 
-                            RegistryObject<BlockEntityType<IGCrateEntity>> TYPE = TE_REGISTER.register(material.getName() + "_crate_entity_type", makeType(IGCrateEntity::new, ()-> getBlock.apply(registryKey)));
-                            // Because RegistryObject is invariant in its type parameter we need to do this hack
-                            // basically we just need to explicitly tell the compiler that yes this is what you're looking for.
-                            @SuppressWarnings("unchecked")
-                            RegistryObject<BlockEntityType<?>> typeCast = (RegistryObject<BlockEntityType<?>>)(Object) TYPE;
-                            TE_REGISTRY_MAP.put(registryKey, typeCast);
+                            DeferredHolder<BlockEntityType<?>, BlockEntityType<IGCrateEntity>> TYPE = TE_REGISTER.register(material.getName() + "_crate_entity_type", makeType(IGCrateEntity::new, ()-> getBlock.apply(registryKey)));
+                            TE_REGISTRY_MAP.put(registryKey, TYPE);
 
                             registerBlock(registryKey, () -> new IGCrateEntityType(blockCategory, material, TYPE));
                             registerItem(registryKey, () -> new IGBlockContainerItem((IGBlockType) getBlock.apply(registryKey)));
@@ -413,7 +412,7 @@ public class IGRegistrationHolder {
                             // Fluid Type Registration
                             registerFluidType(registryKey, () -> getFluid.apply(registryKey).getFluidType());
                             registerItem(bucket_type.getRegistryKey(material, blockCategory), () -> new IGGenericBucketItem(() -> getFluid.apply(registryKey), blockCategory, bucket_type, material));
-                            registerBlock(registryKey + "_block", () -> new IGFluidBlock(() -> (FlowingFluid) getFluid.apply(registryKey), material, BlockBehaviour.Properties.copy(Blocks.WATER)));
+                            registerBlock(registryKey + "_block", () -> new IGFluidBlock(() -> (FlowingFluid) getFluid.apply(registryKey), material, BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
                         }
                         case SLURRY ->
                         {
@@ -433,7 +432,7 @@ public class IGRegistrationHolder {
                                     // Flowing
                                     registerFluid(registryKey + "_flowing", () -> new IGFluid.Flowing(material, slurry_material, blockCategory, ItemCategoryFlags.CLEAN_FLASK));
 
-                                    registerBlock(registryKey + "_block", () -> new IGFluidBlock(() -> (FlowingFluid) getFluid.apply(registryKey), material, BlockBehaviour.Properties.copy(Blocks.WATER)));
+                                    registerBlock(registryKey + "_block", () -> new IGFluidBlock(() -> (FlowingFluid) getFluid.apply(registryKey), material, BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
 
                                     registerItem(ItemCategoryFlags.CLEAN_FLASK.getRegistryKey(material, slurry_material), () -> new IGGenericBucketItem(() -> getFluid.apply(registryKey), blockCategory, ItemCategoryFlags.CLEAN_FLASK, material, slurry_material));
                                 }
@@ -457,7 +456,7 @@ public class IGRegistrationHolder {
                                     // Flowing
                                     registerFluid(registryKey + "_flowing", () -> new IGFluid.Flowing(material, slurry_material, blockCategory, ItemCategoryFlags.CLOUDY_FLASK));
 
-                                    registerBlock(registryKey + "_block", () -> new IGFluidBlock(() -> (FlowingFluid) getFluid.apply(registryKey), material, BlockBehaviour.Properties.copy(Blocks.WATER)));
+                                    registerBlock(registryKey + "_block", () -> new IGFluidBlock(() -> (FlowingFluid) getFluid.apply(registryKey), material, BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
 
                                     registerItem(ItemCategoryFlags.CLOUDY_FLASK.getRegistryKey(material, slurry_material), () -> new IGGenericBucketItem(() -> getFluid.apply(registryKey), blockCategory, ItemCategoryFlags.CLOUDY_FLASK, material, slurry_material));
                                 }
@@ -547,15 +546,15 @@ public class IGRegistrationHolder {
     }
 
     public static Supplier<List<? extends Item>> supplyDeferredItems(){
-        return () -> ITEM_REGISTER.getEntries().stream().map(RegistryObject::get).toList();
+        return () -> ITEM_REGISTER.getEntries().stream().map(DeferredHolder::get).toList();
     }
 
     public static Supplier<List<? extends Block>> supplyDeferredBlocks(){
-        return () -> BLOCK_REGISTER.getEntries().stream().map(RegistryObject::get).toList();
+        return () -> BLOCK_REGISTER.getEntries().stream().map(DeferredHolder::get).toList();
     }
 
     public static Supplier<List<? extends Fluid>> supplyDeferredFluids(){
-        return () -> FLUID_REGISTER.getEntries().stream().map(RegistryObject::get).toList();
+        return () -> FLUID_REGISTER.getEntries().stream().map(DeferredHolder::get).toList();
     }
 
     public static void registerMultiblockTemplate(String registry_name, TemplateMultiblock template)
@@ -583,6 +582,8 @@ public class IGRegistrationHolder {
     public static void addRegistersToEventBus(final IEventBus eventBus){
 
         IGLib.IG_LOGGER.info("======== Registration of Immersive Geology Items, Blocks and Fluids ========");
+        IGLib.IG_LOGGER.info("- Armor Material Registration");
+        IGUshankaItem.init(eventBus);
         IGLib.IG_LOGGER.info("- Block Registration");
         BLOCK_REGISTER.register(eventBus);
         IGLib.IG_LOGGER.info("- Item Registration");
@@ -605,9 +606,48 @@ public class IGRegistrationHolder {
         MOD_BUS_CALLBACKS.forEach(e -> e.accept(eventBus));
     }
 
+    public static void registerCapabilities(RegisterCapabilitiesEvent event)
+    {
+        IGMetalDetectorItem.registerCapabilities(event, getItem.apply(METAL_DETECTOR_KEY));
+
+        for (Item item : getIGItems())
+            if (item instanceof IGGenericBucketItem bucket)
+                IGGenericBucketItem.registerCapabilities(event, bucket);
+
+        for (DeferredHolder<Block, Block> block : BLOCK_REGISTRY_MAP.values())
+            if (block.get() instanceof IGCrateEntityType)
+                event.registerBlock(
+                        Capabilities.ItemHandler.BLOCK,
+                        (level, pos, state, blockEntity, side) ->
+                                blockEntity instanceof IGCrateEntity crate ? crate.getInventoryCap() : null,
+                        block.get()
+                );
+            else if (block.get() instanceof IGHydroVent)
+                event.registerBlock(
+                        Capabilities.FluidHandler.BLOCK,
+                        (level, pos, state, blockEntity, side) ->
+                                blockEntity instanceof IGHydroVentEntity vent
+                                        && (side == null || side == Direction.UP) ? vent.tank : null,
+                        block.get()
+                );
+
+        event.registerBlockEntity(
+                Capabilities.EnergyStorage.BLOCK,
+                METAL_DETECTOR.get(),
+                (blockEntity, side) ->
+                        blockEntity.acceptsEnergyOn(side) ? blockEntity.energyStorage : null
+        );
+
+        event.registerBlockEntity(
+                Capabilities.EnergyStorage.BLOCK,
+                ENERGY_PIPE.get(),
+                IGEnergyPipeEntity::getEnergyCap
+        );
+    }
+
     public static List<Item> getIGItems()
     {
-        return ITEM_REGISTER.getEntries().stream().map(RegistryObject::get).collect(Collectors.toList());
+        return ITEM_REGISTER.getEntries().stream().map(DeferredHolder::get).collect(Collectors.toList());
     }
 
     public static <S extends IMultiblockState> MultiblockRegistration<S> registerMetalMultiblock(String name, IMultiblockLogic<S> logic, Supplier<TemplateMultiblock> structure){
@@ -639,16 +679,16 @@ public class IGRegistrationHolder {
         return builder.build();
     }
 
-    public static LinkedHashMap<String, RegistryObject<Item>> getItemRegistryMap() {
+    public static LinkedHashMap<String, DeferredHolder<Item, Item>> getItemRegistryMap() {
         return ITEM_REGISTRY_MAP;
     }
 
-    public static LinkedHashMap<String, RegistryObject<Fluid>> getFluidRegistryMap()
+    public static LinkedHashMap<String, DeferredHolder<Fluid, Fluid>> getFluidRegistryMap()
     {
         return FLUID_REGISTRY_MAP;
     }
 
-    public static HashMap<String, RegistryObject<Block>> getBlockRegistryMap() {
+    public static HashMap<String, DeferredHolder<Block, Block>> getBlockRegistryMap() {
         return BLOCK_REGISTRY_MAP;
     }
 
@@ -660,7 +700,7 @@ public class IGRegistrationHolder {
         IGLib.IG_LOGGER.info("- Complete");
     }
 
-    public static RegistryObject<Codec<? extends IGlobalLootModifier>> IG_LOOT_MODIFICATION;
+    public static DeferredHolder<MapCodec<? extends IGlobalLootModifier>, MapCodec<IGLootModifier>> IG_LOOT_MODIFICATION;
 
     public static void initializeLootModifications()
     {

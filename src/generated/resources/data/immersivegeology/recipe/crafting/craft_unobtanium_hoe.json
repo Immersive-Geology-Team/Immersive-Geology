@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "ig_tools",
+  "key": {
+    "s": {
+      "tag": "c:rods/wooden"
+    },
+    "u": {
+      "tag": "c:ingots/unobtanium"
+    }
+  },
+  "pattern": [
+    "uu",
+    " s",
+    " s"
+  ],
+  "result": {
+    "count": 1,
+    "id": "immersivegeology:tool_hoe_unobtanium"
+  }
+}

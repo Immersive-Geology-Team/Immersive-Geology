@@ -1,0 +1,63 @@
+{
+  "type": "immersiveengineering:mineral_mix",
+  "biome_predicates": [
+    [
+      "minecraft:is_nether"
+    ]
+  ],
+  "fail_chance": 0.2,
+  "ores": [
+    {
+      "chance": 0.55,
+      "output": {
+        "tag": "c:dusts/sulfur"
+      }
+    },
+    {
+      "chance": 0.25,
+      "output": {
+        "tag": "c:poor_ore/gypsum"
+      }
+    },
+    {
+      "chance": 0.15,
+      "output": {
+        "tag": "c:poor_ore/pyrite"
+      }
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "tag": "c:normal_ore/pyrite"
+      }
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "tag": "c:normal_ore/gypsum"
+      }
+    }
+  ],
+  "sample_background": "minecraft:magma_block",
+  "spoils": [
+    {
+      "chance": 0.5,
+      "output": {
+        "id": "minecraft:netherrack"
+      }
+    },
+    {
+      "chance": 0.3,
+      "output": {
+        "id": "minecraft:basalt"
+      }
+    },
+    {
+      "chance": 0.2,
+      "output": {
+        "id": "minecraft:gravel"
+      }
+    }
+  ],
+  "weight": 25
+}

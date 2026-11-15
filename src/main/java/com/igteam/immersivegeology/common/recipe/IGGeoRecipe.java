@@ -9,33 +9,27 @@
 package com.igteam.immersivegeology.common.recipe;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
-import blusunrize.immersiveengineering.api.crafting.IERecipeTypes.TypeWithClass;
 import blusunrize.immersiveengineering.api.crafting.IESerializableRecipe;
 import blusunrize.immersiveengineering.api.crafting.IJEIRecipe;
-import blusunrize.immersiveengineering.api.crafting.IMultiblockRecipe;
+import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.IndustrialSluiceRecipe;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
-import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
-import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraftforge.common.util.Lazy;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 
 public class IGGeoRecipe extends IESerializableRecipe implements IJEIRecipe
 {
 	public final GeologyMaterial material;
-	public static RegistryObject<IERecipeSerializer<IGGeoRecipe>> SERIALIZER;
+	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<IGGeoRecipe>> SERIALIZER;
 	public static final CachedRecipeList<IGGeoRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.GEOHINT);
-	protected <T extends Recipe<?>> IGGeoRecipe(ResourceLocation id, GeologyMaterial material)
+	public <T extends Recipe<?>> IGGeoRecipe(GeologyMaterial material)
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.GEOHINT, id);
+		super(TagOutput.EMPTY, IGRecipeTypes.GEOHINT);
 		this.material = material;
 	}
 
@@ -46,7 +40,7 @@ public class IGGeoRecipe extends IESerializableRecipe implements IJEIRecipe
 	}
 
 	@Override
-	public @NotNull ItemStack getResultItem(RegistryAccess registryAccess)
+	public @NotNull ItemStack getResultItem(HolderLookup.Provider registryAccess)
 	{
 		return material.getOreIcon();
 	}

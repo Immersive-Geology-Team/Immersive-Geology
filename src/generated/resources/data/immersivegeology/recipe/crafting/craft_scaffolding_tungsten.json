@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "i": {
+      "tag": "c:ingots/tungsten"
+    },
+    "r": {
+      "tag": "c:rods/tungsten"
+    }
+  },
+  "pattern": [
+    "iii",
+    " r ",
+    "r r"
+  ],
+  "result": {
+    "count": 6,
+    "id": "immersivegeology:scaffolding_tungsten_standard"
+  }
+}

@@ -8,18 +8,13 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks;
 
-import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.multiblocks.ClientMultiblocks;
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
-import blusunrize.immersiveengineering.common.register.IEBlocks.Metals;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
-import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 public class IGCrystalizerMultiblock extends IGTemplateMultiblock
@@ -27,7 +22,7 @@ public class IGCrystalizerMultiblock extends IGTemplateMultiblock
 
 	public static final IGCrystalizerMultiblock INSTANCE = new IGCrystalizerMultiblock();
 	public IGCrystalizerMultiblock() {
-        super(new ResourceLocation(IGLib.MODID, "multiblocks/crystallizer"), new BlockPos(1,0,1), new BlockPos(1,1,2), new BlockPos(3,3,3), IGMultiblockProvider.CRYSTALLIZER);
+        super(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "multiblocks/crystallizer"), new BlockPos(1,0,1), new BlockPos(1,1,2), new BlockPos(3,3,3), IGMultiblockProvider.CRYSTALLIZER);
     }
 
     @Override

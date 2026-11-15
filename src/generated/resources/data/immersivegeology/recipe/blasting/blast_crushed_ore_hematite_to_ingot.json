@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "input": {
+    "tag": "c:crushed_ore/hematite"
+  },
+  "result": {
+    "id": "minecraft:iron_ingot"
+  },
+  "slag": {
+    "id": "immersiveengineering:slag"
+  },
+  "time": 900
+}

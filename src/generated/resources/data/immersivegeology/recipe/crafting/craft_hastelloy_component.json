@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "ig_hastelloy_component",
+  "key": {
+    "I": {
+      "tag": "c:ingots/electrum"
+    },
+    "P": {
+      "tag": "c:plates/hastelloy"
+    }
+  },
+  "pattern": [
+    "P P",
+    " I ",
+    "P P"
+  ],
+  "result": {
+    "count": 1,
+    "id": "immersivegeology:mechanical_component_hastelloy"
+  }
+}

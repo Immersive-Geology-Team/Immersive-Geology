@@ -20,12 +20,12 @@
     "type":"item_display",
     "items":
     [
-      {"item":"immersivegeology:ingot_zinc"},
-      {"item":"immersivegeology:ingot_tin"},
-      {"item":"immersiveengineering:ingot_lead"},
-      {"item":"immersiveengineering:ingot_silver"},
-      {"item":"minecraft:gold_ingot"},
-      {"item":"minecraft:copper_ingot"}
+      {"id":"immersivegeology:ingot_zinc"},
+      {"id":"immersivegeology:ingot_tin"},
+      {"id":"immersiveengineering:ingot_lead"},
+      {"id":"immersiveengineering:ingot_silver"},
+      {"id":"minecraft:gold_ingot"},
+      {"id":"minecraft:copper_ingot"}
     ]
   }
 }

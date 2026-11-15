@@ -5,7 +5,7 @@
     "parent": "minecraft:block/block",
     "automatic_culling": false,
     "flip_v": true,
-    "loader": "forge:obj",
+    "loader": "neoforge:obj",
     "model": "immersivegeology:models/block/multiblock/obj/geothermal_exchanger/geothermal_exchanger.obj",
     "textures": {
       "geothermal_exchanger": "immersivegeology:block/multiblock/geothermal_exchanger/default",

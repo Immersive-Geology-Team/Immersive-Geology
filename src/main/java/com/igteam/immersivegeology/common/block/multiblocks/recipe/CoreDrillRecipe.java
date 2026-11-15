@@ -8,35 +8,32 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.recipe;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
-import blusunrize.immersiveengineering.api.crafting.IERecipeTypes.TypeWithClass;
 import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
+import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.common.util.Lazy;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Set;
 
 public class CoreDrillRecipe extends MultiblockRecipe
 {
-	public static RegistryObject<IERecipeSerializer<CoreDrillRecipe>> SERIALIZER;
+	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<CoreDrillRecipe>> SERIALIZER;
 	public static final CachedRecipeList<CoreDrillRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.COREDRILL);
 
-	FluidTagInput input;
+	SizedFluidIngredient input;
 	Fluid output;
 
-	public <T extends Recipe<?>> CoreDrillRecipe(ResourceLocation id, FluidTagInput input, Fluid output)
+	public <T extends Recipe<?>> CoreDrillRecipe(SizedFluidIngredient input, Fluid output)
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.COREDRILL, id);
+		super(TagOutput.EMPTY, IGRecipeTypes.COREDRILL, 1, 0, () -> new RecipeMultiplier(() -> 1, () -> 1));
 		this.input = input;
 		this.output = output;
 	}
@@ -44,17 +41,17 @@ public class CoreDrillRecipe extends MultiblockRecipe
 	@Nullable
 	public static CoreDrillRecipe get(Level level, FluidStack fluid)
 	{
-		for(CoreDrillRecipe r : RECIPES.getRecipes(level))
+		for(RecipeHolder<CoreDrillRecipe> r : RECIPES.getRecipes(level))
 		{
-			if(r.input.test(fluid))
+			if(r.value().input.test(fluid))
 			{
-				return r;
+				return r.value();
 			}
 		}
 		return null;
 	}
 
-	public FluidTagInput getInput()
+	public SizedFluidIngredient getInput()
 	{
 		return input;
 	}

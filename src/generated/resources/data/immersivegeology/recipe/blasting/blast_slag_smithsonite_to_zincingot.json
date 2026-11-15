@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:blast_furnace",
+  "input": {
+    "tag": "c:slag/smithsonite"
+  },
+  "result": {
+    "id": "immersivegeology:ingot_zinc"
+  },
+  "slag": {
+    "id": "immersiveengineering:slag"
+  },
+  "time": 900
+}

@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:rotary_kiln",
+  "heat": 75,
+  "input": {
+    "tag": "c:compound_dust/molybdenum"
+  },
+  "result": {
+    "id": "immersivegeology:metal_oxide_molybdenum"
+  },
+  "time": 300
+}

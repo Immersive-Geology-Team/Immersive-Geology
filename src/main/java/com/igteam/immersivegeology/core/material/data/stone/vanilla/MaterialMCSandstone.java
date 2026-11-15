@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialMCSandstone extends MaterialStone {
 
@@ -31,6 +30,6 @@ public class MaterialMCSandstone extends MaterialStone {
     @Override
     public Properties getProperties(IFlagType<?> flag)
     {
-        return BlockBehaviour.Properties.copy(Blocks.SANDSTONE);
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.SANDSTONE);
     }
 }

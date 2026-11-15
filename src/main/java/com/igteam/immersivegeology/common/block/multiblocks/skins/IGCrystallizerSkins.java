@@ -11,7 +11,6 @@ package com.igteam.immersivegeology.common.block.multiblocks.skins;
 import com.igteam.immersivegeology.common.block.multiblocks.skins.helpers.IIGMultiSkinHelper;
 import com.igteam.immersivegeology.common.block.multiblocks.skins.helpers.SkinCreditType;
 import net.minecraft.ChatFormatting;
-import net.minecraft.util.StringRepresentable;
 
 import java.util.Locale;
 

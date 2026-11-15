@@ -8,7 +8,6 @@
 
 package com.igteam.immersivegeology.core.material.data.types;
 
-import com.igteam.immersivegeology.common.world.IGWorldGen;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
@@ -21,7 +20,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraftforge.common.Tags.Biomes;
+import net.neoforged.neoforge.common.Tags.Biomes;
 
 import java.util.Optional;
 
@@ -55,7 +54,7 @@ public class MaterialEvaporateMineral extends MaterialMineral
 			{
 				case EVAPORATE ->
 				{
-					return new ResourceLocation(IGLib.MODID, "block/colored/"+ name +"/sediment");
+					return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/colored/"+ name +"/sediment");
 				}
 			}
 		}

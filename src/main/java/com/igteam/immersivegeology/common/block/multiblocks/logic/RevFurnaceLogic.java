@@ -17,12 +17,10 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultib
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
-import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.client.utils.TextUtils;
 import blusunrize.immersiveengineering.common.blocks.metal.BlastFurnacePreheaterBlockEntity;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.AdvBlastFurnaceLogic;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.blockimpl.InitialMultiblockContext;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.NonMirrorableWithActiveBlock;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.interfaces.MBOverlayText;
 import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
@@ -33,65 +31,48 @@ import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler
 import blusunrize.immersiveengineering.common.util.inventory.SlotwiseItemHandler.IOConstraint;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler.IntRange;
-import com.igteam.immersivegeology.common.block.multiblocks.IGBloomeryMultiblock;
 import com.igteam.immersivegeology.common.block.multiblocks.IGReverberationFurnaceMultiblock;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.CoreDrillLogic.State;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.IFurnaceEnvironment;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.InputSlot;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGFurnaceHandler.OutputSlot;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFurnaceHandler;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFurnaceHandler.IRevFurnaceEnvironment;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFurnaceHandler.RevInputSlot;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGRevFurnaceHandler.RevOutputSlot;
 import com.igteam.immersivegeology.common.block.multiblocks.part.RevFurnacePart;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.RevFurnaceRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.RevFurnaceShape;
 import com.igteam.immersivegeology.common.block.multiblocks.skins.IGRevFurnaceSkins;
-import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.Util;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleEngine;
-import net.minecraft.client.particle.SmokeParticle;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.ParticleUtils;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.ItemHandlerHelper;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.Capabilities.FluidHandler;
+import net.neoforged.neoforge.capabilities.Capabilities.ItemHandler;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.IFluidTank;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -147,38 +128,38 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
 
     private void outputItems(RevFurnaceLogic.State state)
     {
-        IItemHandler outputHandlerLeft = state.outputLeft.getNullable();
+        IItemHandler outputHandlerLeft = state.outputLeft.get();
         if(outputHandlerLeft!=null)
             for(int j : OUTPUT_SLOTS_LEFT)
             {
                 final ItemStack nextStack = state.inventory.getStackInSlot(j);
                 if(nextStack.isEmpty())
                     continue;
-                ItemStack stack = ItemHandlerHelper.copyStackWithSize(nextStack, 1);
+                ItemStack stack = nextStack.copyWithCount(1);
                 stack = ItemHandlerHelper.insertItem(outputHandlerLeft, stack, false);
                 if(stack.isEmpty())
                     nextStack.shrink(1);
             }
 
-        IItemHandler outputHandlerRight = state.outputRight.getNullable();
+        IItemHandler outputHandlerRight = state.outputRight.get();
         if(outputHandlerRight!=null)
             for(int j : OUTPUT_SLOTS_RIGHT)
             {
                 final ItemStack nextStack = state.inventory.getStackInSlot(j);
                 if(nextStack.isEmpty())
                     continue;
-                ItemStack stack = ItemHandlerHelper.copyStackWithSize(nextStack, 1);
+                ItemStack stack = nextStack.copyWithCount(1);
                 stack = ItemHandlerHelper.insertItem(outputHandlerRight, stack, false);
                 if(stack.isEmpty())
                     nextStack.shrink(1);
             }
     }
 
-    private void drainOutputTank(RevFurnaceLogic.State state, IMultiblockContext<RevFurnaceLogic.State> context, CapabilityReference<IFluidHandler> outputRef)
+    private void drainOutputTank(RevFurnaceLogic.State state, IMultiblockContext<RevFurnaceLogic.State> context, Supplier<IFluidHandler> outputRef)
     {
         int outSize = Math.min(FluidType.BUCKET_VOLUME, state.tank.getFluidAmount());
         FluidStack out = Utils.copyFluidStackWithAmount(state.tank.getFluid(), outSize, false);
-        IFluidHandler output = outputRef.getNullable();
+        IFluidHandler output = outputRef.get();
 
         if(output==null)
             return;
@@ -195,28 +176,19 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
 
 
     @Override
-    public <T> LazyOptional<T> getCapability(IMultiblockContext<State> ctx, CapabilityPosition position, Capability<T> cap)
+    public void registerCapabilities(CapabilityRegistrar<State> register)
     {
-        final State state = ctx.getState();
-        final boolean isMirrored = ctx.getLevel().getOrientation().mirrored();
-        if(cap==ForgeCapabilities.ITEM_HANDLER)
-        {
-            if(SLOT_1_INPUT_POSITION.equals(position)) return (isMirrored ? state.invCapRight.cast(ctx) : state.invCapLeft.cast(ctx));
-            if(SLOT_2_INPUT_POSITION.equals(position)) return (isMirrored ? state.invCapLeft.cast(ctx) : state.invCapRight.cast(ctx) );
+        register.register(ItemHandler.BLOCK, (state, position) -> {
+            if(SLOT_1_INPUT_POSITION.equals(position)) return state.isMirrored?state.invCapRight:state.invCapLeft;
+            if(SLOT_2_INPUT_POSITION.equals(position)) return state.isMirrored?state.invCapLeft:state.invCapRight;
             if(SLOT_1_OUTPUT_POSITION.posInMultiblock().equals(position.posInMultiblock()))
-            {
-                return isMirrored ? state.outputHandlerRight.cast(ctx) : state.outputHandlerLeft.cast(ctx);
-            }
+                return state.isMirrored?state.outputHandlerRight:state.outputHandlerLeft;
             if(SLOT_2_OUTPUT_POSITION.posInMultiblock().equals(position.posInMultiblock()))
-            {
-                return isMirrored ? state.outputHandlerLeft.cast(ctx) : state.outputHandlerRight.cast(ctx);
-            }
-        }
-        else if(cap==ForgeCapabilities.FLUID_HANDLER)
-        {
-            if(SLOT_1_OUTPUT_FLUID.equals(position) || SLOT_2_OUTPUT_FLUID.equals(position)) return state.fluidCap.cast(ctx);
-        }
-        return LazyOptional.empty();
+                return state.isMirrored?state.outputHandlerLeft:state.outputHandlerRight;
+            return null;
+        });
+        register.register(FluidHandler.BLOCK, (state, position) ->
+                SLOT_1_OUTPUT_FLUID.equals(position)||SLOT_2_OUTPUT_FLUID.equals(position)?state.fluidCap:null);
     }
 
     @Override
@@ -227,7 +199,7 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
 
     @Override
     public State createInitialState(IInitialMultiblockContext<State> capability) {
-        return new RevFurnaceLogic.State(capability);
+        return new RevFurnaceLogic.State(capability, ((InitialMultiblockContext<State>)capability).orientation().mirrored());
     }
 
     @Override
@@ -237,7 +209,7 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
 
     @Nullable
     @Override
-    public List<Component> getOverlayText(State state, Player player, boolean b)
+    public List<Component> getOverlayText(State state, BlockPos posInMultiblock, BlockHitResult absoluteHit, Player player, boolean b)
     {
         if(Utils.isFluidRelatedItemStack(player.getItemInHand(InteractionHand.MAIN_HAND)))
             return List.of(TextUtils.formatFluidStack(state.tank.getFluid()));
@@ -256,11 +228,11 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
         final boolean isMirrored = context.getLevel().getOrientation().mirrored();
         if(context.getLevel().shouldTickModulo(2))
         {
-            if(((state.active_left &! state.fluidOutput1.isPresent())))
+            if(((state.active_left & state.fluidOutput1.get()==null)))
             {
                 spawnSmoke(context, isMirrored ? SMOKE_POSITION_RIGHT : SMOKE_POSITION_LEFT);
             }
-            if(((state.active_right &! state.fluidOutput2.isPresent())))
+            if(((state.active_right & state.fluidOutput2.get()==null)))
             {
                 spawnSmoke(context, isMirrored ? SMOKE_POSITION_LEFT : SMOKE_POSITION_RIGHT);
             }
@@ -283,25 +255,27 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
         final IGRevFurnaceHandler<RevFurnaceRecipe> furnace;
         private boolean active_left = false;
         private boolean active_right = false;
+        private final boolean isMirrored;
 
         private final Supplier<RevFurnaceRecipe> cachedRecipeLeft;
         private final Supplier<RevFurnaceRecipe> cachedRecipeRight;
 
         private final FluidTank tank = new FluidTank(TANK_CAPACITY);
-        private final StoredCapability<IItemHandler> invCapLeft;
-        private final StoredCapability<IItemHandler> invCapRight;
-        private final StoredCapability<IItemHandler> outputHandlerLeft;
-        private final StoredCapability<IItemHandler> outputHandlerRight;
+        private final IItemHandler invCapLeft;
+        private final IItemHandler invCapRight;
+        private final IItemHandler outputHandlerLeft;
+        private final IItemHandler outputHandlerRight;
 
-        private final CapabilityReference<IItemHandler> outputLeft;
-        private final CapabilityReference<IItemHandler> outputRight;
+        private final Supplier<IItemHandler> outputLeft;
+        private final Supplier<IItemHandler> outputRight;
 
-        private final CapabilityReference<IFluidHandler> fluidOutput1;
-        private final CapabilityReference<IFluidHandler> fluidOutput2;
-        private final StoredCapability<IFluidHandler> fluidCap;
+        private final Supplier<IFluidHandler> fluidOutput1;
+        private final Supplier<IFluidHandler> fluidOutput2;
+        private final IFluidHandler fluidCap;
 
-        public State(IInitialMultiblockContext<?> ctx)
+        public State(IInitialMultiblockContext<?> ctx, boolean isMirrored)
         {
+            this.isMirrored = isMirrored;
             final Supplier<@Nullable Level> getLevel = ctx.levelSupplier();
             inventory = new SlotwiseItemHandler(List.of(
                     // Left
@@ -314,19 +288,19 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
                     IOConstraint.OUTPUT
             ), ctx.getMarkDirtyRunnable());
 
-            this.outputLeft = ctx.getCapabilityAt(ForgeCapabilities.ITEM_HANDLER, SLOT_1_OUTPUT_POSITION);
-            this.outputRight = ctx.getCapabilityAt(ForgeCapabilities.ITEM_HANDLER, SLOT_2_OUTPUT_POSITION);
+            this.outputLeft = ctx.getCapabilityAt(Capabilities.ItemHandler.BLOCK, SLOT_1_OUTPUT_POSITION);
+            this.outputRight = ctx.getCapabilityAt(Capabilities.ItemHandler.BLOCK, SLOT_2_OUTPUT_POSITION);
 
-            this.fluidOutput1 = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(SLOT_1_OUTPUT_FLUID.side(), SLOT_1_OUTPUT_FLUID.posInMultiblock().above()));
-            this.fluidOutput2 = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(SLOT_2_OUTPUT_FLUID.side(), SLOT_2_OUTPUT_FLUID.posInMultiblock().above()));
+            this.fluidOutput1 = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, new MultiblockFace(SLOT_1_OUTPUT_FLUID.side(), SLOT_1_OUTPUT_FLUID.posInMultiblock().above()));
+            this.fluidOutput2 = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, new MultiblockFace(SLOT_2_OUTPUT_FLUID.side(), SLOT_2_OUTPUT_FLUID.posInMultiblock().above()));
 
-            this.outputHandlerLeft = new StoredCapability<>(new WrappingItemHandler(
+            this.outputHandlerLeft = new WrappingItemHandler(
                     inventory, false, true, new IntRange(2,3)
-            ));
+            );
 
-            this.outputHandlerRight = new StoredCapability<>(new WrappingItemHandler(
+            this.outputHandlerRight = new WrappingItemHandler(
                     inventory, false, true, new IntRange(5,6)
-            ));
+            );
 
             cachedRecipeLeft = CachedRecipe.cached(
                     RevFurnaceRecipe::findRecipe, getLevel, () -> inventory.getStackInSlot(0)
@@ -348,16 +322,14 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
                     ctx.getMarkDirtyRunnable()
             );
 
-            this.invCapLeft = new StoredCapability<>(new WrappingItemHandler(
+            this.invCapLeft = new WrappingItemHandler(
                     inventory, true, true, new IntRange(0,2)
-            ));
-
-            this.invCapRight = new StoredCapability<>(new WrappingItemHandler(
-                    inventory, true, true, new IntRange(3,5)
-            ));
-            this.fluidCap = new StoredCapability<>(
-                    new ArrayFluidHandler(new IFluidTank[]{tank}, true, false, ctx.getMarkDirtyRunnable())
             );
+
+            this.invCapRight = new WrappingItemHandler(
+                    inventory, true, true, new IntRange(3,5)
+            );
+            this.fluidCap = new ArrayFluidHandler(new IFluidTank[]{tank}, true, false, ctx.getMarkDirtyRunnable());
         }
 
         public void addToTank(int amount)
@@ -370,35 +342,35 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
         }
 
         @Override
-        public void writeSaveNBT(CompoundTag nbt)
+        public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            nbt.put("tank", tank.writeToNBT(new CompoundTag()));
-            nbt.put("inventory", inventory.serializeNBT());
+            nbt.put("tank", tank.writeToNBT(provider, new CompoundTag()));
+            nbt.put("inventory", inventory.serializeNBT(provider));
             nbt.put("furnace", furnace.toNBT());
             nbt.putBoolean("active_left", active_left);
             nbt.putBoolean("active_right", active_right);
         }
 
         @Override
-        public void readSaveNBT(CompoundTag nbt)
+        public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            inventory.deserializeNBT(nbt.getCompound("inventory"));
+            inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
             furnace.readNBT(nbt.getCompound("furnace"));
-            tank.readFromNBT(nbt.getCompound("tank"));
+            tank.readFromNBT(provider, nbt.getCompound("tank"));
             active_left = nbt.getBoolean("active_left");
             active_right = nbt.getBoolean("active_right");
         }
 
         @Override
-        public void readSyncNBT(CompoundTag nbt)
+        public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            readSaveNBT(nbt);
+            readSaveNBT(nbt, provider);
         }
 
         @Override
-        public void writeSyncNBT(CompoundTag nbt)
+        public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            writeSaveNBT(nbt);
+            writeSaveNBT(nbt, provider);
         }
 
         public boolean isActive(int furnaceIndex)
@@ -495,11 +467,6 @@ public class RevFurnaceLogic implements IMultiblockLogic<RevFurnaceLogic.State>,
         @Override
         public void invalidate(@NotNull IMultiblockContext<?> ctx)
         {
-            this.outputHandlerRight.get(ctx).invalidate();
-            this.outputHandlerLeft.get(ctx).invalidate();
-            this.fluidCap.get(ctx).invalidate();
-            this.invCapLeft.get(ctx).invalidate();
-            this.invCapRight.get(ctx).invalidate();
         }
     }
 }

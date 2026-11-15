@@ -16,16 +16,12 @@ import com.igteam.immersivegeology.core.material.data.stone.config.IGStoneTypeCo
 import com.igteam.immersivegeology.core.material.helper.material.IStoneType;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public final class IGStoneTypes
@@ -124,7 +120,7 @@ public final class IGStoneTypes
 
 	private static IStoneType resolve(Block block, BlockState state)
 	{
-		IStoneType declared = declaredHosts().get(ForgeRegistries.BLOCKS.getKey(block));
+		IStoneType declared = declaredHosts().get(BuiltInRegistries.BLOCK.getKey(block));
 		if(declared!=null) return declared;
 
 		return StoneEnum.selectWorldState(state);

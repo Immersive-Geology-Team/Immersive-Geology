@@ -10,32 +10,34 @@ package com.igteam.immersivegeology.common.block.multiblocks.recipe;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.crafting.IESerializableRecipe;
+import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.Iterator;
 
 public class ChemicalRepairRecipe extends IESerializableRecipe
 {
-	public static RegistryObject<IERecipeSerializer<ChemicalRepairRecipe>> SERIALIZER;
+	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<ChemicalRepairRecipe>> SERIALIZER;
 	public static final CachedRecipeList<ChemicalRepairRecipe> RECIPES;
 	public final Ingredient input;
 	public final int burnTime;
 
-    public ChemicalRepairRecipe(ResourceLocation id, Ingredient input, int burnTime) {
-		super(LAZY_EMPTY, IGRecipeTypes.CHEMICAL_REPAIR_RECIPE, id);
+    public ChemicalRepairRecipe(Ingredient input, int burnTime) {
+		super(TagOutput.EMPTY, IGRecipeTypes.CHEMICAL_REPAIR_RECIPE);
 		this.input = input;
 		this.burnTime = burnTime;
 	}
 
 	public static int getRepairAmount(Level level, ItemStack stack) {
-		Iterator var2 = RECIPES.getRecipes(level).iterator();
+		Iterator<RecipeHolder<ChemicalRepairRecipe>> var2 = RECIPES.getRecipes(level).iterator();
 
 		ChemicalRepairRecipe e;
 		do {
@@ -43,7 +45,7 @@ public class ChemicalRepairRecipe extends IESerializableRecipe
 				return 0;
 			}
 
-			e = (ChemicalRepairRecipe)var2.next();
+			e = var2.next().value();
 		} while(!e.input.test(stack));
 
 		return e.burnTime;
@@ -57,7 +59,7 @@ public class ChemicalRepairRecipe extends IESerializableRecipe
 		return (IERecipeSerializer)SERIALIZER.get();
 	}
 
-	public ItemStack getResultItem(RegistryAccess access) {
+	public ItemStack getResultItem(HolderLookup.Provider access) {
 		return ItemStack.EMPTY;
 	}
 

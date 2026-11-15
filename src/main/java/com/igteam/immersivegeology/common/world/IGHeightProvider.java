@@ -9,26 +9,19 @@
 package com.igteam.immersivegeology.common.world;
 
 import com.igteam.immersivegeology.common.config.IGServerConfig;
-import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.WorldGenerationContext;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProviderType;
-import net.minecraft.world.level.levelgen.heightproviders.TrapezoidHeight;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
-import net.minecraftforge.common.util.Lazy;
-
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Objects;
+import net.neoforged.neoforge.common.util.Lazy;
 
 public class IGHeightProvider extends HeightProvider
 {
-	public static final Codec<IGHeightProvider> CODEC = IWorldGenConfig.CODEC.xmap(IGHeightProvider::new, p -> p.entry);
+	public static final MapCodec<IGHeightProvider> CODEC = IWorldGenConfig.CODEC.fieldOf("value").xmap(IGHeightProvider::new, p -> p.entry);
 
 	private final IWorldGenConfig entry;
 	private final Lazy<HeightProvider> internalProvider;

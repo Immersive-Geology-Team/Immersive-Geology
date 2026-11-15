@@ -14,7 +14,6 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockB
 import com.igteam.immersivegeology.common.block.multiblocks.logic.AlternatorLogic;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
-import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -29,7 +28,7 @@ public class IGSteamTurbineMultiblock extends IGTemplateMultiblock
 	public static final IGSteamTurbineMultiblock INSTANCE = new IGSteamTurbineMultiblock();
 	public IGSteamTurbineMultiblock()
 	{
-		super(new ResourceLocation(IGLib.MODID, "multiblocks/steam_turbine"), new BlockPos(1, 1, 2), new BlockPos(0,1,11), new BlockPos(3,5,12), IGMultiblockProvider.STEAM_TURBINE);
+		super(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "multiblocks/steam_turbine"), new BlockPos(1, 1, 2), new BlockPos(0,1,11), new BlockPos(3,5,12), IGMultiblockProvider.STEAM_TURBINE);
 	}
 
 	@Override

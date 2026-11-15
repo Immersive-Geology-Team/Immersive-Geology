@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:foundry",
+  "energy": 1152,
+  "input": {
+    "amount": 144,
+    "tag": "c:copper"
+  },
+  "mold": "immersivegeology:mold_ingot_graphite",
+  "result": {
+    "id": "minecraft:copper_ingot"
+  },
+  "time": 3
+}

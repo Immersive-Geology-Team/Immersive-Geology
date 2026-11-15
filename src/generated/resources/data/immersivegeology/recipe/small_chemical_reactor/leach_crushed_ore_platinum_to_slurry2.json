@@ -1,0 +1,20 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 0,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 500,
+    "tag": "c:aqua_regia"
+  },
+  "fluidResult": {
+    "amount": 432,
+    "id": "immersivegeology:slurry_aqua_regia_platinum"
+  },
+  "itemInput": {
+    "item": "immersivegeology:crushed_ore_platinum"
+  },
+  "result": {
+    "id": "immersivegeology:compound_dust_osmium"
+  },
+  "time": 200
+}

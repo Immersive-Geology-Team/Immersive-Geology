@@ -1,0 +1,23 @@
+{
+  "type": "immersivegeology:small_chemical_reactor",
+  "damage_per_second": 0,
+  "energy": 25600,
+  "fluidInputA": {
+    "amount": 750,
+    "tag": "c:sulfuric_acid"
+  },
+  "fluidResult": {
+    "amount": 648,
+    "id": "immersivegeology:slurry_sulfuric_acid_millerite"
+  },
+  "itemInput": {
+    "basePredicate": {
+      "item": "immersivegeology:powdered_slag_millerite"
+    },
+    "count": 3
+  },
+  "result": {
+    "id": "immersivegeology:compound_dust_osmium"
+  },
+  "time": 200
+}

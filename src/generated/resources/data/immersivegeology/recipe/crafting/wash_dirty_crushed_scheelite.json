@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "immersivegeology:dirty_crushed_ore_scheelite"
+    },
+    {
+      "item": "immersivegeology:dirty_crushed_ore_scheelite"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "immersivegeology:crushed_ore_scheelite"
+  }
+}

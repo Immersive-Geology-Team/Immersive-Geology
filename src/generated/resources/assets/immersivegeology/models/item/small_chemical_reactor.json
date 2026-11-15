@@ -123,7 +123,7 @@
     }
   },
   "flip_v": true,
-  "loader": "forge:obj",
+  "loader": "neoforge:obj",
   "model": "immersivegeology:models/block/multiblock/obj/small_chemical_reactor/small_chemical_reactor.obj",
   "textures": {
     "small_chemical_reactor": "immersivegeology:block/multiblock/small_chemical_reactor/default"

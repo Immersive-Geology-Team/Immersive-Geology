@@ -3,18 +3,9 @@ package com.igteam.immersivegeology.client.helper;
 import com.igteam.immersivegeology.client.helper.FluidCuboid.FluidFace;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.inventory.InventoryMenu;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
-import net.minecraftforge.fluids.FluidStack;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
@@ -92,7 +83,7 @@ public class IGFluidRenderHelper
 
 		// if rotating by 90 or 270, swap U and V
 		float minU, maxU, minV, maxV;
-		double size = flowing ? 8 : 16;
+		float size = flowing ? 0.5f : 1f;
 		if ((rotation % 180) == 90) {
 			minU = sprite.getU(v1 * size);
 			maxU = sprite.getU(v2 * size);
@@ -139,42 +130,43 @@ public class IGFluidRenderHelper
 		int r = color >> 16 & 0xFF;
 		int g = color >> 8 & 0xFF;
 		int b = color & 0xFF;
+		Vector3f normal = normalMatrix.transform(new Vector3f(0, 1, 0));
 		switch (face) {
 			case DOWN -> {
-				renderer.vertex(matrix, x1, y1, z2).color(r, g, b, a).uv(u1, v1).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
-				renderer.vertex(matrix, x1, y1, z1).color(r, g, b, a).uv(u2, v2).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
-				renderer.vertex(matrix, x2, y1, z1).color(r, g, b, a).uv(u3, v3).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
-				renderer.vertex(matrix, x2, y1, z2).color(r, g, b, a).uv(u4, v4).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
+				renderer.addVertex(matrix, x1, y1, z2).setColor(r, g, b, a).setUv(u1, v1).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
+				renderer.addVertex(matrix, x1, y1, z1).setColor(r, g, b, a).setUv(u2, v2).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
+				renderer.addVertex(matrix, x2, y1, z1).setColor(r, g, b, a).setUv(u3, v3).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
+				renderer.addVertex(matrix, x2, y1, z2).setColor(r, g, b, a).setUv(u4, v4).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
 			}
 			case UP -> {
-				renderer.vertex(matrix, x1, y2, z1).color(r, g, b, a).uv(u1, v1).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
-				renderer.vertex(matrix, x1, y2, z2).color(r, g, b, a).uv(u2, v2).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
-				renderer.vertex(matrix, x2, y2, z2).color(r, g, b, a).uv(u3, v3).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
-				renderer.vertex(matrix, x2, y2, z1).color(r, g, b, a).uv(u4, v4).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
+				renderer.addVertex(matrix, x1, y2, z1).setColor(r, g, b, a).setUv(u1, v1).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
+				renderer.addVertex(matrix, x1, y2, z2).setColor(r, g, b, a).setUv(u2, v2).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
+				renderer.addVertex(matrix, x2, y2, z2).setColor(r, g, b, a).setUv(u3, v3).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
+				renderer.addVertex(matrix, x2, y2, z1).setColor(r, g, b, a).setUv(u4, v4).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
 			}
 			case NORTH -> {
-				renderer.vertex(matrix, x1, y1, z1).color(r, g, b, a).uv(u1, v1).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
-				renderer.vertex(matrix, x1, y2, z1).color(r, g, b, a).uv(u2, v2).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
-				renderer.vertex(matrix, x2, y2, z1).color(r, g, b, a).uv(u3, v3).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
-				renderer.vertex(matrix, x2, y1, z1).color(r, g, b, a).uv(u4, v4).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
+				renderer.addVertex(matrix, x1, y1, z1).setColor(r, g, b, a).setUv(u1, v1).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
+				renderer.addVertex(matrix, x1, y2, z1).setColor(r, g, b, a).setUv(u2, v2).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
+				renderer.addVertex(matrix, x2, y2, z1).setColor(r, g, b, a).setUv(u3, v3).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
+				renderer.addVertex(matrix, x2, y1, z1).setColor(r, g, b, a).setUv(u4, v4).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
 			}
 			case SOUTH -> {
-				renderer.vertex(matrix, x2, y1, z2).color(r, g, b, a).uv(u1, v1).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
-				renderer.vertex(matrix, x2, y2, z2).color(r, g, b, a).uv(u2, v2).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
-				renderer.vertex(matrix, x1, y2, z2).color(r, g, b, a).uv(u3, v3).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
-				renderer.vertex(matrix, x1, y1, z2).color(r, g, b, a).uv(u4, v4).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
+				renderer.addVertex(matrix, x2, y1, z2).setColor(r, g, b, a).setUv(u1, v1).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
+				renderer.addVertex(matrix, x2, y2, z2).setColor(r, g, b, a).setUv(u2, v2).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
+				renderer.addVertex(matrix, x1, y2, z2).setColor(r, g, b, a).setUv(u3, v3).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
+				renderer.addVertex(matrix, x1, y1, z2).setColor(r, g, b, a).setUv(u4, v4).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
 			}
 			case WEST -> {
-				renderer.vertex(matrix, x1, y1, z2).color(r, g, b, a).uv(u1, v1).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
-				renderer.vertex(matrix, x1, y2, z2).color(r, g, b, a).uv(u2, v2).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
-				renderer.vertex(matrix, x1, y2, z1).color(r, g, b, a).uv(u3, v3).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
-				renderer.vertex(matrix, x1, y1, z1).color(r, g, b, a).uv(u4, v4).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
+				renderer.addVertex(matrix, x1, y1, z2).setColor(r, g, b, a).setUv(u1, v1).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
+				renderer.addVertex(matrix, x1, y2, z2).setColor(r, g, b, a).setUv(u2, v2).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
+				renderer.addVertex(matrix, x1, y2, z1).setColor(r, g, b, a).setUv(u3, v3).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
+				renderer.addVertex(matrix, x1, y1, z1).setColor(r, g, b, a).setUv(u4, v4).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
 			}
 			case EAST -> {
-				renderer.vertex(matrix, x2, y1, z1).color(r, g, b, a).uv(u1, v1).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
-				renderer.vertex(matrix, x2, y2, z1).color(r, g, b, a).uv(u2, v2).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
-				renderer.vertex(matrix, x2, y2, z2).color(r, g, b, a).uv(u3, v3).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
-				renderer.vertex(matrix, x2, y1, z2).color(r, g, b, a).uv(u4, v4).uv2(light1, light2).normal(normalMatrix, 0, 1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).endVertex();
+				renderer.addVertex(matrix, x2, y1, z1).setColor(r, g, b, a).setUv(u1, v1).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
+				renderer.addVertex(matrix, x2, y2, z1).setColor(r, g, b, a).setUv(u2, v2).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
+				renderer.addVertex(matrix, x2, y2, z2).setColor(r, g, b, a).setUv(u3, v3).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
+				renderer.addVertex(matrix, x2, y1, z2).setColor(r, g, b, a).setUv(u4, v4).setUv2(light1, light2).setNormal(normal.x(), normal.y(), normal.z()).setOverlay(OverlayTexture.NO_OVERLAY);
 			}
 		}
 	}

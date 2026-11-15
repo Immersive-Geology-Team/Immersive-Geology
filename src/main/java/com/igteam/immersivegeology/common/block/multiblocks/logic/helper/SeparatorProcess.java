@@ -9,11 +9,12 @@
 package com.igteam.immersivegeology.common.block.multiblocks.logic.helper;
 
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GravitySeparatorRecipe;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
 import java.util.Random;
 
@@ -67,17 +68,17 @@ public class SeparatorProcess
 		return ItemStack.EMPTY;
 	}
 
-	public CompoundTag writeToNBT()
+	public CompoundTag writeToNBT(HolderLookup.Provider provider)
 	{
 		CompoundTag nbt = new CompoundTag();
-		nbt.put("input", this.input.save(new CompoundTag()));
+		nbt.put("input", this.input.saveOptional(provider));
 		nbt.putInt("processTick", this.processTick);
 		return nbt;
 	}
 
-	public static SeparatorProcess readFromNBT(CompoundTag nbt)
+	public static SeparatorProcess readFromNBT(HolderLookup.Provider provider, CompoundTag nbt)
 	{
-		ItemStack input = ItemStack.of(nbt.getCompound("input"));
+		ItemStack input = ItemStack.parseOptional(provider, nbt.getCompound("input"));
 		SeparatorProcess process = new SeparatorProcess(input);
 		process.processTick = nbt.getInt("processTick");
 		return process;

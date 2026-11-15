@@ -8,33 +8,31 @@
 
 package com.igteam.immersivegeology.common.integration;
 
-import blusunrize.immersiveengineering.api.IETags;
+import blusunrize.immersiveengineering.api.crafting.BlastFurnaceFuel;
 import blusunrize.immersiveengineering.common.util.compat.jei.JEIHelper;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.BulkBlastFurnaceLogic;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.BulkBlastFluxRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BulkBlastFurnaceRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
-import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.fluids.FluidStack;
-
-import blusunrize.immersiveengineering.api.crafting.BlastFurnaceFuel;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.BulkBlastFluxRecipe;
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.fluids.FluidStack;
+
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
 
 public class IGBulkBlastFurnaceCategory extends IGRecipeCategory<BulkBlastFurnaceRecipe>
 {
@@ -56,7 +54,7 @@ public class IGBulkBlastFurnaceCategory extends IGRecipeCategory<BulkBlastFurnac
 		super(helper, JEIRecipeTypes.BULK_BLAST_FURNACE, "block.immersivegeology.bulk_blast_furnace");
 		setBackground(helper.createBlankDrawable(156, 54));
 		setIcon(IGMultiblockProvider.BULK_BLAST_FURNACE.iconStack());
-		IDrawableStatic full = helper.drawableBuilder(new ResourceLocation(IGLib.MODID, "textures/gui/jei/arrow.png"), 0, 0, ARROW_WIDTH, ARROW_HEIGHT)
+		IDrawableStatic full = helper.drawableBuilder(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/gui/jei/arrow.png"), 0, 0, ARROW_WIDTH, ARROW_HEIGHT)
 				.setTextureSize(32, 32).build();
 		this.arrow = helper.createAnimatedDrawable(full, 60, IDrawableAnimated.StartDirection.LEFT, false);
 	}
@@ -70,10 +68,10 @@ public class IGBulkBlastFurnaceCategory extends IGRecipeCategory<BulkBlastFurnac
 					.setBackground(JEIHelper.slotDrawable, -1, -1);
 		else if(recipe.meltInput!=null)
 			builder.addSlot(RecipeIngredientRole.INPUT, ORE_X, SLOT_Y)
-					.setFluidRenderer(recipe.meltInput.getAmount(), false, 16, 16)
-					.addIngredients(ForgeTypes.FLUID_STACK, recipe.meltInput.getMatchingFluidStacks())
+					.setFluidRenderer(recipe.meltInput.amount(), false, 16, 16)
+					.addIngredients(NeoForgeTypes.FLUID_STACK, Arrays.asList(recipe.meltInput.getFluids()))
 					.setBackground(JEIHelper.slotDrawable, -1, -1)
-					.addTooltipCallback(JEIHelper.fluidTooltipCallback);
+					.addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
 
 		builder.addSlot(RecipeIngredientRole.INPUT, COKE_X, SLOT_Y)
 				.addItemStacks(fuelStacks())
@@ -91,8 +89,8 @@ public class IGBulkBlastFurnaceCategory extends IGRecipeCategory<BulkBlastFurnac
 	{
 		Level level = Minecraft.getInstance().level;
 		List<ItemStack> stacks = new ArrayList<>();
-		for(BlastFurnaceFuel fuel : BlastFurnaceFuel.RECIPES.getRecipes(level))
-			stacks.addAll(Arrays.asList(fuel.input.getItems()));
+		for(RecipeHolder<BlastFurnaceFuel> fuel : BlastFurnaceFuel.RECIPES.getRecipes(level))
+			stacks.addAll(Arrays.asList(fuel.value().input.getItems()));
 		return stacks;
 	}
 
@@ -100,8 +98,8 @@ public class IGBulkBlastFurnaceCategory extends IGRecipeCategory<BulkBlastFurnac
 	{
 		Level level = Minecraft.getInstance().level;
 		List<ItemStack> stacks = new ArrayList<>();
-		for(BulkBlastFluxRecipe flux : BulkBlastFluxRecipe.RECIPES.getRecipes(level))
-			stacks.addAll(Arrays.asList(flux.input.getItems()));
+		for(RecipeHolder<BulkBlastFluxRecipe> flux : BulkBlastFluxRecipe.RECIPES.getRecipes(level))
+			stacks.addAll(Arrays.asList(flux.value().input.getItems()));
 		return stacks;
 	}
 
@@ -111,7 +109,7 @@ public class IGBulkBlastFurnaceCategory extends IGRecipeCategory<BulkBlastFurnac
 				.setFluidRenderer(melt.getAmount(), false, 16, 16)
 				.addFluidStack(melt.getFluid(), melt.getAmount())
 				.setBackground(JEIHelper.slotDrawable, -1, -1)
-				.addTooltipCallback(JEIHelper.fluidTooltipCallback);
+				.addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
 	}
 
 	@Override

@@ -7,12 +7,11 @@ import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import net.minecraft.world.level.Level;
-
-import java.util.Set;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
+import java.util.Set;
 import java.util.function.BiFunction;
 
 public class MaterialMCBasalt extends MaterialStone {
@@ -39,6 +38,6 @@ public class MaterialMCBasalt extends MaterialStone {
     @Override
     public Properties getProperties(IFlagType<?> flag)
     {
-        return BlockBehaviour.Properties.copy(Blocks.BASALT);
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT);
     }
 }

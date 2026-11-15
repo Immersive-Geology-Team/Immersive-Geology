@@ -8,44 +8,38 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.recipe;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
-import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
+import blusunrize.immersiveengineering.api.crafting.*;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
-import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.util.Lazy;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 
 public class RotaryKilnRecipe extends MultiblockRecipe
 {
-	public static RegistryObject<IERecipeSerializer<RotaryKilnRecipe>> SERIALIZER;
+	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<RotaryKilnRecipe>> SERIALIZER;
 	public static final CachedRecipeList<RotaryKilnRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.ROTARYKILN);
-	public final Lazy<ItemStack> itemOutput;
+	public final TagOutput itemOutput;
 	public final IngredientWithSize itemIn;
 	Lazy<Integer> totalProcessEnergy;
 	Lazy<Integer> heatRequired;
 	Lazy<Integer> totalProcessTime;
 
-	public <T extends Recipe<?>> RotaryKilnRecipe(ResourceLocation id, IngredientWithSize input, Lazy<ItemStack> output, int time, int heat)
+	public <T extends Recipe<?>> RotaryKilnRecipe(IngredientWithSize input, TagOutput output, int time, int heat)
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.ROTARYKILN, id);
+		super(TagOutput.EMPTY, IGRecipeTypes.ROTARYKILN, time, time, () -> new RecipeMultiplier(() -> 1, () -> 1));
 		this.itemOutput = output;
 		this.itemIn = input;
 		// Basic upkeep
 		totalProcessEnergy = Lazy.of(() -> time);
 		heatRequired = Lazy.of(() -> heat);
 		totalProcessTime = Lazy.of(() -> time);
-		this.outputList = Lazy.of(() -> NonNullList.of(ItemStack.EMPTY, this.itemOutput.get()));
+		this.outputList = new TagOutputList(this.itemOutput);
 	}
 
 	@Override
@@ -71,10 +65,10 @@ public class RotaryKilnRecipe extends MultiblockRecipe
 		return totalProcessTime.get();
 	}
 
-	public static RotaryKilnRecipe findRecipe(Level level, ItemStack input)
+	public static RecipeHolder<RotaryKilnRecipe> findRecipe(Level level, ItemStack input)
 	{
-		for(RotaryKilnRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.itemIn.testIgnoringSize(input))
+		for(RecipeHolder<RotaryKilnRecipe> recipe : RECIPES.getRecipes(level))
+			if(recipe.value().itemIn.testIgnoringSize(input))
 				return recipe;
 		return null;
 	}

@@ -1,0 +1,10 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 6000,
+  "input": {
+    "item": "immersivegeology:crushed_ore_pyrolusite"
+  },
+  "result": {
+    "id": "immersivegeology:grit_pyrolusite"
+  }
+}

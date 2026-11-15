@@ -1,0 +1,15 @@
+{
+  "type": "immersivegeology:gravity_separator",
+  "byproduct": {
+    "id": "immersivegeology:metal_oxide_copper"
+  },
+  "byproduct_chance": 0.075,
+  "input": {
+    "tag": "c:powdered_slag/smithsonite"
+  },
+  "result": {
+    "id": "immersivegeology:metal_oxide_zinc"
+  },
+  "time": 200,
+  "water": 250
+}

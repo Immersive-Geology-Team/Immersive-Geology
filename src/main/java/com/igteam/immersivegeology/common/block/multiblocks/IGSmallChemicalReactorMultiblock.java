@@ -21,7 +21,7 @@ public class IGSmallChemicalReactorMultiblock extends IGTemplateMultiblock
 	public static final IGSmallChemicalReactorMultiblock INSTANCE = new IGSmallChemicalReactorMultiblock();
 
 	public IGSmallChemicalReactorMultiblock() {
-		super(new ResourceLocation(IGLib.MODID, "multiblocks/small_chemical_reactor"),
+		super(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "multiblocks/small_chemical_reactor"),
 				new BlockPos(1,0,1),
 				new BlockPos(0,1,2),
 				new BlockPos(4, 6, 3), IGMultiblockProvider.SMALL_CHEMICAL_REACTOR);

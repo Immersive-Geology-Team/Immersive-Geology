@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:foundry",
+  "energy": 1152,
+  "input": {
+    "amount": 144,
+    "tag": "c:bronze"
+  },
+  "mold": "immersivegeology:mold_plate_graphite",
+  "result": {
+    "id": "immersivegeology:plate_bronze"
+  },
+  "time": 3
+}

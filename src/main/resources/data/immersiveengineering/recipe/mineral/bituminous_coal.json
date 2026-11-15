@@ -1,0 +1,72 @@
+{
+  "type": "immersiveengineering:mineral_mix",
+  "biome_predicates": [
+    [
+      "minecraft:is_overworld"
+    ]
+  ],
+  "fail_chance": 0.05,
+  "ores": [
+    {
+      "chance": 0.4,
+      "output": {
+        "tag": "c:normal_ore/lignite"
+      }
+    },
+    {
+      "chance": 0.8,
+      "output": {
+        "tag": "c:normal_ore/bituminous"
+      }
+    },
+    {
+      "chance": 0.2,
+      "output": {
+        "tag": "c:normal_ore/anthracite"
+      }
+    },
+    {
+      "chance": 0.2,
+      "output": {
+        "tag": "c:dusts/sulfur"
+      }
+    },
+    {
+      "chance": 0.2,
+      "conditions": [
+        {
+          "type": "neoforge:not",
+          "value": {
+            "type": "neoforge:tag_empty",
+            "tag": "c:dusts/phosphorus"
+          }
+        }
+      ],
+      "output": {
+        "tag": "c:dusts/phosphorus"
+      }
+    }
+  ],
+  "sample_background": "minecraft:coal_block",
+  "spoils": [
+    {
+      "chance": 0.2,
+      "output": {
+        "item": "minecraft:gravel"
+      }
+    },
+    {
+      "chance": 0.5,
+      "output": {
+        "item": "minecraft:cobblestone"
+      }
+    },
+    {
+      "chance": 0.3,
+      "output": {
+        "item": "minecraft:cobbled_deepslate"
+      }
+    }
+  ],
+  "weight": 25
+}

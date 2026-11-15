@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:bloomery",
+  "input": {
+    "basePredicate": {
+      "tag": "c:crushed_ore/lead"
+    },
+    "count": 2
+  },
+  "result": {
+    "id": "immersiveengineering:ingot_lead"
+  },
+  "time": 200
+}

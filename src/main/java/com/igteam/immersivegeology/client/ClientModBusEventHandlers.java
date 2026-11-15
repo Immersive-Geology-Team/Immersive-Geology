@@ -8,51 +8,34 @@
 
 package com.igteam.immersivegeology.client;
 
-import com.igteam.immersivegeology.client.menu.multiblock.BloomeryScreen;
 import com.igteam.immersivegeology.client.models.IGDynamicModel;
 import com.igteam.immersivegeology.client.renderer.multiblocks.*;
-import com.igteam.immersivegeology.common.block.multiblocks.gui.BloomeryMenu;
+import com.igteam.immersivegeology.common.fluid.IGFluid;
+import com.igteam.immersivegeology.common.fluid.IGFluidType;
 import com.igteam.immersivegeology.common.particle.IGParticles;
 import com.igteam.immersivegeology.common.particle.providers.FlowingWaterParticleProvider;
-import com.igteam.immersivegeology.common.particle.types.FlowingWaterParticle;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.registration.IGMenuTypes;
+import com.igteam.immersivegeology.core.registration.IGContent;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.MapRenderer;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
-import net.minecraft.client.renderer.debug.GameEventListenerRenderer;
-import net.minecraft.client.renderer.texture.atlas.SpriteSources;
-import net.minecraft.client.renderer.texture.atlas.sources.PalettedPermutations;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.MapItem;
-import net.minecraft.world.level.ColorResolver;
-import net.minecraft.world.level.Level;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.saveddata.maps.MapDecoration;
-import net.minecraft.world.level.saveddata.maps.MapDecoration.Type;
-import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.ColorResolverManager;
-import net.minecraftforge.client.event.*;
-import net.minecraftforge.client.event.EntityRenderersEvent.RegisterRenderers;
-import net.minecraftforge.client.event.RegisterColorHandlersEvent.ColorResolvers;
-import net.minecraftforge.common.data.SpriteSourceProvider;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.TickEvent.RenderTickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraft.world.level.material.Fluid;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterRenderers;
+import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 
 
-@Mod.EventBusSubscriber(modid = IGLib.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = IGLib.MODID, value = Dist.CLIENT)
 public class ClientModBusEventHandlers {
 
 	@SubscribeEvent
@@ -69,6 +52,22 @@ public class ClientModBusEventHandlers {
 		SteamTurbineRenderer.ROTOR = new IGDynamicModel(SteamTurbineRenderer.ROTOR_NAME);
 		AlternatorRenderer.WHEEL = new IGDynamicModel(AlternatorRenderer.WHEEL_NAME);
 		CentrifugeRenderer.DRUM = new IGDynamicModel(CentrifugeRenderer.DRUM_NAME);
+	}
+
+	@SubscribeEvent
+	public static void registerClientExtensions(RegisterClientExtensionsEvent event)
+	{
+		for (Fluid fluid : BuiltInRegistries.FLUID)
+		{
+			if (fluid instanceof IGFluid && fluid.getFluidType() instanceof IGFluidType type && !event.isFluidTypeRegistered(type))
+				event.registerFluidType(type.getClientExtensions(), type);
+		}
+	}
+
+	@SubscribeEvent
+	public static void registerScreens(RegisterMenuScreensEvent event)
+	{
+		IGContent.registerContainersAndScreens(event);
 	}
 
 	@SubscribeEvent

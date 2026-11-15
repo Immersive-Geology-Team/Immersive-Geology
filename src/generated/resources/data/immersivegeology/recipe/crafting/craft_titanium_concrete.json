@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "ig_engineering",
+  "key": {
+    "C": {
+      "item": "immersiveengineering:concrete_bucket"
+    },
+    "P": {
+      "tag": "c:plates/titanium"
+    },
+    "R": {
+      "tag": "c:rods/titanium"
+    },
+    "W": {
+      "tag": "c:wires/titanium"
+    }
+  },
+  "pattern": [
+    "PWP",
+    "RCR",
+    "PWP"
+  ],
+  "result": {
+    "count": 9,
+    "id": "immersivegeology:storage_block_trconcrete"
+  }
+}

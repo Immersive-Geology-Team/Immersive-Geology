@@ -8,42 +8,27 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.recipe.builder;
 
-import blusunrize.immersiveengineering.api.crafting.builders.IEFinishedRecipe;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.TurbineFuel;
 import com.igteam.immersivegeology.common.recipe.IGGeoRecipe;
-import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
-import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
-import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
-import com.igteam.immersivegeology.core.material.data.types.MaterialMineral;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.level.material.Fluid;
-import java.util.Locale;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.ResourceLocation;
 
-public class IGGeoHintBuilder extends IEFinishedRecipe<IGGeoHintBuilder>
+public class IGGeoHintBuilder extends IGMultiblockRecipeBuilder<IGGeoHintBuilder>
 {
+	private final GeologyMaterial material;
 
-	private static String capitalize(String input)
+	private IGGeoHintBuilder(GeologyMaterial material)
 	{
-		return input.substring(0,1).toUpperCase(Locale.ROOT) + input.substring(1);
+		this.material = material;
 	}
 
-	private IGGeoHintBuilder(GeologyMaterial material) {
-		super(IGGeoRecipe.SERIALIZER.get());
-
-		int type = material instanceof MaterialMineral? 0 : 1;
-		int index = type == 1 ? MetalEnum.valueOf(capitalize(material.getName())).ordinal() : MineralEnum.valueOf(capitalize(material.getName())).ordinal();
-
-
-		this.addWriter((obj) -> {
-			obj.addProperty("material_index", index);
-		});
-		this.addWriter((obj) -> {
-			obj.addProperty("material_type", type);
-		});
-	}
-
-	public static IGGeoHintBuilder builder(GeologyMaterial material) {
+	public static IGGeoHintBuilder builder(GeologyMaterial material)
+	{
 		return new IGGeoHintBuilder(material);
+	}
+
+	public void build(RecipeOutput out, ResourceLocation name)
+	{
+		out.accept(name, new IGGeoRecipe(material), null, getConditions());
 	}
 }

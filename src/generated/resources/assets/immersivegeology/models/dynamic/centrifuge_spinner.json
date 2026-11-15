@@ -1,5 +1,5 @@
 {
   "flip_v": true,
-  "loader": "forge:obj",
+  "loader": "neoforge:obj",
   "model": "immersivegeology:models/block/multiblock/obj/centrifuge/centrifuge_spinner.obj"
 }

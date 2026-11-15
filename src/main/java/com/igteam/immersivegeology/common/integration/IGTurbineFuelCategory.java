@@ -27,7 +27,7 @@ public class IGTurbineFuelCategory extends IGRecipeCategory<TurbineFuel>
 	public IGTurbineFuelCategory(IGuiHelper helper)
 	{
 		super(helper, JEIRecipeTypes.TURBINE_FUEL, "block.immersivegeology.turbine_fuel");
-		ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/turbine_fuel.png");
+		ResourceLocation background = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/gui/jei/turbine_fuel.png");
 		IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 101, 101).setTextureSize(128,128).build();
 		setBackground(back);
 		setIcon(IGMultiblockProvider.STEAM_TURBINE.iconStack());

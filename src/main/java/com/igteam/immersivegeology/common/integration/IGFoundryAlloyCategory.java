@@ -8,22 +8,23 @@
 
 package com.igteam.immersivegeology.common.integration;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.common.util.compat.jei.JEIHelper;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.FoundryAlloyRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
-import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class IGFoundryAlloyCategory extends IGRecipeCategory<FoundryAlloyRecipe>
@@ -45,7 +46,7 @@ public class IGFoundryAlloyCategory extends IGRecipeCategory<FoundryAlloyRecipe>
 		super(helper, JEIRecipeTypes.FOUNDRY_ALLOYING, "gui.immersivegeology.foundry.alloying");
 		setBackground(helper.createBlankDrawable(128, 46));
 		setIcon(IGMultiblockProvider.FOUNDRY.iconStack());
-		IDrawableStatic full = helper.drawableBuilder(new ResourceLocation(IGLib.MODID, "textures/gui/jei/arrow.png"), 0, 0, ARROW_WIDTH, ARROW_HEIGHT)
+		IDrawableStatic full = helper.drawableBuilder(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/gui/jei/arrow.png"), 0, 0, ARROW_WIDTH, ARROW_HEIGHT)
 				.setTextureSize(32, 32).build();
 		this.arrow = helper.createAnimatedDrawable(full, 40, IDrawableAnimated.StartDirection.LEFT, false);
 	}
@@ -53,22 +54,22 @@ public class IGFoundryAlloyCategory extends IGRecipeCategory<FoundryAlloyRecipe>
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, FoundryAlloyRecipe recipe, IFocusGroup focuses)
 	{
-		List<FluidTagInput> inputs = recipe.alloyInputs;
+		List<SizedFluidIngredient> inputs = recipe.alloyInputs;
 		for(int i = 0; i < inputs.size(); i++)
 		{
-			FluidTagInput input = inputs.get(i);
+			SizedFluidIngredient input = inputs.get(i);
 			builder.addSlot(RecipeIngredientRole.INPUT, INPUT_X+(i%INPUT_COLUMNS)*INPUT_PITCH, INPUT_Y+(i/INPUT_COLUMNS)*INPUT_PITCH)
-					.setFluidRenderer(input.getAmount(), false, 16, 16)
-					.addIngredients(ForgeTypes.FLUID_STACK, input.getMatchingFluidStacks())
+					.setFluidRenderer(input.amount(), false, 16, 16)
+					.addIngredients(NeoForgeTypes.FLUID_STACK, Arrays.asList(input.getFluids()))
 					.setBackground(JEIHelper.slotDrawable, -1, -1)
-					.addTooltipCallback(JEIHelper.fluidTooltipCallback);
+					.addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
 		}
 
 		builder.addSlot(RecipeIngredientRole.OUTPUT, OUTPUT_X, centreOf(inputs.size(), SLOT_SIZE))
 				.setFluidRenderer(recipe.alloyOutput.getAmount(), false, 16, 16)
-				.addIngredient(ForgeTypes.FLUID_STACK, recipe.alloyOutput)
+				.addIngredient(NeoForgeTypes.FLUID_STACK, recipe.alloyOutput)
 				.setBackground(JEIHelper.slotDrawable, -1, -1)
-				.addTooltipCallback(JEIHelper.fluidTooltipCallback);
+				.addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
 	}
 
 	@Override

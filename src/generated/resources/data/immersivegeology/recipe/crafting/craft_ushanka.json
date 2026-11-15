@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "g": {
+      "tag": "c:plates/gold"
+    },
+    "h": {
+      "item": "minecraft:leather_helmet"
+    },
+    "w": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    " w ",
+    " h ",
+    " g "
+  ],
+  "result": {
+    "count": 1,
+    "id": "immersivegeology:armor_russian_helmet"
+  }
+}

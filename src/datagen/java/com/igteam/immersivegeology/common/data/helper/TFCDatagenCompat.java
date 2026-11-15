@@ -10,27 +10,26 @@ package com.igteam.immersivegeology.common.data.helper;
 
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.function.Consumer;
 
 
 public class TFCDatagenCompat
 {
-	public static void runRecipeDatagen(IOreBlock oreBlock, Consumer<FinishedRecipe> consumer, RegistryObject<Block> block)
+	public static void runRecipeDatagen(IOreBlock oreBlock, RecipeOutput consumer, DeferredHolder<Block, Block> block, HolderLookup.Provider provider)
 	{
-		TFCCollapseRecipeBuilder.builder(Ingredient.of(oreBlock.asIGItem())).build(consumer, new ResourceLocation(IGLib.MODID, "collapse/" + block.getId().getPath()));
+		TFCCollapseRecipeBuilder.builder(block.get(), provider).build(consumer, ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "collapse/" + block.getId().getPath()));
 	}
 
 	public static TagKey<Block> getTFCBlockTag(String name)

@@ -14,8 +14,6 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialMetalAlloy;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
-import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Tiers;
 
@@ -34,7 +32,7 @@ public class MaterialTungstenCarbide extends MaterialMetalAlloy
     @Override
     public DrillHeadProps drillHeadInstance()
     {
-        return new DrillHeadProps(getName(), getItemTag(ItemCategoryFlags.INGOT), 3, 1, Tiers.NETHERITE, 9.0f, 11, 96000, () -> new ResourceLocation(IGLib.MODID, "item/colored/" + getName() + "/drill"));
+        return new DrillHeadProps(getName(), getItemTag(ItemCategoryFlags.INGOT), 3, 1, Tiers.NETHERITE, 9.0f, 11, 96000, () -> ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/colored/" + getName() + "/drill"));
     }
 
     @Override

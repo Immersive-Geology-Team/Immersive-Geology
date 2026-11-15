@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:foundry",
+  "energy": 1152,
+  "input": {
+    "amount": 144,
+    "tag": "c:zirconium"
+  },
+  "mold": "immersivegeology:mold_plate_graphite",
+  "result": {
+    "id": "immersivegeology:plate_zirconium"
+  },
+  "time": 3
+}

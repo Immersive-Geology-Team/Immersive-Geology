@@ -29,6 +29,7 @@ import java.util.List;
 public class ReverberationScreen extends IEContainerScreen<ReverberationFurnaceMenu>
 {
 	private static final ResourceLocation TEXTURE = IGLib.makeTextureLocation("multiblocks/reverberation_furnace");
+	private static final ResourceLocation TANK = IGLib.rl("multiblocks/reverberation_furnace/tank_overlay");
 
 	public ReverberationScreen(ReverberationFurnaceMenu inventorySlotsIn, Inventory inv, Component title)
 	{
@@ -107,6 +108,6 @@ public class ReverberationScreen extends IEContainerScreen<ReverberationFurnaceM
 	@Override
 	protected List<InfoArea> makeInfoAreas()
 	{
-		return ImmutableList.of(new FluidInfoArea(this.menu.tank, new Rect2i(this.leftPos + 13, this.topPos + 18, 16, 47), 177, 31, 20, 51, TEXTURE));
+		return ImmutableList.of(new FluidInfoArea(this.menu.tank, new Rect2i(this.leftPos + 13, this.topPos + 18, 16, 47), 20, 51, TANK));
 	}
 }

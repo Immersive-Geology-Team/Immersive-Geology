@@ -1,0 +1,24 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 6000,
+  "input": {
+    "tag": "c:normal_ore/magnetite"
+  },
+  "result": {
+    "id": "immersivegeology:dirty_crushed_ore_magnetite"
+  },
+  "secondaries": [
+    {
+      "chance": 0.33,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_magnetite"
+      }
+    },
+    {
+      "chance": 0.165,
+      "output": {
+        "item": "immersivegeology:dirty_crushed_ore_magnetite"
+      }
+    }
+  ]
+}

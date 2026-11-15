@@ -8,20 +8,10 @@
 
 package com.igteam.immersivegeology.core.material.data.chemical;
 
-import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.IFlagType;
-import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
-import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
-import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
-import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidStack;
 
-import java.util.List;
 import java.util.function.BiFunction;
 
 public class MaterialBindingAgent extends MaterialChemical

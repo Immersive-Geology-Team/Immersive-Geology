@@ -1,0 +1,19 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 216,
+    "tag": "c:clean_hydrochloric_acid_silicon"
+  },
+  "fluidResult": {
+    "amount": 216,
+    "id": "immersivegeology:slurry_hydrochloric_acid_zinc"
+  },
+  "itemInput": {
+    "item": "immersivegeology:grit_zinc"
+  },
+  "result": {
+    "id": "immersivegeology:grit_silicon"
+  },
+  "time": 200
+}

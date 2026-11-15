@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:normal_ore/ilmenite"
+    },
+    {
+      "tag": "c:normal_ore/ilmenite"
+    },
+    {
+      "tag": "c:hammer"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "id": "immersivegeology:dirty_crushed_ore_ilmenite"
+  }
+}

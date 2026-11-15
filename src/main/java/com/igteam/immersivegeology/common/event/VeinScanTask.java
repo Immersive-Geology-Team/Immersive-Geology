@@ -15,10 +15,14 @@ import com.igteam.immersivegeology.common.world.features.helper.IGVeinLocator.Or
 import com.igteam.immersivegeology.common.world.features.helper.IGVeinLocator.Outcome;
 import com.igteam.immersivegeology.common.world.features.helper.IGVeinLocator.Prediction;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
+import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.*;
+import net.minecraft.network.chat.ClickEvent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentUtils;
+import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -32,8 +36,6 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;

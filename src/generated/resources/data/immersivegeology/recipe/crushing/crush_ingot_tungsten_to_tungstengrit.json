@@ -1,0 +1,10 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 6000,
+  "input": {
+    "item": "immersivegeology:ingot_tungsten"
+  },
+  "result": {
+    "id": "immersivegeology:grit_tungsten"
+  }
+}

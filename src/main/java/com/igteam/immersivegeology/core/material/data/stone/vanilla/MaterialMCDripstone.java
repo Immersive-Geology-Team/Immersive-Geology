@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialMCDripstone extends MaterialStone {
 
@@ -32,6 +31,6 @@ public class MaterialMCDripstone extends MaterialStone {
     @Override
     public Properties getProperties(IFlagType<?> flag)
     {
-        return BlockBehaviour.Properties.copy(Blocks.DRIPSTONE_BLOCK);
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.DRIPSTONE_BLOCK);
     }
 }

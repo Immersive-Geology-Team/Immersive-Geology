@@ -8,8 +8,7 @@
 
 package com.igteam.immersivegeology.core.material.helper.material.recipe.methods;
 
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import blusunrize.immersiveengineering.api.crafting.builders.ArcFurnaceRecipeBuilder;
+import blusunrize.immersiveengineering.api.crafting.*;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
 import blusunrize.immersiveengineering.common.register.IEItems.Ingredients;
 import blusunrize.lib.manual.gui.ManualScreen;
@@ -22,7 +21,7 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipe
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageDesignation;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -32,7 +31,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 import static java.util.Arrays.asList;
 
@@ -180,23 +178,17 @@ public class IEArcSmeltingMethod extends IGRecipeMethod
 	}
 
 	@Override
-	public boolean build(Consumer<FinishedRecipe> consumer)
+	public boolean build(RecipeOutput consumer)
 	{
 		try
 		{
-			ArcFurnaceRecipeBuilder builder = ArcFurnaceRecipeBuilder.builder(output);
-			if(!slag.isEmpty()) builder.addSlag(slag);
-			builder.setEnergy(energy);
-			builder.setTime(time);
-			builder.addIngredient("input", input);
-			additives.forEach(builder::addMultiInput);
-
+			List<StackWithChance> secondaryOutputs = new ArrayList<>();
 			for(Pair<TagKey<Item>, Float> entry : secondaries)
-			{
-				builder.addSecondary(entry.getFirst(), entry.getSecond());
-			}
-
-			builder.build(consumer, getLocation());
+				secondaryOutputs.add(new StackWithChance(new TagOutput(entry.getFirst()), entry.getSecond()));
+			ArcFurnaceRecipe recipe = new ArcFurnaceRecipe(
+					new TagOutputList(output.isEmpty()?TagOutput.EMPTY:new TagOutput(output)),
+					slag.isEmpty()?TagOutput.EMPTY:new TagOutput(slag), secondaryOutputs, time, energy, input, additives);
+			consumer.accept(getLocation(), recipe, null);
 			return true;
 		} catch(Exception e)
 		{

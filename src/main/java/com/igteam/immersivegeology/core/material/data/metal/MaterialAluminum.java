@@ -9,7 +9,6 @@
 package com.igteam.immersivegeology.core.material.data.metal;
 
 import blusunrize.immersiveengineering.api.IETags;
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
@@ -22,8 +21,8 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGRecipeChain;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ClipContext.Fluid;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -62,8 +61,8 @@ public class MaterialAluminum extends MaterialMetal {
                 getStack(ItemCategoryFlags.COMPOUND_DUST, 3), //STACK
                 new FluidStack(ChemicalEnum.ChemicalWaste.getCloudySlurryWith(MetalEnum.Sodium), 2*IGLib.ACID_RECOVERED_FROM_SLURRY),
                         IngredientWithSize.of(ItemStack.EMPTY),
-                new FluidTagInput(ChemicalEnum.SodiumHydroxide.getSlurryTagWith(MetalEnum.Aluminum), 3*IGLib.ACID_RECOVERED_FROM_SLURRY),
-                new FluidTagInput(FluidTags.WATER, 3*IGLib.ACID_RECOVERED_FROM_SLURRY),
+                        SizedFluidIngredient.of(ChemicalEnum.SodiumHydroxide.getSlurryTagWith(MetalEnum.Aluminum), 3*IGLib.ACID_RECOVERED_FROM_SLURRY),
+                        SizedFluidIngredient.of(FluidTags.WATER, 3*IGLib.ACID_RECOVERED_FROM_SLURRY),
          null, 200, 51200)
                 .addToTree(hall_heroit_process);
 

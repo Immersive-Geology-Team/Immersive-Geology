@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_item.immersiveengineering.dust_gold": {
+      "conditions": {
+        "items": [
+          {
+            "items": "immersiveengineering:dust_gold"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "immersivegeology:crafting/item.immersiveengineering.dust_gold_to_item.minecraft.gold_ingot_from_blasting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_item.immersiveengineering.dust_gold"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "immersivegeology:crafting/item.immersiveengineering.dust_gold_to_item.minecraft.gold_ingot_from_blasting"
+    ]
+  }
+}

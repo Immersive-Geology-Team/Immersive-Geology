@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:foundry",
+  "energy": 1152,
+  "input": {
+    "amount": 144,
+    "tag": "c:titanium"
+  },
+  "mold": "immersivegeology:mold_gear_graphite",
+  "result": {
+    "id": "immersivegeology:gear_titanium"
+  },
+  "time": 3
+}

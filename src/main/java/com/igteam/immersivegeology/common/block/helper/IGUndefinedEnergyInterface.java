@@ -8,7 +8,7 @@
 
 package com.igteam.immersivegeology.common.block.helper;
 
-import net.minecraftforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.energy.IEnergyStorage;
 
 // A Dummy class to used when you can't check NullEnergyStorage (energy generating multiblocks use it)
 public class IGUndefinedEnergyInterface implements IEnergyStorage

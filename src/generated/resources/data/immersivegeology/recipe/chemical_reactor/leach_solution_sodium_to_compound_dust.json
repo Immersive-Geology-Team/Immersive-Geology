@@ -1,0 +1,22 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 120,
+    "tag": "c:cloudy_chemical_waste_sodium"
+  },
+  "fluidInputB": {
+    "amount": 120,
+    "tag": "c:sulfuric_acid"
+  },
+  "fluidResult": {},
+  "itemInput": {
+    "basePredicate": [],
+    "count": 0
+  },
+  "result": {
+    "count": 3,
+    "id": "immersivegeology:compound_dust_sodium"
+  },
+  "time": 200
+}

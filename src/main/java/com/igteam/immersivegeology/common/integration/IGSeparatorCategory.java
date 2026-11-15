@@ -8,39 +8,27 @@
 
 package com.igteam.immersivegeology.common.integration;
 
-import blusunrize.immersiveengineering.api.crafting.StackWithChance;
-import blusunrize.immersiveengineering.common.register.IEMultiblockLogic;
-import blusunrize.immersiveengineering.common.util.compat.jei.JEIHelper;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GravitySeparatorRecipe;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.RevFurnaceRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mezz.jei.api.recipe.RecipeType;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.Nullable;
 
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class IGSeparatorCategory extends IGRecipeCategory<GravitySeparatorRecipe>
 {
 	public IGSeparatorCategory(IGuiHelper helper)
 	{
 		super(helper, JEIRecipeTypes.SEPARATOR, "block.immersivegeology.gravity_separator");
-		ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/gravity_separator.png");
+		ResourceLocation background = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/gui/jei/gravity_separator.png");
 		IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 101, 101).setTextureSize(101,101).build();
 		setBackground(back);
 		setIcon(IGMultiblockProvider.GRAVITY_SEPARATOR.iconStack());
@@ -58,7 +46,7 @@ public class IGSeparatorCategory extends IGRecipeCategory<GravitySeparatorRecipe
 		String chance = (Math.round(recipe.getChance() * 100)) + "%" + " Output Chance";
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 67, 62)
 				.addItemStack(recipe.itemByproduct.get())
-				.addTooltipCallback((a,b) -> b.add(Component.literal(chance)));
+				.addRichTooltipCallback((a,b) -> b.add(Component.literal(chance)));
 	}
 
 	@Override

@@ -10,23 +10,27 @@ package com.igteam.immersivegeology.common.item;
 
 import blusunrize.immersiveengineering.api.tool.IDrillHead;
 import blusunrize.immersiveengineering.common.items.DrillItem;
-import blusunrize.immersiveengineering.common.items.DrillheadItem.DrillHeadPerm;
 import blusunrize.immersiveengineering.common.register.IEItems.Tools;
 import blusunrize.immersiveengineering.common.util.Utils;
 import com.google.common.collect.ImmutableList;
-import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -34,7 +38,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -53,7 +56,8 @@ public class IGGenericDrillHead extends IGGenericItem implements IDrillHead
 		return false;
 	}
 
-	public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> list, TooltipFlag flag) {
+	@Override
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> list, TooltipFlag flag) {
 		list.add(Component.translatable("desc.immersiveengineering.flavour.drillhead.size", new Object[]{this.perms.drillSize, this.perms.drillDepth}));
 		list.add(Component.translatable("desc.immersiveengineering.flavour.drillhead.level", new Object[]{Utils.getHarvestLevelName(this.getMiningLevel(stack))}));
 		list.add(Component.translatable("desc.immersiveengineering.flavour.drillhead.speed", new Object[]{Utils.formatDouble((double)this.getMiningSpeed(stack), "0.###")}));
@@ -91,12 +95,12 @@ public class IGGenericDrillHead extends IGGenericItem implements IDrillHead
 	}
 
 	public int getHeadDamage(ItemStack head) {
-		if (head.hasTag()) {
-			CompoundTag nbt = head.getOrCreateTag();
-			return nbt.contains("headDamage", 3) ? nbt.getInt("headDamage") : nbt.getInt("Damage");
-		} else {
-			return 0;
+		CustomData customData = head.get(DataComponents.CUSTOM_DATA);
+		if(customData!=null) {
+			CompoundTag tag = customData.copyTag();
+			if(tag.contains("headDamage", Tag.TAG_INT)) return tag.getInt("headDamage");
 		}
+		return head.getOrDefault(DataComponents.DAMAGE, 0);
 	}
 
 	public int getMaximumHeadDamage(ItemStack head) {
@@ -108,9 +112,8 @@ public class IGGenericDrillHead extends IGGenericItem implements IDrillHead
 	}
 
 	public static void setHeadDamage(ItemStack head, int totalDamage) {
-		CompoundTag nbt = head.getOrCreateTag();
-		nbt.remove("headDamage");
-		nbt.putInt("Damage", totalDamage);
+		CustomData.update(DataComponents.CUSTOM_DATA, head, tag -> tag.remove("headDamage"));
+		head.set(DataComponents.DAMAGE, totalDamage);
 	}
 
 	public ResourceLocation getDrillTexture(ItemStack drill, ItemStack head) {

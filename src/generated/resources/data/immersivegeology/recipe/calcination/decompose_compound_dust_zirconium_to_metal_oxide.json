@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:rotary_kiln",
+  "heat": 120,
+  "input": {
+    "tag": "c:compound_dust/zirconium"
+  },
+  "result": {
+    "id": "immersivegeology:metal_oxide_zirconium"
+  },
+  "time": 300
+}

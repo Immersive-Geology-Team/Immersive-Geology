@@ -8,41 +8,23 @@
 
 package com.igteam.immersivegeology.common.world;
 
-import blusunrize.immersiveengineering.api.EnumMetals;
-import blusunrize.immersiveengineering.common.register.IEBlocks;
-import blusunrize.immersiveengineering.common.register.IEBlocks.BlockEntry;
-import blusunrize.immersiveengineering.common.register.IEBlocks.Metals;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
 import com.igteam.immersivegeology.common.config.IGServerConfig.Ores;
-import com.igteam.immersivegeology.common.world.features.helper.IGOreGenUtils;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.telemetry.events.WorldLoadEvent;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.SectionPos;
-import net.minecraft.data.worldgen.DimensionTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.BiomeGenerationSettings;
-import net.minecraft.world.level.biome.BiomeSource;
-import net.minecraft.world.level.biome.MultiNoiseBiomeSource;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.chunk.LevelChunkSection;
-import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
-import net.minecraft.world.level.dimension.DimensionType;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.event.level.ChunkEvent;
-import net.minecraftforge.event.level.LevelEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.level.ChunkEvent;
+import net.neoforged.neoforge.event.level.LevelEvent;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -92,7 +74,7 @@ public class IGWorldSubscription
 
 	private Set<ResourceLocation> getBlacklistedBiomes()
 	{
-		return IGServerConfig.REMOVAL.biome_blacklist.get().stream().map(ResourceLocation::new).collect(Collectors.toSet());
+		return IGServerConfig.REMOVAL.biome_blacklist.get().stream().map(ResourceLocation::parse).collect(Collectors.toSet());
 	}
 
 	// Okay, so, this event NEEDS to be optimized, as extra over head here, means slower chunk generation
@@ -125,7 +107,7 @@ public class IGWorldSubscription
 			replaceState = isNether ? netherStone : null;
 		}
 		Holder<Biome> holder = level.getBiome(chunk.getPos().getWorldPosition());
-		if(holder.getTagKeys().anyMatch(((b) ->
+		if(holder.tags().anyMatch(((b) ->
 		{
 			if(getBlacklistedBiomes().contains(b.location()))
 			{

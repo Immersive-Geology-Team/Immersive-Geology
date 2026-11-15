@@ -12,19 +12,19 @@ import com.igteam.immersivegeology.common.world.structure.*;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.structure.StructureType;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class IGStructureTypes
 {
 	public static final DeferredRegister<StructureType<?>> STRUCTURE_TYPES = DeferredRegister.create(Registries.STRUCTURE_TYPE, IGLib.MODID);
 
-	public static final RegistryObject<StructureType<RuinedMiningOutpost>> RUINED_MINING_OUTPOST = STRUCTURE_TYPES.register("ruined_mining_outpost", () -> () -> RuinedMiningOutpost.CODEC);
-	public static final RegistryObject<StructureType<RuinedFactory>> RUINED_FACTORY = STRUCTURE_TYPES.register("ruined_factory", () -> () -> RuinedFactory.CODEC);
-	public static final RegistryObject<StructureType<LargeRuinedFactory>> LARGE_RUINED_FACTORY = STRUCTURE_TYPES.register("large_ruined_factory", () -> () -> LargeRuinedFactory.CODEC);
-	public static final RegistryObject<StructureType<RuinedElevator>> RUINED_ELEVATOR = STRUCTURE_TYPES.register("ruined_elevator", () -> () -> RuinedElevator.CODEC);
-	public static final RegistryObject<StructureType<HydroVent>> SO2_VENT_TYPE = STRUCTURE_TYPES.register("so2_vent", () -> () -> HydroVent.CODEC);
+	public static final DeferredHolder<StructureType<?>, StructureType<RuinedMiningOutpost>> RUINED_MINING_OUTPOST = STRUCTURE_TYPES.register("ruined_mining_outpost", () -> () -> RuinedMiningOutpost.CODEC);
+	public static final DeferredHolder<StructureType<?>, StructureType<RuinedFactory>> RUINED_FACTORY = STRUCTURE_TYPES.register("ruined_factory", () -> () -> RuinedFactory.CODEC);
+	public static final DeferredHolder<StructureType<?>, StructureType<LargeRuinedFactory>> LARGE_RUINED_FACTORY = STRUCTURE_TYPES.register("large_ruined_factory", () -> () -> LargeRuinedFactory.CODEC);
+	public static final DeferredHolder<StructureType<?>, StructureType<RuinedElevator>> RUINED_ELEVATOR = STRUCTURE_TYPES.register("ruined_elevator", () -> () -> RuinedElevator.CODEC);
+	public static final DeferredHolder<StructureType<?>, StructureType<HydroVent>> SO2_VENT_TYPE = STRUCTURE_TYPES.register("so2_vent", () -> () -> HydroVent.CODEC);
 
 	public static void initialize(IEventBus bus)
 	{

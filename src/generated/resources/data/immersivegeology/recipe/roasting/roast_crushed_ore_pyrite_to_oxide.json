@@ -1,0 +1,11 @@
+{
+  "type": "immersivegeology:reverberation_furnace",
+  "input": {
+    "tag": "c:crushed_ore/pyrite"
+  },
+  "result": {
+    "id": "immersivegeology:slag_pyrite"
+  },
+  "time": 800,
+  "waste": 25
+}

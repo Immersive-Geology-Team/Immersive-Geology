@@ -13,17 +13,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
-import com.igteam.immersivegeology.common.config.IGServerConfig;
-import com.igteam.immersivegeology.common.config.IGServerConfig.Ores.OreConfig;
-import com.igteam.immersivegeology.common.world.IWorldGenConfig;
-import com.igteam.immersivegeology.common.world.features.IGOreFeature;
-import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MineralEnum;
-import com.igteam.immersivegeology.core.material.data.enums.StoneEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
@@ -32,12 +24,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
@@ -64,9 +51,12 @@ public class TFCCompatOreProvider implements DataProvider {
 		JsonObject root = new JsonObject();
 		List<StateMapping> stateMapping = new ArrayList<>();
 		String name = mineral.getName().toLowerCase(Locale.ROOT) + "_tfc";
-		stateMapping.add(new StateMapping("tfc:dirt/sandy_loam", new ResourceLocation(IGLib.MODID, BlockCategoryFlags.EVAPORATE.getRegistryKey(mineral)).toString()));
-		stateMapping.add(new StateMapping("tfc:dirt/silty_loam", new ResourceLocation(IGLib.MODID, BlockCategoryFlags.EVAPORATE.getRegistryKey(mineral)).toString()));
-		stateMapping.add(new StateMapping("tfc:grass/sandy_loam", new ResourceLocation(IGLib.MODID, BlockCategoryFlags.EVAPORATE.getRegistryKey(mineral)).toString()));
+		for (String soil : List.of(
+				"entisol", "aridisol", "oxisol", "fluvisol",
+				"andisol", "podzol", "alfisol", "mollisol")) {
+			stateMapping.add(new StateMapping("tfc:dirt/" + soil, ResourceLocation.fromNamespaceAndPath(IGLib.MODID, BlockCategoryFlags.EVAPORATE.getRegistryKey(mineral)).toString()));
+			stateMapping.add(new StateMapping("tfc:grass/" + soil, ResourceLocation.fromNamespaceAndPath(IGLib.MODID, BlockCategoryFlags.EVAPORATE.getRegistryKey(mineral)).toString()));
+		}
 		root.addProperty("type", "tfc:soil_disc");
 
 		JsonObject config = new JsonObject();
@@ -89,8 +79,8 @@ public class TFCCompatOreProvider implements DataProvider {
 		placedConfigJson.addProperty("feature", "immersivegeology:" + name);
 		placedConfigJson.add("placement", new JsonArray());
 
-		elements.put(new ResourceLocation("immersivegeology", "worldgen/placed_feature/" + name), () -> placedConfigJson);
-		elements.put(new ResourceLocation("immersivegeology", "worldgen/configured_feature/" + name), () -> root);
+		elements.put(ResourceLocation.fromNamespaceAndPath("immersivegeology", "worldgen/placed_feature/" + name), () -> placedConfigJson);
+		elements.put(ResourceLocation.fromNamespaceAndPath("immersivegeology", "worldgen/configured_feature/" + name), () -> root);
 	}
 
 	// --- Helper class for state mapping ---
@@ -158,8 +148,8 @@ public class TFCCompatOreProvider implements DataProvider {
 		placedConfigJson.add("placement", new JsonArray());
 
 		// Save the generated JSON under the correct path
-		elements.put(new ResourceLocation("immersivegeology", "worldgen/configured_feature/" + name), () -> veinConfigJson);
-		elements.put(new ResourceLocation("immersivegeology", "worldgen/placed_feature/" + name), () -> placedConfigJson);
+		elements.put(ResourceLocation.fromNamespaceAndPath("immersivegeology", "worldgen/configured_feature/" + name), () -> veinConfigJson);
+		elements.put(ResourceLocation.fromNamespaceAndPath("immersivegeology", "worldgen/placed_feature/" + name), () -> placedConfigJson);
 	}
 
 	// Method to calculate weight based on OreRichness

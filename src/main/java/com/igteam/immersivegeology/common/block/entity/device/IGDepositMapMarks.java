@@ -8,16 +8,24 @@
 
 package com.igteam.immersivegeology.common.block.entity.device;
 
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.component.MapDecorations;
+import net.minecraft.world.item.component.MapDecorations.Entry;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.saveddata.maps.MapDecoration;
+import net.minecraft.world.level.saveddata.maps.MapDecorationType;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public final class IGDepositMapMarks
 {
@@ -30,7 +38,7 @@ public final class IGDepositMapMarks
 	private static final String DECORATIONS = "Decorations";
 	private static final String NAME = "IGName";
 
-	public record Mark(String id, MapDecoration.Type type, double x, double z, Component name)
+	public record Mark(String id, Holder<MapDecorationType> type, double x, double z, Component name)
 	{
 	}
 
@@ -39,31 +47,35 @@ public final class IGDepositMapMarks
 		return PREFIX+detector+"_";
 	}
 
-	public static void write(ItemStack stack, String prefix, List<Mark> marks)
+	public static void write(ItemStack stack, String prefix, List<Mark> marks, HolderLookup.Provider registries)
 	{
-		ListTag list = stack.getOrCreateTag().getList(DECORATIONS, Tag.TAG_COMPOUND);
-		list.removeIf(entry -> entry instanceof CompoundTag tag&&tag.getString("id").startsWith(prefix));
+		Map<String, Entry> decorations = new LinkedHashMap<>(stack.getOrDefault(DataComponents.MAP_DECORATIONS, MapDecorations.EMPTY).decorations());
+		decorations.keySet().removeIf(id -> id.startsWith(prefix));
+
+		CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+		ListTag list = tag.getList(DECORATIONS, Tag.TAG_COMPOUND);
+		list.removeIf(entry -> entry instanceof CompoundTag entryTag&&entryTag.getString("id").startsWith(prefix));
 
 		for(Mark mark : marks)
 		{
+			decorations.put(mark.id(), new MapDecorations.Entry(mark.type(), mark.x(), mark.z(), 180.0F));
 			CompoundTag entry = new CompoundTag();
-			entry.putByte("type", mark.type().getIcon());
 			entry.putString("id", mark.id());
-			entry.putDouble("x", mark.x());
-			entry.putDouble("z", mark.z());
-			entry.putDouble("rot", 180.0);
-			entry.putString(NAME, Component.Serializer.toJson(mark.name()));
+			entry.putString(NAME, Component.Serializer.toJson(mark.name(), registries));
 			list.add(entry);
 		}
 
-		if(list.isEmpty()) stack.removeTagKey(DECORATIONS);
-		else stack.addTagElement(DECORATIONS, list);
+		if(decorations.isEmpty()) stack.remove(DataComponents.MAP_DECORATIONS);
+		else stack.set(DataComponents.MAP_DECORATIONS, new MapDecorations(Map.copyOf(decorations)));
+		if(list.isEmpty()) tag.remove(DECORATIONS);
+		else tag.put(DECORATIONS, list);
+		CustomData.set(DataComponents.CUSTOM_DATA, stack, tag);
 	}
 
 	public static boolean hasMarks(ItemStack stack)
 	{
-		CompoundTag tag = stack.getTag();
-		if(tag==null||!tag.contains(DECORATIONS, Tag.TAG_LIST)) return false;
+		CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+		if(!tag.contains(DECORATIONS, Tag.TAG_LIST)) return false;
 
 		ListTag list = tag.getList(DECORATIONS, Tag.TAG_COMPOUND);
 		for(int i = 0; i < list.size(); i++)
@@ -75,24 +87,27 @@ public final class IGDepositMapMarks
 
 	public static boolean restore(ItemStack stack, MapItemSavedData data, Level level)
 	{
-		CompoundTag tag = stack.getTag();
-		if(tag==null||!tag.contains(DECORATIONS, Tag.TAG_LIST)) return false;
+		CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+		if(!tag.contains(DECORATIONS, Tag.TAG_LIST)) return false;
 
 		boolean found = false;
 		ListTag list = tag.getList(DECORATIONS, Tag.TAG_COMPOUND);
+		MapDecorations decorations = stack.getOrDefault(DataComponents.MAP_DECORATIONS, MapDecorations.EMPTY);
 		for(int i = 0; i < list.size(); i++)
 		{
 			CompoundTag entry = list.getCompound(i);
 			String id = entry.getString("id");
 			if(!id.startsWith(PREFIX)) continue;
+			MapDecorations.Entry decorationsEntry = decorations.decorations().get(id);
+			if(decorationsEntry==null) continue;
 			found = true;
 
 			if(!entry.contains(NAME, Tag.TAG_STRING)) continue;
-			Component name = Component.Serializer.fromJson(entry.getString(NAME));
+			Component name = Component.Serializer.fromJson(entry.getString(NAME), level.registryAccess());
 			if(name==null) continue;
 
-			data.addDecoration(MapDecoration.Type.byIcon(entry.getByte("type")), level, id,
-					entry.getDouble("x"), entry.getDouble("z"), entry.getDouble("rot"), name);
+			data.addDecoration(decorationsEntry.type(), level, id,
+					decorationsEntry.x(), decorationsEntry.z(), decorationsEntry.rotation(), name);
 		}
 		return found;
 	}

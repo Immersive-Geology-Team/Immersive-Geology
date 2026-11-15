@@ -16,11 +16,8 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultib
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
-import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.client.utils.TextUtils;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.blockimpl.MultiblockLevel;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.interfaces.MBOverlayText;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcess;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessInMachine;
@@ -38,30 +35,32 @@ import com.igteam.immersivegeology.common.block.helper.IGReceiveOnlyEnergy;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.CentrifugeLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.CentrifugeRecipe;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.CentrifugeShape;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage;
+import net.neoforged.neoforge.capabilities.Capabilities.FluidHandler;
+import net.neoforged.neoforge.capabilities.Capabilities.ItemHandler;
+import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.IFluidTank;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -127,23 +126,23 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
 
         final FluidStack input = state.tank.getFluid();
         if(input.isEmpty()) return;
-        CentrifugeRecipe recipe = CentrifugeRecipe.findRecipe(level, input);
+        RecipeHolder<CentrifugeRecipe> recipe = CentrifugeRecipe.findRecipe(level, input);
         if(recipe == null) return;
         MultiblockProcessInMachine<CentrifugeRecipe> process = new MultiblockProcessInMachine<>(recipe);
         if(input.isEmpty()) process.setInputTanks(0);
 
         if(state.processor.addProcessToQueue(process, level, true))
         {
-            state.tank.drain(recipe.fluidIn.getAmount(), FluidAction.EXECUTE);
+            state.tank.drain(recipe.value().fluidIn.amount(), FluidAction.EXECUTE);
             state.processor.addProcessToQueue(process, level, false);
         }
     }
 
-    private void drainOutputTank(IMultiblockContext<CentrifugeLogic.State> context, CapabilityReference<IFluidHandler> outputRef, FluidTank tank)
+    private void drainOutputTank(IMultiblockContext<CentrifugeLogic.State> context, Supplier<@Nullable IFluidHandler> outputRef, FluidTank tank)
     {
         int outSize = Math.min(FluidType.BUCKET_VOLUME, tank.getFluidAmount());
         FluidStack out = Utils.copyFluidStackWithAmount(tank.getFluid(), outSize, false);
-        IFluidHandler output = outputRef.getNullable();
+        IFluidHandler output = outputRef.get();
 
         if(output==null)
             return;
@@ -164,38 +163,17 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
     }
 
     @Override
-    public <T> LazyOptional<T> getCapability(IMultiblockContext<CentrifugeLogic.State> ctx, CapabilityPosition position, Capability<T> cap)
+    public void registerCapabilities(CapabilityRegistrar<State> register)
     {
-        final CentrifugeLogic.State state = ctx.getState();
-        if(cap == ForgeCapabilities.ENERGY && (position.side()==null || ENERGY_INPUTS.contains(position)))
-        {
-            return state.energyCap.cast(ctx);
-        }
-
-        if(cap == ForgeCapabilities.FLUID_HANDLER)
-        {
-            if(FLUID_INPUT_CAP.equals(position))
-            {
-                return state.fInputCap.cast(ctx);
-            }
-
-            if(FLUID_PRIMARY_OUTPUT_CAP.equals(position))
-            {
-                return state.fPrimaryOutput.cast(ctx);
-            }
-            if(FLUID_SECONDARY_OUTPUT_CAP.equals(position))
-            {
-                return state.fSecondaryOutput.cast(ctx);
-            }
-        }
-
-        if(cap==ForgeCapabilities.ITEM_HANDLER)
-        {
-            if(ITEM_OUTPUT_CAP.equals(position))
-                return state.itemOutputCap.cast(ctx);
-        }
-
-        return LazyOptional.empty();
+        register.register(EnergyStorage.BLOCK, (state, position) ->
+                position.side()==null||ENERGY_INPUTS.contains(position)?state.energyCap:null);
+        register.register(FluidHandler.BLOCK, (state, position) -> {
+            if(FLUID_INPUT_CAP.equals(position)) return state.fInputCap;
+            if(FLUID_PRIMARY_OUTPUT_CAP.equals(position)) return state.fPrimaryOutput;
+            if(FLUID_SECONDARY_OUTPUT_CAP.equals(position)) return state.fSecondaryOutput;
+            return null;
+        });
+        register.registerAt(ItemHandler.BLOCK, ITEM_OUTPUT_CAP, state -> state.itemOutputCap);
     }
 
     @Override
@@ -205,7 +183,7 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
 
     @Nullable
     @Override
-    public List<Component> getOverlayText(State state, Player player, boolean b)
+    public List<Component> getOverlayText(State state, BlockPos posInMultiblock, BlockHitResult absoluteHit, Player player, boolean b)
     {
         if(Utils.isFluidRelatedItemStack(player.getItemInHand(InteractionHand.MAIN_HAND)))
             return List.of(TextUtils.formatFluidStack(state.tank.getFluid()), TextUtils.formatFluidStack(state.primary_output_tank.getFluid()), TextUtils.formatFluidStack(state.secondary_output_tank.getFluid()), Component.literal("Processes: " + state.processor.getQueueSize()));
@@ -229,13 +207,13 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
         public final RedstoneControl.RSState rsState = RedstoneControl.RSState.enabledByDefault();
 
         public final FluidTank tank = new FluidTank(TANK_VOLUME);
-        private final StoredCapability<IFluidHandler> fInputCap;
-        private final StoredCapability<IEnergyStorage> energyCap;
+        private final IFluidHandler fInputCap;
+        private final IEnergyStorage energyCap;
         private final DroppingMultiblockOutput output;
-        private final StoredCapability<IItemHandler> itemOutputCap;
+        private final IItemHandler itemOutputCap;
 
-        private final CapabilityReference<IFluidHandler> fluidOutputPrimary, fluidOutputSecondary;
-        private final StoredCapability<IFluidHandler> fPrimaryOutput, fSecondaryOutput;
+        private final Supplier<@Nullable IFluidHandler> fluidOutputPrimary, fluidOutputSecondary;
+        private final IFluidHandler fPrimaryOutput, fSecondaryOutput;
 
         public final FluidTank primary_output_tank = new FluidTank(TANK_VOLUME);
         public final FluidTank secondary_output_tank = new FluidTank(TANK_VOLUME);
@@ -248,7 +226,7 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
         {
             final Supplier<@Nullable Level> getLevel = ctx.levelSupplier();
             this.rotation = 0;
-            this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.energy));
+            this.energyCap = IGReceiveOnlyEnergy.of(this.energy);
             this.output = new DroppingMultiblockOutput(OUTPUT_POS, ctx);
             this.processor = new MultiblockProcessor<>(
                 16, 0, 8, ctx.getMarkDirtyRunnable(), CentrifugeRecipe.RECIPES::getById
@@ -260,52 +238,52 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
                 ctx.getSyncRunnable().run();
                 ctx.getMarkDirtyRunnable().run();
             };
-            this.itemOutputCap = new StoredCapability<>(new WrappingItemHandler(
+            this.itemOutputCap = new WrappingItemHandler(
                     inventory, false, true, new IntRange(0, 1)
-            ));
-            this.fInputCap = new StoredCapability<>(new ArrayFluidHandler(tank, true, true, changedAndSync));
+            );
+            this.fInputCap = new ArrayFluidHandler(tank, true, true, changedAndSync);
 
-            this.fPrimaryOutput = new StoredCapability<>(new ArrayFluidHandler(primary_output_tank, true, false, changedAndSync));
-            this.fSecondaryOutput = new StoredCapability<>(new ArrayFluidHandler(secondary_output_tank, true, false, changedAndSync));
+            this.fPrimaryOutput = new ArrayFluidHandler(primary_output_tank, true, false, changedAndSync);
+            this.fSecondaryOutput = new ArrayFluidHandler(secondary_output_tank, true, false, changedAndSync);
 
-            this.fluidOutputPrimary = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(FLUID_PRIMARY_OUTPUT_CAP.side(), FLUID_PRIMARY_OUTPUT_CAP.posInMultiblock().above()));
-            this.fluidOutputSecondary = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, new MultiblockFace(FLUID_SECONDARY_OUTPUT_CAP.side(), FLUID_SECONDARY_OUTPUT_CAP.posInMultiblock().above()));
+            this.fluidOutputPrimary = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, new MultiblockFace(FLUID_PRIMARY_OUTPUT_CAP.side(), FLUID_PRIMARY_OUTPUT_CAP.posInMultiblock().above()));
+            this.fluidOutputSecondary = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, new MultiblockFace(FLUID_SECONDARY_OUTPUT_CAP.side(), FLUID_SECONDARY_OUTPUT_CAP.posInMultiblock().above()));
 
             this.isActive = false;
         }
 
         @Override
-        public void writeSaveNBT(CompoundTag nbt) {
-            nbt.put("energy", energy.serializeNBT());
-            nbt.put("processor", processor.toNBT());
-            nbt.put("tank", tank.writeToNBT(new CompoundTag()));
-            nbt.put("primary_output_tank", primary_output_tank.writeToNBT(new CompoundTag()));
-            nbt.put("secondary_output_tank", secondary_output_tank.writeToNBT(new CompoundTag()));
-            nbt.put("inventory", inventory.serializeNBT());
+        public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider) {
+            nbt.put("energy", energy.serializeNBT(provider));
+            nbt.put("processor", processor.toNBT(provider));
+            nbt.put("tank", tank.writeToNBT(provider, new CompoundTag()));
+            nbt.put("primary_output_tank", primary_output_tank.writeToNBT(provider, new CompoundTag()));
+            nbt.put("secondary_output_tank", secondary_output_tank.writeToNBT(provider, new CompoundTag()));
+            nbt.put("inventory", inventory.serializeNBT(provider));
             nbt.putBoolean("isActive", isActive);
         }
 
         @Override
-        public void readSaveNBT(CompoundTag nbt){
-            energy.deserializeNBT(nbt.get("energy"));
-            processor.fromNBT(nbt.get("processor"), MultiblockProcessInMachine::new);
-            tank.readFromNBT(nbt.getCompound("tank"));
-            primary_output_tank.readFromNBT(nbt.getCompound("primary_output_tank"));
-            secondary_output_tank.readFromNBT(nbt.getCompound("secondary_output_tank"));
-            inventory.deserializeNBT(nbt.getCompound("inventory"));
+        public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            energy.deserializeNBT(provider, nbt.get("energy"));
+            processor.fromNBT(nbt.get("processor"), (getRecipe, data, p) -> new MultiblockProcessInMachine<>(getRecipe, data), provider);
+            tank.readFromNBT(provider, nbt.getCompound("tank"));
+            primary_output_tank.readFromNBT(provider, nbt.getCompound("primary_output_tank"));
+            secondary_output_tank.readFromNBT(provider, nbt.getCompound("secondary_output_tank"));
+            inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
             isActive = nbt.getBoolean("isActive");
         }
 
         @Override
-        public void writeSyncNBT(CompoundTag nbt)
+        public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            writeSaveNBT(nbt);
+            writeSaveNBT(nbt, provider);
         }
 
         @Override
-        public void readSyncNBT(CompoundTag nbt)
+        public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            readSaveNBT(nbt);
+            readSaveNBT(nbt, provider);
         }
 
         @Override
@@ -364,12 +342,6 @@ public class CentrifugeLogic implements IMultiblockLogic<State>, IServerTickable
         @Override
         public void invalidate(@NotNull IMultiblockContext<?> context)
         {
-            this.fPrimaryOutput.get(context).invalidate();
-            this.fSecondaryOutput.get(context).invalidate();
-            this.itemOutputCap.get(context).invalidate();
-            this.fInputCap.get(context).invalidate();
-            this.energyCap.get(context).invalidate();
-            this.itemOutputCap.get(context).invalidate();
         }
     }
 

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "immersivegeology:storage_block_high_speed_steel"
+    },
+    "I": {
+      "tag": "c:ingots/high_speed_steel"
+    }
+  },
+  "pattern": [
+    "  I",
+    "II ",
+    "BI "
+  ],
+  "result": {
+    "count": 1,
+    "id": "immersivegeology:drill_head_high_speed_steel"
+  }
+}

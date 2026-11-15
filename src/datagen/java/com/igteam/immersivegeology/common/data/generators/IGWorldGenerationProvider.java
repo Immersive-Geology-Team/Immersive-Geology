@@ -8,49 +8,48 @@
 
 package com.igteam.immersivegeology.common.data.generators;
 
-import blusunrize.immersiveengineering.common.world.IEOreFeature;
-import blusunrize.immersiveengineering.common.world.IEOreFeature.IEOreFeatureConfig;
-import blusunrize.immersiveengineering.common.world.IEWorldGen;
-import com.igteam.immersivegeology.ImmersiveGeology;
 import com.igteam.immersivegeology.common.config.IGServerConfig;
-import com.igteam.immersivegeology.common.world.*;
+import com.igteam.immersivegeology.common.world.IGDefaultPlacement;
+import com.igteam.immersivegeology.common.world.IGHeightProvider;
+import com.igteam.immersivegeology.common.world.IGWorldGen;
+import com.igteam.immersivegeology.common.world.IWorldGenConfig;
 import com.igteam.immersivegeology.common.world.features.IGOreFeature.IGOreFeatureConfig;
 import com.igteam.immersivegeology.common.world.features.helper.IGEvaporateConfig;
-import com.igteam.immersivegeology.common.world.modifiers.IGOreRemovalModifier;
 import com.igteam.immersivegeology.common.world.placements.IGCountPlacement;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.material.StoneFormation;
 import com.mojang.serialization.Lifecycle;
-import net.minecraft.core.*;
 import net.minecraft.core.Holder.Reference;
+import net.minecraft.core.*;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.HolderLookup.RegistryLookup;
 import net.minecraft.core.HolderSet.Named;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
-import net.minecraft.world.level.levelgen.placement.*;
-import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.world.BiomeModifier;
-import net.minecraftforge.common.world.ForgeBiomeModifiers.AddFeaturesBiomeModifier;
-import net.minecraftforge.registries.ForgeRegistries.Keys;
-import net.minecraftforge.registries.holdersets.AnyHolderSet;
+import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
+import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.world.BiomeModifier;
+import net.neoforged.neoforge.common.world.BiomeModifiers.AddFeaturesBiomeModifier;
+import net.neoforged.neoforge.registries.NeoForgeRegistries.Keys;
+import net.neoforged.neoforge.registries.holdersets.AnyHolderSet;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 
 public class IGWorldGenerationProvider
@@ -97,7 +96,7 @@ public class IGWorldGenerationProvider
 		registryBuilder.add(Keys.BIOME_MODIFIERS, ctx -> bootstrapBiomeModifiers(ctx, oreFeatures, evaporateFeatures));
 	}
 
-	private static void bootstrapConfiguredFeatures(BootstapContext<ConfiguredFeature<?, ?>> ctx, Map<IWorldGenConfig, FeatureRegistration> oreFeatures, Map<IWorldGenConfig, FeatureRegistration> evaporiteFeatures)
+	private static void bootstrapConfiguredFeatures(BootstrapContext<ConfiguredFeature<?, ?>> ctx, Map<IWorldGenConfig, FeatureRegistration> oreFeatures, Map<IWorldGenConfig, FeatureRegistration> evaporiteFeatures)
 	{
 		for(final Entry<IWorldGenConfig, FeatureRegistration> entry : oreFeatures.entrySet())
 		{
@@ -119,7 +118,7 @@ public class IGWorldGenerationProvider
 		}
 	}
 
-	private static void bootstrapPlacedFeatures(BootstapContext<PlacedFeature> ctx, Map<IWorldGenConfig, FeatureRegistration> oreFeatures,  Map<IWorldGenConfig, FeatureRegistration> evaporateFeatures) {
+	private static void bootstrapPlacedFeatures(BootstrapContext<PlacedFeature> ctx, Map<IWorldGenConfig, FeatureRegistration> oreFeatures,  Map<IWorldGenConfig, FeatureRegistration> evaporateFeatures) {
 		// Register all placed features for the ores
 		IGLib.IG_LOGGER.info("Starting Placement Registration");
 		for (final Entry<IWorldGenConfig, FeatureRegistration> entry : oreFeatures.entrySet()) {
@@ -144,7 +143,7 @@ public class IGWorldGenerationProvider
 		}
 	}
 
-	private static void bootstrapBiomeModifiers(BootstapContext<BiomeModifier> ctx, Map<IWorldGenConfig, FeatureRegistration> oreFeatures, Map<IWorldGenConfig, FeatureRegistration> evaporateFeatures) {
+	private static void bootstrapBiomeModifiers(BootstrapContext<BiomeModifier> ctx, Map<IWorldGenConfig, FeatureRegistration> oreFeatures, Map<IWorldGenConfig, FeatureRegistration> evaporateFeatures) {
 		final HolderGetter<Biome> biomeReg = ctx.lookup(Registries.BIOME);
 		// Register all biome modifiers for the features
 		for (final FeatureRegistration entry : oreFeatures.values())
@@ -193,11 +192,11 @@ public class IGWorldGenerationProvider
 		private boolean isSedimentaryFeature = false;
 		
 		private FeatureRegistration(ResourceLocation name, Optional<TagKey<Biome>> optional) {
-			this.name = name != null ? name : new ResourceLocation("default:feature_name");
+			this.name = name != null ? name : ResourceLocation.parse("default:feature_name");
 			this.inBiomes = null;
 		}
 
-		private void registerConfigured(BootstapContext<ConfiguredFeature<?, ?>> ctx, ConfiguredFeature<?, ?> configured) {
+		private void registerConfigured(BootstrapContext<ConfiguredFeature<?, ?>> ctx, ConfiguredFeature<?, ?> configured) {
 			if (configured != null) {
 				this.configured = ctx.register(ResourceKey.create(Registries.CONFIGURED_FEATURE, this.name), configured);
 			} else {
@@ -205,7 +204,7 @@ public class IGWorldGenerationProvider
 			}
 		}
 
-		private void registerPlaced(BootstapContext<PlacedFeature> ctx, List<PlacementModifier> placement) {
+		private void registerPlaced(BootstrapContext<PlacedFeature> ctx, List<PlacementModifier> placement) {
 			if (placement != null) {
 				this.placed = ctx.register(ResourceKey.create(Registries.PLACED_FEATURE, this.name), new PlacedFeature(configured, placement));
 			} else {

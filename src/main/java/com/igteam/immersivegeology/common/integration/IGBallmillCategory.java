@@ -8,9 +8,7 @@
 
 package com.igteam.immersivegeology.common.integration;
 
-import blusunrize.lib.manual.ManualUtils;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BallmillRecipe;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.RotaryKilnRecipe;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -19,8 +17,6 @@ import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 
@@ -31,7 +27,7 @@ public class IGBallmillCategory extends IGRecipeCategory<BallmillRecipe>
 	public IGBallmillCategory(IGuiHelper helper)
 	{
 		super(helper, JEIRecipeTypes.BALLMILL, "block.immersivegeology.ballmill");
-		ResourceLocation background = new ResourceLocation(IGLib.MODID, "textures/gui/jei/ballmill.png");
+		ResourceLocation background = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/gui/jei/ballmill.png");
 		IDrawableStatic back = guiHelper.drawableBuilder(background, 0, 0, 101, 101).setTextureSize(101,101).build();
 		setBackground(back);
 		setIcon(IGMultiblockProvider.BALLMILL.iconStack());
@@ -44,7 +40,7 @@ public class IGBallmillCategory extends IGRecipeCategory<BallmillRecipe>
 				.addItemStacks(Arrays.asList(recipe.itemIn.getMatchingStacks()));
 
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 67, 42)
-				.addItemStacks(Arrays.asList(recipe.itemOutput.getMatchingStacks()));
+				.addItemStack(recipe.itemOutput.get());
 	}
 
 	@Override

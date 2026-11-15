@@ -8,38 +8,37 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.recipe;
 
-import blusunrize.immersiveengineering.api.crafting.CrusherRecipe;
-import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
-import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
-import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
+import blusunrize.immersiveengineering.api.crafting.*;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
-import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.util.Lazy;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.registries.DeferredHolder;
+
+import java.util.List;
 
 public class BallmillRecipe extends MultiblockRecipe
 {
-	public static RegistryObject<IERecipeSerializer<BallmillRecipe>> SERIALIZER;
+	public static DeferredHolder<RecipeSerializer<?>, IERecipeSerializer<BallmillRecipe>> SERIALIZER;
 	public static final CachedRecipeList<BallmillRecipe> RECIPES = new CachedRecipeList<>(IGRecipeTypes.BALLMILL);
-	public final IngredientWithSize itemOutput;
+	public final TagOutput itemOutput;
 	public final IngredientWithSize itemIn;
 	Lazy<Integer> totalProcessEnergy;
 	Lazy<Integer> totalProcessTime;
 
-	public <T extends Recipe<?>> BallmillRecipe(ResourceLocation id, IngredientWithSize input, IngredientWithSize output, int energy, int time)
+	public <T extends Recipe<?>> BallmillRecipe(IngredientWithSize input, TagOutput output, int energy, int time)
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.BALLMILL, id);
+		super(TagOutput.EMPTY, IGRecipeTypes.BALLMILL, time, energy, () -> new RecipeMultiplier(() -> 1, () -> 1));
 		this.itemOutput = output;
 		this.itemIn = input;
 		totalProcessEnergy = Lazy.of(() -> energy);
 		totalProcessTime = Lazy.of(() -> time);
-		this.outputList = Lazy.of(() -> NonNullList.of(ItemStack.EMPTY, this.itemOutput.getRandomizedExampleStack(0)));
+		this.outputList = new TagOutputList(this.itemOutput);
+		this.setInputListWithSizes(List.of(this.itemIn));
 	}
 
 	@Override
@@ -60,10 +59,10 @@ public class BallmillRecipe extends MultiblockRecipe
 		return totalProcessTime.get();
 	}
 
-	public static BallmillRecipe findRecipe(Level level, ItemStack input)
+	public static RecipeHolder<BallmillRecipe> findRecipe(Level level, ItemStack input)
 	{
-		for(BallmillRecipe recipe : RECIPES.getRecipes(level))
-			if(recipe.itemIn.test(input))
+		for(RecipeHolder<BallmillRecipe> recipe : RECIPES.getRecipes(level))
+			if(recipe.value().itemIn.test(input))
 				return recipe;
 		return null;
 	}

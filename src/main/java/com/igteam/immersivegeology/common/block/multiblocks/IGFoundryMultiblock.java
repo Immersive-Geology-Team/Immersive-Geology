@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+
 import java.util.function.Consumer;
 
 
@@ -21,7 +22,7 @@ public class IGFoundryMultiblock extends IGTemplateMultiblock {
 	public static final IGFoundryMultiblock INSTANCE = new IGFoundryMultiblock();
 
 	public IGFoundryMultiblock() {
-		super(new ResourceLocation(IGLib.MODID, "multiblocks/foundry"), new BlockPos(2,0,2), new BlockPos(2,1,4), new BlockPos(5, 5, 5), IGMultiblockProvider.FOUNDRY);
+		super(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "multiblocks/foundry"), new BlockPos(2,0,2), new BlockPos(2,1,4), new BlockPos(5, 5, 5), IGMultiblockProvider.FOUNDRY);
 	}
 
 	@Override

@@ -31,13 +31,13 @@
     "type": "item_display",
     "items":
     [
-      {"item": "immersivegeology:mold_ingot_graphite"},
-      {"item": "immersivegeology:mold_nugget_graphite"},
-      {"item": "immersivegeology:mold_plate_graphite"},
-      {"item": "immersivegeology:mold_rod_graphite"},
-      {"item": "immersivegeology:mold_wire_graphite"},
-      {"item": "immersivegeology:mold_gear_graphite"},
-      {"item": "immersivegeology:mold_block_graphite"}
+      {"id": "immersivegeology:mold_ingot_graphite"},
+      {"id": "immersivegeology:mold_nugget_graphite"},
+      {"id": "immersivegeology:mold_plate_graphite"},
+      {"id": "immersivegeology:mold_rod_graphite"},
+      {"id": "immersivegeology:mold_wire_graphite"},
+      {"id": "immersivegeology:mold_gear_graphite"},
+      {"id": "immersivegeology:mold_block_graphite"}
     ]
   }
 }

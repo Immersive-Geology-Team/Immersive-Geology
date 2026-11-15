@@ -12,7 +12,6 @@ import com.igteam.immersivegeology.common.block.multiblocks.skins.helpers.IIGMul
 import com.igteam.immersivegeology.common.block.multiblocks.skins.helpers.SkinCreditType;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
 import net.minecraft.ChatFormatting;
-import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
 import org.jetbrains.annotations.NotNull;
 

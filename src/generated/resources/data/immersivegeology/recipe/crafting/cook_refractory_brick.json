@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 120,
+  "experience": 0.0,
+  "group": "refractory_brick_cooking",
+  "ingredient": {
+    "item": "immersivegeology:raw_fire_clay"
+  },
+  "result": {
+    "count": 1,
+    "id": "immersivegeology:refractory_brick"
+  }
+}

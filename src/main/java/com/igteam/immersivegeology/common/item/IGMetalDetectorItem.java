@@ -9,29 +9,26 @@
 package com.igteam.immersivegeology.common.item;
 
 import com.igteam.immersivegeology.common.block.entity.device.IGMetalDetectorEntity;
+import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraft.core.Direction;
-import net.minecraftforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class IGMetalDetectorItem extends BlockItem
 {
 	public static final String ENERGY_TAG = "energy";
-	private static final String BLOCK_ENTITY_TAG = "BlockEntityTag";
 
 	public IGMetalDetectorItem(Block block)
 	{
@@ -40,23 +37,23 @@ public class IGMetalDetectorItem extends BlockItem
 
 	public static int getEnergyStored(ItemStack stack)
 	{
-		CompoundTag tag = stack.getTag();
-		if(tag==null||!tag.contains(BLOCK_ENTITY_TAG, Tag.TAG_COMPOUND)) return 0;
-		return Math.min(IGMetalDetectorEntity.ENERGY_CAPACITY, tag.getCompound(BLOCK_ENTITY_TAG).getInt(ENERGY_TAG));
+		CustomData data = stack.get(DataComponents.BLOCK_ENTITY_DATA);
+		if(data==null) return 0;
+		return Math.min(IGMetalDetectorEntity.ENERGY_CAPACITY, data.copyTag().getInt(ENERGY_TAG));
 	}
 
 	private static void setEnergyStored(ItemStack stack, int energy)
 	{
-		CompoundTag tag = stack.getOrCreateTag();
-		if(!tag.contains(BLOCK_ENTITY_TAG, Tag.TAG_COMPOUND)) tag.put(BLOCK_ENTITY_TAG, new CompoundTag());
-		tag.getCompound(BLOCK_ENTITY_TAG).putInt(ENERGY_TAG, energy);
+		CompoundTag tag = stack.getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY).copyTag();
+		tag.putInt(ENERGY_TAG, energy);
+		BlockItem.setBlockEntityData(stack, IGRegistrationHolder.METAL_DETECTOR.get(), tag);
 	}
 
 	@Override
-	public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltip,
+	public void appendHoverText(@NotNull ItemStack stack, TooltipContext context, @NotNull List<Component> tooltip,
 								@NotNull TooltipFlag flag)
 	{
-		super.appendHoverText(stack, level, tooltip, flag);
+		super.appendHoverText(stack, context, tooltip, flag);
 		tooltip.add(Component.translatable("gui.immersivegeology.metal_detector.energy",
 				getEnergyStored(stack), IGMetalDetectorEntity.ENERGY_CAPACITY));
 	}
@@ -79,28 +76,18 @@ public class IGMetalDetectorItem extends BlockItem
 		return 0xD54B18;
 	}
 
-	@Nullable
-	@Override
-	public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable CompoundTag nbt)
+	public static void registerCapabilities(RegisterCapabilitiesEvent event, Item item)
 	{
-		return new EnergyProvider(stack);
+		event.registerItem(Capabilities.EnergyStorage.ITEM, (stack, context) -> new EnergyProvider(stack), item);
 	}
 
-	private static class EnergyProvider implements ICapabilityProvider, IEnergyStorage
+	private static class EnergyProvider implements IEnergyStorage
 	{
 		private final ItemStack stack;
-		private final LazyOptional<IEnergyStorage> capability = LazyOptional.of(() -> this);
 
 		private EnergyProvider(ItemStack stack)
 		{
 			this.stack = stack;
-		}
-
-		@NotNull
-		@Override
-		public <T> LazyOptional<T> getCapability(@NotNull Capability<T> capability, @Nullable Direction side)
-		{
-			return ForgeCapabilities.ENERGY.orEmpty(capability, this.capability);
 		}
 
 		@Override

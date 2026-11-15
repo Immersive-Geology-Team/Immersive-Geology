@@ -7,14 +7,12 @@
  */
 
 package com.igteam.immersivegeology.gametest;
+
 import com.igteam.immersivegeology.core.lib.IGLib;
-import com.igteam.immersivegeology.gametest.tests.ClientTests;
-import com.igteam.immersivegeology.gametest.tests.CapabilityLifecycleTests;
-import com.igteam.immersivegeology.gametest.tests.CommonTests;
-import com.igteam.immersivegeology.gametest.tests.MultiblockDisassemblyTests;
-import com.igteam.immersivegeology.gametest.tests.ServerTests;
-import net.minecraft.gametest.framework.*;
-import net.minecraftforge.gametest.GameTestHolder;
+import com.igteam.immersivegeology.gametest.tests.*;
+import net.minecraft.gametest.framework.GameTestGenerator;
+import net.minecraft.gametest.framework.TestFunction;
+import net.neoforged.neoforge.gametest.GameTestHolder;
 
 import java.util.ArrayList;
 import java.util.List;

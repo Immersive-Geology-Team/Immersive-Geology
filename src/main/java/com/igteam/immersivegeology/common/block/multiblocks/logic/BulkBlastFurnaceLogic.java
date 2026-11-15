@@ -10,17 +10,15 @@ package com.igteam.immersivegeology.common.block.multiblocks.logic;
 
 import blusunrize.immersiveengineering.api.ApiUtils;
 import blusunrize.immersiveengineering.api.IEProperties;
-import blusunrize.immersiveengineering.api.IETags;
+import blusunrize.immersiveengineering.api.crafting.BlastFurnaceFuel;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IClientTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IServerTickableComponent;
-import blusunrize.immersiveengineering.api.crafting.BlastFurnaceFuel;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.RedstoneControl;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLevel;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
-import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.client.utils.TextUtils;
 import blusunrize.immersiveengineering.common.blocks.metal.BlastFurnacePreheaterBlockEntity;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.NonMirrorableWithActiveBlock;
@@ -37,35 +35,33 @@ import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.Multibl
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BulkBlastFluxRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BulkBlastFurnaceRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.BulkBlastFurnaceShape;
-import com.igteam.immersivegeology.core.material.data.enums.MetalEnum;
 import com.igteam.immersivegeology.core.material.data.enums.MiscEnum;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
-import com.igteam.immersivegeology.core.material.helper.flags.ItemCategoryFlags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.IItemHandler;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.Capabilities.FluidHandler;
+import net.neoforged.neoforge.capabilities.Capabilities.ItemHandler;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.IFluidTank;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -246,8 +242,8 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 		if(refining)
 		{
 			drained = state.metalTank.getFluidAmount();
-			if(drained < recipe.meltInput.getAmount()) return null;
-			units = drained/(float)recipe.meltInput.getAmount();
+			if(drained < recipe.meltInput.amount()) return null;
+			units = drained/(float)recipe.meltInput.amount();
 		}
 		else
 		{
@@ -417,9 +413,9 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 		context.requestMasterBESync();
 	}
 
-	private void pushFluid(IMultiblockContext<State> context, FluidTank tank, CapabilityReference<IFluidHandler> outputRef)
+	private void pushFluid(IMultiblockContext<State> context, FluidTank tank, Supplier<@Nullable IFluidHandler> outputRef)
 	{
-		IFluidHandler output = outputRef.getNullable();
+		IFluidHandler output = outputRef.get();
 		if(output==null) return;
 
 		int outSize = Math.min(FluidType.BUCKET_VOLUME, tank.getFluidAmount());
@@ -455,17 +451,14 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 	}
 
 	@Override
-	public <T> LazyOptional<T> getCapability(IMultiblockContext<State> ctx, CapabilityPosition position, Capability<T> cap)
+	public void registerCapabilities(CapabilityRegistrar<State> register)
 	{
-		final State state = ctx.getState();
-		if(cap==ForgeCapabilities.ITEM_HANDLER&&ITEM_INPUT_CAP.equalsOrNullFace(position))
-			return state.itemInputCap.cast(ctx);
-		if(cap==ForgeCapabilities.FLUID_HANDLER)
-		{
-			if(METAL_OUTPUT_CAP.equals(position)) return state.metalCap.cast(ctx);
-			if(SLAG_OUTPUT_CAP.equals(position)) return state.slagCap.cast(ctx);
-		}
-		return LazyOptional.empty();
+		register.registerAtOrNull(ItemHandler.BLOCK, ITEM_INPUT_CAP, state -> state.itemInputCap);
+		register.register(FluidHandler.BLOCK, (state, position) -> {
+			if(METAL_OUTPUT_CAP.equals(position)) return state.metalCap;
+			if(SLAG_OUTPUT_CAP.equals(position)) return state.slagCap;
+			return null;
+		});
 	}
 
 	@Override
@@ -482,7 +475,7 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 
 	@Nullable
 	@Override
-	public List<Component> getOverlayText(State state, Player player, boolean hammer)
+	public List<Component> getOverlayText(State state, BlockPos posInMultiblock, BlockHitResult absoluteHit, Player player, boolean hammer)
 	{
 		if(Utils.isFluidRelatedItemStack(player.getItemInHand(InteractionHand.MAIN_HAND)))
 			return List.of(
@@ -544,11 +537,11 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 		private final SharedTank metalTank = new SharedTank();
 		private final SharedTank slagTank = new SharedTank();
 
-		private final StoredCapability<IItemHandler> itemInputCap;
-		private final StoredCapability<IFluidHandler> metalCap;
-		private final StoredCapability<IFluidHandler> slagCap;
-		private final CapabilityReference<IFluidHandler> metalOutput;
-		private final CapabilityReference<IFluidHandler> slagOutput;
+		private final IItemHandler itemInputCap;
+		private final IFluidHandler metalCap;
+		private final IFluidHandler slagCap;
+		private final Supplier<@Nullable IFluidHandler> metalOutput;
+		private final Supplier<@Nullable IFluidHandler> slagOutput;
 
 		private boolean active = false;
 		private float heat = 0;
@@ -584,13 +577,13 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 			this.inventory = new SlotwiseItemHandler(
 					Collections.nCopies(NUM_INPUT_SLOTS, new IOConstraint(true, i -> isChargeComponent(levelGetter.get(), i))), markDirty
 			);
-			this.itemInputCap = new StoredCapability<>(new WrappingItemHandler(
+			this.itemInputCap = new WrappingItemHandler(
 					inventory, true, false, new IntRange(0, NUM_INPUT_SLOTS)
-			));
-			this.metalCap = new StoredCapability<>(new ArrayFluidHandler(new IFluidTank[]{metalTank}, true, false, markDirty));
-			this.slagCap = new StoredCapability<>(new ArrayFluidHandler(new IFluidTank[]{slagTank}, true, false, markDirty));
-			this.metalOutput = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, neighbourOf(METAL_OUTPUT));
-			this.slagOutput = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, neighbourOf(SLAG_OUTPUT));
+			);
+			this.metalCap = new ArrayFluidHandler(new IFluidTank[]{metalTank}, true, false, markDirty);
+			this.slagCap = new ArrayFluidHandler(new IFluidTank[]{slagTank}, true, false, markDirty);
+			this.metalOutput = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, neighbourOf(METAL_OUTPUT));
+			this.slagOutput = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, neighbourOf(SLAG_OUTPUT));
 		}
 
 		public int tickPreheaters(IMultiblockLevel level)
@@ -730,13 +723,13 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 		}
 
 		@Override
-		public void writeSaveNBT(CompoundTag nbt)
+		public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider)
 		{
-			nbt.put("inventory", inventory.serializeNBT());
-			nbt.put("metal_tank", metalTank.writeToNBT(new CompoundTag()));
-			nbt.put("slag_tank", slagTank.writeToNBT(new CompoundTag()));
-			nbt.put("pending_metal", pendingMetal.writeToNBT(new CompoundTag()));
-			nbt.put("pending_slag", pendingSlag.writeToNBT(new CompoundTag()));
+			nbt.put("inventory", inventory.serializeNBT(provider));
+			nbt.put("metal_tank", metalTank.writeToNBT(provider, new CompoundTag()));
+			nbt.put("slag_tank", slagTank.writeToNBT(provider, new CompoundTag()));
+			nbt.put("pending_metal", pendingMetal.saveOptional(provider));
+			nbt.put("pending_slag", pendingSlag.saveOptional(provider));
 			nbt.putBoolean("active", active);
 			nbt.putFloat("heat", heat);
 			nbt.putFloat("charge_heat_target", chargeHeatTarget);
@@ -762,13 +755,13 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 		}
 
 		@Override
-		public void readSaveNBT(CompoundTag nbt)
+		public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider)
 		{
-			inventory.deserializeNBT(nbt.getCompound("inventory"));
-			metalTank.readFromNBT(nbt.getCompound("metal_tank"));
-			slagTank.readFromNBT(nbt.getCompound("slag_tank"));
-			pendingMetal = FluidStack.loadFluidStackFromNBT(nbt.getCompound("pending_metal"));
-			pendingSlag = FluidStack.loadFluidStackFromNBT(nbt.getCompound("pending_slag"));
+			inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
+			metalTank.readFromNBT(provider, nbt.getCompound("metal_tank"));
+			slagTank.readFromNBT(provider, nbt.getCompound("slag_tank"));
+			pendingMetal = FluidStack.parseOptional(provider, nbt.getCompound("pending_metal"));
+			pendingSlag = FluidStack.parseOptional(provider, nbt.getCompound("pending_slag"));
 			active = nbt.getBoolean("active");
 			heat = nbt.getFloat("heat");
 			chargeHeatTarget = nbt.getFloat("charge_heat_target");
@@ -796,23 +789,20 @@ public class BulkBlastFurnaceLogic implements IMultiblockLogic<BulkBlastFurnaceL
 		}
 
 		@Override
-		public void writeSyncNBT(CompoundTag nbt)
+		public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
 		{
-			writeSaveNBT(nbt);
+			writeSaveNBT(nbt, provider);
 		}
 
 		@Override
-		public void readSyncNBT(CompoundTag nbt)
+		public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
 		{
-			readSaveNBT(nbt);
+			readSaveNBT(nbt, provider);
 		}
 
 		@Override
 		public void invalidate(@NotNull IMultiblockContext<?> ctx)
 		{
-			this.itemInputCap.get(ctx).invalidate();
-			this.metalCap.get(ctx).invalidate();
-			this.slagCap.get(ctx).invalidate();
 		}
 	}
 }

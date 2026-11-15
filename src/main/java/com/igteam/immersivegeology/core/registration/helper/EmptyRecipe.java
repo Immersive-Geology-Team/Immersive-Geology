@@ -9,22 +9,20 @@
 package com.igteam.immersivegeology.core.registration.helper;
 
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
-import blusunrize.immersiveengineering.api.crafting.IERecipeTypes.TypeWithClass;
 import blusunrize.immersiveengineering.api.crafting.IESerializableRecipe;
+import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import com.igteam.immersivegeology.core.registration.IGRecipeSerializers;
 import com.igteam.immersivegeology.core.registration.IGRecipeTypes;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraftforge.common.util.Lazy;
 import org.jetbrains.annotations.NotNull;
 
 public class EmptyRecipe extends IESerializableRecipe
 {
-	protected <T extends Recipe<?>> EmptyRecipe(ResourceLocation id)
+	protected <T extends Recipe<?>> EmptyRecipe()
 	{
-		super(LAZY_EMPTY, IGRecipeTypes.EMPTY, id);
+		super(TagOutput.EMPTY, IGRecipeTypes.EMPTY);
 	}
 
 	@Override
@@ -34,7 +32,7 @@ public class EmptyRecipe extends IESerializableRecipe
 	}
 
 	@Override
-	public @NotNull ItemStack getResultItem(@NotNull RegistryAccess registryAccess)
+	public @NotNull ItemStack getResultItem(HolderLookup.@NotNull Provider registryAccess)
 	{
 		return ItemStack.EMPTY;
 	}

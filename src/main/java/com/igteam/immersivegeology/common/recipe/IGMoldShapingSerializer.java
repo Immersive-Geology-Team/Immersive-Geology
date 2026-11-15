@@ -8,43 +8,41 @@
 
 package com.igteam.immersivegeology.common.recipe;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
 
-import javax.annotation.Nullable;
-
 public class IGMoldShapingSerializer implements RecipeSerializer<IGMoldShapingRecipe>
 {
-	private static final ShapelessRecipe.Serializer SHAPELESS = new ShapelessRecipe.Serializer();
+	private final MapCodec<IGMoldShapingRecipe> codec;
+	private final StreamCodec<RegistryFriendlyByteBuf, IGMoldShapingRecipe> streamCodec;
 
-	@Override
-	public IGMoldShapingRecipe fromJson(ResourceLocation id, JsonObject json)
+	public IGMoldShapingSerializer()
 	{
-		return wrap(SHAPELESS.fromJson(id, json));
-	}
-
-	@Nullable
-	@Override
-	public IGMoldShapingRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buffer)
-	{
-		ShapelessRecipe base = SHAPELESS.fromNetwork(id, buffer);
-		return base==null?null: wrap(base);
+		RecipeSerializer<ShapelessRecipe> inner = RecipeSerializer.SHAPELESS_RECIPE;
+		this.codec = inner.codec().xmap(IGMoldShapingSerializer::wrap, recipe -> recipe);
+		this.streamCodec = inner.streamCodec().map(IGMoldShapingSerializer::wrap, recipe -> recipe);
 	}
 
 	@Override
-	public void toNetwork(FriendlyByteBuf buffer, IGMoldShapingRecipe recipe)
+	public MapCodec<IGMoldShapingRecipe> codec()
 	{
-		SHAPELESS.toNetwork(buffer, recipe);
+		return codec;
+	}
+
+	@Override
+	public StreamCodec<RegistryFriendlyByteBuf, IGMoldShapingRecipe> streamCodec()
+	{
+		return streamCodec;
 	}
 
 	private static IGMoldShapingRecipe wrap(ShapelessRecipe base)
 	{
 		return new IGMoldShapingRecipe(
-				base.getId(), base.getGroup(), base.category(),
+				base.getGroup(), base.category(),
 				base.getResultItem(RegistryAccess.EMPTY), base.getIngredients()
 		);
 	}

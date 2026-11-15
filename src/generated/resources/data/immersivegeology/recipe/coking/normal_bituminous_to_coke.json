@@ -1,0 +1,11 @@
+{
+  "type": "immersiveengineering:coke_oven",
+  "creosote": 500,
+  "input": {
+    "item": "immersivegeology:normal_ore_bituminous"
+  },
+  "result": {
+    "tag": "c:coal_coke"
+  },
+  "time": 1800
+}

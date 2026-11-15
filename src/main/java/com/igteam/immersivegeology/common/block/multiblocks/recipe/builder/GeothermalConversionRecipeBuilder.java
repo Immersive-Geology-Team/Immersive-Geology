@@ -8,53 +8,43 @@
 
 package com.igteam.immersivegeology.common.block.multiblocks.recipe.builder;
 
-import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
-import blusunrize.immersiveengineering.api.crafting.builders.IEFinishedRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.GeothermalConversionRecipe;
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
-public class GeothermalConversionRecipeBuilder  extends IEFinishedRecipe<GeothermalConversionRecipeBuilder>
+public class GeothermalConversionRecipeBuilder  extends IGMultiblockRecipeBuilder<GeothermalConversionRecipeBuilder>
 {
+	private final Block transitionBlock;
+	private final int blockHeat;
+	@Nullable
+	private final Pair<Block, Integer> upperBound;
+	@Nullable
+	private final Pair<Block, Integer> lowerBound;
 
 	private GeothermalConversionRecipeBuilder(Block transitionBlock, int blockHeat, @Nullable Pair<Block, Integer> upperBound, @Nullable Pair<Block, Integer> lowerBound)
 	{
-		super(GeothermalConversionRecipe.SERIALIZER.get());
-		this.addWriter((obj) -> {
-			obj.addProperty("transitionBlock", BuiltInRegistries.BLOCK.getKey(transitionBlock).toString());
-		});
-		this.addWriter((obj) -> {
-			obj.addProperty("blockHeat", blockHeat);
-		});
-
-		if(upperBound != null)
-		{
-			this.addWriter((obj) -> {
-				obj.addProperty("upperBoundBlock", BuiltInRegistries.BLOCK.getKey(upperBound.getFirst()).toString());
-			});
-			this.addWriter((obj) -> {
-				obj.addProperty("upperHeat", upperBound.getSecond());
-			});
-		}
-
-		if(lowerBound != null)
-		{
-			this.addWriter((obj) -> {
-				obj.addProperty("lowerBoundBlock", BuiltInRegistries.BLOCK.getKey(lowerBound.getFirst()).toString());
-			});
-			this.addWriter((obj) -> {
-				obj.addProperty("lowerHeat", lowerBound.getSecond());
-			});
-		}
+		this.transitionBlock = transitionBlock;
+		this.blockHeat = blockHeat;
+		this.upperBound = upperBound;
+		this.lowerBound = lowerBound;
 	}
 
-	public static GeothermalConversionRecipeBuilder builder(Block transitionBlock, int blockHeat) {
+	public static GeothermalConversionRecipeBuilder builder(Block transitionBlock, int blockHeat)
+	{
 		return new GeothermalConversionRecipeBuilder(transitionBlock, blockHeat, null, null);
 	}
 
-	public static GeothermalConversionRecipeBuilder builder(Block transitionBlock, int blockHeat, @Nullable Pair<Block, Integer> upperBound, @Nullable Pair<Block, Integer> lowerBound) {
+	public static GeothermalConversionRecipeBuilder builder(Block transitionBlock, int blockHeat, @Nullable Pair<Block, Integer> upperBound, @Nullable Pair<Block, Integer> lowerBound)
+	{
 		return new GeothermalConversionRecipeBuilder(transitionBlock, blockHeat, upperBound, lowerBound);
+	}
+
+	public void build(RecipeOutput out, ResourceLocation name)
+	{
+		GeothermalConversionRecipe recipe = new GeothermalConversionRecipe(() -> transitionBlock, blockHeat, upperBound, lowerBound);
+		out.accept(name, recipe, null, getConditions());
 	}
 }

@@ -8,7 +8,6 @@ import com.igteam.immersivegeology.core.material.helper.flags.ModFlags;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialAdAstraStone extends MaterialStone {
 
@@ -27,6 +26,6 @@ public class MaterialAdAstraStone extends MaterialStone {
     @Override
     public ResourceLocation getTextureLocation(IFlagType<?> flag)
     {
-        return new ResourceLocation("ad_astra", "block/"+getName());
+        return ResourceLocation.fromNamespaceAndPath("ad_astra", "block/"+getName());
     }
 }

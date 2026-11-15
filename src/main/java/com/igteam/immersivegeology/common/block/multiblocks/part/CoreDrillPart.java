@@ -10,9 +10,7 @@ package com.igteam.immersivegeology.common.block.multiblocks.part;
 
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.CoreDrillLogic;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.PelletizerLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.skins.IGCoreDrillSkins;
-import com.igteam.immersivegeology.common.block.multiblocks.skins.IGPelletizerSkins;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;

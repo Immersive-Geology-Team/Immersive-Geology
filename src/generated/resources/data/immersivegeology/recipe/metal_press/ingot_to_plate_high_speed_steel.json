@@ -1,0 +1,11 @@
+{
+  "type": "immersiveengineering:metal_press",
+  "energy": 2400,
+  "input": {
+    "tag": "c:ingots/high_speed_steel"
+  },
+  "mold": "immersiveengineering:mold_plate",
+  "result": {
+    "tag": "c:plates/high_speed_steel"
+  }
+}

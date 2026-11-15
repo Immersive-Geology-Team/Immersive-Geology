@@ -10,64 +10,54 @@ package com.igteam.immersivegeology.common.block.multiblocks.logic;
 
 import blusunrize.immersiveengineering.api.ApiUtils;
 import blusunrize.immersiveengineering.api.energy.AveragingEnergyStorage;
-import blusunrize.immersiveengineering.api.fluid.FluidUtils;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IClientTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IServerTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.RedstoneControl;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
-import blusunrize.immersiveengineering.api.utils.CapabilityReference;
 import blusunrize.immersiveengineering.client.utils.TextUtils;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.interfaces.MBOverlayText;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessInWorld;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.MultiblockProcessor;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext.ProcessContextInWorld;
 import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
-import blusunrize.immersiveengineering.common.fluids.IEFluid;
-import blusunrize.immersiveengineering.common.register.IEFluids;
-import blusunrize.immersiveengineering.common.register.IEParticles;
 import blusunrize.immersiveengineering.common.util.Utils;
-import blusunrize.immersiveengineering.common.util.inventory.MultiFluidTank;
 import com.igteam.immersivegeology.common.block.helper.IGReceiveOnlyEnergy;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.CoreDrillLogic.State;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.IGMultiblockState;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.helper.ISkinnableMultiblockLogic;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.CoreDrillRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.shapes.CoreDrillShape;
-import com.igteam.immersivegeology.core.lib.IGLib;
-import net.minecraft.client.gui.screens.worldselection.CreateWorldScreen;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage;
+import net.neoforged.neoforge.capabilities.Capabilities.FluidHandler;
+import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.stringtemplate.v4.ST;
 
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServerTickableComponent<CoreDrillLogic.State>, IClientTickableComponent<CoreDrillLogic.State>, MBOverlayText<CoreDrillLogic.State>
 {
@@ -239,7 +229,7 @@ public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServer
 
                     if(recipe != null && !state.drill_direction && state.spinDown)
                     {
-                        int amount = recipe.getInput().getAmount();
+                        int amount = recipe.getInput().amount();
                         if(!state.acid_tank.drain(amount, FluidAction.SIMULATE).isEmpty())
                         {
                             FluidStack toFill = new FluidStack(recipe.getOutput(), 1);
@@ -297,9 +287,9 @@ public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServer
     private void drainOutputTank(State state, IMultiblockContext<State> context)
     {
         int outSize = Math.min(FluidType.BUCKET_VOLUME, state.output_tank.getFluidAmount());
-        CapabilityReference<IFluidHandler> outputRef = state.fluidOutput;
+        Supplier<@Nullable IFluidHandler> outputRef = state.fluidOutput;
         FluidStack out = Utils.copyFluidStackWithAmount(state.output_tank.getFluid(), outSize, false);
-        IFluidHandler output = outputRef.getNullable();
+        IFluidHandler output = outputRef.get();
 
         if(output==null)
             return;
@@ -317,9 +307,9 @@ public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServer
     private void drainInputTank(State state, IMultiblockContext<State> context)
     {
         int outSize = Math.min(FluidType.BUCKET_VOLUME, state.acid_tank.getFluidAmount());
-        CapabilityReference<IFluidHandler> outputRef = state.fluidOutput;
+        Supplier<@Nullable IFluidHandler> outputRef = state.fluidOutput;
         FluidStack out = Utils.copyFluidStackWithAmount(state.acid_tank.getFluid(), outSize, false);
-        IFluidHandler output = outputRef.getNullable();
+        IFluidHandler output = outputRef.get();
 
         if(output==null)
             return;
@@ -340,28 +330,15 @@ public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServer
     }
 
     @Override
-    public <T> LazyOptional<T> getCapability(IMultiblockContext<State> ctx, CapabilityPosition position, Capability<T> cap)
+    public void registerCapabilities(CapabilityRegistrar<State> register)
     {
-        final State state = ctx.getState();
-        if(cap == ForgeCapabilities.ENERGY && (position.side()==null || ENERGY_INPUTS.contains(position)))
-        {
-            return state.energyCap.cast(ctx);
-        }
-
-        if(cap == ForgeCapabilities.FLUID_HANDLER)
-        {
-            if(FLUID_OUTPUT_CAP.equals(position))
-            {
-                return state.fOutputCap.cast(ctx);
-            }
-
-            if(FLUID_INPUT_CAP.equals(position))
-            {
-                return state.fInputCap.cast(ctx);
-            }
-        }
-
-        return LazyOptional.empty();
+        register.register(EnergyStorage.BLOCK, (state, position) ->
+                position.side()==null||ENERGY_INPUTS.contains(position)?state.energyCap:null);
+        register.register(FluidHandler.BLOCK, (state, position) -> {
+            if(FLUID_OUTPUT_CAP.equals(position)) return state.fOutputCap;
+            if(FLUID_INPUT_CAP.equals(position)) return state.fInputCap;
+            return null;
+        });
     }
 
     @Override
@@ -371,7 +348,7 @@ public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServer
 
     @Nullable
     @Override
-    public List<Component> getOverlayText(State state, Player player, boolean b)
+    public List<Component> getOverlayText(State state, BlockPos posInMultiblock, BlockHitResult absoluteHit, Player player, boolean b)
     {
         if(Utils.isFluidRelatedItemStack(player.getItemInHand(InteractionHand.MAIN_HAND)))
             return List.of(TextUtils.formatFluidStack(state.acid_tank.getFluid()), TextUtils.formatFluidStack(state.output_tank.getFluid()));
@@ -386,11 +363,11 @@ public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServer
 
         private final MultiblockProcessor<CoreDrillRecipe, ProcessContextInWorld<CoreDrillRecipe>> processor;
 
-        private final CapabilityReference<IFluidHandler> fluidOutput;
-        private final StoredCapability<IFluidHandler> fInputCap;
-        private final StoredCapability<IFluidHandler> fOutputCap;
+        private final Supplier<@Nullable IFluidHandler> fluidOutput;
+        private final IFluidHandler fInputCap;
+        private final IFluidHandler fOutputCap;
 
-        private final StoredCapability<IEnergyStorage> energyCap;
+        private final IEnergyStorage energyCap;
 
         private float drill_angle;
         private float gear_clockwise_angle;
@@ -407,38 +384,38 @@ public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServer
         public State(IInitialMultiblockContext<State> ctx){
             // This is selected the Block connected to the output side
             // Allows us to 'fill' it
-            this.fluidOutput = ctx.getCapabilityAt(ForgeCapabilities.FLUID_HANDLER, FLUID_OUTPUT.face().offsetRelative(FLUID_OUTPUT.posInMultiblock(), 1), FLUID_OUTPUT.face());
+            this.fluidOutput = ctx.getCapabilityAt(Capabilities.FluidHandler.BLOCK, FLUID_OUTPUT.face().offsetRelative(FLUID_OUTPUT.posInMultiblock(), 1), FLUID_OUTPUT.face());
             this.processor = new MultiblockProcessor<>(2048, 0, 1, ctx.getMarkDirtyRunnable(), CoreDrillRecipe.RECIPES::getById);
-            this.energyCap = new StoredCapability<>(IGReceiveOnlyEnergy.of(this.energy));
+            this.energyCap = IGReceiveOnlyEnergy.of(this.energy);
             Runnable changedAndSync = () -> {
                 ctx.getSyncRunnable().run();
                 ctx.getMarkDirtyRunnable().run();
             };
-            this.fInputCap = new StoredCapability<>(new ArrayFluidHandler(acid_tank, true, true, changedAndSync));
-            this.fOutputCap = new StoredCapability<>(new ArrayFluidHandler(output_tank, true, true, changedAndSync));
+            this.fInputCap = new ArrayFluidHandler(acid_tank, true, true, changedAndSync);
+            this.fOutputCap = new ArrayFluidHandler(output_tank, true, true, changedAndSync);
         }
 
         @Override
-        public void writeSaveNBT(CompoundTag nbt){
-            nbt.put("energy", energy.serializeNBT());
-            nbt.put("acid_tank", acid_tank.writeToNBT(new CompoundTag()));
-            nbt.put("output_tank", output_tank.writeToNBT(new CompoundTag()));
-            nbt.put("processor", this.processor.toNBT());
+        public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            nbt.put("energy", energy.serializeNBT(provider));
+            nbt.put("acid_tank", acid_tank.writeToNBT(provider, new CompoundTag()));
+            nbt.put("output_tank", output_tank.writeToNBT(provider, new CompoundTag()));
+            nbt.put("processor", this.processor.toNBT(provider));
         }
 
 
         @Override
-        public void readSaveNBT(CompoundTag nbt){
-            energy.deserializeNBT(nbt.get("energy"));
-            acid_tank.readFromNBT(nbt.getCompound("acid_tank"));
-            output_tank.readFromNBT(nbt.getCompound("output_tank"));
-            processor.fromNBT(nbt.get("processor"), MultiblockProcessInWorld::new);
+        public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider){
+            energy.deserializeNBT(provider, nbt.get("energy"));
+            acid_tank.readFromNBT(provider, nbt.getCompound("acid_tank"));
+            output_tank.readFromNBT(provider, nbt.getCompound("output_tank"));
+            processor.fromNBT(nbt.get("processor"), MultiblockProcessInWorld::new, provider);
         }
 
         @Override
-        public void writeSyncNBT(CompoundTag nbt)
+        public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            writeSaveNBT(nbt);
+            writeSaveNBT(nbt, provider);
             // Animation Data
             nbt.putBoolean("renderActive", renderAsActive);
             nbt.putBoolean("drillDirection", drill_direction);
@@ -454,9 +431,9 @@ public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServer
         }
 
         @Override
-        public void readSyncNBT(CompoundTag nbt)
+        public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider)
         {
-            readSaveNBT(nbt);
+            readSaveNBT(nbt, provider);
             renderAsActive = nbt.getBoolean("renderActive");
             drill_direction = nbt.getBoolean("drillDirection");
             spinDown = nbt.getBoolean("spinDown");
@@ -519,9 +496,6 @@ public class CoreDrillLogic implements ISkinnableMultiblockLogic<State>, IServer
         @Override
         public void invalidate(@NotNull IMultiblockContext<?> context)
         {
-            this.energyCap.get(context).invalidate();
-            this.fOutputCap.get(context).invalidate();
-            this.fInputCap.get(context).invalidate();
         }
     }
 

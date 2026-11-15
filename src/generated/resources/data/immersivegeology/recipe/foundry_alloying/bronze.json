@@ -1,0 +1,19 @@
+{
+  "type": "immersivegeology:foundry_alloying",
+  "energy": 16,
+  "inputs": [
+    {
+      "amount": 3,
+      "tag": "c:copper"
+    },
+    {
+      "amount": 1,
+      "tag": "c:tin"
+    }
+  ],
+  "result": {
+    "amount": 4,
+    "id": "immersivegeology:fluid_bronze"
+  },
+  "time": 60
+}

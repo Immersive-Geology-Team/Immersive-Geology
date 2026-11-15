@@ -10,13 +10,8 @@ package com.igteam.immersivegeology.common.block.multiblocks;
 
 import blusunrize.immersiveengineering.api.ApiUtils;
 import blusunrize.immersiveengineering.api.multiblocks.ClientMultiblocks;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockBEHelperMaster;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.util.MultiblockOrientation;
 import blusunrize.immersiveengineering.client.utils.RenderUtils;
 import com.igteam.immersivegeology.client.models.IGDynamicModel;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.BallmillLogic;
-import com.igteam.immersivegeology.common.block.multiblocks.logic.BallmillLogic.State;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.registration.IGMultiblockProvider;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -26,11 +21,9 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.client.model.data.ModelData;
+import net.neoforged.neoforge.client.model.data.ModelData;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
@@ -45,7 +38,7 @@ public class IGBallmillMultiblock extends IGTemplateMultiblock {
     public static final IGBallmillMultiblock INSTANCE = new IGBallmillMultiblock();
 
     public IGBallmillMultiblock() {
-        super(new ResourceLocation(IGLib.MODID, "multiblocks/ballmill"), new BlockPos(2,0,1), new BlockPos(4,1,3), new BlockPos(5,4, 4), IGMultiblockProvider.BALLMILL);
+        super(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "multiblocks/ballmill"), new BlockPos(2,0,1), new BlockPos(4,1,3), new BlockPos(5,4, 4), IGMultiblockProvider.BALLMILL);
     }
 
     @Override

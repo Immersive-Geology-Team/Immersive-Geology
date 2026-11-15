@@ -37,7 +37,7 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.ForgeHooks;
+import net.neoforged.neoforge.common.CommonHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -108,10 +108,10 @@ public class IGCrystalBlock extends IGGenericBlock implements IGBlockType
 			if(i < this.getMaxAge() || stageIncrement < 0)
 			{
 				float f = 1.0f;
-				if(ForgeHooks.onCropsGrowPre(pLevel, pPos, pState, pRandom.nextInt((int)(25.0F/f)+1)==0))
+				if(CommonHooks.canCropGrow(pLevel, pPos, pState, pRandom.nextInt((int)(25.0F/f)+1)==0))
 				{
 					pLevel.setBlock(pPos, this.getStateForAge(i+stageIncrement), 2);
-					ForgeHooks.onCropsGrowPost(pLevel, pPos, pState);
+					CommonHooks.fireCropGrowPost(pLevel, pPos, pState);
 				}
 			}
 		}

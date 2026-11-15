@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:gears/thorium"
+      }
+    }
+  ],
+  "type": "immersivegeology:foundry",
+  "energy": 1152,
+  "input": {
+    "amount": 144,
+    "tag": "c:thorium"
+  },
+  "mold": "immersivegeology:mold_gear_graphite",
+  "result": {
+    "tag": "c:gears/thorium"
+  },
+  "time": 3
+}

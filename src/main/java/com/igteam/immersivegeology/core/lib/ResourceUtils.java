@@ -13,10 +13,10 @@ import net.minecraft.resources.ResourceLocation;
 
 public class ResourceUtils {
     public static ResourceLocation ig(String path){
-        return new ResourceLocation(IGLib.MODID, path);
+        return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, path);
     }
 
     public static ResourceLocation ie(String path){
-        return new ResourceLocation(Lib.MODID, path);
+        return ResourceLocation.fromNamespaceAndPath(Lib.MODID, path);
     }
 }

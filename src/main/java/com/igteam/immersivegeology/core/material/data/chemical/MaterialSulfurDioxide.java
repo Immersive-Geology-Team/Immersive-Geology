@@ -9,7 +9,6 @@
 package com.igteam.immersivegeology.core.material.data.chemical;
 
 import blusunrize.immersiveengineering.api.EnumMetals;
-import blusunrize.immersiveengineering.common.register.IEItems;
 import blusunrize.immersiveengineering.common.register.IEItems.Metals;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.data.enums.ChemicalEnum;
@@ -23,10 +22,8 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGStageD
 import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.IGMethodBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.world.level.material.Fluid;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialSulfurDioxide extends MaterialChemical
 {
@@ -58,7 +55,7 @@ public class MaterialSulfurDioxide extends MaterialChemical
 	@Override
 	public ResourceLocation getTextureLocation(IFlagType<?> flag)
 	{
-		if(flag.equals(BlockCategoryFlags.HYDROVENT)) return new ResourceLocation(IGLib.MODID, "block/greyscale/stone/cobble");
+		if(flag.equals(BlockCategoryFlags.HYDROVENT)) return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/greyscale/stone/cobble");
 		return super.getTextureLocation(flag);
 	}
 

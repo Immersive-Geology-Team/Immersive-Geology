@@ -1,0 +1,13 @@
+{
+  "type": "immersivegeology:bloomery",
+  "input": {
+    "basePredicate": {
+      "tag": "c:crushed_ore/hematite"
+    },
+    "count": 4
+  },
+  "result": {
+    "id": "minecraft:iron_ingot"
+  },
+  "time": 1100
+}

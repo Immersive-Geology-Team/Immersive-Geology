@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class MaterialMCDiorite extends MaterialStone {
 
@@ -30,6 +29,6 @@ public class MaterialMCDiorite extends MaterialStone {
     @Override
     public Properties getProperties(IFlagType<?> flag)
     {
-        return BlockBehaviour.Properties.copy(Blocks.DIORITE);
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.DIORITE);
     }
 }

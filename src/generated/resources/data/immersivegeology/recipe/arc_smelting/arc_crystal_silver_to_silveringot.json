@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 204800,
+  "input": {
+    "tag": "c:crystal/silver"
+  },
+  "results": [
+    {
+      "id": "immersiveengineering:ingot_silver"
+    }
+  ],
+  "time": 400
+}

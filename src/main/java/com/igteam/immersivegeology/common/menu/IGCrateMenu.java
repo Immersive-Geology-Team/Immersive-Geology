@@ -10,9 +10,7 @@ package com.igteam.immersivegeology.common.menu;
 
 import blusunrize.immersiveengineering.api.IEApi;
 import com.google.common.base.Preconditions;
-import com.igteam.immersivegeology.core.lib.IGLib;
 import invtweaks.api.container.ChestContainer;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;

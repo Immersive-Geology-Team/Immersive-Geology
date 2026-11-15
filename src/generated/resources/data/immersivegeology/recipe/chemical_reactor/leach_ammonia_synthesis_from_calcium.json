@@ -1,0 +1,23 @@
+{
+  "type": "immersivegeology:chemical_reactor",
+  "energy": 51200,
+  "fluidInputA": {
+    "amount": 125,
+    "tag": "minecraft:water"
+  },
+  "fluidResult": {
+    "amount": 120,
+    "id": "immersivegeology:fluid_ammonia_solution"
+  },
+  "itemInput": {
+    "basePredicate": {
+      "tag": "c:powdered_slag/calcium"
+    },
+    "count": 8
+  },
+  "result": {
+    "count": 7,
+    "id": "immersivegeology:compound_dust_calcium"
+  },
+  "time": 200
+}

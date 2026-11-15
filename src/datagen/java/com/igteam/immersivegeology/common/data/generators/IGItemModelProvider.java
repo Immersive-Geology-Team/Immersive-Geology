@@ -26,9 +26,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.client.model.generators.ModelBuilder;
-import net.minecraftforge.client.model.generators.loaders.ObjModelBuilder;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.client.model.generators.loaders.ObjModelBuilder;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.slf4j.Logger;
 
 import java.util.List;
@@ -95,28 +94,28 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
 
         // Hand written items are not material driven, so the loop above has no flag to build a path from.
         withExistingParent("item/"+IGRegistrationHolder.USHANKA_KEY,
-                new ResourceLocation(IGLib.MODID, "item/base/ig_base_item"))
-                .texture("layer0", new ResourceLocation(IGLib.MODID, "item/"+IGRegistrationHolder.USHANKA_KEY));
+                ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/base/ig_base_item"))
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/"+IGRegistrationHolder.USHANKA_KEY));
     }
 
     private void generateDrillHead(IGGenericDrillHead item)
     {
-        String itemLocation = new ResourceLocation(IGLib.MODID, "item/" + item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base))).getPath();
-        ResourceLocation coloredTexture = new ResourceLocation(IGLib.MODID, "item/colored/" + item.getMaterial(MaterialTexture.base).getName() + "/" + item.getFlag().name().toLowerCase(Locale.ROOT));
-        ResourceLocation texture = new ResourceLocation(IGLib.MODID, "palette/item/drill_head/drill_head_pristine_"+item.getMaterial(MaterialTexture.base).getName().toLowerCase(Locale.ROOT));
-        boolean colored = this.existingFileHelper.exists(new ResourceLocation(IGLib.MODID, "textures/" + coloredTexture.getPath()).withSuffix(".png"), PackType.CLIENT_RESOURCES);
+        String itemLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/" + item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base))).getPath();
+        ResourceLocation coloredTexture = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/colored/" + item.getMaterial(MaterialTexture.base).getName() + "/" + item.getFlag().name().toLowerCase(Locale.ROOT));
+        ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "palette/item/drill_head/drill_head_pristine_"+item.getMaterial(MaterialTexture.base).getName().toLowerCase(Locale.ROOT));
+        boolean colored = this.existingFileHelper.exists(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/" + coloredTexture.getPath()).withSuffix(".png"), PackType.CLIENT_RESOURCES);
         try {
-            ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");
+            ResourceLocation parentLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/base/ig_base_item");
             withExistingParent(itemLocation, parentLocation).texture("layer0", colored ? coloredTexture : texture);
         } catch (Exception ex) {
-            ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");
+            ResourceLocation parentLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/base/ig_base_item");
             withExistingParent(itemLocation, parentLocation).textures.put("layer0", texture.toString());
         }
     }
 
     private TRSRModelBuilder obj(ItemLike item, ResourceLocation model) {
         Preconditions.checkArgument(this.existingFileHelper.exists(model, PackType.CLIENT_RESOURCES, "", "models"));
-        return (TRSRModelBuilder)((ObjModelBuilder)this.getBuilder(item).customLoader(ObjModelBuilder::begin)).flipV(true).modelLocation(new ResourceLocation(model.getNamespace(), "models/" + model.getPath())).end();
+        return (TRSRModelBuilder)((ObjModelBuilder)this.getBuilder(item).customLoader(ObjModelBuilder::begin)).flipV(true).modelLocation(ResourceLocation.fromNamespaceAndPath(model.getNamespace(), "models/" + model.getPath())).end();
     }
 
     private TRSRModelBuilder getBuilder(ItemLike item) {
@@ -128,17 +127,17 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
     }
 
     private void generateGenericItem(IGFlagItem item){
-        String itemLocation = new ResourceLocation(IGLib.MODID, "item/" + item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base))).getPath();
+        String itemLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/" + item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base))).getPath();
 
         try {
-            ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");
+            ResourceLocation parentLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/base/ig_base_item");
             withExistingParent(itemLocation, parentLocation).texture("layer0", item.getMaterial(MaterialTexture.base).getTextureLocation(item.getFlag()));
 
             if(item.getMaterial(MaterialTexture.overlay) != null) {
                 getBuilder(itemLocation).texture("layer1", item.getMaterial(MaterialTexture.overlay).getTextureLocation(item.getFlag()));
             }
         } catch (Exception ex) {
-            ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");
+            ResourceLocation parentLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/base/ig_base_item");
             withExistingParent(itemLocation, parentLocation).textures.put("layer0", item.getMaterial(MaterialTexture.base).getTextureLocation(item.getFlag()).toString());
 
             if(item.getMaterial(MaterialTexture.overlay) != null) {
@@ -148,23 +147,23 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
     }
 
     private void generateGenericSkinItem(IGMultiblockSkinItem<?> item){
-        String itemLocation = new ResourceLocation(IGLib.MODID, "item/" + item.getRegistryName()).getPath();
-        ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/skin_component_base");
+        String itemLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/" + item.getRegistryName()).getPath();
+        ResourceLocation parentLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/base/skin_component_base");
         withExistingParent(itemLocation, parentLocation);
     }
 
     private void generateToolItem(IGFlagItem item){
-        String itemLocation = new ResourceLocation(IGLib.MODID, "item/" + item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base))).getPath();
+        String itemLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/" + item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base))).getPath();
 
         try {
-            ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_tool_item");
+            ResourceLocation parentLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/base/ig_tool_item");
             withExistingParent(itemLocation, parentLocation).texture("layer0", item.getMaterial(MaterialTexture.base).getTextureLocation(item.getFlag()));
 
             if(item.getMaterial(MaterialTexture.overlay) != null) {
                 getBuilder(itemLocation).texture("layer1", item.getMaterial(MaterialTexture.overlay).getTextureLocation(item.getFlag()));
             }
         } catch (Exception ex) {
-            ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_tool_item");
+            ResourceLocation parentLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/base/ig_tool_item");
             withExistingParent(itemLocation, parentLocation).textures.put("layer0", item.getMaterial(MaterialTexture.base).getTextureLocation(item.getFlag()).toString());
 
             if(item.getMaterial(MaterialTexture.overlay) != null) {
@@ -175,20 +174,20 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
 
     private void generateGenericOreItem(IGGenericOreItem item)
     {
-        String itemLocation = new ResourceLocation(IGLib.MODID, "item/" + item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base))).getPath();
-        ResourceLocation coloredTexture = new ResourceLocation(IGLib.MODID, "item/colored/raw_ore/" + item.getMaterial(MaterialTexture.base).getName().toLowerCase(Locale.ROOT) + "/" + item.getOreRichness().getSanitizedName());
-        boolean color_exists = EXISTING_HELPER.exists(new ResourceLocation(IGLib.MODID, "textures/" + coloredTexture.getPath() + ".png"), CLIENT_RESOURCES);
+        String itemLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/" + item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base))).getPath();
+        ResourceLocation coloredTexture = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/colored/raw_ore/" + item.getMaterial(MaterialTexture.base).getName().toLowerCase(Locale.ROOT) + "/" + item.getOreRichness().getSanitizedName());
+        boolean color_exists = EXISTING_HELPER.exists(ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "textures/" + coloredTexture.getPath() + ".png"), CLIENT_RESOURCES);
         ResourceLocation useTextureBase = color_exists ? coloredTexture : item.getMaterial(MaterialTexture.base).getTextureLocation(item.getFlag());
 
         try {
-            ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");
+            ResourceLocation parentLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/base/ig_base_item");
             withExistingParent(itemLocation, parentLocation).texture("layer0", useTextureBase);
 
             if(item.getMaterial(MaterialTexture.overlay) != null) {
                 getBuilder(itemLocation).texture("layer1", item.getMaterial(MaterialTexture.overlay).getTextureLocation(item.getFlag()));
             }
         } catch (Exception ex) {
-            ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");
+            ResourceLocation parentLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/base/ig_base_item");
             withExistingParent(itemLocation, parentLocation).textures.put("layer0", useTextureBase.toString());
 
             if(item.getMaterial(MaterialTexture.overlay) != null) {
@@ -201,7 +200,7 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
         if(!(item instanceof IGGenericBucketItem bucketItem)) return;
         MaterialInterface<?> baseMaterial = bucketItem.getMaterial(MaterialTexture.base);
         MaterialInterface<?> overlayMaterial = bucketItem.getMaterial(MaterialTexture.overlay);
-        String itemLocation = new ResourceLocation(IGLib.MODID, "item/" + bucketItem.getBucketType().getRegistryKey(baseMaterial, bucketItem.getFluidCategory())).getPath();
+        String itemLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/" + bucketItem.getBucketType().getRegistryKey(baseMaterial, bucketItem.getFluidCategory())).getPath();
         boolean chemical = false;
 
         if(baseMaterial instanceof ChemicalEnum)
@@ -209,16 +208,16 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
            chemical = true;
            if(overlayMaterial != null)
            {
-               itemLocation = new ResourceLocation(IGLib.MODID, "item/" + bucketItem.getBucketType().getRegistryKey(baseMaterial,overlayMaterial)).getPath();
+               itemLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/" + bucketItem.getBucketType().getRegistryKey(baseMaterial,overlayMaterial)).getPath();
            }
         }
 
         try {
-            ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "item/base/ig_base_item");
+            ResourceLocation parentLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/base/ig_base_item");
 
             // TODO implement a better version of this, that supports 'colored' variants of the item textures, using the item flag system
-            withExistingParent(itemLocation, parentLocation).texture("layer0", new ResourceLocation(IGLib.MODID, "item/greyscale/fluid/" + (chemical ? "compound_flask" : "bucket_base")));
-            getBuilder(itemLocation).texture("layer1", new ResourceLocation(IGLib.MODID, "item/greyscale/fluid/" + (chemical ? "compound_flask_fluid" : "bucket_fluid")));
+            withExistingParent(itemLocation, parentLocation).texture("layer0", ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/greyscale/fluid/" + (chemical ? "compound_flask" : "bucket_base")));
+            getBuilder(itemLocation).texture("layer1", ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/greyscale/fluid/" + (chemical ? "compound_flask_fluid" : "bucket_fluid")));
         } catch (Exception ex) {
             logger.error("Attempted to generate a texture for the item type '{}' with material '{}'", item.getFlag().getName(), item.getMaterial(MaterialTexture.base).getName());
             logger.error(ex.getMessage());
@@ -244,16 +243,16 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
 
                     boolean isSedimentary = ((MaterialStone)igOreBlock.getMaterial(MaterialTexture.base).instance()).getStoneFormation().equals(StoneFormation.SEDIMENTARY) || igOreBlock.getMaterial(MaterialTexture.base).useSedimentaryTextures(igOreBlock.getFlag());
                     OreRichness richness = igOreBlock.getOreRichness();
-                    String itemLocation = new ResourceLocation(IGLib.MODID, "item/"+item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.overlay), item.getMaterial(MaterialTexture.base), richness)).getPath();
-                    ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "block/base/ore_block" + (isSedimentary ? "_sedimentary" : "") + IGBlockStateProvider.backdropSuffix(igOreBlock, igOreBlock.getStoneFormation()));
+                    String itemLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/"+item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.overlay), item.getMaterial(MaterialTexture.base), richness)).getPath();
+                    ResourceLocation parentLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/base/ore_block" + (isSedimentary ? "_sedimentary" : "") + IGBlockStateProvider.backdropSuffix(igOreBlock, igOreBlock.getStoneFormation()));
                     TRSRModelBuilder builder = withExistingParent(itemLocation, parentLocation);
                     IGBlockStateProvider.implementUnsafeOreTexture(builder, igOreBlock, igOreBlock.getStoneFormation(), 1);
                     return;
                 }
 
                 if(blockItem.getBlock() instanceof IGScaffoldingBlock scaffoldingBlock){
-                    String itemLocation = new ResourceLocation(IGLib.MODID, "item/scaffolding_" + scaffoldingBlock.getMaterial(MaterialTexture.base).getName().toLowerCase(Locale.ROOT) + "_" + scaffoldingBlock.getScaffoldingType().name().toLowerCase(Locale.ROOT)).getPath();
-                    ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "block/scaffolding/"+scaffoldingBlock.getMaterial(MaterialTexture.base).getName().toLowerCase(Locale.ROOT)+"_scaffolding_"+scaffoldingBlock.getScaffoldingType().name().toLowerCase(Locale.ROOT));
+                    String itemLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/scaffolding_" + scaffoldingBlock.getMaterial(MaterialTexture.base).getName().toLowerCase(Locale.ROOT) + "_" + scaffoldingBlock.getScaffoldingType().name().toLowerCase(Locale.ROOT)).getPath();
+                    ResourceLocation parentLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/scaffolding/"+scaffoldingBlock.getMaterial(MaterialTexture.base).getName().toLowerCase(Locale.ROOT)+"_scaffolding_"+scaffoldingBlock.getScaffoldingType().name().toLowerCase(Locale.ROOT));
 
                     withExistingParent(itemLocation, parentLocation);
                     return;
@@ -262,8 +261,8 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
                 if(blockItem.getBlock() instanceof IGCrystalBlock crystalBlock)
                 {
                     boolean complexItem = blockItem.getMaterials().size() > 1;
-                    String itemLocation = new ResourceLocation(IGLib.MODID, "item/"+(complexItem?item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.overlay), item.getMaterial(MaterialTexture.base)): item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base)))).getPath();
-                    ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "block/evaporate_crystal/"+item.getMaterial(MaterialTexture.base).getName()+"_stage_2");
+                    String itemLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/"+(complexItem?item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.overlay), item.getMaterial(MaterialTexture.base)): item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base)))).getPath();
+                    ResourceLocation parentLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/evaporate_crystal/"+item.getMaterial(MaterialTexture.base).getName()+"_stage_2");
 
                     withExistingParent(itemLocation, parentLocation);
                     return;
@@ -272,7 +271,7 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
 
                 if(blockItem.getBlock() instanceof IGFenceBlock fence)
                 {
-                    withExistingParent(BuiltInRegistries.BLOCK.getKey(fence).getPath(), new ResourceLocation(IGLib.MODID,"block/base/fence_inventory"))
+                    withExistingParent(BuiltInRegistries.BLOCK.getKey(fence).getPath(), ResourceLocation.fromNamespaceAndPath(IGLib.MODID,"block/base/fence_inventory"))
                                     .texture("texture", fence.getMaterial(MaterialTexture.base).getTextureLocation(BlockCategoryFlags.STORAGE_BLOCK));
                     return;
                 }
@@ -280,9 +279,9 @@ public class IGItemModelProvider extends IGTRSRItemModelProvider
 
                 boolean complexItem = blockItem.getMaterials().size() > 1;
 
-                String itemLocation = new ResourceLocation(IGLib.MODID, "item/"+(complexItem?item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.overlay), item.getMaterial(MaterialTexture.base)): item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base)))).getPath();
+                String itemLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "item/"+(complexItem?item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.overlay), item.getMaterial(MaterialTexture.base)): item.getFlag().getRegistryKey(item.getMaterial(MaterialTexture.base)))).getPath();
                 String overlayExtra = item.getMaterial(MaterialTexture.overlay)!=null?"_"+item.getMaterial(MaterialTexture.overlay).getName(): "";
-                ResourceLocation parentLocation = new ResourceLocation(IGLib.MODID, "block/"+item.getFlag().getName()+"/"+item.getFlag().getName()+overlayExtra+"_"+item.getMaterial(MaterialTexture.base).getName());
+                ResourceLocation parentLocation = ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/"+item.getFlag().getName()+"/"+item.getFlag().getName()+overlayExtra+"_"+item.getMaterial(MaterialTexture.base).getName());
 
                 withExistingParent(itemLocation, parentLocation);
                 return;

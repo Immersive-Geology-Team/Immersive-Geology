@@ -1,0 +1,10 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 6000,
+  "input": {
+    "item": "immersivegeology:crushed_ore_silver"
+  },
+  "result": {
+    "id": "immersiveengineering:dust_silver"
+  }
+}

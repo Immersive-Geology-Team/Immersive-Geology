@@ -1,0 +1,18 @@
+{
+  "type": "immersiveengineering:bottling_machine",
+  "fluid": {
+    "amount": 250,
+    "tag": "c:ehv_insulation"
+  },
+  "input": {
+    "item": "immersiveengineering:mold_plate"
+  },
+  "results": [
+    {
+      "id": "immersivegeology:plate_ehv_insulation"
+    },
+    {
+      "id": "immersiveengineering:mold_plate"
+    }
+  ]
+}

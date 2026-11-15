@@ -9,18 +9,18 @@
 package com.igteam.immersivegeology.common.block.multiblocks.gui.helper;
 
 import blusunrize.immersiveengineering.api.crafting.BlastFurnaceFuel;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.arcfurnace.ArcFurnaceProcess;
-import blusunrize.immersiveengineering.common.gui.ArcFurnaceMenu;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.*;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.BasicChemicalRecipe;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.BloomeryFuel;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRecipe;
+import com.igteam.immersivegeology.common.block.multiblocks.recipe.ChemicalRepairRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.process.RotaryKilnProcess;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class IGSlot extends Slot

@@ -11,7 +11,6 @@ package com.igteam.immersivegeology.common.block.entity.device;
 import blusunrize.immersiveengineering.api.energy.MutableEnergyStorage;
 import blusunrize.immersiveengineering.common.blocks.IEBaseBlockEntity;
 import blusunrize.immersiveengineering.common.blocks.ticking.IEServerTickableBE;
-import blusunrize.immersiveengineering.common.util.ResettableCapability;
 import com.igteam.immersivegeology.common.menu.IGMetalDetectorMenu;
 import com.igteam.immersivegeology.common.world.features.helper.IGVeinLocator;
 import com.igteam.immersivegeology.common.world.features.helper.IGVeinLocator.ChunkDeposit;
@@ -19,6 +18,10 @@ import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -28,22 +31,21 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.MapItem;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraft.world.level.saveddata.maps.MapDecoration;
-import net.minecraft.world.level.saveddata.maps.MapDecoration.Type;
-import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.items.ItemStackHandler;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.saveddata.maps.MapDecorationType;
+import net.minecraft.world.level.saveddata.maps.MapDecorationTypes;
+import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -79,7 +81,6 @@ public class IGMetalDetectorEntity extends IEBaseBlockEntity implements IEServer
 	private static volatile List<MaterialInterface<?>> knownMaterials;
 
 	public final MutableEnergyStorage energyStorage = new MutableEnergyStorage(ENERGY_CAPACITY, ENERGY_MAX_INPUT, 0);
-	private final ResettableCapability<IEnergyStorage> energyCap = registerCapability(energyStorage);
 
 	private byte[] radar = new byte[RADAR_SIZE*RADAR_SIZE];
 
@@ -387,17 +388,17 @@ public class IGMetalDetectorEntity extends IEBaseBlockEntity implements IEServer
 			mapData.addDecoration(mark.type(), serverLevel, mark.id(), mark.x(), mark.z(), 180.0, mark.name());
 		}
 		// The saved data never writes these to disk, so the item has to carry them.
-		IGDepositMapMarks.write(stack, prefix, marks);
+		IGDepositMapMarks.write(stack, prefix, marks, serverLevel.registryAccess());
 	}
 
-	private static MapDecoration.Type markerFor(DepositGrade grade)
+	private static Holder<MapDecorationType> markerFor(DepositGrade grade)
 	{
 		return switch(grade)
 				{
-					case RICH -> MapDecoration.Type.TARGET_POINT;
-					case NORMAL -> MapDecoration.Type.RED_MARKER;
-					case POOR -> MapDecoration.Type.BLUE_MARKER;
-					default -> Type.RED_X;
+					case RICH -> MapDecorationTypes.TARGET_POINT;
+					case NORMAL -> MapDecorationTypes.RED_MARKER;
+					case POOR -> MapDecorationTypes.BLUE_MARKER;
+					default -> MapDecorationTypes.RED_X;
 				};
 	}
 
@@ -502,14 +503,6 @@ public class IGMetalDetectorEntity extends IEBaseBlockEntity implements IEServer
 		return idle&&burstRemaining <= 0;
 	}
 
-	@NotNull
-	@Override
-	public <T> LazyOptional<T> getCapability(@NotNull Capability<T> capability, @Nullable Direction side)
-	{
-		if(capability==ForgeCapabilities.ENERGY&&acceptsEnergyOn(side)) return energyCap.cast();
-		return super.getCapability(capability, side);
-	}
-
 	public boolean acceptsEnergyOn(@Nullable Direction side)
 	{
 		if(side==null) return true;
@@ -590,14 +583,14 @@ public class IGMetalDetectorEntity extends IEBaseBlockEntity implements IEServer
 
 
 	@Override
-	public void readCustomNBT(CompoundTag tag, boolean descPacket)
+	public void readCustomNBT(CompoundTag tag, boolean descPacket, HolderLookup.Provider provider)
 	{
 		// idle is deliberately not saved. A detector that has just loaded has no idea whether the ground changed
 		// while it was unloaded, so it always comes back surveying and idles again on its own if nothing has.
 		energyStorage.setStoredEnergy(tag.getInt("energy"));
 		running = tag.getBoolean("running");
 
-		if(tag.contains("maps")) mapSlots.deserializeNBT(tag.getCompound("maps"));
+		if(tag.contains("maps")) mapSlots.deserializeNBT(provider, tag.getCompound("maps"));
 		if(descPacket)
 		{
 			byte[] storedRadar = tag.getByteArray("radar");
@@ -608,11 +601,11 @@ public class IGMetalDetectorEntity extends IEBaseBlockEntity implements IEServer
 	}
 
 	@Override
-	public void writeCustomNBT(CompoundTag tag, boolean descPacket)
+	public void writeCustomNBT(CompoundTag tag, boolean descPacket, HolderLookup.Provider provider)
 	{
 		tag.putInt("energy", energyStorage.getEnergyStored());
 		tag.putBoolean("running", running);
-		tag.put("maps", mapSlots.serializeNBT());
+		tag.put("maps", mapSlots.serializeNBT(provider));
 
 		// The sweep is cheap to redo and would only bloat the region file, so it rides the description packet
 		// to whoever is watching and is never saved.
@@ -621,5 +614,24 @@ public class IGMetalDetectorEntity extends IEBaseBlockEntity implements IEServer
 			tag.putByteArray("radar", radar);
 			tag.putByteArray("grade", grade);
 		}
+	}
+
+	@Override
+	public void saveToItem(ItemStack stack, HolderLookup.Provider provider)
+	{
+		CompoundTag tag = this.saveCustomOnly(provider);
+		stack.applyComponents(this.collectComponents());
+		BlockItem.setBlockEntityData(stack, this.getType(), tag);
+	}
+
+	@Override
+	protected void collectImplicitComponents(DataComponentMap.Builder components)
+	{
+		super.collectImplicitComponents(components);
+
+		CompoundTag tag = new CompoundTag();
+		tag.putInt("energy", energyStorage.getEnergyStored());
+		BlockEntity.addEntityType(tag, this.getType());
+		components.set(DataComponents.BLOCK_ENTITY_DATA, CustomData.of(tag));
 	}
 }

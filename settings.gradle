@@ -1,15 +1,11 @@
 pluginManagement {
     repositories {
         gradlePluginPortal()
-        maven { url 'https://maven.neoforged.net' }
-        mavenCentral()
-        maven {url 'https://repo.spongepowered.org/repository/maven-public/'}
-        maven { url 'https://maven.parchmentmc.org' }
     }
 }
 
 plugins {
-    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.5.0'
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
 }
 
 rootProject.name = "ImmersiveGeology-${version_minecraft}"
@@ -24,11 +20,8 @@ def baseVersion  = props['version']
 def currentBuild = props['build_number'].toInteger()
 def nextBuild    = currentBuild + 1
 
-props['build_number'] = nextBuild.toString()
-props.store(new FileOutputStream(propsFile), null)
-
 // 3. Publish the full new version via gradle.ext
 gradle.ext.nextVersion        = "${baseVersion}-b${nextBuild}"
 gradle.ext.nextBuildNumber   = nextBuild
 
-println "⤷ settings.gradle bumped to ${gradle.ext.nextVersion}"
+println "⤷ settings.gradle prepared to bump to ${gradle.ext.nextVersion}"

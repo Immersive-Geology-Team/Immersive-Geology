@@ -1,0 +1,18 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [
+    {
+      "tag": "c:dusts/coal_coke"
+    }
+  ],
+  "energy": 204800,
+  "input": {
+    "tag": "c:metal_oxide/silicon"
+  },
+  "results": [
+    {
+      "id": "immersivegeology:slag_silicon"
+    }
+  ],
+  "time": 400
+}

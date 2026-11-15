@@ -1,6 +1,5 @@
 package com.igteam.immersivegeology.core.material.data.mineral;
 
-import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import com.igteam.immersivegeology.common.world.features.helper.noise.IGGenerationType;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -21,8 +20,9 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags.Biomes;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.common.Tags.Biomes;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -78,7 +78,7 @@ public class MaterialBauxite extends MaterialMineral {
                 ItemStack.EMPTY, //STACK
                 new FluidStack(ChemicalEnum.SodiumHydroxide.getCloudySlurryWith(MineralEnum.Bauxite), IGLib.SLURRY_FROM_ACID_AMOUNT),
                 new IngredientWithSize(getItemTag(ItemCategoryFlags.POWDER), 1),
-                new FluidTagInput(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
+                SizedFluidIngredient.of(ChemicalEnum.SodiumHydroxide.getFluidTag(BlockCategoryFlags.FLUID), IGLib.ACID_TO_SLURRY_AMOUNT),
                 null, null, 200, 51200).joinBranches(bayer_process, powder_a, powder_b);
 
         IGMethodBuilder.centrifuge(this, IGStageDesignation.REFINEMENT).create(
@@ -94,9 +94,9 @@ public class MaterialBauxite extends MaterialMineral {
                 MetalEnum.Iron.getStack(ItemCategoryFlags.METAL_OXIDE),
                 ChemicalEnum.ChemicalWaste.getFluidStack(IGLib.ACID_TO_SLURRY_AMOUNT),
                 new IngredientWithSize(MetalEnum.Calcium.getItemTag(ItemCategoryFlags.COMPOUND_DUST), 1),
-                new FluidTagInput(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.SLURRY_TO_CRYSTAL_MB),
-                new FluidTagInput(ChemicalEnum.ChemicalWaste.getCloudySlurryTagWith(MineralEnum.Bauxite),IGLib.SLURRY_TO_CRYSTAL_MB),
-                new FluidTagInput(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.SLURRY_TO_CRYSTAL_MB),
+                SizedFluidIngredient.of(ChemicalEnum.HydrochloricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.SLURRY_TO_CRYSTAL_MB),
+                SizedFluidIngredient.of(ChemicalEnum.ChemicalWaste.getCloudySlurryTagWith(MineralEnum.Bauxite),IGLib.SLURRY_TO_CRYSTAL_MB),
+                SizedFluidIngredient.of(ChemicalEnum.SulfuricAcid.getFluidTag(BlockCategoryFlags.FLUID), IGLib.SLURRY_TO_CRYSTAL_MB),
                 200, 51200).addToTree(bayer_process);
 
     }

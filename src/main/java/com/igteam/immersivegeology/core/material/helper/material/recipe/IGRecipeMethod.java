@@ -18,17 +18,16 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.helper.I
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.Rect2i;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.function.Consumer;
 
 public abstract class IGRecipeMethod
 {
@@ -82,10 +81,10 @@ public abstract class IGRecipeMethod
 		{
 			int count = PATH_COUNT.get(s)+1;
 			PATH_COUNT.put(s, count);
-			return new ResourceLocation(IGLib.MODID, s+count);
+			return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, s+count);
 		}
 		PATH_COUNT.put(s, 1);
-		return new ResourceLocation(IGLib.MODID, s);
+		return ResourceLocation.fromNamespaceAndPath(IGLib.MODID, s);
 	}
 
 	public void clearRecipePath(){
@@ -94,7 +93,7 @@ public abstract class IGRecipeMethod
 
 	public abstract String getName();
 
-	public abstract boolean build(Consumer<FinishedRecipe> consumer);
+	public abstract boolean build(RecipeOutput consumer);
 
 	public ItemStack getIconStack()
 	{
@@ -118,11 +117,11 @@ public abstract class IGRecipeMethod
 	{
 		FluidTank tank = new FluidTank(128);
 		tank.setFluid(new FluidStack(stack, 128));
-		FluidInfoArea fluid = new FluidInfoArea(tank, new Rect2i(x, y, w, h), 0,0, 0,0, getMethod().getGuiLocation());
+		FluidInfoArea fluid = new FluidInfoArea(tank, new Rect2i(x, y, w, h), 0,0, getMethod().getGuiLocation());
 		fluid.draw(graphics);
 		if(mx > x && (x+w) > mx && my > y && (y+h) > my)
 		{
-			graphics.renderTooltip(Minecraft.getInstance().font, tank.getFluid().getDisplayName(), mx,my);
+			graphics.renderTooltip(Minecraft.getInstance().font, tank.getFluid().getHoverName(), mx,my);
 		}
 	}
 
@@ -132,11 +131,11 @@ public abstract class IGRecipeMethod
 		FluidTank tank = new FluidTank(128);
 		stack.setAmount(128);
 		tank.setFluid(stack);
-		FluidInfoArea fluid = new FluidInfoArea(tank, new Rect2i(x, y, w, h), 0,0, 0,0, getMethod().getGuiLocation());
+		FluidInfoArea fluid = new FluidInfoArea(tank, new Rect2i(x, y, w, h), 0,0, getMethod().getGuiLocation());
 		fluid.draw(graphics);
 		if(mx > x && (x+w) > mx && my > y && (y+h) > my)
 		{
-			graphics.renderTooltip(Minecraft.getInstance().font, tank.getFluid().getDisplayName(), mx,my);
+			graphics.renderTooltip(Minecraft.getInstance().font, tank.getFluid().getHoverName(), mx,my);
 		}
 	}
 
@@ -144,11 +143,11 @@ public abstract class IGRecipeMethod
 	{
 		FluidTank tank = new FluidTank(amount);
 		tank.setFluid(new FluidStack(stack, amount));
-		FluidInfoArea fluid = new FluidInfoArea(tank, new Rect2i(x, y, w, h), 0,0, 0,0, getMethod().getGuiLocation());
+		FluidInfoArea fluid = new FluidInfoArea(tank, new Rect2i(x, y, w, h), 0,0, getMethod().getGuiLocation());
 		fluid.draw(graphics);
 		if(mx > x && (x+w) > mx && my > y && (y+h) > my)
 		{
-			graphics.renderTooltip(Minecraft.getInstance().font, tank.getFluid().getDisplayName(), mx,my);
+			graphics.renderTooltip(Minecraft.getInstance().font, tank.getFluid().getHoverName(), mx,my);
 		}
 	}
 

@@ -16,22 +16,18 @@ import com.igteam.immersivegeology.core.material.data.types.MaterialMetal;
 import com.igteam.immersivegeology.core.material.helper.flags.BlockCategoryFlags;
 import com.igteam.immersivegeology.core.material.helper.flags.MaterialFlags;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialInterface;
-import com.igteam.immersivegeology.core.material.helper.material.MaterialTexture;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.function.Consumer;
 
 public class IGFluidType extends FluidType
 {
@@ -122,8 +118,8 @@ public class IGFluidType extends FluidType
 		return Component.translatable("fluid.immersivegeology." + type, materialList.toArray());
 	}
 
-	public void initializeClient(Consumer< IClientFluidTypeExtensions > consumer) {
-		consumer.accept(getFluidExtendedProperties(category));
+	public IClientFluidTypeExtensions getClientExtensions() {
+		return getFluidExtendedProperties(category);
 	}
 
 	public IClientFluidTypeExtensions getFluidExtendedProperties(BlockCategoryFlags flag)
@@ -140,13 +136,13 @@ public class IGFluidType extends FluidType
 			@Override
 			public ResourceLocation getStillTexture()
 			{
-				return fluid.base.hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? new ResourceLocation(IGLib.MODID, "block/fluid/molten_still") : new ResourceLocation(IGLib.MODID, "block/fluid/default_still");
+				return fluid.base.hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/fluid/molten_still") : ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/fluid/default_still");
 			}
 
 			@Override
 			public ResourceLocation getFlowingTexture()
 			{
-				return fluid.base.hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? new ResourceLocation(IGLib.MODID, "block/fluid/molten_flow") : new ResourceLocation(IGLib.MODID, "block/fluid/default_flowing");
+				return fluid.base.hasFlag(MaterialFlags.IS_MOLTEN_METAL) ? ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/fluid/molten_flow") : ResourceLocation.fromNamespaceAndPath(IGLib.MODID, "block/fluid/default_flowing");
 			}
 
 			@Override
