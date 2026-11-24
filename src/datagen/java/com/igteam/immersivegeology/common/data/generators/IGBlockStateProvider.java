@@ -9,6 +9,9 @@ import blusunrize.immersiveengineering.data.models.NongeneratedModels.Nongenerat
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.igteam.immersivegeology.client.helper.IGVeinTextureType;
+import com.igteam.immersivegeology.common.block.belt.IGBeltBlock;
+import com.igteam.immersivegeology.common.block.belt.IGSplitterBlock;
+import net.minecraftforge.common.util.TransformationHelper;
 import com.igteam.immersivegeology.common.block.entity.cable.EnergyPipeCallback;
 import com.igteam.immersivegeology.common.block.helper.IGBlockType;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
@@ -119,6 +122,8 @@ public class IGBlockStateProvider extends BlockStateProvider {
                 }
             }
         }
+
+        registerBelts();
 
         List<? extends Fluid> igFluids = IGRegistrationHolder.supplyDeferredFluids().get();
         for(Fluid fluid : igFluids)
@@ -461,6 +466,78 @@ public class IGBlockStateProvider extends BlockStateProvider {
     {
         IGFenceBlock fence = (IGFenceBlock) type;
         igFenceBlock(fence, fence.getMaterial(MaterialTexture.base).getTextureLocation(BlockCategoryFlags.STORAGE_BLOCK));
+    }
+
+    private void registerBelts()
+    {
+        existingFileHelper.trackGenerated(BELT_PARTICLE, PackType.CLIENT_RESOURCES, ".png", "textures");
+        Map<String, ModelFile> pieces = new HashMap<>();
+        for(String key : IGRegistrationHolder.BELT_KEYS)
+        {
+            IGBeltBlock block = (IGBeltBlock)IGRegistrationHolder.getBlock.apply(key);
+            String material = block.style().material();
+            getVariantBuilder(block).forAllStates(state -> {
+                if(!block.rendersModel(state))
+                    return ConfiguredModel.builder().modelFile(models().getExistingFile(modLoc("block/empty"))).build();
+                String piece = block.modelPiece(state);
+                String modelKey = material+"/"+piece+(block.stoppedBelt(state)?STOPPED_MARKER: "");
+                ModelFile model = pieces.computeIfAbsent(modelKey, this::beltModel);
+                return ConfiguredModel.builder()
+                        .modelFile(model)
+                        .rotationY(((int)state.getValue(IGBeltBlock.FACING).toYRot()+180)%360)
+                        .build();
+            });
+            if(block instanceof IGSplitterBlock)
+                splitterItemModel(key, material, block.itemModelPiece());
+            else
+                itemModels().withExistingParent(key, modLoc("block/belt/"+material+"/"+block.itemModelPiece()));
+        }
+    }
+
+    private static final String STOPPED_MARKER = "#stopped";
+    private static final float SPLITTER_ICON_SCALE = 0.66f;
+    private static final float SPLITTER_ICON_LIFT = 0.125f;
+    private static final ResourceLocation BELT_PARTICLE = new ResourceLocation("immersiveengineering", "block/metal/storage_steel");
+
+    private void splitterItemModel(String key, String material, String piece)
+    {
+        String textureRoot = "block/belt/"+material+"/";
+        ItemModelBuilder model = obj(itemModels().withExistingParent(key, mcLoc("block/block")), modLoc("block/belt/"+material+"/"+piece+".obj"), ImmutableMap.of(
+                "belt", modLoc(textureRoot+"belt"),
+                "edge", modLoc(textureRoot+"belt_edge"),
+                "frame", modLoc(textureRoot+"steel_conveyor")
+        ));
+        model.texture("particle", BELT_PARTICLE);
+        model.renderType("cutout");
+        model.rootTransforms()
+                .origin(TransformationHelper.TransformOrigin.CORNER)
+                .translation(SPLITTER_ICON_SCALE*0.5f, SPLITTER_ICON_SCALE*SPLITTER_ICON_LIFT, 0)
+                .scale(SPLITTER_ICON_SCALE)
+                .end();
+    }
+
+    private static String frameTexture(String path, boolean stopped)
+    {
+        if(path.contains("/endergate"))
+            return "endergate";
+        return stopped?"steel_conveyor_off": "steel_conveyor";
+    }
+
+    private ModelFile beltModel(String key)
+    {
+        boolean stopped = key.endsWith(STOPPED_MARKER);
+        String path = stopped?key.substring(0, key.length()-STOPPED_MARKER.length()): key;
+        String material = path.substring(0, path.indexOf('/'));
+        String textureRoot = "block/belt/"+material+"/";
+        BlockModelBuilder model = obj("block/belt/"+path+(stopped?"_stopped": ""), modLoc("block/belt/"+path+".obj"), ImmutableMap.of(
+                "belt", modLoc(textureRoot+(stopped?"belt_stopped": "belt")),
+                "edge", modLoc(textureRoot+"belt_edge"),
+                "frame", modLoc(textureRoot+frameTexture(path, stopped))
+        ), models());
+        model.texture("particle", BELT_PARTICLE);
+        model.renderType("cutout");
+        model.ao(false);
+        return model;
     }
 
     private void registerCable(Block type)

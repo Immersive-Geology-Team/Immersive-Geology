@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "tag": "forge:gears/aluminum"
+    },
+    "P": {
+      "tag": "forge:plates/steel"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "GRG"
+  ],
+  "result": {
+    "count": 8,
+    "item": "immersivegeology:steel_belt"
+  },
+  "show_notification": true
+}

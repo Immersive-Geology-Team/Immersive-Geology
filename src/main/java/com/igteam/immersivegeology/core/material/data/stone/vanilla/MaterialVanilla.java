@@ -32,8 +32,6 @@ public class MaterialVanilla extends MaterialStone {
         this.name = "stone"; // Special Case as we need to override the default name assignment method
         addFlags(MaterialFlags.EXISTING_IMPLEMENTATION, ModFlags.MINECRAFT);
         validMultiblocks.add(() -> IEMultiblocks.ALLOY_SMELTER);
-        validMultiblocks.add(() -> IEMultiblocks.COKE_OVEN);
-        validMultiblocks.add(() -> IEMultiblocks.BLAST_FURNACE);
         validMultiblocks.add(() -> IEMultiblocks.FEEDTHROUGH);
         validMultiblocks.add(() -> IGBloomeryMultiblock.INSTANCE);
     }

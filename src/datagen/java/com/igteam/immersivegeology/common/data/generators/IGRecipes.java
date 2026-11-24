@@ -10,7 +10,6 @@ package com.igteam.immersivegeology.common.data.generators;
 
 import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.IETags;
-import blusunrize.immersiveengineering.api.crafting.BlueprintCraftingRecipe;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IngredientWithSize;
 import blusunrize.immersiveengineering.api.crafting.builders.*;
@@ -26,7 +25,6 @@ import com.igteam.immersivegeology.common.block.multiblocks.logic.RotaryKilnLogi
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BulkBlastFurnaceCharge;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.FoundryAlloy;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.BulkBlastFurnaceOxideCharge;
-import com.igteam.immersivegeology.common.block.multiblocks.recipe.GeothermalBiomeRecipe;
 import com.igteam.immersivegeology.common.block.multiblocks.recipe.builder.*;
 import com.igteam.immersivegeology.common.data.helper.TFCDatagenCompat;
 import com.igteam.immersivegeology.core.lib.IGLib;
@@ -41,6 +39,8 @@ import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipe
 import com.igteam.immersivegeology.core.material.helper.material.recipe.IGRecipeStage;
 import com.igteam.immersivegeology.core.registration.IGRecipeSerializers;
 import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
+import com.igteam.immersivegeology.common.block.belt.helper.BeltStyle;
+import net.minecraft.advancements.critereon.ItemPredicate;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
@@ -59,9 +59,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
@@ -71,6 +69,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Locale;
@@ -98,6 +97,7 @@ public class IGRecipes extends RecipeProvider
 		arcRecyclingOverrides(consumer);
 		tfcCompatRecipes(consumer);
 		manualRecipes(consumer);
+		beltRecipes(consumer);
 		IGRegistrationHolder.buildMaterialRecipes();
 		methodRecipes(consumer);
 		igMineralMixes(consumer);
@@ -1052,6 +1052,112 @@ public class IGRecipes extends RecipeProvider
 				.addInput(mineral.getBlock(BlockCategoryFlags.STORAGE_BLOCK))
 				.setOil(5000).setTime(16200)
 				.build(consumer, new ResourceLocation(IGLib.MODID, "coking/normal_block_" + mineralName + "_to_coke"));
+	}
+
+	private static final String ELECTRONICS = "electronics";
+
+	private void beltRecipes(Consumer<FinishedRecipe> consumer)
+	{
+		TagKey<Item> aluminumGear = MetalEnum.Aluminum.getItemTag(ItemCategoryFlags.GEAR);
+		TagKey<Item> steelPlate = IETags.getTagsFor(EnumMetals.STEEL).plate;
+		TagKey<Item> aluminumPlate = IETags.getTagsFor(EnumMetals.ALUMINUM).plate;
+		TagKey<Item> goldWire = ItemTags.create(new ResourceLocation("forge", "wires/gold"));
+		Item belt = IGRegistrationHolder.getItem.apply(BeltStyle.STEEL.registryKey(""));
+		var hasGear = InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(aluminumGear).build());
+		var hasBelt = InventoryChangeTrigger.TriggerInstance.hasItems(belt);
+
+		ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, belt, 8)
+				.pattern("PPP")
+				.pattern("GRG")
+				.define('P', steelPlate)
+				.define('G', aluminumGear)
+				.define('R', Items.REDSTONE)
+				.unlockedBy("has_aluminum_gear", hasGear).save(consumer, ig("belt/steel_belt"));
+
+		ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, IGRegistrationHolder.getItem.apply(BeltStyle.STEEL.registryKey("rising")), 3)
+				.pattern("B ")
+				.pattern("BR")
+				.pattern("B ")
+				.define('B', belt)
+				.define('R', IETags.steelRod)
+				.unlockedBy("has_steel_belt", hasBelt).save(consumer, ig("belt/steel_rising_belt"));
+
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.TRANSPORTATION, IGRegistrationHolder.getItem.apply(BeltStyle.STEEL.registryKey("dropping")))
+				.requires(belt).requires(Items.IRON_TRAPDOOR)
+				.unlockedBy("has_steel_belt", hasBelt).save(consumer, ig("belt/steel_dropping_belt"));
+
+		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, IEItems.Misc.BLUEPRINT)
+				.pattern("wPr")
+				.pattern("ddd")
+				.pattern("ppp")
+				.define('w', goldWire)
+				.define('P', steelPlate)
+				.define('r', Items.REDSTONE)
+				.define('d', Tags.Items.DYES_BLUE)
+				.define('p', Items.PAPER)
+				.unlockedBy("has_steel_belt", hasBelt)
+				.save(recipe -> consumer.accept(new BlueprintResult(recipe, ELECTRONICS)), ig("blueprint_"+ELECTRONICS));
+
+		BlueprintCraftingRecipeBuilder.builder(ELECTRONICS, new ItemStack(IGRegistrationHolder.getItem.apply(BeltStyle.STEEL.registryKey("powered"))))
+				.addInput(new IngredientWithSize(Ingredient.of(belt), 1))
+				.addInput(new IngredientWithSize(Ingredient.of(Items.REDSTONE), 1))
+				.addInput(new IngredientWithSize(IETags.steelRod, 1))
+				.build(consumer, new ResourceLocation(IGLib.MODID, ELECTRONICS+"/steel_powered_belt"));
+
+		BlueprintCraftingRecipeBuilder.builder(ELECTRONICS, new ItemStack(IGRegistrationHolder.getItem.apply(BeltStyle.STEEL.registryKey("extraction"))))
+				.addInput(new IngredientWithSize(Ingredient.of(belt), 1))
+				.addInput(new IngredientWithSize(Ingredient.of(Items.HOPPER), 1))
+				.build(consumer, new ResourceLocation(IGLib.MODID, ELECTRONICS+"/steel_extraction_belt"));
+
+		BlueprintCraftingRecipeBuilder.builder(ELECTRONICS, new ItemStack(IGRegistrationHolder.getItem.apply(BeltStyle.STEEL.registryKey("splitter"))))
+				.addInput(new IngredientWithSize(Ingredient.of(belt), 2))
+				.addInput(new IngredientWithSize(aluminumGear, 1))
+				.addInput(new IngredientWithSize(steelPlate, 1))
+				.build(consumer, new ResourceLocation(IGLib.MODID, ELECTRONICS+"/steel_splitter_belt"));
+
+		BlueprintCraftingRecipeBuilder.builder(ELECTRONICS, new ItemStack(IGRegistrationHolder.getItem.apply(IGRegistrationHolder.ENDERGATE_KEY), 2))
+				.addInput(new IngredientWithSize(Ingredient.of(belt), 3))
+				.addInput(new IngredientWithSize(aluminumPlate, 2))
+				.addInput(new IngredientWithSize(Ingredient.of(Items.ENDER_PEARL), 2))
+				.build(consumer, new ResourceLocation(IGLib.MODID, ELECTRONICS+"/steel_endergate"));
+	}
+
+	private record BlueprintResult(FinishedRecipe recipe, String category) implements FinishedRecipe
+	{
+		@Override
+		public void serializeRecipeData(@NotNull JsonObject json)
+		{
+			recipe.serializeRecipeData(json);
+			JsonObject nbt = new JsonObject();
+			nbt.addProperty("blueprint", category);
+			json.getAsJsonObject("result").add("nbt", nbt);
+		}
+
+		@Override
+		public @NotNull ResourceLocation getId()
+		{
+			return recipe.getId();
+		}
+
+		@Override
+		public @NotNull RecipeSerializer<?> getType()
+		{
+			return recipe.getType();
+		}
+
+		@Override
+		@Nullable
+		public JsonObject serializeAdvancement()
+		{
+			return recipe.serializeAdvancement();
+		}
+
+		@Override
+		@Nullable
+		public ResourceLocation getAdvancementId()
+		{
+			return recipe.getAdvancementId();
+		}
 	}
 
 	private ResourceLocation ig(String crafting)

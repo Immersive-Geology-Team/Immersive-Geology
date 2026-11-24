@@ -1,0 +1,15 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "automatic_culling": false,
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "immersivegeology:models/block/belt/steel/powered/from_left.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "belt": "immersivegeology:block/belt/steel/belt_stopped",
+    "edge": "immersivegeology:block/belt/steel/belt_edge",
+    "frame": "immersivegeology:block/belt/steel/steel_conveyor_off",
+    "particle": "immersiveengineering:block/metal/storage_steel"
+  }
+}

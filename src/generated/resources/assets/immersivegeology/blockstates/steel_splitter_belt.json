@@ -1,0 +1,31 @@
+{
+  "variants": {
+    "facing=east,half=left": {
+      "model": "immersivegeology:block/empty"
+    },
+    "facing=east,half=right": {
+      "model": "immersivegeology:block/belt/steel/splitter/splitter",
+      "y": 90
+    },
+    "facing=north,half=left": {
+      "model": "immersivegeology:block/empty"
+    },
+    "facing=north,half=right": {
+      "model": "immersivegeology:block/belt/steel/splitter/splitter"
+    },
+    "facing=south,half=left": {
+      "model": "immersivegeology:block/empty"
+    },
+    "facing=south,half=right": {
+      "model": "immersivegeology:block/belt/steel/splitter/splitter",
+      "y": 180
+    },
+    "facing=west,half=left": {
+      "model": "immersivegeology:block/empty"
+    },
+    "facing=west,half=right": {
+      "model": "immersivegeology:block/belt/steel/splitter/splitter",
+      "y": 270
+    }
+  }
+}

@@ -4,6 +4,8 @@ import blusunrize.immersiveengineering.api.excavator.MineralMix;
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import com.igteam.immersivegeology.client.IGClientRenderHandler;
 import com.igteam.immersivegeology.client.IGOverlayHandler;
+import com.igteam.immersivegeology.client.BeltLineGuideRenderer;
+import com.igteam.immersivegeology.client.EndergateGuideRenderer;
 import com.igteam.immersivegeology.client.menu.CreativeMenuHandler;
 
 import com.igteam.immersivegeology.common.block.helper.OreRichness;
@@ -102,6 +104,8 @@ public class ImmersiveGeology {
         MinecraftForge.EVENT_BUS.register(new CreativeMenuHandler());
         IGLib.IG_LOGGER.info("- Custom Multiblock Overlay Registration");
         MinecraftForge.EVENT_BUS.register(new IGOverlayHandler());
+        MinecraftForge.EVENT_BUS.register(new EndergateGuideRenderer());
+        MinecraftForge.EVENT_BUS.register(new BeltLineGuideRenderer());
 
         IGLib.IG_LOGGER.info("- Client Render Handler Registration");
         IGClientRenderHandler.register();

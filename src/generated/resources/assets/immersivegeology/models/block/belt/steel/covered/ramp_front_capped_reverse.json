@@ -1,0 +1,15 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "automatic_culling": false,
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "immersivegeology:models/block/belt/steel/covered/ramp_front_capped_reverse.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "belt": "immersivegeology:block/belt/steel/belt",
+    "edge": "immersivegeology:block/belt/steel/belt_edge",
+    "frame": "immersivegeology:block/belt/steel/steel_conveyor",
+    "particle": "immersiveengineering:block/metal/storage_steel"
+  }
+}

@@ -19,6 +19,7 @@ import com.igteam.immersivegeology.client.manual.IGMaterialShowcase;
 import com.igteam.immersivegeology.client.manual.IGRecipeOverview;
 import com.igteam.immersivegeology.client.menu.IGCrateScreen;
 import com.igteam.immersivegeology.client.menu.IGMetalDetectorScreen;
+import com.igteam.immersivegeology.client.menu.IGSplitterScreen;
 import com.igteam.immersivegeology.client.menu.multiblock.*;
 import com.igteam.immersivegeology.common.block.entity.cable.IGEnergyPipeEntity;
 import com.igteam.immersivegeology.common.block.helper.IOreBlock;
@@ -154,6 +155,7 @@ public class IGContent {
         MenuScreens.register(IGMenuTypes.FOUNDRY.getType(), FoundryScreen::new);
         MenuScreens.register(IGMenuTypes.CRATE.get(), IGCrateScreen.StandardIGCrate::new);
         MenuScreens.register(IGMenuTypes.METAL_DETECTOR.get(), IGMetalDetectorScreen::new);
+        MenuScreens.register(IGMenuTypes.SPLITTER.get(), IGSplitterScreen::new);
     }
 
     public static void initializeManualEntries()

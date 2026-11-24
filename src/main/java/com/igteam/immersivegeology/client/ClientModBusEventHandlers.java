@@ -8,6 +8,8 @@
 
 package com.igteam.immersivegeology.client;
 
+import com.igteam.immersivegeology.core.registration.IGRegistrationHolder;
+import com.igteam.immersivegeology.client.renderer.IGBeltRenderer;
 import com.igteam.immersivegeology.client.menu.multiblock.BloomeryScreen;
 import com.igteam.immersivegeology.client.models.IGDynamicModel;
 import com.igteam.immersivegeology.client.renderer.multiblocks.*;
@@ -94,6 +96,10 @@ public class ClientModBusEventHandlers {
 		registerBERenderNoContext(event, IGMultiblockProvider.CENTRIFUGE.masterBE(), CentrifugeRenderer::new);
 		registerBERenderNoContext(event, IGMultiblockProvider.STEAM_TURBINE.masterBE(), SteamTurbineRenderer::new);
 		registerBERenderNoContext(event, IGMultiblockProvider.ALTERNATOR.masterBE(), AlternatorRenderer::new);
+		event.registerBlockEntityRenderer(IGRegistrationHolder.BELT.get(), $ -> new IGBeltRenderer<>());
+		event.registerBlockEntityRenderer(IGRegistrationHolder.POWERED_BELT.get(), $ -> new IGBeltRenderer<>());
+		event.registerBlockEntityRenderer(IGRegistrationHolder.SPLITTER.get(), $ -> new IGBeltRenderer<>());
+		event.registerBlockEntityRenderer(IGRegistrationHolder.ENDERGATE.get(), $ -> new IGBeltRenderer<>());
 	}
 
 	private static <T extends BlockEntity>

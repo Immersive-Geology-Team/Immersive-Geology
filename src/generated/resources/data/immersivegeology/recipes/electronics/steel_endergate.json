@@ -1,0 +1,28 @@
+{
+  "type": "immersiveengineering:blueprint",
+  "category": "electronics",
+  "inputs": [
+    {
+      "base_ingredient": {
+        "item": "immersivegeology:steel_belt"
+      },
+      "count": 3
+    },
+    {
+      "base_ingredient": {
+        "tag": "forge:plates/aluminum"
+      },
+      "count": 2
+    },
+    {
+      "base_ingredient": {
+        "item": "minecraft:ender_pearl"
+      },
+      "count": 2
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "immersivegeology:steel_endergate"
+  }
+}

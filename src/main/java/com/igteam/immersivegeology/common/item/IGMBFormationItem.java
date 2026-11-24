@@ -219,6 +219,12 @@ public class IGMBFormationItem extends IGGenericItem
 	}
 
 	@Override
+	public boolean isRepairable(@Nonnull ItemStack stack)
+	{
+		return false;
+	}
+
+	@Override
 	public boolean isIGRepairable(ItemStack stack)
 	{
 		return true;

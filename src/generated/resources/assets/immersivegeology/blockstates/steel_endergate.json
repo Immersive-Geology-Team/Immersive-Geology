@@ -1,0 +1,124 @@
+{
+  "variants": {
+    "facing=east,inputs=from_both,role=entry": {
+      "model": "immersivegeology:block/belt/steel/endergate/entry_from_both",
+      "y": 90
+    },
+    "facing=east,inputs=from_both,role=exit": {
+      "model": "immersivegeology:block/belt/steel/endergate/exit_from_both",
+      "y": 90
+    },
+    "facing=east,inputs=from_left,role=entry": {
+      "model": "immersivegeology:block/belt/steel/endergate/entry_from_left",
+      "y": 90
+    },
+    "facing=east,inputs=from_left,role=exit": {
+      "model": "immersivegeology:block/belt/steel/endergate/exit_from_left",
+      "y": 90
+    },
+    "facing=east,inputs=from_right,role=entry": {
+      "model": "immersivegeology:block/belt/steel/endergate/entry_from_right",
+      "y": 90
+    },
+    "facing=east,inputs=from_right,role=exit": {
+      "model": "immersivegeology:block/belt/steel/endergate/exit_from_right",
+      "y": 90
+    },
+    "facing=east,inputs=straight,role=entry": {
+      "model": "immersivegeology:block/belt/steel/endergate/entry",
+      "y": 90
+    },
+    "facing=east,inputs=straight,role=exit": {
+      "model": "immersivegeology:block/belt/steel/endergate/exit",
+      "y": 90
+    },
+    "facing=north,inputs=from_both,role=entry": {
+      "model": "immersivegeology:block/belt/steel/endergate/entry_from_both"
+    },
+    "facing=north,inputs=from_both,role=exit": {
+      "model": "immersivegeology:block/belt/steel/endergate/exit_from_both"
+    },
+    "facing=north,inputs=from_left,role=entry": {
+      "model": "immersivegeology:block/belt/steel/endergate/entry_from_left"
+    },
+    "facing=north,inputs=from_left,role=exit": {
+      "model": "immersivegeology:block/belt/steel/endergate/exit_from_left"
+    },
+    "facing=north,inputs=from_right,role=entry": {
+      "model": "immersivegeology:block/belt/steel/endergate/entry_from_right"
+    },
+    "facing=north,inputs=from_right,role=exit": {
+      "model": "immersivegeology:block/belt/steel/endergate/exit_from_right"
+    },
+    "facing=north,inputs=straight,role=entry": {
+      "model": "immersivegeology:block/belt/steel/endergate/entry"
+    },
+    "facing=north,inputs=straight,role=exit": {
+      "model": "immersivegeology:block/belt/steel/endergate/exit"
+    },
+    "facing=south,inputs=from_both,role=entry": {
+      "model": "immersivegeology:block/belt/steel/endergate/entry_from_both",
+      "y": 180
+    },
+    "facing=south,inputs=from_both,role=exit": {
+      "model": "immersivegeology:block/belt/steel/endergate/exit_from_both",
+      "y": 180
+    },
+    "facing=south,inputs=from_left,role=entry": {
+      "model": "immersivegeology:block/belt/steel/endergate/entry_from_left",
+      "y": 180
+    },
+    "facing=south,inputs=from_left,role=exit": {
+      "model": "immersivegeology:block/belt/steel/endergate/exit_from_left",
+      "y": 180
+    },
+    "facing=south,inputs=from_right,role=entry": {
+      "model": "immersivegeology:block/belt/steel/endergate/entry_from_right",
+      "y": 180
+    },
+    "facing=south,inputs=from_right,role=exit": {
+      "model": "immersivegeology:block/belt/steel/endergate/exit_from_right",
+      "y": 180
+    },
+    "facing=south,inputs=straight,role=entry": {
+      "model": "immersivegeology:block/belt/steel/endergate/entry",
+      "y": 180
+    },
+    "facing=south,inputs=straight,role=exit": {
+      "model": "immersivegeology:block/belt/steel/endergate/exit",
+      "y": 180
+    },
+    "facing=west,inputs=from_both,role=entry": {
+      "model": "immersivegeology:block/belt/steel/endergate/entry_from_both",
+      "y": 270
+    },
+    "facing=west,inputs=from_both,role=exit": {
+      "model": "immersivegeology:block/belt/steel/endergate/exit_from_both",
+      "y": 270
+    },
+    "facing=west,inputs=from_left,role=entry": {
+      "model": "immersivegeology:block/belt/steel/endergate/entry_from_left",
+      "y": 270
+    },
+    "facing=west,inputs=from_left,role=exit": {
+      "model": "immersivegeology:block/belt/steel/endergate/exit_from_left",
+      "y": 270
+    },
+    "facing=west,inputs=from_right,role=entry": {
+      "model": "immersivegeology:block/belt/steel/endergate/entry_from_right",
+      "y": 270
+    },
+    "facing=west,inputs=from_right,role=exit": {
+      "model": "immersivegeology:block/belt/steel/endergate/exit_from_right",
+      "y": 270
+    },
+    "facing=west,inputs=straight,role=entry": {
+      "model": "immersivegeology:block/belt/steel/endergate/entry",
+      "y": 270
+    },
+    "facing=west,inputs=straight,role=exit": {
+      "model": "immersivegeology:block/belt/steel/endergate/exit",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,2164 @@
+{
+  "variants": {
+    "capped=false,facing=east,run=end,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 90
+    },
+    "capped=false,facing=east,run=end,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 90
+    },
+    "capped=false,facing=east,run=end,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 90
+    },
+    "capped=false,facing=east,run=end,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back",
+      "y": 90
+    },
+    "capped=false,facing=east,run=end,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front_reverse",
+      "y": 90
+    },
+    "capped=false,facing=east,run=end,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front",
+      "y": 90
+    },
+    "capped=false,facing=east,run=end,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 90
+    },
+    "capped=false,facing=east,run=end,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty",
+      "y": 90
+    },
+    "capped=false,facing=east,run=end,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_reverse",
+      "y": 90
+    },
+    "capped=false,facing=east,run=end,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_front",
+      "y": 90
+    },
+    "capped=false,facing=east,run=end,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 90
+    },
+    "capped=false,facing=east,run=end,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 90
+    },
+    "capped=false,facing=east,run=end,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 90
+    },
+    "capped=false,facing=east,run=end,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 90
+    },
+    "capped=false,facing=east,run=end,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front_reverse",
+      "y": 90
+    },
+    "capped=false,facing=east,run=end,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 90
+    },
+    "capped=false,facing=east,run=end,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back",
+      "y": 90
+    },
+    "capped=false,facing=east,run=end,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front",
+      "y": 90
+    },
+    "capped=false,facing=east,run=middle,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 90
+    },
+    "capped=false,facing=east,run=middle,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 90
+    },
+    "capped=false,facing=east,run=middle,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 90
+    },
+    "capped=false,facing=east,run=middle,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid",
+      "y": 90
+    },
+    "capped=false,facing=east,run=middle,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid_reverse",
+      "y": 90
+    },
+    "capped=false,facing=east,run=middle,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 90
+    },
+    "capped=false,facing=east,run=middle,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 90
+    },
+    "capped=false,facing=east,run=middle,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty",
+      "y": 90
+    },
+    "capped=false,facing=east,run=middle,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty_reverse",
+      "y": 90
+    },
+    "capped=false,facing=east,run=middle,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_mid",
+      "y": 90
+    },
+    "capped=false,facing=east,run=middle,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 90
+    },
+    "capped=false,facing=east,run=middle,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 90
+    },
+    "capped=false,facing=east,run=middle,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 90
+    },
+    "capped=false,facing=east,run=middle,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 90
+    },
+    "capped=false,facing=east,run=middle,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid_reverse",
+      "y": 90
+    },
+    "capped=false,facing=east,run=middle,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 90
+    },
+    "capped=false,facing=east,run=middle,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid",
+      "y": 90
+    },
+    "capped=false,facing=east,run=middle,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 90
+    },
+    "capped=false,facing=east,run=single,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 90
+    },
+    "capped=false,facing=east,run=single,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 90
+    },
+    "capped=false,facing=east,run=single,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 90
+    },
+    "capped=false,facing=east,run=single,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp",
+      "y": 90
+    },
+    "capped=false,facing=east,run=single,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_reverse",
+      "y": 90
+    },
+    "capped=false,facing=east,run=single,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end",
+      "y": 90
+    },
+    "capped=false,facing=east,run=single,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_reverse",
+      "y": 90
+    },
+    "capped=false,facing=east,run=single,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start",
+      "y": 90
+    },
+    "capped=false,facing=east,run=single,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_reverse",
+      "y": 90
+    },
+    "capped=false,facing=east,run=single,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 90
+    },
+    "capped=false,facing=east,run=single,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 90
+    },
+    "capped=false,facing=east,run=single,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 90
+    },
+    "capped=false,facing=east,run=single,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 90
+    },
+    "capped=false,facing=east,run=single,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 90
+    },
+    "capped=false,facing=east,run=single,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_reverse",
+      "y": 90
+    },
+    "capped=false,facing=east,run=single,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_reverse",
+      "y": 90
+    },
+    "capped=false,facing=east,run=single,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp",
+      "y": 90
+    },
+    "capped=false,facing=east,run=single,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end",
+      "y": 90
+    },
+    "capped=false,facing=east,run=start,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 90
+    },
+    "capped=false,facing=east,run=start,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 90
+    },
+    "capped=false,facing=east,run=start,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 90
+    },
+    "capped=false,facing=east,run=start,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front",
+      "y": 90
+    },
+    "capped=false,facing=east,run=start,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back_reverse",
+      "y": 90
+    },
+    "capped=false,facing=east,run=start,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 90
+    },
+    "capped=false,facing=east,run=start,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front_reverse",
+      "y": 90
+    },
+    "capped=false,facing=east,run=start,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start",
+      "y": 90
+    },
+    "capped=false,facing=east,run=start,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty_reverse",
+      "y": 90
+    },
+    "capped=false,facing=east,run=start,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_back",
+      "y": 90
+    },
+    "capped=false,facing=east,run=start,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 90
+    },
+    "capped=false,facing=east,run=start,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 90
+    },
+    "capped=false,facing=east,run=start,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 90
+    },
+    "capped=false,facing=east,run=start,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 90
+    },
+    "capped=false,facing=east,run=start,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back_reverse",
+      "y": 90
+    },
+    "capped=false,facing=east,run=start,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front_reverse",
+      "y": 90
+    },
+    "capped=false,facing=east,run=start,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front",
+      "y": 90
+    },
+    "capped=false,facing=east,run=start,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 90
+    },
+    "capped=false,facing=north,run=end,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both"
+    },
+    "capped=false,facing=north,run=end,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left"
+    },
+    "capped=false,facing=north,run=end,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right"
+    },
+    "capped=false,facing=north,run=end,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back"
+    },
+    "capped=false,facing=north,run=end,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front_reverse"
+    },
+    "capped=false,facing=north,run=end,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front"
+    },
+    "capped=false,facing=north,run=end,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse"
+    },
+    "capped=false,facing=north,run=end,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty"
+    },
+    "capped=false,facing=north,run=end,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_reverse"
+    },
+    "capped=false,facing=north,run=end,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_front"
+    },
+    "capped=false,facing=north,run=end,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight"
+    },
+    "capped=false,facing=north,run=end,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right"
+    },
+    "capped=false,facing=north,run=end,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight"
+    },
+    "capped=false,facing=north,run=end,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left"
+    },
+    "capped=false,facing=north,run=end,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front_reverse"
+    },
+    "capped=false,facing=north,run=end,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse"
+    },
+    "capped=false,facing=north,run=end,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back"
+    },
+    "capped=false,facing=north,run=end,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front"
+    },
+    "capped=false,facing=north,run=middle,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both"
+    },
+    "capped=false,facing=north,run=middle,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left"
+    },
+    "capped=false,facing=north,run=middle,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right"
+    },
+    "capped=false,facing=north,run=middle,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid"
+    },
+    "capped=false,facing=north,run=middle,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid_reverse"
+    },
+    "capped=false,facing=north,run=middle,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back"
+    },
+    "capped=false,facing=north,run=middle,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse"
+    },
+    "capped=false,facing=north,run=middle,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty"
+    },
+    "capped=false,facing=north,run=middle,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty_reverse"
+    },
+    "capped=false,facing=north,run=middle,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_mid"
+    },
+    "capped=false,facing=north,run=middle,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight"
+    },
+    "capped=false,facing=north,run=middle,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right"
+    },
+    "capped=false,facing=north,run=middle,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight"
+    },
+    "capped=false,facing=north,run=middle,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left"
+    },
+    "capped=false,facing=north,run=middle,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid_reverse"
+    },
+    "capped=false,facing=north,run=middle,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse"
+    },
+    "capped=false,facing=north,run=middle,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid"
+    },
+    "capped=false,facing=north,run=middle,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back"
+    },
+    "capped=false,facing=north,run=single,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both"
+    },
+    "capped=false,facing=north,run=single,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left"
+    },
+    "capped=false,facing=north,run=single,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right"
+    },
+    "capped=false,facing=north,run=single,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp"
+    },
+    "capped=false,facing=north,run=single,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_reverse"
+    },
+    "capped=false,facing=north,run=single,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end"
+    },
+    "capped=false,facing=north,run=single,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_reverse"
+    },
+    "capped=false,facing=north,run=single,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start"
+    },
+    "capped=false,facing=north,run=single,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_reverse"
+    },
+    "capped=false,facing=north,run=single,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight"
+    },
+    "capped=false,facing=north,run=single,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight"
+    },
+    "capped=false,facing=north,run=single,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right"
+    },
+    "capped=false,facing=north,run=single,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight"
+    },
+    "capped=false,facing=north,run=single,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left"
+    },
+    "capped=false,facing=north,run=single,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_reverse"
+    },
+    "capped=false,facing=north,run=single,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_reverse"
+    },
+    "capped=false,facing=north,run=single,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp"
+    },
+    "capped=false,facing=north,run=single,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end"
+    },
+    "capped=false,facing=north,run=start,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both"
+    },
+    "capped=false,facing=north,run=start,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left"
+    },
+    "capped=false,facing=north,run=start,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right"
+    },
+    "capped=false,facing=north,run=start,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front"
+    },
+    "capped=false,facing=north,run=start,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back_reverse"
+    },
+    "capped=false,facing=north,run=start,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back"
+    },
+    "capped=false,facing=north,run=start,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front_reverse"
+    },
+    "capped=false,facing=north,run=start,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start"
+    },
+    "capped=false,facing=north,run=start,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty_reverse"
+    },
+    "capped=false,facing=north,run=start,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_back"
+    },
+    "capped=false,facing=north,run=start,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight"
+    },
+    "capped=false,facing=north,run=start,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right"
+    },
+    "capped=false,facing=north,run=start,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight"
+    },
+    "capped=false,facing=north,run=start,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left"
+    },
+    "capped=false,facing=north,run=start,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back_reverse"
+    },
+    "capped=false,facing=north,run=start,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front_reverse"
+    },
+    "capped=false,facing=north,run=start,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front"
+    },
+    "capped=false,facing=north,run=start,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back"
+    },
+    "capped=false,facing=south,run=end,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 180
+    },
+    "capped=false,facing=south,run=end,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 180
+    },
+    "capped=false,facing=south,run=end,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 180
+    },
+    "capped=false,facing=south,run=end,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back",
+      "y": 180
+    },
+    "capped=false,facing=south,run=end,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front_reverse",
+      "y": 180
+    },
+    "capped=false,facing=south,run=end,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front",
+      "y": 180
+    },
+    "capped=false,facing=south,run=end,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 180
+    },
+    "capped=false,facing=south,run=end,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty",
+      "y": 180
+    },
+    "capped=false,facing=south,run=end,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_reverse",
+      "y": 180
+    },
+    "capped=false,facing=south,run=end,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_front",
+      "y": 180
+    },
+    "capped=false,facing=south,run=end,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 180
+    },
+    "capped=false,facing=south,run=end,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 180
+    },
+    "capped=false,facing=south,run=end,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 180
+    },
+    "capped=false,facing=south,run=end,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 180
+    },
+    "capped=false,facing=south,run=end,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front_reverse",
+      "y": 180
+    },
+    "capped=false,facing=south,run=end,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 180
+    },
+    "capped=false,facing=south,run=end,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back",
+      "y": 180
+    },
+    "capped=false,facing=south,run=end,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front",
+      "y": 180
+    },
+    "capped=false,facing=south,run=middle,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 180
+    },
+    "capped=false,facing=south,run=middle,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 180
+    },
+    "capped=false,facing=south,run=middle,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 180
+    },
+    "capped=false,facing=south,run=middle,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid",
+      "y": 180
+    },
+    "capped=false,facing=south,run=middle,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid_reverse",
+      "y": 180
+    },
+    "capped=false,facing=south,run=middle,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 180
+    },
+    "capped=false,facing=south,run=middle,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 180
+    },
+    "capped=false,facing=south,run=middle,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty",
+      "y": 180
+    },
+    "capped=false,facing=south,run=middle,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty_reverse",
+      "y": 180
+    },
+    "capped=false,facing=south,run=middle,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_mid",
+      "y": 180
+    },
+    "capped=false,facing=south,run=middle,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 180
+    },
+    "capped=false,facing=south,run=middle,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 180
+    },
+    "capped=false,facing=south,run=middle,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 180
+    },
+    "capped=false,facing=south,run=middle,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 180
+    },
+    "capped=false,facing=south,run=middle,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid_reverse",
+      "y": 180
+    },
+    "capped=false,facing=south,run=middle,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 180
+    },
+    "capped=false,facing=south,run=middle,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid",
+      "y": 180
+    },
+    "capped=false,facing=south,run=middle,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 180
+    },
+    "capped=false,facing=south,run=single,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 180
+    },
+    "capped=false,facing=south,run=single,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 180
+    },
+    "capped=false,facing=south,run=single,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 180
+    },
+    "capped=false,facing=south,run=single,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp",
+      "y": 180
+    },
+    "capped=false,facing=south,run=single,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_reverse",
+      "y": 180
+    },
+    "capped=false,facing=south,run=single,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end",
+      "y": 180
+    },
+    "capped=false,facing=south,run=single,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_reverse",
+      "y": 180
+    },
+    "capped=false,facing=south,run=single,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start",
+      "y": 180
+    },
+    "capped=false,facing=south,run=single,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_reverse",
+      "y": 180
+    },
+    "capped=false,facing=south,run=single,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 180
+    },
+    "capped=false,facing=south,run=single,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 180
+    },
+    "capped=false,facing=south,run=single,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 180
+    },
+    "capped=false,facing=south,run=single,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 180
+    },
+    "capped=false,facing=south,run=single,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 180
+    },
+    "capped=false,facing=south,run=single,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_reverse",
+      "y": 180
+    },
+    "capped=false,facing=south,run=single,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_reverse",
+      "y": 180
+    },
+    "capped=false,facing=south,run=single,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp",
+      "y": 180
+    },
+    "capped=false,facing=south,run=single,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end",
+      "y": 180
+    },
+    "capped=false,facing=south,run=start,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 180
+    },
+    "capped=false,facing=south,run=start,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 180
+    },
+    "capped=false,facing=south,run=start,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 180
+    },
+    "capped=false,facing=south,run=start,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front",
+      "y": 180
+    },
+    "capped=false,facing=south,run=start,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back_reverse",
+      "y": 180
+    },
+    "capped=false,facing=south,run=start,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 180
+    },
+    "capped=false,facing=south,run=start,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front_reverse",
+      "y": 180
+    },
+    "capped=false,facing=south,run=start,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start",
+      "y": 180
+    },
+    "capped=false,facing=south,run=start,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty_reverse",
+      "y": 180
+    },
+    "capped=false,facing=south,run=start,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_back",
+      "y": 180
+    },
+    "capped=false,facing=south,run=start,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 180
+    },
+    "capped=false,facing=south,run=start,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 180
+    },
+    "capped=false,facing=south,run=start,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 180
+    },
+    "capped=false,facing=south,run=start,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 180
+    },
+    "capped=false,facing=south,run=start,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back_reverse",
+      "y": 180
+    },
+    "capped=false,facing=south,run=start,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front_reverse",
+      "y": 180
+    },
+    "capped=false,facing=south,run=start,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front",
+      "y": 180
+    },
+    "capped=false,facing=south,run=start,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 180
+    },
+    "capped=false,facing=west,run=end,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 270
+    },
+    "capped=false,facing=west,run=end,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 270
+    },
+    "capped=false,facing=west,run=end,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 270
+    },
+    "capped=false,facing=west,run=end,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back",
+      "y": 270
+    },
+    "capped=false,facing=west,run=end,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front_reverse",
+      "y": 270
+    },
+    "capped=false,facing=west,run=end,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front",
+      "y": 270
+    },
+    "capped=false,facing=west,run=end,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 270
+    },
+    "capped=false,facing=west,run=end,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty",
+      "y": 270
+    },
+    "capped=false,facing=west,run=end,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_reverse",
+      "y": 270
+    },
+    "capped=false,facing=west,run=end,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_front",
+      "y": 270
+    },
+    "capped=false,facing=west,run=end,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 270
+    },
+    "capped=false,facing=west,run=end,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 270
+    },
+    "capped=false,facing=west,run=end,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 270
+    },
+    "capped=false,facing=west,run=end,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 270
+    },
+    "capped=false,facing=west,run=end,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front_reverse",
+      "y": 270
+    },
+    "capped=false,facing=west,run=end,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 270
+    },
+    "capped=false,facing=west,run=end,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back",
+      "y": 270
+    },
+    "capped=false,facing=west,run=end,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front",
+      "y": 270
+    },
+    "capped=false,facing=west,run=middle,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 270
+    },
+    "capped=false,facing=west,run=middle,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 270
+    },
+    "capped=false,facing=west,run=middle,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 270
+    },
+    "capped=false,facing=west,run=middle,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid",
+      "y": 270
+    },
+    "capped=false,facing=west,run=middle,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid_reverse",
+      "y": 270
+    },
+    "capped=false,facing=west,run=middle,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 270
+    },
+    "capped=false,facing=west,run=middle,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 270
+    },
+    "capped=false,facing=west,run=middle,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty",
+      "y": 270
+    },
+    "capped=false,facing=west,run=middle,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty_reverse",
+      "y": 270
+    },
+    "capped=false,facing=west,run=middle,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_mid",
+      "y": 270
+    },
+    "capped=false,facing=west,run=middle,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 270
+    },
+    "capped=false,facing=west,run=middle,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 270
+    },
+    "capped=false,facing=west,run=middle,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 270
+    },
+    "capped=false,facing=west,run=middle,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 270
+    },
+    "capped=false,facing=west,run=middle,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid_reverse",
+      "y": 270
+    },
+    "capped=false,facing=west,run=middle,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 270
+    },
+    "capped=false,facing=west,run=middle,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid",
+      "y": 270
+    },
+    "capped=false,facing=west,run=middle,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 270
+    },
+    "capped=false,facing=west,run=single,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 270
+    },
+    "capped=false,facing=west,run=single,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 270
+    },
+    "capped=false,facing=west,run=single,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 270
+    },
+    "capped=false,facing=west,run=single,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp",
+      "y": 270
+    },
+    "capped=false,facing=west,run=single,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_reverse",
+      "y": 270
+    },
+    "capped=false,facing=west,run=single,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end",
+      "y": 270
+    },
+    "capped=false,facing=west,run=single,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_reverse",
+      "y": 270
+    },
+    "capped=false,facing=west,run=single,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start",
+      "y": 270
+    },
+    "capped=false,facing=west,run=single,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_reverse",
+      "y": 270
+    },
+    "capped=false,facing=west,run=single,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 270
+    },
+    "capped=false,facing=west,run=single,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 270
+    },
+    "capped=false,facing=west,run=single,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 270
+    },
+    "capped=false,facing=west,run=single,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 270
+    },
+    "capped=false,facing=west,run=single,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 270
+    },
+    "capped=false,facing=west,run=single,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_reverse",
+      "y": 270
+    },
+    "capped=false,facing=west,run=single,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_reverse",
+      "y": 270
+    },
+    "capped=false,facing=west,run=single,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp",
+      "y": 270
+    },
+    "capped=false,facing=west,run=single,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end",
+      "y": 270
+    },
+    "capped=false,facing=west,run=start,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 270
+    },
+    "capped=false,facing=west,run=start,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 270
+    },
+    "capped=false,facing=west,run=start,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 270
+    },
+    "capped=false,facing=west,run=start,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front",
+      "y": 270
+    },
+    "capped=false,facing=west,run=start,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back_reverse",
+      "y": 270
+    },
+    "capped=false,facing=west,run=start,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 270
+    },
+    "capped=false,facing=west,run=start,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front_reverse",
+      "y": 270
+    },
+    "capped=false,facing=west,run=start,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start",
+      "y": 270
+    },
+    "capped=false,facing=west,run=start,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty_reverse",
+      "y": 270
+    },
+    "capped=false,facing=west,run=start,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_back",
+      "y": 270
+    },
+    "capped=false,facing=west,run=start,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 270
+    },
+    "capped=false,facing=west,run=start,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 270
+    },
+    "capped=false,facing=west,run=start,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 270
+    },
+    "capped=false,facing=west,run=start,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 270
+    },
+    "capped=false,facing=west,run=start,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back_reverse",
+      "y": 270
+    },
+    "capped=false,facing=west,run=start,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front_reverse",
+      "y": 270
+    },
+    "capped=false,facing=west,run=start,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front",
+      "y": 270
+    },
+    "capped=false,facing=west,run=start,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 270
+    },
+    "capped=true,facing=east,run=end,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 90
+    },
+    "capped=true,facing=east,run=end,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 90
+    },
+    "capped=true,facing=east,run=end,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 90
+    },
+    "capped=true,facing=east,run=end,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back",
+      "y": 90
+    },
+    "capped=true,facing=east,run=end,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front_capped_reverse",
+      "y": 90
+    },
+    "capped=true,facing=east,run=end,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front",
+      "y": 90
+    },
+    "capped=true,facing=east,run=end,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 90
+    },
+    "capped=true,facing=east,run=end,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty",
+      "y": 90
+    },
+    "capped=true,facing=east,run=end,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_reverse",
+      "y": 90
+    },
+    "capped=true,facing=east,run=end,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_front",
+      "y": 90
+    },
+    "capped=true,facing=east,run=end,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 90
+    },
+    "capped=true,facing=east,run=end,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 90
+    },
+    "capped=true,facing=east,run=end,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 90
+    },
+    "capped=true,facing=east,run=end,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 90
+    },
+    "capped=true,facing=east,run=end,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front_reverse",
+      "y": 90
+    },
+    "capped=true,facing=east,run=end,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 90
+    },
+    "capped=true,facing=east,run=end,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back",
+      "y": 90
+    },
+    "capped=true,facing=east,run=end,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front",
+      "y": 90
+    },
+    "capped=true,facing=east,run=middle,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 90
+    },
+    "capped=true,facing=east,run=middle,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 90
+    },
+    "capped=true,facing=east,run=middle,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 90
+    },
+    "capped=true,facing=east,run=middle,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid",
+      "y": 90
+    },
+    "capped=true,facing=east,run=middle,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid_reverse",
+      "y": 90
+    },
+    "capped=true,facing=east,run=middle,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 90
+    },
+    "capped=true,facing=east,run=middle,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 90
+    },
+    "capped=true,facing=east,run=middle,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty",
+      "y": 90
+    },
+    "capped=true,facing=east,run=middle,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty_reverse",
+      "y": 90
+    },
+    "capped=true,facing=east,run=middle,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_mid",
+      "y": 90
+    },
+    "capped=true,facing=east,run=middle,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 90
+    },
+    "capped=true,facing=east,run=middle,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 90
+    },
+    "capped=true,facing=east,run=middle,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 90
+    },
+    "capped=true,facing=east,run=middle,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 90
+    },
+    "capped=true,facing=east,run=middle,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid_reverse",
+      "y": 90
+    },
+    "capped=true,facing=east,run=middle,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 90
+    },
+    "capped=true,facing=east,run=middle,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid",
+      "y": 90
+    },
+    "capped=true,facing=east,run=middle,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 90
+    },
+    "capped=true,facing=east,run=single,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 90
+    },
+    "capped=true,facing=east,run=single,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 90
+    },
+    "capped=true,facing=east,run=single,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 90
+    },
+    "capped=true,facing=east,run=single,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_capped",
+      "y": 90
+    },
+    "capped=true,facing=east,run=single,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_capped_reverse",
+      "y": 90
+    },
+    "capped=true,facing=east,run=single,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end",
+      "y": 90
+    },
+    "capped=true,facing=east,run=single,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_reverse",
+      "y": 90
+    },
+    "capped=true,facing=east,run=single,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start",
+      "y": 90
+    },
+    "capped=true,facing=east,run=single,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_reverse",
+      "y": 90
+    },
+    "capped=true,facing=east,run=single,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 90
+    },
+    "capped=true,facing=east,run=single,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 90
+    },
+    "capped=true,facing=east,run=single,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 90
+    },
+    "capped=true,facing=east,run=single,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 90
+    },
+    "capped=true,facing=east,run=single,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 90
+    },
+    "capped=true,facing=east,run=single,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_reverse",
+      "y": 90
+    },
+    "capped=true,facing=east,run=single,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_reverse",
+      "y": 90
+    },
+    "capped=true,facing=east,run=single,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp",
+      "y": 90
+    },
+    "capped=true,facing=east,run=single,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end",
+      "y": 90
+    },
+    "capped=true,facing=east,run=start,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 90
+    },
+    "capped=true,facing=east,run=start,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 90
+    },
+    "capped=true,facing=east,run=start,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 90
+    },
+    "capped=true,facing=east,run=start,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front_capped",
+      "y": 90
+    },
+    "capped=true,facing=east,run=start,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back_reverse",
+      "y": 90
+    },
+    "capped=true,facing=east,run=start,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 90
+    },
+    "capped=true,facing=east,run=start,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front_reverse",
+      "y": 90
+    },
+    "capped=true,facing=east,run=start,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start",
+      "y": 90
+    },
+    "capped=true,facing=east,run=start,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty_reverse",
+      "y": 90
+    },
+    "capped=true,facing=east,run=start,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_back",
+      "y": 90
+    },
+    "capped=true,facing=east,run=start,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 90
+    },
+    "capped=true,facing=east,run=start,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 90
+    },
+    "capped=true,facing=east,run=start,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 90
+    },
+    "capped=true,facing=east,run=start,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 90
+    },
+    "capped=true,facing=east,run=start,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back_reverse",
+      "y": 90
+    },
+    "capped=true,facing=east,run=start,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front_reverse",
+      "y": 90
+    },
+    "capped=true,facing=east,run=start,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front",
+      "y": 90
+    },
+    "capped=true,facing=east,run=start,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 90
+    },
+    "capped=true,facing=north,run=end,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both"
+    },
+    "capped=true,facing=north,run=end,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left"
+    },
+    "capped=true,facing=north,run=end,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right"
+    },
+    "capped=true,facing=north,run=end,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back"
+    },
+    "capped=true,facing=north,run=end,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front_capped_reverse"
+    },
+    "capped=true,facing=north,run=end,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front"
+    },
+    "capped=true,facing=north,run=end,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse"
+    },
+    "capped=true,facing=north,run=end,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty"
+    },
+    "capped=true,facing=north,run=end,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_reverse"
+    },
+    "capped=true,facing=north,run=end,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_front"
+    },
+    "capped=true,facing=north,run=end,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight"
+    },
+    "capped=true,facing=north,run=end,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right"
+    },
+    "capped=true,facing=north,run=end,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight"
+    },
+    "capped=true,facing=north,run=end,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left"
+    },
+    "capped=true,facing=north,run=end,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front_reverse"
+    },
+    "capped=true,facing=north,run=end,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse"
+    },
+    "capped=true,facing=north,run=end,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back"
+    },
+    "capped=true,facing=north,run=end,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front"
+    },
+    "capped=true,facing=north,run=middle,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both"
+    },
+    "capped=true,facing=north,run=middle,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left"
+    },
+    "capped=true,facing=north,run=middle,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right"
+    },
+    "capped=true,facing=north,run=middle,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid"
+    },
+    "capped=true,facing=north,run=middle,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid_reverse"
+    },
+    "capped=true,facing=north,run=middle,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back"
+    },
+    "capped=true,facing=north,run=middle,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse"
+    },
+    "capped=true,facing=north,run=middle,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty"
+    },
+    "capped=true,facing=north,run=middle,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty_reverse"
+    },
+    "capped=true,facing=north,run=middle,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_mid"
+    },
+    "capped=true,facing=north,run=middle,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight"
+    },
+    "capped=true,facing=north,run=middle,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right"
+    },
+    "capped=true,facing=north,run=middle,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight"
+    },
+    "capped=true,facing=north,run=middle,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left"
+    },
+    "capped=true,facing=north,run=middle,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid_reverse"
+    },
+    "capped=true,facing=north,run=middle,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse"
+    },
+    "capped=true,facing=north,run=middle,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid"
+    },
+    "capped=true,facing=north,run=middle,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back"
+    },
+    "capped=true,facing=north,run=single,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both"
+    },
+    "capped=true,facing=north,run=single,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left"
+    },
+    "capped=true,facing=north,run=single,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right"
+    },
+    "capped=true,facing=north,run=single,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_capped"
+    },
+    "capped=true,facing=north,run=single,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_capped_reverse"
+    },
+    "capped=true,facing=north,run=single,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end"
+    },
+    "capped=true,facing=north,run=single,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_reverse"
+    },
+    "capped=true,facing=north,run=single,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start"
+    },
+    "capped=true,facing=north,run=single,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_reverse"
+    },
+    "capped=true,facing=north,run=single,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight"
+    },
+    "capped=true,facing=north,run=single,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight"
+    },
+    "capped=true,facing=north,run=single,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right"
+    },
+    "capped=true,facing=north,run=single,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight"
+    },
+    "capped=true,facing=north,run=single,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left"
+    },
+    "capped=true,facing=north,run=single,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_reverse"
+    },
+    "capped=true,facing=north,run=single,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_reverse"
+    },
+    "capped=true,facing=north,run=single,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp"
+    },
+    "capped=true,facing=north,run=single,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end"
+    },
+    "capped=true,facing=north,run=start,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both"
+    },
+    "capped=true,facing=north,run=start,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left"
+    },
+    "capped=true,facing=north,run=start,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right"
+    },
+    "capped=true,facing=north,run=start,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front_capped"
+    },
+    "capped=true,facing=north,run=start,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back_reverse"
+    },
+    "capped=true,facing=north,run=start,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back"
+    },
+    "capped=true,facing=north,run=start,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front_reverse"
+    },
+    "capped=true,facing=north,run=start,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start"
+    },
+    "capped=true,facing=north,run=start,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty_reverse"
+    },
+    "capped=true,facing=north,run=start,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_back"
+    },
+    "capped=true,facing=north,run=start,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight"
+    },
+    "capped=true,facing=north,run=start,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right"
+    },
+    "capped=true,facing=north,run=start,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight"
+    },
+    "capped=true,facing=north,run=start,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left"
+    },
+    "capped=true,facing=north,run=start,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back_reverse"
+    },
+    "capped=true,facing=north,run=start,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front_reverse"
+    },
+    "capped=true,facing=north,run=start,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front"
+    },
+    "capped=true,facing=north,run=start,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back"
+    },
+    "capped=true,facing=south,run=end,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 180
+    },
+    "capped=true,facing=south,run=end,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 180
+    },
+    "capped=true,facing=south,run=end,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 180
+    },
+    "capped=true,facing=south,run=end,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back",
+      "y": 180
+    },
+    "capped=true,facing=south,run=end,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front_capped_reverse",
+      "y": 180
+    },
+    "capped=true,facing=south,run=end,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front",
+      "y": 180
+    },
+    "capped=true,facing=south,run=end,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 180
+    },
+    "capped=true,facing=south,run=end,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty",
+      "y": 180
+    },
+    "capped=true,facing=south,run=end,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_reverse",
+      "y": 180
+    },
+    "capped=true,facing=south,run=end,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_front",
+      "y": 180
+    },
+    "capped=true,facing=south,run=end,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 180
+    },
+    "capped=true,facing=south,run=end,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 180
+    },
+    "capped=true,facing=south,run=end,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 180
+    },
+    "capped=true,facing=south,run=end,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 180
+    },
+    "capped=true,facing=south,run=end,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front_reverse",
+      "y": 180
+    },
+    "capped=true,facing=south,run=end,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 180
+    },
+    "capped=true,facing=south,run=end,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back",
+      "y": 180
+    },
+    "capped=true,facing=south,run=end,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front",
+      "y": 180
+    },
+    "capped=true,facing=south,run=middle,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 180
+    },
+    "capped=true,facing=south,run=middle,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 180
+    },
+    "capped=true,facing=south,run=middle,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 180
+    },
+    "capped=true,facing=south,run=middle,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid",
+      "y": 180
+    },
+    "capped=true,facing=south,run=middle,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid_reverse",
+      "y": 180
+    },
+    "capped=true,facing=south,run=middle,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 180
+    },
+    "capped=true,facing=south,run=middle,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 180
+    },
+    "capped=true,facing=south,run=middle,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty",
+      "y": 180
+    },
+    "capped=true,facing=south,run=middle,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty_reverse",
+      "y": 180
+    },
+    "capped=true,facing=south,run=middle,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_mid",
+      "y": 180
+    },
+    "capped=true,facing=south,run=middle,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 180
+    },
+    "capped=true,facing=south,run=middle,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 180
+    },
+    "capped=true,facing=south,run=middle,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 180
+    },
+    "capped=true,facing=south,run=middle,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 180
+    },
+    "capped=true,facing=south,run=middle,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid_reverse",
+      "y": 180
+    },
+    "capped=true,facing=south,run=middle,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 180
+    },
+    "capped=true,facing=south,run=middle,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid",
+      "y": 180
+    },
+    "capped=true,facing=south,run=middle,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 180
+    },
+    "capped=true,facing=south,run=single,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 180
+    },
+    "capped=true,facing=south,run=single,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 180
+    },
+    "capped=true,facing=south,run=single,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 180
+    },
+    "capped=true,facing=south,run=single,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_capped",
+      "y": 180
+    },
+    "capped=true,facing=south,run=single,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_capped_reverse",
+      "y": 180
+    },
+    "capped=true,facing=south,run=single,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end",
+      "y": 180
+    },
+    "capped=true,facing=south,run=single,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_reverse",
+      "y": 180
+    },
+    "capped=true,facing=south,run=single,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start",
+      "y": 180
+    },
+    "capped=true,facing=south,run=single,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_reverse",
+      "y": 180
+    },
+    "capped=true,facing=south,run=single,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 180
+    },
+    "capped=true,facing=south,run=single,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 180
+    },
+    "capped=true,facing=south,run=single,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 180
+    },
+    "capped=true,facing=south,run=single,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 180
+    },
+    "capped=true,facing=south,run=single,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 180
+    },
+    "capped=true,facing=south,run=single,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_reverse",
+      "y": 180
+    },
+    "capped=true,facing=south,run=single,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_reverse",
+      "y": 180
+    },
+    "capped=true,facing=south,run=single,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp",
+      "y": 180
+    },
+    "capped=true,facing=south,run=single,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end",
+      "y": 180
+    },
+    "capped=true,facing=south,run=start,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 180
+    },
+    "capped=true,facing=south,run=start,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 180
+    },
+    "capped=true,facing=south,run=start,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 180
+    },
+    "capped=true,facing=south,run=start,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front_capped",
+      "y": 180
+    },
+    "capped=true,facing=south,run=start,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back_reverse",
+      "y": 180
+    },
+    "capped=true,facing=south,run=start,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 180
+    },
+    "capped=true,facing=south,run=start,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front_reverse",
+      "y": 180
+    },
+    "capped=true,facing=south,run=start,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start",
+      "y": 180
+    },
+    "capped=true,facing=south,run=start,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty_reverse",
+      "y": 180
+    },
+    "capped=true,facing=south,run=start,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_back",
+      "y": 180
+    },
+    "capped=true,facing=south,run=start,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 180
+    },
+    "capped=true,facing=south,run=start,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 180
+    },
+    "capped=true,facing=south,run=start,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 180
+    },
+    "capped=true,facing=south,run=start,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 180
+    },
+    "capped=true,facing=south,run=start,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back_reverse",
+      "y": 180
+    },
+    "capped=true,facing=south,run=start,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front_reverse",
+      "y": 180
+    },
+    "capped=true,facing=south,run=start,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front",
+      "y": 180
+    },
+    "capped=true,facing=south,run=start,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 180
+    },
+    "capped=true,facing=west,run=end,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 270
+    },
+    "capped=true,facing=west,run=end,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 270
+    },
+    "capped=true,facing=west,run=end,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 270
+    },
+    "capped=true,facing=west,run=end,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back",
+      "y": 270
+    },
+    "capped=true,facing=west,run=end,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front_capped_reverse",
+      "y": 270
+    },
+    "capped=true,facing=west,run=end,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front",
+      "y": 270
+    },
+    "capped=true,facing=west,run=end,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 270
+    },
+    "capped=true,facing=west,run=end,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty",
+      "y": 270
+    },
+    "capped=true,facing=west,run=end,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_reverse",
+      "y": 270
+    },
+    "capped=true,facing=west,run=end,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_front",
+      "y": 270
+    },
+    "capped=true,facing=west,run=end,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 270
+    },
+    "capped=true,facing=west,run=end,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 270
+    },
+    "capped=true,facing=west,run=end,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 270
+    },
+    "capped=true,facing=west,run=end,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 270
+    },
+    "capped=true,facing=west,run=end,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front_reverse",
+      "y": 270
+    },
+    "capped=true,facing=west,run=end,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 270
+    },
+    "capped=true,facing=west,run=end,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back",
+      "y": 270
+    },
+    "capped=true,facing=west,run=end,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front",
+      "y": 270
+    },
+    "capped=true,facing=west,run=middle,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 270
+    },
+    "capped=true,facing=west,run=middle,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 270
+    },
+    "capped=true,facing=west,run=middle,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 270
+    },
+    "capped=true,facing=west,run=middle,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid",
+      "y": 270
+    },
+    "capped=true,facing=west,run=middle,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid_reverse",
+      "y": 270
+    },
+    "capped=true,facing=west,run=middle,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 270
+    },
+    "capped=true,facing=west,run=middle,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 270
+    },
+    "capped=true,facing=west,run=middle,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty",
+      "y": 270
+    },
+    "capped=true,facing=west,run=middle,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty_reverse",
+      "y": 270
+    },
+    "capped=true,facing=west,run=middle,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_mid",
+      "y": 270
+    },
+    "capped=true,facing=west,run=middle,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 270
+    },
+    "capped=true,facing=west,run=middle,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 270
+    },
+    "capped=true,facing=west,run=middle,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 270
+    },
+    "capped=true,facing=west,run=middle,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 270
+    },
+    "capped=true,facing=west,run=middle,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid_reverse",
+      "y": 270
+    },
+    "capped=true,facing=west,run=middle,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back_reverse",
+      "y": 270
+    },
+    "capped=true,facing=west,run=middle,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_mid",
+      "y": 270
+    },
+    "capped=true,facing=west,run=middle,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 270
+    },
+    "capped=true,facing=west,run=single,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 270
+    },
+    "capped=true,facing=west,run=single,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 270
+    },
+    "capped=true,facing=west,run=single,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 270
+    },
+    "capped=true,facing=west,run=single,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_capped",
+      "y": 270
+    },
+    "capped=true,facing=west,run=single,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_capped_reverse",
+      "y": 270
+    },
+    "capped=true,facing=west,run=single,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end",
+      "y": 270
+    },
+    "capped=true,facing=west,run=single,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_reverse",
+      "y": 270
+    },
+    "capped=true,facing=west,run=single,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start",
+      "y": 270
+    },
+    "capped=true,facing=west,run=single,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_reverse",
+      "y": 270
+    },
+    "capped=true,facing=west,run=single,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 270
+    },
+    "capped=true,facing=west,run=single,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 270
+    },
+    "capped=true,facing=west,run=single,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 270
+    },
+    "capped=true,facing=west,run=single,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 270
+    },
+    "capped=true,facing=west,run=single,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 270
+    },
+    "capped=true,facing=west,run=single,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_reverse",
+      "y": 270
+    },
+    "capped=true,facing=west,run=single,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_reverse",
+      "y": 270
+    },
+    "capped=true,facing=west,run=single,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp",
+      "y": 270
+    },
+    "capped=true,facing=west,run=single,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end",
+      "y": 270
+    },
+    "capped=true,facing=west,run=start,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/covered/from_both",
+      "y": 270
+    },
+    "capped=true,facing=west,run=start,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 270
+    },
+    "capped=true,facing=west,run=start,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 270
+    },
+    "capped=true,facing=west,run=start,shape=ramp": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front_capped",
+      "y": 270
+    },
+    "capped=true,facing=west,run=start,shape=ramp_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back_reverse",
+      "y": 270
+    },
+    "capped=true,facing=west,run=start,shape=ramp_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 270
+    },
+    "capped=true,facing=west,run=start,shape=ramp_end_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front_reverse",
+      "y": 270
+    },
+    "capped=true,facing=west,run=start,shape=ramp_start": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start",
+      "y": 270
+    },
+    "capped=true,facing=west,run=start,shape=ramp_start_down": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_start_empty_reverse",
+      "y": 270
+    },
+    "capped=true,facing=west,run=start,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/covered/straight_back",
+      "y": 270
+    },
+    "capped=true,facing=west,run=start,shape=to_riser_left": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 270
+    },
+    "capped=true,facing=west,run=start,shape=to_riser_left_from_right": {
+      "model": "immersivegeology:block/belt/steel/covered/from_right",
+      "y": 270
+    },
+    "capped=true,facing=west,run=start,shape=to_riser_right": {
+      "model": "immersivegeology:block/belt/steel/covered/straight",
+      "y": 270
+    },
+    "capped=true,facing=west,run=start,shape=to_riser_right_from_left": {
+      "model": "immersivegeology:block/belt/steel/covered/from_left",
+      "y": 270
+    },
+    "capped=true,facing=west,run=start,shape=valley_drop": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_back_reverse",
+      "y": 270
+    },
+    "capped=true,facing=west,run=start,shape=valley_drop_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_front_reverse",
+      "y": 270
+    },
+    "capped=true,facing=west,run=start,shape=valley_rise": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_front",
+      "y": 270
+    },
+    "capped=true,facing=west,run=start,shape=valley_rise_end": {
+      "model": "immersivegeology:block/belt/steel/covered/ramp_end_mid_back",
+      "y": 270
+    }
+  }
+}

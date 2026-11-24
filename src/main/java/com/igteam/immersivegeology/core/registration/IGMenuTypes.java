@@ -13,6 +13,7 @@ import com.igteam.immersivegeology.common.block.multiblocks.gui.*;
 import com.igteam.immersivegeology.common.block.multiblocks.logic.*;
 import com.igteam.immersivegeology.common.menu.IGCrateMenu;
 import com.igteam.immersivegeology.common.menu.IGMetalDetectorMenu;
+import com.igteam.immersivegeology.common.menu.IGSplitterMenu;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -51,6 +52,7 @@ public class IGMenuTypes
 
 	public static final RegistryObject<MenuType<IGCrateMenu>> CRATE = registerSimple(IGLib.GUIID_Crate, IGCrateMenu::new);
 	public static final RegistryObject<MenuType<IGMetalDetectorMenu>> METAL_DETECTOR = registerWithData(IGLib.GUIID_MetalDetector, IGMetalDetectorMenu::new);
+	public static final RegistryObject<MenuType<IGSplitterMenu>> SPLITTER = registerWithData(IGLib.GUIID_Splitter, IGSplitterMenu::new);
 
 	/**
 	 * For menus that need something from the server at open time - here, which block entity the screen belongs to.

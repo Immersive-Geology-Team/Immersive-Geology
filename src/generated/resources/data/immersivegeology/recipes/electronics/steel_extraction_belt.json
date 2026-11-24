@@ -1,0 +1,15 @@
+{
+  "type": "immersiveengineering:blueprint",
+  "category": "electronics",
+  "inputs": [
+    {
+      "item": "immersivegeology:steel_belt"
+    },
+    {
+      "item": "minecraft:hopper"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:steel_extraction_belt"
+  }
+}

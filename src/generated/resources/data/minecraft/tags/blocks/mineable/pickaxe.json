@@ -3882,6 +3882,20 @@
     "immersivegeology:geothermal_exchanger",
     "immersivegeology:small_chemical_reactor",
     "immersivegeology:alternator",
-    "immersivegeology:metal_detector"
+    "immersivegeology:metal_detector",
+    "immersivegeology:steel_endergate",
+    "immersivegeology:steel_endergate_covered",
+    "immersivegeology:steel_belt",
+    "immersivegeology:steel_rising_belt",
+    "immersivegeology:steel_powered_belt",
+    "immersivegeology:steel_dropping_belt",
+    "immersivegeology:steel_extraction_belt",
+    "immersivegeology:steel_splitter_belt",
+    "immersivegeology:steel_belt_covered",
+    "immersivegeology:steel_rising_belt_covered",
+    "immersivegeology:steel_powered_belt_covered",
+    "immersivegeology:steel_dropping_belt_covered",
+    "immersivegeology:steel_extraction_belt_covered",
+    "immersivegeology:steel_splitter_belt_covered"
   ]
 }

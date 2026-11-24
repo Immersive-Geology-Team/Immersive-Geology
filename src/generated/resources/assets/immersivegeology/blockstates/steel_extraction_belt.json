@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "immersivegeology:block/belt/steel/extraction/extraction",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "immersivegeology:block/belt/steel/extraction/extraction"
+    },
+    "facing=south": {
+      "model": "immersivegeology:block/belt/steel/extraction/extraction",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "immersivegeology:block/belt/steel/extraction/extraction",
+      "y": 270
+    }
+  }
+}

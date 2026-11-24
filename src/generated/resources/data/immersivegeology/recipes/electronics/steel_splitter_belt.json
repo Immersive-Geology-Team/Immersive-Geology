@@ -1,0 +1,21 @@
+{
+  "type": "immersiveengineering:blueprint",
+  "category": "electronics",
+  "inputs": [
+    {
+      "base_ingredient": {
+        "item": "immersivegeology:steel_belt"
+      },
+      "count": 2
+    },
+    {
+      "tag": "forge:gears/aluminum"
+    },
+    {
+      "tag": "forge:plates/steel"
+    }
+  ],
+  "result": {
+    "item": "immersivegeology:steel_splitter_belt"
+  }
+}

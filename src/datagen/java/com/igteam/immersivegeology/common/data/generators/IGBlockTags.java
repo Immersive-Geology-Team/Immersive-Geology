@@ -221,6 +221,8 @@ public class IGBlockTags extends BlockTagsProvider
 		// nothing up there reaches them. The detector asks for the correct tool before it drops, which without a
 		// mineable tag is a tool that does not exist.
 		tag.add(IGRegistrationHolder.getBlockRegistryMap().get(IGRegistrationHolder.METAL_DETECTOR_KEY).get());
+		for(String key : IGRegistrationHolder.BELT_KEYS)
+			tag.add(IGRegistrationHolder.getBlockRegistryMap().get(key).get());
 
 
 		IGLib.IG_LOGGER.info("Finished Registration of Immersive Geology Block Tags");

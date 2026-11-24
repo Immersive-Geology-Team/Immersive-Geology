@@ -1,0 +1,4 @@
+newmtl belt
+map_Kd #belt
+newmtl edge
+map_Kd #edge

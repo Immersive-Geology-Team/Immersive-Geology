@@ -37,10 +37,11 @@ import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
+import com.igteam.immersivegeology.common.block.belt.IGSplitterBlock;
+import com.igteam.immersivegeology.common.block.belt.helper.SplitterHalf;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.Property;
@@ -49,7 +50,6 @@ import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.LootPool.Builder;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.*;
@@ -83,6 +83,7 @@ public class IGBlockLootProvider implements LootTableSubProvider
 		registerSlabs();
 		registerCrates();
 		registerDevices();
+		registerBelts();
 		registerAllRemainingAsDefault();
 
 		IGLib.IG_LOGGER.info("Finished Registration of Immersive Geology Block Loot");
@@ -222,6 +223,17 @@ public class IGBlockLootProvider implements LootTableSubProvider
 				.apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
 						.copy(IGMetalDetectorItem.ENERGY_TAG, "BlockEntityTag."+IGMetalDetectorItem.ENERGY_TAG))
 				.when(this.propertyIs(detector, IGMetalDetector.HALF, DoubleBlockHalf.LOWER))));
+	}
+
+	private void registerBelts() {
+		for(String key : IGRegistrationHolder.BELT_KEYS)
+		{
+			RegistryObject<Block> belt = IGRegistrationHolder.getBlockRegistryMap().get(key);
+			var pool = this.singleItem(belt.get().asItem());
+			if(IGRegistrationHolder.SPLITTER_KEYS.contains(key))
+				pool = pool.when(this.propertyIs(belt, IGSplitterBlock.HALF, SplitterHalf.RIGHT));
+			this.register(belt, LootTable.lootTable().withPool(pool));
+		}
 	}
 
 	private void registerMultiblock(MultiblockRegistration<?> registration) {

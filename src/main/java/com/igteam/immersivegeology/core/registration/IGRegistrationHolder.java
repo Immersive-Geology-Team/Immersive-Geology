@@ -26,6 +26,20 @@ import com.igteam.immersivegeology.client.menu.ItemSubGroup;
 import com.igteam.immersivegeology.common.item.IGMetalDetectorItem;
 import com.igteam.immersivegeology.common.item.IGUshankaItem;
 import com.igteam.immersivegeology.common.block.*;
+import com.igteam.immersivegeology.common.block.belt.helper.BeltStyle;
+import com.igteam.immersivegeology.common.block.belt.IGBeltBlock;
+import com.igteam.immersivegeology.common.block.belt.entity.IGBeltBlockEntity;
+import com.igteam.immersivegeology.common.block.belt.IGRisingBeltBlock;
+import com.igteam.immersivegeology.common.block.belt.IGPoweredBeltBlock;
+import com.igteam.immersivegeology.common.block.belt.IGDroppingBeltBlock;
+import com.igteam.immersivegeology.common.block.belt.IGExtractionBeltBlock;
+import com.igteam.immersivegeology.common.block.belt.IGSplitterBlock;
+import com.igteam.immersivegeology.common.block.belt.IGEndergateBlock;
+import com.igteam.immersivegeology.common.block.belt.item.IGEndergateItem;
+import com.igteam.immersivegeology.common.block.belt.entity.IGEndergateBlockEntity;
+import com.igteam.immersivegeology.common.block.belt.item.IGBeltItem;
+import com.igteam.immersivegeology.common.block.belt.entity.IGSplitterBlockEntity;
+import com.igteam.immersivegeology.common.block.belt.entity.IGPoweredBeltBlockEntity;
 import com.igteam.immersivegeology.common.block.entity.cable.IGEnergyPipe;
 import com.igteam.immersivegeology.common.block.entity.cable.IGEnergyPipeEntity;
 import com.igteam.immersivegeology.common.block.entity.crate.IGCrateEntity;
@@ -58,9 +72,7 @@ import com.igteam.immersivegeology.common.particle.IGParticles;
 import com.igteam.immersivegeology.core.lib.IGLib;
 import com.igteam.immersivegeology.core.lib.ResourceUtils;
 import com.igteam.immersivegeology.core.material.GeologyMaterial;
-import com.igteam.immersivegeology.core.material.data.chemical.MaterialHydrochloricAcid;
 import com.igteam.immersivegeology.core.material.data.enums.*;
-import com.igteam.immersivegeology.core.material.data.misc.MaterialSilicon;
 import com.igteam.immersivegeology.core.material.data.types.MaterialChemical;
 import com.igteam.immersivegeology.core.material.helper.flags.*;
 import com.igteam.immersivegeology.core.material.helper.material.MaterialHelper;
@@ -72,7 +84,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -263,6 +274,18 @@ public class IGRegistrationHolder {
     public static final String METAL_DETECTOR_KEY = "metal_detector";
     public static final String USHANKA_KEY = "armor_russian_helmet";
     public static RegistryObject<BlockEntityType<IGHydroVentEntity>> IG_HYDROVENT;
+    public static RegistryObject<BlockEntityType<IGBeltBlockEntity>> BELT;
+    public static final List<BeltStyle> BELT_STYLES = List.of(BeltStyle.STEEL, BeltStyle.STEEL_COVERED);
+    public static final List<String> BELT_KEYS = new ArrayList<>();
+    public static final List<String> POWERED_BELT_KEYS = new ArrayList<>();
+    public static RegistryObject<BlockEntityType<IGPoweredBeltBlockEntity>> POWERED_BELT;
+    public static final List<String> SPLITTER_KEYS = new ArrayList<>();
+    public static final String ENDERGATE_KEY = "steel_endergate";
+    public static final String ENDERGATE_COVERED_KEY = "steel_endergate_covered";
+    public static final List<String> ENDERGATE_KEYS = List.of(ENDERGATE_KEY, ENDERGATE_COVERED_KEY);
+    public static RegistryObject<BlockEntityType<IGEndergateBlockEntity>> ENDERGATE;
+    public static final int ENDERGATE_RANGE = 8;
+    public static RegistryObject<BlockEntityType<IGSplitterBlockEntity>> SPLITTER;
     public static void initialize()
     {
 
@@ -271,6 +294,21 @@ public class IGRegistrationHolder {
         registerItem(METAL_DETECTOR_KEY, () -> new IGMetalDetectorItem(getBlock.apply(METAL_DETECTOR_KEY)));
 
         IGItemGroup.addLooseItem(ItemSubGroup.structural, () -> getItem.apply(METAL_DETECTOR_KEY));
+        registerBelt(ENDERGATE_KEY, () -> new IGEndergateBlock(BeltStyle.STEEL, ENDERGATE_RANGE), block -> new IGEndergateItem(block, new Item.Properties()));
+        registerBelt(ENDERGATE_COVERED_KEY, () -> new IGEndergateBlock(BeltStyle.STEEL_COVERED, ENDERGATE_RANGE), block -> new IGEndergateItem(block, new Item.Properties()));
+        for(BeltStyle style : BELT_STYLES)
+        {
+            registerBelt(style.registryKey(""), () -> new IGBeltBlock(style));
+            registerBelt(style.registryKey("rising"), () -> new IGRisingBeltBlock(style));
+            String powered = style.registryKey("powered");
+            POWERED_BELT_KEYS.add(powered);
+            registerBelt(powered, () -> new IGPoweredBeltBlock(style));
+            registerBelt(style.registryKey("dropping"), () -> new IGDroppingBeltBlock(style));
+            registerBelt(style.registryKey("extraction"), () -> new IGExtractionBeltBlock(style));
+            String splitter = style.registryKey("splitter");
+            SPLITTER_KEYS.add(splitter);
+            registerBelt(splitter, () -> new IGSplitterBlock(style));
+        }
         registerItem(USHANKA_KEY, IGUshankaItem::new);
         IGItemGroup.addLooseItem(ItemSubGroup.structural, () -> getItem.apply(USHANKA_KEY));
         registerItem("prospector_kit", () -> new IGMineralTestingItem(ItemCategoryFlags.MISC, StoneEnum.MCStone, 128));
@@ -501,9 +539,27 @@ public class IGRegistrationHolder {
         }
 
         ENERGY_PIPE = TE_REGISTER.register("energy_pipe_type", makeType(IGEnergyPipeEntity::new, () -> MiscEnum.Cable.getBlock(BlockCategoryFlags.ENERGY_PIPE)));
+        BELT = TE_REGISTER.register("belt_type", makeTypeMultipleBlocks(IGBeltBlockEntity::new, BELT_KEYS.stream().filter(key -> !POWERED_BELT_KEYS.contains(key)&&!SPLITTER_KEYS.contains(key)&&!ENDERGATE_KEYS.contains(key)).<Supplier<Block>>map(key -> () -> getBlock.apply(key)).toList()));
+        ENDERGATE = TE_REGISTER.register("endergate_type", makeTypeMultipleBlocks(IGEndergateBlockEntity::new, ENDERGATE_KEYS.stream().<Supplier<Block>>map(key -> () -> getBlock.apply(key)).toList()));
+        SPLITTER = TE_REGISTER.register("splitter_type", makeTypeMultipleBlocks(IGSplitterBlockEntity::new, SPLITTER_KEYS.stream().<Supplier<Block>>map(key -> () -> getBlock.apply(key)).toList()));
+        POWERED_BELT = TE_REGISTER.register("powered_belt_type", makeTypeMultipleBlocks(IGPoweredBeltBlockEntity::new, POWERED_BELT_KEYS.stream().<Supplier<Block>>map(key -> () -> getBlock.apply(key)).toList()));
         METAL_DETECTOR = TE_REGISTER.register("metal_detector_type", makeType((pos, state) -> new IGMetalDetectorEntity(METAL_DETECTOR.get(), pos, state), () -> getBlock.apply(METAL_DETECTOR_KEY)));
 
         IGLib.IG_LOGGER.info("Finished");
+    }
+
+    private static void registerBelt(String key, Supplier<Block> block)
+    {
+        registerBelt(key, block, b -> new IGBeltItem(b, new Item.Properties()));
+    }
+
+    private static void registerBelt(String key, Supplier<Block> block, Function<Block, Item> item)
+    {
+        BELT_KEYS.add(key);
+        registerBlock(key, block);
+        registerItem(key, () -> item.apply(getBlock.apply(key)));
+        if(!key.endsWith("_covered"))
+            IGItemGroup.addLooseItem(ItemSubGroup.structural, () -> getItem.apply(key));
     }
 
     public static MultiblockRegistration<?> getMB(String key){

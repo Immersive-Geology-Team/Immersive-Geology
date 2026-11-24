@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "immersivegeology:steel_belt"
+    },
+    "R": {
+      "tag": "forge:rods/steel"
+    }
+  },
+  "pattern": [
+    "B ",
+    "BR",
+    "B "
+  ],
+  "result": {
+    "count": 3,
+    "item": "immersivegeology:steel_rising_belt"
+  },
+  "show_notification": true
+}

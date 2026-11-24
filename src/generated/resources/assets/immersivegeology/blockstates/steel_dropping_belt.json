@@ -1,0 +1,124 @@
+{
+  "variants": {
+    "facing=east,powered=false,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_both",
+      "y": 90
+    },
+    "facing=east,powered=false,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_left",
+      "y": 90
+    },
+    "facing=east,powered=false,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_right",
+      "y": 90
+    },
+    "facing=east,powered=false,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/dropping/straight",
+      "y": 90
+    },
+    "facing=east,powered=true,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_both",
+      "y": 90
+    },
+    "facing=east,powered=true,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_left",
+      "y": 90
+    },
+    "facing=east,powered=true,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_right",
+      "y": 90
+    },
+    "facing=east,powered=true,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/dropping/straight",
+      "y": 90
+    },
+    "facing=north,powered=false,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_both"
+    },
+    "facing=north,powered=false,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_left"
+    },
+    "facing=north,powered=false,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_right"
+    },
+    "facing=north,powered=false,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/dropping/straight"
+    },
+    "facing=north,powered=true,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_both"
+    },
+    "facing=north,powered=true,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_left"
+    },
+    "facing=north,powered=true,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_right"
+    },
+    "facing=north,powered=true,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/dropping/straight"
+    },
+    "facing=south,powered=false,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_both",
+      "y": 180
+    },
+    "facing=south,powered=false,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_left",
+      "y": 180
+    },
+    "facing=south,powered=false,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_right",
+      "y": 180
+    },
+    "facing=south,powered=false,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/dropping/straight",
+      "y": 180
+    },
+    "facing=south,powered=true,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_both",
+      "y": 180
+    },
+    "facing=south,powered=true,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_left",
+      "y": 180
+    },
+    "facing=south,powered=true,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_right",
+      "y": 180
+    },
+    "facing=south,powered=true,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/dropping/straight",
+      "y": 180
+    },
+    "facing=west,powered=false,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_both",
+      "y": 270
+    },
+    "facing=west,powered=false,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_left",
+      "y": 270
+    },
+    "facing=west,powered=false,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_right",
+      "y": 270
+    },
+    "facing=west,powered=false,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/dropping/straight",
+      "y": 270
+    },
+    "facing=west,powered=true,shape=from_both": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_both",
+      "y": 270
+    },
+    "facing=west,powered=true,shape=from_left": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_left",
+      "y": 270
+    },
+    "facing=west,powered=true,shape=from_right": {
+      "model": "immersivegeology:block/belt/steel/dropping/from_right",
+      "y": 270
+    },
+    "facing=west,powered=true,shape=straight": {
+      "model": "immersivegeology:block/belt/steel/dropping/straight",
+      "y": 270
+    }
+  }
+}
