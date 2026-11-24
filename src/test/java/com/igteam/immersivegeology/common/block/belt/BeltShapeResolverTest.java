@@ -13,6 +13,8 @@ import net.minecraft.core.Direction;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -25,11 +27,12 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BeltShapeResolverTest
 {
-	private static final Path EXAMPLE_LAYOUT = Path.of("art/belt/example_layout.json");
+	private static final String EXAMPLE_LAYOUT = "/helper/example_layout.json";
 	private static final double END_PLANE_TOLERANCE = 0.002;
 	private static final Path MODELS = Path.of("src/main/resources/assets/immersivegeology/models/block/belt/steel");
 	private static final Path COVERED_MODELS = MODELS.resolve("covered");
@@ -742,7 +745,12 @@ public class BeltShapeResolverTest
 	@Test
 	void exampleLayoutFromTheArtResolvesToItsPieces() throws IOException
 	{
-		JsonArray layout = JsonParser.parseString(Files.readString(EXAMPLE_LAYOUT)).getAsJsonArray();
+		JsonArray layout;
+		try(InputStream stream = BeltShapeResolverTest.class.getResourceAsStream(EXAMPLE_LAYOUT))
+		{
+			assertNotNull(stream, EXAMPLE_LAYOUT);
+			layout = JsonParser.parseString(new String(stream.readAllBytes(), StandardCharsets.UTF_8)).getAsJsonArray();
+		}
 		Grid g = new Grid();
 		Map<BlockPos, String> expected = new HashMap<>();
 		for(JsonElement element : layout)

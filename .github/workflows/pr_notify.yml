@@ -1,0 +1,22 @@
+name: Pull Request Notify
+on:
+  pull_request_target:
+    types: [ opened ]
+
+permissions: {}
+
+jobs:
+  notify-discord:
+    runs-on: ubuntu-latest
+    name: Notify Discord
+    steps:
+      - name: Notify Public Discord
+        env:
+          WEBHOOK: ${{ secrets.WH_PR_PUBLIC }}
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+          TITLE: ${{ github.event.pull_request.title }}
+          URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          if [ -z "$WEBHOOK" ]; then echo "::error::The WH_PR_PUBLIC secret is not set"; exit 1; fi
+          MESSAGE="[@$AUTHOR](<https://github.com/$AUTHOR>) has contributed to Engineers' Cause with [$TITLE](<$URL>)."
+          jq -n --arg content "$MESSAGE" '{content: $content}' | curl -sSf -H "Content-Type: application/json" -d @- "$WEBHOOK"

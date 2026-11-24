@@ -4,22 +4,28 @@ on:
   issues:
     types: [ closed ]
 
+permissions: {}
+
 jobs:
-  build:
+  notify-discord:
     runs-on: ubuntu-latest
+    name: Notify Discord
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Internal
+            secret: WH_TASK_COMPLETE_PRIVATE
+          - name: Public
+            secret: WH_TASK_COMPLETE_PUBLIC
     steps:
-      - run: |
-          echo 'ISSUE ID: ${{ github.event.issue.id }}'
-          echo 'PROJECT ITEM ID: ${{ github.event.issue.number }}'
-
-      - name: Notify Internal Discord
-        uses: sebastianpopp/discord-action@releases/v2
-        with:
-          webhook: ${{ secrets.WH_TASK_COMPLETE_PRIVATE }}
-          message: "Task [${{ github.event.issue.title }}](<https://github.com/${{ github.repository }}/issues/${{ github.event.issue.number }}>) has been marked as completed."
-
-      - name: Notify Public Discord
-        uses: sebastianpopp/discord-action@releases/v2
-        with:
-          webhook: ${{ secrets.WH_TASK_COMPLETE_PUBLIC }}
-          message: "Task [${{ github.event.issue.title }}](<https://github.com/${{ github.repository }}/issues/${{ github.event.issue.number }}>) has been marked as completed."
+      - name: Notify ${{ matrix.name }} Discord
+        env:
+          WEBHOOK: ${{ secrets[matrix.secret] }}
+          SECRET_NAME: ${{ matrix.secret }}
+          TITLE: ${{ github.event.issue.title }}
+          URL: ${{ github.event.issue.html_url }}
+        run: |
+          if [ -z "$WEBHOOK" ]; then echo "::error::The $SECRET_NAME secret is not set"; exit 1; fi
+          MESSAGE="Task [$TITLE](<$URL>) has been marked as completed."
+          jq -n --arg content "$MESSAGE" '{content: $content}' | curl -sSf -H "Content-Type: application/json" -d @- "$WEBHOOK"

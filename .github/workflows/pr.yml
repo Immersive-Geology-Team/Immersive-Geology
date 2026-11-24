@@ -1,34 +1,28 @@
 name: Pull Request
 on: [ pull_request ]
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
     name: Build
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1000
           fetch-tags: true
 
       - name: Setup JDK 17
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v6
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Build with Gradle
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: build
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
 
-  notify-discord:
-    runs-on: ubuntu-latest
-    name: Notify Discord
-    steps:
-      - name: Notify Internal Discord
-        uses: sebastianpopp/discord-action@releases/v2
-        with:
-          webhook: ${{ secrets.WH_PR_PUBLIC }}
-          message: "[@${{ github.event.pull_request.user.login }}](<https://github.com/${{ github.event.pull_request.user.login }}>) has contributed to Engineers' Cause with [${{ github.event.pull_request.title }}](<https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}>)."
+      - name: Build with Gradle
+        run: ./gradlew build

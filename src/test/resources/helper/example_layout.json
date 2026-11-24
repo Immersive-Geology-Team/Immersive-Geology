@@ -1,0 +1,172 @@
+[
+ {
+  "family": "basic",
+  "piece": "straight",
+  "pos": [
+   6,
+   0,
+   0
+  ],
+  "facing": "south"
+ },
+ {
+  "family": "basic",
+  "piece": "ramp",
+  "pos": [
+   3,
+   0,
+   1
+  ],
+  "facing": "west"
+ },
+ {
+  "family": "basic",
+  "piece": "ramp_start",
+  "pos": [
+   4,
+   0,
+   1
+  ],
+  "facing": "west"
+ },
+ {
+  "family": "splitter",
+  "piece": "splitter",
+  "pos": [
+   5,
+   0,
+   1
+  ],
+  "facing": "west"
+ },
+ {
+  "family": "basic",
+  "piece": "from_both",
+  "pos": [
+   6,
+   0,
+   1
+  ],
+  "facing": "west"
+ },
+ {
+  "family": "covered",
+  "piece": "straight_front",
+  "pos": [
+   1,
+   0,
+   2
+  ],
+  "facing": "west"
+ },
+ {
+  "family": "covered",
+  "piece": "straight_mid",
+  "pos": [
+   2,
+   0,
+   2
+  ],
+  "facing": "west"
+ },
+ {
+  "family": "covered",
+  "piece": "straight_back",
+  "pos": [
+   3,
+   0,
+   2
+  ],
+  "facing": "west"
+ },
+ {
+  "family": "powered",
+  "piece": "straight",
+  "pos": [
+   4,
+   0,
+   2
+  ],
+  "facing": "west"
+ },
+ {
+  "family": "basic",
+  "piece": "straight",
+  "pos": [
+   6,
+   0,
+   2
+  ],
+  "facing": "north"
+ },
+ {
+  "family": "basic",
+  "piece": "from_right",
+  "pos": [
+   6,
+   0,
+   3
+  ],
+  "facing": "north"
+ },
+ {
+  "family": "basic",
+  "piece": "straight",
+  "pos": [
+   7,
+   0,
+   3
+  ],
+  "facing": "west"
+ },
+ {
+  "family": "basic",
+  "piece": "from_left",
+  "pos": [
+   8,
+   0,
+   3
+  ],
+  "facing": "west"
+ },
+ {
+  "family": "basic",
+  "piece": "straight",
+  "pos": [
+   8,
+   0,
+   4
+  ],
+  "facing": "north"
+ },
+ {
+  "family": "basic",
+  "piece": "ramp_end",
+  "pos": [
+   2,
+   1,
+   1
+  ],
+  "facing": "west"
+ },
+ {
+  "family": "rising",
+  "piece": "from_left",
+  "pos": [
+   0,
+   2,
+   1
+  ],
+  "facing": "south"
+ },
+ {
+  "family": "basic",
+  "piece": "to_riser_left",
+  "pos": [
+   1,
+   2,
+   1
+  ],
+  "facing": "west"
+ }
+]
